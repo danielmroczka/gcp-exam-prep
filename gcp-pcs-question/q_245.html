@@ -52,15 +52,14 @@
 <h2>Question 245 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit which users have been granted permissions to access any Cloud Storage bucket via 'Legacy Bucket Roles'. Which tool?
+You have placed several Compute Engine instances in a private subnet. You want to allow these instances to access Google Cloud services, like Cloud Storage, without traversing the internet. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Private Google Access for the private subnet.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure Private Service Connect for the private subnet's Virtual Private Cloud (VPC) and allocate an IP range for the Compute Engine instances.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Reserve and assign static external IP addresses for the Compute Engine instances.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a Cloud NAT gateway for the region where the private subnet is configured.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,23 +78,22 @@ Audit which users have been granted permissions to access any Cloud Storage buck
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Policy Analyzer: Chociaż rola jest 'Legacy' (np. `roles/storage.legacyBucketReader`), to nadal jest to rola IAM. Policy Analyzer potrafi przeszukać całą organizację i wskazać każdą tożsamość, która posiada te przestarzałe uprawnienia, co ułatwia ich migrację do nowoczesnych ról.
+A. Private Google Access: To funkcja zaprojektowana dokładnie dla tego scenariusza. Pozwala ona maszynom wirtualnym, które mają tylko prywatne adresy IP, na łączenie się z publicznymi adresami IP usług Google (np. storage.googleapis.com) przez wewnętrzną sieć Google, bez konieczności przechodzenia przez internet czy NAT.
 
 Dlaczego inne są błędne:
-B, C, D: Nie służą do inwentaryzacji ról IAM w skali całej firmy.
-
-Konsensus społeczności ExamTopics: 100% na A. Audyt ról (nawet starych) = Policy Analyzer.</pre>
+B. Private Service Connect: Nowsza technologia, pozwalająca na tworzenie prywatnych punktów końcowych (IP wewnątrz VPC) dla usług Google, ale klasyczną i najprostszą odpowiedzią na 'dostęp do GCS bez internetu' w GCP jest Private Google Access.
+C. External IP: Wprost łamie wymóg 'without traversing the internet'.
+D. Cloud NAT: Pozwala na wyjście do internetu, co jest zbędne, jeśli chcemy łączyć się tylko z usługami Google przez ich sieć wewnętrzną.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na forach podkreśla się, że 'Legacy Roles' są niebezpieczne, bo często dają zbyt szerokie uprawnienia (np. dostęp do metadanych projektu). Policy Analyzer (A) jest kluczowym narzędziem dla inżynierów security zajmujących się 'sprzątaniem' uprawnień po starych projektach.</p>
+<p>Private Google Access to 'must-have' w każdej bezpiecznej sieci VPC w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">Private Google Access</a></li>
 </ul>
 </div>
 </div>

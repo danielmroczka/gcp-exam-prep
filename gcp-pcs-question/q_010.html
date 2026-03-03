@@ -60,7 +60,6 @@ Your team needs to obtain a unified log view of all development cloud projects i
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Create a Cloud Storage sink with billingAccounts/ABC-BILLING parent and includeChildren property set to False in a dedicated SIEM project. 2. Process Cloud Storage objects in SIEM.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. Export logs in each dev project to a Cloud Pub/Sub topic in a dedicated SIEM project. 2. Subscribe SIEM to the topic.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Create a Cloud Storage sink with a publicly shared Cloud Storage bucket in each project. 2. Process Cloud Storage objects in SIEM.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Your team needs to obtain a unified log view of all development cloud projects i
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Aggregated Sink na folderze: To najbardziej profesjonalna metoda. Ustawiając sink na poziomie FOLDERU z flagą `includeChildren=True`, automatycznie zbierasz logi ze wszystkich obecnych i przyszłych projektów w tym folderze. Pub/Sub to standard dla SIEM (real-time).
+A. Folder-level Sink + Pub/Sub: Można stworzyć jeden 'sink' na poziomie folderu NONPROD. Ustawienie includeChildren=true sprawi, że logi ze wszystkich projektów w tym folderze zostaną zagregowane i wysłane do jednego tematu Pub/Sub, który SIEM może subskrybować.
 
 Dlaczego inne są błędne:
-B. Billing parent: Logi konta rozliczeniowego dotyczą pieniędzy, a nie aktywności systemowej wewnątrz projektów.
-C. Each project: Nieskalowalne. Przy 100 projektach musiałbyś ręcznie klikać 100 razy.
-D. Publicly shared bucket: Skrajne naruszenie bezpieczeństwa. Logi systemowe nigdy nie powinny być publiczne.
-
-Konsensus społeczności ExamTopics: 100% na A. Agregacja to klucz do Enterprise Logging.</pre>
+B. Billing account parent: Logi billingowe to ne to samo co logi aktywności projektów.
+C. Sink w każdym projekcie: Bardzo nieefektywne przy dużej liczbie projektów (Development).
+D. Public storage: Złamanie wszelkich zasad bezpieczeństwa.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na GitHubie zauważają, że aggregated sinks pozwalają na oszczędności – filtrujesz logi raz na górze hierarchii, zamiast zarządzać filtrami w każdym projekcie. To rozwiązanie jest odporne na tzw. 'Shadow IT' – jeśli deweloper stworzy nowy projekt w tym folderze, logi zaczną płynąć do SIEM od pierwszej sekundy.</p>
+<p>Agregacja logów na poziomie folderu lub organizacji to najskuteczniejszy sposób na centralizację monitoringu w dużych środowiskach GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/export/aggregated_sinks" target="_blank">https://cloud.google.com/logging/docs/export/aggregated_sinks</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/export/aggregated_sinks" target="_blank">Collated logging at folder level</a></li>
 </ul>
 </div>
 </div>

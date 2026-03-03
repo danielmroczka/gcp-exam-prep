@@ -52,15 +52,14 @@
 <h2>Question 215 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect your GKE cluster from 'Man-in-the-Middle' attacks between the nodes and the control plane. Which feature?
+You are a Cloud Identity administrator for your organization. In your Google Cloud environment, groups are used to manage user permissions. Each application team has a dedicated group. Your team is responsible for creating these groups and the application teams can manage the team members on their own through the Google Cloud console. You must ensure that the application teams can only add users from within your organization to their groups. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> GKE cluster-level certificates and TLS encryption.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Network Policies</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Change the configuration of the relevant groups in the Google Workspace Admin console to prevent external users from being added to the group.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set an Identity and Access Management (IAM) policy that includes a condition that restricts group membership to user principals that belong to your organization.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Define an Identity and Access Management (IAM) deny policy that denies the assignment of principals that are outside your organization to the groups in scope.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Export the Cloud Identity logs to BigQuery. Configure an alert for external members added to groups. Have the alert trigger a Cloud Function instance that removes the external members from the group.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Protect your GKE cluster from 'Man-in-the-Middle' attacks between the nodes and 
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,27 +75,24 @@ Protect your GKE cluster from 'Man-in-the-Middle' attacks between the nodes and 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. TLS encryption: GKE automatycznie zarządza certyfikatami dla wszystkich komponentów klastra. Cała komunikacja między węzłami (Nodes) a serwerem API (Master/Control Plane) jest domyślnie szyfrowana protokołem TLS z wzajemną autentykacją (mTLS), co uniemożliwia ataki MitM.
+A. Change group configuration in Admin Console: W Google Workspace / Cloud Identity administrator może ustawić flagę 'Allow members outside your organization' na poziomie grupy. Wyłączenie tej opcji (ustawienie na 'No') fizycznie uniemożliwia właścicielom i managerom grupy (zespołom aplikacyjnym) dodanie jakiegokolwiek adresu email spoza zaufanej domeny organizacji.
 
 Dlaczego inne są błędne:
-A, D: Chronią przed niechcianym ruchem (blokada), ale nie zapewniają integralności i poufności przesyłanych danych (szyfrowania) tak jak TLS.
-C. Cloud Armor: Chroni tylko ruch zewnętrzny HTTP.
-
-Konsensus społeczności ExamTopics: 100% na B. To wbudowany mechanizm bezpieczeństwa Kubernetes.</pre>
+B, C. IAM policies: IAM kontroluje uprawnienia DO zasobów chmurowych, ale samo członkostwo w grupach to domena usługi Cloud Identity/Workspace i jej natywnych ustawień administracyjnych.
+D. Export + Cloud Function: Reaktywne i skomplikowane; lepiej zapobiegać (A) niż naprawiać skutki.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci przypominają: Google Cloud zarządza rotacją tych certyfikatów za Ciebie. Jest to jeden z głównych powodów, dla których firmy wybierają GKE zamiast samodzielnego zarządzania Kubernetesem na maszynach VM.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Kontrola członkostwa w grupach to funkcja 'Directory management' w Cloud Identity.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#node_communication" target="_blank">https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#node_communication</a></li>
-
+<li><a href="https://support.google.com/a/answer/167094" target="_blank">Group settings in Admin Console</a></li>
 </ul>
 </div>
 </div>

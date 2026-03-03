@@ -60,7 +60,6 @@ An application running on a Compute Engine instance needs to read data from a Cl
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use a service account with read-only access to the Cloud Storage bucket, and store the credentials to the service account in the config of the application on the Compute Engine instance.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use a service account with read-only access to the Cloud Storage bucket to retrieve the credentials from the instance metadata.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypt the data in the Cloud Storage bucket using Cloud KMS, and allow the application to decrypt the data with the KMS key.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ An application running on a Compute Engine instance needs to read data from a Cl
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Service account + instance metadata: Tożsamość instancji (Service Account attached to VM) pozwala aplikacji na bezpieczne pobieranie tymczasowych tokenów z serwera metadanych (http://metadata.google.internal). Eliminuje to potrzebę przechowywania haseł czy kluczy na dysku.
+C. Service account via instance metadata: To jest 'Google-recommended practice'. Przypisujesz konto serwisowe do maszyny Compute Engine. Aplikacja nie potrzebuje przechowywanych kluczy; zamiast tego pobiera tymczasowy token dostępu bezpośrednio z serwera metadanych instancji, co jest bezpieczne i zgodne z zasadą najmniejszych uprawnień.
 
 Dlaczego inne są błędne:
-A. ACL by IP: Cloud Storage nie wspiera filtrowania dostępu po adresie IP instancji w ramach standardowych ACL.
-B. Store credentials in config: Przechowywanie kluczy JSON na dysku jest poważnym błędem bezpieczeństwa (ryzyko wycieku przy kompromitacji VM).
-D. Cloud KMS: Szyfrowanie chroni dane, ale aplikacja i tak potrzebuje Tożsamości, aby pobrać klucz z KMS. To nie rozwiązuje problemu autoryzacji do bucketu.
-
-Konsensus społeczności ExamTopics: Prawie 100% wskazań na C jako standardową i najbezpieczniejszą metodę w GCP.</pre>
+A. IP-based ACL: Niebezpieczne i niezalecane; IP może ulec zmianie.
+B. Store credentials in config: Bardzo zła praktyka; klucze w plikach konfiguracyjnych mogą wyciec (np. do git).
+D. Encryption via KMS: To dodatkowa warstwa, ale samo w sobie nie rozwiązuje problemu bezpiecznego dostępu do samego bucketu bez credentials.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Mechanizm ten nazywa się 'impersonacją' konta serwisowego przez VM. Jest to fundament bezpieczeństwa IaaS, zapobiegający tzw. 'credential theft' z obrazów maszyn.</p>
+<p>Używanie tożsamości instancji (Service Account przypisany do VM) to fundament bezpiecznego dostępu do usług w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances" target="_blank">https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances</a></li>
-
+<li><a href="https://cloud.google.com/compute/docs/metadata/overview" target="_blank">Authenticate using instance metadata</a></li>
 </ul>
 </div>
 </div>

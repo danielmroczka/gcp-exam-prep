@@ -52,15 +52,14 @@
 <h2>Question 46 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A customer wants to ensure that their data is only stored in a specific geographic region. What should they use?
+A company is deploying their application on Google Cloud Platform. Company policy requires long-term data to be stored using a solution that can automatically replicate data over at least two geographic places. Which Storage solution are they allowed to use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud IAM</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Resource Labels</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Policy: Resource Location Restriction</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Shared VPC</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Bigtable</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud BigQuery</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engine SSD Disk</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Compute Engine Persistent Disk</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ A customer wants to ensure that their data is only stored in a specific geograph
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ A customer wants to ensure that their data is only stored in a specific geograph
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Resource Location Restriction: Jest to polityka organizacji (constraint: `gcp.resourceLocations`), która pozwala zdefiniować listę dozwolonych regionów/stref dla wszystkich usług w hierarchii. Każda próba utworzenia zasobu (np. bucketu) poza EU zostanie zablokowana.
+B. Cloud BigQuery: Jest to usługa regionalna lub multi-regionalna. Dane in BigQuery są automatycznie i transparentnie replikowane wewnątrz regionu (wiele stref) lub między regionami (w opcji multi-region), co spełnia wymóg replikacji w co najmniej dwóch miejscach geograficznych dla wysokiej dostępności.
 
 Dlaczego inne są błędne:
-A. Cloud IAM: Zarządza uprawnieniami osób, a nie właściwościami fizycznymi zasobów.
-B. Resource Labels: To tylko metadane (tagi) do opisu zasobów, nie wymuszają one niczego technicznie.
-D. Shared VPC: To architektura sieciowa, nie kontroluje ona geolokalizacji zasobów storage czy compute.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. To standardowe rozwiązanie dla wymogów rezydencji danych (Data Residency).</pre>
+A. Bigtable: Jest regionalny, ale replikacja między wieloma klastrami w różnych regionach musi zostać jawnie skonfigurowana przez użytkownika (nie jest 'automatyczna' w kontekście podstawowej konfiguracji tak jak w GCS/BQ).
+C, D. SSD/Persistent Disk: To zasoby zonalne (Zone). Aby uzyskać replikację geograficzną, trzeba użyć Regional Persistent Disk (tylko dwie strefy w jednym regionie) lub ręcznie tworzyć snapshoty i je kopiować.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Polityka ta jest dziedziczona. Jeśli ustawisz ją na poziomie organizacji, żaden deweloper w żadnym projekcie nie stworzy zasobu w niedozwolonej lokalizacji.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>Usługi takie jak BigQuery i Cloud Storage (Multi-region) oferują najwyższy stopień automatycznej redundancji geograficznej w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/bigquery/docs/availability-reliability" target="_blank">BigQuery high availability</a></li>
 </ul>
 </div>
 </div>

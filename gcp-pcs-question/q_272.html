@@ -52,15 +52,14 @@
 <h2>Question 272 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure CE instances only in EU. Remediate non-compliant and prevent future ones. What to do?
+You work for a global company. Due to compliance requirements, certain Compute Engine instances that reside within specific projects must be located exclusively in cloud regions within the European Union (EU). You need to ensure that existing non-compliant workloads are remediated and prevent future Compute Engine instances from being launched in restricted regions. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Third-party config tool.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SCC source + remediation function.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Org policy Resource Manager allowed regions.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Org policy deny outside EU + migrate existing.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use a third-party configuration management tool to monitor the location of Compute Engine instances. Automatically delete or migrate non-compliant instances, including existing deployments.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Deploy a Security Command Center source to detect Compute Engine instances created outside the EU. Use a custom remediation function to automatically relocate the instances, run the function once a day.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use organization policy constraints in Resource Manager to enforce allowed regions for Compute Engine instance creation within specific projects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set an organization policy that denies the creation of Compute Engine instances outside the EU. Apply the policy to the appropriate projects. Identify existing non-compliant instances and migrate the instances to compliant EU regions.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Ensure CE instances only in EU. Remediate non-compliant and prevent future ones.
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Prevent & Remediate: Polityka organizacji (`compute.allowedLocations`) prewencyjnie zablokuje stworzenie KAŻDEJ nowej maszyny poza EU. Jednak polityka nie usuwa maszyn już działających - musisz je jawnie zidentyfikować i przenieść (migrate), aby osiągnąć stan 100% zgodności.
+D. Org Policy 'deny' + Migrate existing: Jest to kompletna odpowiedź na oba wymagania. 1. Polityka organizacji z wymuszeniem 'deny' dla regionów poza EU natychmiast blokuje tworzenie nowych, niezgodnych instancji. 2. Ręczna identyfikacja i migracja istniejących instancji (D) jest bezpieczniejsza i bardziej realistyczna niż automatyczne usuwanie (A) działających workloadów produkcyjnych bez nadzoru.
 
 Dlaczego inne są błędne:
-A. Third-party: Lepiej użyć natywnych narzędzi (Org Policy), jeśli są dostępne.
-B. SCC + Function: To świetne rozwiązanie reaktywne, ale opcja D (Org Policy) jest lepsza, bo działa PREWENCYJNIE (nie pozwala popełnić błędu).
-C. Resource Manager: To tylko nazwa usługi, a D precyzuje akcję (deny + migrate).
-
-Konsensus społeczności ExamTopics: 100% na D. Zawsze najpierw blokuj (policy), potem sprzątaj (migrate).</pre>
+A. Third-party tool to auto-delete: Zbyt ryzykowne dla produkcji; automatyczne usuwanie może spowodować nieplanowany przestój.
+B. SCC + auto-relocate: Podobnie jak A, automatyczna relokacja jest skomplikowana i ryzykowna.
+C. Resource Manager constraints: To tylko połowa sukcesu (zapobieganie nowym), ale nie adresuje problemu istniejących maszyn tak konkretnie jak odpowiedź D.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Na egzaminie zawsze szukaj odpowiedzi, która łączy 'prevent' (polityka) z 'remediate' (akcja na istniejących zasobach).</p>
+<p>Polityka 'Resource Location Restriction' skutecznie blokuje nowe zasoby, ale remediation istniejących zawsze wymaga planowej akcji administratora.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">Resource Location Restriction</a></li>
 </ul>
 </div>
 </div>

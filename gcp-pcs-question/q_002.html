@@ -61,7 +61,6 @@ Which two implied firewall rules are defined on a VPC network? (Choose two.)
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> A rule that blocks all inbound port 25 connections</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> A rule that blocks all outbound connections</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> A rule that allows all inbound port 80 connections</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ Which two implied firewall rules are defined on a VPC network? (Choose two.)
 <pre>Odpowiedź: AB.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Implied allow egress rule: Zezwala na cały ruch wychodzący (0.0.0.0/0). Ma najniższy priorytet (65535).
-B. Implied deny ingress rule: Blokuje cały ruch przychodzący do instancji (0.0.0.0/0). Również priorytet 65535.
+A. Implied allow egress rule: Zezwala na cały ruch wychodzący (0.0.0.0/0) z priorytetem 65535.
+B. Implied deny ingress rule: Blokuje cały ruch przychodzący (0.0.0.0/0) z priorytetem 65535.
 
 Dlaczego inne są błędne:
-C. Port 25 SMTP: Google blokuje port 25 na poziomie infrastruktury (aby zapobiec spamowi), ale nie jest to reguła 'firewalla VPC' widoczna lub konfigurowalna jako implied rule.
-D. Odwrotność reguły A.
-E. Port 80: Musi zostać jawnie otwarty przez regułę `default-allow-http` (często obecną w sieci 'default', ale nie jest regułą 'implied').
-
-Konsensus społeczności ExamTopics: 100% na AB. Społeczność zwraca uwagę na pułapkę w opcji C – choć blokada portu 25 istnieje, to mechanizm techniczny jest inny niż firewall VPC.</pre>
+C. Port 25: Blokowanie portu 25 (SMTP) jest realizowane na poziomie infrastruktury Google, ale nie jest to 'implied firewall rule'.
+D. Block outbound: Jest to przeciwieństwo rzeczywistej reguły domniemanej.
+E. Port 80: Ruch na port 80 (HTTP) musi zostać jawnie dopuszczony.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AB</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wielu początkujących inżynierów myli reguły 'default' (te, które Google tworzy w sieci o nazwie 'default') z regułami 'implied' (tymi wbudowanymi w każdy VPC, nawet pusty). Analiza dyskusji pokazuje, że kluczem do egzaminu jest zapamiętanie priorytetu 65535 – tylko te reguły są 'implied'.</p>
+<p>Reguły domniemane (implied) nie mogą zostać usunięte, ale mogą być nadpisane przez każdą regułę stworzoną przez użytkownika (priorytet wyższy niż 65535).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewalls#default_firewall_rules" target="_blank">https://cloud.google.com/vpc/docs/firewalls#default_firewall_rules</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewalls#default_firewall_rules" target="_blank">Default firewall rules</a></li>
 </ul>
 </div>
 </div>

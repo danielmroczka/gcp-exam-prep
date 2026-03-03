@@ -52,15 +52,14 @@
 <h2>Question 357 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Cloud Run: service A calls service B. least privilege. What to do?
+Your company is developing a new application for your organization. The application consists of two Cloud Run services, service A and service B. Service A provides a web-based user frontend. Service B provides backend services that are called by service A. You need to set up Identity and Access Management for the application. Your solution should follow the principle of least privilege. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Two SAs, require auth for B, permit only SA for A to call B.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Three SAs, keys for communication.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> One SA for both, require auth for B.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Default SA for both.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create two separate service accounts. Grant one service account the permissions to execute service A, and grant the other service account the permissions to execute service B. Require authentication for service B. Permit only the service account for service A to call the backend.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create three separate service accounts. Grant one service account the permissions to execute service A. Grant the second service account the permissions to run service B. Grant the third service account the permissions to communicate between both services A and B. Require authentication for service B. Call the backend by authenticating with a service account key for the third service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a new service account with the permissions to run service A and service B. Require authentication for service B. Permit only the new service account to call the backend.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use the Compute Engine default service account to run service A and service B. Require authentication for service B. Permit only the default service account to call the backend.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Cloud Run: service A calls service B. least privilege. What to do?
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Service-to-Service Auth: Każda usługa powinna mieć własną tożsamość (SA). Usługa B powinna mieć wyłączony dostęp publiczny (allow unauthenticated = false). Następnie nadajesz kontu serwisowemu usługi A rolę `roles/run.invoker` tylko na usłudze B. To najczystsza forma Least Privilege.
+A. Two separate SAs + authentication for B: To jest idealna separacja. 1. Service A (frontend) ma swoje konto serwisowe. 2. Service B (backend) ma swoje. 3. Włączasz autentykację na Service B. 4. Nadajesz kontu serwisowemu Service A rolę `Cloud Run Invoker` na Service B. Gwarantuje to, że tylko frontend może wywołać backend, a żadna inna usługa (ani użytkownik z zewnątrz) nie ma do niego dostępu.
 
 Dlaczego inne są błędne:
-B. Keys: Nigdy nie używaj statycznych kluczy do komunikacji między usługami wewnątrz chmury.
-C. One SA for both: Narusza izolację. Jeśli jedna usługa zostanie zhakowana, haker ma uprawnienia obu.
-D. Default SA: Posiada zbyt szerokie uprawnienia (Editor).
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. To fundament bezpieczeństwa mikroserwisów.</pre>
+B. Three SAs: Nadmiarowa złożoność, nie ma potrzeby tworzenia 'trzeciego konta do komunikacji' (tożsamością jest sam inicjator ruchu).
+C. Single SA for both: Łamie zasadę izolacji - jeśli frontend zostanie przejęty, napastnik ma od razu wszystkie uprawnienia backendu.
+D. Default service account: Skrajnie niebezpieczne (zbyt szerokie uprawnienia w całym projekcie).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Usługa A automatycznie pobiera token tożsamości (ID token) z serwera metadanych i dołącza go do nagłówka Authorization, co IAP pod spodem weryfikuje bez pisania dodatkowego kodu.</p>
+<p>Service-to-service authentication w Cloud Run opiera się na tożsamościach IAM i roli 'Invoker'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/run/docs/authenticating/service-to-service" target="_blank">https://cloud.google.com/run/docs/authenticating/service-to-service</a></li>
-
+<li><a href="https://cloud.google.com/run/docs/authenticating/service-to-service" target="_blank">Cloud Run service-to-service auth</a></li>
 </ul>
 </div>
 </div>

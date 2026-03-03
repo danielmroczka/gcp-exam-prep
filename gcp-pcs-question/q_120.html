@@ -52,7 +52,7 @@
 <h2>Question 120 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enable VPC Service Controls and allow perimeter changes without preventing access. Which mode?
+You need to enable VPC Service Controls and allow changes to perimeters in existing environments without preventing access to resources. Which VPC Service Controls mode should you use?
 </div>
 <div class="question-choices-container">
 <ul>
@@ -60,7 +60,6 @@ Enable VPC Service Controls and allow perimeter changes without preventing acces
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Native</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enforced</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Dry run</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,21 @@ Enable VPC Service Controls and allow perimeter changes without preventing acces
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Dry run mode: Pozwala na zdefiniowanie konfiguracji perymetru i sprawdzenie w logach, co ZOSTAŁOBY zablokowane, gdyby polityka była aktywna. Nie przerywa jednak żadnego rzeczywistego ruchu API, co pozwala na bezpieczne testowanie bez ryzyka przestoju produkcyjnego.
+D. Dry run: Tryb 'Dry run' w VPC Service Controls pozwala na zdefiniowanie obwodu bezpieczeństwa i monitorowanie logów pod kątem tego, co ZOSTAŁOBY zablokowane, bez faktycznego przerywania ruchu. Pozwala to administratorom na dopracowanie konfiguracji obwodu w działającym środowisku bez ryzyka przestojów dla aplikacji.
 
 Dlaczego inne są błędne:
-A. Cloud Run: To usługa obliczeniowa, a nie tryb pracy perymetru.
-B. Native: Nie istnieje taki tryb w VPC SC.
-C. Enforced: To tryb aktywny, który natychmiast blokuje niedozwolony ruch - przeciwieństwo wymogu 'without preventing access'.
-
-Konsensus społeczności ExamTopics: 100% na D. To standardowy etap każdego wdrożenia VPC SC.</pre>
+C. Enforced: To tryb produkcyjny, który natychmiast blokuje każdy ruch niezgodny z polityką obwodu.
+A, B. Cloud Run / Native: To nie są tryby działania VPC Service Controls.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Logi z trybu Dry Run zawierają szczegółowe informacje o 'violations', co pozwala administratorowi na precyzyjne dopisanie brakujących wyjątków przed ostatecznym włączeniem blokad.</p>
+<p>Tryb 'Dry Run' jest niezbędny do bezpiecznego wprowadzania mikro-segmentacji usługowej w istniejących organizacjach GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run-overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/dry-run-overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run" target="_blank">VPC Service Controls Dry Run</a></li>
 </ul>
 </div>
 </div>

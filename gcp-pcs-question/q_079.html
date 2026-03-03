@@ -52,15 +52,14 @@
 <h2>Question 79 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-When using App Engine, which area in the technology stack should the organization focus on as their primary responsibility?
+An organization's security and risk management teams are concerned about where their responsibility lies for certain production workloads they are running in Google Cloud and where Google's responsibility lies. They are mostly running workloads using Google Cloud's platform-as-a-Service (PaaS) offerings, including App Engine primarily. Which area in the technology stack should they focus on as their primary responsibility when using App Engine?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configuring and monitoring VPC Flow Logs</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Defending against XSS and SQLi attacks</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Managing Guest OS patches</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypting stored data</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Managing the latest updates and security patches for the Guest OS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypting all stored data</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ When using App Engine, which area in the technology stack should the organizatio
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Application-level attacks: App Engine to usługa PaaS. Google zarządza serwerami, systemem operacyjnym i środowiskiem uruchomieniowym. Odpowiedzialność klienta skupia się na KODZIE aplikacji. Ochrona przed błędami logicznymi, takimi jak XSS czy SQL Injection, leży w 100% po stronie programistów klienta.
+B. Defending against XSS and SQLi: W modelu PaaS (App Engine), Google dba o infrastrukturę, sieć i system operacyjny. Klient jest jednak w pełni odpowiedzialny za kod swojej aplikacji i jej bezpieczeństwo logiczne (np. walidacja wejścia, ochrona przed atakami typu SQL Injection czy Cross-Site Scripting).
 
 Dlaczego inne są błędne:
-A. VPC Flow Logs: W App Engine Standard nie masz nawet dostępu do tradycyjnej sieci VPC w taki sposób, aby zarządzać Flow Logami (to rola Google).
-C. Guest OS patches: To całkowita odpowiedzialność Google w modelu PaaS.
-D. Encrypting data: Google szyfruje dane domyślnie 'at rest'. Choć możesz dodać własne klucze, 'obrona przed atakami' w kodzie jest bardziej unikalną i krytyczną odpowiedzialnością klienta w tym modelu.
-
-Konsensus społeczności ExamTopics: 100% na B. Klasyka modelu PaaS.</pre>
+A. VPC Flow Logs: W App Engine Standard klient ma ograniczony wgląd w niskopoziomowe logi sieciowe VPC (to domena Google).
+C. Guest OS patching: To odpowiedzialność Google w modelu PaaS.
+D. Encrypting stored data: Google szyfruje dane domyślnie, choć klient może dodać własną warstwę (CMEK).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Wiele osób myśli, że chmura załatwia wszystko. Jednak luka w kodzie (np. brak sanitizacji inputu) pozwoli hakerowi wykraść dane niezależnie od tego, jak bezpieczna jest infrastruktura Google.</p>
+<p>W PaaS granica odpowiedzialności klienta kończy się na warstwie kodu aplikacji i danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>
-
+<li><a href="https://cloud.google.com/architecture/framework/security/shared-responsibility-model#paas" target="_blank">PaaS shared responsibility</a></li>
 </ul>
 </div>
 </div>

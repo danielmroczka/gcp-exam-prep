@@ -52,15 +52,14 @@
 <h2>Question 32 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You are creating an internal application that needs to access a user's Google Drive on the user's behalf. What should you do?
+You are creating an internal App Engine application that needs to access a user's Google Drive on the user's behalf. Your company does not want to rely on the current user's credentials. It also wants to follow Google-recommended practices. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Give users the Service Account User role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Give a group the Service Account User role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use G Suite Admin credentials.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a service account with G Suite domain-wide delegation.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a new Service account, and give all application users the role of Service Account User.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a new Service account, and add all application users to a Google Group. Give this group the role of Service Account User.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use a dedicated G Suite Admin account, and authenticate the application's operations with these G Suite credentials.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a new service account, and grant it G Suite domain-wide delegation. Have the application use it to impersonate the user.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ You are creating an internal application that needs to access a user's Google Dr
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Domain-wide delegation: Pozwala kontu serwisowemu na podszywanie się (impersonację) pod dowolnego użytkownika w domenie Google Workspace (G Suite). Dzięki temu aplikacja może uzyskać dostęp do plików na Drive danego użytkownika bez jego interakcji, używając uprawnień nadanych centralnie przez administratora.
+D. Service account + Domain-wide delegation: To jest standardowy sposób, w jaki aplikacje serwerowe uzyskują dostęp do danych użytkowników Google Workspace (np. Drive, Gmail) bez ich interakcji. Administrator Workspace nadaje kontu serwisowemu uprawnienie do 'impersonacji' użytkowników w całej domenie.
 
 Dlaczego inne są błędne:
-A, B. Service Account User: Ta rola wewnątrz GCP pozwala użytkownikowi na używanie konta serwisowego do uruchamiania VM, ale nie ma nic wspólnego z dostępem do danych w G Suite/Drive.
-C. Admin credentials: Używanie haseł administratora w kodzie aplikacji jest skrajnie niebezpieczne i niezgodne z żadnymi standardami bezpieczeństwa.
-
-Konsensus społeczności ExamTopics: Zdecydowane poparcie dla D. Jest to jedyny poprawny sposób na automatyzację zadań w Workspace przez aplikacje serwerowe.</pre>
+A, B. Service Account User: Ta rola pozwala użytkownikowi na używanie konta serwisowego do uruchamiania zasobów (np. VM), ale nie daje dostępu do danych Drive innego użytkownika.
+C. Admin account credentials: Przechowywanie haseł administratora w kodzie/konfiguracji jest skrajnie niebezpieczne.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Delegacja na całą domenę wymaga precyzyjnego ograniczenia zakresów (OAuth Scopes) w konsoli Admin G Suite, aby konto serwisowe miało dostęp tylko do niezbędnych API (np. tylko Drive, bez poczty).</p>
+<p>Domain-wide delegation pozwala kontu serwisowemu działać jako dowolny użytkownik w domenie, co jest niezbędne dla procesów w tle (background jobs).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority" target="_blank">https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority</a></li>
-
+<li><a href="https://developers.google.com/admin-sdk/directory/v1/guides/delegation" target="_blank">Domain-wide delegation</a></li>
 </ul>
 </div>
 </div>

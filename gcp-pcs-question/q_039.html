@@ -52,16 +52,15 @@
 <h2>Question 39 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A company wants to manage IAM permissions between users in development and production projects. Which two steps should they take?
+A customer has 300 engineers. The company wants to grant different levels of access and efficiently manage IAM permissions between users in the development and production environment projects. Which two steps should the company take to meet these requirements? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use multiple VPCs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a folder for each environment.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a Google Group and assign permissions at the folder level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create an Organizational Policy constraint.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Grant rights to each user individually.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a project with multiple VPC networks for each environment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a folder for each development and production environment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a Google Group for the Engineering team, and assign permissions at the folder level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create an Organizational Policy constraint for each folder environment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Create projects for each environment, and grant IAM rights to each engineering user.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ A company wants to manage IAM permissions between users in development and produ
 <pre>Odpowiedź: BC.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Folders: Pozwalają na logiczną izolację środowisk. Możesz mieć folder 'Prod' i folder 'Dev', co ułatwia stosowanie różnych polityk.
-C. Google Groups: Zarządzanie uprawnieniami poprzez grupy (a nie pojedynczych użytkowników) to najlepsza praktyka IAM. Nadanie uprawnień grupie na poziomie foldera automatyzuje dostęp do wszystkich projektów w danym środowisku.
+B. Create a folder for each environment: Pozwala na logiczne oddzielenie polityk i uprawnień dla Dev i Prod.
+C. Create a Google Group and assign at folder level: Używanie grup zamiast pojedynczych użytkowników (E) jest zalecaną praktyką zarządzania IAM (skalowalność). Nadanie uprawnień na poziomie folderu zapewnia spójność wewnątrz środowiska.
 
 Dlaczego inne są błędne:
-A. VPC: To warstwa sieciowa, a nie system zarządzania uprawnieniami użytkowników (IAM).
-D. Org Policy: Służy do nakładania restrykcji na zasoby (np. zakaz publicznych IP), a nie do nadawania uprawnień osobom.
-E. Individual users: To koszmar administracyjny i częste źródło błędów oraz nadmiarowych uprawnień (brak 'skalowalności' przy rotacji pracowników).
-
-Konsensus społeczności ExamTopics: 100% poparcia dla BC. To fundamenty Google Cloud Landing Zone.</pre>
+A. Single project with multiple VPCs: Bardzo trudne w zarządzaniu uprawnieniami (wszyscy mają dostęp do projektu).
+D. Organizational Policy: To ograniczenia (constraints), a nie nadawanie uprawnień użytkownikom (IAM).
+E. Grant rights to each user: Bardzo nieefektywne przy 300 inżynierach (koszmar administracyjny).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BC</b></p>
-<p><b>Głęboka analiza:</b> Stosowanie grup pozwala na 'Self-service'. Zamiast zmieniać uprawnienia w chmurze, administrator AD dodaje osobę do lokalnej grupy, a GCDS synchronizuje to z folderem GCP.</p>
+<p>Zasada 'Groups-based IAM' oraz 'Environment Isolation via Folders' to kluczowe wzorce projektowe w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/groups-in-iam" target="_blank">https://cloud.google.com/iam/docs/groups-in-iam</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/using-managed-groups" target="_blank">IAM best practices</a></li>
 </ul>
 </div>
 </div>

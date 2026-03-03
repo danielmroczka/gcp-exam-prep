@@ -52,15 +52,15 @@
 <h2>Question 58 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-What is the purpose of the Cloud Identity-Aware Proxy (IAP)?
+Which two security characteristics are related to the use of VPC peering to connect two VPC networks? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To provide a VPN for users.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To protect against SQL injection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To control access to cloud applications based on user identity and context.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To manage DNS records.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Central management of routes, firewalls, and VPNs for peered networks</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Non-transitive peered networks; where only directly peered networks can communicate</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ability to peer networks that belong to different Google Cloud organizations</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall rules that can be created with a tag from one peered network to another peered network</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Ability to share specific subnets across peered networks</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ What is the purpose of the Cloud Identity-Aware Proxy (IAP)?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">BC</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,26 @@ What is the purpose of the Cloud Identity-Aware Proxy (IAP)?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: BC.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Identity and Context Control: IAP działa jako centralny punkt autoryzacji dla aplikacji HTTP(S) i SSH/RDP. Zamiast używać VPN, IAP sprawdza tożsamość użytkownika (czy jest zalogowany w Google) oraz kontekst (np. czy ma firmowy laptop, czy jest w dobrym kraju) i dopiero wtedy wpuszcza go do zasobu.
+B. Non-transitive: VPC Peering jest nietranzytywny. Jeśli sieć A jest połączona z B, a B z C, to A NIE widzi C. To kluczowa cecha bezpieczeństwa.
+C. Ability to peer across Orgs: Jak wspomniano w pytaniu 56, można łączyć sieci między różnymi organizacjami GCP.
 
 Dlaczego inne są błędne:
-A. VPN: IAP to alternatywa dla VPN (model BeyondCorp), nie jest on tunelem VPN.
-B. SQL Injection: To zadanie dla WAF (Cloud Armor). IAP nie sprawdza treści zapytań pod kątem ataków hakerskich.
-D. DNS: Tym zajmuje się Cloud DNS.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To definicja IAP jako bramy Zero Trust.</pre>
+A. Central management: VPC Peering to relacja partnerska, każda sieć zachowuje własną administrację (w przeciwieństwie do Shared VPC).
+D. Firewall tags: Tagi firewall NIE działają między peered sieciami (można używać tylko adresów IP lub Service Accounts).
+E. Share subnets: Subnety nie są współdzielone, są tylko routowalne.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> IAP pozwala na udostępnienie wewnętrznych aplikacji (np. Jira, Git) bezpośrednio w internecie w sposób bezpieczniejszy niż tradycyjny VPN, ponieważ każda próba dostępu jest weryfikowana tożsamościowo.</p>
+<p><b>Sugerowana odpowiedź: BC</b></p>
+<p>Zrozumienie nietranzytywności VPC Peeringu jest niezbędne do poprawnego projektowania bezpiecznych topologii sieciowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/vpc-peering#constraints" target="_blank">VPC Peering constraints</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 110 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Confirm unauthorized access by a former employee using a SA key in the past 2 months. Determine user activity.
+Your Security team believes that a former employee of your company gained unauthorized access to Google Cloud resources some time in the past 2 months by using a service account key. You need to confirm the unauthorized access and determine the user activity. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Security Health Analytics</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Monitoring to filter audit logs by user.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> DLP to query logs in GCS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Logs Explorer to search for user activity.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Security Health Analytics to determine user activity.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the Cloud Monitoring console to filter audit logs by user.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use the Cloud Data Loss Prevention API to query logs in Cloud Storage.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use the Logs Explorer to search for user activity.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Confirm unauthorized access by a former employee using a SA key in the past 2 mo
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Confirm unauthorized access by a former employee using a SA key in the past 2 mo
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D. (Uwaga: B jest technicznie podobne, ale Logs Explorer to dedykowane narzędzie do tego celu).
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Logs Explorer: Jest to główne narzędzie do przeszukiwania logów audytowych (Audit Logs). Pozwala na filtrowanie zdarzeń po `principalEmail` (identyfikatorze konta serwisowego) oraz po `serviceAccountKeyName`, co pozwoli precyzyjnie określić, co i kiedy zostało zrobione przy użyciu skradzionego klucza w ciągu ostatnich 2 miesięcy.
+B. Cloud Monitoring console (Log Explorer) filter audit logs: Aby sprawdzić co robił użytkownik (lub Service Account) w przeszłości, musisz przeanalizować logi audytowe (Admin Activity i Data Access). Log Explorer (część Cloud Monitoring/Logging) pozwala na filtrowanie tych logów po tożsamości (user) i czasie (ostatnie 2 miesiące), co pozwoli na potwierdzenie aktywności.
 
 Dlaczego inne są błędne:
-A. Security Health Analytics: Wykrywa błędy konfiguracji (np. 'klucz jest stary'), ale nie służy do analizy aktywności historycznej (kto co zrobił).
-B. Cloud Monitoring: Służy do wyświetlania wykresów i metryk (np. liczba błędów), nie jest optymalny do szczegółowego dochodzenia (forensics) w treści logów audytowych.
-C. DLP: Służy do szukania danych wrażliwych, nie do audytu aktywności systemowej.
-
-Konsensus społeczności ExamTopics: Przewaga głosów na D. Logs Explorer to narzędzie pierwszego wyboru przy incydentach.</pre>
+A. Security Health Analytics: Pokazuje aktualne błędy w konfiguracji, nie służy do historycznej analizy działań użytkownika.
+C. DLP API: Służy do szukania danych wrażliwych, a nie do analizy logów audytowych pod kątem włamań.
+D. Logs Explorer (to samo co B): Chociaż nazwa w D jest poprawna, odpowiedź B specyficznie wspomina o 'audit logs by user', co jest precyzyjniejszym wskazaniem ścieżki śledczej.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Logi 'Admin Activity' są przechowywane domyślnie przez 400 dni, więc okres 2 miesięcy mieści się w standardowej retencji Logs Explorera.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>Logi audytowe są fundamentem cyfrowej kryminalistyki (Forensics) w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/audit" target="_blank">https://cloud.google.com/logging/docs/audit</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/audit/viewing-logs" target="_blank">Viewing audit logs</a></li>
 </ul>
 </div>
 </div>

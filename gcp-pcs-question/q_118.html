@@ -52,15 +52,14 @@
 <h2>Question 118 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Inspect traffic between trusted and untrusted subnets using a virtual appliance (NGFW). How to design?
+You need to set up two network segments: one with an untrusted subnet and the other with a trusted subnet. You want to configure a virtual appliance such as a next-generation firewall (NGFW) to inspect all traffic between the two network segments. How should you design the network to inspect the traffic?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> One VPC, two subnets, custom route 0.0.0.0/0 to appliance.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> One VPC, custom route for RFC1918 to appliance.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Two VPCs peered, custom routes to appliance.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Two VPC networks, appliance with multiple NICs connected to each.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> 1. Set up one VPC with two subnets: one trusted and the other untrusted. 2. Configure a custom route for all traffic (0.0.0.0/0) pointed to the virtual appliance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Set up one VPC with two subnets: one trusted and the other untrusted. 2. Configure a custom route for all RFC1918 subnets pointed to the virtual appliance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. Set up two VPC networks: one trusted and the other untrusted, and peer them together. 2. Configure a custom route on each network pointed to the virtual appliance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Set up two VPC networks: one trusted and the other untrusted. 2. Configure a virtual appliance using multiple network interfaces, with each interface connected to one of the VPC networks.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Inspect traffic between trusted and untrusted subnets using a virtual appliance 
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Multi-NIC Appliance: Aby firewall (virtual appliance) mógł skutecznie filtrować ruch między dwiema strefami, musi on fizycznie (logicznie w chmurze) znajdować się w OBU tych strefach jednocześnie. Model Multi-NIC (instancja z wieloma interfejsami sieciowymi, z których każdy jest w innym VPC) to standardowa architektura NGFW w chmurze.
+D. Two VPC networks + Virtual Appliance with multiple NICs: To jest standardowa architektura 'Firewall Sandwich' lub 'In-line inspection'. Wirtualne urządzenie (firewall) ma dwie karty sieciowe (NICs) - jedną w VPC 'Untrusted' (internet/zewnątrz) a drugą w VPC 'Trusted' (aplikacja). Cały ruch musi fizycznie przejść przez to urządzenie, aby dostać się z jednej sieci do drugiej, co pozwala na pełną inspekcję.
 
 Dlaczego inne są błędne:
-A, B. One VPC: Wewnątrz jednej sieci VPC maszyny mogą często komunikować się bezpośrednio przez trasy domyślne, co utrudnia wymuszenie 'przejścia' przez firewall. Dwie sieci VPC dają twardą izolację.
-C. VPC Peering: Peering służy do bezpośredniej komunikacji z pominięciem firewalla. Bardzo trudno jest 'wstawić' appliance w środek peeringu bez skomplikowanego routingu (Transit VPC).
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na D. To klasyczna architektura 'Network hub' lub 'Security VPC'.</pre>
+A, B. Single VPC: Wewnątrz jednej sieci VPC routing między podsieciami jest automatyczny i trudno go w 100% zmusić do przechodzenia przez appliance bez ryzyka pętli lub ominięcia firewalla (routingu nie da się tak łatwo 'zakrzywić' wewnątrz jednej VPC dla całego ruchu).
+C. VPC Peering: Peering domyślnie łączy sieci bezpośrednio, omijając appliance.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> W tej konfiguracji maszyna w VPC 'Untrusted' wysyła ruch do interfejsu eth0 firewalla, firewall go sprawdza i jeśli jest OK, wypuszcza przez interfejs eth1 do VPC 'Trusted'.</p>
+<p>Używanie maszyn VM z wieloma interfejsami (multi-NIC) to podstawa budowania zaawansowanych topologii bezpieczeństwa sieciowego w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/architecture/best-practices-vpc-design#multi-nic" target="_blank">https://cloud.google.com/architecture/best-practices-vpc-design#multi-nic</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/multiple-interfaces-concepts" target="_blank">Multiple network interfaces overview</a></li>
 </ul>
 </div>
 </div>

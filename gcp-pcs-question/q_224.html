@@ -52,15 +52,14 @@
 <h2>Question 224 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure that all GKE clusters are created with 'Binary Authorization' enabled by default across the organization. Which tool?
+You have numerous private virtual machines on Google Cloud. You occasionally need to manage the servers through Secure Socket Shell (SSH) from a remote location. You want to configure remote access to the servers in a manner that optimizes security and cost efficiency. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: compute.restrictVpcPeering</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Policy constraint: gcp.resourceLocations</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy constraint: cloudfunctions.allowedLocations (Note: No direct GKE policy exists, but enforcement is via Org Policy concepts)</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a site-to-site VPN from your corporate network to Google Cloud.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure server instances with public IP addresses. Create a firewall rule to only allow traffic from your corporate IPs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a firewall rule to allow access from the Identity-Aware Proxy (IAP) IP range. Grant the role of an IAP-secured Tunnel User to the administrators.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a jump host instance with public IP. Manage the instances by connecting through the jump host.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -76,28 +75,25 @@ Ensure that all GKE clusters are created with 'Binary Authorization' enabled by 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C (lub podobna polityka GKE).
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Organization Policy: (Uwaga: Technicznie wymuszanie BinAuth często odbywa się przez polityki niestandardowe lub specyficzne constraints GKE w Org Policy). Kluczem jest wybór narzędzia 'Organization Policy', bo tylko ono potrafi wymusić Standard Konfiguracyjny (jak obecność BinAuth) w skali całej firmy.
+C. IAP IP range firewall rule + IAP-secured Tunnel User role: Jest to najbezpieczniejszy i najbardziej kosztowo efektywny sposób. Nie potrzebujesz publicznych adresów IP ani VPN. IAP działa jako brama proxy. Musisz tylko pozwolić na ruch przychodzący z zakresu IP Google (`35.235.240.0/20`) na port 22 Twoich maszyn. Ruch inżyniera jest tunelowany przez IAP, co eliminuje wystawienie maszyn na świat.
 
 Dlaczego inne są błędne:
-A. IAM: Nie wymusza opcji klastra.
-B. Peering: Nie dotyczy kontenerów.
-D. Cloud Functions: Nie dotyczy GKE.
-
-Konsensus społeczności ExamTopics: Przewaga na C jako jedyne narzędzie 'wymuszające standardy' w opcjach.</pre>
+A. Cloud VPN: Droższe i bardziej skomplikowane w konfiguracji dla pojedynczych dostępów zdalnych.
+B. Public IP: Zwiększa powierzchnię ataku, nawet z białymi listami IP.
+D. Jump host (Bastion): Wymaga zarządzania dodatkową maszyną i jej publicznym IP. IAP (C) jest rozwiązaniem serverless i bezpieczniejszym.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> To pytanie testuje świadomość istnienia 'Guardrails'. Nawet jeśli nie pamiętasz nazwy konkretnego constrainta, musisz wiedzieć, że w Google Cloud 'wymuszanie cech zasobów w całej organizacji' to zawsze domena <b>Organization Policy Service</b>.</p>
+<p>IAP TCP Forwarding to nowoczesna alternatywa dla tradycyjnych bastionów i serwerów VPN.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/overview</a></li>
-
+<li><a href="https://cloud.google.com/iap/docs/tcp-forwarding-overview" target="_blank">IAP for TCP forwarding</a></li>
 </ul>
 </div>
 </div>

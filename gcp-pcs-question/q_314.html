@@ -52,15 +52,14 @@
 <h2>Question 314 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Highly regulated: encrypt data while in use. What to do?
+Your organization operates in a highly regulated environment and has a stringent set of compliance requirements for protecting customer data. You must encrypt data while in use to meet regulations. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CSEK keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Confidential VM (Trusted Execution Environment).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Shielded VM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> CMEK and Cloud KMS.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable the use of customer-supplied encryption keys (CSEK) keys in the Google Compute Engine VMs to give your organization maximum control over their VM disk encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Establish a trusted execution environment with a Confidential VM.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use a Shielded VM to ensure a secure boot with integrity monitoring for the application environment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use customer-managed encryption keys (CMEK) and Cloud KSM to enable your organization to control their keys for data encryption in Cloud SQL.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Highly regulated: encrypt data while in use. What to do?
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Confidential VM: Szyfrowanie 'while in use' odnosi się do danych znajdujących się w procesorze i pamięci RAM podczas obliczeń. Confidential VMs wykorzystują technologię Trusted Execution Environment (TEE), która sprzętowo izoluje i szyfruje RAM kluczem generowanym wewnątrz CPU.
+B. Confidential VM: Podobnie jak w pytaniu 309, wymóg 'szyfrowania danych podczas użycia' (encrypt data while in use) jest unikalną cechą Confidential Computing. Confidential VMs używają sprzętowego szyfrowania pamięci operacyjnej (RAM), co spełnia najbardziej rygorystyczne wymogi compliance dotyczące ochrony danych w trakcie przetwarzania.
 
 Dlaczego inne są błędne:
-A, D: Szyfrują dane 'at rest' (na dysku). Aby procesor mógł na nich pracować, muszą zostać odszyfrowane do pamięci RAM, gdzie stają się podatne na ataki bez technologii B.
-C. Shielded VM: Zapewnia integralność systemu (Secure Boot), ale nie szyfruje pamięci RAM w trakcie pracy aplikacji.
-
-Konsensus społeczności ExamTopics: 100% na B. Dane 'in use' = Confidential Computing.</pre>
+A. CSEK: Szyfruje dane 'at rest' (na dysku), a nie w RAM podczas pracy procesora.
+C. Shielded VM: Zapewnia integralność bootowania i chroni przed malwarem, ale nie szyfruje pamięci RAM w trakcie pracy.
+D. CMEK for Cloud SQL: Chroni dane 'at rest' w bazie danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> To rozwiązanie jest niezbędne dla 'Confidential Computing'. Chroni ono dane przed administratorem hypervisora (Google) oraz przed innymi procesami na tym samym hoście fizycznym.</p>
+<p>Confidential VM to fundament 'Data-in-use' encryption w Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/confidential-computing" target="_blank">https://cloud.google.com/confidential-computing</a></li>
-
+<li><a href="https://cloud.google.com/compute/confidential-vm/docs/about-confidential-vm" target="_blank">Confidential VM overview</a></li>
 </ul>
 </div>
 </div>

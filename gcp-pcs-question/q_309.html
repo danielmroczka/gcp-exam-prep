@@ -52,15 +52,14 @@
 <h2>Question 309 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Microservices (CE + Cloud Functions): secure data in use (memory), minimize unauthorized memory access. What to do?
+Your development team is launching a new application. The new application has a microservices architecture on Compute Engine instances and serverless components, including Cloud Functions. This application will process financial transactions that require temporary, highly sensitive data in memory. You need to secure data in use during computations with a focus on minimizing the risk of unauthorized access to memory for this financial application. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Confidential VM for CE, hardware-based memory isolation for Functions.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Data masking and tokenization.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> DLP scan.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> GCS CMEK.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Confidential VM instances for Compute Engine, and ensure that relevant Cloud Functions can leverage hardware-based memory isolation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use data masking and tokenization techniques on sensitive financial data fields throughout the application and the application's data processing workflows.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use the Cloud Data Loss Prevention (Cloud DLP) API to scan and mask sensitive data before feeding the data into any compute environment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Store all sensitive data during processing in Cloud Storage by using customer-managed encryption keys (CMEK), and set strict bucket-level permissions.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Microservices (CE + Cloud Functions): secure data in use (memory), minimize unau
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Confidential Computing: To jedyna technologia chroniąca dane 'w użyciu' (in memory). Dla CE są to Confidential VMs (AMD SEV). Dla Cloud Functions Google zapewnia sprzętową izolację pamięci na poziomie mikro-VM (gVisor) w swojej infrastrukturze, co minimalizuje ryzyko nieuprawnionego odczytu RAM.
+A. Confidential VMs + Hardware-based isolation for Functions: Pytanie skupia się na bezpieczeństwie 'danych w użyciu' (in-use) w pamięci RAM. Confidential VMs (dla GCE) oraz Confidential Cloud Functions używają sprzętowej izolacji i szyfrowania pamięci (np. AMD SEV), co uniemożliwia podglądanie wrażliwych transakcji finansowych w pamięci RAM, nawet przez uprzywilejowane procesy na tym samym hoście fizycznym.
 
 Dlaczego inne są błędne:
-B, C: Chronią treść danych logicznie, ale nie zapobiegają technicznemu odczytowi pamięci RAM przez złośliwy proces na hoście.
-D. GCS CMEK: Chroni dane na dysku, nie ma wpływu na bezpieczeństwo pamięci RAM procesora.
-
-Konsensus społeczności ExamTopics: 100% na A. Dane 'in use' = Confidential Computing.</pre>
+B. Masking/Tokenization: To ochrona treści danych, ale dane te nadal muszą zostać 'odmaskowane' w pamięci, aby wykonać obliczenia (transakcję), gdzie nadal są narażone.
+C. DLP Scan before compute: Nie chroni danych w momencie, gdy są już w pamięci RAM procesora podczas obliczeń.
+D. CMEK in GCS: Chroni dane 'at rest' (na dysku), a nie 'in use' (w RAM).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Confidential VMs szyfrują RAM kluczem, którego nie zna nawet system operacyjny Google (hypervisor), co czyni ataki typu 'memory dump' bezużytecznymi dla hakera.</p>
+<p>Confidential Computing to jedyna technologia w GCP adresująca ryzyko dostępu do danych bezpośrednio z pamięci operacyjnej (RAM).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/confidential-computing" target="_blank">https://cloud.google.com/confidential-computing</a></li>
-
+<li><a href="https://cloud.google.com/confidential-computing" target="_blank">Confidential Computing</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 56 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Which service provides visibility into Google's own internal audit logs for actions taken by Google employees on your data?
+A customer is collaborating with another company to build an application on Compute Engine. The customer is building the application tier in their GCP Organization, and the other company is building the storage tier in a different GCP Organization. This is a 3-tier web application. Communication between portions of the application must not traverse the public internet by any means. Which connectivity option should be implemented?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Audit Logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Access Transparency</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Access Approval</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Security Command Center</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC peering</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud VPN</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Interconnect</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Shared VPC</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Which service provides visibility into Google's own internal audit logs for acti
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Which service provides visibility into Google's own internal audit logs for acti
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Access Transparency: To unikalna usługa Google Cloud, która udostępnia Ci logi dokumentujące każde działanie inżynierów Google, którzy uzyskali dostęp do Twoich danych lub zasobów (np. podczas rozwiązywania zgłoszenia do supportu). Log zawiera powód dostępu i lokalizację inżyniera.
+A. VPC Peering: VPC Peering pozwala na bezpośrednie połączenie dwóch sieci VPC, nawet jeśli należą do różnych organizacji (GCP Organizations). Ruch między nimi odbywa się wewnątrz sieci Google, nie wychodząc nigdy do publicznego internetu, co spełnia wymóg bezpieczeństwa.
 
 Dlaczego inne są błędne:
-A. Cloud Audit Logs: Rejestrują działania TWOICH użytkowników i systemów w Twoim projekcie. Nie obejmują działań pracowników Google 'pod maską'.
-C. Access Approval: To krok DALEJ niż logowanie - pozwala Ci ZATWIERDZIĆ lub ODRZUCIĆ prośbę o dostęp, zanim inżynier Google go uzyska. Pytanie dotyczy 'widoczności' (logs), co zapewnia Access Transparency.
-D. Security Command Center: To dashboard bezpieczeństwa, który może wyświetlać alerty, ale nie jest źródłem logów o dostępie personelu Google.
-
-Konsensus społeczności ExamTopics: Zdecydowane B. To kluczowa funkcja dla klientów z sektorów regulowanych (bankowość, zdrowie).</pre>
+B. Cloud VPN: Przesyła ruch przez publiczny internet (choć w zaszyfrowanym tunelu), co łamie wymóg 'must not traverse public internet by any means'.
+C. Cloud Interconnect: Służy do łączenia z on-premises, nie między dwiema organizacjami GCP.
+D. Shared VPC: Shared VPC działa tylko wewnątrz JEDNEJ organizacji GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Access Transparency loguje dostęp do danych 'at rest'. Jeśli inżynier Google musi wejść na Twój serwer, dostaniesz o tym powiadomienie i ślad w logach.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>VPC Peering to jedyny sposób na natywne, prywatne połączenie między dwiema niezależnymi organizacjami w Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/access-transparency" target="_blank">https://cloud.google.com/access-transparency</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/vpc-peering" target="_blank">VPC Network Peering overview</a></li>
 </ul>
 </div>
 </div>

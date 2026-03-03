@@ -52,15 +52,14 @@
 <h2>Question 318 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-strongest level of security and control for highly sensitive data in GCP. What to do?
+Your organization must store highly sensitive data within Google Cloud. You need to design a solution that provides the strongest level of security and control. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> GCS with CSEK + VPC SC + DLP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> GCS with CMEK + DLP + Secret Manager.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> GCS with client-side encryption + Cloud KMS/HSM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> GCS with server-side encryption + BQ column encryption + IAM.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud Storage with customer-supplied encryption keys (CSEK), VPC Service Controls for network isolation, and Cloud DLP for data inspection.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Cloud Storage with customer-managed encryption keys (CMEK), Cloud DLP for data classification, and Secret Manager for storing API access tokens.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Cloud Storage with client-side encryption, Cloud KMS for key management, and Cloud HSM for cryptographic operations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Cloud Storage with server-side encryption, BigQuery with column-level encryption, and IAM roles for access control.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ strongest level of security and control for highly sensitive data in GCP. What t
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Client-side encryption + HSM: To najwyższy poziom bezpieczeństwa (Strongest level). Dane są szyfrowane PRZED wysłaniem do chmury. Google widzi tylko nieczytelne bloki bajtów. Użycie Cloud HSM do ochrony kluczy nadrzędnych zapewnia, że nawet przy posiadaniu kluczy w chmurze, są one chronione sprzętowo (FIPS 140-2 Level 3).
+C. Client-side encryption + Cloud KMS + Cloud HSM: To jest kombinacja dająca 'najwyższy poziom kontroli' (strongest level of control). 1. Client-side encryption oznacza, że Google nigdy nie widzi danych jawnych (zaszyfrowane przed wysłaniem). 2. Cloud KMS zarządza kluczami. 3. Cloud HSM gwarantuje, że operacje kryptograficzne odbywają się wewnątrz certyfikowanego sprzętu odpornego na manipulacje (FIPS 140-2 L3).
 
 Dlaczego inne są błędne:
-A. CSEK: Bardzo silne, ale CSEK szyfruje dane 'server-side' (klucz trafia na chwilę do RAM Google). Szyfrowanie 'client-side' (C) jest silniejsze, bo Google nigdy nie widzi klucza.
-B, D: Opierają się na zaufaniu do infrastruktury Google (server-side encryption), co z definicji jest słabsze niż szyfrowanie u siebie (client-side).
-
-Konsensus społeczności ExamTopics: 100% na C. Szyfrowanie u klienta to 'ultimate security' w chmurze.</pre>
+A. CSEK + VPC SC: Bardzo mocne, ale szyfrowanie po stronie klienta (C) jest uważane za jeszcze silniejszą formę kontroli niż CSEK (gdzie klucz jednak trafia do pamięci RAM Google na czas operacji).
+B. CMEK + DLP: Dobre, ale nie daje takiej kontroli nad samą czynnością szyfrowania jak model client-side (C).
+D. Server-side + IAM: To poziom podstawowy (najsłabszy z wymienionych w kontekście 'highly sensitive').</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Wadą opcji C jest brak możliwości wyszukiwania i analizy danych przez natywne usługi chmurowe (np. BQ nie przeszuka zaszyfrowanego pliku). Jednak wymogiem pytania jest Maksymalne Bezpieczeństwo, a nie Użyteczność.</p>
+<p>Szyfrowanie po stronie klienta (Client-side encryption) to ostateczna metoda zapewnienia poufności danych w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/encryption/client-side" target="_blank">https://cloud.google.com/storage/docs/encryption/client-side</a></li>
-
+<li><a href="https://cloud.google.com/storage/docs/encryption/client-side" target="_blank">Cloud Storage Client-side encryption</a></li>
 </ul>
 </div>
 </div>

@@ -60,7 +60,6 @@ A customer needs an alternative to storing their plain text secrets in their sou
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Encrypt the secrets with a Customer-Managed Encryption Key (CMEK), and store them in Cloud Storage.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Run the Cloud Data Loss Prevention API to scan the secrets, and store them in Cloud SQL.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Deploy the SCM to a Compute Engine VM with local SSDs, and enable preemptible VMs.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A customer needs an alternative to storing their plain text secrets in their sou
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Encrypt + GCS: Zaszyfrowanie sekretów kluczem KMS (CMEK) i przechowywanie ich jako zaszyfrowane obiekty w Cloud Storage to sprawdzony wzorzec bezpieczeństwa. Chroni sekrety przed odczytem nawet w przypadku uzyskania dostępu do systemu storage.
+B. Encrypt with CMEK + Cloud Storage: Szyfrowanie sekretów przed ich zapisaniem i przechowywanie ich w bezpiecznym miejscu (Cloud Storage) z kontrolą dostępu IAM jest klasycznym podejściem przed wprowadzeniem dedykowanych usług takich jak Secret Manager.
 
 Dlaczego inne są błędne:
-A. Cloud SQL: Przechowywanie haseł w bazie danych bez dodatkowego szyfrowania aplikacyjnego to tylko przeniesienie problemu z jednego miejsca w drugie.
-C. DLP API: DLP służy do wykrywania wycieków (identyfikacji), a nie do bezpiecznego cyklu życia sekretów.
-D. VM settings: Nie ma żadnego związku z bezpieczeństwem materiału sekretu w kodzie.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na B. Pojawia się jednak dyskusja, że w nowszych wersjach egzaminu właściwą odpowiedzią byłby Secret Manager.</pre>
+A. Cloud SQL: Przechowywanie sekretów w bazie danych bez dodatkowego szyfrowania nie rozwiązuje problemu bezpieczeństwa w SCM w sposób natywny.
+C. DLP: Służy do wykrywania danych wrażliwych, a nie do ich bezpiecznego przechowywania.
+D. Local SSDs + Preemptible: Nie ma żadnego związku z bezpiecznym przechowywaniem sekretów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> To pytanie jest klasycznym przykładem 'pytania z historią'. Eksperci na forach zauważają, że Secret Manager (który jest obecnie najlepszą odpowiedzią) nie istniał w momencie tworzenia tego pytania. Dlatego uczący się muszą rozpoznać, że CMEK + Cloud Storage to 'najlepsza z dostępnych' metod, realizująca wymóg ochrony kryptograficznej i odizolowania od kodu źródłowego.</p>
+<p>Choć obecnie zalecaną usługą jest Secret Manager, w kontekście dostępnych opcji, szyfrowanie kluczem zarządzanym przez klienta (CMEK) i przechowywanie w GCS jest najbezpieczniejsze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/cmek" target="_blank">https://cloud.google.com/kms/docs/cmek</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/cmek" target="_blank">Customer-managed encryption keys (CMEK)</a></li>
 </ul>
 </div>
 </div>

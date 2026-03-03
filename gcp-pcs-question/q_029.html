@@ -52,15 +52,14 @@
 <h2>Question 29 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Your team sets up a Shared VPC. They need to enable Engineering Group A to attach a Compute Engine instance to only the 10.1.1.0/24 subnet. What should your team grant?
+Your team sets up a Shared VPC Network where project co-vpc-prod is the host project. Your team has configured the firewall rules, subnets, and VPN gateway on the host project. They need to enable Engineering Group A to attach a Compute Engine instance to only the 10.1.1.0/24 subnet. What should your team grant to Engineering Group A to meet this requirement?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Compute Network User at the host project level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Compute Network User at the subnet level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Shared VPC Admin at the host project level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Compute Shared VPC Admin at the service project level.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Compute Network User Role at the host project level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Compute Network User Role at the subnet level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Shared VPC Admin Role at the host project level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Compute Shared VPC Admin Role at the service project level.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,20 @@ Your team sets up a Shared VPC. They need to enable Engineering Group A to attac
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Compute Network User at the subnet level: Nadanie roli Network User bezpośrednio na zasobie podsieci (a nie na całym projekcie) precyzyjnie ogranicza uprawnienia inżynierów. Będą oni widzieć i mogli używać tylko tej jednej, konkretnej podsieci.
+B. Compute Network User at subnet level: W Shared VPC, aby użytkownik mógł podpiąć maszynę VM do konkretnej podsieci, musi posiadać rolę roles/compute.networkUser nadaną na poziomie TEJ KONKRETNEJ podsieci. Nadanie jej na poziomie projektu (A) dałoby dostęp do wszystkich subnetów, co łamie zasadę najmniejszych uprawnień.
 
 Dlaczego inne są błędne:
-A. Host project level: Nadanie roli na poziomie całego projektu pozwoliłoby inżynierom używać KAŻDEJ podsieci w tym projekcie hosta, co narusza zasadę najniższych uprawnień.
-C, D. Shared VPC Admin: To rola o bardzo wysokich uprawnieniach, pozwalająca na konfigurowanie całej architektury Shared VPC, a nie tylko na 'używanie' sieci do tworzenia VM.
-
-Konsensus społeczności ExamTopics: Silne poparcie dla B. Jest to klasyczny przykład granularności IAM w GCP.</pre>
+C, D. Shared VPC Admin: To rola dla administratorów całej sieci (High Privileged), a nie dla inżynierów, którzy mają tylko używać sieci do stawiania maszyn.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> W Shared VPC projekt hosta 'wypożycza' podsieci projektom usługowym. Zarządzanie tym 'wypożyczaniem' na poziomie pojedynczych podsieci to najlepsza praktyka bezpieczeństwa sieciowego.</p>
+<p>Precyzyjne nadawanie uprawnień do subnetów to jedna z głównych zalet Shared VPC w zakresie bezpieczeństwa.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/shared-vpc#iam_in_shared_vpc" target="_blank">https://cloud.google.com/vpc/docs/shared-vpc#iam_in_shared_vpc</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/shared-vpc#iam_in_shared_vpc" target="_blank">Shared VPC IAM roles</a></li>
 </ul>
 </div>
 </div>

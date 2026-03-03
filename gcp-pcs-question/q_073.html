@@ -52,15 +52,14 @@
 <h2>Question 73 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-An organization wants to migrate its ongoing data backup and disaster recovery solutions to GCP. Stable networking connectivity is being implemented. Which solution should they use?
+An organization is starting to move its infrastructure from its on-premises environment to Google Cloud Platform (GCP). The first step the organization wants to take is to migrate its ongoing data backup and disaster recovery solutions to GCP. The organization's on-premises production environment is going to be the next phase for migration to GCP. Stable networking connectivity between the on-premises environment and GCP is also being implemented. Which GCP solution should the organization use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery data pipeline.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Storage using gsutil via Cloud Interconnect.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engine Persistent Disks.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Datastore batch upload.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery using a data pipeline job with continuous updates via Cloud VPN</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Storage using a scheduled task and gsutil via Cloud Interconnect</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engines Virtual Machines using Persistent Disk via Cloud Interconnect</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Datastore using regularly scheduled batch upload jobs via Cloud VPN</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ An organization wants to migrate its ongoing data backup and disaster recovery s
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. GCS via Interconnect: Cloud Interconnect zapewnia stabilne, prywatne łącze o dużej przepustowości, co jest niezbędne dla dużych backupów. Cloud Storage jest naturalnym celem dla plików kopii zapasowych, a gsutil to optymalne narzędzie do ich przesyłania.
+B. Cloud Storage via Cloud Interconnect: Cloud Storage to najlepsze miejsce na backupy. Użycie Cloud Interconnect (zamiast VPN) zapewnia dedykowane, stabilne i o dużej przepustowości połączenie, co jest kluczowe przy migrowaniu dużych wolumenów danych backupowych oraz w kolejnej fazie - produkcji.
 
 Dlaczego inne są błędne:
-A. BigQuery: Nie służy do backupu plików systemowych czy obrazów maszyn.
-C. Persistent Disks: Nie można do nich przesyłać danych bezpośrednio z on-premises bez pośrednictwa VM, co komplikuje architekturę backupu.
-D. Cloud Datastore: To baza NoSQL, nie nadaje się do przechowywania dużych plików/blobów backupowych.
-
-Konsensus społeczności ExamTopics: 100% na B. To podręcznikowy scenariusz wykorzystania Interconnect i GCS.</pre>
+A. BigQuery via VPN: VPN może być niestabilny przy masowych transferach danych, a BigQuery nie jest klasycznym storage'em pod backupy.
+C. Persistent Disk: Dyski muszą być przypięte do VM, nie służą do bezpośredniego przesyłania backupów on-premise.
+D. Cloud Datastore: Nie nadaje się do przechowywania obrazów DR lub dużych archiwów plików.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Przy 'ongoing backup' (ciągłym backupie) stabilność Interconnecta zapobiega przerwom w transmisji, które mogłyby wystąpić przy użyciu publicznego internetu (nawet przez VPN).</p>
+<p>Cloud Interconnect oferuje gwarantowaną przepustowość (SLA), co jest krytyczne dla okienek backupowych w przedsiębiorstwach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/gsutil" target="_blank">https://cloud.google.com/storage/docs/gsutil</a></li>
-
+<li><a href="https://cloud.google.com/network-connectivity/docs/interconnect" target="_blank">Cloud Interconnect overview</a></li>
 </ul>
 </div>
 </div>

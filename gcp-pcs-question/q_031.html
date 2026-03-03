@@ -52,15 +52,14 @@
 <h2>Question 31 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-An organization wants to migrate its current data backup and disaster recovery solutions to GCP. Which GCP solution should they use?
+An organization is starting to move its infrastructure from its on-premises environment to Google Cloud Platform (GCP). The first step the organization wants to take is to migrate its current data backup and disaster recovery solutions to GCP for later analysis. The organization's production environment will remain on-premises for an indefinite time. The organization wants a scalable and cost-efficient solution. Which GCP solution should the organization use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery continuous updates.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Storage using a scheduled task and gsutil.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engine Persistent Disks.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Datastore upload jobs.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery using a data pipeline job with continuous updates</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Storage using a scheduled task and gsutil</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engine Virtual Machines using Persistent Disk</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Datastore using regularly scheduled batch upload jobs</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ An organization wants to migrate its current data backup and disaster recovery s
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud Storage: Jest to najbardziej skalowalna, trwała (11 dziewiątek trwałości) i kosztowo efektywna usługa do przechowywania backupów. Użycie gsutil w zaplanowanych zadaniach to standardowy sposób automatyzacji transferu danych z on-premises.
+B. Cloud Storage + gsutil: Cloud Storage to najbardziej skalowalne i opłacalne rozwiązanie do przechowywania kopii zapasowych i danych DR (Disaster Recovery). Użycie gsutil (narzędzia CLI) do planowanego przesyłania danych jest standardowym podejściem w scenariuszach migracji 'data first'.
 
 Dlaczego inne są błędne:
-A. BigQuery: To magazyn danych analitycznych, nie nadaje się do przechowywania surowych kopii zapasowych systemów plików czy baz danych. Jest bardzo drogi jako 'zwykły storage'.
-C. Persistent Disks: Są przypięte do VM. Używanie ich jako globalnego rozwiązania DR jest drogie i nieefektywne (brak łatwego dostępu spoza VM).
-D. Cloud Datastore: To baza dokumentowa NoSQL, nie służy do backupów infrastrukturalnych.
-
-Konsensus społeczności ExamTopics: 100% głosów na B. Cloud Storage to fundament każdego planu Backup & DR w Google Cloud.</pre>
+A. BigQuery: To hurtownia danych do analizy, nie jest optymalna kosztowo jako prosty 'backup storage'.
+C. Compute Engine VM: Używanie dysków Persistent Disk podpiętych do maszyn jest droższe i mniej skalowalne niż GCS.
+D. Cloud Datastore: To baza danych NoSQL dla małych jednostek danych, nie nadaje się do pełnych backupów infrastruktury.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Cloud Storage oferuje klasy archiwalne (Coldline i Archive), które są drastycznie tańsze dla danych rzadko odczytywanych, co jest idealne dla kopii zapasowych.</p>
+<p>Cloud Storage (GCS) z klasami Nearline lub Coldline to fundament strategii Backup & DR w Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/storage-classes" target="_blank">https://cloud.google.com/storage/docs/storage-classes</a></li>
-
+<li><a href="https://cloud.google.com/architecture/disaster-recovery-strategies" target="_blank">Cloud Storage for DR</a></li>
 </ul>
 </div>
 </div>

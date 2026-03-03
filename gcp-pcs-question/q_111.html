@@ -52,15 +52,14 @@
 <h2>Question 111 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Identify network anomalies (VM-to-VM, internet-to-VM, VM-to-Google) within and across VPCs. Which method?
+Your company requires the security and network engineering teams to identify all network anomalies within and across VPCs, internal traffic from VMs to VMs, traffic between end locations on the internet and VMs, and traffic between VMs to Google Cloud services in production. Which method should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Organization policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Packet mirroring.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Define an organization policy constraint.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure packet mirroring policies.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable VPC Flow Logs on the subnet.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Monitor and analyze Cloud Audit Logs.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Identify network anomalies (VM-to-VM, internet-to-VM, VM-to-Google) within and a
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. VPC Flow Logs: Rejestrują one każdy przepływ sieciowy (5-tuple: source/dest IP, source/dest port, protocol) wraz z liczbą bajtów i pakietów. Jest to najbardziej efektywna metoda na wykrywanie anomalii (np. nagłego wycieku danych do internetu lub nietypowej komunikacji między VM-ami).
+C. VPC Flow Logs: Rejestrują one każdy przepływ IP (source IP, dest IP, porty, bajty) wewnątrz sieci VPC oraz ruch wychodzący i przychodzący. Są niezbędne do identyfikacji anomalii sieciowych (np. nietypowe porty, skanowanie sieci, ogromne transfery danych), których nie widać w logach audytowych aplikacji.
 
 Dlaczego inne są błędne:
-A. Organization policy: Nakłada restrykcje konfiguracyjne (np. 'zakaz tworzenia VM w Azji'), nie monitoruje bieżącego ruchu sieciowego.
-B. Packet mirroring: Kopiuje PEŁNE pakiety (łącznie z treścią). Jest to bardzo drogie i zazwyczaj stosowane do głębokiej inspekcji (IDS), a nie do ogólnej identyfikacji anomalii przepływów, gdzie Flow Logi są szybsze i tańsze.
-D. Cloud Audit Logs: Rejestrują zmiany w konfiguracji (np. 'ktoś zmienił firewall'), ale nie widzą samego ruchu sieciowego (pakietów).
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. Flow Logi to standardowy sensor dla SIEM sieciowego w GCP.</pre>
+A. Org Policy: Służy do blokowania akcji, a nie do identyfikacji ruchu sieciowego.
+B. Packet Mirroring: Służy do głębokiej inspekcji pakietów (IDS/IPS), jest znacznie droższy i bardziej skomplikowany niż Flow Logs (które zazwyczaj wystarczają do identyfikacji anomalii).
+D. Audit Logs: Rejestrują 'kto wywołał API', a nie 'jaki ruch sieciowy płynie między VM'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Flow Logi w GCP są generowane z interfejsów sieciowych (NIC) VM, co pozwala widzieć nawet ruch, który został odrzucony przez firewall.</p>
+<p>VPC Flow Logs to odpowiednik 'NetFlow' w Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/using-flow-logs" target="_blank">https://cloud.google.com/vpc/docs/using-flow-logs</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/using-flow-logs" target="_blank">Using VPC Flow Logs</a></li>
 </ul>
 </div>
 </div>

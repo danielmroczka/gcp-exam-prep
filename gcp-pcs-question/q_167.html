@@ -52,15 +52,14 @@
 <h2>Question 167 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit who has the permission to access a specific GCS bucket across the entire organization. Which tool?
+You have the following resource hierarchy. There is an organization policy at each node in the hierarchy as shown. Which load balancer types are denied in VPC A?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> All load balancer types are denied in accordance with the global node's policy.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> INTERNAL_TCP_UDP, INTERNAL_HTTP_HTTPS is denied in accordance with the folder's policy.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> EXTERNAL_TCP_PROXY, EXTERNAL_SSL_PROXY are denied in accordance with the project's policy.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> EXTERNAL_TCP_PROXY, EXTERNAL_SSL_PROXY, INTERNAL_TCP_UDP, and INTERNAL_HTTP_HTTPS are denied in accordance with the folder and project's policies.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,20 @@ Audit who has the permission to access a specific GCS bucket across the entire o
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Policy Analyzer: Pozwala na zadanie pytania: 'Kto ma dostęp do bucketu X?'. Przeszukuje on wszystkie polityki IAM (na poziomie bucketu, projektu, folderu i organizacji) i zwraca pełną listę osób i grup z dostępem.
+A. All load balancer types are denied (Global Policy): W hierarchii GCP polityki organizacji są dziedziczone. Jeśli na najwyższym poziomie (Organization) ustawiono restrykcję blokującą wszystkie typy Load Balancerów, to żadna polityka na niższym poziomie (Folder, Project) nie może jej poluzować (chyba że nadrzędna polityka na to pozwala, ale domyślnie 'Deny' na górze wygrywa).
 
 Dlaczego inne są błędne:
-B. Policy Troubleshooter: Sprawdza tylko 'dlaczego ten JEDEN konkretny użytkownik ma/nie ma dostępu'. Nie daje zbiorczego raportu.
-C. IAM Recommender: Podpowiada jak ograniczyć dostęp, ale nie służy do inwentaryzacji obecnych praw.
-D. Cloud Audit Logs: Rejestrują moment NADANIA uprawnienia, ale bardzo trudno z nich wyczytać AKTUALNY stan (kto ma dostęp TERAZ).
-
-Konsensus społeczności ExamTopics: 100% na A. Policy Analyzer to główne narzędzie 'Access Review'.</pre>
+B, C, D: Sugerują, że polityki na niższych poziomach są decydujące, podczas gdy w przypadku restrykcyjnych polityk organizacji, ograniczenie na poziomie globalnym (A) jest nadrzędne dla całej hierarchii.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na Reddit eksperci radzą: 'Jeśli audytor pyta o listę uprawnień -> idź do Policy Analyzer'. Potrafi on nawet uwzględnić uprawnienia wynikające z grup, do których użytkownik należy, co jest niemożliwe do ręcznego sprawdzenia przy dużej skali.</p>
+<p>Polityki organizacji działają na zasadzie dziedziczenia z ograniczeniami - 'Deny' na wyższym poziomie zazwyczaj nie może być nadpisane przez 'Allow' na niższym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">Org Policy hierarchy</a></li>
 </ul>
 </div>
 </div>

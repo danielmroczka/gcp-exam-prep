@@ -60,7 +60,6 @@ A business unit at a multinational corporation signs up for GCP and starts movin
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Security Reviewer</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Role Administrator</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy Administrator</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A business unit at a multinational corporation signs up for GCP and starts movin
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Organization Administrator: Jest to najwyższa rola w hierarchii GCP. Daje ona pełną kontrolę nad wszystkimi zasobami w organizacji, w tym możliwość nadawania uprawnień IAM innym użytkownikom i audytowania dowolnego projektu.
+A. Organization Administrator: Jest to najwyższa rola w hierarchii GCP. Pozwala na pełną kontrolę nad wszystkimi zasobami w organizacji, w tym na zarządzanie uprawnieniami (IAM) i politykami dla wszystkich projektów w domenie.
 
 Dlaczego inne są błędne:
-B. Security Reviewer: Pozwala na podgląd polityk bezpieczeństwa i logów, ale nie pozwala na ich modyfikację (zarządzanie uprawnieniami).
-C. Organization Role Administrator: Pozwala na tworzenie ról niestandardowych, ale nie daje wglądu we wszystkie projekty ani zarządzania dostępem globalnym.
-D. Organization Policy Administrator: Pozwala na ustawianie restrykcji (constraints) na poziomie organizacji, ale nie służy do zarządzania uprawnieniami IAM użytkowników.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. Aby przejąć pełną kontrolę ('take over managing'), niezbędna jest rola Admina Organizacji.</pre>
+B. Security Reviewer: Rola tylko do odczytu (view permissions), nie pozwala na 'zarządzanie' (managing).
+C. Organization Role Administrator: Pozwala tylko na tworzenie ról niestandardowych, nie daje uprawnień do zarządzania wszystkimi projektami.
+D. Organization Policy Administrator: Pozwala tylko na zarządzanie politykami organizacji (constraints), a nie uprawnieniami użytkowników w projektach.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Rola ta powinna być nadawana z dużą ostrożnością. Zazwyczaj zaleca się posiadanie co najmniej dwóch kont z tą rolą, zabezpieczonych sprzętowym kluczem MFA.</p>
+<p>W sytuacji przejmowania kontroli nad nowo utworzoną organizacją, rola Organization Administrator jest niezbędna do ustanowienia centralnego nadzoru.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/access-control-org" target="_blank">https://cloud.google.com/resource-manager/docs/access-control-org</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/access-control-org" target="_blank">IAM roles for organizations</a></li>
 </ul>
 </div>
 </div>

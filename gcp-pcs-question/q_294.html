@@ -52,15 +52,14 @@
 <h2>Question 294 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-End-to-end encryption of user login credentials behind load balancer. What to do?
+Your organization has an internet-facing application behind a load balancer. Your regulators require end-to-end encryption of user login credentials. You must implement this requirement. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Symmetric key Cloud KMS client-side.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Hashed value + timestamp.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> TLS certificate at GCLB HTTPs, submit through HTTPs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Asymmetric key Cloud KMS client-side.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Generate a symmetric key with Cloud KMS. Encrypt client-side user credentials by using the symmetric key.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Concatenate the credential with a timestamp. Submit the timestamp and hashed value of credentials to the network.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Deploy the TLS certificate at Google Cloud Global HTTPs Load Balancer, and submit the user credentials through HTTPs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Generate an asymmetric key with Cloud KMS. Encrypt client-side user credentials using the public key.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,22 +78,21 @@ End-to-end encryption of user login credentials behind load balancer. What to do
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. TLS on Load Balancer: Podstawową i wystarczającą metodą ochrony poświadczeń w internecie jest protokół HTTPS (TLS). Szyfruje on całą komunikację (w tym login i hasło) od przeglądarki użytkownika do punktu zakończenia TLS na Load Balancerze Google.
+C. TLS certificate at Load Balancer + HTTPS: End-to-end encryption w standardowym rozumieniu webowym oznacza, że dane są szyfrowane w przeglądarce użytkownika i przesyłane bezpiecznym kanałem TLS (HTTPS) aż do Load Balancera (gdzie następuje terminacja) i dalej do backendu (GCP zapewnia szyfrowanie wewnątrz swojej sieci domyślnie). Jest to najprostsza i w 99% przypadków wystarczająca metoda dla 'user login credentials'.
 
 Dlaczego inne są błędne:
-A, D: Szyfrowanie kluczem KMS w przeglądarce (client-side) jest niepraktyczne i nadmiarowe przy poprawnie działającym HTTPS.
-B. Hashing: Chroni hasło w bazie, ale jeśli samo przesyłanie nie jest szyfrowane (HTTP), haker przejmie hasz i może wykonać atak typu 'Pass-the-hash'.</pre>
+A, D. Client-side manual encryption: Bardzo skomplikowane dla standardowych formularzy logowania, wymagałoby posiadania kluczy publicznych przez wszystkich klientów w przeglądarkach.
+B. Hashed credentials: Haszowanie jest jednostronne. Choć hasła się haszuje, wymóg 'end-to-end encryption' (szyfrowanie) odnosi się do kanału przesyłowego (TLS).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Pamiętaj, aby na Load Balancerze wymusić przekierowanie z HTTP na HTTPS oraz używać nowoczesnych wersji TLS (1.2+).</p>
+<p>Szyfrowanie TLS (HTTPS) to podstawowa i wymagana metoda ochrony danych uwierzytelniających w ruchu sieciowym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/load-balancing/docs/https" target="_blank">https://cloud.google.com/load-balancing/docs/https</a></li>
-
+<li><a href="https://cloud.google.com/load-balancing/docs/ssl-certificates" target="_blank">SSL certificates for HTTPS Load Balancing</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 53 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A user needs to view the configuration of a VPC network but should not be able to change anything. Which role should you grant?
+A customer deployed an application on Compute Engine that takes advantage of the elastic nature of cloud computing. How can you work with Infrastructure Operations Engineers to best ensure that Windows Compute Engine VMs are up to date with all the latest OS patches?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Compute Network Admin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Compute Network Viewer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Viewer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Project Viewer</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Build new base images when patches are available, and use a CI/CD pipeline to rebuild VMs, deploying incrementally.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Federate a Domain Controller into Compute Engine, and roll out weekly patches via Group Policy Object.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Deployment Manager to provision updated VMs into new serving Instance Groups (IGs).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Reboot all VMs during the weekly maintenance window and allow the StartUp Script to download the latest patches from the internet.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ A user needs to view the configuration of a VPC network but should not be able t
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ A user needs to view the configuration of a VPC network but should not be able t
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Compute Network Viewer: Rola ta (`roles/compute.networkViewer`) jest precyzyjnie dopasowana do wymogu. Pozwala na podgląd wszystkich zasobów sieciowych (VPC, firewall, trasy), ale nie daje dostępu do podglądu samych maszyn wirtualnych ani żadnych uprawnień edycji.
+A. Build new base images and rebuild VMs: W świecie chmury zaleca się podejście 'Immutable Infrastructure'. Zamiast patchować działające maszyny (co jest ryzykowne i niespójne), buduje się nowy, czysty obraz 'złoty' (Golden Image) z poprawkami i podmienia maszyny w grupach IG (Rolling Update).
 
 Dlaczego inne są błędne:
-A. Compute Network Admin: Pozwala na modyfikację sieci - naruszenie wymogu 'should not be able to change'.
-C. Compute Viewer: Pozwala na podgląd zasobów obliczeniowych (VM), co jest zbyt szerokim uprawnieniem, jeśli użytkownik potrzebuje tylko wglądu w sieć.
-D. Project Viewer: Daje dostęp do podglądu WSZYSTKICH usług w projekcie (SQL, Storage itp.) - naruszenie zasady najniższych uprawnień.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na B jako najbardziej granularną rolę dla administratora sieci bez uprawnień edycji.</pre>
+B. GPO: Tradycyjne podejście on-premises, wolniejsze i trudniejsze do śledzenia w dynamicznym środowisku chmurowym.
+C. Deployment Manager: To narzędzie IaC, samo w sobie nie zarządza procesem patchowania wewnątrz OS.
+D. StartUp Script: Pobieranie patchy przy każdym starcie spowalnia skalowanie maszyn i może zawieść, jeśli repozytorium patchy będzie niedostępne.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Wybieranie ról specyficznych dla usługi (np. Network Viewer) zamiast ogólnych (Project Viewer) to kluczowy element zdania egzaminu Professional Security Engineer.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Infrastruktura niezmienna (Immutable) gwarantuje, że to co przetestowano w środowisku testowym, jest identyczne z tym co działa na produkcji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/access/iam#compute.networkViewer" target="_blank">https://cloud.google.com/compute/docs/access/iam#compute.networkViewer</a></li>
-
+<li><a href="https://cloud.google.com/architecture/immutable-infrastructure" target="_blank">Immutable infrastructure</a></li>
 </ul>
 </div>
 </div>

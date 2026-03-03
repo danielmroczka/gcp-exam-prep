@@ -52,15 +52,14 @@
 <h2>Question 325 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Critical web app, increase resilience against web attacks, enhance perimeter, provide access control. What to do?
+Your organization manages a critical web application that serves international customers on Google Cloud. An increase in malicious traffic targeting this application has strained resources and caused periods of downtime. You need to design security measures to increase the application's resilience against web attacks, enhance perimeter protection, and provide access control. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Network LB, IAP admin access, firewall on external IPs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Firewall on instances, LB threat detection, increase resources.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Firewall block known malicious, Cloud Armor, IAP for granular access.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall restrict internal, Cloud DNS policies, disable external IPs.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Employ network load balancing for traffic distribution. Update Identity-Aware Proxy (IAP) policies to allow only administrative access. Implement custom firewall rules on all external IP addresses.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set up firewall rules on Compute Engine instances within the application's environment. Rely on load balancers for threat detection. Increase instance resources to cope with attack volume.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure firewall rules to block traffic from known malicious IP ranges. Set up Google Cloud Armor and implement Identity-Aware Proxy (IAP) for granular access control.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Add firewall rules that restrict all internal IP ranges. Establish Cloud DNS security policies. Disable external IP addresses to reduce the attack surface. Create user groups for access control.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Critical web app, increase resilience against web attacks, enhance perimeter, pr
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Defense in Depth (Armor + Firewall + IAP): Ten zestaw realizuje wszystkie wymogi: 1. Resilience against web attacks (Cloud Armor jako WAF). 2. Enhance perimeter (Firewall blokujący znanych agresorów). 3. Access control (IAP dla granularnego dostępu użytkowników).
+C. Firewall rules (IP block) + Cloud Armor + IAP: To jest modelowy zestaw 'Defense in Depth': 1. Reguły firewall blokują znane złe źródła na poziomie sieci. 2. Google Cloud Armor (WAF) chroni przed atakami L7 (DDoS, SQLi, XSS) i zapewnia elastyczność w filtrowaniu ruchu webowego. 3. Cloud IAP zapewnia, że tylko autoryzowani użytkownicy (a nie boty czy anonimowi atakujący) mogą w ogóle dotrzeć do wrażliwych części aplikacji.
 
 Dlaczego inne są błędne:
-A. Network LB: Nie wspiera Cloud Armor ani IAP w warstwie 7, co jest kluczowe dla ochrony aplikacji webowych.
-B. Increase resources: To 'pudrowanie' problemu (skalowanie w odpowiedzi na atak), a nie jego techniczne rozwiązanie.
-D. Disable external IPs: Choć dobre, uniemożliwiłoby wejście zwykłym użytkownikom do publicznej aplikacji bez dodatkowych, skomplikowanych mechanizmów (IAP jest tu lepszym sposobem kontroli dostępu).
-
-Konsensus społeczności ExamTopics: 100% na C. To kompletny stos bezpieczeństwa webowego w GCP.</pre>
+A. Network LB: Działa na warstwie 4, nie chroni przed atakami webowymi (L7) tak skutecznie jak Cloud Armor.
+B. Increase resources: To nie jest zabezpieczenie, tylko próba 'przeczekania' ataku, co generuje ogromne koszty i nie rozwiązuje problemu.
+D. Restrict all internal IP: Bezsensowne dla aplikacji służącej klientom z internetu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Cloud Armor chroni przed botami i exploitami, IAP zapewnia, że tylko Twoi pracownicy wejdą do paneli administracyjnych, a Firewall VPC stanowi ostatnią linię obrony sieciowej.</p>
+<p>Cloud Armor to kluczowe narzędzie do zapewnienia odporności (Resilience) publicznych aplikacji na ataki typu Denial of Service.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/products" target="_blank">https://cloud.google.com/security/products</a></li>
-
+<li><a href="https://cloud.google.com/armor/docs/security-policy-concepts" target="_blank">Cloud Armor security policies</a></li>
 </ul>
 </div>
 </div>

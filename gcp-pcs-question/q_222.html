@@ -52,15 +52,14 @@
 <h2>Question 222 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to manage and view all organization policies, but not change IAM roles. Which role?
+Your company recently published a security policy to minimize the usage of service account keys. On-premises Windows-based applications are interacting with Google Cloud APIs. You need to implement Workload Identity Federation (WIF) with your identity provider on-premises. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.organizationAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/orgpolicy.policyAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/iam.securityAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/viewer</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set up a workload identity pool with your corporate Active Directory Federation Service (ADFS). Configure a rule to let principals in the pool impersonate the Google Cloud service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set up a workload identity pool with your corporate Active Directory Federation Service (ADFS). Let all principals in the pool impersonate the Google Cloud service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Set up a workload identity pool with an OpenID Connect (OIDC) service on the same machine. Configure a rule to let principals in the pool impersonate the Google Cloud service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set up a workload identity pool with an OpenID Connect (OIDC) service on the same machine. Let all principals in the pool impersonate the Google Cloud service account.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Grant a user access to manage and view all organization policies, but not change
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ Grant a user access to manage and view all organization policies, but not change
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. orgpolicy.policyAdmin: Jak już ustaliliśmy (216), ta rola daje władzę nad Standardami (Org Policy), ale celowo NIE daje władzy nad Ludźmi (IAM). To idealna separacja dla zespołu Compliance.
+A. Workload Identity Pool + ADFS + rule for impersonation: To jest poprawna procedura WIF dla systemów on-premises używających SAML/OIDC. 1. Tworzysz pulę. 2. Podpinasz ADFS jako providera. 3. Konfigurujesz uprawnienia IAM tak, aby tylko konkretne tożsamości z tej puli (na podstawie atrybutów SAML) mogły wygenerować tokeny dla konta serwisowego GCP.
 
 Dlaczego inne są błędne:
-A. Admin: Może wszystko.
-C. securityAdmin: Zarządza właśnie IAM (rolami), co jest zabronione w pytaniu.
-D. Viewer: Nic nie może zmienić.
-
-Konsensus społeczności ExamTopics: 100% na B. Separacja Governance od IAM to podstawa audytu.</pre>
+B. All principals: Łamie zasadę najmniejszych uprawnień - każdy pracownik w firmie mógłby używać konta serwisowego aplikacji.
+C, D. OIDC on same machine: Pytanie wspomina o AD (Active Directory), dla którego standardem integracji jest ADFS (SAML).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> To pytanie często powraca, by sprawdzić czy rozumiesz różnicę między 'Policy' (zasady floty) a 'Role' (prawa osób). Rola B zarządza tym pierwszym, rola C tym drugim.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Workload Identity Federation pozwala na bezpieczne używanie tożsamości on-premises bez konieczności kopiowania kluczy JSON.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">WIF for on-premises</a></li>
 </ul>
 </div>
 </div>

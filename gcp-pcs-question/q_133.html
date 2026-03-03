@@ -52,7 +52,7 @@
 <h2>Question 133 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Data residency requirements. Store data in specific locations. Hierarchy contain multiple residency locations. At which level set Resource Location Restriction?
+Your company's Chief Information Security Officer (CISO) creates a requirement that business data must be stored in specific locations due to regulatory requirements that affect the company's global expansion plans. After working on the details to implement this requirement, you determine the following: The services in scope are included in the Google Cloud Data Residency Terms. The business data remains within specific locations under the same organization. The folder structure can contain multiple data residency locations. You plan to use the Resource Location Restriction organization policy constraint. At which level in the resource hierarchy should you set the constraint?
 </div>
 <div class="question-choices-container">
 <ul>
@@ -60,7 +60,6 @@ Data residency requirements. Store data in specific locations. Hierarchy contain
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Resource</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Project</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Data residency requirements. Store data in specific locations. Hierarchy contain
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Project Level: Ustawienie polityki organizacji na poziomie projektu zapewnia największą precyzję (granularność). Jeśli Twoja firma działa globalnie, ustawienie restrykcji na poziomie Organizacji (D) lub Folderu (A) mogłoby zablokować deweloperom możliwość tworzenia zasobów w regionach, które są im potrzebne w innych projektach.
+C. Project: Pytanie wspomina, że 'folder structure can contain multiple data residency locations' (czyli w jednym folderze mogą być projekty z różnych regionów) oraz 'the business data remains within specific locations'. Najbardziej granularnym i odpowiednim poziomem do nałożenia restrykcji lokalizacji zasobów, aby spełnić te warunki, jest poziom Projektu. Pozwala to na precyzyjne przypisanie Projektu A do USA, a Projektu B do Europy, nawet jeśli są w tym samym folderze.
 
 Dlaczego inne są błędne:
-A, D: Zbyt szerokie. Dziedziczenie w dół zablokowałoby całą firmę lub cały pion biznesowy do jednego regionu.
-B. Resource: Polityki organizacji (Constraints) ustawia się na węzłach hierarchii (Org/Folder/Project), nie ustawia się ich bezpośrednio 'na zasobie' (np. na pojedynczym dysku).
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. Poziom projektu to najbezpieczniejsze miejsce na specyficzne wymogi prawne bez psucia reszty środowiska.</pre>
+A. Folder: Zbyt szeroko, jeśli folder ma zawierać wiele lokalizacji.
+D. Organization: Zbyt szeroko, zablokowałoby globalną ekspansję firmy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Możesz również użyć Tagów i Warunków (IAM Conditions), ale standardowa polityka `gcp.resourceLocations` na poziomie projektu jest najbardziej uznawaną odpowiedzią egzaminacyjną.</p>
+<p>Resource Location Restriction to kluczowe narzędzie dla zgodności z RODO/GDPR i innymi przepisami o suwerenności danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">Resource Location Restriction policy</a></li>
 </ul>
 </div>
 </div>

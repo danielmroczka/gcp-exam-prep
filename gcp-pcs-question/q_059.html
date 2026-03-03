@@ -52,15 +52,14 @@
 <h2>Question 59 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-How does Google Cloud ensure data is encrypted at rest by default?
+A patch for a vulnerability has been released, and a DevOps team needs to update their running containers in Google Kubernetes Engine (GKE). How should the DevOps team accomplish this?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Using Customer-Supplied Encryption Keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Using Customer-Managed Encryption Keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Using Google-managed encryption keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Data is not encrypted by default.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Puppet or Chef to push out the patch to the running container.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Verify that auto upgrade is enabled; if so, Google will upgrade the nodes in a GKE cluster.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Update the application code or apply a patch, build a new image, and redeploy it.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure containers to automatically upgrade when the base image is available in Container Registry.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ How does Google Cloud ensure data is encrypted at rest by default?
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Google-managed encryption keys: To jest domyślny stan w Google Cloud. Każdy bajt danych zapisany na dysku (GCS, BigQuery, PD) jest automatycznie szyfrowany (AES-256) kluczami zarządzanymi przez Google, bez żadnej akcji ze strony użytkownika.
+C. Build a new image and redeploy: Kontenery z założenia są efemeryczne i niezmienne (immutable). Nie patchuje się działających kontenerów 'na żywo'. Prawidłowy proces to: poprawka w kodzie/Dockerfile -> nowy obraz -> nowe wdrożenie (np. rolling update).
 
 Dlaczego inne są błędne:
-A, B: Są to OPCJONALNE metody szyfrowania, które użytkownik musi sam włączyć i skonfigurować (CMEK/CSEK).
-D. Not encrypted: Błędne założenie. Google szyfruje wszystko domyślnie od lat.
-
-Konsensus społeczności ExamTopics: 100% na C. To fundamentalna cecha bezpieczeństwa infrastruktury Google.</pre>
+A. Puppet/Chef: Narzędzia do konfiguracji OS, nie stosuje się ich do patchowania wnętrza kontenerów.
+B. Auto upgrade nodes: Aktualizuje system operacyjny węzłów (worker nodes), ale nie aplikacje/biblioteki wewnątrz Twoich kontenerów.
+D. Auto upgrade on registry change: GKE nie posiada natywnej funkcji, która automatycznie restartuje pody tylko dlatego, że pojawił się nowy tag w Container Registry (wymaga to akcji CI/CD lub kontrolera).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Szyfrowanie to odbywa się na poziomie warstwy fizycznej (bloków danych). Klucze są przechowywane w bezpiecznym systemie zarządzania kluczami Google i są odseparowane od samych danych.</p>
+<p>Zasada 'Continer Immutability' to fundament bezpieczeństwa i powtarzalności operacji w Kubernetes.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/docs/security/encryption/at-rest" target="_blank">https://cloud.google.com/docs/security/encryption/at-rest</a></li>
-
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster" target="_blank">GKE security best practices</a></li>
 </ul>
 </div>
 </div>

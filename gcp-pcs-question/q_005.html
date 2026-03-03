@@ -61,7 +61,6 @@ When creating a secure container image, which two items should you incorporate i
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Remove any unnecessary tools not needed by the app.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use public container images as a base image for the app.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Use many container image layers to hide sensitive information.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ When creating a secure container image, which two items should you incorporate i
 <pre>Odpowiedź: BC.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Single app per container: Fundament mikroserwisów i bezpieczeństwa. Ułatwia izolację, ograniczanie zasobów i monitorowanie.
-C. Remove unnecessary tools: Usunięcie shella, menedżerów pakietów czy edytorów (tzw. obrazy distroless) uniemożliwia hakerowi eskalację ataku po udanym przejęciu aplikacji.
+B. Single app per container: Zgodnie z zasadą mikroserwisów i izolacji, jeden kontener powinien obsługiwać jeden proces/aplikację.
+C. Remove unnecessary tools: Zmniejsza to 'attack surface' (powierzchnię ataku) kontenera. Im mniej binarek (np. curl, netcat, shell) w kontenerze, tym trudniej napastnikowi po ewentualnym przejęciu aplikacji.
 
 Dlaczego inne są błędne:
-A. PID 1: Aplikacja POWINNA być PID 1 (lub używać inita jak `tini`), aby poprawnie obsługiwać sygnały zamknięcia.
-D. Public images: Korzystanie z publicznych, niezweryfikowanych obrazów to ogromne ryzyko (malware, exploity).
-E. Many layers: Warstwy nie ukrywają danych. Każda warstwa jest dostępna dla każdego, kto ma obraz. Dane wrażliwe w warstwie zostają tam na zawsze, nawet jeśli je 'usuniesz' w kolejnej.
-
-Konsensus społeczności ExamTopics: 100% na BC. To fundamenty bezpieczeństwa kontenerów (Docker Best Practices).</pre>
+A. PID 1: Zaleca się właśnie, aby aplikacja działała jako PID 1 (lub przez 'init'), aby poprawnie obsługiwać sygnały (np. SIGTERM).
+D. Public images: Korzystanie bezpośrednio z publicznych obrazów bez weryfikacji jest ryzykowne.
+E. Many layers: Warstwy nie ukrywają danych (są widoczne w historii obrazu).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BC</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> W dyskusjach na Reddit podnoszony jest argument, że PID 1 (opcja A) jest skomplikowany. Niektórzy twierdzą, że nie powinno się być PID 1 bez inita. Jednak w kontekście tego pytania, kluczowe są zasady minimalizacji powierzchni ataku (C) i separacji procesów (B), które są niekwestionowanymi standardami security.</p>
+<p>Bezpieczeństwo kontenerów opiera się na minimalizmie i izolacji. Obrazy typu 'Distroless' są doskonałym przykładem realizacji punktu C.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/architecture/best-practices-for-building-containers" target="_blank">https://cloud.google.com/architecture/best-practices-for-building-containers</a></li>
-
+<li><a href="https://cloud.google.com/architecture/best-practices-for-building-containers" target="_blank">Best practices for building containers</a></li>
 </ul>
 </div>
 </div>

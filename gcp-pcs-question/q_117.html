@@ -52,15 +52,14 @@
 <h2>Question 117 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Minimize risk of CI/CD credentials (hosted on CE) being stolen. What to do?
+You plan to deploy your cloud infrastructure using a CI/CD cluster hosted on Compute Engine. You want to minimize the risk of its credentials being stolen by a third party. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Dedicated user account in Vault.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Dedicated user account, disable SA creation policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Custom service account, disable SA key creation policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Custom service account, allow SA lifetime extension policy.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a dedicated Cloud Identity user account for the cluster. Use a strong self-hosted vault solution to store the user's temporary credentials.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a dedicated Cloud Identity user account for the cluster. Enable the constraints/iam.disableServiceAccountCreation organization policy at the project level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a custom service account for the cluster. Enable the constraints/iam.disableServiceAccountKeyCreation organization policy at the project level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a custom service account for the cluster. Enable the constraints/iam.allowServiceAccountCredentialLifetimeExtension organization policy at the project level.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Minimize risk of CI/CD credentials (hosted on CE) being stolen. What to do?
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Custom SA + No Keys: Najbezpieczniejszą metodą jest przypisanie tożsamości bezpośrednio do VM (Service Account). Jeśli dodatkowo nałożysz politykę organizacji `iam.disableServiceAccountKeyCreation`, haker, który przejmie maszynę, nie będzie mógł wygenerować statycznego pliku JSON z kluczem, który mógłby wynieść poza chmurę.
+C. Custom Service Account + disableServiceAccountKeyCreation: 1. Użycie Service Accounta zamiast konta użytkownika (Cloud Identity) jest standardem dla CI/CD. 2. Włączenie polityki organizacji 'disableServiceAccountKeyCreation' blokuje możliwość pobierania kluczy JSON. Zmusza to do używania bezpieczniejszej metody - tożsamości przypisanej do maszyny (Instance Metadata), gdzie klucze nie mogą zostać skradzione z systemu plików CI/CD.
 
 Dlaczego inne są błędne:
-A, B. Dedicated user account: Konta użytkowników (ludzi) nie powinny być używane do automatyzacji CI/CD na maszynach.
-D. Lifetime extension: Przedłużenie czasu życia tokenów zwiększa ryzyko, a nie je minimalizuje.
-
-Konsensus społeczności ExamTopics: 100% na C. Kombinacja tożsamości instancji i blokady tworzenia kluczy to 'best practice' dla serwerów CI/CD.</pre>
+A. Dedicated user account: Konta użytkowników nie powinny być używane przez automaty (brak możliwości bezpiecznej, automatycznej rotacji haseł).
+B. disableServiceAccountCreation: Uniemożliwiłoby stworzenie potrzebnego konta dla klastra CI/CD.
+D. allowServiceAccountCredentialLifetimeExtension: Pozwala na wydłużenie życia tokenów, co ZWIĘKSZA ryzyko, a nie je minimalizuje.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> To podejście wymusza korzystanie z krótkotrwałych tokenów pobieranych z metadanych, które są ważne tylko na tej konkretnej maszynie.</p>
+<p>Klucze JSON Service Accountów to najczęstszy wektor wycieku poświadczeń w GCP. Należy dążyć do ich eliminacji na rzecz tożsamości instancji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/best-practices-for-using-service-accounts" target="_blank">https://cloud.google.com/iam/docs/best-practices-for-using-service-accounts</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys" target="_blank">Best practices for service accounts</a></li>
 </ul>
 </div>
 </div>

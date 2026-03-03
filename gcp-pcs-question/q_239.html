@@ -52,15 +52,14 @@
 <h2>Question 239 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit which users have been granted permissions to access any Cloud Storage bucket via ACLs (Access Control Lists). Which tool?
+You control network traffic for a folder in your Google Cloud environment. Your folder includes multiple projects and Virtual Private Cloud (VPC) networks. You want to enforce on the folder level that egress connections are limited only to IP range 10.58.5.0/24 and only from the VPC network "dev-vpc". You want to minimize implementation and maintenance effort. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Bucket metadata analysis script</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> 1. Leave the network configuration of the VMs in scope unchanged. 2. Create a new project including a new VPC network "new-vpc". 3. Deploy a network appliance in "new-vpc" to filter access requests and only allow egress connections from "dev-vpc" to 10.58.5.0/24.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Leave the network configuration of the VMs in scope unchanged. 2. Enable Cloud NAT for "dev-vpc" and restrict the target range in Cloud NAT to 10.58.5.0/24.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. Attach external IP addresses to the VMs in scope. 2. Define and apply a hierarchical firewall policy on folder level to deny all egress connections and to allow egress to IP range 10.58.5.0/24 from network dev-vpc.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Attach external IP addresses to the VMs in scope. 2. Configure a VPC Firewall rule in "dev-vpc" that allows egress connectivity to IP range 10.58.5.0/24 for all source addresses in this network.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Audit which users have been granted permissions to access any Cloud Storage buck
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Audit which users have been granted permissions to access any Cloud Storage buck
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B. (Uwaga: Policy Analyzer skupia się na IAM).
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Metadata analysis: Stary system ACL (Access Control Lists) nie jest częścią modelu IAM, dlatego nowoczesne narzędzie Policy Analyzer (A) często go pomija. Aby audytować ACL dla tysięcy plików i bucketów, najpewniejszą metodą jest użycie skryptu (np. w Pythonie lub `gsutil`), który przeanalizuje metadane każdego zasobu.
+C. Hierarchical firewall policy on folder level: To jest najbardziej eleganckie rozwiązanie przy wielu projektach. Zamiast konfigurować reguły w każdym projekcie (D), tworzysz jedną politykę na poziomie Folderu. Reguła ta blokuje cały ruch wychodzący ('deny all egress') i robi wyjątek tylko dla docelowego IP z konkretnej sieci VPC. To zapewnia spójność i minimalizuje nakład pracy (wymuszenie odgórne).
 
 Dlaczego inne są błędne:
-A. Policy Analyzer: Głównie dla IAM, nie dla 'legacy' ACL na poziomie pojedynczych plików.
-C. Recommender: Sugeruje przejście na IAM (UBLA), ale nie listuje wszystkich obecnych ACL.
-D. Audit Logs: Nie dają zbiorczego raportu 'kto ma dostęp teraz'.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na B. ACL to 'drugi, równoległy świat' uprawnień, który wymaga oddzielnego audytu.</pre>
+A. Network appliance: Wymaga skomplikowanego routingu i zarządzania dodatkową maszyną (duży wysiłek).
+B. Cloud NAT: Służy do wyjścia do internetu, nie jest narzędziem do precyzyjnego filtrowania ruchu między sieciami prywatnymi na poziomie folderu.
+D. VPC Firewall rule: Musiałbyś ją ręcznie dodać do KAŻDEGO projektu w folderze, co jest sprzeczne z wymogiem 'minimize maintenance'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Google Cloud usilnie zachęca do wyłączania ACL na rzecz UBLA (Uniform bucket-level access). Dyskusja w sieci pokazuje, że ACL są uważane za 'niebezpieczne', bo ich audyt (B) jest znacznie trudniejszy niż audyt IAM.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p>Hierarchiczne polityki firewall pozwalają na stosowanie zasady 'Security Guardrails' w całej strukturze organizacyjnej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/access-control/create-manage-lists" target="_blank">https://cloud.google.com/storage/docs/access-control/create-manage-lists</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewall-policies" target="_blank">Hierarchical firewall policies</a></li>
 </ul>
 </div>
 </div>

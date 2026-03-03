@@ -52,15 +52,14 @@
 <h2>Question 129 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Domain restricted sharing policy active. External partner cannot access resources. How to make an exception following best practices?
+You are a security administrator at your company. Per Google-recommended best practices, you implemented the domain restricted sharing organization policy to allow only required domains to access your projects. An engineering team is now reporting that users at an external partner outside your organization domain cannot be granted access to the resources in a project. How should you make an exception for your partner's domain while following the stated best practices?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set policy to Allow All.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Turn off policy and use IAM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Add partner ID to Google group and use as exception.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set policy to Custom, add partner customer ID as exception.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Turn off the domain restriction sharing organization policy. Set the policy value to "Allow All."</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Turn off the domain restricted sharing organization policy. Provide the external partners with the required permissions using Google's Identity and Access Management (IAM) service.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Turn off the domain restricted sharing organization policy. Add each partner's Google Workspace customer ID to a Google group, add the Google group as an exception under the organization policy, and then turn the policy back on.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Turn off the domain restricted sharing organization policy. Set the policy value to "Custom." Add each external partner's Cloud Identity or Google Workspace customer ID as an exception under the organization policy, and then turn the policy back on.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Domain restricted sharing policy active. External partner cannot access resource
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Custom Policy with Customer ID: Polityka 'Domain Restricted Sharing' pozwala na zdefiniowanie wyjątków dla konkretnych identyfikatorów klientów Google Cloud (Customer ID). Jest to najbezpieczniejsza metoda, ponieważ dopuszczasz TYLKO wybraną firmę partnerską, zachowując blokadę dla całego reszty świata.
+D. Set value to Custom + add customer IDs: Polityka 'Domain Restricted Sharing' domyślnie blokuje dodawanie tożsamości spoza Twojej organizacji. Aby zrobić bezpieczny wyjątek dla partnera, nie wyłączasz całej polityki (co byłoby ryzykowne), ale zmieniasz jej tryb na 'Custom' i dodajesz unikalny identyfikator klienta (Customer ID) organizacji partnera do listy dozwolonych. Pozwala to na precyzyjne wskazanie zaufanych domen zewnętrznych.
 
 Dlaczego inne są błędne:
-A, B. Turn off / Allow All: Całkowicie niweluje sens posiadania polityki bezpieczeństwa i naraża firmę na wyciek danych do prywatnych kont pracowników.
-C. Google Group: Grupy służą do IAM, ale 'Domain Restricted Sharing' to polityka organizacji, która blokuje nadanie uprawnienia IAM komukolwiek spoza listy dozwolonych domen, nawet jeśli jest w Twojej grupie. Musisz dodać domenę/ID partnera do samej polityki (D).
-
-Konsensus społeczności ExamTopics: 100% na D. To standardowy sposób współpracy B2B w GCP.</pre>
+A. Allow All: Całkowicie niweluje korzyści z posiadania tej polityki bezpieczeństwa.
+B. IAM only: Sama zmiana w IAM nie zadziała, dopóki polityka organizacji (Org Policy) blokuje tożsamości spoza domeny.
+C. Google Group: Członkostwo w grupie nie omija polityki 'Domain Restricted Sharing', jeśli domena członka grupy nie jest na białej liście.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Customer ID partnera znajdziesz w ich konsoli Admin lub otrzymasz od ich administratora. Wygląda on zazwyczaj jak `C01234567`.</p>
+<p>Customer ID to unikalny identyfikator organizacji w ekosystemie Google (zaczyna się od 'C...').</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains" target="_blank">Domain Restricted Sharing policy</a></li>
 </ul>
 </div>
 </div>

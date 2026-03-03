@@ -52,15 +52,14 @@
 <h2>Question 221 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect a GKE cluster against 'Pod-to-Pod' unauthorized communication within the same cluster. Which feature?
+You define central security controls in your Google Cloud environment. For one of the folders in your organization, you set an organizational policy to deny the assignment of external IP addresses to VMs. Two days later, you receive an alert about a new VM with an external IP address under that folder. What could have caused this alert?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Network Policies</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Master Authorized Networks</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> The VM was created with a static external IP address that was reserved in the project before the organizational policy rule was set.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> The organizational policy constraint wasn't properly enforced and is running in "dry run" mode.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> A project level, the organizational policy control has been overwritten with an "allow" value.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> The policy constraint on the folder level does not have any effect because of an "allow" value for that constraint on the organizational level.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Protect a GKE cluster against 'Pod-to-Pod' unauthorized communication within the
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Protect a GKE cluster against 'Pod-to-Pod' unauthorized communication within the
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Network Policies: To wewnątrzklastrowy firewall dla Kubernetes. Pozwala na zdefiniowanie reguł ruchu między podami (np. 'Pod A może rozmawiać tylko z Podem B'). Bez tego domyślnie wszystkie pody w klastrze mogą rozmawiać ze wszystkimi.
+C. Overwritten at project level: W GCP polityki organizacji są dziedziczone, ale administrator projektu (posiadający odpowiednie uprawnienia) może ustawić politykę na poziomie projektu, która 'nadpisuje' (override) politykę z folderu nadrzędnego, o ile polityka nadrzędna nie została zablokowana przed nadpisywaniem.
 
 Dlaczego inne są błędne:
-A. VPC Firewall: Działa na poziomie węzłów (maszyn VM), nie widzi ruchu między kontenerami na tej samej maszynie.
-C. Cloud Armor: Chroni ruch zewnętrzny.
-D. Master Authorized Networks: Chroni API klastra, nie komunikację między aplikacjami.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Pod-to-Pod security = Network Policies.</pre>
+A. Pre-reserved static IP: Nawet jeśli IP był zarezerwowany, polityka 'deny external IP' blokuje FIZYCZNE przypisanie adresu do karty sieciowej nowej VM w momencie startu.
+B. Dry run mode: Pytanie sugeruje, że polityka została 'set' (ustawiona), co zazwyczaj oznacza tryb Enforced, chyba że zaznaczono inaczej. Jednak nadpisanie (C) jest klasyczną przyczyną 'wycieku' ustawień w hierarchii.
+D. Organizational allow: Domyślnie 'Deny' na niższym poziomie wygrywa z 'Allow' na wyższym, ale 'Allow' na niższym (C) nadpisuje 'Deny' z góry.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na GitHubie specjaliści od K8s przypominają: aby Network Policies (B) działały, Twój klaster musi używać odpowiedniego sterownika sieci (np. Calico lub GKE Dataplane V2). Zawsze włączaj to na początku tworzenia klastra!</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p>Dziedziczenie polityk organizacji wymaga świadomego zarządzania 'overrides' na każdym szczeblu hierarchii.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">Organization Policy inheritance</a></li>
 </ul>
 </div>
 </div>

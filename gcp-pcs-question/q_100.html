@@ -52,15 +52,14 @@
 <h2>Question 100 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Encryption strategy: reduce complexity for non-sensitive data, flexibility for rotation schedule for sensitive data. FIPS 140-2 L1 required. What to do?
+You need to implement an encryption at-rest strategy that reduces key management complexity for non-sensitive data and protects sensitive data while providing the flexibility of controlling the key residency and rotation schedule. FIPS 140-2 L1 compliance is required for all data types. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> External Key Manager for all.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud KMS for all.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Google default for non-sensitive, External KM for sensitive.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google default for non-sensitive, Cloud KMS for sensitive.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Encrypt non-sensitive data and sensitive data with Cloud External Key Manager.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Encrypt non-sensitive data and sensitive data with Cloud Key Management Service</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Encrypt non-sensitive data with Google default encryption, and encrypt sensitive data with Cloud External Key Manager.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypt non-sensitive data with Google default encryption, and encrypt sensitive data with Cloud Key Management Service.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Encryption strategy: reduce complexity for non-sensitive data, flexibility for r
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Default + Cloud KMS (CMEK): Domyślne szyfrowanie Google (Google-managed keys) spełnia wymogi FIPS 140-2 L1 i nie wymaga żadnej konfiguracji (redukcja złożoności). Dla danych wrażliwych użycie Cloud KMS (CMEK) pozwala na definiowanie własnych harmonogramów rotacji kluczy (flexibility), co spełnia oba wymogi pytania.
+D. Default encryption for non-sensitive + Cloud KMS for sensitive: Google Cloud domyślnie szyfruje wszystkie dane (FIPS 140-2 L1 compliant). Dla danych mniej ważnych wystarczy szyfrowanie domyślne (brak skomplikowania). Dla danych wrażliwych użycie Cloud KMS (CMEK) pozwala na własną rotację i kontrolę rezydencji kluczy, spełniając oba wymagania przy optymalnym nakładzie pracy.
 
 Dlaczego inne są błędne:
-A, B. KMS/EKM dla wszystkiego: Zwiększa niepotrzebnie złożoność i koszty dla danych, które nie są krytyczne.
-C. External KM: EKM jest najbardziej skomplikowaną formą zarządzania kluczami (wymaga dostawcy zewnętrznego), co narusza wymóg 'reduce complexity'.
-
-Konsensus społeczności ExamTopics: Wyraźna przewaga opcji D. To najbardziej zrównoważone podejście 'Risk-based security'.</pre>
+A, C. External Key Manager (EKM): EKM jest bardzo skomplikowany (wymaga zewnętrznego dostawcy kluczy) i jest zazwyczaj używany tylko dla najbardziej ekstremalnych wymogów regulacyjnych, a nie do upraszczania zarządzania.
+B. Cloud KMS for all: Zwiększa niepotrzebnie złożoność zarządzania kluczami dla danych, które tego nie wymagają.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Cloud KMS (programowy) ma certyfikację FIPS 140-2 L1. Jeśli potrzebowałbyś Level 3, musiałbyś użyć Cloud HSM. Pytanie precyzuje Level 1, co czyni standardowy KMS idealnym rozwiązaniem.</p>
+<p>Szyfrowanie domyślne Google pokrywa większość potrzeb FIPS, a CMEK dodaje wymaganą kontrolę nad kluczami dla danych krytycznych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/fips-140-2" target="_blank">https://cloud.google.com/kms/docs/fips-140-2</a></li>
-
+<li><a href="https://cloud.google.com/docs/security/encryption/at-rest" target="_blank">GCP Encryption at rest</a></li>
 </ul>
 </div>
 </div>

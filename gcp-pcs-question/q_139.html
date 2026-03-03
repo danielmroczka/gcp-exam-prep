@@ -52,15 +52,14 @@
 <h2>Question 139 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Back up logs. Analysts access logs without PII. Administrator bucket has PII. Automated movement. What to do?
+You are backing up application logs to a shared Cloud Storage bucket that is accessible to both the administrator and analysts. Analysts should not have access to logs that contain any personally identifiable information (PII). Log files containing PII should be stored in another bucket that is only accessible to the administrator. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> DLP trigger to delete PII from shared bucket.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Object Lifecycle Management.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Storage trigger for PII to delete.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Pub/Sub + Cloud Functions + DLP scan. If no PII, move to shared bucket.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Upload the logs to both the shared bucket and the bucket with PII that is only accessible to the administrator. Use the Cloud Data Loss Prevention API to create a job trigger. Configure the trigger to delete any files that contain PII from the shared bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> On the shared bucket, configure Object Lifecycle Management to delete objects that contain PII.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> On the shared bucket, configure a Cloud Storage trigger that is only triggered when PII is uploaded. Use Cloud Functions to capture the trigger and delete the files that contain PII.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Pub/Sub and Cloud Functions to trigger a Cloud Data Loss Prevention scan every time a file is uploaded to the administrator's bucket. If the scan does not detect PII, have the function move the objects into the shared Cloud Storage bucket.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Back up logs. Analysts access logs without PII. Administrator bucket has PII. Au
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Pipeline z DLP: Jest to najbardziej bezpieczny 'przepływ czyszczący'. Dane najpierw trafiają do strefy lądowania administratora (Landing Zone). Tam proces automatyczny (Cloud Functions + DLP) skanuje je. TYLKO te pliki, które przejdą test pomyślnie (brak PII), są kopiowane do bucketu analityków. Gwarantuje to, że dane wrażliwe nigdy nie pojawią się w strefie analitycznej.
+D. Upload to admin bucket -> DLP Scan -> Move if clean: To jest najbezpieczniejszy przepływ pracy. Najpierw dane trafiają do wysoce zabezpieczonego miejsca (administratora). Dopiero po przeskanowaniu przez DLP i potwierdzeniu braku PII, plik jest przenoszony do bucketu dostępnego dla analityków. Gwarantuje to zasadę 'default-deny' dla analityków w zakresie danych wrażliwych.
 
 Dlaczego inne są błędne:
-A, C: Próba usuwania PII Z JUŻ udostępnionego bucketu to błąd (Race condition). Analityk mógłby pobrać plik zanim skrypt go usunie.
-B. Lifecycle Management: Nie potrafi analizować treści plików pod kątem PII.
-
-Konsensus społeczności ExamTopics: 100% na D. To standardowa architektura 'Security Data Pipeline'.</pre>
+A. Upload to shared first: Dane z PII pojawiają się w miejscu dostępnym dla analityków (nawet na chwilę), co łamie wymóg bezpieczeństwa.
+B. Lifecycle Management: Nie potrafi skanować treści (PII).
+C. Storage trigger to delete: Podobnie jak A, dane z PII trafiają najpierw do shared bucketu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Można też użyć DLP do 'zamazania' (redact) danych zamiast blokowania całych plików, ale architektura z osobnym bucketem 'czystym' jest najbardziej odporna na audyty.</p>
+<p>Bezpieczny potok danych (Safe Data Pipeline) powinien filtrować dane przed ich udostępnieniem szerszej grupie użytkowników.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/tutorials/gcs-notifications" target="_blank">https://cloud.google.com/dlp/docs/tutorials/gcs-notifications</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/tutorials/gcs-notifications" target="_blank">DLP for Cloud Storage</a></li>
 </ul>
 </div>
 </div>

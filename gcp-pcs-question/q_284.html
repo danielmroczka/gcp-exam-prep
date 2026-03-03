@@ -52,15 +52,14 @@
 <h2>Question 284 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Secrets in environment variables of Cloud Functions. Identify in timely manner. What to do?
+You are responsible for a set of Cloud Functions running on your organization's Google Cloud environment. During the last annual security review, secrets were identified in environment variables of some of these Cloud Functions. You must ensure that secrets are identified in a timely manner. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Peer reviews.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Function to scan env variables multiple times daily.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Sensitive Data Protection (DLP) scan env variables daily, findings in SCC.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> DAST in CI/CD.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Implement regular peer reviews to assess the environment variables and identify secrets in your Cloud Functions. Raise a security incident if secrets are discovered.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Implement a Cloud Function that scans the environment variables multiple times a day, and creates a finding in Security Command Center if secrets are discovered.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Sensitive Data Protection to scan the environment variables multiple times per day, and create a finding in Security Command Center if secrets are discovered.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Integrate dynamic application security testing into the CI/CD pipeline that scans the application code for the Cloud Functions. Fail the build process if secrets are discovered.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Secrets in environment variables of Cloud Functions. Identify in timely manner. 
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. DLP Scan: Cloud DLP (Sensitive Data Protection) posiada funkcję skanowania konfiguracji usług Google Cloud. Można zaplanować codzienny skan metadanych Cloud Functions, który wykryje wzorce haseł czy kluczy API w zmiennych środowiskowych i zaraportuje to do SCC.
+C. Sensitive Data Protection (DLP) + SCC: Cloud DLP posiada funkcje skanowania nie tylko plików, ale również metadanych i konfiguracji. Może zostać skonfigurowany do okresowego skanowania definicji Cloud Functions (w tym zmiennych środowiskowych) pod kątem infoTypes takich jak `API_KEY`, `AUTH_TOKEN`, itp. Integracja z SCC (Security Command Center) pozwala na natychmiastowe wyświetlenie tych sekretów jako zagrożeń w centralnym dashboardzie.
 
 Dlaczego inne są błędne:
-A. Peer reviews: Metoda manualna, nie gwarantuje detekcji wszystkich błędów w czasie rzeczywistym.
-B. Custom scan: Wymaga pisania kodu, DLP (C) jest gotową usługą 'managed'.
-D. DAST: Testuje aplikację 'z zewnątrz' (HTTP), nie widzi zmiennych środowiskowych serwera.
-
-Konsensus społeczności ExamTopics: 100% na C. DLP to standard dla 'Secret Scanning' w GCP.</pre>
+A. Peer reviews: Ważne, ale nie jest to mechanizm 'timely' i 'automated' zapewniający ciągłą kontrolę.
+B. Custom Cloud Function: Wymagałoby samodzielnego pisania silnika detekcji sekretów, co jest domeną gotowego produktu DLP.
+D. DAST: Dynamiczne testy bezpieczeństwa skanują działającą aplikację 'od zewnątrz', zazwyczaj nie widzą zmiennych środowiskowych serwera.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Prawidłowym miejscem na sekrety jest Secret Manager, ale DLP jest jedynym narzędziem do DETEKCJI pomyłek polegających na ich wpisaniu w env vars.</p>
+<p>DLP API to uniwersalny skaner danych wrażliwych, który potrafi chronić również warstwę konfiguracyjną chmury.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/inspecting-storage" target="_blank">https://cloud.google.com/dlp/docs/inspecting-storage</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/inspecting-secrets" target="_blank">Scanning for secrets with DLP</a></li>
 </ul>
 </div>
 </div>

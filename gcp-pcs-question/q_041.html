@@ -52,15 +52,14 @@
 <h2>Question 41 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Your organization has many projects. You want to audit and enforce security policies across all projects. Which tool should you use?
+Your company runs a website that will store PII on Google Cloud Platform. To comply with data privacy regulations, this data can only be stored for a specific amount of time and must be fully deleted after this specific period. Data that has not yet reached the time period should not be deleted. You want to automate the process of complying with this regulation. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Forseti Security</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IAM</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Stackdriver Logging</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Resource Manager</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Store the data in a single Persistent Disk, and delete the disk at expiration time.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Store the data in a single BigQuery table and set the appropriate table expiration time.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Store the data in a single Cloud Storage bucket and configure the bucket's Time to Live.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Store the data in a single BigTable table and set an expiration time on the column families.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Your organization has many projects. You want to audit and enforce security poli
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Your organization has many projects. You want to audit and enforce security poli
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Forseti Security: Jest to zestaw narzędzi open-source (obecnie SCC Enterprise ma wiele jego funkcji), który pozwala na skanowanie całej organizacji pod kątem niezgodności z politykami (np. publiczne buckety, nieautoryzowane reguły firewall) i automatyczne naprawianie tych błędów.
+C. Cloud Storage bucket + TTL: Cloud Storage posiada funkcję 'Object Lifecycle Management'. Można ustawić regułę (np. 'Age: 30 days'), która automatycznie usunie obiekty po określonym czasie od ich utworzenia. Jest to natywny i zautomatyzowany mechanizm.
 
 Dlaczego inne są błędne:
-B. Cloud IAM: Zarządza tym, kto ma dostęp, ale sam w sobie nie audytuje ani nie wymusza polityk infrastrukturalnych (np. typu VM czy regionu).
-C. Stackdriver Logging: Rejestruje zdarzenia, ale nie egzekwuje polityk ani nie raportuje automatycznie o ich naruszeniu bez dodatkowej konfiguracji alertów.
-D. Resource Manager: Służy do organizacji struktury (projekty, foldery), a nie do audytu technicznego bezpieczeństwa zasobów.
-
-Konsensus społeczności ExamTopics: Zdecydowane A. Forseti to klasyczny przykład narzędzia do wymuszania 'compliance as code'.</pre>
+A. Persistent Disk: Usunięcie całego dysku usuwa wszystkie dane, nie pozwala na usuwanie tylko tych 'przestarzałych'.
+B. BigQuery table expiration: Podobnie jak A, usuwa całą tabelę, a nie poszczególne rekordy (chyba że mowa o partycjach, ale C jest prostszym i częściej wskazywanym rozwiązaniem dla surowych danych PII).
+D. BigTable expiration: BigTable posiada mechanizm TTL na poziomie komórek, ale w kontekście 'PII i prostoty automatyzacji', GCS Lifecycle jest standardową odpowiedzią.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Forseti składa się z modułów takich jak Inventory, Scanner i Enforcer. Scanner porównuje aktualny stan z Twoją zdefiniowaną polityką, a Enforcer może automatycznie przywrócić poprawną konfigurację.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p>Object Lifecycle Management w GCS to najprostszy sposób na realizację polityk retencji danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://forsetisecurity.org/" target="_blank">https://forsetisecurity.org/</a></li>
-
+<li><a href="https://cloud.google.com/storage/docs/lifecycle" target="_blank">Object Lifecycle Management</a></li>
 </ul>
 </div>
 </div>

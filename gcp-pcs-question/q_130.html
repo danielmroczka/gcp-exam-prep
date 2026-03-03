@@ -52,16 +52,15 @@
 <h2>Question 130 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Google Cloud Armor requirements to prevent XSS/SQLi. Which two?
+You plan to use a Google Cloud Armor policy to prevent common attacks such as cross-site scripting (XSS) and SQL injection (SQLi) from reaching your web application's backend. What are two requirements for using Google Cloud Armor security policies? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> External SSL proxy LB.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Match only on L7 attributes.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Premium Network Tier.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Backend service scheme EXTERNAL.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> External HTTP(S) load balancer.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> The load balancer must be an external SSL proxy load balancer.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google Cloud Armor Policy rules can only match on Layer 7 (L7) attributes.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> The load balancer must use the Premium Network Service Tier.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> The backend service's load balancing scheme must be EXTERNAL.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> The load balancer must be an external HTTP(S) load balancer.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ Google Cloud Armor requirements to prevent XSS/SQLi. Which two?
 <pre>Odpowiedź: DE.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Backend scheme EXTERNAL: Cloud Armor jest usługą chroniącą zasoby wystawione na internet. Backend Load Balancera musi być skonfigurowany jako zewnętrzny.
-E. External HTTP(S) Load Balancer: Cloud Armor (w kontekście ochrony przed atakami webowymi XSS/SQLi) działa wyłącznie z zewnętrznymi Load Balancerami warstwy 7 (GCLB HTTP/S).
+D. Backend service's load balancing scheme must be EXTERNAL: Cloud Armor działa tylko na obrzeżach sieci Google (edge) i chroni zasoby wystawione na zewnątrz.
+E. External HTTP(S) load balancer: Cloud Armor został zaprojektowany specyficznie do pracy z globalnym i regionalnym zewnętrznym HTTP(S) Load Balancerem (oraz niektórymi wariantami TCP/SSL proxy).
 
 Dlaczego inne są błędne:
-A. SSL Proxy: To Load Balancer warstwy 4 (TCP). Cloud Armor może go chronić przed DDoS, ale nie oferuje dla niego reguł WAF (XSS/SQLi), bo nie deszyfruje on ruchu HTTP do poziomu aplikacji.
-B. L7 attributes: Cloud Armor może filtrować również po L3/L4 (IP, porty), nie ogranicza się tylko do L7.
-C. Premium Tier: Choć zalecany, nie jest technicznym wymogiem 'koniecznym' do działania samych reguł WAF Cloud Armor (choć standard tier ma ograniczone LB).
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na DE. To fundamenty architektury WAF w Google Cloud.</pre>
+A. SSL proxy: Choć wspierane dla filtracji adresów IP, zaawansowane reguły WAF (SQLi, XSS) są domeną HTTP(S) Load Balancera.
+B. L7 attributes only: Cloud Armor może również filtrować ruch w warstwie 3 i 4 (adresy IP, zakresy CIDR).
+C. Premium Tier: Choć zalecane, nie jest to sztywny 'wymóg' techniczny dla samej aktywacji polityki Cloud Armor.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: DE</b></p>
-<p><b>Głęboka analiza:</b> Cloud Armor 'żyje' wewnątrz polityki bezpieczeństwa (Security Policy), którą przypinasz do Backend Service Twojego Load Balancera HTTP(S).</p>
+<p>Cloud Armor WAF (SQLi/XSS) jest nierozerwalnie związany z zewnętrznym (External) HTTP(S) Load Balancerem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor/docs/security-policy-concepts" target="_blank">https://cloud.google.com/armor/docs/security-policy-concepts</a></li>
-
+<li><a href="https://cloud.google.com/armor/docs/cloud-armor-overview#requirements" target="_blank">Cloud Armor requirements</a></li>
 </ul>
 </div>
 </div>

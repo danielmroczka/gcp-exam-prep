@@ -60,7 +60,6 @@ A customer needs to launch a 3-tier internal web application on Google Cloud Pla
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Firewall Rules</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Identity and Access Management</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud CDN</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A customer needs to launch a 3-tier internal web application on Google Cloud Pla
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. VPC Firewall Rules: Pozwalają na filtrowanie ruchu przychodzącego na podstawie źródłowych zakresów IP (CIDR). Google zapewnia wbudowaną (native) ochronę przed atakami SYN flood na poziomie infrastruktury VPC dla wszystkich portów i adresów.
+B. VPC Firewall Rules: To jedyny natywny produkt, który pozwala na filtrowanie ruchu na podstawie CIDR (zakresów IP) dla wewnętrznych aplikacji. Ponadto, infrastruktura Google Cloud zapewnia wbudowaną ochronę przed atakami SYN flood na poziomie sieci.
 
 Dlaczego inne są błędne:
-A. Cloud Armor: Choć oferuje zaawansowaną ochronę DDoS i WAF, działa głównie z zewnętrznymi Load Balancerami HTTP(S). Dla aplikacji *wewnętrznej* (internal) i prostego filtrowania po CIDR, VPC Firewall jest rozwiązaniem natywnym i wystarczającym.
-C. IAM: Zarządza uprawnieniami do zarządzania chmurą, a nie filtrowaniem pakietów sieciowych.
-D. Cloud CDN: Przyspiesza treści, nie filtruje dostępu po IP.
-
-Konsensus społeczności ExamTopics: 100% na B. Kluczowe słowo 'internal' eliminuje Cloud Armor.</pre>
+A. Cloud Armor: Służy głównie do ochrony zewnętrznych aplikacji wystawionych przez HTTP(S) Load Balancer.
+C. Cloud IAM: Kontroluje dostęp użytkowników/serwisów, a nie ruch sieciowy.
+D. Cloud CDN: Służy do przyspieszania dostarczania treści, a nie do ochrony przed SYN flood.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> To pytanie często wywołuje debatę: 'Przecież Cloud Armor jest lepszy do DDoS!'. Eksperci na forach zwracają uwagę na frazę 'internal application'. Cloud Armor przez długi czas był dostępny tylko dla zewnętrznych Load Balancerów. Dodatkowo, VPC Firewall jest częścią 'fabric' sieci Google, co czyni go najbardziej 'natywnym' (native) rozwiązaniem warstwy 3/4.</p>
+<p>Ochrona przed SYN flood w Google Cloud jest zaimplementowana w samej strukturze sieciowej (SDN), więc użycie reguł firewall jest wystarczające do ograniczenia dostępu do CIDR.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewalls" target="_blank">https://cloud.google.com/vpc/docs/firewalls</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewalls" target="_blank">VPC Firewall Rules</a></li>
 </ul>
 </div>
 </div>

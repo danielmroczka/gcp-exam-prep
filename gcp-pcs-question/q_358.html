@@ -52,15 +52,14 @@
 <h2>Question 358 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-evaluate impact of Context-Aware Access policy on VPC SC perimeter without blocking legitimate access. What to do?
+Your organization has established a highly sensitive project within a VPC Service Controls perimeter. You need to ensure that only users meeting specific contextual requirements such as having a company-managed device, a specific location, and a valid user identity can access resources within this perimeter. You want to evaluate the impact of this change without blocking legitimate access. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Associate policy with perimeter in dry run mode.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Violation dashboard.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Perimeter in dry run + firewall + MFA.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Audit Logs post-incident.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Establish a Context-Aware Access policy that specifies the required contextual attributes, and associate the policy with the VPC Service Controls perimeter in dry run mode.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the VPC Service Control Violation dashboard to identify the impact of details about access denials by service perimeters.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure a VPC Service Controls perimeter in dry run mode, and enforce strict network segmentation using firewall rules. Use multi-factor authentication (MFA) for user verification.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Cloud Audit Logs to monitor user access to the project resources. Use post-incident analysis to identify unauthorized access attempts.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ evaluate impact of Context-Aware Access policy on VPC SC perimeter without block
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. VPC SC Dry Run: Tryb ten jest stworzony dokładnie do 'ewaluacji wpływu' (evaluate impact). Gdy dodasz nową politykę dostępu (CAA) do perymetru w trybie Dry Run, system będzie logował każde żądanie, które ZOSTAŁOBY zablokowane, ale pozwoli mu przejść. Możesz wtedy przeanalizować logi i poprawić reguły przed ich włączeniem.
+A. Context-Aware Access + Dry Run Mode: To jest kompletna odpowiedź. 1. Tworzysz politykę sprawdzającą stan urządzenia i lokalizację (Context-Aware Access). 2. Przypisujesz ją do obwodu VPC Service Controls. 3. Kluczowym krokiem jest 'Dry run mode' - pozwala on na sprawdzenie w logach, kto ZOSTAŁBY zablokowany, bez faktycznego blokowania nikogo. Pozwala to na walidację polityki przed wdrożeniem produkcyjnym.
 
 Dlaczego inne są błędne:
-B. Dashboard: Pokazuje co się dzieje, ale nie pozwala na 'testowanie' nowych reguł bez ich włączania.
-C. Firewall/MFA: To inne warstwy, nie służą do testowania logiki perymetru VPC SC.
-D. Post-incident: Za późno. Celem jest uniknięcie incydentu (zablokowania użytkowników).
-
-Konsensus społeczności ExamTopics: 100% na A. Dry Run to jedyna bezpieczna metoda zmian w VPC SC.</pre>
+B. Violation dashboard: To narzędzie do przeglądania wyników, ale samo w sobie nie 'ewaluuje wpływu zmiany' przed jej wprowadzeniem (musisz najpierw włączyć dry-run).
+C. Enforce strict firewall: Firewalle nie widzą 'company-managed device attribute', to domena warstwy aplikacyjnej IAP/BeyondCorp.
+D. Post-incident analysis: To podejście reaktywne, nie spełnia celu 'evaluate impact without blocking legitimate access' przed wdrożeniem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Logi Dry Run trafiają do Logs Explorera z flagą `dryRun: true`. Możesz je łatwo odfiltrować i sprawdzić, czy któryś z Twoich dyrektorów nie zostałby odcięty od bazy danych.</p>
+<p>Tryb 'Dry Run' w VPC Service Controls to niezbędne narzędzie dla bezpiecznego wprowadzania zmian w dużych organizacjach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/service-controls/docs/dry-run-overview" target="_blank">https://cloud.google.com/vpc/service-controls/docs/dry-run-overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run" target="_blank">VPC Service Controls Dry Run</a></li>
 </ul>
 </div>
 </div>

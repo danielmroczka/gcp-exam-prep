@@ -52,15 +52,14 @@
 <h2>Question 57 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to store secrets that are automatically rotated every 30 days. Which service should you use?
+Your team wants to make sure Compute Engine instances running in your production project do not have public IP addresses. The frontend application Compute Engine instances will require public IPs. The product engineers have the Editor role to modify resources. Your team wants to enforce this requirement. How should your team meet these requirements?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud KMS</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Secret Manager</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engine Metadata</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud SQL</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Private Access on the VPC network in the production project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Remove the Editor role and grant the Compute Admin IAM role to the engineers.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Set up an organization policy to only permit public IPs for the front-end Compute Engine instances.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set up a VPC network with two subnets: one with public IPs and one without public IPs.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ You need to store secrets that are automatically rotated every 30 days. Which se
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ You need to store secrets that are automatically rotated every 30 days. Which se
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Secret Manager: To dedykowana usługa GCP do zarządzania sekretami (hasła, klucze API). Posiada ona natywną funkcję rotacji, która potrafi automatycznie wywołać funkcję Cloud Function co X dni w celu wygenerowania nowego hasła i aktualizacji np. w bazie danych.
+C. Org Policy: compute.vmExternalIpAccess: To jest właściwa odpowiedź. Możesz ustawić politykę organizacji, która blokuje nadawanie zewnętrznych adresów IP wszystkim maszynom, ale pozwala na wyjątki dla konkretnych instancji (frontend).
 
 Dlaczego inne są błędne:
-A. Cloud KMS: Służy do zarządzania kluczami SZYFRUJĄCYMI (KEK). Można nim rotować klucze, ale nie służy do przechowywania i rotowania haseł tekstowych czy kluczy API aplikacji.
-C. Metadata: Dane tam zapisane są jawne (nieszyfrowane) dla każdego, kto ma dostęp do VM. Nie wspiera rotacji.
-D. Cloud SQL: To baza danych. Możesz tam trzymać hasła, ale musisz sam napisać całą logikę ich bezpiecznego pobierania i rotowania.
-
-Konsensus społeczności ExamTopics: 100% na B. Secret Manager to właściwe miejsce na sekrety aplikacji.</pre>
+A. Private Access: Pozwala na dostęp do usług Google, ale nie blokuje możliwości posiadania publicznego IP przez maszynę.
+B. Compute Admin role: Nie rozwiązuje problemu technicznego; administrator nadal może dodać publiczne IP.
+D. Subnets: W GCP przynależność do podsieci nie decyduje o tym, czy maszyna MOŻE mieć publiczne IP. Każda maszyna w dowolnej podsieci może mieć przypisane publiczne IP, chyba że zablokuje to polityka organizacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Secret Manager jest wersjonowany. Aplikacja może zawsze prosić o wersję 'latest', co sprawia, że rotacja jest przezroczysta dla kodu aplikacji.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p>Polityki organizacji (Org Policies) służą do narzucania odgórnych ograniczeń technicznych ('guardrails'), których nie może ominąć nawet użytkownik z rolą Editor.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/secret-manager/docs/rotating-secrets" target="_blank">https://cloud.google.com/secret-manager/docs/rotating-secrets</a></li>
-
+<li><a href="https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#disable_external_ip" target="_blank">Restricting public IP addresses</a></li>
 </ul>
 </div>
 </div>

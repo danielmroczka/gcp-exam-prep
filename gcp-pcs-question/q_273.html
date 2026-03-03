@@ -52,15 +52,14 @@
 <h2>Question 273 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Vertex AI: all data encrypted by keys in EU controlled by organization. No impact on performance. What to do?
+You are working with developers to secure custom training jobs running on Vertex AI. For compliance reasons, all supported data types must be encrypted by key materials that reside in the Europe region and are controlled by your organization. The encryption activity must not impact the training operation in Vertex AI. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Google default for data, CMEK for models.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CMEK for all data types.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> CMEK for code, data, and exported models.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google default + Cloud KMS location policy.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Encrypt the code, training data, and metadata with Google default encryption. Use customer-managed encryption keys (CMEK) for the trained models exported to Cloud Storage buckets.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Encrypt the code, training data, metadata, and exported trained models with customer-managed encryption keys (CMEK).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Encrypt the code, training data, and exported trained models with customer-managed encryption keys (CMEK).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypt the code, training data, and metadata with Google default encryption. Implement an organization policy that enforces a constraint to restrict the Cloud KMS location to the Europe region.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,18 +78,21 @@ Vertex AI: all data encrypted by keys in EU controlled by organization. No impac
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Comprehensive CMEK: Aby spełnić wymóg pełnej kontroli ('controlled by organization') nad całym cyklem AI, należy użyć kluczy CMEK dla wszystkich kluczowych elementów procesu ML.</pre>
+C. CMEK for code, training data, and exported models: Vertex AI wspiera użycie kluczy CMEK do szyfrowania kodów źródłowych (training jobs), danych treningowych oraz finalnych modeli zapisywanych w GCS. Użycie kluczy z regionu Europe zapewnia zgodność regulacyjną, a ponieważ szyfrowanie jest transparentne dla platformy AI, nie wpływa na samą wydajność operacji treningowych.
+
+Dlaczego inne są błędne:
+A, D. Google default encryption: Może nie spełniać specyficznego wymogu compliance o 'organizational control of key materials'.
+B. Encrypt metadata with CMEK: Metadata w Vertex AI (np. nazwy jobów, statystyki) często nie podlegają szyfrowaniu kluczami CMEK w ten sam sposób co surowe dane i kod (choć GCP stale to rozwija, odpowiedź C jest najbardziej precyzyjna w kontekście standardowych kontroli danych wrażliwych).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Vertex AI wspiera CMEK dla zbiorów danych, treningu i modeli.</p>
+<p>CMEK w Vertex AI pozwala na spełnienie wymogów suwerenności danych dla procesów uczenia maszynowego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vertex-ai/docs/general/cmek" target="_blank">https://cloud.google.com/vertex-ai/docs/general/cmek</a></li>
-
+<li><a href="https://cloud.google.com/vertex-ai/docs/general/cmek" target="_blank">CMEK for Vertex AI</a></li>
 </ul>
 </div>
 </div>

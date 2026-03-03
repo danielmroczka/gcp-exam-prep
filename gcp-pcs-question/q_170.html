@@ -52,15 +52,14 @@
 <h2>Question 170 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit changes to organization-level policies. Which log source?
+You are onboarding new users into Cloud Identity and discover that some users have created consumer user accounts using the corporate domain name. How should you manage these consumer user accounts with Cloud Identity?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Admin Activity logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Data Access logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> System Event logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Flow Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Google Cloud Directory Sync to convert the unmanaged user accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a new managed user account for each consumer user account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use the transfer tool for unmanaged user accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure single sign-on using a customer's third-party provider.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Audit changes to organization-level policies. Which log source?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Audit changes to organization-level policies. Which log source?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Admin Activity logs: Każda zmiana polityki organizacji (np. włączenie zakazu publicznych IP) jest operacją administracyjną modyfikującą metadane organizacji. Takie zdarzenia trafiają wyłącznie do dziennika Admin Activity.
+C. Transfer tool for unmanaged user accounts: To narzędzie (część Admin Console) służy właśnie do rozwiązywania problemu 'konfliktujących kont'. Pozwala administratorowi znaleźć konta osobiste założone na adresy firmowe i wysłać zaproszenie do ich konwersji na konta zarządzane przez firmę.
 
 Dlaczego inne są błędne:
-B. Data Access: Rejestrują użycie usług, a nie zmianę ich globalnych reguł (policy).
-C. System Event: Dotyczą problemów Google.
-D. VPC Flow Logs: Dotyczą pakietów sieciowych.
-
-Konsensus społeczności ExamTopics: 100% na A. Podstawowa wiedza o audycie Governance.</pre>
+A. GCDS: Synchronizuje dane z AD, ale samo w sobie nie 'przejmuje' istniejących kont osobistych w chmurze Google.
+B. New managed account: Spowoduje konflikt adresów (nie można mieć dwóch kont o tym samym adresie email w systemie Google).
+D. SSO: SSO zadziała dopiero po tym, jak konta staną się 'zarządzane' (managed).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na forach podkreśla się, że te logi są kluczowe dla wykrywania 'Insider Threat' – sytuacji, w której nieuczciwy admin wyłącza zabezpieczenia (np. zakaz zewnętrznych IP), aby ułatwić sobie kradzież danych.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p>Transfer Tool to jedyna legalna i bezpieczna droga 'przejęcia' kont Shadow IT w domenie firmowej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/audit/understanding-audit-logs#admin-activity" target="_blank">https://cloud.google.com/logging/docs/audit/understanding-audit-logs#admin-activity</a></li>
-
+<li><a href="https://support.google.com/a/answer/6171268" target="_blank">Transfer Tool for unmanaged users</a></li>
 </ul>
 </div>
 </div>

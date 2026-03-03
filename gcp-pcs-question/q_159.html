@@ -52,15 +52,15 @@
 <h2>Question 159 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to store a private key used for code signing. The key must be stored in a FIPS 140-2 Level 3 certified hardware module. Which service?
+You discovered that sensitive personally identifiable information (PII) is being ingested to your Google Cloud environment in the daily ETL process from an on-premises environment to your BigQuery datasets. You need to redact this data to obfuscate the PII, but need to re-identify it for data analytics purposes. Which components should you use in your solution? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud KMS</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud HSM</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud EKM</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Secret Manager</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Secret Manager</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Key Management Service</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Data Loss Prevention with cryptographic hashing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Data Loss Prevention with automatic text redaction</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Cloud Data Loss Prevention with deterministic encryption using AES-SIV</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ You need to store a private key used for code signing. The key must be stored in
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">BE</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,26 @@ You need to store a private key used for code signing. The key must be stored in
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: BE.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud HSM: To usługa, w której klucze są fizycznie generowane i przechowywane w urządzeniach HSM (Hardware Security Module) należących do Google, które posiadają certyfikację FIPS 140-2 Level 3.
+B. Cloud Key Management Service (KMS): Potrzebny do bezpiecznego przechowywania kluczy szyfrujących używanych w procesie de-identyfikacji.
+E. Cloud DLP with deterministic encryption: Szyfrowanie deterministyczne (np. AES-SIV) pozwala na zamianę PII na tokeny w taki sposób, że proces jest odwracalny (można wrócić do danych jawnych, mając klucz), a jednocześnie spójny (ten sam wejście daje ten sam token), co pozwala na analizę trendów.
 
 Dlaczego inne są błędne:
-A. Cloud KMS (Software): Klucze są w oprogramowaniu, co zazwyczaj spełnia tylko Level 1.
-C. Cloud EKM: Służy do używania kluczy z TWOJEGO HSM na zewnątrz Google. Chociaż Twój HSM może być L3, Cloud HSM (B) jest bardziej bezpośrednią odpowiedzią na wymóg usługi wewnątrz GCP.
-D. Secret Manager: Służy do haseł (tekstu), nie jest certyfikowanym modułem HSM dla kluczy kryptograficznych.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Pytanie sprawdza znajomość poziomów certyfikacji FIPS.</pre>
+A. Secret Manager: Służy do haseł aplikacji, nie jest kluczowym elementem potoku DLP dla masowych danych ETL.
+C. Cryptographic hashing: Jest nieodwracalne (nie spełnia wymogu 're-identify').
+D. Automatic text redaction: Jest zazwyczaj nieodwracalne (zastępuje tekst znakiem [REDACTED]).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wiele osób myli Level 2 i Level 3. Eksperci wyjaśniają: Level 3 (oferowany przez Cloud HSM) wymaga fizycznej ochrony przed otwarciem (tamper-evident) oraz reakcji urządzenia na próbę włamania (np. skasowanie kluczy przy wykryciu ingerencji fizycznej).</p>
+<p><b>Sugerowana odpowiedź: BE</b></p>
+<p>Deterministyczne szyfrowanie w DLP API to 'złoty środek' między ochroną prywatności a możliwością analizy danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/hsm" target="_blank">https://cloud.google.com/hsm</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/concepts-deidentification" target="_blank">DLP De-identification methods</a></li>
 </ul>
 </div>
 </div>

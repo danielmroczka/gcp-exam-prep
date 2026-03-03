@@ -52,15 +52,14 @@
 <h2>Question 312 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-subset of Google Cloud logs for on-prem SIEM, minimize risk of data exposure. What to do?
+A team at your organization collects logs in an on-premises security information and event management system (SIEM). You must provide a subset of Google Cloud logs for the SIEM, and minimize the risk of data exposure in your cloud environment. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BQ stream all logs, WIF access.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Log view for relevant logs, Workforce Identity access.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Log sink for relevant logs to Pub/Sub -> Dataflow -> SIEM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> GCS bucket, SA key to SIEM team.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a new BigQuery dataset. Stream all logs to this dataset. Provide the on-premises SIEM system access to the data in BigQuery by using workload identity federation and let the SIEM team filter for the relevant log data.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Define a log view for the relevant logs. Provide access to the log view to a principal from your on-premises identity provider by using workforce identity federation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a log sink for the relevant logs. Send the logs to Pub/Sub. Retrieve the logs from Pub/Sub and push the logs to the SIEM by using Dataflow.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Filter for the relevant logs. Store the logs in a Cloud Storage bucket. Grant the service account access to the bucket. Provide the service account key to the SIEM team.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ subset of Google Cloud logs for on-prem SIEM, minimize risk of data exposure. Wh
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Filtered Log Sink + Pub/Sub: To najbardziej bezpieczna i wydajna metoda. Tworzysz 'Log Sink' z precyzyjnym filtrem (np. tylko logi bezpieczeństwa, bez logów aplikacji z PII), co spełnia wymóg 'subset' i 'minimize exposure'. Pub/Sub i Dataflow zapewniają bezpieczne i skalowalne dostarczenie tych danych do SIEM on-prem.
+C. Log sink -> Pub/Sub -> Dataflow -> SIEM: To jest rekomendowana architektura dla hybrydowego logowania. Log sink z precyzyjnym filtrem wybiera tylko 'subset' potrzebnych logów. Pub/Sub i Dataflow zapewniają bezpieczne i niezawodne przesyłanie logów poza GCP do Twojego SIEM on-premises, bez wystawiania danych na publiczne adresy IP i bez udostępniania statycznych kluczy (można użyć WIF dla Dataflow).
 
 Dlaczego inne są błędne:
-A. All logs: Narusza wymóg 'minimize risk' (niepotrzebne przesyłanie wrażliwych logów aplikacyjnych).
-B. Log view: Służy do ograniczania widoczności logów WEWNĄTRZ chmury (w Logs Explorerze), nie jest to mechanizm eksportu do systemów on-premises.
-D. GCS + SA key: Przesyłanie statycznych kluczy JSON (SA keys) poza chmurę jest odradzane.
-
-Konsensus społeczności ExamTopics: 100% na C. Filtrowany sink to jedyna metoda na precyzyjny eksport danych logowania.</pre>
+A. Workload Identity for SIEM: BigQuery to świetne narzędzie, ale dawanie zewnętrznemu zespołowi bezpośredniego dostępu do BigQuery i pozwalanie im na 'filtrowanie' u siebie zwiększa ryzyko ekspozycji danych (lepiej wysłać tylko to, co powinni widzieć).
+B. Workforce Identity: Służy do logowania ludzi, SIEM to system (maszyna), który potrzebuje federacji maszynowej (Workload Identity).
+D. SA key: Przekazywanie kluczy JSON do systemów on-premises jest niebezpieczne i niezalecane.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Wykorzystanie filtra w sinku (`resource.type="gce_instance" AND severity>=WARNING`) drastycznie zmniejsza koszty przesyłu danych i ułatwia pracę analitykom SIEM.</p>
+<p>Pub/Sub i Dataflow tworzą bezpieczny kanał 'push' dla logów trafiających do zewnętrznych systemów SIEM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk" target="_blank">https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk</a></li>
-
+<li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logging-logs-to-splunk" target="_blank">Log streaming via Dataflow</a></li>
 </ul>
 </div>
 </div>

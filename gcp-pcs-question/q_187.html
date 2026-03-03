@@ -52,15 +52,14 @@
 <h2>Question 187 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit who used a specific IAM permission to perform an action. Which log source?
+A service account key has been publicly exposed on multiple public code repositories. After reviewing the logs, you notice that the keys were used to generate short-lived credentials. You need to immediately remove access with the service account. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Admin Activity logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Data Access logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> System Event logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Flow Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Delete the compromised service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Disable the compromised service account key.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Wait until the service account credentials expire automatically.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Rotate the compromised service account key.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Audit who used a specific IAM permission to perform an action. Which log source?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Audit who used a specific IAM permission to perform an action. Which log source?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Data Access logs: Rejestrują one Wywołania API, które odczytują dane lub metadane (użycie uprawnień). Jeśli chcesz wiedzieć kto sprawdził listę plików lub pobrał dane (używając uprawnienia `storage.objects.get`), znajdziesz to właśnie tutaj.
+A. Delete the compromised service account: Jeśli klucz został skradziony i był używany do generowania krótkotrwałych poświadczeń (np. tokenów OAuth), samo usunięcie klucza (B) może nie wystarczyć do natychmiastowego przerwania aktywnych sesji. Usunięcie całego konta serwisowego jest najbardziej drastycznym, ale i najskuteczniejszym krokiem 'panic button', który unieważnia wszystkie powiązane z nim tokeny i klucze w jednej chwili.
 
 Dlaczego inne są błędne:
-A. Admin Activity: Rejestruje operacje 'Write' (zmiana konfiguracji). Nie powie Ci kto tylko 'użył' istniejącego dostępu do odczytu danych.
-C. System Event: Dotyczą infrastruktury Google.
-D. Flow Logs: Widzą pakiety, nie widzą konkretnych uprawnień IAM użytych w zapytaniu API.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Data Access = Audyt użycia uprawnień.</pre>
+B. Disable key: Dobry krok, ale jeśli napastnik wygenerował już tokeny sesyjne (np. na godzinę), mogą one nadal działać.
+C. Wait for expiry: Niedopuszczalne przy aktywnym wycieku.
+D. Rotate key: To proces dla planowanych zmian, nie dla aktywnego włamania (napastnik nadal ma stary, działający klucz dopóki go nie usuniesz).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja dotyczy kosztów. Ponieważ logi Data Access (B) rejestrują każde pojedyncze czytanie danych, potrafią być bardzo drogie. Inżynierowie radzą włączać je tylko dla 'Sensitive Services' (jak BigQuery, GCS, Secret Manager).</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>W przypadku kompromitacji tożsamości, szybkość reakcji jest kluczowa. Usunięcie konta to najpewniejszy sposób na 'wyczyszczenie' dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/audit/understanding-audit-logs#data-access" target="_blank">https://cloud.google.com/logging/docs/audit/understanding-audit-logs#data-access</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys#compromised" target="_blank">Incident response for service accounts</a></li>
 </ul>
 </div>
 </div>

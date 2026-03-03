@@ -52,15 +52,14 @@
 <h2>Question 232 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Analyze VPC network traffic to detect unauthorized port scanning from an internal VM. Which service?
+Your organization uses the top-tier folder to separate application environments (prod and dev). The developers need to see all application development audit logs, but they are not permitted to review production logs. Your security team can review all logs in production and development environments. You must grant Identity and Access Management (IAM) roles at the right resource level for the developers and security team while you ensure least privilege. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> 1. Grant logging.viewer role to the security team at the organization resource level. 2. Grant logging.viewer role to the developer team at the folder resource level that contains all the dev projects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Grant logging.viewer role to the security team at the organization resource level. 2. Grant logging.admin role to the developer team at the organization resource level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. Grant logging.admin role to the security team at the organization resource level. 2. Grant logging.viewer role to the developer team at the folder resource level that contains all the dev projects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Grant logging.admin role to the security team at the organization resource level. 2. Grant logging.admin role to the developer team at the organization resource level.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Analyze VPC network traffic to detect unauthorized port scanning from an interna
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ Analyze VPC network traffic to detect unauthorized port scanning from an interna
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud IDS: To jedyne narzędzie w GCP z silnikiem inspekcji behawioralnej ruchu 'East-West'. Potrafi rozpoznać wzorzec 'Port Scanning' (próby połączeń na wiele portów w krótkim czasie) i wygenerować alert bezpieczeństwa.
+A. Roles at Org and Folder levels: 1. Nadanie `logging.viewer` zespołowi security na poziomie Organizacji pozwala im widzieć logi ze WSZYSTKICH projektów (dziedziczenie). 2. Nadanie `logging.viewer` deweloperom tylko na poziomie Folderu 'Dev' pozwala im widzieć logi z ich projektów, ale NIE daje im wglądu w projekty z Folderu 'Prod'. To idealna realizacja zasady Least Privilege.
 
 Dlaczego inne są błędne:
-A. Cloud Armor: Chroni tylko Load Balancer.
-C. Flow Logs: Rejestrują połączenia, ale musiałbyś sam pisać algorytmy, by odróżnić skanowanie portów od zwykłego ruchu. IDS (B) robi to automatycznie.
-D. IAP: Dla ludzi, nie dla maszyn.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Skanowanie portów = Intrusion Detection.</pre>
+B, D. logging.admin for developers: Skrajnie niebezpieczne, deweloperzy mogliby usuwać logi audytowe (zacieranie śladów).
+C. logging.admin for security: Choć możliwe, do 'przeglądu' logów (review) wystarczy rola `viewer` lub `privateLogViewer`. Admin jest zbyt wysoki do codziennego monitoringu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na forach zwraca uwagę na 'Lateral Movement'. Skanowanie portów jest pierwszym krokiem hakera po zainfekowaniu jednej VM w Twojej sieci. Cloud IDS (B) jest kluczowy, by złapać atak ZANIM haker dobierze się do bazy danych.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Hierarchia uprawnień IAM pozwala na precyzyjne odizolowanie logów produkcyjnych od deweloperskich.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/access-control" target="_blank">Logging access control</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 257 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-GKE Pods access GCS objects securely with minimal management overhead. What to do?
+You are running code in Google Kubernetes Engine (GKE) containers in Google Cloud that require access to objects stored in a Cloud Storage bucket. You need to securely grant the Pods access to the bucket while minimizing management overhead. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Workload Identity Federation for GKE.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SA keys in Secret Manager + rotation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SA keys as K8s secret.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SA keys in Secret Manager.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a service account. Grant bucket access to the Pods by using Workload Identity Federation for GKE.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a service account with keys. Store the keys in Secret Manager with a 30-day rotation schedule. Reference the keys in the Pods.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a service account with keys. Store the keys as a Kubernetes secret. Reference the keys in the Pods.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a service account with keys. Store the keys in Secret Manager. Reference the keys in the Pods.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,23 +78,21 @@ GKE Pods access GCS objects securely with minimal management overhead. What to d
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Workload Identity: To natywny sposób GKE na bezpieczne nadawanie uprawnień podom. Automatycznie łączy konto K8s z kontem GCP, eliminując potrzebę tworzenia i rotowania kluczy JSON (minimal overhead).
+A. Workload Identity Federation for GKE: To jest 'złoty standard' bezpieczeństwa dla Kubernetes w GCP. Pozwala ona na powiązanie konta serwisowego Kubernetes (KSA) bezpośrednio z kontem serwisowym Google (GSA). Pod automatycznie otrzymuje tokeny GSA, bez potrzeby używania niebezpiecznych kluczy JSON zapisanych w sekretach czy zewnętrznych systemach.
 
 Dlaczego inne są błędne:
-B, C, D: Wszystkie te opcje opierają się na statycznych kluczach JSON, które stanowią ryzyko i wymagają dużego nakładu pracy przy zarządzaniu ich cyklem życia.
-
-Konsensus społeczności ExamTopics: 100% na A. Workload Identity to 'złoty standard' dla GKE.</pre>
+B, D. Secret Manager for keys: Lepiej niż zwykłe sekrety, ale nadal wymaga zarządzania kluczami JSON, co jest zbędne przy użyciu Workload Identity.
+C. Kubernetes secret: Najmniej bezpieczne - klucze JSON są zapisane na dysku klastra (w etcd).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Przy Workload Identity pod pobiera tokeny bezpośrednio z serwera metadanych, co czyni go odpornym na kradzież kluczy z obrazu kontenera.</p>
+<p>Workload Identity to fundament 'keyless' security w Google Kubernetes Engine.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity</a></li>
-
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">GKE Workload Identity</a></li>
 </ul>
 </div>
 </div>

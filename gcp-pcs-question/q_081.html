@@ -52,16 +52,15 @@
 <h2>Question 81 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A customer is running an analytics workload where Compute Engine instances access data in Cloud Storage. You want to ensure this workload cannot access, or be accessed from, the internet. Which two strategies should you use? (Choose two.)
+A customer is running an analytics workload on Google Cloud Platform (GCP) where Compute Engine instances are accessing data stored on Cloud Storage. Your team wants to make sure that this workload will not be able to access, or be accessed from, the internet. Which two strategies should your team use to meet these requirements? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure Private Google Access on the subnet.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Avoid assigning public IP addresses to the instances.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Run the cluster on a separate subnet.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Turn off IP forwarding.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure Private Google Access on the Compute Engine subnet</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Avoid assigning public IP addresses to the Compute Engine cluster.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Make sure that the Compute Engine cluster is running on a separate subnet.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Turn off IP forwarding on the Compute Engine instances in the cluster.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Configure a Cloud NAT gateway.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ A customer is running an analytics workload where Compute Engine instances acces
 <pre>Odpowiedź: AB.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Private Google Access: Pozwala instancjom w podsieci, które nie posiadają publicznych adresów IP, na łączenie się z publicznymi adresami IP usług Google (takich jak Cloud Storage). Jest to niezbędne, aby maszyny odizolowane od internetu mogły nadal pracować z danymi w GCS.
-B. No public IP: Brak publicznego adresu IP fizycznie uniemożliwia bezpośrednie połączenie z maszyny do internetu oraz z internetu do maszyny.
+A. Private Google Access: Pozwala instancjom VM, które mają tylko prywatne adresy IP, na łączenie się z publicznymi adresami IP usług Google (takich jak Cloud Storage). Jest to niezbędne, aby VM bez internetu mogła czytać dane z GCS.
+B. No Public IP: Brak publicznych adresów IP gwarantuje, że maszyny nie są widoczne z internetu i nie mogą bezpośrednio inicjować połączeń do publicznej sieci.
 
 Dlaczego inne są błędne:
-C. Separate subnet: Sam podział na podsieci nie blokuje dostępu do internetu, jeśli podsieć ma trasę do internet gateway.
-D. IP forwarding: Dotyczy przekazywania pakietów przez maszynę (router programowy), nie kontroluje dostępu do API Google.
-E. Cloud NAT: Służy właśnie do umożliwienia maszynom bez publicznego IP dostępu DO internetu (np. po updejty), co jest sprzeczne z wymogiem 'cannot access the internet'.
-
-Konsensus społeczności ExamTopics: 100% na AB. Standardowa metoda izolacji obciążeń korzystających z usług Google.</pre>
+C. Separate subnet: Podsieć nie blokuje dostępu do internetu, jeśli istnieje brama (IGW).
+D. IP forwarding: Dotyczy przekazywania pakietów przez VM, nie dostępu do GCS.
+E. Cloud NAT: Pozwala maszynom bez publicznego IP na wyjście DO internetu, co jest sprzeczne z wymogiem 'workload will not be able to access the internet'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AB</b></p>
-<p><b>Głęboka analiza:</b> To klasyczne pytanie sprawdzające zrozumienie 'Private Google Access'. Kluczem jest zrozumienie, że API Google mają publiczne adresy IP, więc maszyna bez Public IP potrzebuje specjalnego 'mostu' (PGA), aby z nich korzystać bez wychodzenia do internetu.</p>
+<p>Kombinacja 'No Public IP' + 'Private Google Access' to standardowy wzorzec bezpiecznej komunikacji VM-to-GCP Services.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">https://cloud.google.com/vpc/docs/private-google-access</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">Private Google Access</a></li>
 </ul>
 </div>
 </div>

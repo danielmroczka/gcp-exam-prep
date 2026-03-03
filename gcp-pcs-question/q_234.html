@@ -52,15 +52,14 @@
 <h2>Question 234 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit which users have been granted permissions to modify encryption keys in Cloud KMS across the organization. Which tool?
+Your organization uses BigQuery to process highly sensitive, structured datasets. Following the "need to know" principle, you need to create the Identity and Access Management (IAM) design to meet the needs of these users: - Business user: must access curated reports. - Data engineer: must administrate the data lifecycle in the platform. - Security operator: must review user activity on the data platform. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure data access log for BigQuery services, and grant Project Viewer role to security operator.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set row-based access control based on the "region" column, and filter the record from the United States for data engineers.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create curated tables in a separate dataset and assign the role roles/bigquery.dataViewer.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Generate a CSV data file based on the business user's needs, and send the data to their email addresses.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Audit which users have been granted permissions to modify encryption keys in Clo
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,26 +75,25 @@ Audit which users have been granted permissions to modify encryption keys in Clo
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Policy Analyzer: Pozwala zadać pytanie o uprawnienia `cloudkms.cryptoKeys.update` lub rolę `roles/cloudkms.admin` w skali całej firmy. To jedyny sposób na szybki audyt 'Kto może dotykać moich kluczy'.
+C. Curated tables in separate dataset: To jest najlepsza praktyka udostępniania danych w BigQuery. Tworzysz osobny dataset (widok lub tabelę zagregowaną) z danymi bezpiecznymi dla biznesu i nadajesz mu rolę `bigquery.dataViewer`. Pozwala to biznesowi na raportowanie bez dostępu do surowych, wrażliwych danych w głównym zbiorze.
 
 Dlaczego inne są błędne:
-B, C, D: Jak w poprzednich analogicznych pytaniach dotyczących inwentaryzacji dostępów.
-
-Konsensus społeczności ExamTopics: 100% na A. Audyt kluczy = Policy Analyzer.</pre>
+A. Project Viewer for Security: To za mało do 'przeglądu aktywności' (wymaga logów), a Projekt Viewer daje zbyt szeroki wgląd w inne zasoby projektu.
+B. Filter record for Data Engineer: Data engineer zazwyczaj potrzebuje dostępu do całego cyklu życia danych, a nie tylko filtrów geograficznych (które zresztą lepiej nadać przez row-level security).
+D. CSV via email: Skrajnie niebezpieczne, brak kontroli nad danymi po ich wysłaniu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach security podkreślają: 'Klucze KMS to fundament zaufania'. Jeśli ktoś ma do nich prawo modyfikacji, może odciąć firmę od danych (ransomware). Policy Analyzer (A) pozwala wyłapać nadmiarowe uprawnienia przed katastrofą.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p>Dataset-level permissions w BigQuery to podstawowy mechanizm izolacji danych dla różnych grup odbiorców.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
-
+<li><a href="https://cloud.google.com/bigquery/docs/dataset-access-controls" target="_blank">BigQuery dataset permissions</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 142 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Phishing attacks. 2SV option using cryptographic signature and login URL verification. Which one?
+You have noticed an increased number of phishing attacks across your enterprise user accounts. You want to implement the Google 2-Step Verification (2SV) option that uses a cryptographic signature to authenticate a user and verify the URL of the login page. Which Google 2SV option should you use?
 </div>
 <div class="question-choices-container">
 <ul>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Titan Security Keys</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google prompt</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Google Authenticator</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Google Authenticator app</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud HSM keys</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Phishing attacks. 2SV option using cryptographic signature and login URL verific
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Titan Security Keys: Wykorzystują protokół FIDO2/WebAuthn. Klucz fizyczny komunikuje się z przeglądarką i sprawdza, czy URL strony logowania pasuje do zarejestrowanego serwisu. Jeśli strona jest fałszywa (phishing), klucz odmówi złożenia podpisu kryptograficznego. To jedyna metoda w 100% odporna na phishing.
+A. Titan Security Keys: Klucze sprzętowe oparte na standardzie FIDO2/WebAuthn używają kryptografii asymetrycznej. Podczas logowania klucz fizycznie podpisuje wyzwanie (challenge) i automatycznie weryfikuje domenę strony logowania. Jest to jedyna metoda 2SV w 100% odporna na phishing (napastnik nie może przejąć kodu ani zmusić użytkownika do podpisania fałszywej domeny).
 
 Dlaczego inne są błędne:
-B. Google prompt: Bardzo wygodny, ale użytkownik może omyłkowo kliknąć 'Tak' na telefonie, będąc na fałszywej stronie.
-C. Google Authenticator (TOTP): Kody można przepisać na fałszywą stronę, która w tym samym momencie przekaże je do prawdziwego Google (Proxy Phishing).
-D. Cloud HSM keys: Służą do szyfrowania danych w chmurze, a nie do logowania się użytkowników do konsoli Google.
-
-Konsensus społeczności ExamTopics: 100% na A. Fizyczne klucze to najwyższy poziom ochrony tożsamości.</pre>
+B. Google prompt: Wygodne, ale użytkownik może zostać oszukany i kliknąć 'Tak' na fałszywym powiadomieniu (phishing zmęczeniowy).
+C. Authenticator app: Kody OTP (6 cyfr) mogą zostać wyłudzone przez fałszywą stronę logowania i natychmiast użyte przez napastnika.
+D. Cloud HSM keys: Służą do szyfrowania danych w aplikacjach, a nie do logowania użytkowników do konsoli.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Google wdrożyło klucze Titan u wszystkich swoich pracowników i od tego czasu odnotowało ZEROWY wskaźnik udanych ataków phishingowych na swoje konta wewnętrzne.</p>
+<p>Klucze bezpieczeństwa (Security Keys) to złoty standard ochrony kont administracyjnych przed zaawansowanymi atakami phishingowymi.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/titan-security-key" target="_blank">https://cloud.google.com/titan-security-key</a></li>
-
+<li><a href="https://cloud.google.com/titan-security-key" target="_blank">Titan Security Key</a></li>
 </ul>
 </div>
 </div>

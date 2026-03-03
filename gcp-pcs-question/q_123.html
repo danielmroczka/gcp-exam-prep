@@ -52,15 +52,14 @@
 <h2>Question 123 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Connect on-prem to Shared VPC. Private transport link, private API endpoints from on-prem, APIs only via VPC SC. How?
+You need to connect your organization's on-premises network with an existing Google Cloud environment that includes one Shared VPC with two subnets named Production and Non-Production. You are required to: Use a private transport link. Configure access to Google Cloud APIs through private API endpoints originating from on-premises environments. Ensure that Google Cloud APIs are only consumed via VPC Service Controls. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud VPN, restricted.googleapis.com.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Partner Interconnect, private.googleapis.com.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Direct Peering, private access for subnets.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Dedicated Interconnect, restricted.googleapis.com.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> 1. Set up a Cloud VPN link between the on-premises environment and Google Cloud. 2. Configure private access using the restricted.googleapis.com domains in on-premises DNS configurations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Set up a Partner Interconnect link between the on-premises environment and Google Cloud. 2. Configure private access using the private.googleapis.com domains in on-premises DNS configurations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. Set up a Direct Peering link between the on-premises environment and Google Cloud. 2. Configure private access for both VPC subnets.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Set up a Dedicated Interconnect link between the on-premises environment and Google Cloud. 2. Configure private access using the restricted.googleapis.com domains in on-premises DNS configurations.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Connect on-prem to Shared VPC. Private transport link, private API endpoints fro
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Dedicated Interconnect + restricted.googleapis.com: Dedicated Interconnect zapewnia fizyczne, prywatne łącze (Private transport link). Domena `restricted.googleapis.com` (199.36.153.4/30) jest jedyną domeną VIP, która wymusza obsługę wyłącznie usług wspieranych przez VPC Service Controls, co spełnia wymóg 'APIs only via VPC SC'.
+D. Dedicated Interconnect + restricted.googleapis.com: 1. Wymóg 'private transport link' jest najlepiej spełniony przez Dedicated Interconnect (bezpośrednie fizyczne połączenie). 2. Domena `restricted.googleapis.com` (IP 199.36.153.4/30) jest dedykowana dla VPC Service Controls - pozwala na dostęp TYLKO do usług wspieranych przez VPC SC, co eliminuje ryzyko eksfiltracji danych do usług nieobsługiwanych przez obwód bezpieczeństwa.
 
 Dlaczego inne są błędne:
-A. Cloud VPN: Choć bezpieczny, nie jest to 'dedykowane łącze fizyczne' (Interconnect jest wyżej w hierarchii wymagań 'transport link').
-B. private.googleapis.com: Ta domena (199.36.153.8/30) daje dostęp do WSZYSTKICH API Google (w tym YouTube, Gmail), a nie tylko tych chronionych przez VPC SC.
-C. Direct Peering: To peering publiczny dla API, nie zapewnia prywatnego łącza transportowego do sieci VPC.
-
-Konsensus społeczności ExamTopics: 100% na D.restricted VIP to standard dla VPC SC i łączności hybrydowej.</pre>
+A. Cloud VPN: Działa przez internet (nie jest to w pełni 'private transport link' w sensie fizycznym).
+B. private.googleapis.com: Pozwala na dostęp do wszystkich usług Google, również tych nieobsługiwanych przez VPC SC, co zwiększa ryzyko eksfiltracji.
+C. Direct Peering: To peering warstwy 3, nie oferuje takiego poziomu prywatności i integracji z VPC SC jak Interconnect.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Użycie 'restricted' VIP zapobiega wyciekowi danych do usług Google, które nie są objęte perymetrem bezpieczeństwa Twojej firmy.</p>
+<p>Użycie `restricted.googleapis.com` jest wymogiem technicznym dla poprawnego działania VPC Service Controls z sieci on-premises.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity" target="_blank">https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-on-premises" target="_blank">Private Google Access for on-prem</a></li>
 </ul>
 </div>
 </div>

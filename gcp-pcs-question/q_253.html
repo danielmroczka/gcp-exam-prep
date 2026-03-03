@@ -52,15 +52,14 @@
 <h2>Question 253 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Chatbot powered by GenAI. Ensure no PII is communicated. What to do?
+Your organization is building a chatbot that is powered by generative AI to deliver automated conversations with internal employees. You must ensure that no data with personally identifiable information (PII) is communicated through the chatbot. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Encrypt with KMS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud DLP API to discover and transform PII in input and output.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC-SC perimeter.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Marketplace encryption tools.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Encrypt data at rest for both input and output by using Cloud KMS, and apply least privilege access to the encryption keys.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Discover and transform PII data in both input and output by using the Cloud Data Loss Prevention (Cloud DLP) API.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Prevent PII data exfiltration by using VPC-SC to create a safe scope around your chatbot.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Scan both input and output by using data encryption tools from the Google Cloud Marketplace.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Chatbot powered by GenAI. Ensure no PII is communicated. What to do?
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud DLP API: Chatboty pracują na strumieniach tekstu. DLP API potrafi w milisekundach przeskanować zapytanie (input) i odpowiedź modelu (output), identyfikując i maskując PII (imiona, adresy) przed ich wyświetleniem użytkownikowi.
+B. Cloud DLP API (Sensitive Data Protection): To narzędzie jest stworzone do wykrywania i usuwania/maskowania danych wrażliwych (PII) w strumieniach tekstowych. Możesz zintegrować aplikację chatbota tak, aby przed wysłaniem pytania do modelu AI oraz przed pokazaniem odpowiedzi użytkownikowi, tekst przechodził przez skaner DLP, który 'wyczyści' go z danych wrażliwych.
 
 Dlaczego inne są błędne:
-A. Cloud KMS: Szyfruje dane na dysku, ale chatbot musi widzieć tekst jawny, aby odpowiedzieć. Szyfrowanie nie zapobiega wyświetleniu PII użytkownikowi w oknie chatu.
-C. VPC SC: Chroni bazę danych chatbota przed kradzieżą, ale nie kontroluje Treści rozmowy przesyłanej protokołem HTTPS do klienta.
-
-Konsensus społeczności ExamTopics: 100% na B. DLP to standard dla czyszczenia treści AI.</pre>
+A. Encryption at rest: Chroni dane na dysku, ale nie zapobiega ich wyświetleniu użytkownikowi w oknie czatu.
+C. VPC-SC: Chroni przed kradzieżą danych przez API do innego projektu, ale nie filtruje treści samej rozmowy z chatbotem.
+D. Encryption tools from Marketplace: Mogą być pomocne, ale Cloud DLP jest natywną i najbardziej zaawansowaną usługą Google do tego celu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Możesz użyć DLP do 'pseudonimizacji' - model AI dostanie pytanie: 'Co kupił [USER_1]?', co chroni prywatność nawet przed dostawcą modelu.</p>
+<p>DLP API to kluczowy element 'AI Safety' i ochrony prywatności w systemach opartych na LLM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/inspecting-text-examples" target="_blank">https://cloud.google.com/dlp/docs/inspecting-text-examples</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/inspecting-text" target="_blank">DLP for text data</a></li>
 </ul>
 </div>
 </div>

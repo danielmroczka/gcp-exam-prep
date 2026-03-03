@@ -52,15 +52,14 @@
 <h2>Question 303 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Deny-list known IP range for website behind Application Load Balancer. What to do?
+There is a threat actor that is targeting organizations like yours. Attacks are always initiated from a known IP address range. You want to deny-list those IPs for your website, which is exposed to the internet through an Application Load Balancer. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor policy with deny-rule.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> IAP + firewall rule.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Log sink alert.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Firewall policy deny-rule on VPC.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a Cloud Armor policy with a deny-rule for the known IP address range. Attach the policy to the backend of the Application Load Balancer.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Activate Identity-Aware Proxy for the backend of the Application Load Balancer. Create a firewall rule that only allows traffic from the proxy to the application.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a log sink with a filter containing the known IP address range. Trigger an alert that detects when the Application Load Balancer is accessed from those IPs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a Cloud Firewall policy with a deny-rule for the known IP address range. Associate the firewall policy to the Virtual Private Cloud with the application backend.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Deny-list known IP range for website behind Application Load Balancer. What to d
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud Armor: Jest to jedyna usługa w GCP, która pozwala na blokowanie adresów IP na brzegu sieci Google (Edge), ZANIM trafią one do Load Balancera i Twojej sieci. Jest to najbardziej efektywne i skalowalne rozwiązanie dla aplikacji webowych.
+A. Cloud Armor policy + Deny rule: Cloud Armor to WAF (Web Application Firewall) zintegrowany z Application Load Balancerem. Pozwala na tworzenie reguł blokujących (Deny) ruch z konkretnych adresów IP lub zakresów (CIDR) na samym brzegu sieci Google (edge), zanim ruch w ogóle dotrze do Twojej infrastruktury.
 
 Dlaczego inne są błędne:
-B. IAP: Służy do uwierzytelniania osób, nie do masowego blokowania zakresów IP agresorów.
-D. VPC Firewall: Działa głęboko w sieci, blisko VM. W przypadku dużego ataku, Twoja sieć VPC musiałaby procesować te pakiety tylko po to, by je odrzucić, co marnuje zasoby. Armor robi to 'przed drzwiami'.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. Cloud Armor to standardowy WAF/IP-filter w GCP.</pre>
+B. IAP: Służy do uwierzytelniania osób, nie do blokowania złośliwych zakresów IP.
+C. Alerting: Tylko informuje o ataku, nie zapobiega mu (brak blokady).
+D. VPC Firewall: Działa na poziomie VM wewnątrz sieci. Cloud Armor (A) jest lepszy, bo blokuje ruch 'wcześniej' (na Load Balancerze) i nie obciąża Twojej sieci wewnętrznej złośliwym ruchem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Cloud Armor wspiera również gotowe listy IP od Google (Threat Intelligence), co pozwala na automatyczne blokowanie botnetów bez ręcznej pracy administratora.</p>
+<p>Blokowanie znanych złośliwych IP na poziomie Load Balancera (Cloud Armor) to pierwsza linia obrony aplikacji webowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor/docs/security-policy-concepts" target="_blank">https://cloud.google.com/armor/docs/security-policy-concepts</a></li>
-
+<li><a href="https://cloud.google.com/armor/docs/configure-security-policies#deny-list" target="_blank">Cloud Armor IP deny-lists</a></li>
 </ul>
 </div>
 </div>

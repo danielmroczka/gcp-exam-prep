@@ -52,15 +52,14 @@
 <h2>Question 229 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-What is the primary benefit of using Google Cloud Key Access Justifications (KAJ) with CMEK?
+Your organization wants to be General Data Protection Regulation (GDPR) compliant. You want to ensure that your DevOps teams can only create Google Cloud resources in the Europe regions. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate key rotation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide a reason for Google to access your data, which you can then approve or deny.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage IAM roles for KMS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To protect against DDoS.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Identity-Aware Proxy (IAP) with Access Context Manager to restrict the location of Google Cloud resources.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the org policy constraint 'Google Cloud Platform - Resource Location Restriction' on your Google Cloud organization node.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use the org policy constraint 'Restrict Resource Service Usage' on your Google Cloud organization node.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Identity and Access Management (IAM) custom roles to ensure that your DevOps team can only create resources in the Europe regions.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,23 +78,22 @@ What is the primary benefit of using Google Cloud Key Access Justifications (KAJ
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Key Access Justifications (KAJ): To mechanizm suwerenności. Gdy Google potrzebuje użyć Twojego klucza (nawet CMEK), musi podać kod uzasadnienia (np. `CUSTOMER_INITIATED_ACCESS`). Możesz ustawić politykę, która blokuje operację, jeśli uzasadnienie jest niewłaściwe.
+B. Org Policy: Resource Location Restriction: Jest to dedykowana polityka organizacji (`gcp.resourceLocations`), która pozwala zdefiniować listę dozwolonych regionów (np. `in:eu-locations`). Jest to najprostszy i najskuteczniejszy sposób na wymuszenie rezydencji danych w Europie na poziomie całej chmury.
 
 Dlaczego inne są błędne:
-A, C, D: Nie są to funkcje usługi KAJ.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To najwyższy poziom kontroli nad danymi.</pre>
+A. IAP: Służy do dostępu użytkowników do aplikacji, nie ogranicza miejsca tworzenia maszyn czy bucketów.
+C. Restrict Resource Service Usage: Ogranicza TO JAKIE usługi można włączyć (np. nie używaj Cloud Run), a nie GDZIE te usługi mają działać.
+D. Custom IAM roles: Bardzo trudne do zaimplementowania (musiałbyś edytować każde uprawnienie 'create' z warunkiem lokalizacji), podczas gdy Org Policy (B) robi to jednym przełącznikiem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> KAJ (B) jest odpowiedzią na wymogi suwerenności danych w UE i Azji. Pozwala on technicznie udowodnić audytorom, że firma ma kontrolę nad tym, KIEDY i DLACZEGO dostawca chmury korzysta z kluczy klienta.</p>
+<p>Resource Location Restriction to fundament strategii Data Sovereignty dla klientów w Europie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/key-access-justifications/docs/overview" target="_blank">https://cloud.google.com/key-access-justifications/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">Resource Location Restriction</a></li>
 </ul>
 </div>
 </div>

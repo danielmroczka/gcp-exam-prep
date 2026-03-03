@@ -52,15 +52,14 @@
 <h2>Question 279 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Hybrid cloud, private Artifact Registry. On-prem cannot resolve hostname. VPN/Interconnect active, no internet. Fix?
+Your organization operates a hybrid cloud environment and has recently deployed a private Artifact Registry repository in Google Cloud. On-premises developers cannot resolve the Artifact Registry hostname and therefore cannot push or pull artifacts. You've verified the following: • Connectivity to Google Cloud is established by Cloud VPN or Cloud Interconnect. • No custom DNS configurations exist on-premises. • There is no route to the internet from the on-premises network. You need to identify the cause and enable the developers to push and pull artifacts. What is likely causing the issue and what should you do to fix the issue?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> DNS records for restricted/private domains in on-prem DNS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> artifactregistry.writer role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> PGA on subnet.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall rules for 80/443.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> On-premises DNS servers lack the necessary records to resolve private Google API domains. Create DNS records for restricted.googleapis.com or private.googleapis.com pointing to Google's published IP ranges.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Developers must be granted the artifactregistry.writer IAM role. Grant the relevant developer group this role.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Private Google Access is not enabled for the subnet hosting the Artifact Registry. Enable Private Google Access for the appropriate subnet.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Artifact Registry requires external HTTP/HTTPS access. Create a new firewall rule allowing ingress traffic on ports 80 and 443 from the developer's IP ranges.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Hybrid cloud, private Artifact Registry. On-prem cannot resolve hostname. VPN/In
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. DNS for restricted/private domains: Artifact Registry używa publicznych nazw FQDN (`*.pkg.dev`). Jeśli Twoja sieć on-prem nie ma internetu, jej standardowy DNS nie rozwiąże tych nazw. Musisz stworzyć lokalną strefę DNS, która skieruje zapytania o Artifact Registry do adresów IP Private Google Access (zakresy `private.googleapis.com` lub `restricted.googleapis.com`).
+A. DNS records for restricted/private googleapis.com: Artifact Registry używa domen `pkg.dev` lub `*.gcr.io`. W środowisku hybrydowym bez internetu on-premises, DNS musi wiedzieć, że te nazwy należy rozwiązać na specjalne wewnętrzne adresy IP Google (np. `199.36.153.4/30` dla restricted). Brak tych rekordów DNS on-premises uniemożliwia połączenie, ponieważ komputery deweloperów próbują szukać tych adresów w publicznym internecie, do którego nie mają trasy.
 
 Dlaczego inne są błędne:
-B. IAM role: Nie pomoże, jeśli serwer w ogóle nie może 'znaleźć' adresu IP rejestru obrazów.
-C. PGA on subnet: Dotyczy ruchu Z CHMURY, nie rozwiązuje problemu DNS po stronie on-premises.
-D. Firewall: Może być otwarty, ale bez poprawnego DNS-a pakiet nigdy nie zostanie wysłany pod właściwy adres.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowy problem łączności hybrydowej 'DNS split-horizon'.</pre>
+B. IAM roles: Problem dotyczy rozdzielczości nazw (DNS), a nie braku uprawnień (do których sprawdzania system nawet nie doszedł).
+C. Private Google Access: To funkcja dla VM wewnątrz GCP, nie konfiguruje ona DNS-ów po stronie on-premises.
+D. Firewall port 80/443: Choć potrzebne, bez poprawnej rezolucji nazw (A) ruch nawet nie spróbuje wyjść w stronę GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Aby to zadziałało, musisz skonfigurować swój lokalny DNS tak, aby dla domeny `pkg.dev` zwracał adresy CNAME kierujące do `restricted.googleapis.com`.</p>
+<p>Konfiguracja DNS to najczęstszy powód problemów z łącznością w architekturach Hybrid Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-settings#dns-on-prem" target="_blank">https://cloud.google.com/vpc/docs/configure-private-google-access-settings#dns-on-prem</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-on-premises#dns-configuration" target="_blank">DNS for private Google access on-premises</a></li>
 </ul>
 </div>
 </div>

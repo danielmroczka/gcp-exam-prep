@@ -52,15 +52,14 @@
 <h2>Question 255 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Old financial application. Risk of side-channel attacks. Protect confidentiality in memory while running. What to do?
+Your organization's financial modeling application is already deployed on Google Cloud. The application processes large amounts of sensitive customer financial data. Application code is old and poorly understood by your current software engineers. Recent threat modeling exercises have highlighted the potential risk of sophisticated side-channel attacks against the application while the application is running. You need to further harden the Google Cloud solution to mitigate the risk of these side-channel attacks, ensuring maximum protection for the confidentiality of financial data during processing, while minimizing application problems. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Stricter access control.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Runtime library noise.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Confidential VMs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> CMEK.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enforce stricter access controls for Compute Engine instances by using service accounts, least privilege IAM policies, and limit network access.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Implement a runtime library designed to introduce noise and timing variations into the application's execution which will disrupt side-channel attack.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Migrate the application to Confidential VMs to provide hardware-level encryption of memory and protect sensitive data during processing.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Utilize customer-managed encryption keys (CMEK) to ensure complete control over the encryption process.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Old financial application. Risk of side-channel attacks. Protect confidentiality
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Confidential VMs: Wykorzystują sprzętowe szyfrowanie pamięci RAM (AMD SEV). Dane są deszyfrowane dopiero wewnątrz procesora, co chroni je przed odczytem z poziomu hypervisora lub innych procesów próbujących wykorzystać luki w architekturze sprzętowej.
+C. Confidential VMs: Ataki side-channel (np. Spectre, Meltdown) próbują wyciągnąć dane z pamięci RAM lub procesora poprzez analizę efektów ubocznych pracy sprzętu. Confidential VMs używają sprzętowego szyfrowania pamięci (np. AMD SEV), co sprawia, że dane w RAM są nieczytelne dla nikogo poza samym procesorem w zaufanym stanie. Jest to najsilniejsza ochrona przed tego typu zaawansowanymi atakami bez konieczności zmiany kodu aplikacji.
 
 Dlaczego inne są błędne:
-A. Access control: Chroni przed logowaniem, ale nie chroni przed lukami sprzętowymi procesora.
-D. CMEK: Szyfruje dane na dysku, dane w RAM są jawne bez technologii Confidential VM.
-
-Konsensus społeczności ExamTopics: 100% na C. Słowo 'in memory' to zawsze Confidential Computing.</pre>
+A. IAM policies: Chronią przed nieuprawnionym dostępem do API, ale nie przed atakami na poziomie sprzętowym podczas wykonywania kodu.
+B. Runtime library noise: Bardzo trudne do zaimplementowania, może psuć wydajność i nie daje takich gwarancji jak rozwiązanie sprzętowe.
+D. CMEK: Szyfruje dane na dysku, a pytanie dotyczy bezpieczeństwa 'podczas pracy' aplikacji (in-use).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Confidential Computing pozwala na przetwarzanie danych bez ich deszyfrowania w niebezpiecznych warstwach stosu technologicznego (tzw. Trusted Execution Environment).</p>
+<p>Confidential Computing to jedyna technologia skutecznie izolująca dane wewnątrz procesora i pamięci RAM od potencjalnie złośliwego środowiska hosta.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction" target="_blank">https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction</a></li>
-
+<li><a href="https://cloud.google.com/confidential-computing" target="_blank">Confidential Computing overview</a></li>
 </ul>
 </div>
 </div>

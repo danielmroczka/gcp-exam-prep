@@ -52,15 +52,14 @@
 <h2>Question 67 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A company is backing up logs to Cloud Storage. Analysts should only access logs without PII. Log files with PII should be moved to another bucket accessible only by the admin. What should you do?
+A company is backing up application logs to a Cloud Storage bucket shared with both analysts and the administrator. Analysts should only have access to logs that do not contain any personally identifiable information (PII). Log files containing PII should be stored in another bucket that is only accessible by the administrator. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud Pub/Sub and Cloud Functions to trigger a DLP scan on upload and move files with PII.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Upload logs to both buckets and delete PII files from the shared one.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Object Lifecycle Management to delete PII objects.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure a Cloud Storage Trigger for PII data.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud Pub/Sub and Cloud Functions to trigger a Data Loss Prevention scan every time a file is uploaded to the shared bucket. If the scan detects PII, have the function move into a Cloud Storage bucket only accessible by the administrator.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Upload the logs to both the shared bucket and the bucket only accessible by the administrator. Create a job trigger using the Cloud Data Loss Prevention API. Configure the trigger to delete any files from the shared bucket that contain PII.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> On the bucket shared with both the analysts and the administrator, configure Object Lifecycle Management to delete objects that contain any PII.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> On the bucket shared with both the analysts and the administrator, configure a Cloud Storage Trigger that is only triggered when PII data is uploaded. Use Cloud Functions to capture the trigger and delete such files.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A company is backing up logs to Cloud Storage. Analysts should only access logs 
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. DLP + Cloud Functions: Cloud Storage nie posiada wbudowanego skanera PII. Należy zautomatyzować proces: zdarzenie 'upload' do bucketu wyzwala Cloud Function, która przesyła dane do DLP API. Jeśli DLP znajdzie PII, funkcja przenosi plik do bucketu administratora.
+A. Pub/Sub + Cloud Functions + DLP Scan: To jest zautomatyzowany przepływ pracy ('Event-driven pipeline'). Wgranie pliku do GCS generuje powiadomienie do Pub/Sub, Funkcja uruchamia skan DLP. Jeśli wykryje PII, przenosi plik do bezpiecznego bucketu. Gwarantuje to, że wrażliwe dane nie zostaną w miejscu dostępnym dla analityków.
 
 Dlaczego inne są błędne:
-B. Upload to both: Ryzykowne i nieefektywne. Dane wrażliwe i tak trafiają do 'shared' bucketu przed ich usunięciem.
-C. Lifecycle Management: Działa na podstawie wieku lub wersji obiektu, nie potrafi analizować treści plików i wykrywać PII.
-D. Trigger for PII: Nie istnieje taki natywny wyzwalacz w GCS. Trigerem jest 'zapis pliku', a logika wykrywania PII musi być w kodzie funkcji.
-
-Konsensus społeczności ExamTopics: 100% na A. To klasyczny wzorzec architektury 'Event-driven security' w GCP.</pre>
+B. Trigger to delete: To podejście 'reactive', dane już tam są. Metoda A jest bardziej proaktywnym procesem przenoszenia.
+C. Object Lifecycle: Służy do usuwania plików na podstawie wieku lub wersji, nie potrafi analizować ich zawartości (PII).
+D. Cloud Storage Trigger for PII: GCS nie posiada natywnego triggera, który sam z siebie 'wie', czy w środku jest PII. Wymaga to zewnętrznej analizy (DLP).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Ten proces zapewnia, że analitycy nigdy nie zobaczą nieprzeprocesowanych logów. Jest to jedyna metoda gwarantująca zachowanie poufności danych wrażliwych przy automatycznym backupie.</p>
+<p>DLP API w połączeniu z Cloud Functions pozwala na budowanie inteligentnych systemów ochrony danych 'at ingestion'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/tutorials/gcs-notifications" target="_blank">https://cloud.google.com/dlp/docs/tutorials/gcs-notifications</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/tutorials/gcs-notifications" target="_blank">Automating DLP for Cloud Storage</a></li>
 </ul>
 </div>
 </div>

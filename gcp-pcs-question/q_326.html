@@ -52,15 +52,14 @@
 <h2>Question 326 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Node auto-updates missed notification issues in GKE. Scalable cloud-first process. What to do?
+Your organization deploys a large number of containerized applications on Google Kubernetes Engine (GKE). Node updates are currently applied manually. Audit findings show that a critical patch has not been installed due to a missed notification. You need to design a more reliable, cloud-first, and scalable process for node updates. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Node auto-upgrades in maintenance windows.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Custom script.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Self-managed Kubernetes.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Daily reboot.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure node auto-upgrades for node pools in the maintenance windows.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Develop a custom script to continuously check for patch availability, download patches, and apply the patches across all components of the cluster.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Migrate the cluster infrastructure to a self-managed Kubernetes environment for greater control over the patching process.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Schedule a daily reboot for all nodes to automatically upgrade.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Node auto-updates missed notification issues in GKE. Scalable cloud-first proces
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. GKE Node Auto-upgrades: Jest to usługa zarządzana, która automatycznie dba o to, by węzły miały najnowsze poprawki bezpieczeństwa. Skaluje się ona automatycznie dla dowolnej liczby klastrów. Użycie 'Maintenance Windows' pozwala kontrolować, kiedy te aktualizacje mogą się odbywać, aby nie zakłócać pracy aplikacji.
+A. Node auto-upgrades: Jest to funkcja 'cloud-first' w GKE. Google automatycznie monitoruje dostępność poprawek dla Twoich węzłów i instaluje je w zdefiniowanych oknach serwisowych (maintenance windows). Eliminuje to ryzyko 'missed notification' i błędu ludzkiego, zapewniając stały poziom bezpieczeństwa floty.
 
 Dlaczego inne są błędne:
-B. Custom script: Rozwiązanie trudne w utrzymaniu i nieskalowalne.
-C. Self-managed: Zwiększa narzut operacyjny i ryzyko błędów (musisz sam dbać o wszystko). GKE jest właśnie po to, by Google robiło to za Ciebie.
-D. Daily reboot: Nie instaluje poprawek, po prostu restartuje potencjalnie dziurawy system.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. To fundament bezpieczeństwa platformy GKE.</pre>
+B. Custom script: Bardzo trudny do utrzymania i mniej niezawodny niż natywna usługa Google.
+C. Self-managed Kubernetes: Zwiększa 'operational overhead' i odpowiedzialność klienta za patchowanie (przeciwieństwo wymogu 'cloud-first').
+D. Daily reboot: Reboot nie jest tym samym co 'upgrade' (instalacja poprawek wymaga zmiany obrazu węzła).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Node auto-upgrades są powiązane z wersją Mastera klastra. Google najpierw aktualizuje Mastera, a potem stopniowo, w sposób bezpieczny, wymienia węzły robocze.</p>
+<p>Node auto-upgrades to fundament modelu 'Shared Responsibility' w usługach zarządzanych Kubernetes.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades</a></li>
-
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades" target="_blank">GKE Node Auto-upgrades</a></li>
 </ul>
 </div>
 </div>

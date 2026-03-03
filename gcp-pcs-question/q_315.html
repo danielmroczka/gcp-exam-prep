@@ -52,15 +52,14 @@
 <h2>Question 315 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Real-time recommendation engine (BQ, GCS, AR, GKE, Pub/Sub). ML model supply chain threats. Enhance security in serverless architecture. What to do?
+Your organization is building a real-time recommendation engine using ML models that process live user activity data stored in BigQuery and Cloud Storage. Each new model developed is saved to Artifact Registry. This new system deploys models to Google Kubernetes Engine, and uses Pub/Sub for message queues. Recent industry news have been reporting attacks exploiting ML model supply chains. You need to enhance the security in this serverless architecture, specifically against risks to the development and deployment pipeline. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Vulnerability scanning + Binary Authorization.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Sanitize training data + IAM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Limit external libraries + rotate keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall rules + Cloud IDS.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable container image vulnerability scanning during development and pre-deployment. Enforce Binary Authorization on images deployed from Artifact Registry to your continuous integration and continuous deployment (CI/CD) pipeline.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Thoroughly sanitize all training data prior to model development to reduce risk of poisoning attacks. Use IAM for authorization, and apply role-based restrictions to code repositories and cloud services.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Limit external libraries and dependencies that are used for the ML models as much as possible. Continuously rotate encryption keys that are used to access the user data from BigQuery and Cloud Storage.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Develop strict firewall rules to limit external traffic to Cloud Run instances. Integrate intrusion detection systems (IDS) for real-time anomaly detection on Pub/Sub message flows.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Real-time recommendation engine (BQ, GCS, AR, GKE, Pub/Sub). ML model supply cha
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Supply Chain Defense: Ataki na łańcuch dostaw (Supply Chain) polegają na wstrzyknięciu złośliwego kodu do obrazów kontenerów lub modeli. Połączenie skanowania podatności (identyfikacja dziur) z Binary Authorization (blokowanie niezatwierdzonych obrazów) to najsilniejsza tarcza przed tego typu zagrożeniami.
+A. Vulnerability scanning + Binary Authorization: Pytanie dotyczy 'supply chain attacks' (ataków na łańcuch dostaw). Najlepszą obroną jest: 1. Automatyczne skanowanie obrazów w Artifact Registry pod kątem malware i luk (CVE). 2. Binary Authorization, które blokuje uruchomienie jakiegokolwiek modelu/kontenera, który nie został podpisany (atestowany) jako bezpieczny przez Twój system budowania.
 
 Dlaczego inne są błędne:
-B. Sanitize data: Ważne, ale nie chroni przed podmienionym kodem modelu w kontenerze.
-C. Rotate keys: Dobra praktyka, ale nie adresuje problemu 'złośliwego kodu' wewnątrz artefaktów.
-D. Firewall/IDS: Chronią sieć, nie chronią przed 'zaufanym' obrazem, który w środku ma zaszyty złośliwy skrypt.
-
-Konsensus społeczności ExamTopics: 100% na A.Supply Chain Security w chmurze to domena Binary Authorization.</pre>
+B. Training data sanitization: Chroni przed 'poisoning' (zatruciem modelu), ale nie chroni samego potoku deploymentu (pipeline) przed wstrzyknięciem złośliwego kodu do obrazu kontenera.
+C. Rotate keys: Dobra praktyka, ale nie adresuje ryzyka 'supply chain' (czyli zawartości obrazów).
+D. Firewall/IDS: Chronią system po uruchomieniu (runtime), ale nie zapobiegają wdrożeniu złośliwego artefaktu zbudowanego w Twoim pipeline.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> W tej architekturze Binary Authorization zapewnia, że tylko obrazy podpisane przez Twoje zaufane klucze KMS mogą zostać uruchomione w GKE, co eliminuje ryzyko użycia 'zatrutych' modeli ML.</p>
+<p>Ochrona łańcucha dostaw (Supply Chain Security) wymaga weryfikacji artefaktów przed ich dopuszczeniem do środowiska wykonawczego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>
-
+<li><a href="https://cloud.google.com/security/supply-chain-security" target="_blank">Software supply chain security</a></li>
 </ul>
 </div>
 </div>

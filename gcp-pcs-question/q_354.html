@@ -52,15 +52,14 @@
 <h2>Question 354 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Defense: master encryption key never leaves on-prem hardware. Revoke access independent of CSP. What to do?
+Your global defense company is migrating top-secret classified data to BigQuery and Cloud Storage. National security regulations demand that master encryption key material never leaves the accredited on-premises cryptographic hardware. You must retain the unilateral ability to revoke data access, independent of any cloud provider. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CMEK in Cloud KMS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CSEK per operation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Import master keys into Cloud KMS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud EKM integrated with on-prem HSM.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use customer-managed encryption keys (CMEKs) for the BigQuery datasets and Cloud Storage buckets. Store the keys in Cloud Key Management Service (Cloud KMS).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use customer-supplied encryption keys (CSEKs) by providing your own encryption keys with each data operation in Cloud Storage and BigQuery.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Import existing on-premises master encryption keys into Cloud Key Management Service (Cloud KMS). Use the imported keys for BigQuery and Cloud Storage encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure Cloud External Key Manager (Cloud EKM) for the BigQuery datasets and Cloud Storage buckets. Integrate EKM with your existing on-premises hardware security modules (HSMs).</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Defense: master encryption key never leaves on-prem hardware. Revoke access inde
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Cloud EKM: To jedyna usługa, gdzie materiał klucza (master key) fizycznie NIGDY nie opuszcza Twojego lokalnego urządzenia HSM (D). Google tylko 'prosi' Twój HSM o wykonanie operacji. Możesz natychmiast 'odciąć' chmurę (Revoke access) poprzez wyłączenie klucza u siebie, całkowicie niezależnie od systemów Google (CSP).
+D. Cloud External Key Manager (EKM) + On-premises HSM: Jest to jedyne rozwiązanie spełniające twardy wymóg: 'key material never leaves on-premises hardware'. W modelu EKM klucz żyje w Twoim centrum danych. Google przesyła tylko prośbę o szyfrowanie/deszyfrowanie do Twojego systemu. Jeśli odłączysz swój system od internetu lub unieważnisz klucz u siebie, dane w chmurze stają się natychmiastowo i unilateralnie nieczytelne.
 
 Dlaczego inne są błędne:
-A. CMEK: Klucz jest w Google.
-B. CSEK: Klucz trafia na chwilę do pamięci RAM Google podczas operacji szyfrowania - technicznie 'opuszcza on-prem'.
-C. Imported keys: Po imporcie klucz rezyduje w chmurze Google.
-
-Konsensus społeczności ExamTopics: 100% na D. EKM to fundament suwerenności kluczy w chmurze.</pre>
+A. CMEK: Klucz jest w chmurze (Google KMS).
+B. CSEK: Klucz jest przesyłany do Google w momencie operacji (trafia do RAM w Google Cloud), co może naruszać wymóg 'never leaves accredited hardware'.
+C. Imported Key: Po imporcie materiał klucza znajduje się fizycznie w infrastrukturze Google KMS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> To rozwiązanie jest wymagane przez organizacje, które mają prawny zakaz powierzania materiału klucza podmiotom trzecim (nawet w formie zaszyfrowanej).</p>
+<p>Cloud EKM zapewnia najwyższy poziom suwerenności kluczy, oddzielając posiadanie danych (Google) od posiadania kluczy (Klient).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">External Key Manager overview</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 128 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Public-facing application outage. Suspect firewall rules. Test if rules are working properly. What to do?
+Users are reporting an outage on your public-facing application that is hosted on Compute Engine. You suspect that a recent change to your firewall rules is responsible. You need to test whether your firewall rules are working properly. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Firewall Rules Logging and use Logs Explorer.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Network traffic analyzer on bastion host.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Disable rules individually in pre-prod.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable VPC Flow Logs.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Firewall Rules Logging on the latest rules that were changed. Use Logs Explorer to analyze whether the rules are working correctly.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Connect to a bastion host in your VPC. Use a network traffic analyzer to determine at which point your requests are being blocked.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> In a pre-production environment, disable all firewall rules individually to determine which one is blocking user traffic.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable VPC Flow Logs in your VPC. Use Logs Explorer to analyze whether the rules are working correctly.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Public-facing application outage. Suspect firewall rules. Test if rules are work
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Firewall Rules Logging: To najszybsza i najdokładniejsza metoda diagnozy. Rejestruje ona każdy pakiet, który został dopuszczony lub odrzucony przez konkretną regułę. W Logs Explorerze zobaczysz dokładnie nazwę reguły, która 'zabiła' ruch aplikacji.
+A. Enable Firewall Rules Logging: Jest to najszybszy i najdokładniejszy sposób na sprawdzenie, czy konkretna reguła firewall blokuje ruch. Po włączeniu logowania, w Logs Explorer zobaczysz dokładnie, który pakiet został odrzucony (DENY) lub zaakceptowany (ALLOW) i przez którą regułę (podane jest ID reguły).
 
 Dlaczego inne są błędne:
-B. Bastion host: Analiza z poziomu bastionu nie powie Ci, co dzieje się na interfejsach innych maszyn chronionych przez rozproszony firewall GCP.
-C. Disable rules: Bardzo ryzykowne i czasochłonne. Może pogorszyć sytuację bezpieczeństwa na produkcji.
-D. VPC Flow Logs: Rejestrują przepływy, ale nie zawsze precyzują nazwę reguły firewalla, która spowodowała blokadę tak czytelnie jak dedykowane logi firewalla.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. To standardowe narzędzie do debugowania sieci w GCP.</pre>
+B. Bastion host + analyzer: Zbyt skomplikowane i nie pokaże logiki firewalla GCP (który działa 'przed' maszyną).
+C. Disable rules: Bardzo niebezpieczne na produkcji i mało profesjonalne.
+D. VPC Flow Logs: Rejestrują przepływy, ale nie wskazują tak precyzyjnie 'którą regułę firewall' wyzwolono, jak robi to dedykowane logowanie reguł.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Firewall Logging pozwala również na audytowanie reguł, które nie są używane (brak trafień w logach), co pomaga w optymalizacji polityk.</p>
+<p>Firewall Rules Logging to podstawowe narzędzie diagnostyczne dla inżynierów sieci w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewall-rules-logging" target="_blank">https://cloud.google.com/vpc/docs/firewall-rules-logging</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/using-firewall-rules-logging" target="_blank">Using Firewall Rules Logging</a></li>
 </ul>
 </div>
 </div>

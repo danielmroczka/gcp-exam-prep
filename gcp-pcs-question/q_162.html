@@ -52,15 +52,14 @@
 <h2>Question 162 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enable two-factor authentication for all users in your Cloud Identity domain. Which method is most secure against phishing?
+Which Identity-Aware Proxy role should you grant to an Identity and Access Management (IAM) user to access HTTPS resources?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> SMS codes</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google Authenticator app</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Security Keys (FIDO2/WebAuthn)</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Email codes</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Security Reviewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> IAP-Secured Tunnel User</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAP-Secured Web App User</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Service Broker Operator</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Enable two-factor authentication for all users in your Cloud Identity domain. Wh
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Security Keys: Fizyczne klucze (np. Titan Security Key) oparte na standardzie FIDO2 są jedyną metodą całkowicie odporną na phishing. Wymagają one fizycznej obecności klucza i weryfikują domenę strony, co uniemożliwia hakerowi przechwycenie sesji.
+C. IAP-Secured Web App User: To jest specyficzna rola wymagana, aby użytkownik mógł przejść przez bramkę IAP i uzyskać dostęp do aplikacji wystawionej przez HTTPS (App Engine, GKE, Load Balancer).
 
 Dlaczego inne są błędne:
-A, D: SMS i e-mail są podatne na przechwycenie (SIM swap, przejęcie skrzynki).
-B. Authenticator: Kod można podać na fałszywej stronie (phishing), haker go przepisze w czasie rzeczywistym.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To oficjalne stanowisko Google i standard branżowy dla 'High Security'.</pre>
+A. Security Reviewer: Rola do odczytu ustawień bezpieczeństwa, nie daje dostępu do aplikacji.
+B. IAP-Secured Tunnel User: Służy do dostępu przez tunele TCP (np. SSH/RDP), a nie do aplikacji webowych HTTPS.
+D. Service Broker Operator: Nie ma związku z dostępem użytkowników przez IAP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Google przeprowadziło badanie na własnych pracownikach: od czasu wymuszenia kluczy fizycznych (C) w 2017 roku, liczba udanych ataków phishingowych na ich konta spadła do zera. To potężny argument często przytaczany w dyskusjach o 2FA.</p>
+<p>Identity-Aware Proxy rozróżnia dostęp do 'Web Apps' od dostępu do 'TCP Tunnels'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/titansecuritykey/answer/9111147" target="_blank">https://support.google.com/titansecuritykey/answer/9111147</a></li>
-
+<li><a href="https://cloud.google.com/iap/docs/access-control#roles" target="_blank">IAP IAM roles</a></li>
 </ul>
 </div>
 </div>

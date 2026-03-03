@@ -52,15 +52,14 @@
 <h2>Question 25 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Your team needs to centralize control over networking resources like firewall rules, subnets, and routes. Which type of networking design should your team use?
+Your team needs to configure their Google Cloud Platform (GCP) environment so they can centralize the control over networking resources like firewall rules, subnets, and routes. They also have an on-premises environment where resources need access back to the GCP resources through a private VPN connection. The networking resources will need to be controlled by the network security team. Which type of networking design should your team use to meet these requirements?
 </div>
 <div class="question-choices-container">
 <ul>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Shared VPC Network with a host project and service projects</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Grant Compute Admin role to each project</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC peering hub and spoke</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud VPN hub and spoke</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Grant Compute Admin role to the networking team for each engineering project</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC peering between all engineering projects using a hub and spoke model</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud VPN Gateway between all engineering projects using a hub and spoke model</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Your team needs to centralize control over networking resources like firewall ru
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Shared VPC: Pozwala na wyznaczenie jednego projektu jako 'host project', w którym zespół sieciowy zarządza siecią VPC, firewallami i routingiem. Inne projekty ('service projects') mogą korzystać z tej sieci, ale nie mogą jej modyfikować. To idealnie centralizuje kontrolę.
+A. Shared VPC (Host + Service projects): Shared VPC pozwala na oddzielenie administracji siecią (Host Project zarządzany przez network security team) od administracji zasobami (Service Projects dla deweloperów). Pozwala na centralne zarządzanie firewallami, subnetami i połączeniem VPN z jednego miejsca, udostępniając tylko subnety do projektów inżynierskich.
 
 Dlaczego inne są błędne:
-B. Compute Admin: Nadanie uprawnień admina w każdym projekcie to decentralizacja, a nie centralizacja.
-C. VPC Peering: Pozwala na łączenie sieci, ale każda sieć nadal posiada własne firewalle i routing, co utrudnia centralne zarządzanie (brak wspólnej administracji).
-D. Cloud VPN: Służy do łączenia chmury z on-premises, a nie do strukturyzacji sieci wewnątrz chmury w celu centralizacji kontroli.
-
-Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. Shared VPC to standardowa architektura Enterprise w GCP.</pre>
+B. Compute Admin for all: Zbyt szerokie uprawnienia i brak centralizacji zasobów sieciowych.
+C. VPC Peering hub-and-spoke: Trudniejsze w zarządzaniu i ma limity liczby połączeń peeringowych (nie jest to Shared VPC).
+D. VPN between all projects: Bardzo skomplikowane i nieefektywne kosztowo.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Shared VPC rozwiązuje problem 'shadow IT' w sieciach. Deweloperzy mogą tworzyć zasoby (VM, klastry), ale to zespół bezpieczeństwa decyduje, jakie porty są otwarte.</p>
+<p>Shared VPC to 'enterprise-grade' rozwiązanie do zarządzania siecią w GCP, zapewniające spójność i centralną kontrolę.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/shared-vpc" target="_blank">https://cloud.google.com/vpc/docs/shared-vpc</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/shared-vpc" target="_blank">Shared VPC overview</a></li>
 </ul>
 </div>
 </div>

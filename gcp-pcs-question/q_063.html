@@ -60,7 +60,6 @@ For compliance reasons, an organization needs to ensure that in-scope PCI Kubern
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a node pool with the label inscope: true and a Pod Security Policy that only allows the Pods to run on Nodes with that label.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Place a taint on the Nodes with the label inscope: true and effect NoSchedule and a toleration to match in the Pod configuration.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Run all in-scope Pods in the namespace in-scope-pci.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ For compliance reasons, an organization needs to ensure that in-scope PCI Kubern
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Taints and Tolerations: To jedyny mechanizm w Kubernetes gwarantujący WYŁĄCZNOŚĆ. 'Taint' na węźle odpycha wszystkie pody, które nie mają odpowiedniej 'tolerancji'. Dzięki temu tylko pody PCI (z tolerancją) mogą tam trafić, a żadne inne pody (bez tolerancji) nigdy nie zostaną tam uruchomione.
+C. Taints and Tolerations: To jedyny sposób w Kubernetes na fizyczne zagwarantowanie, że 'tylko specyficzne pody' trafią na 'specyficzne nody'. Taint (skaza) na węźle odpycha wszystkie pody, które nie mają odpowiedniej Toleration (tolerancji). To zapewnia izolację w obie strony: inne pody nie wejdą na te nody, a pody PCI wejdą tylko na te nody.
 
 Dlaczego inne są błędne:
-A. nodeSelector: Gwarantuje, że pod PCI trafi na węzeł PCI, ale NIE ZABRANIA innym, zwykłym podom trafienia na ten sam węzeł. To nie zapewnia wymaganej izolacji ('Nodes can ONLY contain in-scope Pods').
-B. Pod Security Policy: Służy do ograniczania uprawnień wewnątrz kontenera (np. brak roota), a nie do sterowania harmonogramowaniem na węzłach w celu izolacji sprzętowej.
-D. Namespaces: To izolacja logiczna wewnątrz API, nie ma wpływu na fizyczne rozmieszczenie podów na węzłach.
-
-Konsensus społeczności ExamTopics: 100% na C. Izolacja PCI w K8s zawsze opiera się na Taints & Tolerations.</pre>
+A. nodeSelector: Gwarantuje, że pod trafi na wybrany nod, ale NIE zabrania innym (zwykłym) podom trafienia na te same nody.
+B. Node pool + Pod Security Policy: PSP (już wycofane) kontrolowało uprawnienia podów, ale nie mechanizm harmonogramowania (scheduling) tak precyzyjnie jak tainty.
+D. Namespaces: Zapewniają logiczną izolację w API, ale nie fizyczną izolację na poziomie węzłów (worker nodes).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Aby spełnić wymogi PCI DSS w GKE, musisz udowodnić, że dane kart płatniczych nie są procesowane na tym samym kernelu co inne, mniej bezpieczne aplikacje.</p>
+<p>Tainty i Toleracje to zaawansowany mechanizm K8s do separacji krytycznych workloadów na poziomie infrastruktury.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/" target="_blank">https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/</a></li>
-
+<li><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/" target="_blank">Taints and Tolerations</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 361 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-AI model in central project, isolated from internet. Expose endpoint only to defined list of projects. What to do?
+Your company has deployed an artificial intelligence model in a central project. This model has a lot of sensitive intellectual property and must be kept strictly isolated from the internet. You must expose the model endpoint only to a defined list of projects in your organization. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Internal ALB + Private Service Connect (PSC).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Private Google Access both ends.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Shared VPC + central firewall.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> External ALB + Cloud Armor.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Within the model project, create an internal Application Load Balancer that points to the model endpoint. Expose this load balancer with Private Service Connect to a configured list of projects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Activate Private Google Access in both the model project and in each project that needs to connect to the model. Create a firewall policy to allow connectivity to Private Google Access addresses.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a central project to host Shared VPC networks that are provided to all other projects. Centrally administer all firewall rules in this project to grant access to the model.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Within the model project, create an external Application Load Balancer that points to the model endpoint. Create a Cloud Armor policy to restrict IP addresses to Google Cloud.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ AI model in central project, isolated from internet. Expose endpoint only to def
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Private Service Connect (PSC): Jest to najnowocześniejsza metoda udostępniania usług między projektami w GCP bez potrzeby VPC Peeringu (który jest trudny w skali). Model publikuje swój endpoint przez PSC, a wybrane projekty 'konsumują' go, tworząc lokalny adres IP w swojej sieci, który prowadzi bezpiecznie do modelu przez sieć wewnętrzną Google.
+A. Internal Application Load Balancer + Private Service Connect (PSC): To jest najbardziej nowoczesne i bezpieczne rozwiązanie dla modelu 'Producer-Consumer'. 1. Model AI jest schowany za wewnętrznym Load Balancerem (brak IP publicznego). 2. Private Service Connect pozwala na wystawienie tej usługi do innych projektów w Twojej organizacji bez użycia Peeringu czy VPN. Tylko autoryzowane projekty mogą 'podpiąć się' do endpointu PSC, co zapewnia ścisłą izolację od internetu i pełną kontrolę nad tym, kto widzi Twój model.
 
 Dlaczego inne są błędne:
-B. PGA: Służy do dostępu do usług PUBLICZNYCH Google (jak GCS), a nie do Twoich własnych modeli w prywatnych projektach.
-C. Shared VPC: Wymagałoby, aby wszystkie projekty były w jednej sieci, co jest trudne przy dużej liczbie niezależnych zespołów i projektów. PSC (A) jest bardziej elastyczne i odizolowane.
-D. External ALB: Przeciwieństwo wymogu 'isolated from internet'.
-
-Konsensus społeczności ExamTopics: 100% na A. PSC to domyślny sposób budowania 'Service Directory' i bezpiecznego udostępniania API wewnątrz korporacji.</pre>
+B. Private Google Access: Pozwala na dostęp DO usług Google (np. GCS), ale nie służy do wystawiania Twoich własnych modeli z jednego projektu do drugiego.
+C. Shared VPC: Dobre rozwiązanie, ale PSC (A) oferuje lepszą granulację i łatwiejsze zarządzanie przy wielu niezależnych projektach-konsumentach.
+D. External LB + Cloud Armor: Wprost łamie wymóg 'kept strictly isolated from the internet' (External LB posiada publiczny adres IP).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Dzięki PSC możesz udostępnić model AI nawet zespołom z innych organizacji (np. klientom), zachowując pełną izolację sieciową obu stron.</p>
+<p>Private Service Connect to fundament bezpiecznego współdzielenia usług (Service Networking) wewnątrz dużej korporacji w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/private-service-connect" target="_blank">https://cloud.google.com/vpc/docs/private-service-connect</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/private-service-connect" target="_blank">Private Service Connect overview</a></li>
 </ul>
 </div>
 </div>

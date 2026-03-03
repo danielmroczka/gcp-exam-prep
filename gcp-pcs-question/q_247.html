@@ -52,15 +52,14 @@
 <h2>Question 247 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect your VPC from unauthorized communication by using 'VPC Network Peering'. What is the primary limitation to keep in mind for security?
+You run a web application on top of Cloud Run that is exposed to the internet with an Application Load Balancer. You want to ensure that only privileged users from your organization can access the application. The proposed solution must support browser access with single sign-on. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> It automates the build of container images.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> It is not transitive.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> It manages Kubernetes namespaces.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> It provides a container registry.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Change Cloud Run configuration to require authentication. Assign the role of Cloud Run Invoker to the group of privileged users.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a group of privileged users in Cloud Identity. Assign the role of Cloud Run User to the group directly on the Cloud Run service.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Change the Ingress Control configuration of Cloud Run to internal and create firewall rules to allow only access from known IP addresses.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Activate Identity-Aware Proxy (IAP) on the Application Load Balancer backend. Assign the role of IAP-secured Web App User to the group of privileged users.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Protect your VPC from unauthorized communication by using 'VPC Network Peering'.
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,26 +75,25 @@ Protect your VPC from unauthorized communication by using 'VPC Network Peering'.
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Non-transitivity: W GCP VPC Peering nie jest przechodni (transitive). Jeśli sieć A połączona jest z B, a B z C, to A NIE widzi C. To kluczowe dla bezpieczeństwa – uniemożliwia przypadkowe 'przepłynięcie' ruchu między niepowiązanymi projektami przez wspólny Hub.
+D. IAP on Application Load Balancer + IAP-secured Web App User: Cloud Run może być backendem dla globalnego Load Balancera (ALB). Włączenie IAP na tym Load Balancerze zapewnia centralne uwierzytelnianie (SSO) i autoryzację. Tylko użytkownicy z grupy 'privileged' posiadający odpowiednią rolę IAM zostaną przepuszczeni do aplikacji Cloud Run.
 
 Dlaczego inne są błędne:
-A, C, D: Nie mają żadnego związku z technologią VPC Peering.
-
-Konsensus społeczności ExamTopics: 100% na B. To podstawowa wiedza o routingu w chmurze Google.</pre>
+A. Cloud Run Invoker: Pozwala na autentykację service-to-service lub przy użyciu tokenów ID, ale IAP (D) oferuje znacznie lepsze doświadczenie dla użytkowników w przeglądarce (formularz logowania Google, obsługa sesji).
+B. Cloud Run User: Ta rola pozwala na zarządzanie usługą, a nie na jej wywoływanie (do tego jest Invoker).
+C. Ingress internal + Firewall: Cloud Run to usługa publiczna, nie można do niej stosować reguł firewall VPC w ten sam sposób co do maszyn VM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Brak tranzytywności (B) jest postrzegany zarówno jako zaleta bezpieczeństwa, jak i wyzwanie architektoniczne. Inżynierowie na Reddit radzą: jeśli potrzebujesz tranzytywności (np. centralny firewall), użyj <b>Cloud Hub</b> lub maszyn VM działających jako routery w modelu Hub-and-Spoke.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Cloud IAP na Load Balancerze to zalecana metoda zabezpieczania aplikacji webowych Serverless dla użytkowników korporacyjnych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/vpc-peering#restrictions" target="_blank">https://cloud.google.com/vpc/docs/vpc-peering#restrictions</a></li>
-
+<li><a href="https://cloud.google.com/iap/docs/enabling-cloud-run" target="_blank">Enabling IAP for Cloud Run</a></li>
 </ul>
 </div>
 </div>

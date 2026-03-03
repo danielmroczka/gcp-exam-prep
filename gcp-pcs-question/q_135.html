@@ -52,15 +52,14 @@
 <h2>Question 135 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Encryption strategy: sensitive data rotation, control region for keys, minimize latency for both. What to do?
+You need to implement an encryption-at-rest strategy that protects sensitive data and reduces key management complexity for non-sensitive data. Your solution has the following requirements: Schedule key rotation for sensitive data. Control which region the encryption keys for sensitive data are stored in. Minimize the latency to access encryption keys for both sensitive and non-sensitive data. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> EKM for both.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud KMS for both.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Google default for non-sensitive, EKM for sensitive.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google default for non-sensitive, Cloud KMS for sensitive.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Encrypt non-sensitive data and sensitive data with Cloud External Key Manager.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Encrypt non-sensitive data and sensitive data with Cloud Key Management Service.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Encrypt non-sensitive data with Google default encryption, and encrypt sensitive data with Cloud External Key Manager.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypt non-sensitive data with Google default encryption, and encrypt sensitive data with Cloud Key Management Service.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Encryption strategy: sensitive data rotation, control region for keys, minimize 
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Default + Cloud KMS (CMEK): Domyślne szyfrowanie (Google-managed) zapewnia najniższe opóźnienia i zerowy narzut konfiguracyjny (idealne dla 'non-sensitive'). Użycie Cloud KMS (CMEK) dla danych wrażliwych pozwala na pełną kontrolę nad lokalizacją klucza (Control region) oraz harmonogramem rotacji (Sensitive data rotation).
+D. Default encryption for non-sensitive + Cloud KMS for sensitive: Podobnie jak w pytaniu 100, jest to optymalna strategia. Google Default Encryption obsługuje dane mniej wrażliwe (zerowy koszt zarządzania, minimalne opóźnienie). Cloud KMS (CMEK) dla danych wrażliwych pozwala na pełną kontrolę nad regionem przechowywania klucza (Data Residency) oraz harmonogramem rotacji, a ponieważ jest to usługa Google, opóźnienia są znacznie niższe niż w przypadku External Key Manager (EKM).
 
 Dlaczego inne są błędne:
-A, B: Niepotrzebnie komplikują zarządzanie i mogą zwiększać opóźnienia dla danych, które nie wymagają specjalnej ochrony.
-C. EKM: External Key Manager wprowadza największe opóźnienia (klucz jest poza Google), co narusza wymóg 'minimize latency'.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na D. To najbardziej pragmatyczne i efektywne podejście.</pre>
+A, C. External Key Manager: EKM wprowadza największe opóźnienia (latency), ponieważ każde szyfrowanie wymaga wywołania API do zewnętrznego systemu poza siecią Google.
+B. Cloud KMS for all: Niepotrzebnie komplikuje zarządzanie dla danych, które nie wymagają specjalnej kontroli.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Cloud KMS pozwala na tworzenie kluczy regionalnych. Wybierając region `europe-west1`, masz pewność, że materiał klucza nigdy nie opuści tej lokalizacji.</p>
+<p>Cloud KMS oferuje najlepszy balans między kontrolą klienta (rotacja, region) a wydajnością chmurową.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/locations" target="_blank">https://cloud.google.com/kms/docs/locations</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/locations" target="_blank">Cloud KMS locations</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 282 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Efficiently route logs from _Default to a new log bucket. What to do?
+You have just created a new log bucket to replace the _Default log bucket. You want to route all log entries that are currently routed to the _Default log bucket to this new log bucket, in the most efficient manner. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Exclusion filters + new sink.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Disable _Default + new sink.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> User-defined sink with filters.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Edit _Default sink and select new log bucket.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create exclusion filters for the _Default sink to prevent it from receiving new logs. Create a user-defined sink, and select the new log bucket as the sink destination.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Disable the _Default sink. Create a user-defined sink and select the new log bucket as the sink destination.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a user-defined sink with inclusion filters copied from the _Default sink. Select the new log bucket as the sink destination.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Edit the _Default sink, and select the new log bucket as the sink destination.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,23 +78,20 @@ Efficiently route logs from _Default to a new log bucket. What to do?
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Edit _Default sink: To najprostsza metoda (least effort). Sink `_Default` jest systemowym mechanizmem zbierania logów. Edytując jego cel (destination) i wskazując nowy Log Bucket, zmieniasz kierunek całego domyślnego potoku danych bez potrzeby tworzenia nowych, skomplikowanych reguł.
+D. Edit the _Default sink: To jest najskuteczniejszy i najprostszy sposób. Domyślny sink `_Default` w GCP automatycznie zbiera większość logów. Możesz po prostu edytować jego konfigurację i zmienić docelowy bucket z domyślnego na Twój nowo utworzony bucket. Od tej pory wszystkie logi będą trafiać w nowe miejsce bez konieczności tworzenia duplikujących się sinków.
 
 Dlaczego inne są błędne:
-A, B, C: Wymagają więcej kroków (tworzenie nowych zasobów, zarządzanie filtrami wykluczeń), co jest mniej efektywne i trudniejsze w utrzymaniu.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. Zawsze edytuj istniejące systemowe zlewy logów, jeśli to możliwe.</pre>
+A, B, C: Tworzenie nowych sinków i wyłączanie starych jest bardziej pracochłonne i może prowadzić do przerw w logowaniu lub duplikacji logów (i kosztów), jeśli filtry nie zostaną idealnie skopiowane. Edycja (D) jest najbardziej natywnym podejściem 'zastępowania' celu logowania.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Log Buckets pozwalają na ustawienie retencji niezależnie od projektu, co jest kluczowe dla optymalizacji kosztów.</p>
+<p>Zarządzanie domyślnymi sinkami (Default sinks) pozwala na globalną zmianę polityki przechowywania logów przy minimalnym nakładzie pracy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/routing/overview#sinks" target="_blank">https://cloud.google.com/logging/docs/routing/overview#sinks</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/routing/overview#buckets" target="_blank">Configure log buckets</a></li>
 </ul>
 </div>
 </div>

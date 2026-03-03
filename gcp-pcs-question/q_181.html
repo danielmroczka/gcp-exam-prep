@@ -52,15 +52,14 @@
 <h2>Question 181 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enforce MFA for all privileged accounts in Google Cloud. Which accounts are considered privileged by default in this context?
+Your organization operates Virtual Machines (VMs) with only private IPs in the Virtual Private Cloud (VPC) with internet access through Cloud NAT. Everyday, you must patch all VMs with critical OS updates and provide summary reports. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Any account with the 'Owner' role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Any account with the 'Editor' role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Only Super Admin accounts.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Both A and B.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Validate that the egress firewall rules allow any outgoing traffic. Log in to each VM and execute OS specific update commands. Configure the Cloud Scheduler job to update with critical patches daily for daily updates.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Copy the latest patches to the Cloud Storage bucket. Log in to each VM, download the patches from the bucket, and install them.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Assign public IPs to VMs. Validate that the egress firewall rules allow any outgoing traffic. Log in to each VM, and configure a daily cron job to enable for OS updates at night during low activity periods.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Ensure that VM Manager is installed and running on the VMs. In the OS patch management service, configure the patch jobs to update with critical patches daily.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Enforce MFA for all privileged accounts in Google Cloud. Which accounts are cons
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,26 +75,23 @@ Enforce MFA for all privileged accounts in Google Cloud. Which accounts are cons
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Super Admin: W kontekście Google Workspace i Cloud Identity, konto Super Admina jest kontem o najwyższych uprawnieniach systemowych (zarządzanie domeną, resetowanie haseł innych adminów). Google kategorycznie zaleca wymuszenie MFA (2SV) przede wszystkim dla tych kont jako fundament bezpieczeństwa.
+D. VM Manager + OS patch management: VM Manager to natywny zestaw narzędzi w GCP do zarządzania flotą maszyn VM. Moduł 'OS patch management' pozwala na pełną automatyzację procesu patchowania (zgodnie z harmonogramem, np. codziennie) oraz generowanie raportów o stanie poprawek we wszystkich maszynach, co idealnie spełnia wymagania bez konieczności ręcznego logowania się do każdej VM.
 
 Dlaczego inne są błędne:
-A, B, D: Choć role Owner i Editor są 'uprzywilejowane' w chmurze (GCP IAM), to Super Admin (C) jest rolą nadrzędną nad całą tożsamością firmy. W wielu firmach polityka MFA jest wdrażana etapami, zaczynając od Super Adminów.
-
-Konsensus społeczności ExamTopics: 100% na C. Super Admin to 'klucze do królestwa'.</pre>
+A, B, C: Wszystkie sugerują ręczne logowanie się do maszyn ('Log in to each VM'), co jest skrajnie nieefektywne, podatne na błędy i nie skaluje się przy dużej liczbie instancji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Debata na forach dotyczy tego, dlaczego nie wszyscy admini GCP muszą mieć MFA. Odpowiedź: powinni, ale Super Admin jest jedyną rolą, która może wyłączyć MFA innym lub przejąć całą domenę. Dlatego w pytaniach o 'priorytetowe wymuszenie' lub 'definicję uprzywilejowania domeny', Super Admin jest kluczowy.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>VM Manager to nowoczesne rozwiązanie GCP do automatyzacji operacji systemowych (Day 2 operations) na maszynach wirtualnych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/9050643" target="_blank">https://support.google.com/a/answer/9050643</a></li>
-
+<li><a href="https://cloud.google.com/compute/docs/os-patch-management" target="_blank">VM Manager overview</a></li>
 </ul>
 </div>
 </div>

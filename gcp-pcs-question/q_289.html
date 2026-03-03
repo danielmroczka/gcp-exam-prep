@@ -52,15 +52,14 @@
 <h2>Question 289 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Secure GCS buckets: varying access, rest encryption, track changes, control over keys. What to do?
+You work for an organization that handles sensitive customer data. You must secure a series of Google Cloud Storage buckets housing this data and meet these requirements: - Multiple teams need varying access levels (some read-only, some read-write). - Data must be protected in storage and at rest. - It's critical to track file changes and audit access for compliance purposes. - For compliance purposes, the organization must have control over the encryption keys. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM groups, server-side encryption, versioning.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Individual permissions, ACLs, TLS, versioning, audit logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Predefined roles, CSEK, TLS, versioning, audit logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Object-level permissions, third-party encryption.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create IAM groups for each team and manage permissions at the group level. Employ server-side encryption and Object Versioning by Google Cloud Storage. Configure cloud monitoring tools to alert on anomalous data access patterns.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set individual permissions for each team and apply access control lists (ACLs) to each bucket and file. Enforce TLS encryption for file transfers. Enable Object Versioning and Cloud Audit Logs for the storage buckets.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use predefined IAM roles tailored to each team's access needs, such as Storage Object Viewer and Storage Object User. Utilize customer-supplied encryption keys (CSEK) and enforce TLS encryption. Turn on both Object Versioning and Cloud Audit Logs for the storage buckets.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Assign IAM permissions for all teams at the object level. Implement third-party software to encrypt data at rest. Track data access by using network logs.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Secure GCS buckets: varying access, rest encryption, track changes, control over
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Comprehensive GCS Security: 1. Predefined roles (granularny dostęp). 2. CSEK (pełna kontrola klienta nad kluczami). 3. TLS (bezpieczny transport). 4. Versioning + Audit logs (śledzenie zmian). Ten zestaw spełnia wszystkie rygorystyczne wymogi pytania.
+C. Predefined IAM roles + CSEK + Versioning + Audit Logs: Ta odpowiedź łączy wszystkie wymagania: 1. Granularny dostęp (predefined roles). 2. Ochrona w spoczynku z pełną kontrolą kluczy przez klienta (Customer-Supplied Encryption Keys - CSEK). 3. Śledzenie zmian plików (Object Versioning). 4. Audyt dostępu (Cloud Audit Logs).
 
 Dlaczego inne są błędne:
-A. Server-side: Bez doprecyzowania oznacza klucze Google, co narusza wymóg 'control over keys'.
-B. ACLs: Są przestarzałe i odradzane przez Google na rzecz IAM.
-D. Object-level: Bardzo trudne w zarządzaniu i audycie w porównaniu do polityk na poziomie bucketu.
-
-Konsensus społeczności ExamTopics: 100% na C. CSEK to najwyższy wymóg kontroli klucza w GCS.</pre>
+A. Server-side encryption (default): Nie daje klientowi kontroli nad kluczami (wymóg compliance).
+B. ACLs: Są niezalecane; IAM (C) jest lepszy do zarządzania grupami i uprawnieniami w GCP.
+D. Third-party software for encryption: Wprowadza ogromny narzut operacyjny, gdy GCP oferuje natywne mechanizmy (CSEK/CMEK).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Przy CSEK musisz dostarczać klucz przy każdej operacji gsutil. Jeśli go zgubisz, dane w buckecie stają się bezpowrotnie nieczytelne.</p>
+<p>Wybór między CMEK a CSEK zależy od pożądanego poziomu kontroli klucza - CSEK daje kontrolę absolutną (Google nie przechowuje klucza).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/encryption/customer-supplied-keys" target="_blank">https://cloud.google.com/storage/docs/encryption/customer-supplied-keys</a></li>
-
+<li><a href="https://cloud.google.com/storage/docs/encryption" target="_blank">Cloud Storage encryption options</a></li>
 </ul>
 </div>
 </div>

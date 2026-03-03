@@ -52,15 +52,14 @@
 <h2>Question 277 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enforce password length 12-16. Users still use shorter passwords. Fix in Admin console.
+You work for a large organization that is using Cloud Identity as the identity provider (IdP) on Google Cloud. Your InfoSec team has mandated the enforcement of a strong password with a length between 12 and 16 characters for all users. After configuring this requirement, users are still able to access the Google Cloud console with passwords that are less than 12 characters. You need to fix this problem within the Admin console. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Reset existing passwords.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Select 'Enforce password policy at the next sign-in'.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Select 'Enforce strong password'.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization password management settings.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Review each user's password configuration and reset existing passwords.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Review the organization password management setting and select Enforce password policy at the next sign-in.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Review each user's password configuration and select Enforce strong password.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Review the organization password management setting and select Enforce strong password.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,21 @@ Enforce password length 12-16. Users still use shorter passwords. Fix in Admin c
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Enforce at next sign-in: Gdy zmieniasz politykę haseł w Google Workspace, nie wpływa ona na osoby już zalogowane. Aby wymusić natychmiastową zgodność, musisz zaznaczyć opcję, która przy kolejnej próbie logowania zmusi użytkownika do zmiany hasła na takie, które spełnia nowe wymogi (12-16 znaków).
+B. Enforce password policy at the next sign-in: Gdy zmieniasz politykę haseł w Cloud Identity, nowa polityka dotyczy tylko NOWYCH haseł lub sytuacji, gdy użytkownik jest zmuszony do zmiany hasła. Wybranie opcji 'Enforce... at next sign-in' sprawia, że przy kolejnej próbie logowania system sprawdzi obecne hasło użytkownika i jeśli nie spełnia ono nowych kryteriów (np. jest za krótkie), wymusi jego natychmiastową zmianę.
 
 Dlaczego inne są błędne:
-A. Reset passwords: Zbyt agresywne i uciążliwe. B zrobi to samo w sposób kontrolowany podczas naturalnego logowania użytkownika.
-C. Enforce strong password: To ogólna flaga (sprawdza czy są cyfry/litery), ale to opcja B gwarantuje natychmiastową aktualizację haseł u wszystkich użytkowników.
-D. Organization settings: To miejsce, gdzie definiujesz długość, ale to opcja B jest 'akcją' wymuszającą poprawę stanu obecnego.
-
-Konsensus społeczności ExamTopics: 100% na B. To standardowa procedura 'hygiene' haseł.</pre>
+A. Manual reset: Mało efektywne przy dużej liczbie użytkowników.
+C, D. Select 'Enforce strong password': To tylko włączenie samej funkcji, ale bez wymuszenia przy logowaniu (B), starzy użytkownicy mogą nadal korzystać ze słabych haseł aż do ich naturalnego wygaśnięcia.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Bez zaznaczenia tej opcji, Twoi użytkownicy mogliby używać starych, 8-znakowych haseł jeszcze przez miesiące, aż do ich naturalnego wygaśnięcia.</p>
+<p>Skuteczne wdrożenie nowej polityki haseł wymaga wymuszenia jej walidacji na istniejących sesjach użytkowników.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/139399" target="_blank">https://support.google.com/a/answer/139399</a></li>
-
+<li><a href="https://support.google.com/a/answer/139399" target="_blank">Enforcing password policies</a></li>
 </ul>
 </div>
 </div>

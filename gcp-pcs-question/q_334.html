@@ -52,15 +52,14 @@
 <h2>Question 334 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-prevent and detect information leakages using Gemini in Vertex AI. What to do?
+Your organization is using AI to improve products through innovation. The developers want to use Gemini in Vertex AI on a project. You need to provide a secure Google Cloud environment to prevent and detect information leakages. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Service Controls + DLP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Vertex AI User role + Cloud Logging.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Model Armor + SCC findings.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall rule.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set up VPC Service Controls perimeters around the Vertex AI project. Enable Data Loss Prevention API for content inspection.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Grant the developers and AI engineers the Vertex AI User role. Monitor the audit trails with Cloud Logging.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Deploy Model Armor to protect the Vertex AI endpoint. Review Security Command Center findings to detect information leakages.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Implement a firewall rule that allows all traffic to and from the Vertex AI API endpoint.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ prevent and detect information leakages using Gemini in Vertex AI. What to do?
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Model Armor: Jest to nowa, dedykowana usługa Google Cloud zaprojektowana specjalnie do ochrony interakcji z modelami LLM (AI). Potrafi ona w czasie rzeczywistym blokować przesyłanie danych wrażliwych (leakage) w promptach oraz wykrywać ataki typu jailbreak. Integracja z SCC zapewnia detekcję incydentów.
+C. Model Armor + SCC findings: Model Armor to nowa usługa w GCP zaprojektowana specyficznie do ochrony modeli AI (Vertex AI) przed atakami typu 'prompt injection' oraz wyciekiem danych. Integracja z Security Command Center (SCC) pozwala na centralne monitorowanie i wykrywanie prób naruszenia bezpieczeństwa modeli Gemini.
 
 Dlaczego inne są błędne:
-A. VPC SC + DLP: VPC SC chroni granice API, a DLP skanuje storage. Model Armor (C) jest bardziej specyficzny dla dynamicznych rozmów z modelem AI (runtime prompt protection).
-B. Logging: Pozwala na audyt po fakcie (detect), ale nie zapobiega wyciekowi w momencie wysyłania pytania do AI (prevent).
-D. Firewall: Nie ma żadnego wglądu w treść zapytań przesyłanych protokołem HTTPS do usługi Vertex AI.
-
-Konsensus społeczności ExamTopics: 100% na C. Model Armor lo nowość w programie egzaminacyjnym skupiona na AI Security.</pre>
+A. VPC SC + DLP: Dobre zabezpieczenia ogólne, ale Model Armor (C) jest rozwiązaniem dedykowanym specyficznie dla warstwy aplikacyjnej AI (filtrowanie promptów i odpowiedzi).
+B. Vertex AI User role: To uprawnienie pozwala używać usługi, ale samo w sobie nie 'wykrywa' i nie 'zapobiega' leakages.
+D. Firewall rule: Zwykłe firewalle sieciowe nie potrafią filtrować treści rozmów z modelem AI.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Model Armor działa jako filtr przed modelem AI. Może np. automatycznie zamienić nazwisko klienta na gwiazdki ZANIM model je przetworzy, co chroni prywatność danych.</p>
+<p>Model Armor to 'firewall dla AI', który filtruje treści wchodzące i wychodzące z modeli generatywnych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/products" target="_blank">https://cloud.google.com/security/products</a></li>
-
+<li><a href="https://cloud.google.com/vertex-ai/docs/generative-ai/model-armor/overview" target="_blank">Vertex AI Model Armor</a></li>
 </ul>
 </div>
 </div>

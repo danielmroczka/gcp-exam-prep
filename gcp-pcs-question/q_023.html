@@ -52,15 +52,14 @@
 <h2>Question 23 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Leadership team is concerned that PII is being stored as part of the regular chat logs. You want to resolve this concern while still maintaining data utility. What should you do?
+When working with agents in the support center via online chat, your organization's customers often share pictures of their documents with personally identifiable information (PII). Your leadership team is concerned that this PII is being stored as part of the regular chat logs, which are reviewed by internal or external analysts for customer service trends. You want to resolve this concern while still maintaining data utility. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud KMS to encrypt PII.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Object Lifecycle Management to discard chat records.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use image inspection and redaction actions of the DLP API.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use generalization and bucketing of the DLP API.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud Key Management Service to encrypt PII shared by customers before storing it for analysis.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Object Lifecycle Management to make sure that all chat records containing PII are discarded and not saved for analysis.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use the image inspection and redaction actions of the DLP API to redact PII from the images before storing them for analysis.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use the generalization and bucketing actions of the DLP API solution to redact PII from the texts before storing them for analysis.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Leadership team is concerned that PII is being stored as part of the regular cha
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. DLP API (Redaction): Funkcja 'redaction' (redagowanie/zamazywanie) w DLP API pozwala na wykrycie danych wrażliwych (np. w tekście lub na zrzutach ekranu z chatu) i ich trwałe usunięcie lub zamaskowanie. Pozwala to zachować resztę logów do analizy (data utility).
+C. DLP API Image Redaction: Pytanie dotyczy 'pictures of documents'. Cloud DLP posiada dedykowaną funkcję inspect i redact dla obrazów, która potrafi wykryć tekst (OCR) na obrazku, zidentyfikować PII (np. numery dowodów) i zamazać (redact) te fragmenty przed ich zapisaniem.
 
 Dlaczego inne są błędne:
-A. Cloud KMS: Szyfrowanie ukrywa dane przed niepowołanymi, ale nie usuwa ich z logów. Użytkownik z kluczem nadal widzi PII, co nie rozwiązuje obawy o ich samo 'przechowywanie'.
-B. Lifecycle Management: Usunięcie całych rekordów chatu niszczy użyteczność danych (data utility).
-D. Generalization/Bucketing: Są to techniki de-identyfikacji dla danych strukturalnych (np. wiek zamieniony na przedział). Dla logów tekstowych ('regular chat logs') najskuteczniejsza jest redakcja.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. Redakcja to standardowe podejście do czyszczenia logów z PII.</pre>
+A. Encrypt PII: Szyfrowanie nie rozwiązuje problemu analityków widzących dane (potrzebowaliby klucza).
+B. Lifecycle Management: Usunięcie całych logów powoduje utratę 'data utility' (przydatności do analizy trendów).
+D. Generalization on texts: Dotyczy tekstu, a problemem są tutaj obrazy/zdjęcia dokumentów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> DLP API posiada ponad 150 wbudowanych detektorów (infoTypes), które automatycznie rozpoznają numery kart, adresy i imiona w strumieniach tekstowych.</p>
+<p>DLP dla obrazów to potężne narzędzie do ochrony prywatności w systemach wsparcia klienta.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/redacting-sensitive-data-images" target="_blank">https://cloud.google.com/dlp/docs/redacting-sensitive-data-images</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/redacting-sensitive-data-images" target="_blank">Redacting sensitive data from images</a></li>
 </ul>
 </div>
 </div>

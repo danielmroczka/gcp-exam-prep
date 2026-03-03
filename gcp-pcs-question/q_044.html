@@ -52,15 +52,14 @@
 <h2>Question 44 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You want to prevent users from creating public IP addresses for their Compute Engine instances. Which tool should you use?
+Your company is using GSuite and has developed an application meant for internal usage on Google App Engine. You need to make sure that an external user cannot gain access to the application even when an employee's password has been compromised. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall Rules</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy Service</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud IAM</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Access Context Manager</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enforce 2-factor authentication in GSuite for all users.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure Cloud Identity-Aware Proxy for the App Engine Application.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Provision user passwords using GSuite Password Sync.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure Cloud VPN between your private network and GCP.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ You want to prevent users from creating public IP addresses for their Compute En
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ You want to prevent users from creating public IP addresses for their Compute En
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Organization Policy Service: Pozwala na nakładanie odgórnych ograniczeń (constraints) na poziomie całej firmy lub folderu. Ograniczenie `compute.restrictPublicIp` (lub podobne) fizycznie uniemożliwia przypisanie zewnętrznego adresu IP do interfejsu sieciowego VM.
+A. Enforce 2-factor authentication (2FA): To najskuteczniejsza metoda ochrony przed przejęciem konta za pomocą skradzionego hasła. Nawet jeśli napastnik pozna hasło pracownika, nie będzie mógł się zalogować bez drugiego składnika (np. klucza bezpieczeństwa lub kodu z aplikacji).
 
 Dlaczego inne są błędne:
-A. VPC Firewall: Blokuje ruch na portach, ale nie uniemożliwia SAMEGO przypisania adresu IP do maszyny.
-C. Cloud IAM: Można by odebrać uprawnienia do edycji IP, ale to skomplikowane i trudne do wymuszenia globalnie przy wielu rolach. Org Policy jest bardziej precyzyjna i prewencyjna.
-D. Access Context Manager: Służy do kontroli dostępu do konsoli/API na podstawie kontekstu (np. skąd loguje się admin), a nie do ograniczania konfiguracji zasobów.
-
-Konsensus społeczności ExamTopics: Zdecydowane poparcie dla B. Słowo 'prevent' w kontekście konfiguracji infrastruktury często wskazuje na Org Policy.</pre>
+B. Cloud IAP: IAP kontroluje dostęp do aplikacji, ale jeśli konto użytkownika (hasło) zostanie przejęte, napastnik nadal może przejść przez IAP, chyba że włączone jest MFA/2FA.
+C. Password Sync: Tylko synchronizuje hasła, nie dodaje nowej warstwy ochrony.
+D. Cloud VPN: Zapewnia prywatność tunelu, ale nie chroni przed logowaniem się z internetu skradzionymi poświadczeniami.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Polityki organizacji działają prewencyjnie - operacja API utworzenia VM z publicznym IP zostanie odrzucona przez system Google, zanim maszyna powstanie.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Multi-Factor Authentication (MFA) to podstawa bezpieczeństwa tożsamości w modelu Cloud-First.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
-
+<li><a href="https://support.google.com/a/answer/175197" target="_blank">Deploying 2nd-step verification</a></li>
 </ul>
 </div>
 </div>

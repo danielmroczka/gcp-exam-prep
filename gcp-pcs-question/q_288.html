@@ -52,15 +52,14 @@
 <h2>Question 288 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Manage identities for corporate and public users. Corporate must use domain name. What to do?
+Your organization is developing an application that will have both corporate and public end-users. You want to centrally manage those customers' identities and authorizations. Corporate end users must access the application by using their corporate user and domain name. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Domain restricted sharing.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Workforce Identity Federation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Google Workspace identities.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> CIAM tool like Identity Platform.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Add the corporate and public end-user domains to domain restricted sharing on the organization.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Federate the customers' identity provider (IdP) with Workforce Identity Federation in your application's project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Do nothing. Google Workspace identities will allow you to filter personal accounts and disable their access.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use a customer identity and access management tool (CIAM) like Identity Platform.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Manage identities for corporate and public users. Corporate must use domain name
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Identity Platform: Jest to usługa CIAM (Customer Identity and Access Management). Pozwala na obsługę milionów użytkowników publicznych (przez e-mail, telefon, social login) oraz jednoczesną integrację z korporacyjnymi IdP dla pracowników. Spełnia wymóg zarządzania obiema grupami w jednym systemie.
+D. Identity Platform (CIAM): Identity Platform to usługa Google przeznaczona do zarządzania tożsamościami klientów zewnętrznych (Customer IAM). Wspiera ona wiele metod logowania (email/pass, social login, SAML, OIDC). Pozwala na federację z firmowym IdP dla pracowników korporacyjnych oraz obsługę kont publicznych dla reszty świata w jednej, skalowalnej usłudze.
 
 Dlaczego inne są błędne:
-A. Domain restricted: To polityka blokowania, nie system tożsamości.
-B. Workforce Federation: Służy tylko do logowania pracowników do konsoli chmury, nie dla użytkowników publicznych aplikacji.
-C. Workspace: Nie nadaje się do zarządzania milionami anonimowych klientów (koszt licencji i bezpieczeństwo).
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. Identity Platform to odpowiedź na każdy scenariusz CIAM.</pre>
+A. Domain restricted sharing: To polityka ograniczająca uprawnienia IAM wewnątrz GCP, a nie system logowania dla użytkowników aplikacji.
+B. Workforce Identity Federation: Służy do logowania pracowników do zarządzania chmurą, nie jest optymalna jako silnik tożsamości dla publicznej aplikacji webowej (B2C).
+C. Google Workspace: Nie nadaje się do zarządzania milionami kont publicznych (użytkowników z internetu).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Identity Platform bazuje na Firebase Auth, ale oferuje funkcje klasy Enterprise, takie jak multi-tenancy i wsparcie dla protokołów SAML/OIDC.</p>
+<p>Identity Platform dostarcza zaawansowane funkcje bezpieczeństwa (MFA, blokowanie botów) dla aplikacji o skali globalnej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/identity-platform" target="_blank">https://cloud.google.com/identity-platform</a></li>
-
+<li><a href="https://cloud.google.com/identity-platform/docs/about" target="_blank">Identity Platform overview</a></li>
 </ul>
 </div>
 </div>

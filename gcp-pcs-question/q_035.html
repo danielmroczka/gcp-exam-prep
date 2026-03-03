@@ -52,15 +52,14 @@
 <h2>Question 35 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You want to reduce the scope of systems subject to PCI audit standards. What should you do?
+You are a member of the security team at an organization. Your team has a single GCP project with credit card payment processing systems alongside web applications and data processing systems. You want to reduce the scope of systems subject to PCI audit standards. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use MFA for admin access.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use PA-DSS certified apps.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Move cardholder data environment into a separate project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use VPN for all connections.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use multi-factor authentication for admin access to the web application.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use only applications certified compliant with PA-DSS.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Move the cardholder data environment into a separate GCP project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use VPN for all connections between your office and cloud environments.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,20 @@ You want to reduce the scope of systems subject to PCI audit standards. What sho
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Separate project (Segmentation): Podstawową metodą ograniczania kosztów i trudności audytu PCI jest izolacja systemów przetwarzających dane kart płatniczych (CDE - Cardholder Data Environment) od reszty systemów firmy. W GCP projekt jest najsilniejszą granicą izolacji.
+C. Move CDE into a separate project: Jedną z podstawowych zasad PCI DSS jest minimalizacja zakresu audytu (scoping). Odizolowanie środowiska CDE (Cardholder Data Environment) do oddzielnego projektu GCP pozwala na zastosowanie rygorystycznych kontroli tylko tam, podczas gdy reszta infrastruktury (web, general data processing) pozostaje poza ścisłym zakresem audytu.
 
 Dlaczego inne są błędne:
-A. MFA: Jest wymagane przez PCI, ale nie zmniejsza *zakresu* (scope) audytu; po prostu zwiększa bezpieczeństwo wewnątrz zakresu.
-B. PA-DSS: Pomaga w certyfikacji aplikacji, ale nie odcina innych systemów infrastrukturalnych od audytu.
-D. VPN: Służy do bezpiecznej transmisji, ale nie separuje logicznie systemów w chmurze w celu redukcji zakresu audytu.
-
-Konsensus społeczności ExamTopics: 100% głosów na C. Segmentacja to słowo-klucz przy PCI DSS.</pre>
+A, B, D: To dobre praktyki bezpieczeństwa, ale nie redukują one fizycznie 'zakresu' (scope) systemów, które audytor musi sprawdzić. Jeśli wszystkie systemy są w jednym projekcie i sieci, wszystkie są 'w zasięgu'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Dzięki umieszczeniu CDE w osobnym projekcie, audytor musi skupić się tylko na tym projekcie i regułach sieciowych do niego prowadzących, zamiast badać całą infrastrukturę firmy.</p>
+<p>Izolacja (segmentacja) to najskuteczniejsza metoda redukcji kosztów i skomplikowania zgodności z PCI DSS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/solutions/pci-dss-compliance-in-gcp" target="_blank">https://cloud.google.com/solutions/pci-dss-compliance-in-gcp</a></li>
-
+<li><a href="https://cloud.google.com/solutions/pci-dss-compliance-in-gcp" target="_blank">PCI DSS on Google Cloud</a></li>
 </ul>
 </div>
 </div>

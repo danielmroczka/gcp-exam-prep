@@ -52,15 +52,14 @@
 <h2>Question 212 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure that all data in a project is encrypted using Customer-Managed Encryption Keys (CMEK) by default. Which tool?
+Your company is moving to Google Cloud. You plan to sync your users first by using Google Cloud Directory Sync (GCDS). Some employees have already created Google Cloud accounts by using their company email addresses that were created outside of GCDS. You must create your users on Cloud Identity. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: storage.restrictDatasetEncryption</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Policy constraint: gcp.restrictCmekCryptoKeyProjects</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy constraint: gcp.restrictNonCmekServices</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure GCDS and use GCDS search rules to sync these users.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the transfer tool to migrate unmanaged users.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Write a custom script to identify existing Google Cloud users and call the Admin SDK: Directory API to transfer their account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure GCDS and use GCDS exclusion rules to ensure users are not suspended.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Ensure that all data in a project is encrypted using Customer-Managed Encryption
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +75,25 @@ Ensure that all data in a project is encrypted using Customer-Managed Encryption
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Organization Policy (CMEK restriction): Istnieje zestaw polityk organizacji (np. `gcp.restrictCmekCryptoKeyProjects`), który pozwala wymusić użycie CMEK dla wszystkich wspieranych usług w projekcie. To 'wymusza' na użytkownikach podanie klucza KMS przy tworzeniu dysków, bucketów czy baz danych.
+B. Transfer tool to migrate unmanaged users: Pytanie dotyczy tzw. 'konfliktujących kont' (użytkownicy założyli prywatne konta Google na adresy firmowe). GCDS ich nie 'naprawi' automatycznie. Musisz użyć Transfer Tool, aby znaleźć te konta i wysłać zaproszenia do ich konwersji na konta zarządzane przez Twoją organizację w Cloud Identity.
 
 Dlaczego inne są błędne:
-A. IAM: Nie wymusza technologii szyfrowania.
-B. restrictDatasetEncryption: Ogranicza się tylko do BigQuery.
-D. restrictNonCmekServices: Brzmi podobnie, ale to polityka C jest standardowym mechanizmem kontroli 'kluczy zaufanych projektów' w Enterprise.</pre>
+A. GCDS search rules: Synchronizują nowych użytkowników, ale nie rozwiązują problemu istniejących kont osobistych o tym samym adresie email.
+C. Custom script: Zbyt skomplikowane i niepotrzebne, skoro istnieje gotowe narzędzie (Transfer Tool).
+D. GCDS exclusion rules: Służą do pomijania pewnych kont przy synchronizacji, a nie do ich transferu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na Reddit podkreślają, że samo 'wymuszenie CMEK' to połowa sukcesu. Musisz też wskazać, z których projektów KMS te klucze mogą pochodzić (C), aby uniemożliwić deweloperom używanie kluczy z ich prywatnych, niekontrolowanych projektów.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>Zarządzanie unmanaged accounts to krytyczny krok przy wdrażaniu Cloud Identity w istniejącej firmie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#cmek" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#cmek</a></li>
-
+<li><a href="https://support.google.com/a/answer/6171268" target="_blank">Transfer unmanaged users</a></li>
 </ul>
 </div>
 </div>

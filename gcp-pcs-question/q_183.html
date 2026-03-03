@@ -52,15 +52,14 @@
 <h2>Question 183 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to classify and redact sensitive information in images stored in a Cloud Storage bucket. Which service?
+Your company conducts clinical trials and needs to analyze the results of a recent study that are stored in BigQuery. The interval when the medicine was taken contains start and stop dates. The interval data is critical to the analysis, but specific dates may identify a particular batch and introduce bias. You need to obfuscate the start and end dates for each row and preserve the interval data. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Vision API</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud DLP API</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> AutoML Vision</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Video Intelligence API</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use date shifting with the context set to the unique ID of the test subject.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Extract the date using TimePartConfig from each date field and append a random month and year.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use bucketing to shift values to a predetermined date based on the initial value.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use the FFX mode of format preserving encryption (FPE) and maintain data consistency.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ You need to classify and redact sensitive information in images stored in a Clou
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ You need to classify and redact sensitive information in images stored in a Clou
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud DLP API: Posiada dedykowaną funkcję `image.redact`. Potrafi ona wykryć tekst na obrazku (np. numer karty na zrzucie ekranu) przy użyciu wbudowanego OCR, a następnie nałożyć czarny prostokąt na to miejsce (redaction).
+A. Date shifting with context: Technika 'date shifting' w Cloud DLP przesuwa daty o losową liczbę dni, ale robi to konsekwentnie dla zdefiniowanego kontekstu (np. ID pacjenta). Dzięki temu interwał między startem a końcem terapii pozostaje identyczny (np. zawsze 14 dni), mimo że realne daty kalendarzowe są zmienione i nie pozwalają na identyfikację konkretnego dnia badania.
 
 Dlaczego inne są błędne:
-A. Vision API: Wykryje tekst (OCR), ale nie posiada gotowej funkcji Automatycznego Zamazywania danych wrażliwych (redaction). Musiałbyś pisać własny kod. DLP robi to 'z pudełka'.
-C. AutoML: Służy do trenowania własnych modeli rozpoznawania obiektów, nie do ochrony PII.
-D. Video Intelligence: Do analizy wideo, nie statycznych obrazów w storage.
-
-Konsensus społeczności ExamTopics: 100% na B. Redakcja PII to domena DLP API.</pre>
+B. Extract month/year: Niszczy precyzję interwału (dni).
+C. Bucketing: Grupuje daty (np. wszystkie z jednego tygodnia trafiają do poniedziałku), co również zmienia długość trwania interwału w poszczególnych rekordach.
+D. FPE: Zaszyfruje datę jako ciąg znaków o tym samym formacie, ale uniemożliwi obliczenia matematyczne na datach (np. odejmowanie dat w BigQuery), co jest kluczowe dla analizy interwałów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na Reddit dotyczy precyzji. DLP API używa zaawansowanych algorytmów, aby nie zamazować całego obrazka, a jedynie konkretne pole (np. tylko PESEL na dowodzie osobistym), co zachowuje użyteczność reszty dokumentu.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Date shifting to zaawansowana technika DLP pozwalająca na analizę szeregów czasowych przy jednoczesnej anonimizacji konkretnych momentów w czasie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/redacting-sensitive-data-images" target="_blank">https://cloud.google.com/dlp/docs/redacting-sensitive-data-images</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/concepts-date-shifting" target="_blank">DLP Date shifting</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 355 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-prevent and detect misconfigurations in folder based on industry-specific and internal compliance. What to do?
+You work at a company in a regulated industry and are responsible for ongoing security of the Cloud environment. You need to prevent and detect misconfigurations in a particular folder based on specific compliance policies. You need to adhere to industry-specific compliance policies and policies that are internal to your company. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create Posture file using SHA/org policies, enforce on folder.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Custom org policies.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Assured Workloads on folder.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Workload Manager custom Rego policies.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a Posture file by using custom and predefined SHA or organization policies. Enforce the posture on the folder level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create custom organization policies that follow specific business requirements. Enforce the policies on the folder level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable Assured Workloads on the folder level, with the specific control bundle appropriate for your industry's regulations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Workload Manager with custom Rego policies to continuously scan the environment for misconfigurations on the folder level.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ prevent and detect misconfigurations in folder based on industry-specific and in
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Security Posture Management: To najnowocześniejsze narzędzie w SCC. Pozwala zdefiniować cały zestaw reguł (polityki organizacji + detektory SHA) w jednym pliku YAML ('Posture file'). Możesz go następnie 'przypiąć' do folderu, co zapewnia zarówno blokowanie błędów (prevent), jak i stałe monitorowanie zgodności (detect).
+A. Security Posture in SCC: 'Postures' to nowa i rekomendowana funkcja w SCC Premium. Pozwala na zdefiniowanie zestawu polityk (SHA, Org Policies) jako jeden plik/byt ('posture') i wymuszenie go na konkretnym folderze. Zapewnia to spójność między wieloma różnymi mechanizmami kontroli i ułatwia raportowanie zgodności z konkretnymi standardami branżowymi.
 
 Dlaczego inne są błędne:
-B. Custom policies: To tylko połowa sukcesu (prevent), nie oferują dashboardu detekcji 'findings' tak jak SCC Posture.
-C. Assured Workloads: Świetne dla rezydencji danych, ale Posture (A) jest bardziej elastyczne dla specyficznych 'internal compliance' i reguł SHA.
-D. Workload Manager: Skupia się na aplikacjach Enterprise (SAP, SQL Server), nie jest ogólnym narzędziem 'Posture' dla folderu.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. Posture Management to nowy standard 'Governance as Code' w GCP.</pre>
+B. Org policies only: To tylko jedna warstwa ochrony; Postures (A) łączą polityki z aktywnym skanowaniem SHA.
+C. Assured Workloads: Bardzo dobre, ale dotyczy głównie tworzenia NOWYCH środowisk zgodnych z rygorystycznymi wymogami Gov/Regionalnymi, a 'Postures' są bardziej elastycznym narzędziem do zarządzania 'stanem bezpieczeństwa' (hardening) dla każdego typu workloadu.
+D. Workload Manager: Skupia się głównie na workloadach SAP i specyficznych aplikacjach, a nie na ogólnym bezpieczeństwie folderów GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Dzięki Posture Management zespół security może przygotować 'szablon bezpiecznego folderu' i mieć pewność, że każdy projekt w nim stworzony będzie od razu zgodny ze standardem firmy.</p>
+<p>Security Posture Management (CSPM) w SCC pozwala na centralne zarządzanie bezpieczeństwem jako kodem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-postures-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-postures-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-posture-overview" target="_blank">Security Command Center postures</a></li>
 </ul>
 </div>
 </div>

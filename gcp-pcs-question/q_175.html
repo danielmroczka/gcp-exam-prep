@@ -52,15 +52,15 @@
 <h2>Question 175 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to ensure that only authorized employees can access a corporate web application from any location, including home. Which architecture?
+You are consulting with a client that requires end-to-end encryption of application data (including data in transit, data in use, and data at rest) within Google Cloud. Which options should you utilize to accomplish this? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPN for everyone.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Identity-Aware Proxy (IAP).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Shared VPC with firewalls.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Armor IP whitelisting.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> External Key Manager</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Customer-supplied encryption keys</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Hardware Security Module</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Confidential Computing and Istio</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Client-side encryption</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ You need to ensure that only authorized employees can access a corporate web app
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">DE</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,24 @@ You need to ensure that only authorized employees can access a corporate web app
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: DE.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. IAP: Pozwala na bezpieczny dostęp do aplikacji webowej przez publiczny internet bez VPN. IAP weryfikuje tożsamość użytkownika przez Google Cloud Identity. To idealne rozwiązanie dla pracy zdalnej (any location).
+D. Confidential Computing and Istio: 'Data in use' jest chronione przez Confidential Computing (szyfrowanie danych w pamięci RAM procesora). Istio (Service Mesh) zapewnia mTLS, czyli szyfrowanie 'Data in transit' między mikroserwisami.
+E. Client-side encryption: Szyfrowanie danych przed ich wysłaniem do chmury gwarantuje, że są one zaszyfrowane 'At rest' (na dysku Google) i Google nigdy nie ma dostępu do ich treści (najwyższy poziom ochrony).
 
 Dlaczego inne są błędne:
-A. VPN: Działa, ale jest uciążliwy dla użytkowników i generuje narzut administracyjny (zarządzanie klientami VPN na komputerach). IAP jest prostszy i bardziej nowoczesny.
-C. Shared VPC: To tylko sieć, nie rozwiązuje problemu autoryzacji osób z domów.
-D. Cloud Armor: IP pracowników domowych są dynamiczne, więc whitelisting (biała lista) IP nie zadziała.
-
-Konsensus społeczności ExamTopics: 100% na B. IAP to król dostępu zdalnego w modelu Zero Trust.</pre>
+A, B, C: Skupiają się głównie na 'At rest' (klucze szyfrujące dyski). Żadne z nich nie chroni 'Data in use' (danych w pamięci RAM podczas obliczeń), co robi tylko Confidential Computing.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie na Reddit podkreślają: 'IAP to koniec ery haseł przesyłanych przez VPN'. Z IAP użytkownik po prostu klika w link, loguje się swoim kontem firmowym (z 2FA) i pracuje. To znacznie bezpieczniejsze i wygodniejsze.</p>
+<p><b>Sugerowana odpowiedź: DE</b></p>
+<p>End-to-end encryption w chmurze musi obejmować wszystkie trzy stany danych: Transit, Rest oraz Use.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>
-
+<li><a href="https://cloud.google.com/confidential-computing" target="_blank">Confidential Computing</a></li>
 </ul>
 </div>
 </div>

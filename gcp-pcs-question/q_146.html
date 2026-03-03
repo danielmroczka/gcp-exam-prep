@@ -52,15 +52,14 @@
 <h2>Question 146 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Prevent developers from creating user-managed SA keys. How to enforce?
+Your security team wants to reduce the risk of user-managed keys being mismanaged and compromised. To achieve this, you need to prevent developers from creating user-managed service account keys for projects in their organization. How should you enforce this?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Secret Manager.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Org policy: disable SA creation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Org policy: prevent SA keys creation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Remove getAccessToken permission.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure Secret Manager to manage service account keys.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable an organization policy to disable service accounts from being created.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable an organization policy to prevent service account keys from being created.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Remove the iam.serviceAccounts.getAccessToken permission from users.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Prevent developers from creating user-managed SA keys. How to enforce?
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. iam.disableServiceAccountKeyCreation: Ta konkretna polityka organizacji blokuje możliwość generowania statycznych plików kluczy JSON dla kont serwisowych. Zmusza to deweloperów do używania bezpieczniejszych metod, takich jak Workload Identity czy tożsamość instancji.
+C. Org Policy: iam.disableServiceAccountKeyCreation: Ta polityka organizacji wprost zabrania tworzenia nowych kluczy JSON dla kont serwisowych. Jest to najskuteczniejszy sposób na wymuszenie używania bezpieczniejszych metod (jak tożsamość instancji lub Workload Identity) i zapobieganie powstawaniu niezarządzanych plików z kluczami na komputerach deweloperów.
 
 Dlaczego inne są błędne:
-A. Secret Manager: Można w nim trzymać klucze, ale nie zapobiega to ich TWORZENIU przez deweloperów.
-B. Disable SA creation: Zbyt drastyczne. Deweloperzy mogą potrzebować tworzyć KONTA (tożsamości), ale nie powinni tworzyć do nich niebezpiecznych KLUCZY (haseł w pliku).
-D. getAccessToken: To uprawnienie jest potrzebne do pobierania tokenów tymczasowych, które SĄ bezpieczne. Odebranie go uniemożliwiłoby poprawną pracę bez kluczy statycznych.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To standardowa restrykcja w bezpiecznych organizacjach.</pre>
+A. Secret Manager: Może przechowywać klucze, ale sam nie 'zabrania' ich tworzenia w IAM.
+B. disableServiceAccountCreation: Zbyt drastyczne, blokuje tworzenie samych kont, które mogą być potrzebne (np. bez kluczy JSON).
+D. iam.serviceAccounts.getAccessToken: Odbiera możliwość generowania krótkotrwałych tokenów, co jest bezpieczną alternatywą dla kluczy - nie o to chodzi w pytaniu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Klucze JSON są wieczne (chyba że je ręcznie zrotujesz) i są najczęstszą przyczyną wycieków danych w chmurze po trafieniu na GitHub.</p>
+<p>Blokowanie tworzenia kluczy JSON to jedna z najważniejszych rekomendacji bezpieczeństwa od Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#iam.disableServiceAccountKeyCreation" target="_blank">Disabling SA key creation</a></li>
 </ul>
 </div>
 </div>

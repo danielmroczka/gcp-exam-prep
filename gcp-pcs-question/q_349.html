@@ -52,15 +52,14 @@
 <h2>Question 349 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-deploy 2-step verification (2SV) phased migration to minimize complexity. What to do?
+Your company wants to deploy 2-step verification (2SV). The organizational unit (OU) structure of your company is divided into four departmental units: Human Resources, Finance, Engineering, and Marketing. You need to prevent many access issues from occurring at the same time. Your solution should minimize complexity in management and configuration. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> New OU for enforcement.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configuration groups for phased migration.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Set enforcement to Off for each OU.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set enforcement to On for each OU.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a single new OU to configure enforcement of 2SV to certain users but not others.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create configuration groups, and enable a phased migration to control the number of individuals in which to enforce 2SV.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> In the Admin console, for each OU, check the checkbox to Allow users to turn on 2-Step Verification and set Enforcement to Off.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> In the Admin console, for each OU, uncheck the checkbox to Allow users to turn on 2-Step Verification and set Enforcement to On.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ deploy 2-step verification (2SV) phased migration to minimize complexity. What t
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Configuration Groups: Google Cloud pozwala na włączanie funkcji takich jak 2SV dla konkretnych grup użytkowników (niezależnie od ich położenia w strukturze OU). Pozwala to na etapowe (phased) wdrażanie, np. najpierw dział IT, potem Marketing itp., bez przenoszenia ich kont między jednostkami organizacyjnymi.
+B. Configuration groups + Phased migration: W Google Workspace / Cloud Identity można używać tzw. 'Configuration Groups' do wymuszania 2SV. Pozwala to na stopniowe (fazowe) dodawanie użytkowników do grupy objętej wymogiem 2SV, niezależnie od ich przynależności do OU (działów). Minimalizuje to ryzyko masowych problemów z dostępem (np. w przypadku problemów z telefonami) i pozwala na kontrolowane wdrożenie w całej firmie.
 
 Dlaczego inne są błędne:
-A. New OU: Przenoszenie użytkowników między OU tylko po to, by włączyć 2SV, jest uciążliwe i psuje inne ustawienia dziedziczone z OU. Grupy są bardziej elastyczne.
-C, D: Dotyczą całych jednostek OU, co jest mniej granularne i trudniejsze do kontrolowanego, etapowego wdrożenia niż model oparty na grupach.
-
-Konsensus społeczności ExamTopics: 100% na B. Grupy konfiguracyjne to zalecana metoda dla etapowych zmian w Workspace/Cloud Identity.</pre>
+A. Single new OU: Przenoszenie użytkowników między jednostkami organizacyjnymi (OU) tylko na czas wdrożenia 2SV jest procesem uciążliwym i psuje strukturę działo-zorientowaną.
+C, D. OU level only: Włączenie 2SV na poziomie całego działu (np. Engineering - 1000 osób na raz) bez fazowania może spowodować paraliż pracy w przypadku problemów technicznych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Używając grup, możesz najpierw włączyć 2SV dla grupy 'Security Volunteers' i zebrać feedback przed wymuszeniem go na całej firmie.</p>
+<p>Grupy konfiguracyjne (Configuration Groups) pozwalają na elastyczne wdrażanie polityk bezpieczeństwa w poprzek struktury organizacyjnej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/9122284" target="_blank">https://support.google.com/a/answer/9122284</a></li>
-
+<li><a href="https://support.google.com/a/answer/9116814" target="_blank">Deploy 2SV with configuration groups</a></li>
 </ul>
 </div>
 </div>

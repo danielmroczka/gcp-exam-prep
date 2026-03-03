@@ -52,15 +52,14 @@
 <h2>Question 62 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-An engineering team is launching a web application that will be public on the internet. The web application is hosted in multiple GCP regions and will be directed to the respective backend based on the URL request. Your team wants to avoid exposing the application directly on the internet and wants to deny traffic from a specific list of malicious IP addresses. Which solution should your team implement to meet these requirements?
+A manager wants to start retaining security event logs for 2 years while minimizing costs. You write a filter to select the appropriate log entries. Where should you export the logs?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Network Load Balancing</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SSL Proxy Load Balancing</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> NAT Gateway</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery datasets</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Storage buckets</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> StackDriver logging</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Pub/Sub topics</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ An engineering team is launching a web application that will be public on the in
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ An engineering team is launching a web application that will be public on the in
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud Armor: Współpracuje z zewnętrznym Load Balancerem HTTP(S). Pozwala na filtrowanie ruchu na poziomie warstwy 7 (URL-based routing) i jednoczesne blokowanie adresów IP (blacklisting). Chroni przed bezpośrednim wystawieniem backendów na internet.
+B. Cloud Storage buckets: Do długoterminowego (2 lata) i taniego przechowywania logów (retencja) idealnie nadaje się Cloud Storage. Można użyć klas Nearline, Archive lub Coldline, co minimalizuje koszty w porównaniu do BigQuery czy Cloud Logging.
 
 Dlaczego inne są błędne:
-B. Network Load Balancing: Jest regionalny i działa na warstwie 4 (TCP/UDP). Nie potrafi kierować ruchem na podstawie URL i nie integruje się z Cloud Armor w celu zaawansowanego blokowania IP L7.
-C. SSL Proxy LB: Obsługuje ruch TCP z szyfrowaniem SSL, ale nie wspiera routingu opartego na ścieżkach URL (host/path rules), co jest wymogiem pytania.
-D. NAT Gateway: Służy do ruchu WYCHODZĄCEGO z maszyn prywatnych, a nie do obsługi ruchu przychodzącego od użytkowników publicznych.
-
-Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. Połączenie GCLB HTTP(S) + Cloud Armor to standard dla aplikacji webowych.</pre>
+A. BigQuery: Świetne do analizy, ale droższe przy długim przechowywaniu ogromnych ilości surowych logów.
+C. Stackdriver (Cloud Logging): Domyślna retencja jest krótka (30-400 dni), a jej wydłużenie jest bardzo kosztowne.
+D. Cloud Pub/Sub: To bufor do przesyłania danych, a nie system archiwizacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Wykorzystanie mechanizmu Anycast IP w Load Balancerze sprawia, że atak DDoS jest rozpraszany po całej infrastrukturze Google, a Cloud Armor blokuje go zanim dotrze do Twoich serwerów.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>GCS to standardowy wybór dla 'Log Archiving' ze względu na klasy storage dopasowane do rzadkiego dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor" target="_blank">https://cloud.google.com/armor</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/export/using_exported_logs" target="_blank">Exporting logs to Cloud Storage</a></li>
 </ul>
 </div>
 </div>

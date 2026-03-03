@@ -56,11 +56,10 @@ A customer terminates an engineer and needs to make sure the engineer's Google a
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Remove IAM permissions in Cloud Identity.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Cloud SDK to deprovision users.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure Cloud Directory Sync (GCDS) with their directory service.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Manually delete the user in Admin Console.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use the Cloud SDK with their directory service to remove their IAM permissions in Cloud Identity.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the Cloud SDK with their directory service to provision and deprovision users from Cloud Identity.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure Cloud Directory Sync with their directory service to provision and deprovision users from Cloud Identity.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure Cloud Directory Sync with their directory service to remove their IAM permissions in Cloud Identity.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,21 @@ A customer terminates an engineer and needs to make sure the engineer's Google a
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. GCDS: Narzędzie to synchronizuje stan Twojego lokalnego katalogu (np. Active Directory) z Cloud Identity. Gdy HR usunie inżyniera z AD, przy kolejnej synchronizacji GCDS automatycznie zawiesi lub usunie jego konto w Google, zapewniając automatyzm i brak 'osieroconych' kont.
+C. Configure Cloud Directory Sync (GCDS): GCDS automatyzuje proces aprowizacji (tworzenia) i deaprowizacji (usuwania/zawieszania) kont użytkowników w Cloud Identity na podstawie stanu w lokalnym katalogu (np. AD). Jeśli użytkownik zostanie usunięty z AD, GCDS automatycznie wyłączy go w GCP przy następnej synchronizacji.
 
 Dlaczego inne są błędne:
-A. Remove IAM: To tylko odbiera uprawnienia w chmurze, ale użytkownik nadal może się logować do innych usług Google (np. Drive, Gmail). To nie jest deprovisioning konta.
-B. Cloud SDK: Można napisać skrypt, ale nie jest to 'automatyczny' mechanizm systemowy tak jak GCDS.
-D. Manually delete: Rozwiązanie manualne, podatne na błędy i zapomnienia, sprzeczne z wymogiem automatyzacji.
-
-Konsensus społeczności ExamTopics: 100% na C. GCDS to jedyne poprawne rozwiązanie dla automatycznego cyklu życia użytkownika hybrydowego.</pre>
+A, B. Cloud SDK: Wymagałoby to pisania i utrzymywania własnych skryptów, co jest mniej stabilne i bardziej pracochłonne niż gotowe narzędzie GCDS.
+D. Remove permissions: Usunięcie uprawnień nie usunie samego konta użytkownika z domeny Cloud Identity (Shadow accounts).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Automatyczny deprovisioning to krytyczny wymóg większości audytów bezpieczeństwa (np. SOC2, ISO 27001). Zapobiega on dostępowi byłych pracowników do zasobów firmy.</p>
+<p>GCDS to de facto standard dla synchronizacji tożsamości 'On-prem to Cloud' w ekosystemie Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/106368" target="_blank">https://support.google.com/a/answer/106368</a></li>
-
+<li><a href="https://support.google.com/a/answer/106368" target="_blank">Google Cloud Directory Sync</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,15 @@
 <h2>Question 197 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to manage and view all security settings, but only within a specific folder, not the organization. Which role?
+You run applications on Cloud Run. You already enabled container analysis for vulnerability scanning. However, you are concerned about the lack of control on the applications that are deployed. You must ensure that only trusted container images are deployed on Cloud Run. What should you do? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.folderAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/iam.securityAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/securitycenter.admin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/owner</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Binary Authorization on the existing Cloud Run service.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set the organization policy constraint constraints/run.allowedBinaryAuthorizationPolicies to the list or allowed Binary Authorization policy names.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable Binary Authorization on the existing Kubernetes cluster.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Cloud Run breakglass to deploy an image that meets the Binary Authorization policy by default.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Set the organization policy constraint constraints/compute.trustedImageProjects to the list of projects that contain the trusted container images.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ Grant a user access to manage and view all security settings, but only within a 
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">AB</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,26 @@ Grant a user access to manage and view all security settings, but only within a 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: AB.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. iam.securityAdmin: Ta rola pozwala na zarządzanie wszystkimi politykami IAM i uprawnieniami. Nadanie jej na poziomie Foldera (B) ogranicza zasięg władzy administratora bezpieczeństwa tylko do projektów znajdujących się w tym folderze.
+A. Enable Binary Authorization on Cloud Run: To jest główny przełącznik, który sprawia, że usługa Cloud Run zaczyna sprawdzać atestacje obrazów przed startem.
+B. Org Policy: run.allowedBinaryAuthorizationPolicies: Pozwala na centralne zdefiniowanie (na poziomie projektu/org), która konkretna polityka Binary Authorization ma być używana. Gwarantuje to spójność i uniemożliwia deweloperom ominięcie sprawdzania podpisów.
 
 Dlaczego inne są błędne:
-A. Folder Admin: Zarządza Strukturą folderów (tworzenie/przenoszenie), ale nie jest dedykowaną rolą do zarządzania 'ustawieniami bezpieczeństwa' (IAM) w sposób tak bezpośredni jak Security Admin.
-C. securitycenter.admin: Zarządza usługą SCC, a nie uprawnieniami IAM użytkowników.
-D. Owner: Zbyt szeroka rola, naruszenie Least Privilege.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To standardowa rola dla regionalnych adminów security.</pre>
+C. Kubernetes cluster: Cloud Run (w wersji w pełni zarządzanej) nie działa na Twoim klastrze GKE, to osobna usługa serverless.
+D. Breakglass: Służy do OMINIĘCIA polityki w sytuacjach awaryjnych, a pytanie pyta o to jak 'zapewnić kontrolę'.
+E. compute.trustedImageProjects: Dotyczy maszyn VM (GCE), nie kontenerów w Cloud Run.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> To pytanie sprawdza znajomość hierarchii zasobów. Zapamiętaj: każdą rolę w GCP można nadać na poziomie Organizacji, Foldera lub Projektu. Aby ograniczyć dostęp terytorialnie/działowo, zawsze wybieraj Folder (B).</p>
+<p><b>Sugerowana odpowiedź: AB</b></p>
+<p>Binary Authorization wspiera Cloud Run, zapewniając, że tylko obrazy podpisane w procesie CI/CD mogą zostać uruchomione.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/understanding-roles#security-admin-role" target="_blank">https://cloud.google.com/iam/docs/understanding-roles#security-admin-role</a></li>
-
+<li><a href="https://cloud.google.com/run/docs/configuring/binary-authorization" target="_blank">Binary Authorization for Cloud Run</a></li>
 </ul>
 </div>
 </div>

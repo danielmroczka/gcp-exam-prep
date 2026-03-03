@@ -52,15 +52,14 @@
 <h2>Question 182 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect your web application against 'Slowloris' DDoS attacks. Which service?
+For compliance reporting purposes, the internal audit department needs you to provide the list of virtual machines (VMs) that have critical operating system (OS) security updates available, but not installed. You must provide this list every six months, and you want to perform this task quickly. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud IAP</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud DNS</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Run a Security Command Center security scan on all VMs to extract a list of VMs with critical OS vulnerabilities every six months.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Run a gcloud CLI command from the Command Line Interface (CLI) to extract the VM's OS version information every six months.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ensure that the Cloud Logging agent is installed on all VMs, and extract the OS last update log date every six months.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Ensure the OS Config agent is installed on all VMs and extract the patch status dashboard every six months.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Protect your web application against 'Slowloris' DDoS attacks. Which service?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Protect your web application against 'Slowloris' DDoS attacks. Which service?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud Armor: Jako system WAF i ochrony DDoS, Cloud Armor potrafi analizować behawior połączeń HTTP. Slowloris to atak polegający na utrzymywaniu wielu otwartych połączeń przez długi czas. Cloud Armor (zintegrowany z GCLB) posiada mechanizmy timeoutów i limitów połączeń, które skutecznie neutralizują takie próby.
+D. OS Config agent + Patch status dashboard: Agent OS Config (część VM Manager) zbiera informacje o dostępnych i zainstalowanych poprawkach bezpośrednio z systemu operacyjnego maszyn. Dashboard w konsoli GCP (OS patch management) wizualizuje te dane, pozwalając na szybkie wygenerowanie listy maszyn z brakującymi poprawkami krytycznymi dla audytu.
 
 Dlaczego inne są błędne:
-A. Firewall: Nie 'rozumie' protokołu HTTP na tyle głęboko, by odróżnić wolnego klienta od ataku Slowloris.
-C. IAP: Służy do logowania, nie do filtrowania ataków na protokół.
-D. DNS: Nie widzi sesji HTTP.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Cloud Armor to jedyna ochrona L7 DDoS w GCP.</pre>
+A. SCC security scan: SCC wykrywa podatności (CVE), ale VM Manager (D) jest narzędziem dedykowanym specyficznie do raportowania statusu 'patchy' OS.
+B. gcloud for OS version: Wersja systemu operacyjnego to nie to samo co lista brakujących poprawek bezpieczeństwa.
+C. Cloud Logging: Agent logów przesyła logi, ale analiza 'dostępnych patchy' wymaga agenta OS Config, który potrafi rozmawiać z menedżerem pakietów (np. apt, yum).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci przypominają: Google Cloud Load Balancer (GCLB) sam w sobie jest 'odporny' na wiele ataków tego typu, bo działa jako proxy. Cloud Armor (B) dodaje jednak granularną kontrolę (np. progi dropowania połączeń), co jest niezbędne w profesjonalnej architekturze.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Zarządzanie poprawkami (Patch Management) w GCP opiera się na agencie OS Config zainstalowanym na maszynach VM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor/docs/managed-protection-overview" target="_blank">https://cloud.google.com/armor/docs/managed-protection-overview</a></li>
-
+<li><a href="https://cloud.google.com/compute/docs/os-patch-management/view-patch-compliance" target="_blank">Patch compliance reporting</a></li>
 </ul>
 </div>
 </div>

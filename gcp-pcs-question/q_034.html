@@ -52,15 +52,14 @@
 <h2>Question 34 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Your company is using Cloud Dataproc. You want to be able to create, rotate, and destroy symmetric encryption keys used for persistent disks. What should you do?
+Your company is using Cloud Dataproc for its Spark and Hadoop jobs. You want to be able to create, rotate, and destroy symmetric encryption keys used for the persistent disks used by Cloud Dataproc. Keys can be stored in the cloud. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud KMS to manage DEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Cloud KMS to manage KEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use CSEK to manage DEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use CSEK to manage KEK.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use the Cloud Key Management Service to manage the data encryption key (DEK).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the Cloud Key Management Service to manage the key encryption key (KEK).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use customer-supplied encryption keys to manage the data encryption key (DEK).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use customer-supplied encryption keys to manage the key encryption key (KEK).</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Your company is using Cloud Dataproc. You want to be able to create, rotate, and
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud KMS to manage KEK: W hierarchii kluczy Google Cloud, użytkownik zarządza kluczami nadrzędnymi (KEK - Key Encryption Keys) w usłudze Cloud KMS. Te klucze służą do szyfrowania kluczy danych (DEK), którymi fizycznie zapisywane są bloki na dysku. KMS pozwala na rotację i niszczenie właśnie kluczy KEK.
+B. Cloud KMS to manage the KEK: Zgodnie z modelem szyfrowania kopertowego (envelope encryption), użytkownik w Cloud KMS zarządza kluczem KEK (Key Encryption Key). Klucz ten służy do szyfrowania klucza DEK (Data Encryption Key), który fizycznie szyfruje dane na dysku.
 
 Dlaczego inne są błędne:
-A, C. DEK (Data Encryption Key): Klucze te są zarządzane automatycznie przez infrastrukturę Google blisko danych dla wydajności. Użytkownik nie zarządza nimi bezpośrednio w KMS.
-D. CSEK: Dotyczy kluczy dostarczanych przez klienta przy każdej operacji, a nie zarządzanych w ramach usługi Cloud KMS.
-
-Konsensus społeczności ExamTopics: Wyraźna przewaga opcji B. Zrozumienie różnicy między KEK a DEK jest kluczowe na egzaminie Security.</pre>
+A. Manage DEK via KMS: Systemy GCP (jak Dataproc/Compute Engine) same zarządzają kluczami DEK na poziomie warstwy dyskowej; użytkownik kontroluje tylko KEK.
+C, D. Customer-supplied keys: CSEK wymagają od użytkownika dostarczenia klucza przy każdej operacji zapisu/odczytu, co jest trudne do zarządzania w usługach typu 'managed' jak Dataproc i nie pozwala na łatwe 'przechowywanie kluczy w chmurze' (wymaganie pytania).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Model ten nazywa się 'Envelope Encryption'. Twoja kontrola skupia się na kluczu nadrzędnym (KEK). Jeśli go zniszczysz, klucz DEK staje się nieużyteczny, a dane nieczytelne.</p>
+<p>KMS służy do zarządzania kluczami KEK. DEK jest generowany i używany lokalnie przez usługę do szyfrowania bloków danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/key-management-service" target="_blank">https://cloud.google.com/kms/docs/key-management-service</a></li>
-
+<li><a href="https://cloud.google.com/dataproc/docs/concepts/configuring-cmek" target="_blank">Cloud Dataproc encryption</a></li>
 </ul>
 </div>
 </div>

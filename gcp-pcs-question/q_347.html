@@ -52,15 +52,14 @@
 <h2>Question 347 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-runtime threat detection for containers in production folder (libs loaded, scripts executed). Findings visible in SCC. What to do?
+Your company has recently enabled Security Command Center at the organization level. You need to implement runtime threat detection for applications running in containers within projects residing in the production folder. Specifically, you need to be notified if additional libraries are loaded or malicious scripts are executed within these running containers. You need to configure Security Command Center to meet this requirement while ensuring findings are visible within Security Command Center. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Log-based metrics.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SHA container runtime monitor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Container-Optimized OS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable Container Threat Detection in SCC Premium.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create log-based metrics and alerts in Cloud Logging and Cloud Monitoring for suspicious container activity within the production folder.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure Security Health Analytics within Security Command Center to monitor container runtime vulnerabilities in the production folder.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ensure that the containers in the production folder are running on hosts that are using Container-Optimized OS.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable Container Threat Detection in Security Command Center Premium tier for the projects within the production folder.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ runtime threat detection for containers in production folder (libs loaded, scrip
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Container Threat Detection: Jest to specyficzna funkcja SCC Premium zaprojektowana dokładnie do monitorowania wnętrza działających kontenerów. Wykrywa ona podejrzane zdarzenia, takie jak uruchomienie nieznanego skryptu, ładowanie złośliwej biblioteki czy otwarcie reverse-shell.
+D. Container Threat Detection (SCC Premium): Jest to funkcja zaprojektowana specjalnie do monitorowania runtime'u kontenerów. Działa na poziomie jądra systemu (COS) i potrafi wykryć złośliwe zdarzenia, takie jak: `Suspicious Binary Execution` czy `Suspicious Library Loaded` wewnątrz działających kontenerów, wysyłając alerty bezpośrednio do SCC.
 
 Dlaczego inne są błędne:
-A. Log-based metrics: Zliczają wystąpienia fraz w logach, ale nie mają wglądu w niskopoziomowe operacje systemowe kontenera (np. ładowanie modułów jądra).
-B. SHA: Skupia się na błędach w konfiguracji chmury (np. 'pod jest uprzywilejowany'), a nie na tym co pod ROBI w trakcie działania (runtime).
-C. COS: To bezpieczny system operacyjny, ale sam w sobie nie raportuje zagrożeń runtime do SCC bez włączonej usługi detekcji (D).
-
-Konsensus społeczności ExamTopics: 100% na D. Runtime threat detection = CTD w Google Cloud.</pre>
+A. Log-based alerts: Trudno za ich pomocą wykryć niskopoziomowe akcje systemowe (jak załadowanie biblioteki do pamięci), jeśli aplikacja sama tego nie zaloguje.
+B. Security Health Analytics: Skanuje konfigurację chmury (at-rest), a nie zachowanie procesów wewnątrz kontenera (runtime).
+C. Container-Optimized OS (COS): To bezpieczny system bazowy, ale sam w sobie nie wysyła 'findings' o załadowanych bibliotekach do SCC bez włączonej usługi detekcji (D).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> CTD działa poprzez zbieranie sygnałów z jądra systemu Linux i przesyłanie ich do silnika analitycznego SCC, co pozwala na wykrycie włamań 'zero-day'.</p>
+<p>Container Threat Detection to kluczowe narzędzie do obrony kontenerów przed atakami typu 'Zero-day' w czasie rzeczywistym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-container-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-container-threat-detection-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-container-threat-detection-overview" target="_blank">Container Threat Detection</a></li>
 </ul>
 </div>
 </div>

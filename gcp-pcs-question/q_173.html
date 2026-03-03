@@ -52,15 +52,14 @@
 <h2>Question 173 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to view security findings in SCC only for projects with a specific label (e.g., department:finance). Which tool?
+You are working with a client who plans to migrate their data to Google Cloud. You are responsible for recommending an encryption service to manage their encrypted keys. You have the following requirements: - The master key must be rotated at least once every 45 days. - The solution that stores the master key must be FIPS 140-2 Level 3 validated. - The master key must be stored in multiple regions within the US for redundancy. Which solution meets these requirements?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> IAM Conditions</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Service Controls</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Customer-managed encryption keys with Cloud Key Management Service</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Customer-managed encryption keys with Cloud HSM</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Customer-supplied encryption keys</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google-managed encryption keys</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Grant a user access to view security findings in SCC only for projects with a sp
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. IAM Conditions: Pozwalają na nadanie roli (np. `securitycenter.findingsViewer`) pod pewnym warunkiem. Jednym z dostępnych warunków jest sprawdzenie atrybutów zasobu (Resource Labels). Dzięki temu użytkownik zobaczy alerty tylko z projektów oznaczonych jako 'finance'.
+B. CMEK with Cloud HSM: Pytanie stawia twardy wymóg: FIPS 140-2 Level 3. Standardowy Cloud KMS (software-based) spełnia tylko Level 1. Dopiero Cloud HSM (Hardware Security Module) zapewnia certyfikację Level 3. Cloud HSM w GCP pozwala na zarządzanie kluczami (rotacja co 45 dni jest możliwa) oraz oferuje multi-regionalną dostępność.
 
 Dlaczego inne są błędne:
-A. Standard IAM: Bez warunków (Conditions) rola działałaby na wszystkich projektach w folderze/organizacji.
-C, D: Nie służą do granularnego nadawania uprawnień do odczytu alertów SCC.
-
-Konsensus społeczności ExamTopics: 100% na B. IAM Conditions to potężne narzędzie precyzyjnej kontroli dostępu.</pre>
+A. Standard Cloud KMS: Spełnia tylko FIPS 140-2 Level 1.
+C. Customer-supplied (CSEK): Nie oferuje zarządzania rotacją i przechowywania klucza wewnątrz certyfikowanego modułu HSM w chmurze w sposób zarządzany.
+D. Google-managed: Klient nie ma kontroli nad rotacją (Google rotuje rzadziej lub wg własnego uznania).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci przypominają: Tagi (Tags) są nowszym i bezpieczniejszym mechanizmem niż Etykiety (Labels) dla warunków IAM, ponieważ Etykiety może zmienić każdy Project Editor, a Tagi są zarządzane centralnie. Jednak w starszych pytaniach 'Labels' są często używane jako synonim atrybutu do filtrowania.</p>
+<p>Cloud HSM jest niezbędny dla workloadów wymagających najwyższego stopnia fizycznej i logicznej ochrony kluczy (FIPS Level 3).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/conditions-overview" target="_blank">https://cloud.google.com/iam/docs/conditions-overview</a></li>
-
+<li><a href="https://cloud.google.com/hsm/docs/overview" target="_blank">Cloud HSM overview</a></li>
 </ul>
 </div>
 </div>

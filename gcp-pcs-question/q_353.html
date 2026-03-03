@@ -52,15 +52,14 @@
 <h2>Question 353 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-process PII for analytics, adhere to privacy, retain original format and consistency, avoid irreversible deletion. What to do?
+Your financial services company needs to process customer personally identifiable information (PII) for analytics while adhering to strict privacy regulations. You must transform this data to protect individual privacy to ensure that the data retains its original format and consistency for analytical integrity. Your solution must avoid full irreversible deletion. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud KMS dataset encryption.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Service Controls + row encryption.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> BigQuery UDF JS hash.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Sensitive Data Protection (SDP) format-preserving encryption (FPE).</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud Key Management Service (Cloud KMS) to encrypt the entire dataset with a customer-managed encryption key (CMEK).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set up VPC Service Controls around the BigQuery project. Implement row-level encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Implement a custom BigQuery user-defined function (UDF) by using JavaScript to hash all sensitive fields before they are loaded into the analytical tables.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure Sensitive Data Protection (SDP) to de-identify PII using format-preserving encryption (FPE).</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ process PII for analytics, adhere to privacy, retain original format and consist
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. SDP (DLP) + FPE: Pytanie zawiera dwa kluczowe wymogi: 'original format' i 'avoid irreversible deletion'. Format-Preserving Encryption (FPE) zapewnia, że np. zaszyfrowany numer karty nadal ma 16 cyfr i poprawny format, a proces jest odwracalny dla uprawnionych osób (nie jest to 'irreversible deletion' jak przy haszowaniu).
+D. Sensitive Data Protection (DLP) + FPE: Pytanie wymaga trzech rzeczy: ochrony prywatności, zachowania formatu (format-preserving) oraz spójności danych (consistency). Format-Preserving Encryption (FPE) w usłudze DLP (Sensitive Data Protection) idealnie spełnia te wymogi - zamienia np. numer buta na inny realistyczny numer, zachowując typ danych i umożliwiając spójną analitykę (ten sam klient ma zawsze ten sam token). Proces jest odwracalny, więc nie jest to 'irreversible deletion'.
 
 Dlaczego inne są błędne:
-A. Dataset encryption: Chroni bazę przed hakerem, ale analityk z dostępem do BQ i tak widziałby dane jawne.
-B. VPC SC: Chroni granice, nie zmienia treści danych wewnątrz.
-C. Hashing: Jest nieodwracalny (irreversible) i całkowicie zmienia format danych, co narusza oba wymogi pytania.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. FPE to standard dla analityki Big Data zachowującej prywatność.</pre>
+A. CMEK: Szyfruje całe pliki na dysku, ale po odczycie analityk nadal widziałby surowe PII.
+B. VPC SC: Chroni przed kradzieżą danych na zewnątrz, ale nie chroni prywatności wewnątrz procesu analitycznego.
+C. JavaScript hashing: Haszowanie jest zazwyczaj nieodwracalne i niszczy format danych (np. hash z imienia 'Jan' to długi ciąg znaków, co psuje strukturę bazy).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Dzięki FPE zachowujesz tzw. 'Referential Integrity'. Jeśli zaszyfrujesz ID klienta tym samym kluczem w dwóch różnych tabelach, nadal będziesz mógł je połączyć (JOIN), nie wiedząc kim jest klient.</p>
+<p>FPE to zaawansowana technika DLP łącząca bezpieczeństwo danych z ich użytecznością biznesową.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/pseudonymization#fpe" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization#fpe</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/concepts-fpe" target="_blank">DLP Format Preserving Encryption</a></li>
 </ul>
 </div>
 </div>

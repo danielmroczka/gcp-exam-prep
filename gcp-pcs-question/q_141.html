@@ -52,16 +52,15 @@
 <h2>Question 141 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-SCC configuration. Alerts for crypto mining and misconfigurations. Which two features?
+You have been tasked with configuring Security Command Center for your organization's Google Cloud environment. Your security team needs to receive alerts of potential crypto mining in the organization's compute environment and alerts for common Google Cloud misconfigurations that impact security. Which Security Command Center features should you use to configure these alerts? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Event Threat Detection</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Container Threat Detection</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Security Health Analytics</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud DLP</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Cloud Armor</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Data Loss Prevention</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Google Cloud Armor</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ SCC configuration. Alerts for crypto mining and misconfigurations. Which two fea
 <pre>Odpowiedź: AC.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Event Threat Detection: Analizuje logi (np. Cloud Audit Logs, VPC Flow Logs) w czasie rzeczywistym i wykrywa wzorce charakterystyczne dla zagrożeń takich jak właśnie crypto mining, brute force czy wycieki danych.
-C. Security Health Analytics: Skupia się na wykrywaniu błędnych konfiguracji infrastruktury (misconfigurations), np. otwartych portów SSH na cały świat czy braku wersjonowania bucketów.
+A. Event Threat Detection: Analizuje logi (np. Cloud Logging) w czasie rzeczywistym i potrafi wykryć sygnatury typowe dla crypto miningu (np. połączenia z pulami wydobywczymi).
+C. Security Health Analytics: To podstawowe narzędzie SCC do wykrywania błędów w konfiguracji (misconfigurations), takich jak otwarte publicznie buckety, brak włączonego logowania czy słabe reguły firewall.
 
 Dlaczego inne są błędne:
-B. Container Threat Detection: Monitoruje wnętrze działającego kontenera (np. próba odczytu pamięci przez obcy proces). Jest to Premium, ale A i C pokrywają szerszy zakres 'misconfigurations' i 'threats' wymienionych w pytaniu.
-D. Cloud DLP: Szuka danych wrażliwych, nie wykrywa ataków typu mining.
-E. Cloud Armor: Chroni aplikacje webowe przed atakami z zewnątrz.
-
-Konsensus społeczności ExamTopics: Silne poparcie dla AC. To dwa fundamentalne filary SCC Premium.</pre>
+B. Container Threat Detection: Skupia się tylko na wnętrzu kontenerów (np. malware w podzie), a pytanie dotyczy ogólnego środowiska compute.
+D. Cloud DLP: Służy do szukania danych wrażliwych (PII), nie do wykrywania miningu czy błędów sieciowych.
+E. Cloud Armor: To WAF, nie narzędzie do audytu konfiguracji chmury.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AC</b></p>
-<p><b>Głęboka analiza:</b> SHA to Twoje 'Compliance', a ETD to Twoje 'SOC'. Razem dają pełny obraz stanu bezpieczeństwa i aktywnych prób włamań.</p>
+<p>SCC Premium oferuje kompleksową ochronę od poziomu konfiguracji (SHA) po detekcję zagrożeń w logach (ETD).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-command-center-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-command-center-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-command-center-overview" target="_blank">Security Command Center features</a></li>
 </ul>
 </div>
 </div>

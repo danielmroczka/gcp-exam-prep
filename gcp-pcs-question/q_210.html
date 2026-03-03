@@ -52,15 +52,14 @@
 <h2>Question 210 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect a web application from 'Log4j' type vulnerabilities (JNDI injection). Which service?
+Your company uses Google Cloud and has publicly exposed network assets. You want to discover the assets and perform a security audit on these assets by using a software tool in the least amount of time. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud IDS</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Run a platform security scanner on all instances in the organization.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Identify all external assets by using Cloud Asset Inventory, and then run a network security scanner against them.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Contact a Google approved security vendor to perform the audit.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Notify Google about the pending audit, and wait for confirmation before performing the scan.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Protect a web application from 'Log4j' type vulnerabilities (JNDI injection). Wh
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud Armor: Posiada predefiniowane reguły WAF (np. `cve-canary`), które są aktualizowane przez Google w odpowiedzi na nowe zagrożenia. W przypadku Log4j, Cloud Armor potrafi zidentyfikować i zablokować złośliwe ciągi `${jndi:ldap...}` w nagłówkach i parametrach zapytań HTTP.
+B. Cloud Asset Inventory + Network Security Scanner: Cloud Asset Inventory pozwala błyskawicznie wygenerować listę wszystkich zasobów posiadających publiczne IP (External Assets). Mając tę listę, możesz skierować na nie skaner (np. Cloud Security Scanner lub zewnętrzne narzędzia), co jest znacznie szybsze niż skanowanie wszystkiego 'na ślepo'.
 
 Dlaczego inne są błędne:
-A. Firewall: Nie analizuje treści pakietów aplikacyjnych.
-C. Cloud IDS: Wykryje atak, ale go nie zablokuje w czasie rzeczywistym przed dotarciem do serwera tak skutecznie jak Armor.
-D. IAP: Nie chroni przed błędami w kodzie dla osób zalogowanych.
-
-Konsensus społeczności ExamTopics: 100% na B. To klasyczny przypadek użycia WAF dla 'Zero-day protection'.</pre>
+A. Scan all instances: W dużej organizacji skanowanie 100% instancji (również tych prywatnych) zajmie mnóstwo czasu i zasobów.
+C. Security vendor: Zajmie to znacznie więcej czasu (kontraktowanie, planowanie) niż użycie natywnych narzędzi chmurowych.
+D. Notify Google: Od 2021 roku Google nie wymaga już wcześniejszego powiadamiania o standardowych testach penetracyjnych i skanach podatności własnych zasobów (z pewnymi wyjątkami dotyczącymi DoS).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na forach security podkreśla się, że Cloud Armor (B) to 'pierwsza linia obrony'. Nawet jeśli nie zdążyłeś jeszcze zpatchować wszystkich swoich serwerów Java, reguła WAF kupuje Ci czas, blokując exploit na brzegu sieci Google.</p>
+<p>Cloud Asset Inventory to najszybsza droga do poznania 'stanu posiadania' w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor/docs/rule-tuning#cve-protection" target="_blank">https://cloud.google.com/armor/docs/rule-tuning#cve-protection</a></li>
-
+<li><a href="https://cloud.google.com/asset-inventory/docs/overview" target="_blank">Cloud Asset Inventory overview</a></li>
 </ul>
 </div>
 </div>

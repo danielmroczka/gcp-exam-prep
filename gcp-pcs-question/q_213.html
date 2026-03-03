@@ -52,15 +52,14 @@
 <h2>Question 213 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit which users have been granted the 'Service Account User' role across the organization. Which tool?
+Your organization is using GitHub Actions as a continuous integration and delivery (CI/CD) platform. You must enable access to Google Cloud resources from the CI/CD pipelines in the most secure way. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a service account key, and add it to the GitHub pipeline configuration file.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a service account key, and add it to the GitHub repository content.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure a Google Kubernetes Engine cluster that uses Workload Identity to supply credentials to GitHub.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure workload identity federation to use GitHub as an identity pool provider.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Audit which users have been granted the 'Service Account User' role across the o
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,26 +75,24 @@ Audit which users have been granted the 'Service Account User' role across the o
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Policy Analyzer: Pozwala na zadanie pytania o konkretną rolę (`roles/iam.serviceAccountUser`) w skali całej organizacji. Jest to kluczowe, bo ta rola pozwala na impersonację kont serwisowych i jest częstym celem audytów bezpieczeństwa.
+D. Workload Identity Federation with GitHub: To jest najbezpieczniejsza metoda (keyless). Pozwala na uwierzytelnianie GitHub Actions w GCP bez użycia długowiecznych kluczy JSON. GitHub wystawia token OIDC, który GCP wymienia na tymczasowy token dostępu do konta serwisowego.
 
 Dlaczego inne są błędne:
-B, C, D: Jak w poprzednich analogicznych pytaniach – te narzędzia nie służą do inwentaryzacji 'kto ma daną rolę' w skali globalnej.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowe zadanie audytowe IAM.</pre>
+A, B. Service account keys: Przechowywanie kluczy JSON w repozytoriach lub konfiguracjach CI/CD jest uważane za niebezpieczne i niezalecane przez Google.
+C. GKE Workload Identity: Służy do podów działających WEWNĄTRZ GKE, a nie do zewnętrznych systemów jak GitHub Actions (chyba że GitHub Actions runner działa wewnątrz Twojego GKE, ale WIF (D) jest ogólniejszym i właściwszym rozwiązaniem dla zewnętrznych platform CI/CD).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja w sieci skupia się na niebezpieczeństwie roli SA User. Jeśli ktoś ma tę rolę na poziomie folderu, może 'stać się' dowolnym kontem serwisowym w projektach pod spodem. Policy Analyzer (A) to jedyny sposób, by to szybko wyłapać.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Workload Identity Federation to 'gold standard' dla bezpiecznej integracji CI/CD spoza Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
-
+<li><a href="https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions" target="_blank">Workload Identity Federation for GitHub Actions</a></li>
 </ul>
 </div>
 </div>

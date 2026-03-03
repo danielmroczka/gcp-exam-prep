@@ -52,15 +52,14 @@
 <h2>Question 49 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A company wants to securely connect their on-premises data center to GCP with high availability and high throughput (10 Gbps+). What should they use?
+You are in charge of migrating a legacy application from your company datacenters to GCP before the current maintenance contract expires. You do not know what ports the application is using and no documentation is available for you to check. You want to complete the migration without putting your environment at risk. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud VPN</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Carrier Peering</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Dedicated Interconnect</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Partner Interconnect</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Migrate the application into an isolated project using a "Lift & Shift" approach. Enable all internal TCP traffic using VPC Firewall rules. Use VPC Flow logs to determine what traffic should be allowed for the application to work properly.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Migrate the application into an isolated project using a "Lift & Shift" approach in a custom network. Disable all traffic within the VPC and look at the Firewall logs to determine what traffic should be allowed for the application to work properly.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Refactor the application into a micro-services architecture in a GKE cluster. Disable all traffic from outside the cluster using Firewall Rules. Use VPC Flow logs to determine what traffic should be allowed for the application to work properly.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Refactor the application into a micro-services architecture hosted in Cloud Functions in an isolated project. Disable all traffic from outside your project using Firewall Rules. Use VPC Flow logs to determine what traffic should be allowed for the application to work properly.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ A company wants to securely connect their on-premises data center to GCP with hi
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ A company wants to securely connect their on-premises data center to GCP with hi
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Dedicated Interconnect: Oferuje fizyczne, dedykowane łącze o przepustowościach 10 Gbps lub 100 Gbps. Jest to najbardziej wydajne i niezawodne rozwiązanie dla dużych przedsiębiorstw potrzebujących stałego, szerokiego pasma do chmury.
+A. Lift & Shift + VPC Flow logs: Ponieważ nie masz dokumentacji i czasu, najbezpieczniej jest przenieść aplikację 'taką jaka jest' (Lift & Shift) do odizolowanego projektu. Włączenie wszystkich portów wewnętrznie pozwoli jej działać, a analiza VPC Flow Logs (które rejestrują próby połączeń) pozwoli Ci zidentyfikować, które porty są faktycznie używane, by docelowo zamknąć pozostałe.
 
 Dlaczego inne są błędne:
-A. Cloud VPN: Przepustowość jednego tunelu to ok. 3 Gbps. Osiągnięcie stabilnych 10 Gbps+ wymagałoby wielu tuneli, co jest droższe i trudniejsze w zarządzaniu niż Interconnect.
-B. Carrier Peering: To połączenie dla dostępu do publicznych API Google (np. YouTube, Workspace), nie zapewnia ono prywatnego połączenia z siecią VPC dla Twoich maszyn VM.
-D. Partner Interconnect: Podobny do Dedicated, ale realizowany przez pośrednika (operatora). Zazwyczaj stosowany dla mniejszych przepustowości (poniżej 10 Gbps) lub gdy klient nie ma punktu styku z Google.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C ze względu na wymóg '10 Gbps+'. Dedicated to najwyższa półka wydajności.</pre>
+B. Disable all traffic: Aplikacja przestanie działać, co nie pozwala na jej przetestowanie i analizę portów.
+C, D. Refactor: Refaktoryzacja do GKE lub Cloud Functions zajmuje dużo czasu, którego w tym scenariuszu brakuje (maintenance contract expires).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Dedicated Interconnect wymaga fizycznej kolokacji sprzętu klienta w tym samym punkcie (PoP) co routery Google.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>VPC Flow Logs to doskonałe narzędzie do inżynierii wstecznej wymagań sieciowych nieudokumentowanych aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/using-flow-logs" target="_blank">Using VPC Flow Logs</a></li>
 </ul>
 </div>
 </div>

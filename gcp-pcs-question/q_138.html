@@ -52,7 +52,7 @@
 <h2>Question 138 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Cloud SQL malicious activity. Monitor API calls that read configuration or metadata. Which logs?
+A database administrator notices malicious activities within their Cloud SQL instance. The database administrator wants to monitor the API calls that read the configuration or metadata of resources. Which logs should the database administrator review?
 </div>
 <div class="question-choices-container">
 <ul>
@@ -60,7 +60,6 @@ Cloud SQL malicious activity. Monitor API calls that read configuration or metad
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> System Event</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Access Transparency</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Data Access</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Cloud SQL malicious activity. Monitor API calls that read configuration or metad
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Data Access Logs: W terminologii Cloud Audit Logs, operacje typu 'read' na konfiguracji usługi (np. `gcloud sql instances describe`) lub na samych danych są klasyfikowane jako logi 'Data Access'. Są one domyślnie wyłączone (poza BigQuery), więc ich włączenie jest kluczowe do wykrywania zwiadu (reconnaissance) wykonywanego przez hakera.
+D. Data Access logs: Te logi rejestrują operacje odczytu konfiguracji lub metadanych (np. `get`, `list`) oraz operacje na samych danych. Jeśli administrator chce monitorować, kto 'odczytuje' konfigurację jego bazy Cloud SQL, musi patrzeć właśnie w te logi.
 
 Dlaczego inne są błędne:
-A. Admin Activity: Rejestrują tylko operacje 'write' (np. zmiana hasła, usunięcie bazy). Nie zobaczysz w nich, że ktoś tylko 'podglądał' konfigurację.
-B. System Event: Dotyczą problemów technicznych platformy Google.
-C. Access Transparency: Dotyczą pracowników Google, a nie Twoich użytkowników (lub hakerów używających ich kont).
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. Monitoring 'podglądania' to zawsze Data Access logs.</pre>
+A. Admin Activity: Rejestrują tylko operacje 'zapisu' (tworzenie, usuwanie, modyfikacja). Odczyty (read-only) tam nie trafiają.
+B. System Event: Dotyczą działań Google (np. restarty konserwacyjne).
+C. Access Transparency: Dotyczą działań pracowników Google Support.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Logi Data Access dzielą się na: ADMIN_READ, DATA_READ i DATA_WRITE. Do śledzenia odczytu metadanych potrzebujesz ADMIN_READ.</p>
+<p>Logi Data Access są niezbędne do wykrywania rekonesansu (zwiadu) wykonywanego przez napastnika.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/audit#data-access" target="_blank">https://cloud.google.com/logging/docs/audit#data-access</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/audit#data-access" target="_blank">Cloud Audit Logs: Data Access</a></li>
 </ul>
 </div>
 </div>

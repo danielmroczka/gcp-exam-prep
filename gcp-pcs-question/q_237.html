@@ -52,15 +52,14 @@
 <h2>Question 237 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Analyze VPC network traffic to detect data exfiltration via ICMP tunneling. Which service?
+Your organization wants full control of the keys used to encrypt data at rest in their Google Cloud environments. Keys must be generated and stored outside of Google and integrate with many Google Services including BigQuery. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use customer-supplied encryption keys (CSEK) with keys generated on trusted external systems. Provide the raw CSEK as part of the API call.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a KMS key that is stored on a Google managed FIPS 140-2 level 3 Hardware Security Module (HSM). Manage the Identity and Access Management (IAM) permissions settings, and set up the key rotation period.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Cloud External Key Management (EKM) that integrates with an external Hardware Security Module (HSM) system from supported vendors.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a Cloud Key Management Service (KMS) key with imported key material. Wrap the key for protection during import. Import the key generated on a trusted system in Cloud KMS.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Analyze VPC network traffic to detect data exfiltration via ICMP tunneling. Whic
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Analyze VPC network traffic to detect data exfiltration via ICMP tunneling. Whic
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud IDS: ICMP Tunneling to ukrywanie danych w pakietach 'ping'. Cloud IDS posiada silnik głębokiej inspekcji pakietów (DPI), który potrafi wykryć nietypową treść (payload) wewnątrz protokołu ICMP, co jest charakterystyczne dla tego typu exfiltration.
+C. Cloud External Key Management (EKM): Jak w pytaniu 160, EKM to jedyny mechanizm, który pozwala na używanie kluczy generowanych i przechowywanych FIZYCZNIE poza Google (on-premises lub u zewnętrznego partnera), jednocześnie integrując się z wysokopoziomowymi usługami takimi jak BigQuery.
 
 Dlaczego inne są błędne:
-A. Cloud Armor: Dla HTTP, nie dla ICMP.
-C. Flow Logs: Widzą, że jest ruch ICMP, ale nie widzą jego treści (nie wykryją tunelu).
-D. IAP: Dla ludzi.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Wykrywanie tuneli sieciowych to domena IDS.</pre>
+A. CSEK: BigQuery NIE wspiera CSEK (kluczy dostarczanych w API call). Wspiera tylko CMEK (KMS) oraz EKM.
+B. Cloud HSM: Klucze w HSM są generowane i zarządzane przez Google (choć w certyfikowanym sprzęcie), co nie spełnia wymogu 'stored outside of Google'.
+D. Imported Key: Materiał jest generowany na zewnątrz, ale po imporcie trafia do chmury Google (KMS), tracisz nad nim fizyczną kontrolę.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach security podkreślają: ICMP jest często pomijany przez administratorów. Cloud IDS (B) to Twoja jedyna nadzieja na złapanie zaawansowanego hakera, który 'wyprowadza' dane bajt po bajcie w odpowiedziach na pingi.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p>Cloud EKM jest dedykowany dla klientów wymagających najwyższego stopnia fizycznej suwerenności nad materiałem klucza.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">Cloud EKM documentation</a></li>
 </ul>
 </div>
 </div>

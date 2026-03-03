@@ -52,15 +52,14 @@
 <h2>Question 335 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-restrict users from accessing Cloud Storage buckets in other Google Cloud organizations. What to do?
+You are responsible for configuring Identity and Access Management in your organization's Google Cloud environment. You need to restrict your organization's users from accessing Cloud Storage buckets in other Google Cloud organizations. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Principal access boundary policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization restriction headers.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM deny policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Domain restricted sharing.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set a principal access boundary policy with the appropriate enforcement version. Bind the policy to the principals of your organization.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure organization restriction headers for your environment. Only include the organization ID of your organization in the list of allowed resources.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create an IAM deny policy on the organization level that prevents access to Cloud Storage buckets outside the organization.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enforce domain restricted sharing in your organization. Configure a managed constraint, and only include the principals in your organization.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ restrict users from accessing Cloud Storage buckets in other Google Cloud organi
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Principal Access Boundary (PAB): Jest to potężna funkcja IAM, która pozwala zdefiniować 'granicę' dla tożsamości (użytkowników/SA). PAB mówi: 'To konto może używać swoich uprawnień TYLKO wewnątrz mojej organizacji'. Dzięki temu, nawet jeśli użytkownik doda swoje firmowe konto do uprawnień w swoim prywatnym projekcie, PAB zablokuje mu dostęp do tego obcego projektu.
+A. Principal Access Boundary (PAB) policy: PAB to nowa, potężna funkcja IAM, która pozwala na zdefiniowanie 'granicy' dla tożsamości. Możesz ustawić politykę, która mówi: 'Użytkownicy z mojej organizacji mogą używać swoich uprawnień tylko do zasobów wewnątrz mojej organizacji'. Skutecznie blokuje to możliwość użycia służbowego konta do odczytu danych z bucketu w innej, prywatnej organizacji GCP (zabezpieczenie przed eksfiltracją).
 
 Dlaczego inne są błędne:
-B. Organization restriction headers: Służą do blokowania dostępu Z Twojej sieci VPC do obcych organizacji (kontrola sieciowa), ale nie kontrolują uprawnień samej TOŻSAMOŚCI (IAM) w internecie. PAB (A) jest silniejszym mechanizmem tożsamościowym.
-C. IAM Deny: Może zablokować dostęp w Twoim projekcie, ale nie może zabronić użytkownikowi korzystania z uprawnień w cudzym projekcie.
-D. Domain restricted sharing: Uniemożliwia zapraszanie obcych osób DO Twoich projektów, ale nie zabrania Twoim ludziom wychodzenia NA ZEWNĄTRZ do obcych bucketów.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. PAB to przełom w walce z eksfiltracją danych przez tożsamość.</pre>
+B. Organization restriction headers: To rozwiązanie sieciowe (dla wyjścia z Twojej sieci firmowej), a pytanie dotyczy konfiguracji uprawnień użytkowników (IAM) wewnątrz środowiska chmurowego.
+C. IAM Deny on Org: Deny policy może blokować dostęp do Twoich zasobów, ale nie może zablokować uprawnienia 'Storage Viewer' nadanego Twojemu użytkownikowi przez administratora INNEJ organizacji w tamtym projekcie.
+D. Domain Restricted Sharing: Chroni Twoje zasoby przed udostępnieniem ich na zewnątrz, ale nie powstrzymuje Twoich użytkowników przed wchodzeniem na zasoby zewnętrzne.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> PAB to 'odwrotność' perymetru. Perymetr chroni ZASÓB przed ludźmi, a PAB chroni LUDZI przed używaniem ich mocy w niewłaściwych miejscach.</p>
+<p>Principal Access Boundaries to mechanizm ograniczający 'zasięg rażenia' tożsamości użytkowników w skali całej chmury.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/principal-access-boundary" target="_blank">https://cloud.google.com/iam/docs/principal-access-boundary</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/principal-access-boundary-overview" target="_blank">Principal Access Boundary overview</a></li>
 </ul>
 </div>
 </div>

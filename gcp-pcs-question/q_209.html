@@ -52,15 +52,15 @@
 <h2>Question 209 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-What is the primary benefit of using Google Cloud Access Transparency?
+Your organization is transitioning to Google Cloud. You want to ensure that only trusted container images are deployed on Google Kubernetes Engine (GKE) clusters in a project. The containers must be deployed from a centrally managed Container Registry and signed by a trusted authority. What should you do? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate IAM role requests.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide logs of actions taken by Google personnel on your data or configurations.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage SSL certificates.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To protect against DDoS.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Container Threat Detection in the Security Command Center (SCC) for the project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure the trusted image organization policy constraint for the project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a custom organization policy constraint to enforce Binary Authorization for Google Kubernetes Engine (GKE).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable PodSecurity standards, and set them to Restricted.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Configure the Binary Authorization policy with respective attestations for the project.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ What is the primary benefit of using Google Cloud Access Transparency?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">CE</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,26 @@ What is the primary benefit of using Google Cloud Access Transparency?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: CE.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Access Transparency: Udostępnia logi, które dokumentują KAŻDY przypadek, gdy pracownik Google uzyskał dostęp do Twoich danych (np. podczas rozwiązywania zgłoszenia w support). To kluczowe dla zaufania i wymogów prawnych.
+C. Org Policy for Binary Authorization: Wymusza użycie usługi Binary Authorization w projektach GKE.
+E. Binary Authorization with attestations: Pozwala na zdefiniowanie reguły: 'Uruchom tylko jeśli obraz został zbudowany przez nasz system CI/CD i posiada cyfrowy podpis (atestację) od zaufanego autorytetu'. To dokładnie spełnia wymóg 'signed by a trusted authority'.
 
 Dlaczego inne są błędne:
-A, C, D: To funkcje innych usług (IAM, Certificate Manager, Cloud Armor).
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Pytanie o definicję unikalnej funkcji Google.</pre>
+A. Container Threat Detection: Działa po uruchomieniu (runtime), nie zapobiega wdrożeniu złego obrazu.
+B. Trusted image policy: Dotyczy obrazów VM (GCE), nie kontenerów (GKE).
+D. PodSecurity standards: Kontrolują uprawnienia wewnątrz kontenera (np. brak roota), ale nie sprawdzają źródła i podpisu samego obrazu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wiele osób myli Access Transparency (B) z Access Approval. Zapamiętaj: Transparency to LOGI (po fakcie), Approval to ZGODA (przed faktem). Oba razem tworzą kompletny system nadzoru nad dostawcą chmury.</p>
+<p><b>Sugerowana odpowiedź: CE</b></p>
+<p>Binary Authorization to 'bramkarz' dla klastrów GKE, weryfikujący tożsamość i pochodzenie kodu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/access-transparency" target="_blank">https://cloud.google.com/access-transparency</a></li>
-
+<li><a href="https://cloud.google.com/binary-authorization" target="_blank">Binary Authorization</a></li>
 </ul>
 </div>
 </div>

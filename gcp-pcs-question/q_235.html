@@ -52,15 +52,14 @@
 <h2>Question 235 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-What is the primary purpose of the Google Cloud Binary Authorization attestations?
+You are setting up a new Cloud Storage bucket in your environment that is encrypted with a customer managed encryption key (CMEK). The CMEK is stored in Cloud Key Management Service (KMS), in project "prj-a", and the Cloud Storage bucket will use project "prj-b". The key is backed by a Cloud Hardware Security Module (HSM) and resides in the region europe-west3. Your storage bucket will be located in the region europe-west1. When you create the bucket, you cannot access the key, and you need to troubleshoot why. What has caused the access issue?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate the build of container images.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide a digital signature that a container image has passed a specific security check.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage Kubernetes namespaces.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To provide a container registry.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> A firewall rule prevents the key from being accessible.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud HSM does not support Cloud Storage.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> The CMEK is in a different project than the Cloud Storage bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> The CMEK is in a different region than the Cloud Storage bucket.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ What is the primary purpose of the Google Cloud Binary Authorization attestation
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,26 +75,25 @@ What is the primary purpose of the Google Cloud Binary Authorization attestation
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Attestations (BinAuth): Atestacja to cyfrowy 'stempel' (podpis). Jeśli Twój skaner podatności stwierdzi, że obraz jest czysty, tworzy atestację. BinAuth w klastrze GKE sprawdza ten stempel. Brak stempla = brak wdrożenia.
+D. CMEK in different region than bucket: W Google Cloud, aby użyć klucza CMEK do szyfrowania bucketu Cloud Storage, klucz MUSI znajdować się w tym samym regionie co bucket. Jeśli klucz jest w `europe-west3` (Frankfurt) a bucket w `europe-west1` (Belgia), Cloud Storage nie będzie mógł go użyć ze względów technicznych i wydajnościowych.
 
 Dlaczego inne są błędne:
-A, C, D: Jak w pytaniu 205 – to funkcje innych usług.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Atestacja = Dowód Bezpieczeństwa Obrazu.</pre>
+A. Firewall: KMS i Storage komunikują się przez wewnętrzne API Google, nie są blokowane przez standardowe reguły firewall VPC użytkownika.
+B. HSM Support: Cloud Storage w pełni wspiera klucze KMS przechowywane w HSM.
+C. Different project: GCP wspiera Cross-Project CMEK (klucz w jednym projekcie, zasób w innym), więc to nie jest przyczyną błędu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na Reddit dotyczy 'Separation of Duties' w pipeline. Budowanie obrazu robi Cloud Build, skanowanie robi Container Analysis, a Atestację (B) podpisuje kluczem KMS dedykowany 'Attestor'. BinAuth jest tylko strażnikiem sprawdzającym ten podpis.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Zasada 'Lokalizacja klucza = Lokalizacja zasobu' jest kluczowa dla CMEK w wielu usługach GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization/docs/key-concepts#attestations" target="_blank">https://cloud.google.com/binary-authorization/docs/key-concepts#attestations</a></li>
-
+<li><a href="https://cloud.google.com/storage/docs/encryption/customer-managed-keys#locations" target="_blank">CMEK regionality requirements</a></li>
 </ul>
 </div>
 </div>

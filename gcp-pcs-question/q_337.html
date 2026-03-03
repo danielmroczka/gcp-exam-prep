@@ -52,15 +52,14 @@
 <h2>Question 337 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Vendor IdP integration, SSO, no vendor users lifecycle management. Secure way. What to do?
+There is a vendor who needs access to your company's Google Cloud environment. The vendor uses a third-party identity provider (IdP). You need to integrate this IdP with your company's Google Cloud environment to enable single sign-on (SSO) for the vendor's users in the most secure way. You don't want to manage any of the vendor users' lifecycle management. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> GCDS sync.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Custom app.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Workforce Identity Federation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create accounts manually + sync passwords.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Google Cloud Directory Sync to synchronize user accounts from the IdP to Google Workspace, and then configure SSO between Google Workspace and Google Cloud.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Develop a custom application that queries the IdP for user authentication and then programmatically creates Google Cloud user accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Connect the vendor's IdP with Google Cloud using Workforce Identify Federation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create Google Cloud accounts for each user and synchronize their passwords with the third-party IdP.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Vendor IdP integration, SSO, no vendor users lifecycle management. Secure way. W
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Workforce Identity Federation (WIF): Jest to idealne rozwiązanie, gdy nie chcesz zarządzać kontami (lifecycle) osób trzecich. Użytkownik loguje się do swojego IdP, a WIF wymienia jego token na dostęp do Twojego GCP. Gdy partner usunie pracownika, straci on dostęp do Twoich zasobów natychmiast, bez Twojej ingerencji.
+C. Workforce Identity Federation: To jest idealne rozwiązanie dla dostępu vendorów i partnerów. Pozwala im logować się do Twojego GCP bezpośrednio przy użyciu ich kont firmowych (Azure AD, Okta, itp.). Ponieważ jest to federacja, nie musisz tworzyć kont dla tych osób w swoim systemie (no managed identities) ani dbać o ich cykl życia (jeśli vendor odejdzie z pracy, jego macierzysty IdP go zablokuje, a tym samym straci dostęp do Twojego GCP).
 
 Dlaczego inne są błędne:
-A. GCDS sync: Wymagałbyś dostępu do serwerów LDAP partnera i tworzyłbyś konta 'shadow' w swojej domenie, co jest sprzeczne z wymogiem 'no lifecycle management'.
-B. Custom app: Niepotrzebny narzut deweloperski.
-D. Manual accounts: Skrajne przeciwieństwo wymogów (wymagałoby manualnego usuwania kont po zakończeniu współpracy).
-
-Konsensus społeczności ExamTopics: 100% na C. WIF to przyszłość współpracy międzyorganizacyjnej w chmurze.</pre>
+A. GCDS: Wymaga fizycznej synchronizacji kont (shadow accounts), co wiąże się z zarządzaniem ich cyklem życia w Google Workspace.
+B. Custom application: Niepotrzebny nakład pracy i potencjalne dziury w bezpieczeństwie przy budowaniu własnego systemu tożsamości.
+D. Manual accounts: Skrajnie niebezpieczne i pracochłonne, brak powiązania z IdP vendora.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Przy WIF nie płacisz za licencje Cloud Identity dla partnerów, ponieważ nie są oni zarejestrowani jako Twoi użytkownicy.</p>
+<p>Workforce Identity Federation to standard dla 'Vendor/Partner Access', eliminujący Shadow IT i ułatwiający de-provisioning.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workforce-identity-federation</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">Workforce Identity Federation</a></li>
 </ul>
 </div>
 </div>

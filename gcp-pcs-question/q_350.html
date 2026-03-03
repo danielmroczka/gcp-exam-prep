@@ -52,15 +52,14 @@
 <h2>Question 350 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-ensure only images that passed vulnerability scanning and meet corporate policies are deployed to GKE. automated and integrated. What to do?
+Your company is deploying a large number of containerized applications to GKE. The existing CI/CD pipeline uses Cloud Build to construct container images, transfers the images to Artifact Registry, and then deploys the images to GKE. You need to ensure that only images that have passed vulnerability scanning and meet specific corporate policies are allowed to be deployed. The process needs to be automated and integrated into the existing CI/CD pipeline. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Binary Authorization + Artifact Analysis scanning.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Artifact Analysis scan only.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Custom script in Cloud Build.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Trusted AR repo + manual inspection.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure a policy in Binary Authorization to use Artifact Analysis vulnerability scanning to only allow images that pass the scan to deploy to your GKE clusters.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable Artifact Analysis vulnerability scanning and regularly scan images in Artifact Registry. Remove any images that do not meet the vulnerability requirements before deployment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Implement a custom script in the Cloud Build pipeline that uses a third-party vulnerability scanning tool. Fail the build if vulnerabilities are found.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure GKE to use only images from a specific, trusted Artifact Registry repository. Manually inspect all images before pushing them to this repository.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ ensure only images that passed vulnerability scanning and meet corporate policie
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. BinAuth + Artifact Analysis: To kompletny, automatyczny łańcuch zaufania. Skaner (Artifact Analysis) wykonuje brudną robotę (szukanie CVE), a strażnik (Binary Authorization) sprawdza werdykt skanera przed wpuszczeniem obrazu do klastra. Wszystko jest w pełni zintegrowane i zarządzane przez Google.
+A. Binary Authorization + Artifact Analysis: To jest standardowy model 'Trusted Deployment' w GCP. 1. Artifact Analysis automatycznie skanuje obrazy w Artifact Registry. 2. Binary Authorization pozwala na zdefiniowanie polityki: 'Zezwalaj na deployment tylko jeśli obraz przeszedł skanowanie i nie posiada krytycznych luk'. Całość jest w pełni zintegrowana i zautomatyzowana.
 
 Dlaczego inne są błędne:
-B. Scan only: Brak mechanizmu blokady (enforcement). Obraz z krytyczną luką i tak zostanie uruchomiony.
-C. Custom script: Zwiększa narzut i jest mniej pewne niż natywna funkcja BinAuth.
-D. Manual inspection: Całkowicie nieskalowalne i sprzeczne z wymogiem automatyzacji.
-
-Konsensus społeczności ExamTopics: 100% na A. Podstawowe pytanie o architekturę bezpiecznych wdrożeń GKE.</pre>
+B. Manual removal: Mało wydajne i nie gwarantuje, że obraz nie zostanie uruchomiony przed jego usunięciem.
+C. Custom scripts: Zwiększają nakład pracy operacyjnej, gdy GCP oferuje gotowy system Binary Authorization.
+D. Manual inspection: Skrajnie nieefektywne przy dużej skali wdrożeń kontenerowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Ten model zapobiega też 'driftowi' - jeśli w już działającym obrazie zostanie wykryta nowa luka, BinAuth może zablokować jego kolejne restarty lub nowe wdrożenia.</p>
+<p>Binary Authorization to 'polityka jako kod' dla bezpieczeństwa obrazów kontenerowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization/docs/vulnerability-checks" target="_blank">https://cloud.google.com/binary-authorization/docs/vulnerability-checks</a></li>
-
+<li><a href="https://cloud.google.com/binary-authorization/docs/vulnerability-checks" target="_blank">Binary Authorization with Artifact Analysis</a></li>
 </ul>
 </div>
 </div>

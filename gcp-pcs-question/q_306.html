@@ -52,15 +52,14 @@
 <h2>Question 306 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Validate if keys rotated every 90 days. Effective detection strategy. What to do?
+You must ensure that the keys used for at-rest encryption of your data are compliant with your organization's security controls. One security control mandates that keys get rotated every 90 days. You must implement an effective detection strategy to validate if keys are rotated as required. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Asset Inventory analysis.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud KMS code in Cloud Run.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Logging metric.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Security Health Analytics detector in SCC.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Analyze the crypto key versions of the keys by using data from Cloud Asset Inventory. If an active key is older than 90 days, send an alert message through your incident notification channel.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Assess the keys in the Cloud Key Management Service by implementing code in Cloud Run. If a key is not rotated after 90 days, raise a finding in Security Command Center.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Define a metric that checks for timely key updates by using Cloud Logging. If a key is not rotated after 90 days, send an alert message through your incident notification channel.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Identify keys that have not been rotated by using Security Health Analytics. If a key is not rotated after 90 days, a finding in Security Command Center is raised.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Validate if keys rotated every 90 days. Effective detection strategy. What to do
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. SCC SHA Detector: Security Health Analytics posiada gotowy, wbudowany detektor `KMS_KEY_NOT_ROTATED`. Automatycznie sprawdza on wszystkie klucze w organizacji i zgłasza błąd w dashboardzie, jeśli wiek klucza przekroczył 90 dni bez rotacji. To najbardziej 'efektywne' i najmniej pracochłonne rozwiązanie.
+D. Security Health Analytics (SHA): Jest to skaner wbudowany w SCC Premium, który automatycznie wykrywa błędy w konfiguracji chmury. SHA posiada dedykowany detektor dla Cloud KMS, który sprawdza, czy klucze mają włączoną automatyczną rotację i czy ostatnia rotacja odbyła się zgodnie z harmonogramem. Jeśli klucz nie został rotowany przez 90 dni, SHA natychmiast zgłasza 'finding' w SCC.
 
 Dlaczego inne są błędne:
-A. Asset Inventory: Pozwala na jednorazowe sprawdzenie, ale nie jest ciągłym systemem alarmowania.
-B. Cloud Run: Wymagałoby pisania i utrzymywania własnego kodu, co jest zbędne, gdy funkcja jest już wbudowana w chmurę.
-C. Logging metric: Rejestruje zdarzenie rotacji, ale bardzo trudno na jej podstawie wykryć BRAK zdarzenia (zaniedbanie) w określonym czasie.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. SCC SHA to Twój automatyczny audytor konfiguracji.</pre>
+A. Asset Inventory analysis: Wymagałoby budowania własnych narzędzi do analizy eksportu danych, co jest 'manualne' w porównaniu do gotowego SCC.
+B. Cloud Run custom code: Niepotrzebny nakład pracy na programowanie czegoś, co GCP oferuje jako gotową funkcję (SHA).
+C. Cloud Logging metric: Logi informują o zdarzeniu (fakcie rotacji), ale SCC SHA (D) monitoruje STAN (czy rotacja jest zaplanowana i aktualna), co jest właściwsze dla compliance.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Alerty z SCC można zintegrować z Pub/Sub i Cloud Functions, aby automatycznie powiadamiać właściciela klucza lub nawet wymusić rotację (Self-remediation).</p>
+<p>Monitoring rotacji kluczy to standardowy detektor w Security Health Analytics.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview#kms_detectors" target="_blank">SHA KMS detectors</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 42 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to ensure that specific sensitive data in a BigQuery table is only visible to authorized users. What is the most granular way to achieve this?
+A DevOps team will create a new container to run on Google Kubernetes Engine. As the application will be internet-facing, they want to minimize the attack surface of the container. What should they do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Dataset-level permissions</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Table-level permissions</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Row-level security</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Column-level security using policy tags</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud Build to build the container images.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Build small containers using small base images.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Delete non-used versions from Container Registry.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use a Continuous Delivery tool to deploy the application.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ You need to ensure that specific sensitive data in a BigQuery table is only visi
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ You need to ensure that specific sensitive data in a BigQuery table is only visi
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Column-level security: To najbardziej granularna (szczegółowa) metoda kontroli dostępu w BigQuery. Pozwala na przypisanie tagów polityk (policy tags) do konkretnych kolumn (np. numer karty kredytowej) i ograniczenie widoczności tylko dla wybranych osób, mimo że widzą one resztę tabeli.
+B. Small containers using small base images: Mniejszy obraz kontenera (np. Alpine, Distroless) zawiera mniej zainstalowanych bibliotek i narzędzi (jak shell, curl, compilers). Każde zbędne narzędzie to potencjalny wektor ataku dla napastnika po przejęciu aplikacji.
 
 Dlaczego inne są błędne:
-A. Dataset-level: Daje dostęp do wszystkich tabel w zbiorze - najmniej granularne.
-B. Table-level: Daje dostęp do wszystkich danych w tabeli - mniej granularne niż kolumny.
-C. Row-level security: Służy do filtrowania wierszy (np. dany handlowiec widzi tylko swoich klientów), ale nie chroni konkretnych atrybutów (kolumn) we wszystkich wierszach.
-
-Konsensus społeczności ExamTopics: Prawie 100% na D. Słowo 'granular' w pytaniu o BQ prawie zawsze wskazuje na Column lub Row level security.</pre>
+A. Cloud Build: To narzędzie do budowania, samo w sobie nie zmienia 'powierzchni ataku' finalnego obrazu.
+C. Delete non-used versions: Oszczędza miejsce i poprawia higienę, ale nie wpływa na bezpieczeństwo kontenera działającego w internecie.
+D. Continuous Delivery: Automatyzuje wdrożenie, nie wpływa na zawartość kontenera.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Column-level security integruje się z Data Catalog. Nawet jeśli użytkownik wykona zapytanie 'SELECT *', kolumny, do których nie ma uprawnień, zostaną zablokowane (wyrzuci błąd dostępu).</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>Zasada 'Attack Surface Reduction' w kontenerach polega na usuwaniu wszystkiego, co nie jest niezbędne do działania aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/bigquery/docs/column-level-security-intro" target="_blank">https://cloud.google.com/bigquery/docs/column-level-security-intro</a></li>
-
+<li><a href="https://cloud.google.com/architecture/best-practices-for-building-containers" target="_blank">Best practices for building containers</a></li>
 </ul>
 </div>
 </div>

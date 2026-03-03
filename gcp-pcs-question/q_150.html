@@ -52,15 +52,14 @@
 <h2>Question 150 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Reduce internet exposure of VMs hosting web services for external users. Already removed public IPs. What to do?
+Your organization's Google Cloud VMs are deployed via an instance template that configures them with a public IP address in order to host web services for external users. The VMs reside in a service project that is attached to a host (VPC) project containing one custom Shared VPC for the VMs. You have been asked to reduce the exposure of the VMs to the internet while continuing to service external users. You have already recreated the instance template without a public IP address configuration to launch the managed instance group (MIG). What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud NAT in service project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud NAT in host project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> External HTTP(S) LB in service project with MIG as backend.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> External HTTP(S) LB in host project.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Deploy a Cloud NAT Gateway in the service project for the MIG.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Deploy a Cloud NAT Gateway in the host (VPC) project for the MIG.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Deploy an external HTTP(S) load balancer in the service project with the MIG as a backend.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Deploy an external HTTP(S) load balancer in the host (VPC) project with the MIG as a backend.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Reduce internet exposure of VMs hosting web services for external users. Already
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. External HTTP(S) LB: Jest to zalecana architektura. Load Balancer posiada publiczny adres IP i przyjmuje ruch od użytkowników, a następnie przekazuje go do Twoich maszyn wirtualnych przez sieć wewnętrzną Google. Dzięki temu VM-y mogą pozostać w 100% prywatne (bez publicznych IP), co drastycznie zmniejsza ich powierzchnię ataku.
+C. External HTTP(S) load balancer in the service project: To jest zalecana architektura. Twoje maszyny VM nie mają publicznych adresów IP (bezpieczeństwo), a ruch z internetu trafia najpierw do Load Balancera. Load Balancer przekazuje ruch do backendu (MIG) przez wewnętrzną sieć GCP. Ponieważ aplikacja należy do zespołu w projekcie serwisowym, Load Balancer powinien znajdować się tam, gdzie jego backendy, korzystając z sieci Shared VPC udostępnionej z projektu hosta.
 
 Dlaczego inne są błędne:
-A, B. Cloud NAT: Służy do ruchu WYCHODZĄCEGO (z VM do internetu). Nie pozwoli użytkownikom z zewnątrz połączyć się z Twoimi usługami webowymi.
-D. Host project: Choć Shared VPC jest dobra, to zazwyczaj aplikacje (MIG) i ich Load Balancery tworzy się w projektach usługowych, aby zespoły deweloperskie miały autonomię w zarządzaniu swoimi usługami.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To standardowy wzorzec 'Safe Internet Front-end'.</pre>
+A, B. Cloud NAT: Pozwala maszynom WYJŚĆ do internetu, ale nie pozwala użytkownikom zewnętrznym WEJŚĆ do Twoich usług webowych.
+D. Load balancer in host project: Choć technicznie możliwe, łamie zasadę separacji obowiązków (Separation of Duties). Zespół aplikacji w projekcie serwisowym powinien zarządzać swoim Load Balancerem, a zespół sieci w projekcie hosta tylko samą siecią VPC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Load Balancer HTTP(S) działa jako reverse-proxy. Haker nie może połączyć się bezpośrednio z Twoją maszyną (np. przez SSH czy luki protokołu TCP), bo LB 'rozumie' tylko protokół HTTP/HTTPS.</p>
+<p>Użycie Load Balancera jako 'frontu' pozwala na całkowite ukrycie adresów IP serwerów aplikacji przed internetem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/load-balancing/docs/https" target="_blank">https://cloud.google.com/load-balancing/docs/https</a></li>
-
+<li><a href="https://cloud.google.com/load-balancing/docs/https" target="_blank">External HTTP(S) Load Balancing overview</a></li>
 </ul>
 </div>
 </div>

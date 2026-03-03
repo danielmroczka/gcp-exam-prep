@@ -52,15 +52,14 @@
 <h2>Question 154 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Authenticate a mobile application to access GCP resources securely without embedding long-lived keys. Which service?
+Your company's cloud security policy dictates that VM instances should not have an external IP address. You need to identify the Google Cloud service that will allow VM instances without external IP addresses to connect to the internet to update the VMs. Which service should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Firebase Authentication with Identity Platform</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Service Account Keys in the app binary</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud VPN</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Identity Aware-Proxy</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud NAT</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> TCP/UDP Load Balancing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud DNS</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Authenticate a mobile application to access GCP resources securely without embed
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Authenticate a mobile application to access GCP resources securely without embed
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Firebase Auth / Identity Platform: To rozwiązanie pozwala na logowanie użytkowników (przez Google, Facebook, e-mail) i wymianę ich tożsamości na krótkotrwałe tokeny dostępu do zasobów GCP. Eliminuje to potrzebę zaszywania jakichkolwiek kluczy w kodzie aplikacji mobilnej.
+B. Cloud NAT: To standardowe rozwiązanie dla maszyn bez publicznego IP. Cloud NAT pozwala tym maszynom na inicjowanie połączeń wychodzących (np. do repozytoriów z aktualizacjami w internecie), wykonując translację adresów. Jednocześnie nie pozwala na ruch przychodzący zainicjowany z zewnątrz, co chroni maszyny.
 
 Dlaczego inne są błędne:
-B. SA Keys in binary: Kardynalny błąd bezpieczeństwa. Każdy może wyciągnąć klucz z pliku APK/IPA i przejąć kontrolę nad Twoją chmurą.
-C. Cloud VPN: Nie rozwiązuje problemu tożsamości aplikacji mobilnej na telefonach tysięcy użytkowników.
-D. VPC Service Controls: Chroni API, ale nie służy do autentykacji użytkowników końcowych.
-
-Konsensus społeczności ExamTopics: 100% na A. Bezpieczny dostęp mobilny = Identity Platform.</pre>
+A. Identity-Aware Proxy (IAP): Służy do wchodzenia DO maszyny (np. przez SSH), a nie do wychodzenia z niej do internetu.
+C. Load Balancing: Służy do rozdzielania ruchu przychodzącego do aplikacji.
+D. Cloud DNS: Służy do rozwiązywania nazw, nie zapewnia samej łączności z internetem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na Reddit często debatuje się o 'Google Sign-In'. Wyjaśnienie: Firebase Auth/Identity Platform jest 'nadzbiorem' tych technologii, oferującym funkcje Enterprise, takie jak multi-tenancy i wsparcie dla protokołów SAML/OIDC, co jest kluczowe dla profesjonalnych aplikacji.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>Cloud NAT to fundament bezpiecznego 'Egress connectivity' dla prywatnych VPC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/identity-platform" target="_blank">https://cloud.google.com/identity-platform</a></li>
-
+<li><a href="https://cloud.google.com/nat/docs/overview" target="_blank">Cloud NAT overview</a></li>
 </ul>
 </div>
 </div>

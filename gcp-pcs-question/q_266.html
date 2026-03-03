@@ -52,15 +52,14 @@
 <h2>Question 266 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Migrate complex application across several projects. Design authorization aligning with least privilege and separation of duties. What to do?
+Your organization is migrating a complex application to Google Cloud. The application has multiple internal components that interact with each other across several Google Cloud projects. Security is a major concern, and you must design an authorization scheme for administrators that aligns with the principles of least privilege and separation of duties. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Identify users, revoke default roles, assign custom roles.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Multiple external IdPs with different SAML profiles.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> MFA with physical tokens.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> No action, automatic permissions.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Identify the users who will migrate the application, revoke the default user roles and assign the users with purposely created custom roles.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use multiple external identity providers (IdP) configured to use different SAML profiles and federate the IdPs for each application component.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure multi-factor authentication (MFA) to enforce the use of physical tokens for all users who will migrate the application.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> No action needed. When a Google Cloud organization is created, the appropriate permissions are automatically assigned to all users in the domain.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Migrate complex application across several projects. Design authorization aligni
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Custom Roles + Audit: To jedyna droga do prawdziwego 'Least Privilege'. Standardowe role (Editor/Owner) są zbyt szerokie. Stworzenie ról dopasowanych dokładnie do czynności wykonywanych przez aplikację i jej administratorów realizuje wymogi bezpieczeństwa.
+A. Custom roles + Revoke default roles: To jest podstawowa zasada 'Least Privilege'. Domyślne role (Owner, Editor) są zbyt szerokie i niebezpieczne. Należy stworzyć precyzyjne role niestandardowe (Custom Roles) zawierające tylko te uprawnienia, których administratorzy faktycznie potrzebują do migracji swoich komponentów, co zapewnia separację obowiązków.
 
 Dlaczego inne są błędne:
-B. Multiple IdPs: Komplikuje architekturę, nie rozwiązuje problemu nadmiarowych uprawnień Wewnątrz GCP.
-C. MFA: Zabezpiecza logowanie, ale nie ogranicza tego, co użytkownik może zrobić po zalogowaniu (autoryzacja).
-D. No action: Prowadzi do wycieków danych i naruszeń zgodności.
-
-Konsensus społeczności ExamTopics: 100% na A. Custom Roles to fundament dojrzałego IAM.</pre>
+B. Multiple IdPs: Skomplikowałoby to tożsamość bez realnego wpływu na granulację uprawnień wewnątrz GCP.
+C. MFA: Zapewnia silne uwierzytelnianie, ale nie rozwiązuje problemu 'nadmiarowych uprawnień' (autoryzacji).
+D. No action needed: Skrajnie błędne - domyślne uprawnienia są zazwyczaj zbyt szerokie dla rygorystycznych środowisk.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Przy migracji warto użyć <b>IAM Policy Analyzer</b>, aby zobaczyć, które z obecnych uprawnień są faktycznie używane, a które można bezpiecznie usunąć.</p>
+<p>Projektowanie ról IAM powinno zawsze zaczynać się od analizy potrzeb i unikania ról predefiniowanych o zbyt szerokim zasięgu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/creating-custom-roles" target="_blank">https://cloud.google.com/iam/docs/creating-custom-roles</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/creating-custom-roles" target="_blank">IAM custom roles</a></li>
 </ul>
 </div>
 </div>

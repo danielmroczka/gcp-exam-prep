@@ -52,15 +52,14 @@
 <h2>Question 84 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-An engineer accidentally deletes a service account used for VM-to-GCS transfers. You want to recover as quickly as possible without compromising security. What should you do?
+Your team uses a service account to authenticate data transfers from a given Compute Engine virtual machine instance of to a specified Cloud Storage bucket. An engineer accidentally deletes the service account, which breaks application functionality. You want to recover the application as quickly as possible without compromising security. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Disable authentication on the bucket.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the undelete command to recover the SA.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a new SA with the same name.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Update permissions of another existing SA.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Temporarily disable authentication on the Cloud Storage bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the undelete command to recover the deleted service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a new service account with the same name as the deleted service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Update the permissions of another existing service account and supply those credentials to the applications.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ An engineer accidentally deletes a service account used for VM-to-GCS transfers.
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Undelete command: Google Cloud umożliwia przywrócenie usuniętego konta serwisowego w ciągu 30 dni od usunięcia. Jest to najszybsza metoda, ponieważ przywraca konto wraz z jego unikalnym identyfikatorem (Unique ID), co sprawia, że wszystkie istniejące uprawnienia IAM (które są przypisane do ID, a nie do nazwy) znów zaczynają działać.
+B. Undelete command: Usunięte konta serwisowe w GCP można przywrócić (undelete) w ciągu 30 dni od usunięcia. Jest to najszybsza metoda, ponieważ przywraca konto z tym samym ID, tym samym adresem email i - co najważniejsze - tymi samymi uprawnieniami IAM, które były nadane wcześniej.
 
 Dlaczego inne są błędne:
-A. Disable auth: Skrajne naruszenie bezpieczeństwa. Dane byłyby publiczne.
-C. New SA with same name: Nowe konto otrzyma NOWY Unique ID. Nawet jeśli nazwa jest ta sama, uprawnienia IAM starego konta NIE będą działać. Musiałbyś ręcznie odtworzyć całą politykę IAM.
-D. Another SA: Wymagałoby zmian w konfiguracji aplikacji na wszystkich maszynach, co jest wolniejsze i wprowadza chaos.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To 'life-saver' w sytuacjach awaryjnych.</pre>
+A. Disable authentication: Skrajnie niebezpieczne, otwiera dane na cały świat.
+C. Create new with same name: Nowe konto będzie miało unikalne `Unique ID` (mimo tej samej nazwy email). Uprawnienia IAM są przypisane do ID, więc nowe konto nie będzie miało żadnych uprawnień starego konta.
+D. Update other account: Wymaga zmiany konfiguracji aplikacji (supply credentials), co nie jest najszybszą metodą przywrócenia działania.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Pamiętaj, że w GCP uprawnienia są przypisane do numeru seryjnego konta (Unique ID). Nazwa jest tylko etykietą. Dlatego 'undelete' jest jedynym sposobem na zachowanie ciągłości dostępu bez re-konfiguracji IAM.</p>
+<p>Funkcja 'undelete' Service Accounta to krytyczna operacja ratunkowa w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts#undeleting" target="_blank">https://cloud.google.com/iam/docs/creating-managing-service-accounts#undeleting</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts#undeleting" target="_blank">Undeleting a service account</a></li>
 </ul>
 </div>
 </div>

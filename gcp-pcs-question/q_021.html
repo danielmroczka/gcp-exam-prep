@@ -61,7 +61,6 @@ In order to meet PCI DSS requirements, a customer wants to ensure that all outbo
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engine</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google Kubernetes Engine</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Cloud Storage</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,25 +79,22 @@ In order to meet PCI DSS requirements, a customer wants to ensure that all outbo
 <pre>Odpowiedź: CD.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Compute Engine (CE): Jako usługa IaaS daje pełną kontrolę nad stosem sieciowym. Możesz tworzyć reguły Firewall typu 'egress' (wychodzące), które blokują cały ruch i zezwalają tylko na autoryzowane połączenia.
-D. Google Kubernetes Engine (GKE): Pozwala na stosowanie polityk sieciowych (Network Policies) oraz reguł firewalla VPC dla węzłów klastra, co umożliwia pełną kontrolę ruchu wychodzącego z podów i węzłów.
+C. Compute Engine: Pozwala na pełną kontrolę nad regułami firewall (egress), co pozwala na autoryzację każdego połączenia wychodzącego.
+D. Google Kubernetes Engine: Dzięki Network Policies (np. Calico lub GKE Dataplane V2), można precyzyjnie kontrolować i autoryzować ruch wychodzący z podów (egress rules).
 
 Dlaczego inne są błędne:
-A, B. App Engine i Cloud Functions: To usługi typu serverless (PaaS). Domyślnie ich ruch wychodzący przechodzi przez współdzielone adresy IP Google i nie podlega pod Twoje reguły VPC Firewall (chyba że użyjesz VPC Access Connector, ale to już jest 'additional control').
-E. Cloud Storage: Jest to usługa obiektowa, a nie środowisko obliczeniowe generujące ruch sieciowy, który można filtrować regułami firewall.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na CD. Kontrola 'egress' jest natywna dla modelu IaaS/CaaS w VPC.</pre>
+A, B. App Engine / Cloud Functions: To usługi Serverless. Domyślnie mają ograniczoną kontrolę nad ruchem wychodzącym bez użycia dodatkowych usług typu Serverless VPC Access Connector.
+E. Cloud Storage: To usługa przechowywania danych, a nie środowisko wykonawcze z firewallem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CD</b></p>
-<p><b>Głęboka analiza:</b> PCI DSS (wymóg 1.2.1) wymaga ograniczania ruchu wychodzącego do tego, co jest niezbędne. W GCP najłatwiej to osiągnąć w usługach, które są bezpośrednio przypięte do sieci VPC.</p>
+<p>Zgodność z PCI DSS wymaga ścisłej kontroli 'egress traffic'. GKE i GCE oferują najbardziej natywne mechanizmy firewallingu dla takich potrzeb.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewalls" target="_blank">https://cloud.google.com/vpc/docs/firewalls</a></li>
-
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy" target="_blank">GKE Network Policies</a></li>
 </ul>
 </div>
 </div>

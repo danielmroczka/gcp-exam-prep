@@ -52,15 +52,14 @@
 <h2>Question 149 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Update VPC Service Controls perimeter with new access level without breaking existing. Least disruption. What to do?
+You want to update your existing VPC Service Controls perimeter with a new access level. You need to avoid breaking the existing perimeter with this change, and ensure the least disruptions to users while minimizing overhead. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Exact replica perimeter.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Access level that never matches.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Dry run mode on perimeter configuration.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Dry run mode on perimeter dry run configuration.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an exact replica of your existing perimeter. Add your new access level to the replica. Update the original perimeter after the access level has been vetted.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Update your perimeter with a new access level that never matches. Update the new access level to match your desired state one condition at a time to avoid being overly permissive.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable the dry run mode on your perimeter. Add your new access level to the perimeter configuration. Update the perimeter configuration after the access level has been vetted.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable the dry run mode on your perimeter. Add your new access level to the perimeter dry run configuration. Update the perimeter configuration after the access level has been vetted.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Update VPC Service Controls perimeter with new access level without breaking exi
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Dry run configuration: VPC Service Controls pozwala na posiadanie dwóch konfiguracji jednocześnie: aktywnej (Enforced) i testowej (Dry run). Możesz dodać nowy Access Level do konfiguracji Dry Run i obserwować logi audytowe. Jeśli nie widzisz niespodziewanych blokad, możesz bezpiecznie promować te zmiany do konfiguracji aktywnej.
+D. Dry run mode on perimeter dry run configuration: VPC Service Controls oferuje specjalny tryb 'Dry run', który posiada własną, równoległą konfigurację. Możesz dodać nowy access level do konfiguracji dry run i obserwować logi audytowe. Jeśli zobaczysz, że ruch jest poprawnie identyfikowany i nie ma niespodziewanych blokad, dopiero wtedy kopiujesz tę konfigurację do trybu 'Enforced'. Minimalizuje to ryzyko błędu i przestoju.
 
 Dlaczego inne są błędne:
-A. Replica: Bardzo trudne do utrzymania i nie daje wglądu w rzeczywisty ruch bez dublowania wszystkich systemów.
-B. Never matches: Nie pozwoli przetestować, czy nowy poziom dostępu faktycznie działa (przepuszcza ruch).
-C. Dry run on Enforced: Pytanie dotyczy zmiany KONKRETNEGO elementu (Access Level). Najmniej inwazyjne jest użycie dedykowanej warstwy testowej Dry Run dla całego perymetru.
-
-Konsensus społeczności ExamTopics: 100% na D. Dry Run to klucz do przeżycia przy zarządzaniu VPC SC.</pre>
+A. Replica perimeter: Bardzo trudne do wykonania, ponieważ projekty mogą należeć tylko do jednego obwodu na raz.
+B. Access level that never matches: Mało użyteczne do testowania realnego wpływu na użytkowników.
+C. Enable dry run on perimeter (general): Lepiej sprecyzować, że zmieniamy konfigurację dry-run, a nie tylko przełączamy cały istniejący obwód w tryb testowy (choć technicznie są to powiązane czynności, D jest precyzyjniejszą odpowiedzią inżynierską).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> VPC SC jest bardzo 'zero-jedynkowe'. Błąd w konfiguracji może natychmiast odciąć całą firmę od danych. Tryb Dry Run to obowiązkowy krok przed każdą zmianą.</p>
+<p>Tryb 'Dry Run' pozwala na bezpieczne ewoluowanie polityk bezpieczeństwa API bez wpływu na działające systemy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run-overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/dry-run-overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run" target="_blank">VPC Service Controls Dry Run</a></li>
 </ul>
 </div>
 </div>

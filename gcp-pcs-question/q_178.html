@@ -52,15 +52,14 @@
 <h2>Question 178 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enforce that all data written to a specific BigQuery dataset must be encrypted using a Customer-Managed Encryption Key (CMEK). Which tool?
+An organization wants to track how bonus compensations have changed over time to identify employee outliers and correct earning disparities. This task must be performed without exposing the sensitive compensation data for any individual and must be reversible to identify the outlier. Which Cloud Data Loss Prevention API technique should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: bq.restrictDatasetEncryption</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Dataset settings in the BQ Console</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cryptographic hashing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Redaction</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Format-preserving encryption</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Generalization</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Enforce that all data written to a specific BigQuery dataset must be encrypted u
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Dataset settings: W BigQuery, wymóg użycia klucza CMEK ustawia się bezpośrednio we właściwościach Datasetu (Encryption Configuration). Gdy to zrobisz, BigQuery odrzuci każdą próbę zapisu danych, która nie wskazuje tego konkretnego klucza KMS.
+C. Format-preserving encryption (FPE): FPE szyfruje dane w taki sposób, że wynik ma taki sam format jak wejście (np. numer konta bankowego zamienia się w inny, realistycznie wyglądający numer). Pozwala to na śledzenie zmian w czasie (spójność) i jest odwracalne (mając klucz), co pozwala na identyfikację konkretnego pracownika (outliera) po zakończeniu analizy.
 
 Dlaczego inne są błędne:
-A. IAM: Nie wymusza metod szyfrowania.
-B. Org Policy: Choć istnieją polityki ograniczające użycie CMEK, to twarde wymuszenie dla konkretnego zbioru danych (Dataset) odbywa się w jego ustawieniach (C).
-D. VPC Service Controls: Chroni przed kradzieżą danych, nie zarządza kluczami szyfrującymi.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To tam konfiguruje się 'Default Key' dla danych BigQuery.</pre>
+A. Hashing: Nieodwracalne.
+B. Redaction: Usuwa dane całkowicie.
+D. Generalization: Zastępuje dane zakresami (np. wiek 20-30), co uniemożliwia precyzyjne śledzenie zmian dla konkretnej jednostki w czasie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Pamiętaj, że w BigQuery nie możesz 'wymusić' CMEK dla istniejącej tabeli bez jej przepisania. Musisz ustawić to na poziomie Datasetu ZANIM zaczniesz tworzyć tabele, aby wszystkie nowe obiekty dziedziczyły ten wymóg.</p>
+<p>FPE to idealna technika DLP dla analityki HR, gdzie prywatność musi iść w parze z precyzją statystyczną.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/bigquery/docs/customer-managed-encryption" target="_blank">https://cloud.google.com/bigquery/docs/customer-managed-encryption</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/concepts-fpe" target="_blank">DLP FPE</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 203 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enforce that all data in a project must be stored in the 'us-central1' region. Which tool?
+Your organization must comply with the regulation to keep instance logging data within Europe. Your workloads will be hosted in the Netherlands in region europe-west4 in a new project. You must configure Cloud Logging to keep your data in the country. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: Resource Location Restriction</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Resource Labels</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure the organization policy constraint gcp.resourceLocations to europe-west4.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure log sink to export all logs into a Cloud Storage bucket in europe-west4.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a new log bucket in europe-west4, and redirect the _Default bucket to the new bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set the logging storage region to europe-west4 by using the gcloud CLI logging settings update.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Enforce that all data in a project must be stored in the 'us-central1' region. W
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Enforce that all data in a project must be stored in the 'us-central1' region. W
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Resource Location Restriction: To najsilniejszy mechanizm rezydencji danych w GCP. Pozwala na zdefiniowanie białej listy regionów. Jeśli deweloper spróbuje stworzyć SQL lub VM w Europie, API Google odrzuci to żądanie z błędem 'Policy Violation'.
+D. Set logging storage region: Google Cloud Logging umożliwia konfigurację 'organizational settings' dla logów. Możesz zdefiniować domyślny region przechowywania dla logów generowanych w Twojej organizacji (lub projekcie). Ustawienie tego na `europe-west4` gwarantuje, że dane logów (np. z domyślnych bucketów `_Default` i `_Required`) nie opuszczą terytorium Holandii/Europy.
 
 Dlaczego inne są błędne:
-A. IAM: Kontroluje 'kto', nie 'gdzie'.
-C. Labels: To tylko tekstowe metadane do filtrowania kosztów.
-D. VPC SC: Chroni przed wyciekiem danych, a nie przed wyborem lokalizacji zasobu.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Standardowa metoda compliance.</pre>
+A. ResourceLocations: Ogranicza lokalizację maszyn/dysków, ale domyślne buckety logów rządzą się własnymi ustawieniami regionalnymi.
+B. Log sink to GCS: Przesyła kopię logów, ale oryginały w Cloud Logging nadal mogłyby być przechowywane w domyślnym regionie (zazwyczaj Global).
+C. Redirect _Default: Możliwe, ale ustawienie systemowe (D) jest bardziej fundamentalnym sposobem zapewnienia compliance dla całego projektu/org.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Pytanie to często pojawia się w kontekście regulacji prawnych (np. dane obywateli USA muszą zostać w USA). Eksperci na forach zauważają, że polityka B jest 'dziedziczna' – jeśli ustawisz ją na folderze 'US-Workloads', wszystkie projekty wewnątrz będą automatycznie zablokowane na inne regiony.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Data Residency dla logów jest konfigurowana na poziomie ustawień usługi Logging (Logging storage settings).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/regional-log-storage" target="_blank">Regional log storage</a></li>
 </ul>
 </div>
 </div>

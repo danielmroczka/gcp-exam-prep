@@ -52,15 +52,14 @@
 <h2>Question 40 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to identify Google's inherent PCI controls. Which document should you review?
+You want to evaluate your organization's Google Cloud instance for PCI compliance. You need to identify Google's inherent controls. Which document should you review to find the information?
 </div>
 <div class="question-choices-container">
 <ul>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Google Cloud Platform: Customer Responsibility Matrix</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> PCI DSS Requirements</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> PCI SSC Guidelines</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Compute Engine documentation</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> PCI DSS Requirements and Security Assessment Procedures</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> PCI SSC Cloud Computing Guidelines</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Product documentation for Compute Engine</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ You need to identify Google's inherent PCI controls. Which document should you r
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Customer Responsibility Matrix: Jest to kluczowy dokument dostarczany przez Google (często w ramach Compliance Reports Manager), który punkt po punkcie wskazuje, za które wymogi PCI DSS odpowiada Google (np. ochrona fizyczna serwerowni), a za które odpowiada klient (np. konfiguracja firewalla).
+A. Customer Responsibility Matrix: To dokument dostarczany przez Google (często w pakiecie z raportami SOC/PCI), który jasno określa, które wymagania PCI DSS są pokryte przez infrastrukturę Google (inherent controls), a za które odpowiada klient (np. konfiguracja firewalli, zarządzanie dostępem).
 
 Dlaczego inne są błędne:
-B, C. PCI DSS/SSC: To ogólne standardy branżowe, nie powiedzą Ci, co konkretnie Google już za Ciebie zrobiło w swojej infrastrukturze.
-D. Compute Engine docs: Zawierają instrukcje techniczne, ale nie są oficjalnym dokumentem audytowym potwierdzającym spełnienie wymogów zgodności.
-
-Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. Macierz odpowiedzialności to Biblia dla każdego inżyniera compliance.</pre>
+B. PCI DSS Requirements: To ogólny standard organizacji PCI, nie zawiera specyficznych informacji o implementacji Google.
+C. PCI SSC Guidelines: To ogólne wytyczne dla chmury, nie raport audytowy Google.
+D. Compute Engine docs: Zawierają informacje techniczne, ale nie formalne zestawienie odpowiedzialności za konkretne punkty standardu PCI.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Zgodnie z modelem współdzielonej odpowiedzialności, Google posiada certyfikację PCI dla swojej infrastruktury, ale to Ty musisz zapewnić zgodność swojej aplikacji i jej konfiguracji.</p>
+<p>Shared Responsibility Matrix to 'mapa drogowa' dla każdego audytora bezpieczeństwa w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/compliance/pci-dss" target="_blank">https://cloud.google.com/security/compliance/pci-dss</a></li>
-
+<li><a href="https://cloud.google.com/security/compliance/compliance-reports-manager" target="_blank">Compliance reports manager</a></li>
 </ul>
 </div>
 </div>

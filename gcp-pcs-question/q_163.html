@@ -52,15 +52,15 @@
 <h2>Question 163 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Analyze application traffic to detect anomalies and potential malware communication without modifying the application code. Which GCP service?
+You need to audit the network segmentation for your Google Cloud footprint. You currently operate Production and Non-Production infrastructure-as-a-service (IaaS) environments. All your VM instances are deployed without any service account customization. After observing the traffic in your custom network, you notice that all instances can communicate freely - despite tag-based VPC firewall rules in place to segment traffic properly - with a priority of 1000. What are the most likely reasons for this behavior?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud IDS</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Firewall</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Trace</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> All VM instances are missing the respective network tags.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> All VM instances are residing in the same network subnet.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> All VM instances are configured with the same network route.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> A VPC firewall rule is allowing traffic between source/targets based on the same service account with priority 999.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> A VPC firewall rule is allowing traffic between source/targets based on the same service account with priority 1001.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ Analyze application traffic to detect anomalies and potential malware communicat
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">AD</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,26 @@ Analyze application traffic to detect anomalies and potential malware communicat
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: AD.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud IDS (Intrusion Detection System): Jest to usługa zarządzana, która bazuje na silniku Palo Alto Networks. Mirroruje ona ruch sieciowy i szuka w nim sygnatur ataków, malware'u i anomalii (np. exfiltration). Nie wymaga żadnych zmian w kodzie aplikacji (działa w warstwie sieci).
+A. Missing tags: Skoro reguły firewall są oparte na tagach (tag-based), a maszyny nie mają przypisanych tych tagów, reguły po prostu nie działają na te maszyny.
+D. Firewall rule with priority 999: W GCP reguły o niższym numerze mają wyższy priorytet. Jeśli istnieje reguła 'Allow all' z priorytetem 999 oparta na domyślnym koncie serwisowym (którego używają wszystkie Twoje maszyny), to nadpisze ona Twoje tag-based reguły z priorytetem 1000.
 
 Dlaczego inne są błędne:
-B. Cloud Armor: Chroni tylko ruch HTTP(S) przychodzący z zewnątrz. Nie widzi malware'u przesyłanego np. przez SSH czy ruch wewnętrzny (East-West).
-C. VPC Firewall: Blokuje porty/IP, ale nie 'rozumie' czy przesyłane pakiety to legalny ruch czy komunikacja trojana.
-D. Cloud Trace: Tylko dla wydajności.
-
-Konsensus społeczności ExamTopics: 100% na A. Cloud IDS to nowa jakość wglądu w bezpieczeństwo sieciowe GCP.</pre>
+B. Same subnet: Podsieci nie izolują ruchu w GCP.
+C. Same network route: Trasy określają kierunek (gdzie wysłać pakiet), a nie to, czy pakiet ma prawo przejść (to robi firewall).
+E. Priority 1001: Ta reguła byłaby słabsza niż Twoje reguły z priorytetem 1000, więc nie ona byłaby przyczyną problemu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie na forach zauważają, że Cloud IDS jest znacznie łatwiejszy we wdrożeniu niż Packet Mirroring (144) z własnym IDS-em, ponieważ Google dba o aktualizację bazy sygnatur zagrożeń i skalowanie infrastruktury analizującej.</p>
+<p><b>Sugerowana odpowiedź: AD</b></p>
+<p>Analiza konfliktów reguł firewall wymaga zrozumienia hierarchii priorytetów (Lower number wins).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewalls#priority" target="_blank">Firewall rules priority</a></li>
 </ul>
 </div>
 </div>

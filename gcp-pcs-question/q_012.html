@@ -60,7 +60,6 @@ A customer deploys an application to App Engine and needs to check for Open Web 
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google Cloud Audit Logs</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Web Security Scanner</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Anomaly Detection</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A customer deploys an application to App Engine and needs to check for Open Web 
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Web Security Scanner: Jest to usługa zaprojektowana specjalnie do automatycznego skanowania aplikacji webowych (App Engine, GKE, CE) pod kątem typowych podatności, takich jak XSS, Flash injection, Mixed Content i inne błędy z listy OWASP.
+C. Web Security Scanner: Jest to usługa wbudowana w GCP (część Security Command Center), która automatycznie skanuje aplikacje (App Engine, GKE, Compute Engine) pod kątem luk bezpieczeństwa z listy OWASP Top 10, takich jak Cross-Site Scripting (XSS) czy mieszana treść.
 
 Dlaczego inne są błędne:
-A. Cloud Armor: Jest to firewall L7 (WAF), który BLOKUJE ataki, ale sam w sobie nie jest skanerem podatności szukającym luk w kodzie aplikacji.
-B. Audit Logs: Rejestrują aktywność administracyjną i dostęp do danych, nie służą do testowania bezpieczeństwa kodu.
-D. Anomaly Detection: Część monitoringu wykrywająca nietypowe zachowania, ale nie jest narzędziem do systematycznego skanowania pod kątem OWASP.
-
-Konsensus społeczności ExamTopics: Prawie 100% głosów na C. Jest to jedyne natywne narzędzie DAST (Dynamic Application Security Testing) w GCP.</pre>
+A. Cloud Armor: To firewall aplikacyjny (WAF), który blokuje ataki, ale sam ich nie szuka w kodzie/konfiguracji aplikacji.
+B. Audit Logs: Rejestrują akcje administracyjne, a nie podatności w kodzie.
+D. Anomaly Detection: Wykrywa nietypowe zachowania, ale nie jest dedykowanym skanerem OWASP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Web Security Scanner jest darmowy dla podstawowych skanów w App Engine. Wersja Premium (w SCC) oferuje szerszy zakres wykrywania podatności i wsparcie dla aplikacji za Load Balancerem.</p>
+<p>Web Security Scanner to 'managed vulnerability scanner' dedykowany dla aplikacji webowych w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview" target="_blank">Web Security Scanner overview</a></li>
 </ul>
 </div>
 </div>

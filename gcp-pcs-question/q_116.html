@@ -52,15 +52,14 @@
 <h2>Question 116 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Export logs to GCS. Error: log sinks don't support uniform bucket-level access. How to resolve?
+You are exporting application logs to Cloud Storage. You encounter an error message that the log sinks don't support uniform bucket-level access policies. How should you resolve this error?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Change access control model for bucket.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Update sink destination.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Add logging.logWriter role to bucket.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Add logging.bucketWriter role to bucket.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Change the access control model for the bucket</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Update your sink with the correct bucket destination.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Add the roles/logging.logWriter Identity and Access Management (IAM) role to the bucket for the log sink identity.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Add the roles/logging.bucketWriter Identity and Access Management (IAM) role to the bucket for the log sink identity.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -76,27 +75,24 @@ Export logs to GCS. Error: log sinks don't support uniform bucket-level access. 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A. (Uwaga: To pytanie historyczne, obecnie Cloud Logging wspiera UBLA).
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Change to Fine-grained access: Starsze wersje mechanizmu eksportu logów (Sink) wymagały użycia list ACL na poziomie pojedynczych obiektów (plików logów), aby poprawnie zapisywać dane. Uniform Bucket-Level Access (UBLA) wyłącza ACL, co powodowało błąd. Rozwiązaniem było przełączenie bucketu na model 'Fine-grained'.
+A. Change the access control model for the bucket: Błąd wynika z tego, że eksport logów (log sinks) do Cloud Storage historycznie wymagał wsparcia dla ACL (Object-level access). Jeśli bucket ma włączone 'Uniform bucket-level access', starsze mechanizmy logowania mogą mieć problem z zapisem. Zmiana na model 'fine-grained' (ACL enabled) rozwiązuje ten specyficzny problem techniczny. (Uwaga: Nowsze wersje GCP poprawiają to, ale w kontekście egzaminu to standardowa odpowiedź).
 
 Dlaczego inne są błędne:
-B. Update destination: Zmiana celu nie rozwiązuje problemu konfiguracji uprawnień na buckecie GCS.
-C, D: Nadanie roli IAM jest poprawne w nowym modelu, ale pytanie opisuje konkretny błąd techniczny ('sinks don't support uniform...'), którego jedyną solucją w tamtym czasie było wyłączenie uniform access.
-
-Konsensus społeczności ExamTopics: Większość na A ze względu na historyczny kontekst pytania. Warto jednak wiedzieć, że dzisiaj (2024+) opcja C/D byłaby bardziej pożądana.</pre>
+B. Bucket destination: Adres jest poprawny, błąd dotyczy polityki dostępu.
+C, D. IAM roles: Nawet jeśli dodasz rolę, błąd 'doesn't support uniform access' wskazuje na niekompatybilność modelu uprawnień bucketu z mechanizmem sinka.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Google stale aktualizuje swoje usługi. Zawsze zwracaj uwagę, czy pytanie dotyczy 'ograniczenia technicznego' (które może być stare) czy 'najlepszej praktyki' (która ewoluuje).</p>
+<p>Log sinks wymagają specyficznych uprawnień do zapisu, które czasem gryzą się z restrykcyjnym modelem Uniform Access.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/export/using_exported_logs" target="_blank">https://cloud.google.com/logging/docs/export/using_exported_logs</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/export/configure_export_v2#dest-auth" target="_blank">Permissions for log sinks</a></li>
 </ul>
 </div>
 </div>

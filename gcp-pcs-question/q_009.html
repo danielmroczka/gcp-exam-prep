@@ -60,7 +60,6 @@ A company has been running their application on Compute Engine. A bug in the app
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create an Alerting Policy in Stackdriver using the CPU usage metric. Set the threshold to 80% to be notified when the CPU usage goes above this 80%.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Log every execution of the script to Stackdriver Logging. Create a User-defined metric in Stackdriver Logging on the logs, and create a Stackdriver Dashboard displaying the metric.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Log every execution of the script to Stackdriver Logging. Configure BigQuery as a log sink, and create a BigQuery scheduled query to count the number of executions in a specific timeframe.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A company has been running their application on Compute Engine. A bug in the app
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Process Health Alert: Ta polityka monitoruje, czy dany proces (aplikacja) żyje. Jeśli haker uruchomi skrypt powodujący crash, proces zniknie, a Stackdriver (Cloud Monitoring) natychmiast wyśle powiadomienie (Email/SMS/PagerDuty).
+A. Process Health: Ta funkcja w Stackdriver (teraz Cloud Monitoring) pozwala monitorować czy dany proces działa. Jeśli proces aplikacji (który był crashowany przez skrypt) przestanie działać, zostanie wygenerowany alert.
 
 Dlaczego inne są błędne:
-B. CPU usage: Crash może nastąpić przy niskim zużyciu CPU (np. brak pamięci).
-C. User-defined metric: Stworzy dashboard, ale dashboard to nie alert. Nikt nie patrzy w dashboard 24/7.
-D. BigQuery: Rozwiązanie analityczne, bardzo wolne (scheduled query co godzinę to nie jest powiadomienie o incydencie w czasie rzeczywistym).
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. To najszybsza metoda wykrycia 'padu' usługi.</pre>
+B. CPU Usage: Atak może nie powodować wysokiego CPU przed crashem.
+C. User-defined metric + Dashboard: Dashboard tylko pokazuje dane, nie wysyła powiadomień (alertów).
+D. Log sink + BigQuery: BigQuery nie nadaje się do powiadomień w czasie rzeczywistym.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Niektórzy użytkownicy forów argumentują, że opcja C byłaby dobra do liczenia prób ataku. Jednak zadanie wyraźnie mówi: 'get notified' (zostań powiadomiony). W ekosystemie GCP 'Notification' = 'Alerting Policy'. Opcja A to jedyny gotowy automat do tego celu.</p>
+<p>Zamiast monitorować symptom (CPU), lepiej monitorować stan samej aplikacji (Process Health) lub konkretne logi błędów za pomocą log-based alerts.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/monitoring/alerts/types-of-conditions#process-health" target="_blank">https://cloud.google.com/monitoring/alerts/types-of-conditions#process-health</a></li>
-
+<li><a href="https://cloud.google.com/monitoring/alerts" target="_blank">Cloud Monitoring Alerting</a></li>
 </ul>
 </div>
 </div>

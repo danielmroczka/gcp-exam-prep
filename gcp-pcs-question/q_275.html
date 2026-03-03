@@ -52,15 +52,14 @@
 <h2>Question 275 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant project access to support engineers from two partner organizations using their own IdP credentials. What to do?
+Your organization is migrating business critical applications to Google Cloud across multiple projects. You only have the required IAM permission at the Google Cloud organization level. You want to grant project access to support engineers from two partner organizations using their existing identity provider (IdP) credentials. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Two SSO profiles Cloud Identity.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Manual users in groups.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Two workforce identity pools.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> GCDS sync.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create two single sign-on (SSO) profiles for the internal and partner IdPs by using SSO for Cloud Identity.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create users manually by using the Google Cloud console. Assign the users to groups.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create two workforce identity pools for the partner IdPs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Sync user identities from their existing IdPs to Cloud Identity by using Google Cloud Directory Sync (GCDS).</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,18 +78,22 @@ Grant project access to support engineers from two partner organizations using t
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Workforce Identity Federation: To nowoczesna usługa pozwalająca na bezpośrednią federację zewnętrznych IdP z Twoją organizacją bez potrzeby tworzenia kont użytkowników w Twoim katalogu.</pre>
+C. Workforce identity pools: Jest to nowa funkcja Google Cloud (następca tradycyjnej federacji dla pracowników), która pozwala na przyznanie dostępu do konsoli i API Google Cloud bezpośrednio użytkownikom z zewnętrznych systemów tożsamości (Azure AD, Okta, itp.) BEZ konieczności synchronizowania ich kont do Cloud Identity (no-sync model). Jest to idealne dla partnerów, ponieważ ich konta żyją tylko w ich własnym systemie.
+
+Dlaczego inne są błędne:
+A. SSO for Cloud Identity: Wymaga wcześniejszego 'istnienia' (zsynchronizowania) konta w Cloud Identity, co przeczy wymogowi 'using their existing credentials' bez nadmiarowej pracy.
+B. Manual users: Nie skaluje się i nie zapewnia bezpieczeństwa (brak powiązania z IdP partnera).
+D. GCDS: Wymaga fizycznej synchronizacji kont, co jest przeciwieństwem nowoczesnego modelu federacyjnego typu workforce pool.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Dzięki WIF, jeśli pracownik partnera zostanie zwolniony, natychmiast traci dostęp do Twojego GCP.</p>
+<p>Workforce Identity Federation pozwala na dostęp do GCP bez tworzenia 'cieni' użytkowników (shadow accounts) w Cloud Identity.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workforce-identity-federation</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">Workforce Identity Federation</a></li>
 </ul>
 </div>
 </div>

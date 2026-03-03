@@ -52,15 +52,14 @@
 <h2>Question 51 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You want to ensure that only trusted container images are deployed to GKE. Which service should you use?
+You want to limit the images that can be used as the source for boot disks. These images will be stored in a dedicated project. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Container Analysis</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Binary Authorization</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Build</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Artifact Registry</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use the Organization Policy Service to create a compute.trustedimageProjects constraint on the organization level. List the trusted project as the whitelist in an allow operation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the Organization Policy Service to create a compute.trustedimageProjects constraint on the organization level. List the trusted projects as the exceptions in a deny operation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> In Resource Manager, edit the project permissions for the trusted project. Add the organization as member with the role: Compute Image User.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> In Resource Manager, edit the organization permissions. Add the project ID as member with the role: Compute Image User.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ You want to ensure that only trusted container images are deployed to GKE. Which
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ You want to ensure that only trusted container images are deployed to GKE. Which
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Binary Authorization: Jest to usługa kontroli wdrożeń (enforcement), która fizycznie ZABLOKUJE próbę uruchomienia kontenera w GKE, jeśli nie posiada on cyfrowego podpisu (atestacji) potwierdzającego, że obraz jest zaufany i przeszedł testy.
+A. Organization Policy: compute.trustedimageProjects: Jest to polityka organizacji, która pozwala na zdefiniowanie 'białej listy' (whitelist) projektów, z których użytkownicy mogą pobierać obrazy do tworzenia maszyn VM. Skonfigurowanie tego na poziomie organizacji skutecznie blokuje używanie niezweryfikowanych lub publicznych obrazów.
 
 Dlaczego inne są błędne:
-A. Container Analysis: Służy do skanowania obrazów pod kątem podatności (Vulnerability Scanning). Dostarcza informacji, ale sama w sobie nie blokuje wdrożenia. Binary Authorization używa informacji z Container Analysis do podjęcia decyzji.
-C. Cloud Build: System CI/CD. Może budować i podpisywać obrazy, ale to nie on pilnuje tego, co faktycznie dzieje się w klastrze GKE.
-D. Artifact Registry: Repozytorium obrazów. Może przechowywać zaufane obrazy, ale nie kontroluje procesu ich uruchamiania.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Binary Authorization to jedyne narzędzie do aktywnego blokowania niezatwierdzonych kontenerów.</pre>
+B. Exceptions in deny operation: To podejście jest trudniejsze w utrzymaniu (musiałbyś blokować wszystko oprócz...). Standardem dla trusted images jest whitelist (allow).
+C, D. Compute Image User: Ta rola IAM daje uprawnienie do używania obrazu, ale nie 'zabrania' używania innych obrazów (z innych projektów). Tylko polityka organizacji wymusza restrykcję.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> BinAuth pozwala na tworzenie reguł typu: 'obraz musi być podpisany przez skaner bezpieczeństwa ORAZ przez menedżera QA' przed trafieniem na produkcję.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Zaufane obrazy (Trusted Images) to kluczowa kontrola bezpieczeństwa w dużych przedsiębiorstwach korzystających z GCE.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>
-
+<li><a href="https://cloud.google.com/compute/docs/images/restricting-root-disk-image-creation" target="_blank">Restricting image use with Org Policy</a></li>
 </ul>
 </div>
 </div>

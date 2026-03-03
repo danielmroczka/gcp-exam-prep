@@ -52,16 +52,15 @@
 <h2>Question 145 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Data at rest residency within specific geographic boundaries. Recommendation?
+You are a consultant for an organization that is considering migrating their data from its private cloud to Google Cloud. The organization's compliance team is not familiar with Google Cloud and needs guidance on how compliance requirements will be met on Google Cloud. One specific compliance requirement is for customer data at rest to reside within specific geographic boundaries. Which option should you recommend for the organization to meet their data residency requirements on Google Cloud?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Organization Policy constraints.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Shielded VMs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> ACLs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Geolocation access controls.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Cloud Armor.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Organization Policy Service constraints</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Shielded VM instances</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Access control lists</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Geolocation access controls</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Google Cloud Armor</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,22 @@ Data at rest residency within specific geographic boundaries. Recommendation?
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Organization Policy constraints: Ograniczenie `gcp.resourceLocations` jest jedynym systemowym mechanizmem w GCP, który pozwala administratorowi centralnie wymusić lokalizację fizyczną danych (regiony/strefy) dla wszystkich usług (Storage, Compute, SQL).
+A. Organization Policy Service constraints: GCP posiada specyficzne polityki (constraints) takie jak `gcp.resourceLocations`. Pozwala ona na zdefiniowanie 'białej listy' lokalizacji (regionów), w których można tworzyć zasoby. To najskuteczniejsza metoda wymuszenia rezydencji danych na poziomie całej organizacji.
 
 Dlaczego inne są błędne:
-B. Shielded VMs: Chronią integralność kernela i bootloadera, nie mają wpływu na to, w którym kraju stoi serwer.
-C. ACLs: Zarządzają uprawnieniami dostępu do plików, a nie ich lokalizacją fizyczną.
-D. Geolocation access: Służy do blokowania dostępu użytkownikom z danych krajów, ale dane firmy mogą nadal leżeć w innym kraju (to nie jest residency).
-E. Cloud Armor: Firewall L7, nie kontroluje miejsca składowania danych.
-
-Konsensus społeczności ExamTopics: 100% na A. Residency = Org Policy w terminologii GCP.</pre>
+B. Shielded VM: Chronią integralność systemu operacyjnego, nie mają związku z lokalizacją danych.
+C. ACL: Kontrolują dostęp osób, nie lokalizację zasobów.
+D. Geolocation access controls: Zazwyczaj blokują dostęp użytkowników z danych krajów, a nie fizyczne miejsce składowania danych w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Polityka ta działa prewencyjnie. Jeśli deweloper spróbuje stworzyć bucket w `us-central1`, a dozwolone jest tylko `europe-west1`, otrzyma błąd 'Policy violation'.</p>
+<p>Polityki organizacji to fundament 'Data Sovereignty' i compliance w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">Resource Location Restriction</a></li>
 </ul>
 </div>
 </div>

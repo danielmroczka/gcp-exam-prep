@@ -52,15 +52,14 @@
 <h2>Question 240 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-What is the primary benefit of using Google Cloud Access Approval with Cloud KMS?
+Your customer has an on-premises Public Key Infrastructure (PKI) with a certificate authority (CA). You need to issue certificates for many HTTP load balancer frontends. The on-premises PKI should be minimally affected due to many manual processes, and the solution needs to scale. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate key rotation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide a way to approve or deny requests by Google personnel to use your keys for cryptographic operations.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage IAM roles for KMS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To protect against DDoS.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Certificate Manager to issue Google managed public certificates and configure it at HTTP the load balancers in your infrastructure as code (IaC).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use a subordinate CA in the Google Certificate Authority Service from the on-premises PKI system to issue certificates for the load balancers.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Certificate Manager to import certificates issued from on-premises PKI and for the frontends. Leverage the gcloud tool for importing.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use the web applications with PKCS12 certificates issued from subordinate CA based on OpenSSL on-premises. Use the gcloud tool for importing. Use the External TCP/UDP Network load balancer instead of an external HTTP Load Balancer.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,23 +78,22 @@ What is the primary benefit of using Google Cloud Access Approval with Cloud KMS
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Access Approval (KMS): Jeśli pracownik Google musi użyć Twojego klucza (np. w procesie odzyskiwania danych), musi poprosić o Twoją ZGODĘ. To najwyższy poziom kontroli operacyjnej nad kluczami szyfrującymi.
+B. Subordinate CA in Google Certificate Authority Service: To rozwiązanie pozwala na zautomatyzowane wydawanie certyfikatów w chmurze przy jednoczesnym zachowaniu 'łańcucha zaufania' do Twojego on-premises Root CA. Tworzysz Subordinate CA w GCP (managed service), podpisujesz go swoim Root CA on-premises raz, a następnie GCP może automatycznie i masowo wystawiać certyfikaty dla Load Balancerów bez ręcznej ingerencji zespołu PKI.
 
 Dlaczego inne są błędne:
-A, C, D: Jak w poprzednich pytaniach o Access Approval (200).
-
-Konsensus społeczności ExamTopics: 100% na B. Kontrola nad ludźmi Google = Access Approval.</pre>
+A. Google managed public certificates: Służą do domen publicznych, nie są powiązane z Twoim wewnętrznym PKI.
+C. Import certificates: Bardzo pracochłonne (manualne odnawianie i import przy każdym certyfikacie), nie skaluje się.
+D. PKCS12 + Network LB: Skomplikowane i nieefektywne rozwiązanie dla problemu certyfikatów na Load Balancerze HTTP(S).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach podkreślają: CMEK + Access Approval (B) to duet, który sprawia, że Google staje się jedynie 'wynajętym sejfem', do którego tylko TY masz klucz otwierający dostęp dla obsługi.</p>
+<p>Certificate Authority Service (CAS) pozwala na przeniesienie ciężaru operacyjnego PKI do chmury przy zachowaniu pełnej zgodności z polityką firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/access-approval/docs/overview" target="_blank">https://cloud.google.com/access-approval/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/certificate-authority-service/docs/overview" target="_blank">Certificate Authority Service overview</a></li>
 </ul>
 </div>
 </div>

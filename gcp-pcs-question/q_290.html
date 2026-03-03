@@ -52,15 +52,14 @@
 <h2>Question 290 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Restriction for BigQuery in a folder. Analytics team manage restrictions only at folder level. What to do?
+You are implementing communications restrictions for specific services in your Google Cloud organization. Your data analytics team works in a dedicated folder. You need to ensure that access to BigQuery is controlled for that folder and its projects. The data analytics team must be able to control the restrictions only at the folder level. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Org-level service perimeter, ACM Editor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Scoped policy on folder with service perimeter, ACM Editor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Hierarchical firewall policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Restrict Resource Service Usage org policy.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an organization-level access policy with a service perimeter to restrict BigQuery access. Assign the data analytics team the Access Context Manager Editor role on the access policy to allow the team to configure the access policy.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a scoped policy on the folder with a service perimeter to restrict BigQuery access. Assign the data analytics team the Access Context Manager Editor role on the scoped policy to allow the team to configure the scoped policy.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Define a hierarchical firewall policy on the folder to deny BigQuery access. Assign the data analytics team the Compute Organization Firewall Policy Admin role to allow the team to configure rules for the firewall policy.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enforce the Restrict Resource Service Usage organization policy constraint on the folder to restrict BigQuery access. Assign the data analytics team the Organization Policy Administrator role to allow the team to manage exclusions within the folder.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Restriction for BigQuery in a folder. Analytics team manage restrictions only at
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Scoped Access Policies: Pozwalają one na delegowanie zarządzania perymetrami VPC Service Controls do konkretnych folderów. Zespół analityczny dostaje rolę ACM Editor TYLKO na swojej polityce 'scoped', co pozwala im na izolację BigQuery bez dostępu do globalnych ustawień firmy.
+B. Scoped policy on the folder + ACM Editor: Wersja 2 VPC Service Controls pozwala na tworzenie 'Scoped Policies'. Możesz stworzyć politykę bezpieczeństwa, która dotyczy tylko konkretnego Folderu. Nadanie zespołowi analitycznemu roli 'Access Context Manager Editor' TYLKO do tej konkretnej polityki (scoped policy) pozwala im na samodzielne zarządzanie obwodami wokół BigQuery w ich folderze, nie dając im uprawnień do polityk w innych częściach firmy.
 
 Dlaczego inne są błędne:
-A. Org-level: Narusza zasadę 'least privilege' i autonomii zespołu.
-C. Firewall: Nie chroni API BigQuery (to rola VPC SC).
-D. Restrict Service Usage: Blokuje włączenie usługi, a nie dostęp sieciowy do danych wewnątrz niej.
-
-Konsensus społeczności ExamTopics: 100% na B. Scoped policies to klucz do delegowanego bezpieczeństwa w Enterprise.</pre>
+A. Organization-level policy: Zespół analityczny mógłby psuć obwody w innych działach (brak izolacji uprawnień).
+C. Hierarchical firewall: Blokuje sieć, a VPC SC (B) chroni warstwę API BigQuery, co jest właściwsze dla kontroli dostępu do samej usługi danych.
+D. Org Policy: Służy do blokowania włączenia całej usługi, a nie do precyzyjnego sterowania obwodami bezpieczeństwa wokół danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Dzięki Scoped Policies możesz uniknąć 'wąskiego gardła' w centralnym zespole IT, dając zaufanym zespołom kontrolę nad ich własnymi granicami danych.</p>
+<p>Scoped Policies w Access Context Manager umożliwiają delegowane zarządzanie obwodami bezpieczeństwa w dużych organizacjach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/access-context-manager/docs/scoped-access-policies" target="_blank">https://cloud.google.com/access-context-manager/docs/scoped-access-policies</a></li>
-
+<li><a href="https://cloud.google.com/access-context-manager/docs/scoped-policies" target="_blank">Scoped policies overview</a></li>
 </ul>
 </div>
 </div>

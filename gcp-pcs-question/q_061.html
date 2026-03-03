@@ -52,15 +52,14 @@
 <h2>Question 61 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to ensure that specific sensitive data in a BigQuery table is only visible to authorized users. What is the most granular way to achieve this?
+A customer wants to deploy a large number of 3-tier web applications on Compute Engine. How should the customer ensure authenticated network separation between the different tiers of the application?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Dataset-level permissions</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Table-level permissions</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Row-level security</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Column-level security using policy tags</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Run each tier in its own Project, and segregate using Project labels.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Run each tier with a different Service Account (SA), and use SA-based firewall rules.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Run each tier in its own subnet, and use subnet-based firewall rules.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Run each tier with its own VM tags, and use tag-based firewall rules.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ You need to ensure that specific sensitive data in a BigQuery table is only visi
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ You need to ensure that specific sensitive data in a BigQuery table is only visi
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Column-level security: To najbardziej szczegółowa metoda ochrony danych wewnątrz tabeli BigQuery. Używając tagów polityk (policy tags) z Data Catalog, możesz zablokować dostęp do wybranych kolumn (np. numer telefonu) dla konkretnych grup użytkowników, podczas gdy nadal mogą oni pracować na pozostałych kolumnach tej samej tabeli.
+B. Service Account (SA) based firewall rules: W GCP najlepszą praktyką separacji warstw aplikacji jest przypisanie każdej warstwie (frontend, backend, db) unikalnego konta serwisowego. Reguły firewall mogą wtedy zezwalać na ruch tylko między konkretnymi kontami serwisowymi. Jest to bezpieczniejsze niż tagi, ponieważ uprawnienie do używania konta serwisowego jest kontrolowane przez IAM i trudniejsze do sfałszowania niż zwykły tag sieciowy.
 
 Dlaczego inne są błędne:
-A. Dataset-level: Daje dostęp do całego zbioru danych (wszystkich tabel w środku). Najmniej granularne.
-B. Table-level: Daje dostęp do całej tabeli. Nadal mniej granularne niż pojedyncza kolumna.
-C. Row-level security: Pozwala na filtrowanie rekordów (wierszy), ale nie ukrywa konkretnych atrybutów (kolumn). Jeśli użytkownik ma dostęp do wiersza, widzi wszystkie jego kolumny.
-
-Konsensus społeczności ExamTopics: 100% na D. Policy tags to standardowe rozwiązanie dla ochrony PII w kolumnach.</pre>
+A. Projects + labels: Etykiety projektów nie służą do izolacji sieciowej.
+C. Subnets: Podsieci w GCP nie są granicami izolacji (ruch między nimi jest domyślnie routowalny).
+D. VM Tags: Tagi są łatwe w użyciu, ale mniej bezpieczne niż reguły oparte na Service Accounts (brak ścisłej kontroli IAM nad tym, kto może nadać jaki tag).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Column-level security jest niezależne od zapytania SQL. Nawet jeśli użytkownik ma rolę Data Viewer na tabeli, brak uprawnienia do tagu polityki uniemożliwi mu odczytanie zawartości chronionej kolumny.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>Używanie Service Accounts w regułach firewall to model 'Identity-based microsegmentation'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/bigquery/docs/column-level-security-intro" target="_blank">https://cloud.google.com/bigquery/docs/column-level-security-intro</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewalls#service_accounts" target="_blank">Firewall rules service account filtering</a></li>
 </ul>
 </div>
 </div>

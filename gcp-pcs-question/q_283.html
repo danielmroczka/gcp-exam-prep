@@ -52,15 +52,14 @@
 <h2>Question 283 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Identify common misconfigurations and compliance violations across organization in a dashboard. What to do?
+Your organization's use of the Google Cloud has grown substantially and there are many different groups using different cloud resources independently. You must identify common misconfigurations and compliance violations across the organization and track findings for remedial action in a dashboard. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Asset Inventory filter.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Secure Health Analytics in SCC Premium.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Audit Logs filters.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Event Threat Detection.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a filter set in Cloud Asset Inventory to identify service accounts with high privileges and IAM principals with Gmail domains.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Scan and alert vulnerabilities and misconfigurations by using Secure Health Analytics detectors in Security Command Center Premium.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Set up filters on Cloud Audit Logs to flag log entries for specific, risky API calls, and display the calls in a Cloud Log Analytics dashboard.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Alert and track emerging attacks detected in your environment by using Event Threat Detection detectors.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Identify common misconfigurations and compliance violations across organization 
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Security Health Analytics (SHA): To moduł SCC Premium dedykowany do 'Posture Management'. Automatycznie skanuje on zasoby (bucket, VM, IAM) pod kątem błędów (np. brak MFA, publiczne porty) i prezentuje je w czytelnym dashboardzie Compliance.
+B. Security Health Analytics (SCC Premium): Jest to dedykowana usługa do wykrywania błędów w konfiguracji (misconfigurations) i naruszeń zgodności (compliance violations) w Google Cloud. Automatycznie skanuje ona zasoby (np. otwarte firewalle, brak szyfrowania, publiczne buckety) i prezentuje wyniki w centralnym dashboardzie SCC, co dokładnie odpowiada potrzebom administratora.
 
 Dlaczego inne są błędne:
-A. Asset Inventory: To tylko lista zasobów, nie posiada silnika analizy podatności.
-C. Audit Logs: Pokazują historię zmian, ale nie dają gotowej oceny stanu bezpieczeństwa 'na teraz'.
-D. Event Threat Detection: Szuka aktywnych włamań (malware, mining), a nie błędów w konfiguracji (compliance).
-
-Konsensus społeczności ExamTopics: 100% na B. SHA to fundament widoczności bezpieczeństwa w GCP.</pre>
+A. Cloud Asset Inventory filter: Wymaga ręcznego budowania filtrów i nie wykrywa 'podatności' automatycznie, tylko raportuje stan zasobów.
+C. Audit Logs filter: Logi mówią 'co się stało' (zdarzenia), ale SCC (B) mówi 'co jest źle' (stan konfiguracji), co jest lepszym podejściem do identyfikacji misconfigurations.
+D. Event Threat Detection: Skupia się na wykrywaniu aktywnych ATAKÓW (np. mining, brute-force), a nie błędów w konfiguracji (które same w sobie nie są atakami, ale mogą do nich prowadzić).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> SHA wspiera standardy takie jak CIS, NIST i PCI DSS, automatycznie przypisując błędy do konkretnych wymogów tych norm.</p>
+<p>Security Health Analytics to 'automatyczny audytor' Twojej infrastruktury w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview" target="_blank">Security Health Analytics detectors</a></li>
 </ul>
 </div>
 </div>

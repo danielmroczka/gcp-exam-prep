@@ -52,7 +52,7 @@
 <h2>Question 102 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Small startup office manager needs to match payments to invoices and create billing alerts. Minimal permissions. Which two IAM roles?
+An office manager at your small startup company is responsible for matching payments to invoices and creating billing alerts. For compliance reasons, the office manager is only permitted to have the Identity and Access Management (IAM) permissions necessary for these tasks. Which two IAM roles should the office manager have? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
@@ -61,7 +61,6 @@ Small startup office manager needs to match payments to invoices and create bill
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Billing Account Viewer</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Billing Account Costs Manager</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Billing Account User</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ Small startup office manager needs to match payments to invoices and create bill
 <pre>Odpowiedź: CD.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Billing Account Viewer: Pozwala na przeglądanie faktur, historii płatności i dopasowywanie ich do wydatków (wymóg 'match payments to invoices').
-D. Billing Account Costs Manager: Pozwala na zarządzanie budżetami i tworzenie alertów budżetowych (wymóg 'create billing alerts').
+C. Billing Account Viewer: Pozwala na podgląd faktur i dopasowywanie płatności (matching payments to invoices).
+D. Billing Account Costs Manager: Pozwala na zarządzanie budżetami i tworzenie alertów bilingowych (creating billing alerts).
 
 Dlaczego inne są błędne:
-A. Organization Administrator: Zbyt szerokie uprawnienia, pozwalające na zarządzanie całą firmą.
-B. Project Creator: Pozwala na wydawanie pieniędzy poprzez tworzenie nowych projektów, co nie jest potrzebne do zarządzania fakturami.
-E. Billing Account User: Pozwala na przypisywanie konta rozliczeniowego do projektów, co wykracza poza rolę office managera zajmującego się fakturami.
-
-Konsensus społeczności ExamTopics: 100% na CD. To klasyczny podział ról finansowych wg zasady najniższych uprawnień.</pre>
+A. Organization Administrator: Zbyt wysokie uprawnienia (może wszystko w całej chmurze).
+B. Project Creator: Nie ma związku z zadaniami finansowymi/bilingowymi.
+E. Billing Account User: Pozwala na podpinanie projektów do konta bilingowego, co nie jest zadaniem office managera w tym scenariuszu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CD</b></p>
-<p><b>Głęboka analiza:</b> Wiele osób myli rolę Viewer z Costs Manager. Viewer widzi CO się stało, ale tylko Costs Manager może ustawić progi powiadomień (alerts).</p>
+<p>Zasada najmniejszych uprawnień (Least Privilege) wymaga precyzyjnego dobierania ról bilingowych do funkcji pełnionych w firmie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/billing/docs/how-to/billing-access" target="_blank">https://cloud.google.com/billing/docs/how-to/billing-access</a></li>
-
+<li><a href="https://cloud.google.com/billing/docs/how-to/billing-access" target="_blank">Billing IAM roles</a></li>
 </ul>
 </div>
 </div>

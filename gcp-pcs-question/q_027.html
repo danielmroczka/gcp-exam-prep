@@ -52,15 +52,14 @@
 <h2>Question 27 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Your team wants visibility into all projects and wants to organize projects based on business units. Which strategy should you use?
+A customer's company has multiple business units. Each business unit operates independently, and each has their own engineering group. Your team wants visibility into all projects created within the company and wants to organize their Google Cloud Platform (GCP) projects based on different business units. Each business unit also requires separate sets of IAM permissions. Which strategy should you use to meet these needs?
 </div>
 <div class="question-choices-container">
 <ul>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an organization node, and assign folders for each business unit.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Establish standalone projects with gmail.com accounts.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use labels for business units.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Assign resources in a VPC for each unit.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Establish standalone projects for each business unit, using gmail.com accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Assign GCP resources in a project, with a label identifying which business unit owns the resource.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Assign GCP resources in a VPC for each business unit to separate network access.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Your team wants visibility into all projects and wants to organize projects base
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Folders under Organization Node: Hierarchia GCP (Organizacja -> Foldery -> Projekty) to jedyny sposób na strukturalne uporządkowanie zasobów. Foldery pozwalają na grupowanie projektów wg jednostek biznesowych i delegowanie uprawnień IAM na poziomie tych grup.
+A. Organization Node + Folders: Struktura Organizacja -> Foldery (jednostki biznesowe) -> Projekty jest najlepszym sposobem na odwzorowanie struktury firmy w GCP. Foldery pozwalają na dziedziczenie uprawnień IAM i polityk specyficznych dla danej jednostki oraz zapewniają widoczność wszystkich zasobów pod węzłem organizacji.
 
 Dlaczego inne są błędne:
-B. gmail.com accounts: Konta prywatne są niezarządzalne w firmie i stanowią ogromne ryzyko bezpieczeństwa (brak centralnej kontroli).
-C. Labels: Etykiety są przydatne do filtrowania kosztów (billing), ale nie dają struktury hierarchicznej ani nie pozwalają na dziedziczenie uprawnień IAM.
-D. VPC: Sieć VPC to element techniczny, nie służy do organizacji projektów ani zarządzania widocznością uprawnień w skali firmy.
-
-Konsensus społeczności ExamTopics: Zdecydowane A. Foldery to fundament ładu (governance) w Google Cloud.</pre>
+B. Standalone projects with gmail.com: Brak centralnego zarządzania i bezpieczeństwa (Shadow IT).
+C. Labels only: Etykiety służą do bilingu i filtrowania, ale nie pozwalają na zarządzanie hierarchią uprawnień IAM.
+D. VPC per business unit: Rozwiązuje problem izolacji sieciowej, ale nie hierarchii zarządzania projektami i uprawnieniami administracyjnymi.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Posiadanie 'Organization Node' jest warunkiem koniecznym do używania folderów. Bez niego każdy projekt jest 'samotną wyspą' bez centralnego nadzoru.</p>
+<p>Zasób 'Folder' w Resource Managerze został stworzony właśnie po to, by grupować projekty według działów firmy lub środowisk.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/creating-managing-folders" target="_blank">https://cloud.google.com/resource-manager/docs/creating-managing-folders</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/creating-managing-folders" target="_blank">Using folders for resource organization</a></li>
 </ul>
 </div>
 </div>

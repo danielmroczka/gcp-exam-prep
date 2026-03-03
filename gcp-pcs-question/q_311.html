@@ -52,15 +52,14 @@
 <h2>Question 311 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-automatically scan deployment pipeline for vulnerabilities and ensure only scanned/verified containers run. What to do?
+Your organization is worried about recent news headlines regarding application vulnerabilities in production applications that have led to security breaches. You want to automatically scan your deployment pipeline for vulnerabilities and ensure only scanned and verified containers can run in the environment. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> K8s RBAC source of truth.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> gcloud describe vulnerability in CI/CD.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Code feedback.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Binary Authorization + attestations of scans.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Kubernetes role-based access control (RBAC) as the source of truth for cluster access by granting "container.clusters.get" to limited users. Restrict deployment access by allowing these users to generate a kubeconfig file containing the configuration access to the GKE cluster.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use gcloud artifacts docker images describe LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE_ID@sha256:HASH --show-package-vulnerability in your CI/CD pipeline, and trigger a pipeline failure for critical vulnerabilities.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enforce the use of Cloud Code for development so users receive real-time security feedback on vulnerable libraries and dependencies before they check in their code.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable Binary Authorization and create attestations of scans.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ automatically scan deployment pipeline for vulnerabilities and ensure only scann
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Binary Authorization + Attestations: Jest to kompletne, natywne rozwiązanie GCP. Proces polega na tym, że skaner (Container Analysis) po znalezieniu braku krytycznych podatności tworzy cyfrowy podpis (atestację). Binary Authorization w klastrze GKE sprawdza ten podpis przed uruchomieniem kontenera. Jeśli atestacji brak, wdrożenie jest automatycznie blokowane.
+D. Binary Authorization + scan attestations: To jest kompletne rozwiązanie typu 'Supply Chain Security'. 1. Obraz jest skanowany w potoku CI/CD. 2. Jeśli skan przejdzie pomyślnie, atestator (attestor) 'podpisuje' obraz. 3. Binary Authorization na poziomie GKE blokuje uruchomienie każdego kontenera, który nie posiada ważnego podpisu od Twojego atestatora.
 
 Dlaczego inne są błędne:
-A. K8s RBAC: Zarządza tym, co użytkownik może zrobić wewnątrz klastra, nie weryfikuje 'bezpieczeństwa' obrazu kontenera przed uruchomieniem.
-B. gcloud describe: Dostarcza informacji, ale sam w sobie nie stanowi mechanizmu blokady (enforcement). Musiałbyś sam dopisać całą logikę blokowania.
-C. Cloud Code: To wtyczka do IDE pomagająca programiście pisać kod, nie jest elementem wymuszania standardów w pipeline produkcyjnym.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. To standardowa architektura 'Secure Software Supply Chain'.</pre>
+A. RBAC: Kontroluje kto może wywołać API Kubernetes, ale nie sprawdza zawartości (CVE) obrazów kontenerowych.
+B. gcloud scan in CI/CD: Pozwala wykryć błąd i przerwać build, ale nie powstrzyma kogoś przed ręcznym wgraniem i uruchomieniem innego, zainfekowanego obrazu. Tylko Binary Authorization (D) pilnuje 'bramy' klastra.
+C. Cloud Code: Pomaga deweloperom, ale nie jest mechanizmem wymuszania (enforcement) na produkcji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Binary Authorization pozwala na zdefiniowanie polityki 'Require Attestations' od zaufanych skanerów, co gwarantuje, że nieprzebadany kod nigdy nie trafi na produkcję.</p>
+<p>Binary Authorization zapewnia, że tylko zweryfikowane i podpisane artefakty trafiają na produkcję.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>
-
+<li><a href="https://cloud.google.com/binary-authorization" target="_blank">Binary Authorization</a></li>
 </ul>
 </div>
 </div>

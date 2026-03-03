@@ -52,15 +52,14 @@
 <h2>Question 278 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-First time in GCP. Determine controls/policies and identify what Google manages. What to do?
+Your organization is preparing to build business services in Google Cloud for the first time. You must determine where to apply appropriate controls or policies. You must also identify what aspects of your cloud deployment are managed by Google. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Follow blueprints exactly.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Risk Manager report.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Subscribe to release notes.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Study shared responsibilities model.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Model your deployment on the Google Enterprise foundations blueprint. Follow the blueprint exactly and rely on the blueprint to maintain the posture necessary for your business.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the Risk Manager tool in the Risk Protection Program to generate a report on your cloud security posture. Obtain cyber insurance coverage.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Subscribe to the Google Cloud release notes to keep up on product updates and when new services are available. Evaluate new services for appropriate use before enabling their API.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Study the shared responsibilities model. Depending on your business scenario, you might need to consider your responsibilities based on the location of your business offices, your customers, and your data.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ First time in GCP. Determine controls/policies and identify what Google manages.
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Shared Responsibilities Model: Jest to fundamentalny koncept bezpieczeństwa chmurowego. Zrozumienie tego modelu pozwala inżynierowi dokładnie określić, gdzie kończy się rola Google (np. ochrona fizyczna serwerów), a gdzie zaczyna rola klienta (np. konfiguracja IAM i firewalli). Jest to pierwszy krok każdego planu bezpieczeństwa.
+D. Study the shared responsibilities model: To jest najważniejszy krok przy wchodzeniu do chmury. Model współdzielonej odpowiedzialności wyjaśnia, że Google dba o bezpieczeństwo 'OF the cloud' (sprzęt, data center), a klient o bezpieczeństwo 'IN the cloud' (konfiguracja, dane, uprawnienia). Zrozumienie tego podziału pozwala na prawidłowe zaadresowanie kontroli w Twoim specyficznym scenariuszu biznesowym.
 
 Dlaczego inne są błędne:
-A. Blueprints: Są pomocne, ale bez zrozumienia modelu (D) nie będziesz wiedział DLACZEGO dana konfiguracja jest bezpieczna i co faktycznie chroni.
-B. Risk Manager: To narzędzie finansowe/ubezpieczeniowe, nie jest bazą wiedzy o podziale obowiązków technicznych.
-C. Release notes: Informują o nowościach, a nie o podstawowych zasadach współpracy z dostawcą.
-
-Konsensus społeczności ExamTopics: 100% na D. Każdy kurs Security zaczyna się od tego modelu.</pre>
+A. Blueprint exactly: Blueprints są świetnym punktem startowym, ale każda firma ma inne wymagania regulacyjne (np. regiony danych), które wymagają dostosowania.
+B. Cyber insurance: To transfer ryzyka finansowego, a nie identyfikacja kontroli technicznych.
+C. Release notes: Ważne dla utrzymania systemów, ale nie pomaga w strategicznym podziale odpowiedzialności na początku drogi.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Pamiętaj: Google odpowiada za bezpieczeństwo CHMURY, Ty odpowiadasz za bezpieczeństwo W CHMURZE. Ten model zmienia się w zależności od usługi (IaaS vs PaaS vs SaaS).</p>
+<p>Zrozumienie granic odpowiedzialności dostawcy i klienta to klucz do sukcesu każdego audytu bezpieczeństwa chmurowego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>
-
+<li><a href="https://cloud.google.com/architecture/framework/security/shared-responsibility-model" target="_blank">Shared Responsibility Model</a></li>
 </ul>
 </div>
 </div>

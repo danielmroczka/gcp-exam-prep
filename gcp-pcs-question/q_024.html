@@ -56,11 +56,10 @@ A company's application is deployed with a user-managed Service Account key. You
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Run gcloud iam service-accounts enable-auto-rotate.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Run gcloud iam service-accounts keys rotate.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a new key, update the application, and delete the old key.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Store the old key as a backup.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Open Cloud Shell and run gcloud iam service-accounts enable-auto-rotate --iam-account=IAM_ACCOUNT.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Open Cloud Shell and run gcloud iam service-accounts keys rotate --iam-account=IAM_ACCOUNT --key=NEW_KEY.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a new key, and use the new key in the application. Delete the old key from the Service Account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a new key, and use the new key in the application. Store the old key on the system as a backup key.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ A company's application is deployed with a user-managed Service Account key. You
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Manual rotation process: Google nie oferuje automatycznej rotacji dla kluczy POBRANYCH (JSON keys). Zalecany proces to: 1. Stworzenie nowego klucza. 2. Wdrożenie go do aplikacji. 3. Upewnienie się, że aplikacja działa. 4. Skasowanie starego klucza.
+C. Create new key, use in app, delete old key: To jest standardowy proces bezpiecznej rotacji kluczy zarządzanych przez użytkownika (user-managed keys). 1. Tworzysz nowy klucz. 2. Aktualizujesz aplikację, aby go używała. 3. Dopiero gdy masz pewność, że nowym klucz działa, usuwasz stary klucz z IAM, aby nie mógł być już użyty.
 
 Dlaczego inne są błędne:
-A, B. Komendy enable-auto-rotate lub keys rotate nie istnieją w gcloud dla kluczy zarządzanych przez użytkownika. Google automatycznie rotuje tylko klucze, których NIE pobierasz (system-managed keys).
-D. Backup: Przechowywanie starych kluczy po rotacji jest niebezpieczne i sprzeczne z celem rotacji (zmniejszenie ryzyka przy wycieku).
-
-Konsensus społeczności ExamTopics: 100% na C. To standardowa procedura operacyjna dla kluczy SA.</pre>
+A. enable-auto-rotate: Google zarządza rotacją tylko dla kluczy, których sam pilnuje (system-managed). Dla kluczy pobranych przez użytkownika (JSON), to użytkownik musi przeprowadzić rotację.
+B. keys rotate: Komenda gcloud nie posiada funkcji 'rotate', która magicznie podmienia klucz w Twoim kodzie/pliku JSON.
+D. Store old key as backup: Przechowywanie starych kluczy zwiększa ryzyko ich wycieku i nie spełnia celu rotacji (którym jest unieważnienie starych credentials).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Najlepszą praktyką jest całkowite odejście od kluczy JSON na rzecz tożsamości instancji lub Workload Identity Federation, co eliminuje potrzebę manualnej rotacji.</p>
+<p>Rotacja kluczy to proces administracyjny polegający na wymianie 'secretu'. Najbezpieczniej jest zawsze najpierw 'dodać nowy', a potem 'usunąć stary' (metoda bez przestojów).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/key-rotation" target="_blank">https://cloud.google.com/iam/docs/key-rotation</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/key-rotation" target="_blank">Service account key rotation</a></li>
 </ul>
 </div>
 </div>

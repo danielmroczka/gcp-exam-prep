@@ -52,16 +52,15 @@
 <h2>Question 121 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Explore network flows and payload to aid investigations. Which product?
+You manage your organization's Security Operations Center (SOC). You currently monitor and detect network traffic anomalies in your Google Cloud VPCs based on packet header information. However, you want the capability to explore network flows and their payload to aid investigations. Which Google Cloud product should you use?
 </div>
 <div class="question-choices-container">
 <ul>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Marketplace IDS</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Flow Logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC SC logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Service Controls logs</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Packet Mirroring</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Cloud Armor DPI</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Google Cloud Armor Deep Packet Inspection</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ Explore network flows and payload to aid investigations. Which product?
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Packet Mirroring: Jest to jedyna natywna usługa w GCP, która pozwala na klonowanie PEŁNEGO ruchu sieciowego (w tym zawartości pakietów - payload) z wybranych instancji VM lub całych podsieci. Skopiowany ruch można wysłać do urządzenia trzeciego (np. IDS/IPS w Marketplace) w celu głębokiej inspekcji (Deep Packet Inspection).
+D. Packet Mirroring: Jest to funkcja w GCP, która kopiuje ruch z wybranych instancji (lub całych podsieci) i przesyła go do wybranego celu (np. kolektora IDS lub instancji analizującej). W przeciwieństwie do Flow Logs, które zawierają tylko nagłówki (metadata), Packet Mirroring pozwala na inspekcję pełnego ładunku (payload) pakietu, co jest niezbędne do głębokich dochodzeń SOC.
 
 Dlaczego inne są błędne:
-A. Marketplace IDS: To oprogramowanie (cel), ale potrzebuje ono METODY dostarczenia pakietów, którą jest właśnie Packet Mirroring.
-B. VPC Flow Logs: Rejestrują tylko metadane (nagłówki: skąd, dokąd, ile danych), ale celowo NIE rejestrują payloadu (treści pakietu).
-C. VPC SC logs: Dotyczą blokad na poziomie API usług Google (np. GCS), a nie ruchu sieciowego między maszynami VM.
-E. Cloud Armor DPI: Cloud Armor zajmuje się filtrowaniem ruchu HTTP(S) na brzegu sieci, nie jest narzędziem do ogólnej eksploracji payloadu wewnątrz VPC.
-
-Konsensus społeczności ExamTopics: 100% na D. Payload = Packet Mirroring w terminologii GCP.</pre>
+A. Marketplace IDS: To gotowe systemy, ale to Packet Mirroring (D) jest mechanizmem dostarczającym im dane.
+B. VPC Flow Logs: Zawierają tylko informacje o połączeniach (IP, porty), nie zawierają payloadu pakietów.
+C. VPC SC logs: Dotyczą blokad na poziomie API usług Google, nie ruchu sieciowego między VM.
+E. Cloud Armor DPI: Deep Packet Inspection w Cloud Armor służy do ochrony przed atakami webowymi, a nie do ogólnej eksploracji ruchu sieciowego w VPC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Packet Mirroring jest niezbędne dla celów kryminalistyki sieciowej (Forensics) i wykrywania intruzów, którzy przesyłają złośliwe dane wewnątrz dozwolonych sesji TCP.</p>
+<p>Packet Mirroring to 'chmurowy SPAN port', umożliwiający pełną analizę ruchu sieciowego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/packet-mirroring" target="_blank">https://cloud.google.com/vpc/docs/packet-mirroring</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/packet-mirroring" target="_blank">Packet Mirroring overview</a></li>
 </ul>
 </div>
 </div>

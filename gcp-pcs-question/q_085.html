@@ -52,15 +52,14 @@
 <h2>Question 85 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You want to synchronize security groups with email addresses from LDAP to Cloud IAM. What should you do?
+You are the Security Admin in your company. You want to synchronize all security groups that have an email address from your LDAP directory in Cloud IAM. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure GCDS to sync security groups using LDAP search rules with 'user email address' attribute.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure GCDS for bidirectional sync.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use a management tool for subset sync based on email.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Sync based on group object class attribute.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure Google Cloud Directory Sync to sync security groups using LDAP search rules that have "user email address" as the attribute to facilitate one-way sync.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure Google Cloud Directory Sync to sync security groups using LDAP search rules that have "user email address" as the attribute to facilitate bidirectional sync.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use a management tool to sync the subset based on the email address attribute. Create a group in the Google domain. A group created in a Google domain will automatically have an explicit Google Cloud Identity and Access Management (IAM) role.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use a management tool to sync the subset based on group object class attribute. Create a group in the Google domain. A group created in a Google domain will automatically have an explicit Google Cloud Identity and Access Management (IAM) role.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,21 @@ You want to synchronize security groups with email addresses from LDAP to Cloud 
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. GCDS search rules: Google Cloud Directory Sync pozwala na precyzyjne określenie, które grupy z LDAP mają zostać przeniesione do chmury. Filtrowanie po atrybucie adresu e-mail zapewnia, że zsynchronizowane zostaną tylko grupy, które mogą funkcjonować w ekosystemie Google (gdzie tożsamość oparta jest na e-mailu).
+A. GCDS with LDAP search rules (one-way): Google Cloud Directory Sync (GCDS) zawsze wykonuje synchronizację jednostronną (LDAP -> Google). Poprawna konfiguracja polega na zdefiniowaniu reguł wyszukiwania (Search Rules), które wyłuskają grupy posiadające atrybut email i przeniosą je do Cloud Identity.
 
 Dlaczego inne są błędne:
-B. Bidirectional sync: GCDS wspiera tylko synchronizację JEDNOSTRONNĄ (LDAP -> Google). Google nie pozwala na wypychanie zmian z chmury z powrotem do Twojego AD/LDAP tym narzędziem.
-C. Subset sync tool: Brzmi jak ogólnik, podczas gdy A precyzuje jak to zrobić w oficjalnym narzędziu GCDS.
-D. Object class attribute: Sama klasa obiektu (np. groupOfNames) nie gwarantuje, że grupa ma przypisany adres e-mail, co jest wymagane do jej poprawnego działania w IAM.
-
-Konsensus społeczności ExamTopics: Zdecydowane A. Skuteczna synchronizacja wymaga dobrze zdefiniowanych reguł wyszukiwania (Search Rules).</pre>
+B. Bidirectional sync: GCDS NIE wspiera synchronizacji dwukierunkowej (nie nadpisuje danych w LDAP).
+C, D. Automatically have IAM role: To nieprawda. Grupa utworzona w Google Cloud (nawet zsynchronizowana) jest pusta pod względem uprawnień - role IAM trzeba jej nadać ręcznie lub przez skrypt w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> GCDS to narzędzie działające w modelu 'state comparison'. Przed każdą synchronizacją generuje raport zmian, który administrator musi zatwierdzić.</p>
+<p>GCDS to narzędzie do replikacji tożsamości, a nie do zarządzania uprawnieniami IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/612003" target="_blank">https://support.google.com/a/answer/612003</a></li>
-
+<li><a href="https://support.google.com/a/answer/6161743" target="_blank">GCDS Group search rules</a></li>
 </ul>
 </div>
 </div>

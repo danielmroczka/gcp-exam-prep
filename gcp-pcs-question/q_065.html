@@ -52,15 +52,14 @@
 <h2>Question 65 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A customer has an analytics workload running on Compute Engine. Your team created an egress firewall rule to deny (priority 1000) all traffic to the internet. The instances now need to reach out to a public repository for updates. What should you do?
+A customer has an analytics workload running on Compute Engine that should have limited internet access. Your team created an egress firewall rule to deny (priority 1000) all traffic to the internet. The Compute Engine instances now need to reach out to the public repository to get security updates. What should your team do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an egress rule to allow traffic to the repository CIDR with priority > 1000.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create an egress rule to allow traffic to the repository CIDR with priority < 1000.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create an egress rule to allow traffic to the hostname with priority > 1000.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create an egress rule to allow traffic to the hostname with priority < 1000.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an egress firewall rule to allow traffic to the CIDR range of the repository with a priority greater than 1000.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create an egress firewall rule to allow traffic to the CIDR range of the repository with a priority less than 1000.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create an egress firewall rule to allow traffic to the hostname of the repository with a priority greater than 1000.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create an egress firewall rule to allow traffic to the hostname of the repository with a priority less than 1000.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ A customer has an analytics workload running on Compute Engine. Your team create
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Priority < 1000: W firewallu GCP niższy numer priorytetu oznacza WYŻSZĄ ważność reguły. Aby 'wyciąć' wyjątek z ogólnej blokady (deny, prio 1000), musisz stworzyć regułę allow z priorytetem np. 999. Reguły firewalla operują na zakresach IP (CIDR).
+B. Allow rule with priority < 1000: W firewallu GCP reguły o niższym numerze mają wyższy priorytet. Jeśli masz regułę 'Deny All' z priorytetem 1000, musisz stworzyć regułę 'Allow' z priorytetem np. 900 (mniejszym niż 1000), aby została ona sprawdzona jako pierwsza i zezwoliła na ruch do repozytorium.
 
 Dlaczego inne są błędne:
-A. Priority > 1000: Reguła o priorytecie np. 1001 zostanie przetworzona PO regule blokującej (1000), więc ruch i tak zostanie odrzucony.
-C, D. Hostname: Standardowy VPC Firewall nie wspiera filtrowania po nazwach domenowych (FQDN). Wymagałoby to Secure Web Proxy lub Cloud NGFW Enterprise.
-
-Konsensus społeczności ExamTopics: 100% na B. Podstawowa wiedza o priorytetach i adresacji IP w firewallu VPC.</pre>
+A. Priority > 1000: Reguła zostanie sprawdzona PO regule 'Deny All', więc ruch zostanie zablokowany.
+C, D. Hostname: Reguły firewall VPC w GCP działają tylko na adresach IP/CIDR, nie obsługują nazw domenowych (hostnames) bezpośrednio.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Priorytety w GCP mieszczą się w zakresie 0-65535. Reguły domniemane mają 65535. Twoje reguły zazwyczaj zaczynają się od 1000, co daje duży margines na dodawanie wyjątków 'nad' nimi (niższe numery).</p>
+<p>Zasada 'Lower number = Higher precedence' jest kluczowa dla poprawnego konfigurowania reguł firewall.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewalls#priority-order" target="_blank">https://cloud.google.com/vpc/docs/firewalls#priority-order</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewalls#priority" target="_blank">Firewall rules priority</a></li>
 </ul>
 </div>
 </div>

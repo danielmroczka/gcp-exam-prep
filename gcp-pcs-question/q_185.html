@@ -52,15 +52,14 @@
 <h2>Question 185 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Identify security misconfigurations like world-readable Cloud Storage buckets across the organization. Which tool?
+Your organization is moving virtual machines (VMs) to Google Cloud. You must ensure that operating system images that are used across your projects are trusted and meet your security requirements. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Security Command Center: Security Health Analytics</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Event Threat Detection</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Implement an organization policy to enforce that boot disks can only be created from images that come from the trusted image project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Implement an organization policy constraint that enables the Shielded VM service on all projects to enforce the trusted image repository usage.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a Cloud Function that is automatically triggered when a new virtual machine is created from the trusted image repository. Verify that the image is not deprecated.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Automate a security scanner that verifies that no common vulnerabilities and exposures (CVEs) are present in your trusted image repository.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Identify security misconfigurations like world-readable Cloud Storage buckets ac
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Security Health Analytics (SHA): To moduł SCC, który automatycznie skanuje konfigurację Twoich zasobów (Posture Management). Wykrywa on setki błędów, w tym publicznie dostępne buckety, i zgłasza je jako 'findings'.
+A. Org Policy: compute.trustedImageProjects: To jest standardowa i najskuteczniejsza metoda wymuszania użycia zaufanych obrazów w całej organizacji. Polityka ta blokuje możliwość tworzenia dysków bootujących z obrazów, które nie znajdują się w projektach wskazanych na 'białej liście' (np. Twoim centralnym repozytorium obrazów).
 
 Dlaczego inne są błędne:
-B. ETD: Szuka śladów ataków (np. mining, brute force) w logach, a nie błędów w Statycznej Konfiguracji.
-C. Flow Logs: Pokazują ruch, ale nie wiedzą czy bucket jest publiczny (ruch do bucketu to API, nie Flow Logi).
-D. Audit Logs: Powie Ci kto udostępnił bucket, ale nie daje zbiorczego dashboardu 'co jest źle teraz'.
-
-Konsensus społeczności ExamTopics: 100% na A. SHA to fundament widoczności bezpieczeństwa.</pre>
+B. Shielded VM: Zapewnia integralność bootowania, ale nie ogranicza źródła obrazu (można mieć Shielded VM z niezaufanego obrazu).
+C. Cloud Function: To metoda reaktywna - maszyna już powstała, zanim funkcja ją sprawdzi. Metoda A (polityka) zapobiega stworzeniu maszyny.
+D. Security scanner for CVE: Dobre dla higieny repozytorium, ale samo w sobie nie 'wymusza' na użytkownikach korzystania tylko z tego repozytorium.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wiele osób pyta: 'A co z Forseti?'. Wyjaśnienie: Forseti było prekursorem, ale obecnie SHA (A) jest wbudowanym, natywnym i wspieranym przez Google rozwiązaniem klasy Enterprise dostępnym w konsoli SCC.</p>
+<p>Wymuszanie użycia zaufanych obrazów za pomocą Org Policy to 'podstawowa higiena' bezpieczeństwa w GCE.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview</a></li>
-
+<li><a href="https://cloud.google.com/compute/docs/images/restricting-root-disk-image-creation" target="_blank">Trusted images policy</a></li>
 </ul>
 </div>
 </div>

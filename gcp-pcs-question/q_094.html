@@ -52,15 +52,14 @@
 <h2>Question 94 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect highly sensitive data in BigQuery. Operations team cannot read email addresses and names. These should only be available to HR. What should you do?
+You are responsible for protecting highly sensitive data in BigQuery. Your operations teams need access to this data, but given privacy regulations, you want to ensure that they cannot read the sensitive fields such as email addresses and first names. These specific sensitive fields should only be available on a need-to-know basis to the Human Resources team. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Data masking with DLP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Data redaction with DLP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Data inspection with DLP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Tokenization for Pseudonymization with DLP.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Perform data masking with the Cloud Data Loss Prevention API, and store that data in BigQuery for later use.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Perform data redaction with the Cloud Data Loss Prevention API, and store that data in BigQuery for later use.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Perform data inspection with the Cloud Data Loss Prevention API, and store that data in BigQuery for later use.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Perform tokenization for Pseudonymization with the Cloud Data Loss Prevention API, and store that data in BigQuery for later use.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Protect highly sensitive data in BigQuery. Operations team cannot read email add
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Tokenization/Pseudonymization: Pozwala na zastąpienie danych wrażliwych (np. imienia) unikalnym tokenem. Zespół Ops może pracować na tabeli, widząc tylko tokeny (co pozwala im np. na zliczanie unikalnych użytkowników), a HR posiada klucz pozwalający na odwrócenie procesu (re-identification) i zobaczenie prawdziwych danych.
+D. Tokenization for Pseudonymization: Tokenizacja (lub pseudonimizacja zachowująca format) zastępuje dane wrażliwe (email, imię) unikalnymi tokenami. Pozwala to operacyjnym zespołom pracować na danych (np. liczyć unikalnych użytkowników, łączyć tabele) bez widzenia realnej tożsamości osób. Zespół HR, posiadający klucz do 'detokenizacji', może odzyskać realne dane w razie potrzeby.
 
 Dlaczego inne są błędne:
-A. Data masking: To technika BigQuery (nie DLP API w tym sensie), która ukrywa dane, ale często nie jest tak elastyczna w scenariuszach 'odwracalności' dla wybranych grup jak pełna tokenizacja DLP. (Uwaga: Obecnie BQ ma natywne maskowanie, ale DLP Tokenization jest potężniejszym, systemowym rozwiązaniem).
-B. Redaction: Usuwa dane bezpowrotnie. HR też by ich nie zobaczyło.
-C. Inspection: To tylko znalezienie danych, nie chroni ich przed odczytem.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na D. Tokenizacja to złoty środek między bezpieczeństwem a użytecznością danych.</pre>
+A. Masking: Trwale ukrywa część danych (np. xxxx@gmail.com), co może uniemożliwić precyzyjne operacje (np. łączenie danych).
+B. Redaction: Całkowicie usuwa dane.
+C. Inspection: Tylko znajduje dane wrażliwe, ale ich nie chroni.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Tokenizacja z DLP zazwyczaj wykorzystuje klucze Cloud KMS do ochrony procesu kodowania, co zapewnia pełny ślad audytowy każdego przypadku odszyfrowania danych przez HR.</p>
+<p>Pseudonimizacja (Tokenizacja) pozwala na zachowanie użyteczności danych przy jednoczesnym zachowaniu prywatności (Privacy-Preserving Analytics).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/pseudonymization" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/concepts-pseudonymization" target="_blank">DLP Pseudonymization</a></li>
 </ul>
 </div>
 </div>

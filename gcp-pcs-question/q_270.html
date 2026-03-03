@@ -52,15 +52,14 @@
 <h2>Question 270 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Healthcare provider: data residency, administrative approval required, auditable. What to do?
+You work for a healthcare provider that is expanding into the cloud to store and process sensitive patient data. You must ensure the chosen Google Cloud configuration meets these strict regulatory requirements: • Data must reside within specific geographic regions. • Certain administrative actions on patient data require explicit approval from designated compliance officers. • Access to patient data must be auditable. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Standard region, CAA, logging, Access Transparency.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Assured Workloads, Access Approval, logging, Access Transparency.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Assured Workloads multiple regions, custom roles, VPC SC.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Multiple standard regions, ACLs, logging.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Select a standard Google Cloud region. Restrict access to patient data based on user location and job function by using Access Context Manager. Enable both Cloud Audit Logging and Access Transparency.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Deploy an Assured Workloads environment in an approved region. Configure Access Approval for sensitive operations on patient data. Enable both Cloud Audit Logs and Access Transparency.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Deploy an Assured Workloads environment in multiple regions for redundancy. Utilize custom IAM roles with granular permissions. Isolate network-level data by using VPC Service Controls.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Select multiple standard Google Cloud regions for high availability. Implement Access Control Lists (ACLs) on individual storage objects containing patient data. Enable Cloud Audit Logs.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Healthcare provider: data residency, administrative approval required, auditable
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Assured Workloads + Access Approval: Ten zestaw idealnie pasuje do wymogów: 1. Data residency (Assured Workloads wymusza regiony). 2. Administrative approval (Access Approval wymusza Twoją zgodę dla Google). 3. Auditable (Logging + Access Transparency dokumentują wszystko).
+B. Assured Workloads + Access Approval + Logging: To jest kompletny pakiet dla sektora zdrowia (Healthcare). 1. Assured Workloads wymusza rezydencję danych w wybranym regionie. 2. Access Approval zapewnia wymóg 'explicit approval' dla akcji administracyjnych personelu Google. 3. Cloud Audit Logs i Access Transparency zapewniają pełną audytowalność każdego dostępu.
 
 Dlaczego inne są błędne:
-A. Standard region: Nie 'wymusza' rezydencji tak twardo i automatycznie jak Assured Workloads. Brak Access Approval.
-C. VPC SC: Chroni przed wyciekiem, ale nie jest mechanizmem 'zatwierdzania dostępu personelu Google' (Access Approval).
-D. ACLs: Przeżytek, nie spełniają nowoczesnych wymogów compliance dla dużych organizacji medycznych.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Assured Workloads to 'healthcare compliance' w jednym pakiecie.</pre>
+A. Access Context Manager: Dobry do wpuszczania użytkowników, ale nie rozwiązuje problemu 'approval' dla działań administratorów platformy (Google).
+C. Multi-region redundancy: Choć dobra, Assured Workloads (B) jest bardziej specyficznym rozwiązaniem dla rygorystycznych wymogów compliance opisanych w pytaniu.
+D. ACLs on objects: ACL są niezalecane (lepiej używać IAM) i nie zapewniają mechanizmu zatwierdzania akcji administracyjnych Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Assured Workloads tworzy 'bezpieczną bańkę', w której wszystkie nowo tworzone zasoby muszą być zgodne z wybranym standardem (np. HIPAA dla zdrowia).</p>
+<p>Assured Workloads automatyzuje tworzenie środowisk zgodnych z rygorystycznymi standardami takimi jak HIPAA czy GDPR.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/assured-workloads/docs/overview" target="_blank">https://cloud.google.com/assured-workloads/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/assured-workloads" target="_blank">Assured Workloads for Healthcare</a></li>
 </ul>
 </div>
 </div>

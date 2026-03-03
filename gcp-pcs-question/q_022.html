@@ -56,11 +56,10 @@ A website design company recently migrated all customer sites to App Engine. Som
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Upload an .htaccess file to App Engine.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create an App Engine firewall rule.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable Cloud Identity-Aware Proxy (IAP).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Cloud VPN.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Upload an .htaccess file containing the customer and employee user accounts to App Engine.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create an App Engine firewall rule that allows access from the customer and employee networks and denies all other traffic.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable Cloud Identity-Aware Proxy (IAP), and allow access to a Google Group that contains the customer and employee user accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Cloud VPN to create a VPN connection between the relevant on-premises networks and the company's GCP Virtual Private Cloud (VPC) network.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A website design company recently migrated all customer sites to App Engine. Som
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Cloud Identity-Aware Proxy (IAP): To najlepsze rozwiązanie dla aplikacji webowych. IAP weryfikuje tożsamość użytkownika (Identity) oraz kontekst (Context), pozwalając na dostęp z dowolnej lokalizacji (Any location) bez potrzeby używania VPN, o ile użytkownik jest zautoryzowany w IAM.
+C. Enable Cloud IAP + Google Group: Identity-Aware Proxy (IAP) to idealne rozwiązanie dla App Engine. Pozwala na zablokowanie dostępu do aplikacji na poziomie tożsamości (użytkownik musi się zalogować). Dodanie grupy Google do IAP pozwala na łatwe zarządzanie listą osób uprawnionych bez względu na ich lokalizację (pracuje z każdego miejsca w internecie).
 
 Dlaczego inne są błędne:
-A. .htaccess: App Engine nie jest serwerem Apache; pliki .htaccess nie są obsługiwane.
-B. App Engine firewall: Pozwala tylko na filtrowanie adresów IP. Jeśli pracownicy są 'w dowolnej lokalizacji' (dynamiczne IP), nie da się stworzyć skutecznej listy allowlist.
-D. Cloud VPN: Wymagałby od każdego klienta i pracownika posiadania tunelu VPN lub klienta VPN, co jest skomplikowane i niepotrzebne przy aplikacjach HTTP.
-
-Konsensus społeczności ExamTopics: Prawie 100% wskazuje na C. IAP to fundament modelu BeyondCorp (Zero Trust).</pre>
+A. .htaccess: Nie jest wspierany przez standardowe środowisko App Engine (to rozwiązanie dla Apache).
+B. Firewall rule: Blokowanie po IP jest trudne, gdy klienci/pracownicy łączą się 'z dowolnej lokalizacji' (zmienne IP).
+D. Cloud VPN: Wymagałoby, aby użytkownicy byli wpięci do konkretnej sieci, co jest trudniejsze niż proste logowanie przez IAP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> IAP działa na poziomie warstwy 7. Po włączeniu IAP, App Engine odrzuca wszystkie żądania, które nie posiadają ważnego dowodu tożsamości od proxy Google.</p>
+<p>Cloud IAP realizuje model 'Zero Trust'. Tożsamość jest nowym obwodem bezpieczeństwa, zastępującym stare metody oparte na adresach IP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>
-
+<li><a href="https://cloud.google.com/iap/docs/concepts-overview" target="_blank">Identity-Aware Proxy overview</a></li>
 </ul>
 </div>
 </div>

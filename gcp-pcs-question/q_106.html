@@ -52,16 +52,15 @@
 <h2>Question 106 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Delegate permissions to business units (thousands of users). scale, no cross-unit access, user lifecycle managed by on-prem directory. Which two steps?
+You work for a large organization where each business unit has thousands of users. You need to delegate management of access control permissions to each business unit. You have the following requirements: * Each business unit manages access controls for their own projects. * Each business unit manages access control permissions at scale. * Business units cannot access other business units' projects. * Users lose their access if they move to a different business unit or leave the company. * Users and access control permissions are managed by the on-premises directory service. What should you do? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC SC perimeters.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organize projects in folders, use groups at folder level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Units (OUs).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAM Conditions based on project prefix.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> GCDS to sync users and groups.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use VPC Service Controls to create perimeters around each business unit's project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organize projects in folders, and assign permissions to Google groups at the folder level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Group business units based on Organization Units (OUs) and manage permissions based on OUs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a project naming convention, and use Google's IAM Conditions to manage access based on the prefix of project names.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Use Google Cloud Directory Sync to synchronize users and group memberships in Cloud Identity.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ Delegate permissions to business units (thousands of users). scale, no cross-uni
 <pre>Odpowiedź: BE.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Folders + Groups: Foldery pozwalają na logiczną izolację jednostek. Nadanie uprawnień GRUPOM na poziomie foldera to jedyny sposób na zarządzanie tysiącami użytkowników bez chaosu (skalowalność).
-E. GCDS: Synchronizuje użytkowników i grupy z on-premises, co zapewnia, że cykl życia konta (np. usunięcie po zwolnieniu) jest zarządzany w jednym, centralnym miejscu.
+B. Folders + Groups at folder level: Foldery pozwalają na odizolowanie jednostek biznesowych. Przypisanie uprawnień Grupom Google (np. 'Group-Finance-Admins') na poziomie Folderu zapewnia skalowalność i automatyczne dziedziczenie uprawnień do nowych projektów w tym folderze.
+E. Google Cloud Directory Sync (GCDS): Synchronizacja z on-premises AD gwarantuje automatyczny cykl życia konta (jeśli pracownik odchodzi lub zmienia dział w AD, GCDS automatycznie aktualizuje jego status i członkostwo w grupach w Google Cloud).
 
 Dlaczego inne są błędne:
-A. VPC SC: To warstwa sieciowa chroniąca przed wyciekiem danych, nie służy do delegowania uprawnień administracyjnych IAM dla tysięcy osób.
-C. Organization Units (OUs): Służą do nakładania ustawień w konsoli Admin Google (np. kto ma dostęp do YouTube), nie służą do zarządzania uprawnieniami do projektów w Google Cloud.
-D. IAM Conditions by prefix: Bardzo trudne do zarządzania przy tysiącach użytkowników i setkach projektów. Foldery są natywnym mechanizmem do tego celu.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla BE. To podręcznikowy wzorzec 'Enterprise Landing Zone'.</pre>
+A. VPC Service Controls: Chronią przed eksfiltracją danych, ale nie służą do delegowania uprawnień IAM użytkownikom.
+C. Organization Units (OUs): Dotyczą polityk urządzeń/usług w Google Workspace, a nie uprawnień do zasobów w GCP.
+D. IAM Conditions: Mogłyby pomóc, ale metoda B (Foldery) jest natywnym i prostszym sposobem na separację jednostek biznesowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BE</b></p>
-<p><b>Głęboka analiza:</b> Zarządzanie poprzez grupy (E) i hierarchię folderów (B) pozwala na delegowanie administracji. Możesz nadać rolę 'Folder Admin' szefowi IT danej jednostki, a on sam będzie zarządzał grupami zsynchronizowanymi z AD.</p>
+<p>Prawidłowa struktura zarządzania to: GCDS (Tożsamość) -> Grupy (Grupowanie) -> Foldery (Zasoby).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/groups-in-iam" target="_blank">https://cloud.google.com/iam/docs/groups-in-iam</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#best-practices" target="_blank">Resource hierarchy best practices</a></li>
 </ul>
 </div>
 </div>

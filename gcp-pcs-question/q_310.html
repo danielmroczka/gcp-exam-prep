@@ -52,15 +52,14 @@
 <h2>Question 310 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-continuously maintain configurations, residency, org policies, access controls. What to do?
+You work for a financial organization in a highly regulated industry that is subject to active regulatory compliance. To meet compliance requirements, you need to continuously maintain a specific set of configurations, data residency, organizational policies, and personnel data access controls. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Resource location org policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Assured Workloads folder.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SCC Compliance page violations triage.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Posture.yaml file in SCC Premium.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Apply an organizational policy constraint at the organization level to limit the location of new resource creation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create an Assured Workloads folder for your required compliance program to apply defined controls and requirements.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Go to the Compliance page in Security Command Center. View the report for your status against the required compliance standard. Triage violations to maintain compliance on a regular basis.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a posture.yaml file with the required security compliance posture. Apply the posture with the gcloud scc postures create POSTURE_NAME --posture-from-file=posture.yaml command in Security Command Center Premium.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ continuously maintain configurations, residency, org policies, access controls. 
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Assured Workloads: Jest to usługa typu 'Active Compliance'. Nie tylko raportuje błędy, ale aktywnie WYMUSZA i UTRZYMUJE (maintain) pożądaną konfigurację. Jeśli wrzucisz projekt do folderu Assured Workloads, system automatycznie nałoży odpowiednie polityki organizacji i restrykcje, gwarantując stałą zgodność z wybranym standardem (np. IL4, EU).
+B. Assured Workloads folder: Assured Workloads to usługa 'Compliance as a Service'. Tworząc taki folder i wybierając program (np. PCI, HIPAA, FedRAMP), GCP automatycznie wymusza zestaw polityk organizacji (data residency, restricted services) oraz zapewnia, że dostęp personelu Google (support) jest ograniczony do osób spełniających wymogi danego programu. Jest to najbardziej kompleksowe rozwiązanie do ciągłego utrzymania zgodności.
 
 Dlaczego inne są błędne:
-A. Org policy: To tylko jeden element układanki, nie zapewnia całościowej 'utrzymania' zgodności (np. nie kontroluje personelu supportu).
-C. SCC Compliance triage: To proces ręczny, nie jest to 'automatyczne utrzymanie' konfiguracji.
-D. Posture.yaml: Służy do monitorowania stanu (Posture), ale Assured Workloads (B) jest bardziej kompletną usługą dla rygorystycznych, 'ciągłych' wymogów prawnych.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Assured Workloads to król 'Automated Governance'.</pre>
+A. Org policy only: To tylko jeden z elementów zgodności, Assured Workloads (B) konfiguruje ich znacznie więcej automatycznie.
+C. Compliance page in SCC: Służy do monitorowania (audytu), ale Assured Workloads (B) służy do AKTYWNEGO WYMUSZANIA (compliance by design).
+D. Posture.yaml: 'Postures' to nowa funkcja do zarządzania stanem bezpieczeństwa, ale dla twardych wymogów regulacyjnych i kontroli personelu Google, Assured Workloads (B) pozostaje fundamentem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Assured Workloads posiada funkcję 'Compliance drift monitoring', która natychmiast wykrywa każdą próbę zmiany konfiguracji na niezgodną z normą.</p>
+<p>Assured Workloads automatyzuje tworzenie 'bezpiecznych przystani' dla workloadów regulowanych prawnie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/assured-workloads/docs/overview" target="_blank">https://cloud.google.com/assured-workloads/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/assured-workloads" target="_blank">Assured Workloads</a></li>
 </ul>
 </div>
 </div>

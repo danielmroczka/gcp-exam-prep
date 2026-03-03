@@ -52,15 +52,14 @@
 <h2>Question 340 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-ensure Google does not use your sensitive data for tuning public models. Vertex AI. What to do?
+Your organization is building an application powered by generative AI that uses sensitive internal data to train the AI model. The application is built using Vertex AI, which is generally available in your region. You must ensure Google does not use your sensitive data when tuning public models because it could result in your data being shared with other Google Cloud customers. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Do not use Vertex AI.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CMEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Do nothing. Foundation models are frozen by default and do not use your data.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Contact Google support to opt out.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Do not use Vertex AI for sensitive data. Use only public data with minimal privacy requirements.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Encrypt your data by using customer-managed encryption keys (CMEK) to have full control over encryption key access.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Do nothing. Vertex AI foundation models are frozen by default and do not use your data for model-tuning purposes.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Contact Google support to opt out of model tuning.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ ensure Google does not use your sensitive data for tuning public models. Vertex 
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Default Data Governance: Google Cloud w swoich warunkach prawnych (GCP Data Processing Addendum) gwarantuje, że dane klientów przetwarzane w Vertex AI są ich własnością i NIE są wykorzystywane do trenowania modeli bazowych (foundation models), z których korzystają inni klienci. Twoje dane są odizolowane.
+C. Do nothing (Models are frozen): Google w swojej dokumentacji Vertex AI jasno deklaruje, że dane klientów używane do trenowania modeli dedykowanych lub promptowania modeli bazowych NIE są wykorzystywane do douczania (tuning) publicznych modeli bazowych (np. Gemini). Twoje dane pozostają odizolowane i są używane tylko dla Twoich instancji modeli.
 
 Dlaczego inne są błędne:
-A. Do not use: Niepotrzebne, platforma jest bezpieczna.
-B. CMEK: Chroni przed odczytem danych, ale nie wpływa na to, czy Google (jako system) używa ich do uczenia (choć warunki prawne C to wykluczają).
-D. Support opt-out: Nie jest wymagany, bo 'opt-out' jest stanem domyślnym i niezmiennym dla usług Vertex AI Enterprise.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To kluczowa informacja dla firm obawiających się wycieku własności intelektualnej do publicznych modeli AI.</pre>
+A. Do not use: Rezygnacja z innowacji AI jest zbędna, skoro Google zapewnia techniczne i prawne gwarancje prywatności.
+B. CMEK: Szyfruje dane na dysku, ale nie ma wpływu na logikę treningową modelu w chmurze (Google i tak musi 'widzieć' dane, by model mógł się na nich uczyć).
+D. Contact support to opt-out: W GCP opcja 'nie używania danych do tuningu' jest domyślna i nie wymaga specjalnego zgłoszenia supportowi dla standardowych usług Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Google oferuje tzw. 'Customer Managed Tuning', gdzie model jest dotrenowywany Twoimi danymi, ale ta 'wersja' modelu istnieje tylko w Twoim projekcie i nikt inny nie ma do niej dostępu.</p>
+<p>Google Cloud Enterprise AI zapewnia silną izolację danych klientów od publicznych zbiorów treningowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vertex-ai/docs/generative-ai/data-governance" target="_blank">https://cloud.google.com/vertex-ai/docs/generative-ai/data-governance</a></li>
-
+<li><a href="https://cloud.google.com/vertex-ai/docs/generative-ai/data-governance" target="_blank">Vertex AI Data Privacy</a></li>
 </ul>
 </div>
 </div>

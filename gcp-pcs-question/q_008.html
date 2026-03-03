@@ -60,7 +60,6 @@ A customer implements Cloud Identity-Aware Proxy for their ERP system hosted on 
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Make sure that the ERP system can validate the identity headers in the HTTP requests.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Make sure that the ERP system can validate the x-forwarded-for headers in the HTTP requests.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Make sure that the ERP system can validate the user's unique identifier headers in the HTTP requests.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,20 @@ A customer implements Cloud Identity-Aware Proxy for their ERP system hosted on 
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. JWT validation: IAP dołącza do każdego żądania nagłówek `x-goog-iap-jwt-assertion`. Jest to token podpisany przez Google. Weryfikacja tego podpisu przez aplikację ERP daje pewność, że żądanie nie zostało sfałszowane i rzeczywiście przeszło przez IAP, a nie zostało wysłane bezpośrednio do serwera (np. z wnętrza sieci).
+A. Validate JWT assertion: Cloud IAP przesyła informację o uwierzytelnionym użytkowniku w nagłówku x-goog-iap-jwt-assertion. Aplikacja powinna walidować ten token JWT, aby mieć pewność, że ruch pochodzi z IAP i nie został sfałszowany.
 
 Dlaczego inne są błędne:
-B, D: Zwykłe nagłówki (np. `x-goog-authenticated-user-email`) mogą być łatwo sfałszowane przez każdego, kto uzyska dostęp do sieci wewnętrznej. Tylko kryptograficzny podpis JWT (A) gwarantuje autentyczność.
-C. x-forwarded-for: Zawiera tylko adres IP, który nie jest dowodem tożsamości w modelu Zero Trust.
-
-Konsensus społeczności ExamTopics: 100% na A. To 'najbezpieczniejsza' metoda implementacji IAP.</pre>
+B, C, D: Nagłówki tożsamości mogą zostać sfałszowane, jeśli napastnik ominie IAP i uderzy bezpośrednio w adres IP serwera. Tylko podpisany cyfrowo token JWT daje pewność autentyczności.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wielu deweloperów uważa, że wystarczy firewall blokujący wszystko poza IP Load Balancera. Jednak eksperci security na forach podkreślają, że w modelu 'Defense in Depth' aplikacja nigdy nie powinna ufać sieci. Weryfikacja JWT to jedyna metoda, która chroni przed atakami typu 'lateral movement' wewnątrz chmury.</p>
+<p>Walidacja JWT to krytyczny krok przy używaniu IAP do zabezpieczania aplikacji. Zabezpiecza przed sytuacją, gdy ktoś znajdzie sposób na obejście warstwy proxy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap/docs/signed-headers-howto" target="_blank">https://cloud.google.com/iap/docs/signed-headers-howto</a></li>
-
+<li><a href="https://cloud.google.com/iap/docs/signed-headers-howto" target="_blank">Securing with IAP: Authenticating users</a></li>
 </ul>
 </div>
 </div>

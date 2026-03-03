@@ -52,15 +52,14 @@
 <h2>Question 189 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect your web application from botnets and scrapers using advanced behavioral analysis. Which service?
+Your application is deployed as a highly available, cross-region solution behind a global external HTTP(S) load balancer. You notice significant spikes in traffic from multiple IP addresses, but it is unknown whether the IPs are malicious. You are concerned about your application's availability. You want to limit traffic from these clients over a specified time interval. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor Premium</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Firewall</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud IAP</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud DNS</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure a throttle action by using Google Cloud Armor to limit the number of requests per client over a specified time interval.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure a rate_based_ban action by using Google Cloud Armor and set the ban_duration_sec parameter to the specified time interval.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure a firewall rule in your VPC to throttle traffic from the identified IP addresses.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure a deny action by using Google Cloud Armor to deny the clients that issued too many requests over the specified time interval.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Protect your web application from botnets and scrapers using advanced behavioral
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud Armor Premium: Dopiero wersja Premium (Managed Protection) oferuje integrację z reCAPTCHA Enterprise i zaawansowane reguły 'Bot Management'. Pozwala to na wykrywanie botów nie po adresie IP, a po ich zachowaniu (behawiorze), co jest skuteczne przeciwko botnetom.
+A. Throttle action in Cloud Armor: Akcja 'throttle' pozwala na ustawienie limitów liczby żądań (np. 100 na minutę) dla każdego unikalnego adresu IP klienta. Jest to idealne rozwiązanie, gdy nie jesteś pewien, czy ruch jest złośliwy (nie chcesz go całkowicie blokować - Deny), ale chcesz chronić dostępność aplikacji przed przeciążeniem.
 
 Dlaczego inne są błędne:
-B. Firewall: Blokuje IP, botnety mają tysiące IP - firewall jest bezużyteczny.
-C. IAP: Chroni przed ludźmi bez konta, boty mogą próbować kraść sesje lub atakować formularze.
-D. DNS: Nie ma funkcji analizy behawioralnej ruchu.
-
-Konsensus społeczności ExamTopics: 100% na A. Bot Management to funkcja Premium Cloud Armor.</pre>
+B. rate_based_ban: To ostrzejsza wersja - jeśli ktoś przekroczy limit, zostaje całkowicie zablokowany na pewien czas. Throttling (A) jest bardziej elastyczny.
+C. VPC Firewall throttle: Reguły firewall VPC w GCP nie wspierają natywnego throttlingu (ograniczania pasma/liczby połączeń) w ten sam sposób co Cloud Armor.
+D. Deny action: Spowodowałoby odrzucenie ruchu, co przy braku pewności o złośliwości mogłoby uderzyć w legalnych użytkowników (False Positives).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wiele firm uważa, że darmowy Cloud Armor wystarczy. Analiza incydentów pokazuje jednak, że nowoczesne boty (scrapers) potrafią emulować ruch ludzki. Tylko analiza behawioralna i Threat Intelligence z wersji Premium (A) są w stanie je odróżnić.</p>
+<p>Rate Limiting (Throttling) w Cloud Armor to kluczowa kontrola dla zapewnienia wysokiej dostępności (Availability) aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor/docs/managed-protection-overview#bot-management" target="_blank">https://cloud.google.com/armor/docs/managed-protection-overview#bot-management</a></li>
-
+<li><a href="https://cloud.google.com/armor/docs/rate-limiting-overview" target="_blank">Cloud Armor rate limiting</a></li>
 </ul>
 </div>
 </div>

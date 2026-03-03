@@ -52,15 +52,14 @@
 <h2>Question 140 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Regulated industry. Data stored for specific time and deleted after. Minimize costs. What to do?
+You work for an organization in a regulated industry that has strict data protection requirements. The organization backs up their data in the cloud. To comply with data privacy regulations, this data can only be stored for a specific length of time and must be deleted after this specific period. You want to automate the compliance with this regulation while minimizing storage costs. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Persistent disk deletion.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Bigtable column expiration.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> BigQuery table expiration.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Storage Object Lifecycle Management.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Store the data in a persistent disk, and delete the disk at expiration time.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Store the data in a Cloud Bigtable table, and set an expiration time on the column families.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Store the data in a BigQuery table, and set the table's expiration time.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Store the data in a Cloud Storage bucket, and configure the bucket's Object Lifecycle Management feature.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Regulated industry. Data stored for specific time and deleted after. Minimize co
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Cloud Storage Lifecycle Management: To najtańsza (bucket GCS jest znacznie tańszy niż dyski czy bazy) i najbardziej zautomatyzowana metoda. Możesz ustawić regułę 'Delete' dla obiektów starszych niż np. 7 lat. System Google sam dba o usunięcie, a Ty płacisz tylko za storage.
+D. Cloud Storage + Object Lifecycle Management: Jest to najbardziej efektywne kosztowo i w pełni zautomatyzowane rozwiązanie. Pozwala na zdefiniowanie reguły (np. 'usuń po 90 dniach'), która działa na poziomie całej chmury bez interwencji użytkownika i bez kosztów dodatkowego oprogramowania.
 
 Dlaczego inne są błędne:
-A. Persistent disks: Są najdroższą formą przechowywania danych archiwalnych.
-B, C: Bazy danych (BigQuery/Bigtable) są świetne do analizy, ale jako czyste archiwum 'long-term' są droższe w utrzymaniu niż klasy Coldline/Archive w Cloud Storage.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. GCS Lifecycle to 'best practice' dla retencji danych.</pre>
+A. Persistent Disk: Ręczne usuwanie dysków jest trudne do automatyzacji na poziomie pojedynczych plików/backupów i kosztowne.
+B. Bigtable: Droższe rozwiązanie, nie jest optymalne do typowych backupów plikowych.
+C. BigQuery: Bardzo dobre do danych strukturalnych, ale GCS (D) jest uniwersalnym i najtańszym miejscem na backupy wszelkiego typu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> W branżach regulowanych warto połączyć to z funkcją 'Bucket Lock', aby mieć pewność, że nikt nie usunie danych przed upływem wymaganego czasu, ale system usunie je punktualnie po jego upływie.</p>
+<p>Polityka retencji realizowana przez GCS Lifecycle Management to kluczowy element zgodności z przepisami o ochronie danych (np. prawo do bycia zapomnianym).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/lifecycle" target="_blank">https://cloud.google.com/storage/docs/lifecycle</a></li>
-
+<li><a href="https://cloud.google.com/storage/docs/lifecycle" target="_blank">Object Lifecycle Management</a></li>
 </ul>
 </div>
 </div>

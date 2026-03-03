@@ -52,15 +52,14 @@
 <h2>Question 345 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-dedicated Cloud Interconnect. Private access from on-prem hosts to GCS/BQ without public internet. What to do?
+Your organization has a hybrid cloud environment with a data center connected to Google Cloud through a dedicated Cloud Interconnect connection. You need to configure private access from your on-premises hosts to Google APIs, specifically Cloud Storage and BigQuery, without exposing traffic to the public internet. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Shared VPC + PGA.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC peering + Cloud Firewall.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> PGA for on-premises + private.googleapis.com DNS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud NAT + 199.36.153.8/30 DNS.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure Shared VPC to extend your Google Cloud VPC network to your on-premises environment. Use Private Google Access to access Google APIs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Establish VPC peering between your on-premises network and your Google Cloud VPC network. Configure Cloud Firewall rules to allow traffic to Google API IP ranges.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Private Google Access for on-premises hosts. Configure DNS resolution to point to the private.googleapis.com domain.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure Cloud NAT on your on-premises network. Configure DNS records in a private DNS zone to send requests to 199.36.153.8/30 to access Google APIs.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ dedicated Cloud Interconnect. Private access from on-prem hosts to GCS/BQ withou
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. PGA for on-premises + private VIP: Aby hosty lokalne (on-prem) mogły 'rozmawiać' z usługami Google przez Interconnect, muszą kierować zapytania DNS do zakresu IP `199.36.153.8/30` (private.googleapis.com). Google Cloud zajmuje się wtedy routingiem tego ruchu przez prywatne łącze zamiast przez internet.
+C. Private Google Access for on-premises hosts + private.googleapis.com: To jest standardowa konfiguracja. Twoje hosty on-premises, łącząc się przez Interconnect, używają domen `private.googleapis.com` (IP `199.36.153.8/30`). Pozwala to na dostęp do API takich jak GCS i BigQuery bez wychodzenia do publicznego internetu. Wymaga to odpowiedniej konfiguracji DNS on-premises, aby zapytania do Google APIs kierować na te konkretne adresy IP.
 
 Dlaczego inne są błędne:
-A. PGA: Dotyczy ruchu Z chmury, PGA 'for on-premises' to osobna, choć powiązana funkcja.
-B. VPC Peering: Nie łączy on-prem z chmurą i nie ma wpływu na dostęp do publicznych API Google (GCS/BQ).
-D. Cloud NAT: Służy do WYJŚCIA na internet, a tu chcemy go UNIKNĄĆ.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To standardowa konfiguracja 'Hybrid Private Access'.</pre>
+A. Shared VPC to on-premises: Nie można 'rozciągnąć' sieci VPC fizycznie do centrum danych w taki sposób (VPC kończy się na brzegu Google).
+B. VPC Peering to on-premises: Nie jest możliwe (peering działa tylko między sieciami VPC wewnątrz Google Cloud).
+D. Cloud NAT: Służy do wychodzenia DO internetu, a celem jest uniknięcie internetu i użycie prywatnych ścieżek Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Wybór między `private` (wszystkie API) a `restricted` (tylko VPC SC) zależy od Twojej polityki bezpieczeństwa, ale technicznie oba rozwiązania PGA for on-prem działają podobnie.</p>
+<p>Private Google Access for on-premises pozwala na bezpieczną komunikację hybrydową z usługami SaaS/PaaS Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-settings" target="_blank">https://cloud.google.com/vpc/docs/configure-private-google-access-settings</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-on-premises" target="_blank">Private Google Access for on-premises</a></li>
 </ul>
 </div>
 </div>

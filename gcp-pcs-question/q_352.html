@@ -52,15 +52,14 @@
 <h2>Question 352 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-protect web app from layer 7 attacks (XSS/SQLi) minimize impact on legitimate traffic, high availability. What to do?
+Your company hosts a critical web application on Google Cloud. The application is experiencing an increasing number of sophisticated layer 7 attacks, including cross-site scripting (XSS) and SQL injection attempts. You need to protect the application from these attacks while minimizing the impact on legitimate traffic and ensuring high availability. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Adaptive Protection and throttling.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> NGFW block malicous IP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor pre-configured WAF rules on backend.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Armor security policy with customized/pre-configured WAF rules at load balancer.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Implement a load balancer in front of the web application instances, and enable Adaptive Protection and throttling to mitigate the occurrence of these malicious requests.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure Cloud Next Generation Firewall to block known malicious IP addresses targeting /32 addresses.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable Google Cloud Armor's pre-configured WAF rules for OWASP Top 10 vulnerabilities at the backend service.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure a Cloud Armor security policy with customized and pre-configured WAF rules for OWASP Top 10 vulnerabilities at the load balancer.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ protect web app from layer 7 attacks (XSS/SQLi) minimize impact on legitimate tr
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Cloud Armor (Edge WAF): Ustawienie polityk bezpieczeństwa Cloud Armor na Load Balancerze (D) to najlepsza praktyka. Wykorzystuje ona globalną infrastrukturę Google do filtrowania ataków L7 (SQLi/XSS) ZANIM dotrą one do Twojej sieci. Pozwala na precyzyjne dostrojenie reguł (customized), co minimalizuje wpływ na legalny ruch.
+D. Cloud Armor policy + pre-configured WAF rules: Cloud Armor posiada zestaw gotowych reguł (WAF pre-configured rules) chroniących przed atakami z listy OWASP Top 10 (SQLi, XSS, LFI itp.). Konfiguracja tej polityki na Load Balancerze zapewnia ochronę całego ruchu przychodzącego, a możliwość 'customizacji' pozwala na wykluczenie reguł powodujących błędy (false positives), co zapewnia wysoką dostępność dla legalnych użytkowników.
 
 Dlaczego inne są błędne:
-A. Throttling: Pomaga na DDoS, ale nie chroni przed pojedynczym, złośliwym zapytaniem SQL Injection.
-B. NGFW: Działa na warstwie sieciowej (IP), nie 'rozumie' ataków wewnątrz protokołu HTTP tak dobrze jak WAF.
-C. Backend rules: Lepiej blokować na LB (D), aby szkodliwy ruch w ogóle nie wchodził głębiej do infrastruktury.
-
-Konsensus społeczności ExamTopics: 100% na D. Cloud Armor na LB to definicja ochrony L7 w GCP.</pre>
+A. Adaptive Protection: To potężna funkcja ML do wykrywania DDoS, ale dla konkretnych ataków typu SQLi/XSS standardową i pierwszą linią obrony są reguły WAF (D).
+B. NGFW: Działa na warstwie 3/4, nie analizuje ładunku HTTP pod kątem skomplikowanych ataków L7 (XSS).
+C. Backend service only: Choć technicznie poprawne, odpowiedź D wspomina o Load Balancerze jako punkcie styku, co jest pełniejszym opisem architektury perymetru.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Cloud Armor posiada gotowe zestawy reguł (np. `sqli-v33-stable`), które są regularnie aktualizowane, chroniąc Cię przed najnowszymi wariantami ataków bez Twojej ingerencji.</p>
+<p>Cloud Armor WAF rules to 'tarcza' chroniąca kod aplikacji przed wykorzystaniem znanych luk w zabezpieczeniach webowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor/docs/waf-rules" target="_blank">https://cloud.google.com/armor/docs/waf-rules</a></li>
-
+<li><a href="https://cloud.google.com/armor/docs/waf-rules" target="_blank">Cloud Armor pre-configured WAF rules</a></li>
 </ul>
 </div>
 </div>

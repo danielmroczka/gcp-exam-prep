@@ -52,15 +52,14 @@
 <h2>Question 93 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Cloud Storage bucket in Project A should only be readable from Project B. Data cannot be accessed from or copied to buckets outside the network. What should you do?
+You are part of a security team that wants to ensure that a Cloud Storage bucket in Project A can only be readable from Project B. You also want to ensure that data in the Cloud Storage bucket cannot be accessed from or copied to Cloud Storage buckets outside the network, even if the user has the correct credentials. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable VPC Service Controls and create a perimeter with A and B.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Domain Restricted Sharing and Bucket Policy Only.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Private Access in networks.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Peering.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable VPC Service Controls, create a perimeter with Project A and B, and include Cloud Storage service.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable Domain Restricted Sharing Organization Policy and Bucket Policy Only on the Cloud Storage bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable Private Access in Project A and B networks with strict firewall rules to allow communication between the networks.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable VPC Peering between Project A and B networks with strict firewall rules to allow communication between the networks.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,21 @@ Cloud Storage bucket in Project A should only be readable from Project B. Data c
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. VPC Service Controls (Perimeter): To jedyne rozwiązanie w GCP, które zapobiega eksfiltracji danych między zaufanymi a niezaufanymi projektami. Umieszczenie projektów A i B w jednym perymetrze pozwala im na wymianę danych, ale blokuje każdą próbę kopiowania danych poza ten perymetr (nawet przez użytkownika z pełnymi uprawnieniami IAM).
+A. VPC Service Controls (Perimeter): VPC SC pozwala na stworzenie obwodu bezpieczeństwa wokół zasobów takich jak Cloud Storage. Dodanie Projektów A i B do wspólnego obwodu pozwala im na komunikację, jednocześnie blokując dostęp do danych z jakiegokolwiek projektu lub lokalizacji poza tym obwodem, nawet jeśli ktoś posiada poprawne dane logowania (zabezpieczenie przed eksfiltracją).
 
 Dlaczego inne są błędne:
-B. Domain Restricted Sharing: Uniemożliwia nadawanie uprawnień osobom spoza firmy, ale nie blokuje 'wynoszenia' danych przez pracowników na ich prywatne konta w chmurze.
-C. Private Access: Pozwala na dostęp do API Google bez internetu, ale nie nakłada restrykcji na TO, do których bucketów (Twoich czy obcych) można pisać.
-D. VPC Peering: Łączy sieci, nie ma wpływu na bezpieczeństwo usług API takich jak Cloud Storage.
-
-Konsensus społeczności ExamTopics: 100% na A. VPC SC to standardowa odpowiedź na wymóg 'cannot be copied to buckets outside'.</pre>
+B. Domain Restricted Sharing: Ogranicza udostępnianie nowym użytkownikom, ale nie blokuje kopiowania danych między bucketami.
+C, D. VPC Peering/Private Access: Rozwiązują problem routingu sieciowego, ale nie blokują dostępu do API Cloud Storage z innych lokalizacji (GCS jest usługą publiczną API).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Perymetr VPC SC tworzy 'mur' na poziomie API Google. To tak, jakby Twoje buckety przestały istnieć dla reszty świata, a te ze świata przestały istnieć dla Twoich VM.</p>
+<p>VPC Service Controls to 'ostatnia linia obrony', która ogranicza dostęp do API usług GCP do konkretnych projektów/sieci.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc-service-controls" target="_blank">VPC Service Controls</a></li>
 </ul>
 </div>
 </div>

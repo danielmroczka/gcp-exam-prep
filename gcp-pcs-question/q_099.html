@@ -52,15 +52,14 @@
 <h2>Question 99 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Store and retrieve sensitive configuration data from an application on Compute Engine. Which option?
+You are asked to recommend a solution to store and retrieve sensitive configuration data from an application that runs on Compute Engine. Which option should you recommend?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud KMS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Guest attributes.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Custom metadata.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Secret Manager.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Key Management Service</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Compute Engine guest attributes</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Compute Engine custom metadata</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Secret Manager</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Store and retrieve sensitive configuration data from an application on Compute E
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Secret Manager: Jest to dedykowana usługa Google Cloud do bezpiecznego przechowywania sekretów (hasła, klucze API, certyfikaty). Dane są tam szyfrowane, wersjonowane, a dostęp do nich jest ściśle kontrolowany przez IAM z pełnym logowaniem audytowym.
+D. Secret Manager: To dedykowana usługa GCP do bezpiecznego przechowywania sekretów (hasła, klucze API, certyfikaty). Oferuje wersjonowanie, rotację, audytowanie dostępu i szyfrowanie. Jest to zalecany sposób na przekazywanie poufnych danych konfiguracyjnych do aplikacji.
 
 Dlaczego inne są błędne:
-A. Cloud KMS: Służy do zarządzania kluczami szyfrującymi (materiałem binarnym), a nie do przechowywania haseł tekstowych. Można nim coś zaszyfrować, ale to Secret Manager jest 'szufladą' na te zaszyfrowane dane.
-B, C. Metadata: Dane w metadanych (Custom/Guest) są przesyłane i przechowywane w jawnym tekście. Każdy, kto może uruchomić `curl` wewnątrz VM, odczyta te sekrety. To kardynalny błąd bezpieczeństwa.
-
-Konsensus społeczności ExamTopics: 100% na D. Secret Manager to jedyne poprawne miejsce na 'sensitive configuration data'.</pre>
+A. Cloud KMS: Zarządza kluczami szyfrującymi, ale nie jest optymalny do przechowywania samych 'tekstowych' danych konfiguracyjnych (choć może je zaszyfrować).
+B, C. Metadata/Guest attributes: Te dane są widoczne dla każdego, kto ma dostęp do maszyny (często nawet bez uprawnień roota) i nie są domyślnie szyfrowane ani audytowane pod kątem bezpieczeństwa tak jak Secret Manager.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Secret Manager integruje się z Cloud IAM, co pozwala nadać uprawnienia do sekretu tylko konkretnemu kontu serwisowemu danej aplikacji, co realizuje zasadę najniższych uprawnień.</p>
+<p>Secret Manager to 'standard branżowy' w GCP dla zarządzania wrażliwymi danymi aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/secret-manager" target="_blank">https://cloud.google.com/secret-manager</a></li>
-
+<li><a href="https://cloud.google.com/secret-manager/docs/overview" target="_blank">Secret Manager overview</a></li>
 </ul>
 </div>
 </div>

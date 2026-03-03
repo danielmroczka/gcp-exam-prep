@@ -52,15 +52,14 @@
 <h2>Question 38 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-A customer decides to use customer-supplied encryption keys (CSEK) for Cloud Storage. How should they complete this task?
+A customer's internal security team must manage its own encryption keys for encrypting data on Cloud Storage and decides to use customer-supplied encryption keys (CSEK). How should the team complete this task?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Upload the key to the bucket.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use gsutil and specify the location of the encryption key.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Generate a key in the Console.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypt the object locally first.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Upload the encryption key to a Cloud Storage bucket, and then upload the object to the same bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the gsutil command line tool to upload the object to Cloud Storage, and specify the location of the encryption key.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Generate an encryption key in the Google Cloud Platform Console, and upload an object to Cloud Storage using the specified key.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Encrypt the object, then use the gsutil command line tool or the Google Cloud Platform Console to upload the object to Cloud Storage.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A customer decides to use customer-supplied encryption keys (CSEK) for Cloud Sto
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. gsutil with key: CSEK wymagają, aby to klient dostarczał klucz przy każdej operacji zapisu/odczytu. Narzędzie gsutil posiada specjalne flagi (lub plik konfiguracyjny .boto), w których wskazuje się klucz szyfrujący. Google używa go w pamięci RAM i natychmiast usuwa.
+B. gsutil with encryption key location: Przy użyciu kluczy dostarczanych przez klienta (CSEK), klucz nie jest przechowywany w GCP. Musi on zostać dostarczony w momencie wykonywania operacji przesyłania (upload). gsutil obsługuje to poprzez flagi lub plik konfiguracyjny `.boto`.
 
 Dlaczego inne są błędne:
-A. Upload key: Przechowywanie klucza w tym samym buckecie co dane niweluje sens szyfrowania.
-C. Console: Konsola Google Cloud nie wspiera CSEK, ponieważ Google nie może (z założenia tej usługi) dotknąć Twojego klucza w sposób trwały.
-D. Encrypt locally: To szyfrowanie 'client-side', a nie CSEK. CSEK to szyfrowanie 'server-side' kluczem dostarczonym przez klienta.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na B. CSEK to najbardziej restrykcyjna forma szyfrowania w GCP obsługiwana głównie przez CLI.</pre>
+A. Upload key to bucket: Przechowywanie klucza szyfrującego w tym samym miejscu co zaszyfrowane dane jest skrajnie niebezpieczne.
+C. Generate key in Console: Konsola GCP nie służy do generowania kluczy CSEK (klucz musi powstać po stronie klienta).
+D. Encrypt before upload: To techniczne rozwiązanie (client-side encryption), ale CSEK to specyficzna funkcja GCS, gdzie Google wykonuje szyfrowanie 'on-the-fly' przy użyciu Twojego klucza.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Jeśli zgubisz klucz CSEK, Google NIE może Ci pomóc w odzyskaniu danych. Dane są bezpowrotnie stracone, ponieważ materiał klucza nigdy nie został zapisany w systemach Google.</p>
+<p>CSEK (Customer-Supplied) to model 'Bring Your Own Key', gdzie Google nigdy nie zapisuje klucza na dysku w formie niezaszyfrowanej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/encryption/customer-supplied-keys" target="_blank">https://cloud.google.com/storage/docs/encryption/customer-supplied-keys</a></li>
-
+<li><a href="https://cloud.google.com/storage/docs/encryption/customer-supplied-keys" target="_blank">Customer-supplied encryption keys</a></li>
 </ul>
 </div>
 </div>

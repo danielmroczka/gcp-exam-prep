@@ -52,7 +52,7 @@
 <h2>Question 101 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Join user info in banking app with credit score from third party. Exposure risk needs de-identification/tokenization with DLP while maintaining referential integrity across the database. Which format?
+Your company wants to determine what products they can build to help customers improve their credit scores depending on their age range. To achieve this, you need to join user information in the company's banking app with customers' credit score data received from a third party. While using this raw data will allow you to complete this task, it exposes sensitive data, which could be propagated into new systems. This risk needs to be addressed using de-identification and tokenization with Cloud Data Loss Prevention while maintaining the referential integrity across the database. Which cryptographic token format should you use to meet these requirements?
 </div>
 <div class="question-choices-container">
 <ul>
@@ -60,7 +60,6 @@ Join user info in banking app with credit score from third party. Exposure risk 
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Secure, key-based hashes</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Format-preserving encryption</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cryptographic hashing</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,21 @@ Join user info in banking app with credit score from third party. Exposure risk 
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Deterministic encryption: Jest to metoda szyfrowania (w DLP np. AES-SIV), która dla tej samej wartości wejściowej zawsze generuje tę samą wartość zaszyfrowaną. Pozwala to na wykonywanie operacji 'JOIN' na zaszyfrowanych kolumnach w różnych bazach danych, zachowując integralność referencyjną bez ujawniania danych PII analitykom.
+A. Deterministic encryption: Szyfrowanie deterministyczne gwarantuje, że to samo wejście (np. ten sam numer ID klienta) zawsze daje to samo wyjście (ten sam zaszyfrowany token). Pozwala to na łączenie tabel (join) między różnymi systemami na podstawie tokenów, zachowując integralność referencyjną, bez ujawniania realnego ID.
 
 Dlaczego inne są błędne:
-B. Secure hashes: Choć mogą być unikalne, zazwyczaj nie są tak łatwo 'odwracalne' dla uprawnionych procesów w ramach tego samego mechanizmu co pełne szyfrowanie DLP.
-C. Format-preserving encryption (FPE): Zachowuje format (np. cyfry na cyfry), co jest świetne dla użyteczności, ale pytanie kładzie nacisk na 'joining' i 'referential integrity', gdzie determinizm AES-SIV jest standardem dla operacji na bazach danych w DLP.
-D. Cryptographic hashing: Standardowe haszowanie (bez soli lub z losową solą) utrudnia łączenie danych, a bez soli jest podatne na ataki słownikowe. Deterministyczne szyfrowanie jest bezpieczniejsze i bardziej elastyczne w ekosystemie DLP.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. AES-SIV to fundament 'secure join' w GCP.</pre>
+B, D. Hashing: Haszowanie jest nieodwracalne. Jeśli będziesz potrzebował odzyskać dane, będzie to niemożliwe.
+C. Format-preserving encryption (FPE): Zachowuje format (np. z numeru karty robi inny numer karty), co jest świetne do analityki, ale dla wymogu 'referential integrity' w łączeniu baz, szyfrowanie deterministyczne (które może być FPE) jest kluczowym terminem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Determinizm pozwala na analizę trendów (np. ile razy dany zaszyfrowany ID wystąpił w logach) bez wiedzy, kim fizycznie jest ta osoba.</p>
+<p>Szyfrowanie deterministyczne to technika kryptograficzna umożliwiająca operacje na danych zaszyfrowanych (np. wyszukiwanie, łączenie) bez ich odszyfrowywania.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/concepts-pseudonymization#deterministic-encryption" target="_blank">https://cloud.google.com/dlp/docs/concepts-pseudonymization#deterministic-encryption</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/concepts-deterministic-encryption" target="_blank">DLP Deterministic encryption</a></li>
 </ul>
 </div>
 </div>

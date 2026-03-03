@@ -52,15 +52,14 @@
 <h2>Question 231 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to manage and view all organization policies, but not modify VPC networks. Which role?
+You are migrating an application into the cloud. The application will need to read data from a Cloud Storage bucket. Due to local regulatory requirements, you need to hold the key material used for encryption fully under your control and you require a valid rationale for accessing the key material. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.organizationAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/orgpolicy.policyAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.networkAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/viewer</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Encrypt the data in the Cloud Storage bucket by using Customer Managed Encryption Keys. Configure an IAM deny policy for unauthorized groups.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Generate a key in your on-premises environment to encrypt the data before you upload the data to the Cloud Storage bucket. Upload the key to the Cloud Key Management Service (KMS). Activate Key Access Justifications (KAJ) and have the external key system reject unauthorized accesses.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Encrypt the data in the Cloud Storage bucket by using Customer Managed Encryption Keys backed by a Cloud Hardware Security Module (HSM). Enable data access logs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Generate a key in your on-premises environment and store it in a Hardware Security Module (HSM) that is managed on-premises. Use this key as an external key in the Cloud Key Management Service (KMS). Activate Key Access Justifications (KAJ) and set the external key system to reject unauthorized accesses.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Grant a user access to manage and view all organization policies, but not modify
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ Grant a user access to manage and view all organization policies, but not modify
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. orgpolicy.policyAdmin: Jak już ustaliliśmy (216, 222), ta rola służy do zarządzania Standardami Floty (Governance). Pozwala na nałożenie zakazu np. tworzenia publicznych IP, ale sama w sobie nie daje uprawnień do edycji sieci VPC (subnets, routes).
+D. External Key in KMS + On-premises HSM + Key Access Justifications: To jest najbardziej kompleksowe rozwiązanie suwerennościowe. 1. Klucz (materiał) jest fizycznie on-premises w Twoim HSM. 2. Google używa go przez EKM (External Key Manager). 3. Key Access Justifications (KAJ) zmusza Google do podania powodu ('rationale') przy każdej próbie użycia tego klucza, a Twój system on-premises może to żądanie odrzucić, jeśli powód jest nieprawidłowy.
 
 Dlaczego inne są błędne:
-A. organizationAdmin: Może wszystko, w tym zmieniać sieć.
-C. networkAdmin: Służy właśnie do modyfikacji sieci, co jest zakazane.
-D. Viewer: Tylko do odczytu.
-
-Konsensus społeczności ExamTopics: 100% na B. Podstawowa separacja obowiązków.</pre>
+A, C. CMEK: Materiał klucza jest w chmurze Google (choć w HSM), co nie spełnia wymogu pełnej kontroli on-premises.
+B. Upload to KMS (Imported Key): Po wgraniu materiału do KMS, Google nim zarządza. Nie masz możliwości odrzucenia pojedynczego żądania użycia klucza na poziomie Twojego on-premises HSM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Pytanie to testuje precyzyjne rozróżnienie między 'Governance' (zasady) a 'Infrastructure Administration' (realizacja). Rola B to 'ustawodawca', rola C to 'wykonawca'. Compliance officer powinien mieć tylko rolę B.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Tylko połączenie EKM z KAJ daje klientowi technologiczną gwarancję, że Google nie użyje klucza bez wyraźnej i uzasadnionej zgody.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/overview</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/ekm-kaj-overview" target="_blank">External Key Management and KAJ</a></li>
 </ul>
 </div>
 </div>

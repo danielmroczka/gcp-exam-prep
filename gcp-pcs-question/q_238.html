@@ -52,15 +52,14 @@
 <h2>Question 238 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure that all Cloud SQL instances are created with 'Public IP' disabled across the organization. Which tool?
+Your company is concerned about unauthorized parties gaining access to the Google Cloud environment by using a fake login page. You must implement a solution to protect against person-in-the-middle attacks. Which security measure should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: sql.restrictPublicIp</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud SQL configuration settings</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Security key</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google prompt</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Text message or phone call code</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google Authenticator application</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Ensure that all Cloud SQL instances are created with 'Public IP' disabled across
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,23 @@ Ensure that all Cloud SQL instances are created with 'Public IP' disabled across
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Organization Policy: Polityka `sql.restrictPublicIp` pozwala na centralne zablokowanie możliwości przypisywania publicznych adresów IP do baz danych Cloud SQL. Gwarantuje to, że bazy będą dostępne tylko przez sieć wewnętrzną (Private IP/PSC).
+A. Security Key: Klucze bezpieczeństwa (FIDO2/Titan) są jedyną formą MFA odporną na ataki typu 'person-in-the-middle' (PITM) i phishing. Podczas logowania klucz weryfikuje domenę strony (URL). Jeśli strona jest fałszywa (fake login page), klucz po prostu odmówi podpisania wyzwania, bo domena się nie zgadza.
 
 Dlaczego inne są błędne:
-A. IAM: Nie wymusza cech technicznych bazy.
-C. SQL Settings: To ustawienie dla pojedynczej bazy, nie 'across organization'.
-D. VPC Service Controls: Chroni API SQL, ale nie zapobiega samemu posiadaniu Public IP przez instancję bazy.
-
-Konsensus społeczności ExamTopics: 100% na B. To standardowy 'Security Guardrail' w GCP.</pre>
+B, C, D: Wszystkie te metody (kody SMS, powiadomienia na telefon, kody z aplikacji) mogą zostać 'przechwycone' przez napastnika na fałszywej stronie i użyte w czasie rzeczywistym do zalogowania się na prawdziwe konto użytkownika.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> To jedna z najważniejszych polityk w firmie. Publiczne IP na bazie danych to 'prośba o kłopoty'. Eksperci na Reddit radzą: 'Włącz B na poziomie organizacji pierwszego dnia migracji do chmury'.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Kryptograficzne powiązanie sesji z domeną (FIDO2) to jedyna skuteczna obrona przed nowoczesnym phishingiem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#sql" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#sql</a></li>
-
+<li><a href="https://cloud.google.com/blog/products/identity-security/fido2-the-new-standard-for-authentication" target="_blank">FIDO2 security keys</a></li>
 </ul>
 </div>
 </div>

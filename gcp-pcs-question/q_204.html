@@ -52,15 +52,14 @@
 <h2>Question 204 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit which users have the permission to modify firewall rules in a specific VPC. Which tool?
+You are using Security Command Center (SCC) to protect your workloads and receive alerts for suspected security breaches at your company. You need to detect cryptocurrency mining software. Which SCC service should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Virtual Machine Threat Detection</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Container Threat Detection</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Rapid Vulnerability Detection</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Web Security Scanner</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Audit which users have the permission to modify firewall rules in a specific VPC
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Policy Analyzer: Pozwala zadać precyzyjne pytanie: 'Pokaż mi wszystkich użytkowników i grupy, które posiadają uprawnienie compute.firewalls.update na tym zasobie sieciowym'. Narzędzie to przeszukuje wszystkie poziomy hierarchii IAM i zwraca ujednoliconą listę osób.
+A. Virtual Machine Threat Detection (VMTD): Jest to unikalna funkcja SCC Premium, która skanuje pamięć RAM działających maszyn wirtualnych bez agenta (agentless). Potrafi ona wykryć sygnatury procesów kopiących kryptowaluty (np. Monero miners), które są celowo ukrywane przed systemem operacyjnym.
 
 Dlaczego inne są błędne:
-B. Policy Troubleshooter: Tylko dla scenariuszy 'dlaczego nie mogę'.
-C. IAM Recommender: Sugeruje usuwanie nieużywanych ról.
-D. Audit Logs: Powie Ci kto ZMIENIŁ regułę w przeszłości, ale nie pokaże listy osób, które MAJĄ prawo to zrobić TERAZ.
-
-Konsensus społeczności ExamTopics: 100% na A. To główne narzędzie do 'Access Inwentaryzacji'.</pre>
+B. Container Threat Detection: Skupia się tylko na kontenerach (GKE), a mining często odbywa się na zwykłych maszynach GCE.
+C. Rapid Vulnerability Detection: Szuka otwartych portów i podatności webowych 'od zewnątrz' (skaner sieciowy).
+D. Web Security Scanner: Szuka luk w kodzie stron www (XSS, SQLi).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na Reddit specjaliści ostrzegają: uprawnienia do firewalla często 'ukryte' są w rolach Editor lub Owner nadanych na poziomie folderu. Tylko Policy Analyzer (A) potrafi je 'wyłowić' i pokazać w jednym raporcie audytowym.</p>
+<p>VMTD to przełomowa technologia pozwalająca na detekcję malware i miningu bez obciążania procesora maszyny agentami.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-vm-threat-detection-overview" target="_blank">Virtual Machine Threat Detection</a></li>
 </ul>
 </div>
 </div>

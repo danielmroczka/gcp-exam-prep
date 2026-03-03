@@ -52,15 +52,14 @@
 <h2>Question 293 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Temporary partner team (18 months). Partner employees lose access if removed from their employer's org. What to do?
+Your organization has hired a small, temporary partner team for 18 months. The temporary team will work alongside your DevOps team to develop your organization's application that is hosted on Google Cloud. You must give the temporary partner team access to your application's resources on Google Cloud and ensure that partner employees lose access if they are removed from their employer's organization. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Temporary username/password.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Workforce identity pool federated with partner IdP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Just-in-time privileged access.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Add to own IdP.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a temporary username and password for the temporary partner team members. Auto-clean the usernames and passwords after the work engagement has ended.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a workforce identity pool and federate the identity pool with the identity provider (IdP) of the temporary partner team.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Implement just-in-time privileged access to Google Cloud for the temporary partner team.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Add the identities of the temporary partner team members to your identity provider (IdP).</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Temporary partner team (18 months). Partner employees lose access if removed fro
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Workforce Identity Federation: Federacja z IdP partnera gwarantuje, że proces logowania odbywa się u nich. Jeśli partner usunie pracownika, ich IdP przestanie wydawać mu tokeny, a on natychmiast straci dostęp do Twojego GCP. Nie musisz ręcznie sprzątać kont - partner dba o swój cykl życia (lifecycle).
+B. Workforce identity pool + Federate with partner IdP: To rozwiązanie idealnie adresuje wymóg 'lose access if removed from their employer'. Dzięki federacji, kiedy partner usunie pracownika ze swojego AD/Okta, sesja tego użytkownika w GCP przestanie być ważna przy kolejnej próbie logowania, ponieważ Google każdorazowo odpytuje system partnera o ważność tożsamości. Nie musisz ręcznie zarządzać tymi kontami w swoim GCP.
 
 Dlaczego inne są błędne:
-A. Temporary password: Bardzo słabe bezpieczeństwo, brak automatyzacji wygaśnięcia.
-C. JIT: Ogranicza uprawnienia, ale nie rozwiązuje problemu tożsamości użytkownika zewnętrznego.
-D. Add to own IdP: Wymaga od Ciebie manualnego zarządzania obcymi kontami, co jest błędotwórcze.
-
-Konsensus społeczności ExamTopics: 100% na B. Federacja to jedyny poprawny sposób współpracy z partnerami B2B.</pre>
+A. Manual usernames: Koszmar administracyjny i ryzyko zostawienia 'martwych' kont po 18 miesiącach.
+C. JIT access: Rozwiązuje problem 'kiedy' mają dostęp, ale nie rozwiązuje problemu 'własności' konta i jego cyklu życia u pracodawcy.
+D. Add to your IdP: Wymagałoby to stworzenia kont dla partnerów w Twoim systemie, co zwiększa ryzyko i nakład pracy (lepiej ufać ich systemowi przez federację).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> WIF wspiera również ograniczanie dostępu tylko do osób o określonych atrybutach (np. tylko osoby z działu 'GCP-Consultants' u partnera).</p>
+<p>Federacja tożsamości (Workforce Federation) przenosi odpowiedzialność za cykl życia konta na prawowitego pracodawcę (Partnera).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workforce-identity-federation</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">Workforce Identity Federation</a></li>
 </ul>
 </div>
 </div>

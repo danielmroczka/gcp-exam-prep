@@ -52,15 +52,14 @@
 <h2>Question 77 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to validate that all data written to BigQuery was done using the App Engine Default Service Account. What should you do?
+Last week, a company deployed a new App Engine application that writes logs to BigQuery. No other workloads are running in the project. You need to validate that all data written to BigQuery was done using the App Engine Default Service Account. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Filter Cloud Logging by SA and authentication field, then click Hide Matching and ensure empty.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Filter Cloud Logging and click Show Matching and ensure empty.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Check BigQuery dataset permissions.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Check IAM project roles.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> 1. Use Cloud Logging and filter on BigQuery Insert Jobs. 2. Click on the email address in line with the App Engine Default Service Account in the authentication field. 3. Click Hide Matching Entries. 4. Make sure the resulting list is empty.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Use Cloud Logging and filter on BigQuery Insert Jobs. 2. Click on the email address in line with the App Engine Default Service Account in the authentication field. 3. Click Show Matching Entries. 4. Make sure the resulting list is empty.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. In BigQuery, select the related dataset. 2. Make sure that the App Engine Default Service Account is the only account that can write to the dataset.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Go to the Identity and Access Management (IAM) section of the project. 2. Validate that the App Engine Default Service Account is the only account that has a role that can write to BigQuery.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ You need to validate that all data written to BigQuery was done using the App En
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Filter + Hide Matching: To sprytna metoda audytu. Filtrujesz logi BigQuery pod kątem operacji zapisu, a następnie UKRYWASZ (Hide Matching) wpisy pochodzące od poprawnego konta serwisowego. Jeśli wynikowa lista jest PUSTA, oznacza to, że nikt inny nie pisał do bazy. Jeśli coś zostało, masz dowód na użycie innego konta.
+A. Cloud Logging + Filter + Hide Matching: To jest poprawna procedura audytu. Filtrujesz logi BigQuery, wskazujesz tożsamość 'App Engine Default Service Account' i wybierasz 'Hide matching entries' (ukryj pasujące wpisy). Jeśli lista jest pusta, oznacza to, że KAŻDA operacja zapisu została wykonana przez to konto. Każdy inny wpis na liście byłby dowodem na użycie innego konta.
 
 Dlaczego inne są błędne:
-B. Show Matching + empty: Jeśli pokażesz tylko poprawne konto i lista będzie pusta, to znaczy, że ono NIC nie napisało - to odwrotność tego, co chcesz sprawdzić.
-C, D: Sprawdzenie uprawnień powie Ci, kto MOŻE pisać, ale nie potwierdzi, kto FAKTYCZNIE pisał w przeszłości (audyt historyczny wymaga logów).
-
-Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. To praktyczna umiejętność korzystania z Logs Explorera.</pre>
+B. Show Matching: Pokazałoby tylko poprawne wpisy, ale nie ujawniłoby ewentualnych wpisów od 'niepowołanych' osób.
+C, D. IAM permissions: Sprawdzanie uprawnień mówi nam, co MOŻE się stać, ale nie potwierdza tego, co się FAKTYCZNIE stało (do tego służą logi).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Ten wzorzec audytowy pozwala na szybkie wykrycie 'szumu' lub nieautoryzowanych działań bez konieczności przeglądania milionów poprawnych wpisów.</p>
+<p>Audytowanie logów to jedyny sposób na empiryczne potwierdzenie, że zasady bezpieczeństwa są przestrzegane.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/view/logs-explorer-queries" target="_blank">https://cloud.google.com/logging/docs/view/logs-explorer-queries</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/view/logging-query-language" target="_blank">Cloud Logging filter</a></li>
 </ul>
 </div>
 </div>

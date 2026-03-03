@@ -60,7 +60,6 @@ A customer needs to prevent attackers from hijacking their domain/IP and redirec
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Armor</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> DNS Security Extensions</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Identity-Aware Proxy</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A customer needs to prevent attackers from hijacking their domain/IP and redirec
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. DNS Security Extensions (DNSSEC): Chroni przed atakami typu man-in-the-middle, takimi jak DNS cache poisoning, poprzez cyfrowe podpisywanie rekordów DNS. Gwarantuje to, że odpowiedzi DNS pochodzą z autentycznego źródła i nie zostały zmodyfikowane w trakcie przesyłania.
+C. DNS Security Extensions (DNSSEC): DNSSEC chroni przed atakami typu 'man-in-the-middle' i 'DNS cache poisoning' poprzez cyfrowe podpisywanie rekordów DNS. Gwarantuje to, że użytkownik łączący się z domeną trafia na właściwy adres IP, a nie na fałszywą stronę napastnika.
 
 Dlaczego inne są błędne:
-A. VPC Flow Logs: Rejestrują pakiety IP, co jest przydatne do audytu ruchu, ale nie zapobiegają atakom na protokół DNS.
-B. Cloud Armor: Chroni przed atakami DDoS i atakami na poziomie aplikacji (WAF), ale nie rozwiązuje problemów z integralnością odpowiedzi DNS.
-D. Cloud Identity-Aware Proxy (IAP): Zarządza dostępem do aplikacji na podstawie tożsamości, ale nie chroni infrastruktury DNS przed hijackingiem.
-
-Konsensus społeczności ExamTopics: 100% wskazuje na C. DNSSEC to standardowe rozwiązanie dla ochrony integralności domen.</pre>
+A. VPC Flow Logs: Rejestrują ruch, ale nie zapobiegają hijackingowi DNS.
+B. Cloud Armor: Chroni przed atakami DDoS i WAF (L7), ale nie zabezpiecza protokołu DNS.
+D. Cloud IAP: Służy do kontroli dostępu do aplikacji, a nie do ochrony samej rezolucji nazw w internecie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> DNSSEC wprowadza zaufanie do hierarchii DNS poprzez łańcuch podpisów cyfrowych. W Google Cloud DNS włączenie DNSSEC sprowadza się do zmiany jednego ustawienia w strefie DNS.</p>
+<p>DNSSEC to standardowy protokół bezpieczeństwa zapobiegający podszywaniu się pod serwery nazw (DNS hijacking).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dns/docs/dnssec-configs" target="_blank">https://cloud.google.com/dns/docs/dnssec-configs</a></li>
-
+<li><a href="https://cloud.google.com/dns/docs/dnssec" target="_blank">Cloud DNS DNSSEC</a></li>
 </ul>
 </div>
 </div>

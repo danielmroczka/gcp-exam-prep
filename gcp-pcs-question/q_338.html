@@ -52,15 +52,14 @@
 <h2>Question 338 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-ensure all GKE nodes always run the latest release to minimize vulnerability risk. Automated. What to do?
+Your organization is planning to deploy a large number of Google Kubernetes Engine (GKE) clusters to run business applications in different folders and projects. You must ensure that all GKE nodes always run the latest release to minimize vulnerability risk and administrative effort. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> gcloud container node-pools describe.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Custom org policy constraint resource.management.autoUpgrade == true.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Migrate to new node pools.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Manually run upgrade.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> After creating clusters, use the Google Cloud console gcloud container node-pools describe NODE_POOL_NAME --cluster=CLUSTER_NAME command. Examine the upgradeSettings and UpdateInfo output.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a custom organization policy constraint resource.management.autoUpgrade == true with an action type of ALLOW at the organization level before deployment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a new node pool with the newer version for each cluster. Migrate the workload. Eliminate the outdated node pool.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Manually run the Google Cloud console gcloud container clusters upgrade CLUSTER_NAME--node-pool=NODE_POOL_NAME --cluster-version VERSION command on newly created clusters regularly.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ ensure all GKE nodes always run the latest release to minimize vulnerability ris
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Org Policy Enforcement: Aby mieć pewność, że wszystkie zespoły w firmie dbają o bezpieczeństwo węzłów, administrator może wymusić włączenie funkcji 'Auto-upgrade' za pomocą polityki organizacji. Uniemożliwia to stworzenie klastra z wyłączonymi automatycznymi poprawkami.
+B. Org Policy: resource.management.autoUpgrade == true: Aby zagwarantować, że WSZYSTKIE klastry w całej organizacji mają włączoną funkcję auto-upgrade, należy użyć Polityki Organizacji. Wymusza ona na każdym nowo tworzonym klastrze ustawienie tej opcji na 'prawda', co minimalizuje błędy ludzkie i nakład pracy administracyjnej (nie musisz sprawdzać każdego klastra ręcznie).
 
 Dlaczego inne są błędne:
-A. gcloud describe: Służy do sprawdzania, nie do zapewniania (enforcement).
-C. Migrate: To czynność manualna, nie jest to 'automatyczny proces' zapewniający stałą aktualność w czasie.
-D. Manually upgrade: Nieskalowalne i podatne na błędy ludzkie (zapomnienie).
-
-Konsensus społeczności ExamTopics: 100% na B. Polityki organizacji to jedyny sposób na skalowalne egzekwowanie standardów GKE.</pre>
+A. Describe command: To tylko narzędzie do sprawdzania stanu, nie wymusza ono bezpieczeństwa.
+C. Manual migration: Bardzo pracochłonne i ryzykowne przy 'dużej liczbie klastrów'.
+D. Manual upgrade command: Przeciwieństwo automatyzacji i wymogu minimalizacji wysiłku.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Node auto-upgrades w GKE zazwyczaj odbywają się kilka dni po aktualizacji Mastera, co zapewnia stabilność klastra.</p>
+<p>Node auto-upgrades to fundament modelu 'Security by Default' w zarządzanych klastrach GKE.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades</a></li>
-
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades" target="_blank">GKE Node auto-upgrades</a></li>
 </ul>
 </div>
 </div>

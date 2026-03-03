@@ -52,15 +52,14 @@
 <h2>Question 281 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Secure Web Proxy implemented. Developers cannot access URLs from Linux instances. What to do?
+You just implemented a Secure Web Proxy instance on Google Cloud for your organization. You were able to reach the internet when you tested this configuration on your test instance. However, developers cannot access the allowed URLs on the Secure Web Proxy instance from their Linux instance on Google Cloud. You want to solve this problem with developers. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud NAT gateway.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Restart instance.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure proxy address on instance.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall rule HTTP/S.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure a Cloud NAT gateway to enable internet access from the developer instance subnet.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Ensure that the developers have restarted their instance and HTTP service is enabled.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ensure that the developers have explicitly configured the proxy address on their instance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure a firewall rule to allow HTTP/S from the developer instance.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Secure Web Proxy implemented. Developers cannot access URLs from Linux instances
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Proxy configuration: Secure Web Proxy (SWP) działa zazwyczaj jako proxy jawne (explicit). System operacyjny Linux nie kieruje automatycznie ruchu do proxy - musi zostać o tym 'poinformowany' przez zmienne środowiskowe (np. `export http_proxy=...`). Bez tej konfiguracji pakiety próbują iść bezpośrednio do internetu, co kończy się błędem.
+C. Explicitly configure proxy address: Secure Web Proxy (SWP) w GCP działa jako 'explicit proxy'. Oznacza to, że instancje klienckie (Linux deweloperów) muszą wiedzieć, że mają wysyłać ruch przez ten proxy. Należy ustawić zmienne środowiskowe `http_proxy` i `https_proxy` na adres IP instancji Secure Web Proxy, aby ruch został tam skierowany.
 
 Dlaczego inne są błędne:
-A. Cloud NAT: Służy do omijania proxy, co jest sprzeczne z celem wdrożenia SWP (kontrolą ruchu).
-B. Restart: Nie zmieni konfiguracji sieciowej aplikacji.
-D. Firewall rule: SWP ma własne mechanizmy dopuszczania ruchu; problemem jest tu brak 'styku' klienta z proxy, a nie blokada na poziomie portów IP.
-
-Konsensus społeczności ExamTopics: 100% na C. Jawne proxy wymaga konfiguracji zmiennych środowiskowych.</pre>
+A. Cloud NAT: Służy do bezpośredniego wyjścia do internetu (transparent NAT), a deweloperzy mają używać Secure Web Proxy (który filtruje ruch wg innych zasad).
+B. Restart instance: Mało prawdopodobne, by rozwiązało brak konfiguracji aplikacyjnej proxy.
+D. Firewall rule: Pytanie mówi, że 'tested configuration worked on test instance', więc firewalle są prawdopodobnie OK, brakuje tylko skierowania ruchu z nowych maszyn do proxy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> SWP pozwala na inspekcję TLS i filtrowanie URL, co czyni go znacznie potężniejszym narzędziem niż zwykły firewall.</p>
+<p>Secure Web Proxy wymaga od klientów jawnej konfiguracji adresu serwera proxy (Explicit Proxy model).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/secure-web-proxy/docs/overview" target="_blank">https://cloud.google.com/secure-web-proxy/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/secure-web-proxy/docs/overview" target="_blank">Secure Web Proxy overview</a></li>
 </ul>
 </div>
 </div>

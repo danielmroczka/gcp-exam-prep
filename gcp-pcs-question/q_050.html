@@ -52,15 +52,14 @@
 <h2>Question 50 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to analyze VPC network traffic for anomalies without installing agents on VMs. What should you use?
+Your company has deployed an application on Compute Engine. The application is accessible by clients on port 587. You need to balance the load between the different instances running the application. The connection should be secured using TLS, and terminated by the Load Balancer. What type of Load Balancing should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Stackdriver Logging</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Flow Logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Trace</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Packet Mirroring</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Network Load Balancing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> HTTP(S) Load Balancing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> TCP Proxy Load Balancing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SSL Proxy Load Balancing</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ You need to analyze VPC network traffic for anomalies without installing agents 
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ You need to analyze VPC network traffic for anomalies without installing agents 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. VPC Flow Logs: Rejestrują one metadane o wszystkich przepływach IP (źródło, cel, porty, liczba bajtów) bezpośrednio na poziomie sieci VPC. Nie wymagają one żadnego oprogramowania (agenta) wewnątrz systemu operacyjnego VM.
+D. SSL Proxy Load Balancing: Ten typ Load Balancera jest przeznaczony dla ruchu TCP, który nie jest protokołem HTTP, ale wymaga szyfrowania SSL/TLS. Terminuje on połączenie SSL na balancerze (Load Balancer odszyfrowuje ruch) i przesyła go do instancji na dowolnym porcie (np. 587 - często używany dla SMTP/submission).
 
 Dlaczego inne są błędne:
-A. Stackdriver Logging: Może zawierać logi aplikacji, ale nie rejestruje automatycznie ruchu sieciowego na poziomie pakietów IP bez dodatkowej konfiguracji.
-C. Cloud Trace: Służy do analizy opóźnień w aplikacjach mikroserwisowych (profilowanie), a nie do monitoringu ruchu sieciowego.
-D. Packet Mirroring: Kopiuje pełne pakiety dla celów inspekcji (IDS/IPS). Jest bardziej skomplikowane i droższe w analizie niż Flow Logs, które zazwyczaj wystarczają do wykrywania anomalii (np. nagłych skoków transferu).
-
-Konsensus społeczności ExamTopics: Wyraźna przewaga opcji B jako najprostszej i 'agentless' metody monitoringu sieci.</pre>
+A. Network Load Balancing: Nie terminuje połączeń SSL (tylko przekazuje pakiety).
+B. HTTP(S) Load Balancing: Służy tylko dla protokołów HTTP/HTTPS.
+C. TCP Proxy Load Balancing: Służy dla czystego ruchu TCP, nie zajmuje się terminacją SSL (choć technicznie SSL Proxy to wariant TCP Proxy z SSL).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Flow Logs są próbkowane, co pozwala na monitoring ogromnego ruchu przy minimalnym wpływie na wydajność sieci i koszty przechowywania logów.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>SSL Proxy LB pozwala na centralne zarządzanie certyfikatami dla niestandardowych protokołów TCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/using-flow-logs" target="_blank">https://cloud.google.com/vpc/docs/using-flow-logs</a></li>
-
+<li><a href="https://cloud.google.com/load-balancing/docs/ssl" target="_blank">SSL Proxy Load Balancing overview</a></li>
 </ul>
 </div>
 </div>

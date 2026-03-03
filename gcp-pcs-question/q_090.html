@@ -52,15 +52,14 @@
 <h2>Question 90 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Development team creates multiple projects under a folder. Prevent data exfiltration by insiders without restricting communication between projects. What should you do?
+You are the security admin of your company. Your development team creates multiple GCP projects under the "implementation" folder for several dev, staging, and production workloads. You want to prevent data exfiltration by malicious insiders or compromised code by setting up a security perimeter. However, you do not want to restrict communication between the projects. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Shared VPC and firewall rules.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Access levels in Access Context Manager and Shared VPC.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Single service perimeter with IaC monitoring folder changes.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Three different service perimeters.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use a Shared VPC to enable communication between all projects, and use firewall rules to prevent data exfiltration.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create access levels in Access Context Manager to prevent data exfiltration, and use a shared VPC for communication between projects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use an infrastructure-as-code software tool to set up a single service perimeter and to deploy a Cloud Function that monitors the "implementation" folder via Stackdriver and Cloud Pub/Sub. When the function notices that a new project is added to the folder, it executes Terraform to add the new project to the associated perimeter.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use an infrastructure-as-code software tool to set up three different service perimeters for dev, staging, and prod and to deploy a Cloud Function that monitors the "implementation" folder via Stackdriver and Cloud Pub/Sub. When the function notices that a new project is added to the folder, it executes Terraform to add the new project to the respective perimeter.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Development team creates multiple projects under a folder. Prevent data exfiltra
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ Development team creates multiple projects under a folder. Prevent data exfiltra
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Single Service Perimeter: Umieszczenie wszystkich projektów wewnątrz JEDNEGO perymetru VPC Service Controls pozwala im na swobodną komunikację między sobą (brak restrykcji wewnątrz), ale jednocześnie tworzy twardą barierę chroniącą przed kopiowaniem danych na zewnątrz perymetru (data exfiltration). Automatyzacja (IaC) zapewnia, że nowe projekty w folderze są automatycznie dodawane do ochrony.
+B. VPC Service Controls (Perimeter) + Shared VPC: Pytanie dotyczy zapobiegania eksfiltracji danych (data exfiltration). Do tego celu służy VPC Service Controls, które tworzy wirtualny obwód (perimeter) wokół zasobów Google Cloud (jak GCS, BigQuery). Użycie Shared VPC pozwala na swobodną komunikację między projektami wewnątrz sieci prywatnej, podczas gdy obwód VPC SC blokuje próby kopiowania danych do projektów/lokalizacji poza Twoją organizacją.
 
 Dlaczego inne są błędne:
-A. Shared VPC: Chroni tylko warstwę sieciową, nie zapobiega kopiowaniu danych między API Google (np. z GCS do innego GCS poza Twoją kontrolą).
-B. Access levels: Kontrolują kto może wejść DO perymetru, ale nie blokują wyjścia danych przez uprawnionego użytkownika.
-D. Three perimeters: Zablokowałyby komunikację między projektami, co jest sprzeczne z wymogiem 'without restricting communication'.
-
-Konsensus społeczności ExamTopics: Silne poparcie dla C. Jeden perymetr dla grupy projektów to standardowy wzorzec izolacji zespołów.</pre>
+A. Firewall rules: Chronią warstwę sieciową, ale nie zapobiegają eksfiltracji danych przez API usług Google (np. ktoś może legalnie mieć dostęp do sieci, ale nielegalnie skopiować dane do prywatnego bucketu GCS).
+C, D. Terraform scripts for perimeter: To są metody automatyzacji, ale sercem rozwiązania jest sam mechanizm VPC Service Controls (odpowiedź B).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> VPC SC działa na poziomie API Google. Nawet jeśli masz uprawnienia Ownera, nie skopiujesz danych do prywatnego bucketu, jeśli Twój projekt jest w perymetrze firmy, a docelowy nie.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>VPC Service Controls to jedyna metoda blokowania eksfiltracji danych na poziomie warstwy usługowej (API) Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">VPC Service Controls overview</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 230 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect a GKE cluster against unauthorized access by using 'Workload Identity'. What is the primary benefit?
+For data residency requirements, you want your secrets in Google Clouds Secret Manager to only have payloads in europe-west1 and europe-west4. Your secrets must be highly available in both regions. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> It automates the build of container images.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> It allows Kubernetes service accounts to act as Google service accounts without using static JSON keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> It manages Kubernetes namespaces.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> It provides a container registry.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create your secret with a user managed replication policy, and choose only compliant locations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create your secret with an automatic replication policy, and choose only compliant locations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create two secrets by using Terraform, one in europe-west1 and the other in europe-west4.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create your secret with an automatic replication policy, and create an organizational policy to deny secret creation in non-compliant locations.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Protect a GKE cluster against unauthorized access by using 'Workload Identity'. 
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,26 +75,25 @@ Protect a GKE cluster against unauthorized access by using 'Workload Identity'. 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Workload Identity: To najbezpieczniejszy sposób nadawania uprawnień podom w GKE. Łączy on tożsamość Kubernetes (KSA) z tożsamością Google (GSA). Pod po prostu 'staje się' kontem serwisowym Google, co eliminuje potrzebę ściągania i przechowywania niebezpiecznych kluczy JSON wewnątrz klastra.
+A. Secret Manager with user managed replication: Przy tworzeniu sekretu w Secret Managerze możesz wybrać politykę replikacji. Wybierając 'User managed', wskazujesz konkretne regiony (np. europe-west1 i europe-west4). Gwarantuje to, że dane sekretu nie opuszczą tych lokalizacji, spełniając wymóg Data Residency, przy jednoczesnym zachowaniu wysokiej dostępności w obu wybranych miejscach.
 
 Dlaczego inne są błędne:
-A, C, D: To funkcje innych usług (Cloud Build, K8s core, Artifact Registry).
-
-Konsensus społeczności ExamTopics: 100% na B. Workload Identity to 'must-have' dla bezpieczeństwa GKE.</pre>
+B. Automatic replication: Google sam decyduje o regionach (często globalnie), co łamie wymóg rezydencji w konkretnych dwóch regionach.
+C. Two secrets: Skomplikowałoby to aplikację (musiałaby wiedzieć, do którego sekretu uderzyć), Secret Manager natywnie wspiera replikację jednego sekretu do wielu regionów.
+D. Automatic + Org Policy: Nawet jeśli zabronisz tworzenia w innych miejscach, replikacja 'Automatic' nadal może próbować zapisać dane poza Twoimi regionami, jeśli nie wybierzesz 'User managed'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie na GitHubie podkreślają: 'Klucze JSON to najczęstsza przyczyna włamań do GKE'. Workload Identity (B) całkowicie usuwa ten wektor ataku, co czyni go kluczowym elementem każdej bezpiecznej architektury kontenerowej.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>User-managed replication w Secret Managerze pozwala na precyzyjne sterowanie lokalizacją poufnych danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity</a></li>
-
+<li><a href="https://cloud.google.com/secret-manager/docs/creating-and-managing-secrets#replication" target="_blank">Secret Manager Replication</a></li>
 </ul>
 </div>
 </div>

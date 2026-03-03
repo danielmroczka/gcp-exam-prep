@@ -52,15 +52,14 @@
 <h2>Question 43 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-An application needs to access a Cloud Storage bucket. You want to follow the principle of least privilege. How should you authenticate the application?
+While migrating your organization's infrastructure to GCP, a large number of users will need to access GCP Console. The Identity Management team already has a well-established way to manage your users and want to keep using your existing Active Directory or LDAP server along with the existing SSO password. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use a JSON key for a service account.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the default Compute Engine service account.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a custom service account with minimal roles and attach it to the VM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Make the bucket public.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Manually synchronize the data in Google domain with your existing Active Directory or LDAP server.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Google Cloud Directory Sync to synchronize the data in Google domain with your existing Active Directory or LDAP server.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Users sign in directly to the GCP Console using the credentials from your on-premises Kerberos compliant identity provider.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Users sign in using OpenID (OIDC) compatible IdP, receive an authentication token, then use that token to log in to the GCP Console.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ An application needs to access a Cloud Storage bucket. You want to follow the pr
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ An application needs to access a Cloud Storage bucket. You want to follow the pr
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Custom service account: Stworzenie dedykowanego konta serwisowego i nadanie mu tylko roli wymaganej do odczytu konkretnego bucketu (np. Storage Object Viewer) to fundament zasady najniższych uprawnień. Przypięcie go do VM eliminuje potrzebę zarządzania kluczami JSON.
+B. Google Cloud Directory Sync (GCDS): To standardowe narzędzie od Google, które instaluje się on-premises. Odczytuje ono dane z AD/LDAP i synchronizuje użytkowników oraz grupy do Google Cloud Identity. Pozwala to na zachowanie istniejących procesów zarządzania tożsamością.
 
 Dlaczego inne są błędne:
-A. JSON key: Statyczne klucze są niebezpieczne (ryzyko wycieku). Należy ich unikać wewnątrz chmury.
-B. Default service account: Domyślne konto CE posiada rolę Editor, co jest skrajnym naruszeniem zasady najniższych uprawnień (zbyt duże uprawnienia).
-D. Public bucket: Całkowity brak bezpieczeństwa.
-
-Konsensus społeczności ExamTopics: 100% na C. Używanie dedykowanych kont SA zamiast domyślnych to podstawowa lekcja security w GCP.</pre>
+A. Manually synchronize: Nierealne i podatne na błędy przy 'dużej liczbie użytkowników'.
+C. Kerberos: Konsola GCP nie wspiera bezpośredniego logowania natywnym protokołem Kerberos bez federacji.
+D. OpenID: Choć możliwe, pytanie sugeruje synchronizację z AD/LDAP, co jest domeną GCDS. Federacja (SSO) jest zazwyczaj krokiem nastpnym po synchronizacji kont przez GCDS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Zawsze wyłączaj domyślne uprawnienia dla kont serwisowych i twórz własne, precyzyjne tożsamości dla każdej aplikacji.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>GCDS to 'łącznik' między on-premise Directory a chmurą Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances" target="_blank">https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances</a></li>
-
+<li><a href="https://support.google.com/a/answer/106368" target="_blank">GCDS Overview</a></li>
 </ul>
 </div>
 </div>

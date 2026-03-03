@@ -52,7 +52,7 @@
 <h2>Question 72 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-In a shared security responsibility model for IaaS, which two layers does the customer share responsibility for? (Choose two.)
+In a shared security responsibility model for IaaS, which two layers of the stack does the customer share responsibility for? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
@@ -61,7 +61,6 @@ In a shared security responsibility model for IaaS, which two layers does the cu
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Storage Encryption</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Access Policies</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Boot</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ In a shared security responsibility model for IaaS, which two layers does the cu
 <pre>Odpowiedź: BD.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Network Security: Google odpowiada za bezpieczeństwo kabli i routerów fizycznych, ale to KLIENT odpowiada za konfigurację reguł firewall, VPC i izolację sieciową swoich maszyn.
-D. Access Policies: Klient jest w 100% odpowiedzialny za to, komu nadaje role IAM i jakie polityki dostępu (np. IAP) konfiguruje dla swoich zasobów.
+B. Network Security: Klient w IaaS odpowiada za konfigurację firewalli, bezpieczeństwo sieci VPC i izolację segmentów sieciowych.
+D. Access Policies: Klient odpowiada za to, kto ma dostęp do zasobów (zarządzanie IAM, polityki haseł, MFA).
 
 Dlaczego inne są błędne:
-A. Hardware: Za to odpowiada wyłącznie Google (dostawca chmury).
-C. Storage Encryption: W IaaS Google szyfruje dane domyślnie, ale to KLIENT może chcieć zarządzać własnymi kluczami (CMEK). Jednak 'Access Policies' i 'Network' są bardziej fundamentalnymi elementami 'odpowiedzialności klienta' w standardowych diagramach modelu. (Uwaga: Niektóre źródła uznają C za poprawną zamiast B, ale BD to najczęstszy duet egzaminacyjny).
-E. Boot: Bezpieczeństwo procesu bootowania infrastruktury bazowej to rola Google. Klient odpowiada tylko za OS wewnątrz VM.
-
-Konsensus społeczności ExamTopics: Przewaga głosów na BD. Sieć i tożsamość to filary odpowiedzialności klienta w chmurze.</pre>
+A. Hardware: W chmurze publicznej (IaaS) za sprzęt fizyczny odpowiada w 100% dostawca (Google).
+C. Storage Encryption: Google domyślnie szyfruje wszystkie dane 'at rest'. Klient może zarządzać kluczami (CMEK), ale fundament szyfrowania warstwy fizycznej leży po stronie Google.
+E. Boot: Za proces bootowania fizycznych hostów odpowiada Google. Klient odpowiada za obraz OS, który wgrywa.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BD</b></p>
-<p><b>Głęboka analiza:</b> Pamiętaj zasadę: Google odpowiada za bezpieczeństwo CHMURY (of the cloud), a Ty za bezpieczeństwo W CHMURZE (in the cloud).</p>
+<p>Model współdzielonej odpowiedzialności (Shared Responsibility Model) jasno rozdziela 'Security OF the cloud' (Google) od 'Security IN the cloud' (Klient).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>
-
+<li><a href="https://cloud.google.com/architecture/framework/security/shared-responsibility-model" target="_blank">Shared responsibility model</a></li>
 </ul>
 </div>
 </div>

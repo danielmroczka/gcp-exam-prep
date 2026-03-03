@@ -52,15 +52,14 @@
 <h2>Question 329 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Python app on Cloud Run connect to Cloud SQL in different project securely with minimal overhead. What to do?
+Your organization is implementing a new Python application that will be deployed on Cloud Run. The application needs to connect to a MySQL database that runs on Cloud SQL in a different project in your Google Cloud organization. You must secure the connection from the application to the Cloud SQL instance while minimizing management overhead. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Public IP + Python Connector.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Private IP + Cloud SQL Auth Proxy in Cloud Run.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Private IP + client certificate.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Private IP + authorized network.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use a public IP address for the Cloud SQL instance. Integrate the Cloud SQL Python Connector into your application code to connect to the Cloud SQL instance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Ensure that the Cloud SQL instance doesn't have a public IP address. Configure Cloud Run to use Cloud SQL Auth Proxy to connect to the Cloud SQL instance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ensure that the Cloud SQL instance doesn't have a public IP address. Enforce SSL/TLS. Require the use of a trusted client certificate to connect to the Cloud SQL instance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Ensure that the Cloud SQL instance doesn't have a public IP address. Configure the application's IP address as an authorized network to connect to the Cloud SQL instance.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Python app on Cloud Run connect to Cloud SQL in different project securely with 
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud SQL Auth Proxy: Jest to natywny i najbardziej bezpieczny sposób łączenia się z bazami SQL w Google Cloud. Cloud Run posiada wbudowaną integrację (wystarczy zaznaczyć bazę w ustawieniach), która uruchamia proxy automatycznie. Użycie 'Private IP' zapewnia, że ruch nie opuszcza sieci Google, a proxy dba o autoryzację IAM i szyfrowanie TLS bez potrzeby zarządzania certyfikatami (minimal overhead).
+B. No public IP + Cloud SQL Auth Proxy: To jest najbardziej bezpieczny i zalecany sposób łączenia usług Serverless (Cloud Run) z bazą danych. 1. Baza nie ma publicznego IP (brak ekspozycji na internet). 2. Cloud SQL Auth Proxy zapewnia bezpieczny, zaszyfrowany i uwierzytelniany tunel do bazy bez potrzeby zarządzania adresami IP czy certyfikatami SSL po stronie aplikacji.
 
 Dlaczego inne są błędne:
-A. Public IP: Zwiększa powierzchnię ataku na bazę danych.
-C. Client certificate: Bardzo trudne w zarządzaniu przy wielu mikroserwisach (overhead związany z rotacją certyfikatów). Proxy (B) robi to za Ciebie.
-D. Authorized network: Nie zadziała bezpośrednio dla Cloud Run, który nie posiada stałego adresu IP, który można by dodać do listy. Wymagałoby to użycia Cloud NAT lub Proxy.
-
-Konsensus społeczności ExamTopics: 100% na B. Cloud SQL Proxy to standardowy łącznik dla serverless.</pre>
+A. Public IP: Zwiększa niepotrzebnie ryzyko ataku.
+C. Trusted client certificate: Bardzo trudne w zarządzaniu w środowisku serverless (Cloud Run), gdzie instancje pojawiają się i znikają (trudna dystrybucja i rotacja certyfikatów klienckich).
+D. Authorized network: Cloud Run nie ma stałego adresu IP, który mógłbyś wpisać na białą listę bazy danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Auth Proxy weryfikuje uprawnienia konta serwisowego Cloud Run do bazy danych. Jeśli deweloper nie nadał roli `Cloud SQL Client`, połączenie zostanie odrzucone mimo poprawnych haseł do bazy.</p>
+<p>Cloud SQL Auth Proxy to standardowy mechanizm zapewniający bezpieczną łączność z bazami danych w modelu Cloud-Native.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/sql/docs/mysql/connect-run" target="_blank">https://cloud.google.com/sql/docs/mysql/connect-run</a></li>
-
+<li><a href="https://cloud.google.com/sql/docs/mysql/connect-run" target="_blank">Connect Cloud Run to Cloud SQL</a></li>
 </ul>
 </div>
 </div>

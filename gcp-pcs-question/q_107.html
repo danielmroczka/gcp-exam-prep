@@ -52,15 +52,14 @@
 <h2>Question 107 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect GKE application. Scans once per week, detect XSS, authenticate with Google accounts. Which solution?
+Your organization recently deployed a new application on Google Kubernetes Engine. You need to deploy a solution to protect the application. The solution has the following requirements: * Scans must run at least once per week * Must be able to detect cross-site scripting vulnerabilities * Must be able to authenticate using Google accounts Which solution should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Google Cloud Armor</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Web Security Scanner</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Security Health Analytics</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Container Threat Detection</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Protect GKE application. Scans once per week, detect XSS, authenticate with Goog
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Web Security Scanner: To narzędzie DAST, które potrafi skanować publiczne punkty końcowe (w tym aplikacje na GKE). Wspiera ono harmonogramy (np. raz w tygodniu) i potrafi udawać zalogowanego użytkownika Google, aby skanować części aplikacji ukryte za autoryzacją. Specjalizuje się w wykrywaniu XSS.
+B. Web Security Scanner: Spełnia wszystkie trzy wymagania: 1. Można harmonogramować skany (raz w tygodniu). 2. Wykrywa XSS (Cross-Site Scripting). 3. Potrafi uwierzytelnić się w aplikacji przy użyciu konta Google, aby przeskanować sekcje dostępne tylko po zalogowaniu.
 
 Dlaczego inne są błędne:
-A. Cloud Armor: To firewall (WAF). On BLOKUJE ataki, ale nie 'skanuje' aplikacji w celu znalezienia luk przed hakerem.
-C. Security Health Analytics: Sprawdza błędną konfigurację CHMURY (np. czy bucket jest publiczny), a nie błędy w KODZIE strony WWW.
-D. Container Threat Detection: Monitoruje anomalie wewnątrz uruchomionego kontenera (np. crypto mining), nie szuka luk XSS w warstwie webowej.
-
-Konsensus społeczności ExamTopics: 100% głosów na B. Tylko WSS jest skanerem warstwy aplikacyjnej.</pre>
+A. Cloud Armor: Chroni przed atakami, ale ich nie 'wykrywa' poprzez skanowanie kodu/aplikacji (nie jest skanerem podatności).
+C. Security Health Analytics: Skanuje konfigurację chmury (np. otwarte porty), a nie kod aplikacji pod kątem XSS.
+D. Container Threat Detection: Monitoruje pody w czasie rzeczywistym pod kątem podejrzanych procesów (np. reverse shell), nie jest skanerem podatności webowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> WSS działa poprzez wstrzykiwanie bezpiecznych payloadów testowych i sprawdzanie, czy zostaną one wykonane przez przeglądarkę, co precyzyjnie identyfikuje luki XSS.</p>
+<p>Web Security Scanner to narzędzie typu DAST (Dynamic Application Security Testing) wbudowane w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview" target="_blank">Web Security Scanner</a></li>
 </ul>
 </div>
 </div>

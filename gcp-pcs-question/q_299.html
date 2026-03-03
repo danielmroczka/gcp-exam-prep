@@ -52,15 +52,14 @@
 <h2>Question 299 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Separate new application with internet access from internal systems. Effective isolation. What to do?
+You manage multiple internal-only applications that are hosted within different Google Cloud projects. You are deploying a new application that requires external internet access. To maintain security, you want to clearly separate this new application from internal systems. Your solution must have effective security isolation for the new externally-facing application. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Same project, Shared VPC.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Same project, adjustment firewall.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC SC perimeter.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> New project, VPC Network Peering to internal.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Deploy the application within the same project as an internal application. Use a Shared VPC model to manage network configurations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Place the application in the same project as an existing internal application, and adjust firewall rules to allow external traffic.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a VPC Service Controls perimeter, and place the new application's project within that perimeter.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a new project for the application, and use VPC Network Peering to access necessary resources in the internal projects.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Separate new application with internet access from internal systems. Effective i
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. New Project + Peering: Projekt jest najsilniejszą granicą izolacji w GCP (oddzielne uprawnienia, billing, zasoby). Umieszczenie ryzykownej aplikacji w nowym projekcie i połączenie go precyzyjnym peeringiem z siecią wewnętrzną to najprostszy i najskuteczniejszy model izolacji.
+D. New project + VPC Network Peering: To jest najsilniejsza forma izolacji. Umieszczenie publicznej aplikacji w całkowicie osobnym projekcie (i osobnej sieci VPC) tworzy 'twardą granicę'. Nawet jeśli aplikacja zostanie przejęta przez internet, napastnik nie ma bezpośredniego dostępu do sieci projektów wewnętrznych. VPC Peering pozwala na precyzyjne zestawienie połączenia tylko do niezbędnych zasobów, przy zachowaniu osobnego zarządzania i firewalli dla obu stron.
 
 Dlaczego inne są błędne:
-A, B. Same project: Bardzo ryzykowne. Błąd w konfiguracji IAM lub firewallu może otworzyć drogę hakerowi do całego środowiska.
-C. VPC SC: Chroni przed kradzieżą danych przez API, ale nie tworzy tak czystej izolacji administracyjnej dla warstwy sieciowej IP maszyn VM jak osobne projekty.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na D. Projekt to podstawowa jednostka bezpieczeństwa.</pre>
+A, B. Same project: Bardzo słaba izolacja. Błąd w regule firewall może narazić aplikacje wewnętrzne.
+C. VPC Service Controls: Chronią warstwę API usług managed (np. GCS), ale nie rozwiązują problemu izolacji sieciowej (IP/VPC) dla samych aplikacji działających na maszynach VM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Dzięki peeringowi możesz kontrolować komunikację na poziomie IP, a haker przejmujący 'Project Editor' w nowej aplikacji nadal nie będzie miał żadnych uprawnień w Twoim projekcie z bazą danych.</p>
+<p>Projekt (Project) jest w GCP podstawową jednostką izolacji zasobów i uprawnień.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/vpc-peering" target="_blank">https://cloud.google.com/vpc/docs/vpc-peering</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/vpc-peering" target="_blank">VPC Network Peering</a></li>
 </ul>
 </div>
 </div>

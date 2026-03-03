@@ -52,15 +52,14 @@
 <h2>Question 324 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-EU regulated workload. Restrict creation of resources outside EU without disrupting global apps. What to do?
+Your organization has a workload that is regulated by European laws. You must restrict the creation of resources outside of the EU for this specific workload. You must find an effective way to implement this security control without disrupting the other global applications. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Function delete outside EU.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Regional subnet in EU.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Service Controls.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Org policy allowed locations at project/folder level.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a Cloud Function triggered at asset creation that detects and deletes resources outside of the EU.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create all your workload's assets in a regional subnet in the EU in one project or folder.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Segment your workload in the EU in one project or folder by using VPC Service Controls.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Implement an organization policy that only allows the EU as the location for your workload's project or folder.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ EU regulated workload. Restrict creation of resources outside EU without disrupt
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Hierarchical Org Policy: Polityka `gcp.resourceLocations` może być ustawiona na dowolnym poziomie hierarchii. Aby nie blokować globalnych aplikacji, nie ustawiasz jej na poziomie Organizacji, lecz na poziomie Folderu dedykowanego dla obciążeń EU lub bezpośrednio na ich Projektach. To zapewnia zgodność bez disruptingu reszty firmy.
+D. Org Policy: Resource Location Restriction on project/folder: Polityki organizacji można nakładać na dowolnym poziomie hierarchii. Możesz stworzyć folder dla workloadu europejskiego i TYLKO na tym folderze wymusić restrykcję `gcp.resourceLocations` ustawioną na regiony EU. Pozostałe projekty w organizacji pozostaną nienaruszone i będą mogły korzystać z globalnych regionów.
 
 Dlaczego inne są błędne:
-A. Delete function: Rozwiązanie reaktywne i 'brudne'. Deweloper mógłby stworzyć i użyć zasobu zanim funkcja go skasuje.
-B. Subnets: Dotyczą tylko sieci, nie ograniczają miejsca tworzenia bucketów GCS czy baz BigQuery.
-C. VPC Service Controls: Chroni przed wyciekiem danych, ale sama w sobie nie narzuca rezydencji danych 'at rest' tak prosto i skutecznie jak Org Policy.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla D. To standardowy sposób zarządzania wymogami prawnymi per projekt.</pre>
+A. Cloud Function: To metoda reaktywna (kasuje już stworzone zasoby), polityka (D) zapobiega ich powstaniu.
+B. Regional subnet: Subnet ogranicza sieć, ale nie powstrzyma kogoś przed stworzeniem np. bucketu Cloud Storage w USA w tym samym projekcie.
+C. VPC Service Controls: Służą do ochrony przed eksfiltracją, a nie do ograniczania regionów tworzenia zasobów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Pamiętaj, że polityka `allowedLocations` dotyczy tylko nowych zasobów. Jeśli w projekcie już coś było poza EU, będziesz musiał to ręcznie przenieść.</p>
+<p>Polityki organizacji są dziedziczone, ale ich specyficzne stosowanie na pod-folderach pozwala na precyzyjne zarządzanie zgodnością (Compliance).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">Resource Location Restriction</a></li>
 </ul>
 </div>
 </div>

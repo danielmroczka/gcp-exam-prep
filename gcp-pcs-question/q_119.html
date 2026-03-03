@@ -52,15 +52,14 @@
 <h2>Question 119 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Reduce Linux bastion host attack surface by removing public IPs. SREs need access from public locations. How to enable?
+You are a member of your company's security team. You have been asked to reduce your Linux bastion host external attack surface by removing all public IP addresses. Site Reliability Engineers (SREs) require access to the bastion host from public locations so they can access the internal VPC while off-site. How should you enable this access?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud VPN.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> OS Login with 2SV.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAP TCP forwarding.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Armor.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Implement Cloud VPN for the region where the bastion host lives.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Implement OS Login with 2-step verification for the bastion host.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Implement Identity-Aware Proxy TCP forwarding for the bastion host.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Implement Google Cloud Armor in front of the bastion host.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Reduce Linux bastion host attack surface by removing public IPs. SREs need acces
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. IAP TCP Forwarding: Ta funkcja Identity-Aware Proxy pozwala na tunelowanie ruchu TCP (np. port 22 dla SSH) przez infrastrukturę Google bezpośrednio do maszyn posiadających tylko prywatne adresy IP. SRE loguje się do IAP za pomocą swoich poświadczeń firmowych, co eliminuje potrzebę wystawiania bastionu na świat.
+C. Identity-Aware Proxy (IAP) TCP forwarding: To jest idealne rozwiązanie. IAP pozwala na tunelowanie ruchu SSH (TCP port 22) przez serwery Google. Inżynier loguje się do Google Cloud, a IAP przesyła jego ruch do maszyny bastion, która posiada TYLKO prywatny adres IP. Eliminuje to całkowicie ekspozycję bastionu na publiczny internet.
 
 Dlaczego inne są błędne:
-A. Cloud VPN: Wymagałby od każdego SRE posiadania stałego połączenia VPN z każdego miejsca, z którego pracuje, co jest trudne w realizacji przy 'public locations'. IAP działa przez zwykłe HTTPS.
-B. OS Login with 2SV: To świetna funkcja, ale nadal wymaga połączenia sieciowego do maszyny. Jeśli usuniesz Public IP, SRE nie będzie miał 'jak' uderzyć do maszyny, aby OS Login zadziałał.
-D. Cloud Armor: Chroni aplikacje webowe (HTTP), nie służy do tunelowania ruchu SSH.
-
-Konsensus społeczności ExamTopics: 100% na C. IAP TCP Forwarding to oficjalna rekomendacja Google dla bezpiecznego SSH.</pre>
+A. Cloud VPN: Rozwiązuje problem, ale wymaga zestawienia tunelu VPN po stronie inżyniera (trudniejsze dla osób 'off-site' na różnych łączach).
+B. OS Login with 2SV: Bardzo dobra funkcja, ale sama w sobie wymaga, abyś mógł 'dosięgnąć' maszyny po IP (a maszyna nie ma publicznego IP).
+D. Cloud Armor: Chroni HTTP(S), nie wspiera standardowo SSH (TCP 22) dla maszyn bez publicznego IP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> IAP TCP Forwarding jest darmowy. Wykorzystuje komendę `gcloud compute ssh --tunnel-through-iap`, co czyni dostęp dla SRE bardzo wygodnym.</p>
+<p>IAP TCP Forwarding pozwala na bezpieczny dostęp administracyjny do zasobów prywatnych bez ryzyka skanowania portów przez boty z internetu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap/docs/using-tcp-forwarding" target="_blank">https://cloud.google.com/iap/docs/using-tcp-forwarding</a></li>
-
+<li><a href="https://cloud.google.com/iap/docs/tcp-forwarding-overview" target="_blank">Using IAP for TCP forwarding</a></li>
 </ul>
 </div>
 </div>

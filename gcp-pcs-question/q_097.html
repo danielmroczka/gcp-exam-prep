@@ -52,15 +52,14 @@
 <h2>Question 97 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Synchronization and SAML federation between Cloud Identity and AD. Reduce risk of user accounts being compromised. What to do?
+Your organization has implemented synchronization and SAML federation between Cloud Identity and Microsoft Active Directory. You want to reduce the risk of Google Cloud user accounts being compromised. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Identity password policy and 2-Step Verification with security keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Identity password policy and codes via text.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> AD domain password policy and post-SSO 2-Step Verification with security keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> AD domain password policy and codes via text.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a Cloud Identity password policy with strong password settings, and configure 2-Step Verification with security keys in the Google Admin console.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a Cloud Identity password policy with strong password settings, and configure 2-Step Verification with verification codes via text or phone call in the Google Admin console.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create an Active Directory domain password policy with strong password settings, and configure post-SSO (single sign-on) 2-Step Verification with security keys in the Google Admin console.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create an Active Directory domain password policy with strong password settings, and configure post-SSO (single sign-on) 2-Step Verification with verification codes via text or phone call in the Google Admin console.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Synchronization and SAML federation between Cloud Identity and AD. Reduce risk o
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. AD Policy + Post-SSO 2SV: Przy federacji SAML, hasło jest sprawdzane przez AD, więc to tam musi być silna polityka haseł. Google oferuje funkcję 'post-SSO 2-Step Verification', która dodaje wymóg drugiego składnika (klucz Titan/fizyczny) PO pomyślnym zalogowaniu się w AD. To najsilniejsza możliwa ochrona konta hybrydowego.
+C. AD Password Policy + Post-SSO 2SV with Security Keys: Ponieważ używasz federacji SAML z AD, źródłem prawdy dla haseł jest Active Directory (tam musi być silna polityka). Google Cloud pozwala jednak na wymuszenie dodatkowej weryfikacji (2-Step Verification) już PO poprawnym zalogowaniu się w AD. Użycie kluczy bezpieczeństwa (np. Titan, YubiKey) jest najbezpieczniejszą formą 2SV, odporną na phishing.
 
 Dlaczego inne są błędne:
-A, B. Password policy in Cloud Identity: Przy SSO hasło w Google nie jest używane, więc ta polityka nie ma znaczenia dla bezpieczeństwa logowania użytkowników AD.
-D. Codes via text: Kody SMS są podatne na ataki typu SIM swapping i phishing. Klucze fizyczne (C) są znacznie bezpieczniejsze.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. To najlepsza praktyka łączenia on-prem security z bezpieczeństwem chmury.</pre>
+A, B. Cloud Identity password policy: Przy federacji SAML, Cloud Identity nie sprawdza hasła (użytkownik loguje się w AD), więc ta polityka nie ma tu zastosowania.
+D. Text/Phone call: Kody SMS/telefoniczne są podatne na ataki typu SIM swapping i phishing, są mniej bezpieczne niż klucze fizyczne.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Post-SSO MFA zapewnia, że nawet jeśli haker przejmie hasło pracownika w lokalnej sieci, nie wejdzie do zasobów chmurowych bez fizycznego klucza USB/NFC.</p>
+<p>W modelu federacyjnym hasło chroni AD, a Google 2SV (MFA) stanowi krytyczną drugą linię obrony.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/7543044" target="_blank">https://support.google.com/cloudidentity/answer/7543044</a></li>
-
+<li><a href="https://support.google.com/a/answer/9116814" target="_blank">Apply 2SV to federated users</a></li>
 </ul>
 </div>
 </div>

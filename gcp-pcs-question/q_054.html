@@ -52,15 +52,14 @@
 <h2>Question 54 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-How can you restrict access to a specific Cloud Storage bucket so that only users from your corporate network can access it?
+Your team needs to make sure that their backend database can only be accessed by the frontend application and no other instances on the network. How should your team design this network?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Bucket ACLs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Service Controls with Access Levels</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall rules</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an ingress firewall rule to allow access only from the application to the database using firewall tags.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a different subnet for the frontend application and database to ensure network isolation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create two VPC networks, and connect the two networks using Cloud VPN gateways to ensure network isolation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create two VPC networks, and connect the two networks using VPC peering to ensure network isolation.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ How can you restrict access to a specific Cloud Storage bucket so that only user
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ How can you restrict access to a specific Cloud Storage bucket so that only user
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. VPC Service Controls (VPC SC): Pozwala na stworzenie perymetru wokół usług API Google (np. Cloud Storage API). W połączeniu z Access Levels (zdefiniowanymi w Access Context Manager) można zablokować dostęp do API każdemu, kto nie łączy się z konkretnego zakresu adresów IP (Twój corporate network).
+A. Ingress firewall rule + tags: To jest najbardziej elegancki i natywny sposób w GCP. Nadajesz tag `frontend` maszynom aplikacji i tag `database` maszynom bazy. Tworzysz regułę firewall zezwalającą na ruch na port bazy (np. 5432) tylko jeśli źródłem jest tag `frontend` i celem jest tag `database`.
 
 Dlaczego inne są błędne:
-A. Cloud IAM: Zarządza TOŻSAMOŚCIĄ (kto), ale nie potrafi natywnie odciąć dostępu dla uprawnionego użytkownika logującego się z publicznego internetu zamiast z biura.
-B. Bucket ACLs: Podobnie jak IAM, zarządzają tożsamością, nie mają pojęcia o lokalizacji sieciowej użytkownika.
-D. Firewall rules: Chronią maszyny VM, ale nie chronią publicznego API Cloud Storage (storage.googleapis.com), które znajduje się poza Twoją siecią VPC.
-
-Konsensus społeczności ExamTopics: Prawie 100% na C. To jedyna metoda na 'obwód bezpieczeństwa' dla usług zarządzanych (PaaS/SaaS) w GCP.</pre>
+B. Different subnets: Podsieci w GCP nie izolują ruchu (routing między subnetami w tej samej VPC jest domyślnie otwarty).
+C, D. Separate VPCs: Bardzo skomplikowane rozwiązanie dla tak prostego problemu izolacji wewnątrz jednej aplikacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> VPC Service Controls to jedyny sposób na walkę z kradzieżą danych (data exfiltration). Nawet jeśli ktoś ukradnie klucze administratora, nie pobierze danych spoza biura, jeśli perymetr na to nie pozwala.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Tagi sieciowe (lub Service Accounts w nowszych wersjach) pozwalają na tworzenie reguł firewall opartych na rolach maszyn, a nie na ich adresach IP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/access-level-usage" target="_blank">https://cloud.google.com/vpc-service-controls/docs/access-level-usage</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewalls#target_tags" target="_blank">Firewall rules tags</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 198 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Analyze VPC flow logs to detect potential beaconing behavior to a known malicious IP. Which tool?
+Your organization has on-premises hosts that need to access Google Cloud APIs. You must enforce private connectivity between these hosts, minimize costs, and optimize for operational efficiency. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery via Log Sink</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Event Threat Detection (ETD)</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Trace</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Packet Mirroring</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set up VPC peering between the hosts on-premises and the VPC through the internet.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Route all on-premises traffic to Google Cloud through an IPsec VPN tunnel to a VPC with Private Google Access enabled.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enforce a security policy that mandates all applications to encrypt data with a Cloud Key Management Service (KMS) key before you send it over the network.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Route all on-premises traffic to Google Cloud through a dedicated or Partner Interconnect to a VPC with Private Google Access enabled.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Analyze VPC flow logs to detect potential beaconing behavior to a known maliciou
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Event Threat Detection: Jest to usługa, która w czasie rzeczywistym skanuje logi i szuka wzorców ataków. Beaconing (regularne wysyłanie sygnałów do serwera C2) jest jednym z podstawowych wzorców, które ETD wykrywa automatycznie dzięki integracji z Threat Intelligence Google.
+B. IPsec VPN tunnel + Private Google Access: 1. VPN to najtańszy sposób na uzyskanie prywatnego połączenia (tańszy niż Interconnect). 2. Private Google Access dla on-premises (często realizowany przez adresy IP `restricted.googleapis.com`) pozwala Twoim serwerom w biurze na łączenie się z API Google (np. Cloud Storage) przez ten tunel VPN, a nie przez publiczny internet.
 
 Dlaczego inne są błędne:
-A. BigQuery: Pozwala na analizę ręczną, ale nie jest systemem Automatycznej detekcji w czasie rzeczywistym.
-C. Cloud Trace: Dla wydajności kodu.
-D. Packet Mirroring: Zbyt ciężkie i drogie rozwiązanie do wykrywania Beaconingu, który widać doskonale w samych metadanych logów Flow (B).
-
-Konsensus społeczności ExamTopics: 100% na B. Beaconing = Event Threat Detection.</pre>
+A. VPC peering through internet: Nie można zestawiać VPC Peeringu przez publiczny internet (wymaga on bezpośredniego połączenia wewnątrz sieci Google).
+C. Encrypt before send: Dobra praktyka, ale nie rozwiązuje problemu 'private connectivity' (ruch nadal leci przez internet, jeśli nie ma VPN).
+D. Dedicated Interconnect: Najwyższa wydajność, ale też najwyższy koszt. Pytanie prosi o 'minimize costs'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na GitHubie podkreślają, że ETD oszczędza mnóstwo czasu analitykom SOC. Zamiast pisać zapytania SQL szukające regularności w logach, dostajesz gotowy alert: 'VM X rozmawia z C2 co dokładnie 60 sekund'.</p>
+<p>Cloud VPN to ekonomiczny wybór dla hybrydowej łączności, gdy nie są wymagane ekstremalne przepustowości Interconnecta.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-on-premises" target="_blank">Private Google Access for on-premises</a></li>
 </ul>
 </div>
 </div>

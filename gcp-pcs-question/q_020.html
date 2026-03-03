@@ -60,7 +60,6 @@ How should a customer reliably deliver Stackdriver logs from GCP to their on-pre
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure every project to export all their logs to a common BigQuery DataSet, which will be queried by the SIEM system.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure Organizational Log Sinks to export logs to a Cloud Pub/Sub Topic, which will be sent to the SIEM via Dataflow.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Build a connector for the SIEM to query for all logs in real time from the GCP RESTful JSON APIs.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ How should a customer reliably deliver Stackdriver logs from GCP to their on-pre
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Pub/Sub + Dataflow: To najbardziej skalowalna i odporna na awarie metoda. Pub/Sub działa jako bufor (do 7 dni), co gwarantuje, że logi nie zginą przy awarii SIEM lub łącza. Dataflow pozwala na transformację i bezpieczne wypchnięcie danych do on-prem.
+C. Organizational Log Sink -> Pub/Sub -> Dataflow -> SIEM: To najbardziej skalowalny i niezawodny model eksportu logów z GCP do systemów zewnętrznych. Agregowany sink na poziomie organizacji zbiera logi ze wszystkich projektów, przesyła do Pub/Sub (bufor), a Dataflow może je dodatkowo przetworzyć i wysłać do on-premises SIEM (np. Splunk, QRadar).
 
 Dlaczego inne są błędne:
-A. Syslog: Bezpośrednie wysyłanie syslogiem przez internet jest niebezpieczne i nie gwarantuje dostarczenia przy dużym natężeniu ruchu.
-B. BigQuery: Jest to baza analityczna. Odpytywanie jej przez SIEM w czasie rzeczywistym jest nieefektywne i kosztowne.
-D. REST APIs: Odpytywanie (polling) API jest wolne, ma limity (quota) i nie nadaje się do przesyłania milionów logów w czasie rzeczywistym.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. Jest to oficjalnie zalecana przez Google architektura dla integracji z SIEM takimi jak Splunk czy QRadar.</pre>
+A. Syslog: Cloud Logging nie wysyła logów bezpośrednio protokołem syslog do internetu bez pośredników.
+B. BigQuery: Nadaje się do analizy historycznej, ale nie do zasilania SIEM w czasie rzeczywistym.
+D. Query via REST API: Bardzo nieefektywne (pull zamiast push) i może napotkać limity API przy dużej skali logów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Kluczowym słowem jest 'reliably'. Pub/Sub zapewnia mechanizm potwierdzeń (acknowledgments), co daje pewność, że każde zdarzenie trafiło do celu.</p>
+<p>Pub/Sub to standardowy mechanizm 'streaming export' dla logów w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk" target="_blank">https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk</a></li>
-
+<li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logging-logs-to-splunk" target="_blank">Exporting logs to SIEM</a></li>
 </ul>
 </div>
 </div>

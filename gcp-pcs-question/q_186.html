@@ -52,15 +52,14 @@
 <h2>Question 186 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Limit the lifetime of signed URLs for Cloud Storage to a maximum of 1 hour across the organization. Which tool?
+You have stored company approved compute images in a single Google Cloud project that is used as an image repository. This project is protected with VPC Service Controls and exists in the perimeter along with other projects in your organization. This lets other projects deploy images from the image repository project. A team requires deploying a third-party disk image that is stored in an external Google Cloud organization. You need to grant read access to the disk image so that it can be deployed into the perimeter. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: storage.maxRetentionPeriod</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Bucket settings in the Console</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy constraint: iam.serviceAccountKeyExposureDuration</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Allow the external project by using the organizational policy, constraints/compute.trustedImageProjects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Update the perimeter. 2. Configure the egressTo field to include the external Google Cloud project number as an allowed resource and the serviceName to compute.googleapis.com. 3. Configure the egressFrom field to set identityType to ANY_IDENTITY.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. Update the perimeter. 2. Configure the ingressFrom field to set identityType to ANY_IDENTITY. 3. Configure the ingressTo field to include the external Google Cloud project number as an allowed resource and the serviceName to compute.googleapis.com.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Update the perimeter. 2. Configure the egressTo field to set identityType to ANY_IDENTITY. 3. Configure the egressFrom field to include the external Google Cloud project number as an allowed resource and the serviceName to compute.googleapis.com.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Limit the lifetime of signed URLs for Cloud Storage to a maximum of 1 hour acros
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Organization Policy: (Uwaga techniczna: Prawidłowa nazwa polityki to `constraints/storage.publicAccessPrevention` lub inne specyficzne dla storage, ale w kontekście limitowania parametrów czasowych 'retencji' lub 'dostępu', polityki organizacji są jedynym miejscem na takie wymuszenia centralne. Uwaga: Standardowo Signed URLs limituje się w KODZIE, ale wymuszenie globalne to domena Org Policy).
+B. Update perimeter + Egress rule: VPC Service Controls domyślnie blokuje komunikację (również odczyt obrazów) z projektami spoza obwodu. Aby pozwolić projektom wewnątrz obwodu na pobranie obrazu z zewnętrznej organizacji, musisz skonfigurować regułę 'Egress'. Pozwala ona tożsamościom z wewnątrz (From ANY_IDENTITY lub konkretny SA) na wyjście poza obwód do konkretnego zasobu zewnętrznego (To: external project) w celu skorzystania z usługi Compute API (pobranie obrazu).
 
 Dlaczego inne są błędne:
-A. IAM: Nie ma parametru czasu trwania Signed URL.
-C. Console: Nie pozwala na globalne wymuszenie dla całej firmy.
-
-Konsensus społeczności ExamTopics: Przewaga na B. Choć technicznie polityki te stale ewoluują, Org Policy jest jedyną odpowiedzią pasującą do 'across the organization'.</pre>
+A. Org Policy: Pozwoliłoby na użycie obrazu z punktu widzenia IAM, ale VPC Service Controls nadal blokowałoby fizyczne połączenie do API w celu pobrania metadanych obrazu.
+C. Ingress rule: Dotyczy wpuszczania kogoś z zewnątrz DO Twojego obwodu, a tutaj to Twoje maszyny muszą 'sięgnąć' NA ZEWNĄTRZ po obraz.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> To pytanie jest uznawane za podchwytliwe. W rzeczywistości Signed URLs mogą trwać do 7 dni. Wiele firm chce to ograniczyć ze względów bezpieczeństwa. Eksperci na forach wskazują, że Organization Policy (B) jest jedynym miejscem, gdzie Google planuje lub wdraża takie ograniczenia systemowe.</p>
+<p>Egress i Ingress rules w VPC Service Controls pozwalają na bezpieczną komunikację przez granice obwodu bezpieczeństwa.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
-
+<li><a href="https://cloud.google.com/vpc-service-controls/docs/ingress-egress-rules" target="_blank">VPC SC Egress rules</a></li>
 </ul>
 </div>
 </div>

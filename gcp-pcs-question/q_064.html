@@ -52,15 +52,14 @@
 <h2>Question 64 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-In an effort for your company messaging app to comply with FIPS 140-2, a decision was made to use GCP compute and network services. The instances use Local SSDs for data caching and UDP for instance-to-instance communications. Which options should you recommend to meet the requirements?
+In an effort for your company messaging app to comply with FIPS 140-2, a decision was made to use GCP compute and network services. The messaging app architecture includes a Managed Instance Group (MIG) that controls a cluster of Compute Engine instances. The instances use Local SSDs for data caching and UDP for instance-to-instance communications. The app development team is willing to make any changes necessary to comply with the standard Which options should you recommend to meet the requirements?
 </div>
 <div class="question-choices-container">
 <ul>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Encrypt all cache storage and VM-to-VM communication using the BoringCrypto module.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set Disk Encryption on the Instance Template to customer-managed key and use BoringSSL for all data transit.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Change the app instance-to-instance communications from UDP to TCP and enable BoringSSL.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set Disk Encryption to Google-managed Key and use BoringSSL library.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set Disk Encryption on the Instance Template used by the MIG to customer-managed key and use BoringSSL for all data transit between instances.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Change the app instance-to-instance communications from UDP to TCP and enable BoringSSL on clients' TLS connections.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set Disk Encryption on the Instance Template used by the MIG to Google-managed Key and use BoringSSL library on all instance-to-instance communications.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ In an effort for your company messaging app to comply with FIPS 140-2, a decisio
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. BoringCrypto: Google używa modułu BoringCrypto (część BoringSSL), który posiada certyfikację FIPS 140-2. Aby zapewnić zgodność w warstwie aplikacji, należy używać tej biblioteki zarówno do szyfrowania danych na dyskach lokalnych (SSD), jak i do zabezpieczania komunikacji między instancjami.
+A. BoringCrypto module: Standard FIPS 140-2 wymaga użycia certyfikowanych modułów kryptograficznych. Google używa biblioteki BoringCrypto (wariant BoringSSL), która posiada certyfikat FIPS. Szyfrowanie komunikacji VM-to-VM oraz danych na dyskach (Local SSD) przy użyciu tego modułu jest kluczowe dla zgodności.
 
 Dlaczego inne są błędne:
-B, D: Szyfrowanie dysków (CMEK/GMEK) odbywa się na poziomie infrastruktury Google i jest zgodne z FIPS, ale nie rozwiązuje problemu szyfrowania ruchu UDP w warstwie aplikacji.
-C: Zmiana UDP na TCP nie jest wymagana przez FIPS; FIPS dotyczy algorytmów i bibliotek kryptograficznych, a nie protokołu transportowego.
-
-Konsensus społeczności ExamTopics: Większość na A. BoringCrypto to kluczowe pojęcie przy pytaniach o FIPS w GCP.</pre>
+B, D. BoringSSL for data transit: To połowa sukcesu, ale wymóg FIPS dotyczy również kryptografii 'at rest' (Local SSD).
+C. UDP to TCP: Zmiana protokołu nie wpływa bezpośrednio na certyfikację kryptograficzną FIPS, choć TLS (używający BoringSSL) jest łatwiejszy do wdrożenia na TCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Google Cloud zapewnia zgodność FIPS dla infrastruktury, ale klient jest odpowiedzialny za to, aby jego własna aplikacja używała zatwierdzonych modułów kryptograficznych do operacji wykonywanych 'wewnątrz' systemu operacyjnego.</p>
+<p>BoringCrypto to fundament strategii FIPS 140-2 w usługach Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/fips-140-2-compliance" target="_blank">https://cloud.google.com/security/fips-140-2-compliance</a></li>
-
+<li><a href="https://cloud.google.com/security/compliance/fips-140-2" target="_blank">Google Cloud FIPS 140-2 compliance</a></li>
 </ul>
 </div>
 </div>

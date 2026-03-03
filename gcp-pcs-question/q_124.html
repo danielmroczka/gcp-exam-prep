@@ -52,15 +52,14 @@
 <h2>Question 124 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Anonymize PHI in a non-reversible way. Do not preserve character set and length. Which solution?
+You are working with protected health information (PHI) for an electronic health record system. The privacy officer is concerned that sensitive data is stored in the analytics system. You are tasked with anonymizing the sensitive data in a way that is not reversible. Also, the anonymized data should not preserve the character set and length. Which Google Cloud solution should you use?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> DLP deterministic encryption AES-SIV</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> DLP format-preserving encryption</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> DLP cryptographic hashing</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> DLP Cloud KMS wrapped keys</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Data Loss Prevention with deterministic encryption using AES-SIV</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Data Loss Prevention with format-preserving encryption</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Data Loss Prevention with cryptographic hashing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Data Loss Prevention with Cloud Key Management Service wrapped cryptographic keys</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Anonymize PHI in a non-reversible way. Do not preserve character set and length.
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Cryptographic hashing: Haszowanie jest procesem jednokierunkowym (nieodwracalnym). Całkowicie zmienia ono format i długość danych (np. SHA-256 zawsze daje 64 znaki hex), co spełnia wymóg 'do not preserve character set and length'.
+C. Cloud DLP with cryptographic hashing: Haszowanie kryptograficzne jest procesem jednostronnym (nieodwracalnym). Po zamianie danych (np. nazwiska) na skrót (hash), nie można odzyskać oryginału bez posiadania klucza i przeprowadzenia ataku brute-force. Ponadto, hash zazwyczaj ma stałą długość i inny zestaw znaków niż wejście, co spełnia wymóg 'should not preserve character set and length'.
 
 Dlaczego inne są błędne:
-A. Deterministic encryption: Jest odwracalna (reversible) przy użyciu klucza.
-B. Format-preserving encryption: Z założenia zachowuje format i długość (np. numer telefonu po zaszyfrowaniu nadal ma 9 cyfr) - przeciwieństwo wymogu.
-D. Wrapped keys: To mechanizm zarządzania kluczami, a nie technika transformacji danych (anonymizacji).
-
-Konsensus społeczności ExamTopics: 100% na C. Hashing = non-reversible i zmiana formatu.</pre>
+A. Deterministic encryption: Jest odwracalna (jeśli masz klucz).
+B. Format-preserving encryption (FPE): Z definicji zachowuje zestaw znaków i długość danych (np. numer karty kredytowej zamienia na inny numer o tej samej długości).
+D. KMS wrapped keys: To metoda zarządzania kluczami, a nie sam sposób anonimizacji danych (choć może być częścią procesu, samo haszowanie (C) jest sednem odpowiedzi).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Jeśli potrzebowałbyś łączyć te dane w przyszłości (referential integrity), musiałbyś użyć tej samej soli (salt) przy haszowaniu każdego rekordu.</p>
+<p>Haszowanie kryptograficzne to najsilniejsza forma de-identyfikacji danych, gdy nie planujemy powrotu do danych jawnych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/transformations-reference#hashing" target="_blank">https://cloud.google.com/dlp/docs/transformations-reference#hashing</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/concepts-deidentification#hashing" target="_blank">DLP De-identification techniques</a></li>
 </ul>
 </div>
 </div>

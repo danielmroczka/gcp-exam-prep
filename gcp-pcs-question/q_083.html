@@ -52,15 +52,14 @@
 <h2>Question 83 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to optimize Cloud DLP usage to reduce cost. Data is in GCS and BigQuery. Which options should you recommend?
+As adoption of the Cloud Data Loss Prevention (Cloud DLP) API grows within your company, you need to optimize usage to reduce cost. Cloud DLP target data is stored in Cloud Storage and BigQuery. The location and region are identified as a suffix in the resource name. Which cost reduction options should you recommend?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set rowsLimit on BQ outside US, bytesLimitPerFile on multiregional GCS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set rowsLimit on BQ outside US, minimize transformation units.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use rowsLimit and bytesLimitPerFile to sample data and use CloudStorageRegexFileSet.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use FindingLimits and TimespanConfig.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set appropriate rowsLimit value on BigQuery data hosted outside the US and set appropriate bytesLimitPerFile value on multiregional Cloud Storage buckets.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set appropriate rowsLimit value on BigQuery data hosted outside the US, and minimize transformation units on multiregional Cloud Storage buckets.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use rowsLimit and bytesLimitPerFile to sample data and use CloudStorageRegexFileSet to limit scans.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use FindingLimits and TimespanContfig to sample data and minimize transformation units.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ You need to optimize Cloud DLP usage to reduce cost. Data is in GCS and BigQuery
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Sampling and Filtering: Największy wpływ na koszt DLP ma ilość skanowanych danych. Użycie `rowsLimit` (dla BigQuery) i `bytesLimitPerFile` (dla GCS) pozwala na przeskanowanie reprezentatywnej PRÓBKI danych zamiast całości. `CloudStorageRegexFileSet` dodatkowo ogranicza skanowanie tylko do konkretnych typów plików (np. tylko logi .txt).
+C. Sample data (rowsLimit / bytesLimit) + RegexFileSet: Koszt DLP zależy od ilości przeskanowanych danych. Optymalizacja polega na skanowaniu tylko reprezentatywnej próby danych (sampling) zamiast całości oraz używaniu filtrów (regex), aby skanować tylko te pliki/lokalizacje, które faktycznie mogą zawierać wrażliwe dane.
 
 Dlaczego inne są błędne:
-A, B. Regiony (outside US) nie mają bezpośredniego wpływu na optymalizację kosztów skanowania jako taką (cennik jest zazwyczaj spójny lub różnice są minimalne w porównaniu do redukcji wolumenu danych).
-D. FindingLimits: Ogranicza liczbę raportowanych znalezisk, ale DLP i tak musi przeskanować cały plik, aby je znaleźć, więc nie redukuje to kosztów operacji skanowania.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. Próbkowanie (sampling) to kluczowa technika optymalizacji kosztów w Big Data.</pre>
+A, B. Outside the US: Region nie zmienia znacząco struktury kosztów DLP w tak dużym stopniu jak redukcja wolumenu danych.
+D. FindingLimits: Ogranicza liczbę raportowanych znalezisk, ale nie ilość przeskanowanych danych (za które płacisz).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Jeśli masz 1TB logów, skanowanie 100MB z każdego pliku (sampling) zazwyczaj wystarczy, aby wykryć, czy dany proces zaczął omyłkowo zapisywać PII, a kosztuje ułamek ceny pełnego skanu.</p>
+<p>W DLP API płacisz za 'przetworzone bajty'. Sampling to najskuteczniejsza metoda kontroli kosztów przy dużych zbiorach danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/cost-control" target="_blank">https://cloud.google.com/dlp/docs/cost-control</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/optimizing-costs" target="_blank">Cloud DLP pricing and optimization</a></li>
 </ul>
 </div>
 </div>

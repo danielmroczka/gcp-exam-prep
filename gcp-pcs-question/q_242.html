@@ -52,15 +52,14 @@
 <h2>Question 242 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to manage and view all VPC flow logs across the organization. Which role?
+Your Google Cloud environment has one organization node, one folder named "Apps", and several projects within that folder. The organizational node enforces the constraints/iam.allowedPolicyMemberDomains organization policy, which allows members from the terramearth.com organization. The "Apps" folder enforces the constraints/iam.allowedPolicyMemberDomains organization policy, which allows members from the flowlogistic.com organization. It also has the inheritFromParent: false property. You attempt to grant access to a project in the "Apps" folder to the user testuser@terramearth.com. What is the result of your action and why?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/logging.admin at the organization level</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/compute.networkAdmin at the organization level</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/logging.viewer at the project level</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/resourcemanager.organizationAdmin</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> The action succeeds because members from both organizations, terramearth.com or flowlogistic.com, are allowed on projects in the "Apps" folder.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> The action succeeds and the new member is successfully added to the project's Identity and Access Management (IAM) policy because all policies are inherited by underlying folders and projects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> The action fails because a constraints/iam.allowedPolicyMemberDomains organization policy must be defined on the current project to deactivate the constraint temporarily.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> The action fails because a constraints/iam.allowedPolicyMemberDomains organization policy is in place and only members from the flowlogistic.com organization are allowed.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Grant a user access to manage and view all VPC flow logs across the organization
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Grant a user access to manage and view all VPC flow logs across the organization
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. logging.admin (Org Level): Podobnie jak w pytaniu 211, zarządzanie logami (Flow Logs to logi!) wymaga uprawnień Logging Admin. Nadanie tej roli na poziomie organizacji pozwala na centralne zarządzanie zbieraniem i audytem ruchu sieciowego we wszystkich projektach firmy.
+D. The action fails (inheritFromParent: false): Gdy polityka organizacji `allowedPolicyMemberDomains` jest ustawiona na poziomie folderu z właściwością `inheritFromParent: false`, całkowicie zastępuje ona politykę z poziomu organizacji. W folderze 'Apps' dozwolona jest TYLKO domena `flowlogistic.com`. Próba dodania użytkownika z domeny `terramearth.com` zostanie zablokowana przez mechanizm wymuszania polityki, mimo że na poziomie organizacji ta domena jest dozwolona.
 
 Dlaczego inne są błędne:
-B. networkAdmin: Nie zarządza konfiguracją usługi Cloud Logging.
-C. Project level: Zbyt wąski zakres (nie 'across organization').
-D. organizationAdmin: Zbyt wysoka rola.
-
-Konsensus społeczności ExamTopics: 100% na A. Zarządzanie logami w skali firmy = Org-level Logging Admin.</pre>
+A. Both organizations allowed: Nie, ponieważ `inheritFromParent: false` odcina wpływ polityki nadrzędnej.
+B. Action succeeds: Błędne założenie - polityka zabroni tej akcji.
+C. Define on project: Nie jest to wymagane do deaktywacji; polityka folderu już jest wystarczająco restrykcyjna, by zablokować akcję.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na forach inżynierowie radzą: 'Stwórz centralny projekt logów i nadaj roli A zespołowi Security na poziomie organizacji'. Dzięki temu logi ze wszystkich VPC będą trafiać do jednego, bezpiecznego miejsca pod ich kontrolą.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Zrozumienie mechanizmu 'inheritFromParent' w politykach organizacji jest kluczowe dla poprawnego projektowania hierarchii bezpieczeństwa.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/access-control" target="_blank">https://cloud.google.com/logging/docs/access-control</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">Org Policy inheritance</a></li>
 </ul>
 </div>
 </div>

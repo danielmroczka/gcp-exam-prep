@@ -60,7 +60,6 @@ A customer's data science group wants to use Google Cloud Platform (GCP) for the
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Register a new domain name, and use that for the new Cloud Identity domain.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ask Google to provision the data science manager's account as a Super Administrator in the existing domain.</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Ask customer's management to discover any other uses of Google managed services, and work with the existing Super Administrator.</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ A customer's data science group wants to use Google Cloud Platform (GCP) for the
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Współpraca z istniejącym Super Administratorem: Ponieważ domena może być powiązana tylko z jedną organizacją Google (Cloud Identity lub Workspace), najlepszym wyjściem jest znalezienie administratora istniejącej instancji G Suite i zintegrowanie nowych projektów GCP w ramach tej samej hierarchii.
+D. Discover other uses and work with Super Admin: Ponieważ domena jest już używana przez inną usługę Google (G Suite), nie można jej po prostu przejąć. Najmniej inwazyjną metodą jest identyfikacja istniejącego administratora (Super Admin) tej domeny i dodanie do niej zasobów Cloud Identity, co pozwoli na centralne zarządzanie bez konfliktów.
 
 Dlaczego inne są błędne:
-A. Domain Contestation: Służy do odzyskiwania domeny, jeśli ktoś nieuprawniony ją zarejestrował. Tu domena jest używana legalnie przez inną część tej samej firmy.
-B. New domain: Tworzy silosy tożsamości. Firma chce używać swojej głównej domeny dla wszystkich usług.
-C. Provisioning via Google: Google nie nadaje uprawnień Super Admina na życzenie bez zgody obecnego właściciela instancji.
-
-Konsensus społeczności ExamTopics: Wyraźna przewaga opcji D jako najbardziej pragmatycznego podejścia zgodnego z polityką korporacyjną.</pre>
+A. Domain Contestation: To długotrwały i agresywny proces, nie jest 'najmniej inwazyjny'.
+B. New domain: Skomplikowałoby to proces uwierzytelniania dla użytkowników, którzy mają już konta w głównej domenie.
+C. Ask Google to provision: Google nie przyznaje uprawnień Super Admin bez weryfikacji własności domeny lub kontaktu z obecnym adminem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> W GCP 'Organization Node' jest nierozerwalnie związany z domeną Cloud Identity/Workspace. Posiadanie jednej organizacji ułatwia centralne zarządzanie bezpieczeństwem i kosztami.</p>
+<p>To pytanie o 'Identity consolidation'. Jeśli domena istnieje w ekosystemie Google, należy do niej dołączyć, a nie tworzyć nową wyspę.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/7298065" target="_blank">https://support.google.com/cloudidentity/answer/7298065</a></li>
-
+<li><a href="https://cloud.google.com/identity/docs/setup" target="_blank">Cloud Identity setup</a></li>
 </ul>
 </div>
 </div>

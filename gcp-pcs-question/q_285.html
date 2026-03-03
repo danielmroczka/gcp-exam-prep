@@ -52,15 +52,14 @@
 <h2>Question 285 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-SaaS app compliance: privileged account activity, IAM changes, trace unauthorized configuration. What to do?
+Your organization is developing a new SaaS application on Google Cloud. Stringent compliance standards require visibility into privileged account activity, and potentially unauthorized changes and misconfigurations to the application's infrastructure. You need to monitor administrative actions, log changes to IAM roles and permissions, and be able to trace potentially unauthorized configuration changes. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Log sinks to GCS, alerts.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS + Firewall logging.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Logging custom filters + VPC Flow Logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Event Threat Detection + SHA in SCC + Cloud Audit Logs.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create log sinks to Cloud Storage for long-term retention. Set up log-based alerts in Cloud Logging based on relevant log types. Enable VPC Flow Logs for network visibility.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Deploy Cloud IDS and activate Firewall Rules Logging. Create a custom dashboard in Security Command Center to visualize potential intrusion attempts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Detect sensitive administrative actions by using Cloud Logging with custom filters. Enable VPC Flow Logs with BigQuery exports for rapid analysis of network traffic patterns.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable Event Threat Detection and Security Health Analytics in Security Command Center. Set up detailed logging for IAM-related activity and relevant project resources by deploying Cloud Audit Logs.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,21 +78,22 @@ SaaS app compliance: privileged account activity, IAM changes, trace unauthorize
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. SCC Suite: Zestaw ETD (wykrywanie włamań), SHA (wykrywanie błędów konfiguracji) oraz Cloud Audit Logs (ślad zmian IAM) pokrywa wszystkie wymogi monitoringu compliance dla aplikacji SaaS.
+D. SCC (ETD + SHA) + Cloud Audit Logs: To jest najbardziej kompleksowy zestaw narzędzi monitorujących. 1. Cloud Audit Logs (Admin Activity) rejestrują 'kto i co zmienił' w IAM i infrastrukturze. 2. Event Threat Detection (SCC) wykrywa złośliwe działania w logach. 3. Security Health Analytics (SCC) monitoruje błędy w konfiguracji. Razem dają pełną widoczność wymaganą przez compliance.
 
 Dlaczego inne są błędne:
-A, B, C: Są to rozwiązania fragmentaryczne, skupiające się tylko na sieci lub samej archiwizacji logów, bez inteligentnej analizy zagrożeń tożsamościowych i konfiguracyjnych.</pre>
+A. Long-term retention only: Przechowywanie logów jest ważne, ale bez narzędzi analizy i alertowania (SCC) nie zapewnia aktywnego monitoringu.
+B. Cloud IDS + Firewall logs: Skupiają się na sieci, pomijając krytyczne zmiany w IAM i konfiguracji API usług managed.
+C. Custom filters: Wymagają dużego nakładu pracy na utrzymanie, podczas gdy SCC (D) oferuje gotowe, inteligentne detektory.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Integracja SCC z Audit Logs pozwala na korelację zdarzeń - np. 'ktoś z IP z Chin (ETD) zmienił rolę IAM (Audit Logs) na uprzywilejowaną'.</p>
+<p>Compliance w chmurze opiera się na dwóch filarach: Audytowalności (Audit Logs) oraz Ciągłym Monitoringu (SCC).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center" target="_blank">https://cloud.google.com/security-command-center</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center" target="_blank">Security Command Center Premium</a></li>
 </ul>
 </div>
 </div>

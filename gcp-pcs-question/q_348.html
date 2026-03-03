@@ -52,15 +52,14 @@
 <h2>Question 348 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-regulated business unit needs temporary exception to external IPs policy. comply with least privilege, minimize drift. What to do?
+Your organization enforces a custom organization policy that disables the use of Compute Engine VM instances with external IP addresses. However, a regulated business unit requires an exception to temporarily use external IPs for a third-party audit process. The regulated business workload must comply with least privilege principles and minimize policy drift. You need to ensure secure policy management and proper handling. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Folder for non-regulated, move others.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Org level policy, custom role bypass.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Org level policy, move regulated to separate folder, override at folder level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Allow for all, restrict via firewall.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a folder. Apply the restrictive organization policy for non-regulated business workloads in the folder. Place the regulated business workload in that folder.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Apply the restrictive organization policy at the organization level. Create an IAM custom role with permissions to bypass organization policies. Assign the custom role to the regulated business team for the specific project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Apply the custom organization policy at the organization level to restrict external IPs. Move the regulated business workload to a separate folder. Override the policy at that folder level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Modify the custom organization policy at the organization level to allow external IPs for all projects. Configure VPC firewall rules to restrict egress traffic except for the regulated business workload.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ regulated business unit needs temporary exception to external IPs policy. comply
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Folder-level Override: Najlepszym sposobem na zarządzanie wyjątkami w GCP jest hierarchia. Utrzymujesz silną polityka na poziomie Organizacji, a dla 'wyjątkowego' działu tworzysz osobny folder, w którym nadpisujesz tę jedną politykę (Override). To zapewnia izolację wyjątku i łatwy audyt (drift jest ograniczony do jednego folderu).
+C. Separate folder + Policy Override: To jest poprawny proces zarządzania wyjątkami w GCP. Przeniesienie workloadu do osobnego folderu pozwala na precyzyjne ograniczenie zasięgu wyjątku. Na tym folderze ustawiasz politykę `compute.vmExternalIpAccess`, która nadpisuje (override) zakaz z poziomu organizacji, pozwalając na publiczne IP tylko tam. Jest to zgodne z hierarchią i łatwe do audytowania.
 
 Dlaczego inne są błędne:
-A. Move others: Niepotrzebne skomplikowanie struktury dla większości, która nie potrzebuje zmian.
-B. Custom role bypass: Nie istnieje rola IAM pozwalająca na 'zignorowanie' polityki organizacji (Org Policy działa na poziomie API, niezależnie od IAM).
-D. Allow for all: Katastrofa bezpieczeństwa.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. To złoty standard zarządzania wyjątkami compliance.</pre>
+A. Apply restrictive policy in folder: To podejście 'odwrócone' - jeśli na samej górze (Org) jest restrykcja, to podfolder ją dziedziczy. Musisz jawnie 'nadpisać' politykę w folderze wyjątku (C).
+B. IAM role to bypass: W GCP nie istnieje rola IAM, która pozwala na 'omijanie' polityk organizacji (Org Policies to twarde ograniczenia techniczne nadrzędne wobec IAM).
+D. Allow all + Firewall: Złamanie zasad bezpieczeństwa całej firmy ('allow all') w odpowiedzi na potrzebę jednego zespołu to błąd krytyczny.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Po zakończeniu projektu regulowanego, wystarczy skasować politykę na folderze, a projekty automatycznie odziedziczą bezpieczne ustawienia z góry (Organizacji).</p>
+<p>Zarządzanie wyjątkami poprzez hierarchię folderów i nadpisywanie polityk (Override) zapewnia najlepszą kontrolę nad 'Policy Drift'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank">Organization Policy Service</a></li>
 </ul>
 </div>
 </div>

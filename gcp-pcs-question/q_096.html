@@ -52,7 +52,7 @@
 <h2>Question 96 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Regulated workload audit evidence for access reviews. Which tool should you use?
+You are the project owner for a regulated workload that runs in a project you own and manage as an Identity and Access Management (IAM) admin. For an upcoming audit, you need to provide access reviews evidence. Which tool should you use?
 </div>
 <div class="question-choices-container">
 <ul>
@@ -60,7 +60,6 @@ Regulated workload audit evidence for access reviews. Which tool should you use?
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Analyzer</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Policy Simulator</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Regulated workload audit evidence for access reviews. Which tool should you use?
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Policy Analyzer: Jest to dedykowane narzędzie do audytu uprawnień. Potrafi odpowiedzieć na skomplikowane pytania typu: 'Kto ma dostęp do tego konkretnego bucketu, uwzględniając grupy i dziedziczenie?'. Pozwala na generowanie raportów, które są idealnym dowodem (audit evidence) dla audytorów.
+B. Policy Analyzer: To narzędzie w Cloud Asset Inventory, które pozwala na generowanie raportów pokazujących 'kto ma dostęp do czego'. Potrafi analizować złożone hierarchie, role i dziedziczenie, co jest idealnym dowodem audytowym potwierdzającym stan uprawnień w regulowanym środowisku.
 
 Dlaczego inne są błędne:
-A. Policy Troubleshooter: Służy do sprawdzania, dlaczego KONKRETNY użytkownik nie ma dostępu do KONKRETNEGO zasobu w danej chwili. Nie nadaje się do masowych przeglądów dostępów.
-C. IAM Recommender: Podpowiada jak ZMNIEJSZYĆ uprawnienia na podstawie historii użycia (Least Privilege), ale nie służy do raportowania aktualnego stanu dla audytu.
-D. Policy Simulator: Pozwala sprawdzić wpływ zmiany uprawnień ZANIM ją wprowadzisz, aby niczego nie popsuć.
-
-Konsensus społeczności ExamTopics: 100% na B. Policy Analyzer to 'must-have' przy każdym audycie IAM.</pre>
+A. Policy Troubleshooter: Służy do sprawdzania, DLACZEGO konkretny użytkownik ma (lub nie ma) dostępu do konkretnego zasobu w danej chwili.
+C. IAM Recommender: Sugeruje ograniczenie nadmiarowych uprawnień, nie jest narzędziem do pełnego audytu stanu.
+D. Policy Simulator: Pozwala sprawdzić wpływ zmiany polityki przed jej wprowadzeniem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Policy Analyzer potrafi wyeksportować wyniki do BigQuery lub JSON, co umożliwia dalszą automatyczną analizę zgodności z wymogami regulacyjnymi.</p>
+<p>Policy Analyzer to potężne narzędzie do audytu 'Effective Permissions' w całej organizacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/analyzing-iam-policies" target="_blank">Analyze IAM policies</a></li>
 </ul>
 </div>
 </div>

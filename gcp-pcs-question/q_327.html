@@ -52,15 +52,14 @@
 <h2>Question 327 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant GKE applications access to GCP services according to security best practices. What to do?
+Your organization is migrating its primary web application from on-premises to Google Kubernetes Engine (GKE). You must advise the development team on how to grant their applications access to Google Cloud services from within GKE according to security recommended practices. What should you advise the development team to do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Default CE service account.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable Workload Identity for GKE.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Custom SA on nodes.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Application SA key as K8s secret.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure the GKE nodes to use the default Compute Engine service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable Workload Identity for GKE. Assign a Kubernetes service account to the application and configure that Kubernetes service account to act as an Identity and Access Management (IAM) service account. Grant the required roles to the IAM service account.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a user-managed service account with only the roles required for the specific workload. Assign this service account to the GKE nodes.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create an application-specific IAM service account and generate a user-managed service account key for it. Inject the key to the workload by storing it as a Kubernetes secret within the same namespace as the application.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Grant GKE applications access to GCP services according to security best practic
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Workload Identity: Jest to jedyny zalecany (best practice) sposób nadawania uprawnień aplikacjom w GKE. Pozwala on na przypisanie tożsamości GCP bezpośrednio do konta serwisowego Kubernetes (KSA). Dzięki temu każdy pod ma własny, minimalny zestaw uprawnień, bez używania statycznych kluczy i bez dziedziczenia uprawnień od węzła.
+B. Enable Workload Identity for GKE: To jest 'złoty standard' bezpieczeństwa GKE. Pozwala na powiązanie konta serwisowego Kubernetes (KSA) z kontem serwisowym Google (GSA). Dzięki temu Twoja aplikacja w podzie może używać natywnych bibliotek Google (np. do odczytu z GCS) bez potrzeby wstrzykiwania jakichkolwiek kluczy JSON. Pod 'staje się' tożsamością IAM w sposób bezpieczny i automatyczny.
 
 Dlaczego inne są błędne:
-A. Default SA: Posiada zbyt szerokie uprawnienia (rola Editor) - skrajne naruszenie zasad security.
-C. Custom SA on nodes: Wszystkie pody na tym samym węźle miałyby te same uprawnienia (brak izolacji między aplikacjami).
-D. SA key as secret: Nadal używa statycznych kluczy JSON, które mogą wycieknąć i wymagają rotacji.
-
-Konsensus społeczności ExamTopics: 100% na B. Workload Identity to 'złoty standard' dla GKE.</pre>
+A. Default Compute SA: Bardzo niebezpieczne (zbyt szerokie uprawnienia - 'Project Editor').
+C. SA on GKE nodes: Wszystkie aplikacje na tym samym węźle miałyby te same uprawnienia (brak izolacji).
+D. Keys in K8s secret: Mniej bezpieczne (klucze statyczne istnieją w etcd) i trudniejsze w zarządzaniu (rotacja kluczy).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Workload Identity sprawia, że biblioteki Google (Cloud SDK) wewnątrz kontenera automatycznie 'widzą' tożsamość i pobierają tokeny bez żadnej konfiguracji ze strony programisty.</p>
+<p>Workload Identity eliminuje ryzyko związane z kradzieżą statycznych kluczy kont serwisowych z wnętrza kontenerów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity</a></li>
-
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">GKE Workload Identity overview</a></li>
 </ul>
 </div>
 </div>

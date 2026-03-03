@@ -52,15 +52,14 @@
 <h2>Question 313 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Prod projects attaching to Shared VPCs outside networking folder (data exfiltration risk). Resolve prod without impacting dev. Efficient approach.
+Your Google Cloud organization is subdivided into three folders: production, development, and networking. Networking resources for the organization are centrally managed in the networking folder. You discovered that projects in the production folder are attaching to Shared VPCs that are outside of the networking folder which could become a data exfiltration risk. You must resolve the production folder issue without impacting the development folder. You need to use the most efficient and least disruptive approach. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Restrict Shared VPC Host Projects policy on prod folder, allow under:folders/networking.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy on networking folder only.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Policy at project level for each prod project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Policy at org level.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable the Restrict Shared VPC Host Projects organization policy on the production folder. Create a custom rule and configure the policy type to Allow. In the Custom value section, enter under:folders/networking.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable the Restrict Shared VPC Host Projects organization policy on the networking folder only. Create a new custom rule and configure the policy type to Allow. In the Custom value section, enter under:organizations/123456739123.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Enable the Restrict Shared VPC Host Projects organization policy at the project level for each of the production projects. Create a custom rule and configure the policy type to Allow. In the Custom value section, enter under:folders/networking.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable the Restrict Shared VPC Host Projects organization policy at the organization level. Create a custom rule and configure the policy type to Allow. In the Custom value section, enter under:folders/networking.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Prod projects attaching to Shared VPCs outside networking folder (data exfiltrat
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Scoped Org Policy: Ograniczenie `compute.restrictSharedVpcHostProjects` pozwala wskazać listę zaufanych projektów hostów (lub całych folderów z hostami). Ustawienie tej polityki na poziomie folderu 'Prod' (A) zapewnia, że tylko projekty produkcyjne zostaną ograniczone, podczas gdy folder 'Dev' pozostanie nietknięty (brak impactu na dev).
+A. Restrict Shared VPC Host Projects on production folder: Polityka organizacji `compute.restrictSharedVpcHostProjects` pozwala na zdefiniowanie 'białej listy' projektów (lub całych folderów), które mogą pełnić rolę hosta Shared VPC dla zasobów w danej lokalizacji. Ustawienie tej polityki na folderze 'Production' z wartością `under:folders/networking` gwarantuje, że projekty produkcyjne będą mogły podpinać się TYLKO do sieci zarządzanych centralnie w folderze networkingowym. Nie wpłynie to na folder 'Development'.
 
 Dlaczego inne są błędne:
-B. Networking folder: To folder, w którym SĄ sieci, a restrykcję musisz nałożyć tam, gdzie są VM-y (w projektach usługowych), aby nie mogły się one 'podpiąć' do obcych sieci.
-C. Project level: Niewydajne przy wielu projektach (większy overhead).
-D. Org level: Zablokowałoby też swobodę w folderze deweloperskim, co jest sprzeczne z wymogiem 'without impacting dev'.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. To idealne zastosowanie hierarchicznego nakładania polityk organizacji.</pre>
+B. Networking folder only: To by ograniczyło co może być hostem wewnątrz folderu networking, ale nie powstrzymałoby produkcji przed szukaniem hostów gdzie indziej.
+C. Project level: Zbyt pracochłonne przy wielu projektach (A jest bardziej wydajne).
+D. Org level: Wpłynęłoby to również na folder 'Development', co jest sprzeczne z wymogiem 'without impacting development'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Ta polityka jest kluczowa, aby deweloper nie mógł podpiąć produkcyjnej VM do swojej prywatnej, niezabezpieczonej sieci VPC w innym projekcie.</p>
+<p>Polityki ograniczeń Shared VPC pozwalają na twarde wymuszenie topologii 'Central Networking' w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/restrict-shared-vpc" target="_blank">Restricting Shared VPC host projects</a></li>
 </ul>
 </div>
 </div>

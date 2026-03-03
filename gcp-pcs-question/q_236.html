@@ -52,15 +52,14 @@
 <h2>Question 236 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to manage and view all VPC service control perimeters across the organization. Which role?
+You are deploying regulated workloads on Google Cloud. The regulation has data residency and data access requirements. It also requires that support is provided from the same geographical location as where the data resides. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/accesscontextmanager.policyAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/resourcemanager.organizationAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.networkAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/viewer</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Access Transparency Logging.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Deploy Assured Workloads.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Deploy resources only to regions permitted by data residency requirements.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Data Access logging and Access Transparency logging to confirm that no users are accessing data from another region.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Grant a user access to manage and view all VPC service control perimeters across
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Grant a user access to manage and view all VPC service control perimeters across
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. accesscontextmanager.policyAdmin: To specyficzna rola do zarządzania perymetrami VPC Service Controls i poziomami dostępu (Access Levels) w Access Context Managerze. Pozwala na pełne zarządzanie granicami danych w całej firmie.
+B. Deploy Assured Workloads: Assured Workloads to usługa zaprojektowana specjalnie dla regulowanych środowisk. Automatycznie konfiguruje ona 'obwód' (perimeter) spełniający wymagania dotyczące rezydencji danych, a co najważniejsze - gwarantuje, że wsparcie techniczne (Google Support) będzie świadczone przez pracowników z konkretnej lokalizacji geograficznej (np. tylko obywatele USA dla workloadów Gov, lub tylko personel z EU dla EU-sensitive data).
 
 Dlaczego inne są błędne:
-B. organizationAdmin: Zbyt wysoka rola.
-C. networkAdmin: Zarządza routingiem i subnets, nie ma praw do zarządzania 'Perymetrami API' (VPC SC).
-D. Viewer: Tylko do odczytu.
-
-Konsensus społeczności ExamTopics: 100% na A. Perymetry = Access Context Manager Admin.</pre>
+A. Access Transparency: Daje logi, ale sama w sobie nie 'gwarantuje' lokalizacji personelu wsparcia (tylko go raportuje).
+C. Region only: Spełnia wymóg rezydencji danych, ale nie rozwiązuje problemu 'lokalizacji personelu wsparcia'.
+D. Data Access logging: Ponownie, to tylko monitoring po fakcie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wiele osób szuka słowa 'VPC' w nazwie roli. Eksperci wyjaśniają: VPC Service Controls to nazwa handlowa, ale technicznie usługa ta rezyduje w Access Context Managerze (A). To częsta pułapka nazewnictwa na egzaminie.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p>Assured Workloads to rozwiązanie typu 'Compliance as a Service', wymuszające twarde ograniczenia regulacyjne na platformie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/access-context-manager/docs/access-control" target="_blank">https://cloud.google.com/access-context-manager/docs/access-control</a></li>
-
+<li><a href="https://cloud.google.com/assured-workloads/docs/overview" target="_blank">Assured Workloads overview</a></li>
 </ul>
 </div>
 </div>

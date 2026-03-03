@@ -52,15 +52,14 @@
 <h2>Question 152 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to manage and rotate encryption keys in Cloud KMS without allowing them to use the keys for encryption or decryption. Which role?
+You need to centralize your team's logs for production projects. You want your team to be able to search and analyze the logs using Logs Explorer. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/cloudkms.admin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/cloudkms.cryptoKeyEncrypterDecrypter</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/cloudkms.viewer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/cloudkms.publicKeyViewer</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Cloud Monitoring workspace, and add the production projects to be monitored.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Logs Explorer at the organization level and filter for production project logs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create an aggregate org sink at the parent folder of the production projects, and set the destination to a Cloud Storage bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create an aggregate org sink at the parent folder of the production projects, and set the destination to a logs bucket.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Grant a user access to manage and rotate encryption keys in Cloud KMS without al
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Grant a user access to manage and rotate encryption keys in Cloud KMS without al
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. cloudkms.admin: Ta rola pozwala na pełne zarządzanie cyklem życia kluczy (tworzenie, rotacja, usuwanie) oraz uprawnieniami, ale celowo NIE posiada uprawnień do wykonywania operacji kryptograficznych na danych (encrypt/decrypt).
+D. Aggregate org sink to a logs bucket: Aby centralnie przeszukiwać logi z wielu projektów bezpośrednio w Logs Explorerze, najlepiej użyć funkcji 'Aggregated Sinks'. Skierowanie ich do specjalnego 'log bucket' (zamiast zwykłego Cloud Storage) pozwala na natychmiastowe indeksowanie i przeszukiwanie tych logów za pomocą standardowych narzędzi GCP.
 
 Dlaczego inne są błędne:
-B. CryptoKeyEncrypterDecrypter: To rola 'użytkowa' do szyfrowania danych, a nie do zarządzania administracyjnego kluczami.
-C. Viewer: Tylko do odczytu metadanych, nie pozwala na rotację.
-D. PublicKeyViewer: Służy tylko do pobierania klucza publicznego w scenariuszach asymetrycznych.
-
-Konsensus społeczności ExamTopics: 100% na A. Klasyczny przykład separacji obowiązków (Separation of Duties).</pre>
+A. Monitoring workspace: Służy do metryk (CPU, RAM), a nie do centralizacji i przeszukiwania logów audytowych.
+B. Logs Explorer at org level: Bez skonfigurowanego sinka agregującego, Logs Explorer na poziomie organizacji nie pokaże automatycznie wszystkich logów ze wszystkich projektów.
+C. Cloud Storage bucket: Logi w GCS są świetne do archiwizacji, ale nie można ich przeszukiwać dynamicznie w Logs Explorerze bez ich ponownego importu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na forach zwraca uwagę na to, jak ważne jest, aby osoba zarządzająca bezpieczeństwem (Admin) nie miała wglądu w treść danych. Jeśli haker przejmie konto Admina KMS, może zniszczyć klucze (DoS), ale nie ukradnie Twoich haseł czy danych klientów w jawnym tekście.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Log buckets i agregowane sinki to nowoczesny sposób na budowanie centralnego repozytorium logów w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/reference/iam-roles" target="_blank">https://cloud.google.com/kms/docs/reference/iam-roles</a></li>
-
+<li><a href="https://cloud.google.com/logging/docs/export/aggregated_sinks" target="_blank">Aggregated sinks</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 143 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Connect CE instances between two organizations. Encrypted connection, private IP addresses. What to do?
+Your organization hosts a financial services application running on Compute Engine instances for a third-party company. The third-party company's servers that will consume the application also run on Compute Engine in a separate Google Cloud organization. You need to configure a secure network connection between the Compute Engine instances. You have the following requirements: - The network connection must be encrypted. - The communication between servers must be over private IP addresses. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud VPN.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC peering.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC SC with access level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Apigee proxy TLS.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure a Cloud VPN connection between your organization's VPC network and the third party's that is controlled by VPC firewall rules.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure a VPC peering connection between your organization's VPC network and the third party's that is controlled by VPC firewall rules.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure a VPC Service Controls perimeter around your Compute Engine instances, and provide access to the third party via an access level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure an Apigee proxy that exposes your Compute Engine-hosted application as an API, and is encrypted with TLS which allows access only to the third party.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Connect CE instances between two organizations. Encrypted connection, private IP
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud VPN: Umożliwia połączenie dwóch sieci VPC (nawet w różnych organizacjach) przy użyciu prywatnych adresów IP. Ruch jest automatycznie szyfrowany za pomocą tunelu IPsec, co spełnia oba wymogi: 'private IPs' i 'encrypted connection'.
+A. Cloud VPN: VPN tworzy zaszyfrowany tunel IPsec przez internet. Pozwala na komunikację przy użyciu prywatnych adresów IP (RFC 1918) między dwiema RÓŻNYMI organizacjami GCP, spełniając oba wymogi: szyfrowanie i prywatna adresacja.
 
 Dlaczego inne są błędne:
-B. VPC Peering: Pozwala na komunikację po prywatnych IP, ale sam w sobie NIE szyfruje ruchu (ruch idzie siecią Google w jawnym tekście, choć jest odizolowany od internetu). Pytanie prosi o 'encrypted connection'.
-C. VPC SC: To bariera dla API usług, nie jest to tunel komunikacyjny dla maszyn VM.
-D. Apigee: Służy do zarządzania API, nie do łączenia warstwy sieciowej (L3) między maszynami wirtualnymi.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. VPN to standardowa odpowiedź na wymóg 'encrypted private link'.</pre>
+B. VPC Peering: Łączy sieci prywatnie, ale ruch wewnątrz sieci Google nie jest domyślnie dodatkowo szyfrowany przez Google na warstwie pakietu (choć jest w warstwie fizycznej). Pytanie o 'encrypted connection' w kontekście hybrydowym/między-org zazwyczaj wskazuje na VPN.
+C. VPC Service Controls: Chroni API, nie tworzy tunelu komunikacyjnego między instancjami VM.
+D. Apigee proxy: Służy do zarządzania API (L7), VPN jest prostszym i właściwszym rozwiązaniem dla bezpośredniej komunikacji między serwerami.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Choć sieć Google jest bardzo bezpieczna, niektóre standardy (jak PCI czy HIPAA) wymagają jawnego szyfrowania (np. AES) przy przechodzeniu między różnymi podmiotami prawnymi (organizacjami).</p>
+<p>Cloud VPN to standardowy sposób na bezpieczne, szyfrowane połączenie sieci oparte na adresacji prywatnej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview" target="_blank">https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview</a></li>
-
+<li><a href="https://cloud.google.com/vpn/docs/concepts/overview" target="_blank">Cloud VPN overview</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 271 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Near real-time log export to on-prem SIEM. Fault tolerance, auto scaling, retry on failure. What to do?
+You work for a multinational organization that has systems deployed across multiple cloud providers, including Google Cloud. Your organization maintains an extensive on-premises security information and event management (SIEM) system. New security compliance regulations require that relevant Google Cloud logs be integrated seamlessly with the existing SIEM to provide a unified view of security events. You need to implement a solution that exports Google Cloud logs to your on-premises SIEM by using a push-based, near real-time approach. You must prioritize fault tolerance, security, and auto scaling capabilities. In particular, you must ensure that if a log delivery fails, logs are re-sent. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Pub/Sub + Cloud Function pull.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Aggregated log sink + Pub/Sub + Dataflow (primary/secondary).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Log sink to syslog CE.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Firewall query + Cloud Function.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a Pub/Sub topic for log aggregation. Write a custom Python script on a Cloud Function Leverage the Cloud Logging API to periodically pull logs from Google Cloud and forward the logs to the SIEM. Schedule the Cloud Function to run twice per day.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Collect all logs into an organization-level aggregated log sink and send the logs to a Pub/Sub topic. Implement a primary Dataflow pipeline that consumes logs from this Pub/Sub topic and delivers the logs to the SIEM. Implement a secondary Dataflow pipeline that replays failed messages.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Deploy a Cloud Logging sink with a filter that routes all logs directly to a syslog endpoint. The endpoint is based on a single Compute Engine hosted on Google Cloud that routes all logs to the on-premises SIEM. Implement a Cloud Function that triggers a retry action in case of failure.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Utilize custom firewall rules to allow your SIEM to directly query Google Cloud logs. Implement a Cloud Function that notifies the SIEM of a failed delivery and triggers a retry action.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Near real-time log export to on-prem SIEM. Fault tolerance, auto scaling, retry 
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Dataflow pipeline: Dataflow jest jedyną usługą w tym zestawieniu, która jest w 100% zarządzana, skaluje się automatycznie (auto scaling) i posiada wbudowane mechanizmy obsługi błędów i ponowień (fault tolerance, retry) dla strumieni danych z Pub/Sub. Model primary/secondary zapewnia wysoką dostępność.
+B. Aggregated log sink + Pub/Sub + Dataflow: To jest najbardziej solidna (enterprise-grade) architektura eksportu logów. 1. Aggregated sink zbiera logi z całej organizacji. 2. Pub/Sub działa jako skalowalny bufor. 3. Dataflow zapewnia automatyczne skalowanie, fault tolerance oraz możliwość implementacji logiki powtórzeń (retries) dla nieudanych wysyłek do SIEM, co gwarantuje near real-time dostarczenie logów bez ich utraty.
 
 Dlaczego inne są błędne:
-A. Cloud Function: Przy ogromnej liczbie logów (near real-time) funkcje te są mniej efektywne kosztowo i trudniejsze w zarządzaniu niż dedykowany rurociąg Dataflow.
-C. Syslog CE: VM z syslogiem to 'single point of failure' i brak automatycznego skalowania.
-D. Firewall query: Bardzo wolne i nie jest to metoda 'near real-time log export'.
-
-Konsensus społeczności ExamTopics: 100% na B. Dataflow to król potoków danych w GCP.</pre>
+A. Cloud Function pull: Mało wydajne przy dużym wolumenie logów i nie jest 'near real-time' (uruchamiane 2 razy dziennie).
+C. Syslog via single VM: Pojedyncza maszyna VM to 'single point of failure' (brak fault tolerance i skalowalności).
+D. SIEM query directly: Mało bezpieczne i mało wydajne; SIEM musiałby stale odpytywać API, co może naruszać limity i nie jest podejściem push-based.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Google udostępnia gotowe szablony Dataflow (Pub/Sub to Splunk, Pub/Sub to Elasticsearch), które wystarczy skonfigurować, co minimalizuje czas wdrożenia.</p>
+<p>Eksport logów do SIEM on-premises za pomocą pary Pub/Sub + Dataflow to wzorcowa architektura GCP zapewniająca wysoką niezawodność.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk" target="_blank">https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk</a></li>
-
+<li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logging-logs-to-splunk" target="_blank">Exporting logs to Splunk via Dataflow</a></li>
 </ul>
 </div>
 </div>

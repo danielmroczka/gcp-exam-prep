@@ -52,15 +52,14 @@
 <h2>Question 95 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Restrict service account creation capability centrally across the organization in production. What should you do?
+You are a Security Administrator at your organization. You need to restrict service account creation capability within production environments. You want to accomplish this centrally across the organization. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use IAM to restrict all users.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Org policy iam.disableServiceAccountKeyCreation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Org policy iam.disableServiceAccountKeyUpload.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Org policy iam.disableServiceAccountCreation.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Identity and Access Management (IAM) to restrict access of all users and service accounts that have access to the production environment.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use organization policy constraints/iam.disableServiceAccountKeyCreation boolean to disable the creation of new service accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use organization policy constraints/iam.disableServiceAccountKeyUpload boolean to disable the creation of new service accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use organization policy constraints/iam.disableServiceAccountCreation boolean to disable the creation of new service accounts.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,21 @@ Restrict service account creation capability centrally across the organization i
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Disable SA Creation: Polityka organizacji `iam.disableServiceAccountCreation` całkowicie blokuje możliwość tworzenia nowych kont serwisowych w danej części hierarchii (np. w folderze Production). Jest to najsilniejsza, centralna metoda wymuszenia tego ograniczenia.
+D. Org Policy: constraints/iam.disableServiceAccountCreation: Jest to specjalna polityka organizacji, która po włączeniu blokuje możliwość tworzenia nowych kont serwisowych. Można ją wymusić na poziomie całej organizacji lub konkretnego folderu (np. Production), co zapewnia centralną kontrolę.
 
 Dlaczego inne są błędne:
-A. IAM: Musiałbyś odebrać uprawnienia każdemu użytkownikowi z osobna lub na poziomie grup, co jest trudne do utrzymania i nie gwarantuje, że nowy użytkownik (np. z rolą Editor) ich nie otrzyma. Org Policy działa niezależnie od roli IAM.
-B, C: Te restrykcje dotyczą KLUCZY (JSON) do istniejących już kont, a nie samego procesu tworzenia nowych kont serwisowych.
-
-Konsensus społeczności ExamTopics: 100% na D. Klasyczny przykład użycia prewencyjnych polityk organizacji.</pre>
+A. IAM: Musiałbyś odebrać uprawnienia każdemu użytkownikowi z osobna, co jest trudne do utrzymania. Polityka (D) jest nadrzędna.
+B, C. Key creation/upload: Te polityki blokują tworzenie lub wgrywanie KLUCZY do kont serwisowych, ale nie samo tworzenie kont serwisowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Tę politykę często stosuje się na produkcji, aby wymusić tworzenie kont SA wyłącznie poprzez zatwierdzone procesy IaC (Terraform) działające na koncie z uprawnieniami 'bypass'.</p>
+<p>Polityki organizacji (Constraints) to najsilniejsza metoda wymuszania standardów bezpieczeństwa w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">IAM Organization Policies</a></li>
 </ul>
 </div>
 </div>

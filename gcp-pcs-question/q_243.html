@@ -52,15 +52,14 @@
 <h2>Question 243 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Analyze VPC network traffic to detect data exfiltration via SSH tunneling. Which service?
+An administrative application is running on a virtual machine (VM) in a managed group at port 5601 inside a Virtual Private Cloud (VPC) instance without access to the internet currently. You want to expose the web interface at port 5601 to users and enforce authentication and authorization Google credentials. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure the bastion host with OS Login enabled and allow connection to port 5601 at VPC firewall. Log in to the bastion host from the Google Cloud console by using SSH-in-browser and then to the web application.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Modify the VPC routing with the default route point to the default internet gateway. Modify the VPC Firewall rule to allow access from the internet 0.0.0.0/0 to port 5601 on the application instance.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure Secure Shell Access (SSH) bastion host in a public network, and allow only the bastion host to connect to the application on port 5601. Use a bastion host as a jump host to connect to the application.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure an HTTP Load Balancing instance that points to the managed group with Identity-Aware Proxy (IAP) protection with Google credentials. Modify the VPC firewall to allow access from IAP network range.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Analyze VPC network traffic to detect data exfiltration via SSH tunneling. Which
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ Analyze VPC network traffic to detect data exfiltration via SSH tunneling. Which
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud IDS: SSH Tunneling to metoda 'ukrywania' ruchu wewnątrz szyfrowanego połączenia SSH. Cloud IDS posiada zaawansowane algorytmy detekcji, które potrafią rozpoznać nietypowe przepływy danych wewnątrz sesji SSH, co wskazuje na próbę eksfiltracji danych.
+D. HTTP Load Balancing + IAP: To jest standardowe rozwiązanie GCP do bezpiecznego wystawiania wewnętrznych aplikacji. Load Balancer stanowi punkt wejścia, a Cloud IAP wymusza logowanie za pomocą kont Google i sprawdza uprawnienia IAM przed wpuszczeniem ruchu do maszyny VM. Pozwala to na dostęp bez wystawiania maszyny bezpośrednio na publiczne IP i bez potrzeby używania VPN/Bastiona.
 
 Dlaczego inne są błędne:
-A. Cloud Armor: Chroni LB, nie monitoruje portu 22 (SSH) maszyn VM.
-C. Flow Logs: Zobaczą tylko 'ruch na porcie 22', nie 'zrozumieją' co jest w środku sesji SSH.
-D. IAP: Służy do bezpiecznego logowania przez SSH, ale nie jest systemem detekcji włamań (IDS) analizującym treść ruchu.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. SSH tunneling detection = Cloud IDS.</pre>
+A, C. Bastion/Jump host: Wymagają dodatkowego zarządzania infrastrukturą i są mniej wygodne dla użytkowników końcowych niż bezpośredni dostęp przez przeglądarkę z IAP.
+B. Default internet gateway + firewall: Otwiera maszynę bezpośrednio na świat (public IP), co jest niebezpieczne i nie zapewnia natywnej autoryzacji Google przed warstwą sieciową.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci security na Reddit podkreślają: hakerzy często używają SSH do 'wyprowadzania' danych, bo ten port jest zazwyczaj otwarty. Cloud IDS (B) to jedyne narzędzie w GCP, które potrafi to wykryć na podstawie wzorców ruchu (Traffic analysis).</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Cloud IAP (Identity-Aware Proxy) pozwala na udostępnienie aplikacji 'BeyondCorp-style' - bezpiecznie i bez VPN.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
-
+<li><a href="https://cloud.google.com/iap/docs/concepts-overview" target="_blank">IAP for on-premises/VM apps</a></li>
 </ul>
 </div>
 </div>

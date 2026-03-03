@@ -52,15 +52,14 @@
 <h2>Question 223 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Analyze VPC network traffic to detect data exfiltration via DNS tunneling. Which service?
+After completing a security vulnerability assessment, you learned that cloud administrators leave Google Cloud CLI sessions open for days. You need to reduce the risk of attackers who might exploit these open sessions by setting these sessions to the minimum duration. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery via Log Sink</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Event Threat Detection (ETD) with Cloud DNS logs</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Trace</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Packet Mirroring</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Set the session duration for the Google session control to one hour.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set the reauthentication frequency for the Google Cloud Session Control to one hour.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Set the organization policy constraint constraints/iam.allowServiceAccountCredentialLifetimeExtension to one hour.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Set the organization policy constraint constraints/iam.serviceAccountKeyExpiryHours to one hour and inheritFromParent to false.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Analyze VPC network traffic to detect data exfiltration via DNS tunneling. Which
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. ETD + DNS Logs: DNS Tunneling to metoda ukrywania danych w zapytaniach DNS. ETD posiada dedykowany detektor, który analizuje logi z Cloud DNS i szuka nietypowo długich lub licznych zapytań o dziwne subdomeny, co jest sygnaturą tego ataku.
+B. Reauthentication frequency for Cloud Session Control: Jest to specyficzne ustawienie w konsoli administracyjnej, które decyduje o tym, jak często użytkownik korzystający z konsoli lub CLI (poprzez gcloud auth login) musi ponownie przejść proces uwierzytelniania. Ustawienie tego na 1h minimalizuje ryzyko użycia cudzej sesji.
 
 Dlaczego inne są błędne:
-A. BigQuery: Wymagałoby ręcznego pisania bardzo trudnych algorytmów analitycznych.
-C. Cloud Trace: Nie widzi ruchu sieciowego DNS.
-D. Packet Mirroring: Zadziałałoby, ale analiza surowego ruchu UDP/53 jest znacznie trudniejsza i droższa niż analiza logów przez gotowy silnik ETD (B).
-
-Konsensus społeczności ExamTopics: 100% na B. DNS Tunneling detection to mocna strona ETD.</pre>
+A. Session duration: Może dotyczyć sesji samej przeglądarki, ale reauthentication frequency (B) jest właściwszym terminem dla wymuszania 'świeżości' autentykacji w usługach Google Cloud.
+C. CredentialLifetimeExtension: Dotyczy kont serwisowych i ich tokenów, a nie administratorów-ludzi.
+D. serviceAccountKeyExpiry: Dotyczy kluczy JSON, a nie sesji interaktywnych użytkowników.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach zauważają, że hakerzy uwielbiają DNS, bo jest on zazwyczaj otwarty na każdym firewallu. ETD (B) to jedyny automat w GCP, który potrafi to 'wyłowić' bez zapychania sieci kopiami pakietów.</p>
+<p>Session Control to potężne narzędzie do ograniczania trwałości sesji administracyjnych w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview</a></li>
-
+<li><a href="https://support.google.com/a/answer/9368148" target="_blank">Set session duration for GCP</a></li>
 </ul>
 </div>
 </div>

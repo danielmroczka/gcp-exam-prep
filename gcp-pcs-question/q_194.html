@@ -52,15 +52,15 @@
 <h2>Question 194 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit which users have been granted permissions to a specific BigQuery table via inherited roles from folders or the organization. Which tool?
+You plan to synchronize identities to Cloud Identity from a third-party identity provider (IdP). You discovered that some employees used their corporate email address to set up consumer accounts to access Google services. You need to ensure that the organization has control over the configuration, security, and lifecycle of these consumer accounts. What should you do? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Mandate that those corporate employees delete their unmanaged consumer accounts.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Reconcile accounts that exist in Cloud Identity but not in the third-party IdP.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Evict the unmanaged consumer accounts in the third-party IdP before you sync identities.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Google Cloud Directory Sync (GCDS) to migrate the unmanaged consumer accounts' emails as user aliases.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Use the transfer tool to invite those corporate employees to transfer their unmanaged consumer accounts to the corporate domain.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ Audit which users have been granted permissions to a specific BigQuery table via
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">BE</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,26 @@ Audit which users have been granted permissions to a specific BigQuery table via
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: BE.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Policy Analyzer: Jest to jedyne narzędzie, które 'rozumie' dziedziczenie. Potrafi ono przeanalizować całe drzewo uprawnień i pokazać, że użytkownik Jan ma dostęp do tabeli, bo ma rolę nadaną na folderze 3 poziomy wyżej.
+B. Reconcile accounts: Przed synchronizacją musisz zidentyfikować konta, które już istnieją w Google, aby uniknąć błędów i nieoczekiwanych zachowań podczas łączenia z nowym IdP.
+E. Use the transfer tool: Jak w pytaniu 170, transfer tool to jedyny oficjalny sposób na zaproszenie użytkowników do przeniesienia ich prywatnych kont (Shadow IT) pod kontrolę organizacji.
 
 Dlaczego inne są błędne:
-B. Policy Troubleshooter: Sprawdza tylko pojedyncze żądanie dostępu, nie buduje mapy wszystkich uprawnionych osób.
-C. IAM Recommender: Tylko sugeruje zmiany.
-D. Audit Logs: Nie pokażą Ci dziedziczenia, a jedynie momenty nadań poszczególnych ról w różnych miejscach czasu i przestrzeni.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. Policy Analyzer to 'rentgen' Twojego IAM.</pre>
+A. Mandate delete: Mało skuteczne i powoduje opór pracowników (oraz stratę ich danych służbowych).
+C. Evict in third-party IdP: Usunięcie konta w zewnętrznym AD nie usunie 'unmanaged account' w chmurze Google.
+D. GCDS user aliases: Aliansy nie rozwiązują problemu własności konta i jego zabezpieczeń (MFA, polityki haseł).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na Reddit zwraca uwagę na 'Privilege Escalation'. Dzięki Policy Analyzer (A) możesz wykryć, że ktoś nadał rolę 'Owner' na folderze, co niechcący dało dostęp do tajnych tabel finansowych w projektach pod spodem. To kluczowe narzędzie dla higieny IAM.</p>
+<p><b>Sugerowana odpowiedź: BE</b></p>
+<p>Proces 'Identity Consolidation' wymaga użycia narzędzi do wykrywania konfliktów oraz zapraszania użytkowników do domeny zarządzanej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
-
+<li><a href="https://support.google.com/a/answer/6171268" target="_blank">Transfer unmanaged users</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 200 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-What is the primary benefit of using Google Cloud Access Approval?
+Your company must follow industry specific regulations. Therefore, you need to enforce customer-managed encryption keys (CMEK) for all new Cloud Storage resources in the organization called org1. What command should you execute?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate the approval of IAM role requests.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To require your explicit approval before Google personnel can access your data or configurations.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage SSL certificates.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To provide a way for users to request access to projects.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> organization policy: constraints/gcp.restrictStorageNonCmekServices / binding at: org1 / policy type: allow / policy value: all supported services</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> organization policy: constraints/gcp.restrictNonCmekServices / binding at: org1 / policy type: deny / policy value: storage.googleapis.com</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> organization policy: constraints/gcp.restrictStorageNonCmekServices / binding at: org1 / policy type: deny / policy value: storage.googleapis.com</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> organization policy: constraints/gcp.restrictNonCmekServices / binding at: org1 / policy type: allow / policy value: storage.googleapis.com</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,20 @@ What is the primary benefit of using Google Cloud Access Approval?
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Access Approval: To 'hamulec bezpieczeństwa' nałożony na dostawcę chmury. Jeśli inżynier Google musi wejść do Twojego projektu (np. by naprawić błąd bazy), system wysyła Ci powiadomienie. Dopóki nie klikniesz 'Zatwierdzam', Google nie ma technicznego dostępu do Twoich danych.
+B. constraints/gcp.restrictNonCmekServices + deny + storage.googleapis.com: To jest precyzyjna polityka organizacji. Poprzez 'deny' dla 'storage.googleapis.com' w ramach tego ograniczenia, wprost zabraniasz tworzenia zasobów Cloud Storage, które NIE używają kluczy CMEK. Innymi słowy: każdy nowy bucket lub obiekt MUSI mieć przypisany klucz z KMS, inaczej operacja zostanie zablokowana.
 
 Dlaczego inne są błędne:
-A. Automate IAM: To zadanie dla rozwiązań typu IGA lub ServiceNow, nie dla Access Approval.
-C. SSL: Tym zajmuje się Certificate Manager.
-D. Request access: To funkcja IAM / Cloud Identity, a nie mechanizm kontroli dostawcy.
-
-Konsensus społeczności ExamTopics: 100% na B. To definicja kontroli nad dostępem administracyjnym Google.</pre>
+A, C, D: Mylą nazwy polityk (restrictStorageNonCmekServices to starsza lub niepoprawna nazwa) lub logikę allow/deny. Prawidłowa polityka to ogólna `restrictNonCmekServices` z listą usług, dla których chcemy wymusić CMEK.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie compliance na Reddit zauważają, że Access Approval (B) jest 'brakującym ogniwem' do uzyskania pełnej kontroli w chmurze publicznej. W połączeniu z logami Access Transparency daje 100% pewności, że żadna akcja Google nie odbyła się 'za plecami' klienta.</p>
+<p>Polityka 'Restrict Non-CMEK Services' pozwala na globalne wymuszenie Twoich standardów szyfrowania w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/access-approval" target="_blank">https://cloud.google.com/access-approval</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/org-policy-constraints#restrictNonCmekServices" target="_blank">Restricting non-CMEK services</a></li>
 </ul>
 </div>
 </div>

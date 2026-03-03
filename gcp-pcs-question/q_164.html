@@ -52,15 +52,14 @@
 <h2>Question 164 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Which service provides a centralized way to manage and enforce access control policies for web applications without using a VPN?
+You are creating a new infrastructure CI/CD pipeline to deploy hundreds of ephemeral projects in your Google Cloud organization to enable your users to interact with Google Cloud. You want to restrict the use of the default networks in your organization while following Google-recommended best practices. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud VPN</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Identity-Aware Proxy (IAP)</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Shared VPC</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable the constraints/compute.skipDefaultNetworkCreation organization policy constraint at the organization level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a cron job to trigger a daily Cloud Function to automatically delete all default networks for each project.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Grant your users the IAM Owner role at the organization level. Create a VPC Service Controls perimeter around the project that restricts the compute.googleapis.com API.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Only allow your users to use your CI/CD pipeline with a predefined set of infrastructure templates they can deploy to skip the creation of the default networks.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Which service provides a centralized way to manage and enforce access control po
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Which service provides a centralized way to manage and enforce access control po
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. IAP: Pozwala na udostępnienie wewnętrznych aplikacji (np. Jira, Wiki) bezpośrednio w internecie, ale pod warunkiem przejścia silnej autoryzacji Google. Zastępuje VPN, dając użytkownikom łatwiejszy dostęp (przez przeglądarkę) przy zachowaniu wyższego bezpieczeństwa (Zero Trust).
+A. compute.skipDefaultNetworkCreation organization policy: To jest najbardziej elegancki sposób na poziomie całej organizacji. Każdy nowo tworzony projekt (nawet ephemeralny) NIE będzie miał automatycznie tworzonej sieci 'default' (która jest uznawana za niebezpieczną ze względu na predefiniowane otwarte porty). Zmusza to do świadomego tworzenia bezpiecznych sieci customowych.
 
 Dlaczego inne są błędne:
-A. Cloud VPN: Wymóg pytania to 'WITHOUT using a VPN'.
-C. Cloud Armor: To firewall (WAF), nie zarządza tożsamością i sesjami użytkowników tak jak IAP.
-D. Shared VPC: To tylko topologia sieciowa.
-
-Konsensus społeczności ExamTopics: 100% na B. IAP to definicja modelu 'BeyondCorp'.</pre>
+B. Cron job to delete: Rozwiązanie 'reactive', przez pewien czas sieć default i tak istnieje i może być użyta.
+C. IAM Owner: Nadawanie użytkownikom roli Ownera na poziomie organizacji jest sprzeczne z wszelkimi zasadami bezpieczeństwa.
+D. CI/CD templates: Dobre, ale polityka (A) gwarantuje bezpieczeństwo niezależnie od tego, czy ktoś użyje szablonu, czy stworzy projekt ręcznie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Główna korzyść z IAP (B) podnoszona w sieci to 'Context-Aware Access'. Możesz np. zezwolić na dostęp bez VPN, ale tylko jeśli użytkownik ma służbowego laptopa z zaszyfrowanym dyskiem i łączy się z terytorium Polski.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Wyłączenie sieci domyślnej to 'Step 1' utwardzania nowej organizacji w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#compute.skipDefaultNetworkCreation" target="_blank">Disabling default network creation</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 291 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Third-party IdP, grant console access without syncing identities. Users receive permissions based on attributes. What to do?
+Your organization is using a third-party identity and authentication provider to centrally manage users. You want to use this identity provider to grant access to the Google Cloud console without syncing identities to Google Cloud. Users should receive permissions based on attributes. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Workforce Identity Federation + attribute mapping CEL.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Periodic sync + SAML SSO.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Identity Platform + OIDC.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> External identities on IAP.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure the central identity provider as a workforce identity pool provider in Workforce Identity Federation. Create an attribute mapping by using the Common Expression Language (CEL).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure a periodic synchronization of relevant users and groups with attributes to Cloud Identity. Activate single sign-on by using the Security Assertion Markup Language (SAML).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Set up the Google Cloud Identity Platform. Configure an external authentication provider by using OpenID Connect and link user accounts based on attributes.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Activate external identities on the Identity-Aware Proxy. Use the Security Assertion Markup Language (SAML) to configure authentication based on attributes to the central authentication provider.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Third-party IdP, grant console access without syncing identities. Users receive 
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Workforce Identity Federation (WIF): Jest to usługa pozwalająca na logowanie pracowników do GCP BEZ tworzenia kont w Google Cloud Identity (wymóg 'without syncing'). Mapowanie atrybutów za pomocą języka CEL pozwala na dynamiczne przydzielanie ról IAM na podstawie atrybutów z zewnętrznego tokena IdP.
+A. Workforce Identity Federation + Attribute mapping (CEL): To jest 'modern approach'. Workforce Identity Federation pozwala użytkownikom na logowanie się do GCP bezpośrednio za pomocą kont z zewnętrznego IdP (np. Azure AD) BEZ synchronizacji (no-sync). Dzięki mapowaniu atrybutów przy użyciu języka CEL (Common Expression Language), możesz dynamicznie przyznawać uprawnienia w GCP na podstawie tego, jakie atrybuty (np. dział, stanowisko) użytkownik ma w swoim macierzystym systemie.
 
 Dlaczego inne są błędne:
-B. Periodic sync: Jawnie zabronione przez wymóg 'without syncing'.
-C. Identity Platform: Służy do logowania klientów do Twojej aplikacji, nie pracowników do Konsoli Google.
-D. IAP: Chroni Twoje aplikacje, a nie dostęp administracyjny do platformy GCP bez kont użytkowników.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. WIF to rewolucja w 'stateless' IAM.</pre>
+B. Periodic synchronization: Wprost łamie wymóg 'without syncing identities'.
+C. Identity Platform: Służy do budowania logowania w aplikacjach, nie do dostępu pracowników do konsoli administracyjnej GCP.
+D. IAP for Console: IAP służy do zabezpieczania Twoich aplikacji, a dostęp do samej Konsoli Google Cloud jest zarządzany przez mechanizmy Cloud Identity / Workforce Federation.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> To podejście eliminuje potrzebę synchronizacji tysięcy użytkowników przez GCDS, co upraszcza infrastrukturę i zwiększa bezpieczeństwo.</p>
+<p>Workforce Identity Federation eliminuje potrzebę duplikowania tożsamości w chmurze, opierając się na dynamicznym zaufaniu do atrybutów IdP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workforce-identity-federation</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">Workforce Identity Federation</a></li>
 </ul>
 </div>
 </div>

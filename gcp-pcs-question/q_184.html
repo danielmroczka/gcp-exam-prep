@@ -52,15 +52,14 @@
 <h2>Question 184 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Authenticate a server-to-service communication within GCP securely. Which method?
+You have a highly sensitive BigQuery workload that contains personally identifiable information (PII) that you want to ensure is not accessible from the internet. To prevent data exfiltration, only requests from authorized IP addresses are allowed to query your BigQuery tables. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Service account keys stored in environmental variables.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IAM roles with Instance Service Account.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Username and password in Secret Manager.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> API keys.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use service perimeter and create an access level based on the authorized source IP address as the condition.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Google Cloud Armor security policies defining an allowlist of authorized IP addresses at the global HTTPS load balancer.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use the Restrict Resource Service Usage organization policy constraint along with Cloud Data Loss Prevention (DLP).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use the Restrict allowed Google Cloud APIs and services organization policy constraint along with Cloud Data Loss Prevention (DLP).</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Authenticate a server-to-service communication within GCP securely. Which method
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,24 @@ Authenticate a server-to-service communication within GCP securely. Which method
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Instance Service Account: Najbezpieczniejszą metodą komunikacji między usługami w GCP (np. z VM do BigQuery) jest przypisanie konta serwisowego do maszyny. Aplikacja pobiera wtedy tymczasowe tokeny z serwera metadanych. Brak statycznych kluczy = brak ryzyka ich kradzieży.
+A. Service perimeter + access level (Source IP): VPC Service Controls (service perimeter) blokuje dostęp do API BigQuery dla każdego, kto znajduje się poza obwodem. 'Access level' z warunkiem adresu IP pozwala na zrobienie precyzyjnego wyłomu w tym obwodzie dla zaufanych lokalizacji (biuro, VPN firmowy), skutecznie uniemożliwiając kradzież danych przez internet z jakiegokolwiek innego miejsca.
 
 Dlaczego inne są błędne:
-A. Environmental variables: Złe. Logi lub zrzuty pamięci mogą ujawnić klucz.
-C. Username/Password: Przestarzałe i trudne w rotacji w porównaniu do natywnego IAM.
-D. API keys: Są słabe, nie identyfikują 'kto' woła, a jedynie 'jaki projekt'. Służą głównie do publicznych API (np. Maps).
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To 'złoty standard' bezpieczeństwa chmurowego.</pre>
+B. Cloud Armor: Chroni aplikacje webowe za Load Balancerem, ale BigQuery to usługa API, do której użytkownicy/skrypty łączą się bezpośrednio przez endpoints Google, a nie przez Twój Load Balancer.
+C, D. Org Policies: Służą do ograniczania tego, jakie usługi MOŻNA uruchomić, a nie do filtrowania ruchu do konkretnych danych w BigQuery na podstawie adresu IP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Na GitHubie specjaliści od DevSecOps podkreślają: 'Klucze JSON to dług techniczny'. Użycie tożsamości instancji (B) eliminuje 90% problemów związanych z wyciekiem poświadczeń w chmurze.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p>Access Context Manager (Access Levels) w połączeniu z VPC SC pozwala na budowanie obwodów bezpieczeństwa opartych na kontekście (Context-Aware Security).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances" target="_blank">https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances</a></li>
-
+<li><a href="https://cloud.google.com/vpc-service-controls/docs/access-levels" target="_blank">VPC SC Access Levels</a></li>
 </ul>
 </div>
 </div>

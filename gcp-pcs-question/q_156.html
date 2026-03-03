@@ -52,15 +52,15 @@
 <h2>Question 156 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure that a specific group of users can only create Compute Engine instances in the 'europe-west1' region. Which tool?
+Your company plans to move most of its IT infrastructure to Google Cloud. They want to leverage their existing on-premises Active Directory as an identity provider for Google Cloud. Which two steps should you take to integrate the company's on-premises Active Directory with Google Cloud and configure access management? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM conditions on the compute.instances.create permission.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: compute.allowedLocations.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Resource Labels.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Identity Platform to provision users and groups to Google Cloud.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use Cloud Identity SAML integration to provision users and groups to Google Cloud.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Install Google Cloud Directory Sync and connect it to Active Directory and Cloud Identity.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create Identity and Access Management (IAM) roles with permissions corresponding to each Active Directory group.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Create Identity and Access Management (IAM) groups with permissions corresponding to each Active Directory group.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ Ensure that a specific group of users can only create Compute Engine instances i
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">CE</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,26 @@ Ensure that a specific group of users can only create Compute Engine instances i
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: CE.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Organization Policy: Polityka `gcp.resourceLocations` (często w pytaniach jako `compute.allowedLocations`) pozwala na zdefiniowanie 'dozwolonych regionów' dla zasobów. Jest to najsilniejsza metoda, działająca na poziomie platformy, gwarantująca zgodność z wymogami rezydencji danych (GDPR).
+C. Google Cloud Directory Sync (GCDS): To narzędzie, które fizycznie przenosi (synchronizuje) użytkowników i grupy z Active Directory do Cloud Identity.
+E. Create IAM groups with permissions: W GCP najlepszą praktyką jest nadawanie uprawnień GRUPOM, a nie pojedynczym użytkownikom. Tworzysz grupę w GCP, która odpowiada grupie w AD, nadajesz jej role IAM, a GCDS dba o to, by właściwi ludzie byli w tej grupie.
 
 Dlaczego inne są błędne:
-A. IAM conditions: Warunki IAM mogą filtrować po tagach, ale filtrowanie samej operacji 'Create' po regionie jest znacznie trudniejsze i mniej niezawodne niż odgórna polityka organizacji (B).
-C. Labels: To tylko opisy, nie blokują technicznie stworzenia zasobu w innym regionie.
-D. VPC Service Controls: Chroni przed eksfiltracją, a nie przed wyborem regionu dla nowych VM.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Rezydencja danych = Org Policy.</pre>
+A. Identity Platform: Służy do autentykacji użytkowników Twojej aplikacji, a nie pracowników do zarządzania chmurą.
+B. SAML integration to provision: SAML służy do logowania (SSO), a nie do aprowizacji (tworzenia) kont i grup (do tego służy GCDS).
+D. IAM roles for AD group: W GCP nie nadaje się ról 'AD grupom' bezpośrednio; najpierw grupa musi zostać zsynchronizowana do Cloud Identity (E).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na forach dotyczy tego, jak polityka ta wpływa na już istniejące zasoby. Odpowiedź: Polityka organizacji blokuje PRZYSZŁE akcje. Jeśli masz już VM w USA, a włączysz politykę na EU, stara maszyna będzie działać dalej, ale nowej w USA już nikt nie stworzy.</p>
+<p><b>Sugerowana odpowiedź: CE</b></p>
+<p>Standardowa integracja AD z GCP to: GCDS dla kont/grup oraz SAML dla logowania (SSO).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction" target="_blank">Federating AD with GCP</a></li>
 </ul>
 </div>
 </div>

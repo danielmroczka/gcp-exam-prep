@@ -52,15 +52,14 @@
 <h2>Question 92 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Web app in staging on GKE includes user data without validation. Attackers could execute commands in victim's browser. How to prevent and fix?
+You are on your company's development team. You noticed that your web application hosted in staging on GKE dynamically includes user data in web pages without first properly validating the inputted data. This could allow an attacker to execute gibberish commands and display arbitrary content in a victim user's browser in a production environment. How should you prevent and fix this vulnerability?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud IAP based on IP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> HTTPS LB and Cloud Armor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Web Security Scanner for outdated libraries.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Web Security Scanner in staging to simulate XSS and use contextual auto-escaping.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Cloud IAP based on IP address or end-user device attributes to prevent and fix the vulnerability.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set up an HTTPS load balancer, and then use Cloud Armor for the production environment to prevent the potential XSS attack.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Use Web Security Scanner to validate the usage of an outdated library in the code, and then use a secured version of the included library.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Use Web Security Scanner in staging to simulate an XSS injection attack, and then use a templating system that supports contextual auto-escaping.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Web app in staging on GKE includes user data without validation. Attackers could
 <pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. WSS and Auto-escaping: Opisany atak to Cross-Site Scripting (XSS). Web Security Scanner potrafi symulować takie ataki w środowisku stagingowym i je wykrywać. Rozwiązaniem programistycznym ('fix') jest użycie mechanizmów auto-escaping w silniku szablonów, co uniemożliwia interpretację danych użytkownika jako kodu JS.
+D. Web Security Scanner in staging + Templating with auto-escaping: Pytanie opisuje podatność na Cross-Site Scripting (XSS) - brak walidacji i uciekania danych użytkownika. Web Security Scanner potrafi wykryć takie luki w środowisku staging. Rozwiązaniem systemowym jest użycie nowoczesnych systemów szablonów (np. Jinja2, Go templates), które automatycznie 'uciekają' (escape) dane, uniemożliwiając wykonanie kodu w przeglądarce.
 
 Dlaczego inne są błędne:
-A. IAP: Chroni przed nieautoryzowanym wejściem, ale nie naprawia błędów w kodzie samej aplikacji (XSS zadziała dla zalogowanego użytkownika).
-B. Cloud Armor: Może blokować próby ataku, ale pytanie prosi o 'prevent and FIX' (naprawę), a naprawa musi nastąpić w kodzie.
-C. Outdated libraries: To tylko jeden z wielu powodów XSS. WSS szuka błędów logicznych w wyświetlaniu danych, a nie tylko wersji bibliotek.
-
-Konsensus społeczności ExamTopics: 100% na D. Połączenie testów DAST i poprawnych praktyk kodowania to jedyna droga.</pre>
+A. Cloud IAP: Kontroluje dostęp do aplikacji, ale nie naprawia błędów w jej kodzie.
+B. Cloud Armor: Może blokować niektóre ataki XSS, ale nie naprawia źródła problemu w aplikacji.
+C. Outdated library: Pytanie dotyczy logiki wyświetlania danych (XSS), a nie konkretnie bibliotek (choć to też ważne).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> XSS polega na wstrzyknięciu złośliwego skryptu, który uruchamia się u innego użytkownika. Kontekstowy auto-escaping sprawia, że znaki takie jak `<` stają się bezpiecznym `&lt;`.</p>
+<p>XSS to najczęstsza podatność webowa. Rozwiązanie to 'Contextual Auto-Escaping' oraz regularne skanowanie dynamiczne (DAST).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview</a></li>
-
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html" target="_blank">OWASP XSS Prevention</a></li>
 </ul>
 </div>
 </div>

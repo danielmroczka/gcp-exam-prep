@@ -52,15 +52,14 @@
 <h2>Question 66 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You want data on Compute Engine disks to be encrypted with keys managed by Cloud KMS. IAM permissions to these keys must be managed in a grouped way. What should you do?
+You want data on Compute Engine disks to be encrypted at rest with keys managed by Cloud Key Management Service (KMS). Cloud Identity and Access Management (IAM) permissions to these keys must be managed in a grouped way because the permissions should be the same for all keys. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Manage IAM permissions at the Key level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a single KeyRing and manage IAM permissions at the KeyRing level.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a KeyRing per persistent disk.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Manage IAM permissions at the Organization level.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a single KeyRing for all persistent disks and all Keys in this KeyRing. Manage the IAM permissions at the Key level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a single KeyRing for all persistent disks and all Keys in this KeyRing. Manage the IAM permissions at the KeyRing level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a KeyRing per persistent disk, with each KeyRing containing a single Key. Manage the IAM permissions at the Key level.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a KeyRing per persistent disk, with each KeyRing containing a single Key. Manage the IAM permissions at the KeyRing level.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,21 @@ You want data on Compute Engine disks to be encrypted with keys managed by Cloud
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. KeyRing level management: W hierarchii Cloud KMS, KeyRing (pęk kluczy) grupuje wiele kluczy. Nadanie uprawnień IAM na poziomie KeyRing sprawia, że są one dziedziczone przez wszystkie klucze wewnątrz. To najbardziej efektywny sposób zarządzania dostępem grupowym.
+B. Grouped management at KeyRing level: W Cloud KMS uprawnienia IAM są dziedziczone. Jeśli chcesz zarządzać uprawnieniami do wielu kluczy w ten sam sposób, najskuteczniej jest umieścić je w jednym KeyRingu i nadać uprawnienia na poziomie tego KeyRingu. Każdy klucz w tym ringu automatycznie otrzyma te same uprawnienia.
 
 Dlaczego inne są błędne:
-A. Key level: Wymagałoby to osobnej konfiguracji dla każdego klucza (np. dla każdego dysku), co jest czasochłonne i błędotwórcze przy dużej skali.
-C. KeyRing per disk: Niweluje sens grupowania i centralizacji zarządzania uprawnieniami.
-D. Organization level: Nadaje dostęp do WSZYSTKICH kluczy w całej firmie, co drastycznie narusza zasadę najniższych uprawnień.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na B. To standardowa dobra praktyka administracyjna w KMS.</pre>
+A, C. Manage at Key level: Bardzo pracochłonne i trudne w utrzymaniu przy dużej liczbie kluczy (brak grupowania).
+D. KeyRing per disk: Przeciwieństwo grupowania uprawnień.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Dziedziczenie uprawnień w KMS działa tak samo jak w Resource Managerze. Pozwala to na separację np. kluczy produkcyjnych (KeyRing 'Prod') od deweloperskich (KeyRing 'Dev').</p>
+<p>Hierarchia Cloud KMS (Project -> Location -> KeyRing -> Key) pozwala na efektywne delegowanie uprawnień zgodnie z zasadą najmniejszych uprawnień na odpowiednim poziomie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/resource-hierarchy" target="_blank">https://cloud.google.com/kms/docs/resource-hierarchy</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/iam" target="_blank">KMS IAM permissions</a></li>
 </ul>
 </div>
 </div>

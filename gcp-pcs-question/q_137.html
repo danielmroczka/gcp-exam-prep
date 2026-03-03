@@ -52,7 +52,7 @@
 <h2>Question 137 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Granular data residency control. Folder structure multiple locations, projects aligned to specific locations. At which level set constraint?
+Your company's chief information security officer (CISO) is requiring business data to be stored in specific locations due to regulatory requirements that affect the company's global expansion plans. After working on a plan to implement this requirement, you determine the following: - The services in scope are included in the Google Cloud data residency requirements. - The business data remains within specific locations under the same organization. - The folder structure can contain multiple data residency locations. - The projects are aligned to specific locations. You plan to use the Resource Location Restriction organization policy constraint with very granular control. At which level in the hierarchy should you set the constraint?
 </div>
 <div class="question-choices-container">
 <ul>
@@ -60,7 +60,6 @@ Granular data residency control. Folder structure multiple locations, projects a
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Resource</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Project</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Folder</li>
-
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Granular data residency control. Folder structure multiple locations, projects a
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Project Level: Podobnie jak w pytaniu 133, poziom projektu pozwala na precyzyjne dopasowanie restrykcji lokalizacji do konkretnego zastosowania bez 'psucia' globalnych planów innych działów firmy. W architekturze, gdzie projekty są już 'aligned to specific locations', ustawienie polityki właśnie tam jest najbardziej logiczne i bezpieczne.
+C. Project: Ponownie, dla 'granular control' w sytuacji, gdy foldery są zróżnicowane lokalizacyjnie, poziom Projektu jest najwłaściwszy. Pytanie zaznacza, że 'projects are aligned to specific locations', więc nałożenie restrykcji na poziomie Projektu idealnie odzwierciedla stan faktyczny i zapobiega stworzeniu zasobu w złym regionie wewnątrz danego projektu.
 
 Dlaczego inne są błędne:
-A, D: Zbyt szerokie. Jeśli jeden folder ma projekty w US i EU, polityka na poziomie folderu uniemożliwiłaby działanie jednej z tych grup.
-B. Resource: Polityki organizacji nie wspierają przypisania do pojedynczych zasobów technicznych.
-
-Konsensus społeczności ExamTopics: Zdecydowana większość na C. Granularność wymusza stosowanie polityk jak najbliżej zasobu (w dół hierarchii).</pre>
+A. Organization: Za mało granularne.
+B. Resource: Polityki organizacji nie nakłada się na pojedyncze zasoby (jak np. jedną instancję VM), tylko na kontenery zasobów (Org, Folder, Project).
+D. Folder: Może być użyte, ale Projekt (C) daje obiecaną w pytaniu 'very granular control'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Najlepszą praktyką jest ustawienie szerokiej, bezpiecznej polityki na górze (np. 'tylko regiony demokratyczne') i doprecyzowanie jej (np. 'tylko Polska') na poziomie projektu.</p>
+<p>Zasady Resource Location Restriction są dziedziczone w dół hierarchii, więc najniższy poziom (Project) daje największą precyzję.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
-
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">Org Policy hierarchy</a></li>
 </ul>
 </div>
 </div>

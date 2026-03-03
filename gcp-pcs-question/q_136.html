@@ -52,16 +52,15 @@
 <h2>Question 136 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Reduce impact of compromised symmetric key in Cloud KMS. Steps before incident. Which two?
+Your security team uses encryption keys to ensure confidentiality of user data. You want to establish a process to reduce the impact of a potentially compromised symmetric encryption key in Cloud Key Management Service (Cloud KMS). Which steps should your team take before an incident occurs? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Disable compromised keys.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable automatic key version rotation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Manually rotate on ad hoc.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Limit number of messages encrypted per key version.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Disable Cloud KMS API.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Disable and revoke access to compromised keys.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Enable automatic key version rotation on a regular schedule.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Manually rotate key versions on an ad hoc schedule.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Limit the number of messages encrypted with each key version.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Disable the Cloud KMS API.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -80,26 +79,23 @@ Reduce impact of compromised symmetric key in Cloud KMS. Steps before incident. 
 <pre>Odpowiedź: BD.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Automatic rotation: Dzięki częstej rotacji (np. co 90 dni), skradziony klucz staje się bezużyteczny dla nowych danych po upływie krótkiego czasu. Ogranicza to 'okno' ataku.
-D. Limit number of messages: Niektóre standardy (i dobra praktyka kryptograficzna) zalecają nieużywanie jednego klucza do zbyt dużej liczby operacji, aby uniknąć ataków kryptoanalitycznych. Mniej danych zaszyfrowanych jednym kluczem = mniejsza strata przy jego kompromitacji.
+B. Enable automatic key version rotation: To proaktywny krok. Regularna rotacja ogranicza ilość danych zaszyfrowanych daną wersją klucza. Jeśli klucz zostanie kiedyś skradziony, napastnik będzie mógł odszyfrować tylko fragment danych historycznych, a nie wszystko od początku istnienia systemu.
+D. Limit the number of messages: To zasada 'Key usage limit'. Zmniejsza ona prawdopodobieństwo kryptoanalizy i ogranicza 'blast radius' w przypadku kompromitacji jednej wersji klucza.
 
 Dlaczego inne są błędne:
-A. Disable compromised keys: To działanie REAKTYWNE (po incydencie), a pytanie prosi o kroki 'before incident'.
-C. Manual rotate: Jest mniej skuteczne i bardziej podatne na błędy ludzkie niż automatyzacja (B).
-E. Disable API: Uniemożliwi działanie Twoich systemów, co nie jest celem 'redukcji wpływu kompromitacji'.
-
-Konsensus społeczności ExamTopics: Przewaga na BD. Automatyzacja i higiena kryptograficzna to klucz do ograniczenia 'blast radius'.</pre>
+A. Disable and revoke: To akcja reaktywna, wykonywana JUŻ PO incydencie (a pytanie pyta o kroki 'before').
+C. Manually rotate on ad hoc: Gorsze niż automatyzacja (B), łatwo o tym zapomnieć.
+E. Disable KMS API: Sparaliżowałoby całą infrastrukturę.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BD</b></p>
-<p><b>Głęboka analiza:</b> Cloud KMS obsługuje rotację do 36500 wersji klucza. Starsze wersje nadal mogą służyć do odszyfrowania starych danych, ale nowe dane będą bezpieczne pod nowym kluczem.</p>
+<p>Automatyczna rotacja kluczy to fundament higieny kryptograficznej w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/key-rotation" target="_blank">https://cloud.google.com/kms/docs/key-rotation</a></li>
-
+<li><a href="https://cloud.google.com/kms/docs/key-rotation" target="_blank">Key rotation</a></li>
 </ul>
 </div>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 319 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enforce Binary Authorization for all new Cloud Run jobs/services in production. What to do?
+The InfoSec team has mandated that all new Cloud Run jobs and services in production must have Binary Authorization enabled. You need to enforce this requirement. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Org policy to require BinAuth enforcement.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SHA custom rule.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Remove Cloud Run admin role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> BinAuth custom policy not editable by devs.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure an organization policy to require Binary Authorization enforcement on images deployed to Cloud Run.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure a Security Health Analytics (SHA) custom rule that prevents the execution of Cloud Run jobs and services without Binary Authorization.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ensure the Cloud Run admin role is not assigned to developers.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure a Binary Authorization custom policy that is not editable by developers and auto-attaches to all Cloud Run jobs and services.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Enforce Binary Authorization for all new Cloud Run jobs/services in production. 
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Org Policy Enforcement: Istnieje polityka organizacji `run.allowedBinaryAuthorizationPolicies`, która pozwala administratorowi wymusić stosowanie Binary Authorization dla wszystkich usług Cloud Run w danym folderze lub projekcie. To jedyny sposób na systemowe i centralne wyegzekwowanie tego wymogu.
+A. Org Policy: requireBinaryAuthorization: Jest to dedykowana polityka organizacji dla Cloud Run (`run.allowedBinaryAuthorizationPolicies` lub ogólna wymuszająca Binary Auth). Ustawienie jej na poziomie folderu 'Production' wymusza technicznie, aby każda nowa usługa Cloud Run miała włączone sprawdzanie atestacji. Deweloperzy nie będą mogli uruchomić obrazu bez atestacji, nawet jeśli mają uprawnienia admina do Cloud Run.
 
 Dlaczego inne są błędne:
-B. SHA rule: Powie Ci, że ktoś nie używa BinAuth (detekcja), ale mu nie przeszkodzi (brak enforcementu).
-C. Remove roles: Deweloperzy nie mogliby w ogóle pracować. Celem jest pozwolenie im na pracę, ale przy zachowaniu standardu.
-D. Custom policy: Sama polityka BinAuth nie zadziała, jeśli nie zostanie jawnie 'włączona' (enforced) na poziomie usługi, co robi polityka organizacji (A).
-
-Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowy mechanizm zarządzania standardami serverless.</pre>
+B. SHA custom rule: SHA służy do WYKRYWANIA (detekcji), a nie do FIZYCZNEGO BLOKOWANIA (enforcement) operacji w momencie ich wykonywania.
+C. Remove admin role: Deweloperzy potrzebują uprawnień do pracy; polityka (A) pozwala im pracować, ale narzuca bezpieczne ramy (guardrails).
+D. Custom policy not editable: Sama polityka Binary Auth to tylko definicja reguł; dopiero polityka organizacji (A) wymusza jej użycie przez serwis Cloud Run.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Polityka ta jest dziedziczona. Jeśli ustawisz ją na folderze 'Production', każdy nowy mikroserwis Cloud Run tam stworzony będzie automatycznie wymagał atestacji obrazu.</p>
+<p>Polityki organizacji to najskuteczniejszy sposób na globalne wymuszanie standardów Binary Authorization.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization/docs/run/overview" target="_blank">https://cloud.google.com/binary-authorization/docs/run/overview</a></li>
-
+<li><a href="https://cloud.google.com/run/docs/configuring/binary-authorization#org-policy" target="_blank">Binary Authorization organization policy</a></li>
 </ul>
 </div>
 </div>

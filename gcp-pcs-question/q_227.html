@@ -52,15 +52,15 @@
 <h2>Question 227 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure that all Cloud Storage buckets are created with 'Public Access Prevention' enabled by default. Which tool?
+You are migrating your users to Google Cloud. There are cookie replay attacks with Google web and Google Cloud CLI SDK sessions on endpoint devices. You need to reduce the risk of these threats. What should you do? (Choose two.)
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: storage.publicAccessPrevention</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Bucket settings in the Console</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure Google session control to a shorter duration.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Set an organizational policy for OAuth 2.0 access token with a shorter duration.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Set a reauthentication policy for Google Cloud services to a shorter duration.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure a third-party identity provider with session management.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Enforce Security Key Authentication with 2SV.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +68,7 @@ Ensure that all Cloud Storage buckets are created with 'Public Access Prevention
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">AE</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,26 @@ Ensure that all Cloud Storage buckets are created with 'Public Access Prevention
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: AE.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Organization Policy (PAP): Polityka `storage.publicAccessPrevention` jest najskuteczniejszym sposobem na globalne zablokowanie publicznych bucketów. Gdy jest włączona na poziomie organizacji lub projektu, Google Cloud automatycznie blokuje każdą próbę nadania uprawnień `allUsers` lub `allAuthenticatedUsers`.
+A. Session control to a shorter duration: Skrócenie czasu trwania sesji ciasteczka (cookie) sprawia, że skradzione ciasteczko szybciej staje się bezużyteczne dla napastnika.
+E. Security Key Authentication (2SV): Ataki typu 'cookie replay' są często blokowane przez wymóg użycia klucza bezpieczeństwa przy każdej krytycznej akcji lub po prostu poprzez fakt, że nowoczesne systemy MFA (FIDO2) lepiej wiążą sesję z fizycznym urządzeniem użytkownika. Ponadto, wymuszenie re-autentykacji sprzętowej utrudnia napastnikowi utrzymanie dostępu.
 
 Dlaczego inne są błędne:
-A. IAM: Nie zapobiega pomyłkom administratorów przy nadawaniu ról.
-C. Console settings: To akcja manualna na pojedynczym zasobie, nie zapewnia 'default across org'.
-D. VPC Service Controls: Blokuje exfiltration przez API, ale nie zarządza 'publiczną dostępnością' plików w internecie w tak bezpośredni sposób jak PAP.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To fundament ochrony danych w GCS.</pre>
+B. OAuth token duration: Dotyczy aplikacji trzecich, a nie głównej sesji logowania użytkownika do konsoli/SDK.
+C. Reauthentication policy: Brzmi podobnie do A, ale 'Session Control' (A) jest specyficznym mechanizmem Google do zarządzania czasem życia ciasteczek logowania.
+D. Third-party session management: Może pomóc, ale natywne mechanizmy Google (A i E) są pierwszą rekomendacją dla ochrony sesji GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Eksperci na Reddit podkreślają, że PAP (B) to 'must-have' dla firm regulowanych. Chroni ona przed najczęstszym błędem ludzkim – przypadkowym upublicznieniem danych firmowych przez jednego dewelopera.</p>
+<p><b>Sugerowana odpowiedź: AE</b></p>
+<p>Ochrona sesji przed kradzieżą (Session Hijacking) polega na minimalizacji czasu ich trwania i wymuszaniu silnej tożsamości.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/public-access-prevention" target="_blank">https://cloud.google.com/storage/docs/public-access-prevention</a></li>
-
+<li><a href="https://cloud.google.com/docs/security/best-practices-for-securing-your-google-cloud-environment#identity-access" target="_blank">Cookie security best practices</a></li>
 </ul>
 </div>
 </div>

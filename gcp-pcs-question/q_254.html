@@ -52,15 +52,14 @@
 <h2>Question 254 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Applications in multiple clouds access GCP resources using short-lived credentials. What to do?
+Your organization has applications that run in multiple clouds. The applications require access to a Google Cloud resource running in your project. You must use short-lived access credentials to maintain security across the clouds. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Managed workload identity.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SA key download.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Workload identity pool with provider for each cloud, impersonation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC firewall ingress IP allowlist.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a managed workload identity. Bind an attested identity to the Compute Engine workload.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a service account key. Download the key to each application that requires access to the Google Cloud resource.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create a workload identity pool with a workload identity provider for each external cloud. Set up a service account and add an IAM binding for impersonation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create a VPC firewall rule for ingress traffic with an allowlist of the IP ranges of the external cloud applications.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Applications in multiple clouds access GCP resources using short-lived credentia
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Workload Identity Pools: To mechanizm federacji tożsamości. Tworzysz jedną pulę i dodajesz do niej dostawców (Providers) dla AWS i Azure. Aplikacje używają swoich natywnych poświadczeń (np. AWS IAM Role) do pobrania krótkotrwałych tokenów GCP poprzez impersonację.
+C. Workload Identity Pool + Service Account Impersonation: To jest standardowy sposób na bezpieczną komunikację między-chmurową (np. AWS -> GCP). Korzystasz z mechanizmu federacji (WIF), który pozwala tożsamości z innej chmury (np. roli IAM w AWS) na bezpieczne 'przebranie się' (impersonację) za konto serwisowe w GCP. Daje to poświadczenia krótkotrwałe i eliminuje potrzebę kopiowania kluczy JSON między chmurami.
 
 Dlaczego inne są błędne:
-B. SA key download: Tworzy statyczne, niebezpieczne klucze JSON - przeciwieństwo wymogu 'short-lived'.
-D. Firewall ingress: Kontroluje sieć, a nie tożsamość i uprawnienia aplikacji multi-cloud.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla C. WIF to jedyne skalowalne rozwiązanie multi-cloud w GCP.</pre>
+A. Managed workload identity: W GCP to pojęcie odnosi się zazwyczaj do maszyn Compute Engine (identyfikacja wewnątrz chmury), dla innych chmur używamy WIF (C).
+B. Service account key: Przesyłanie i przechowywanie kluczy JSON w innych chmurach jest uznawane za błąd bezpieczeństwa.
+D. Firewall rule: Firewall chroni sieć, ale nie zapewnia uwierzytelniania aplikacyjnego i 'short-lived credentials' wymaganych w pytaniu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> To rozwiązanie eliminuje 'Secret Management overhead' - nie musisz już rotować kluczy GCP na serwerach w AWS.</p>
+<p>Workload Identity Federation to fundament bezpieczeństwa w architekturach Multi-cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workload-identity-federation</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">Workload Identity Federation</a></li>
 </ul>
 </div>
 </div>

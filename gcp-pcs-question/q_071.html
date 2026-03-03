@@ -52,15 +52,14 @@
 <h2>Question 71 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-You need to create a Service Account that can list Compute Engine instances. You want to follow Google-recommended practices. What should you do?
+You will create a new Service Account that should be able to list the Compute Engine instances in the project. You want to follow Google-recommended practices. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Use Read Only access for Compute Engine Access Scope.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a custom role with compute.instances.list permission.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Grant Compute Viewer role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Grant Project Viewer role.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an Instance Template, and allow the Service Account Read Only access for the Compute Engine Access Scope.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create a custom role with the permission compute.instances.list and grant the Service Account this role.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Give the Service Account the role of Compute Viewer, and use the new Service Account for all instances.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Give the Service Account the role of Project Viewer, and use the new Service Account for all instances.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ You need to create a Service Account that can list Compute Engine instances. You
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Custom Role: Najlepszą praktyką bezpieczeństwa (Least Privilege) jest nadanie tylko tych uprawnień, które są absolutnie niezbędne. Stworzenie roli niestandardowej z tylko jednym uprawnieniem `compute.instances.list` jest bardziej precyzyjne niż użycie jakiejkolwiek roli predefiniowanej.
+B. Custom role with compute.instances.list: Zgodnie z zasadą najmniejszych uprawnień (Least Privilege), jeśli Service Account potrzebuje TYLKO listować instancje, najlepiej stworzyć rolę niestandardową zawierającą tylko to jedno uprawnienie.
 
 Dlaczego inne są błędne:
-A. Access Scopes: To przestarzała metoda (legacy). Obecnie steruje się dostępem wyłącznie przez role IAM. Scopes nie zastępują uprawnień IAM.
-C. Compute Viewer: Daje dostęp do listy, ale TEŻ do podglądu wszystkich szczegółów maszyn, ich dysków, obrazów itp. - to za dużo.
-D. Project Viewer: Daje dostęp do podglądu wszystkiego w całym projekcie (Storage, SQL, BigQuery) - skrajne naruszenie zasady najniższych uprawnień.
-
-Konsensus społeczności ExamTopics: Silne poparcie dla B. Role Custom to 'złoty standard' dla precyzyjnych zadań automatyzacji.</pre>
+A. Access Scope: To starszy mechanizm (legacy), który nie jest zalecany zamiast ról IAM.
+C. Compute Viewer: Ta predefiniowana rola zawiera uprawnienie do listowania, ale również wiele innych (np. podgląd konfiguracji sieci, dysków itp.), co wykracza poza wymóg.
+D. Project Viewer: Bardzo szeroka rola dająca wgląd we wszystkie zasoby w projekcie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Jeśli zadanie można wykonać rolą predefiniowaną, która nie ma nadmiarowych uprawnień, użyj jej. Jeśli jednak każda rola gotowa jest zbyt szeroka (jak tu), stwórz rolę Custom.</p>
+<p>Predefiniowane role są wygodne, ale Role Niestandardowe (Custom Roles) pozwalają na najdokładniejsze spełnienie zasady Least Privilege.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/creating-custom-roles" target="_blank">https://cloud.google.com/iam/docs/creating-custom-roles</a></li>
-
+<li><a href="https://cloud.google.com/iam/docs/creating-custom-roles" target="_blank">Creating custom roles</a></li>
 </ul>
 </div>
 </div>

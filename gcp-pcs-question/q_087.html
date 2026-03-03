@@ -52,15 +52,14 @@
 <h2>Question 87 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Frontend VM in subnet A needs to access MySQL VM in subnet B on port 3306. Subnets have other VMs. You want minimal access. What should you do?
+You have an application where the frontend is deployed on a managed instance group in subnet A and the data layer is stored on a mysql Compute Engine virtual machine (VM) in subnet B on the same VPC. Subnet A and Subnet B hold several other Compute Engine VMs. You only want to allow the application frontend to access the data in the application's mysql instance on port 3306. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Allow subnet A IP range to 'data-tag' on port 3306.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Allow communication from frontend's service account to MySQL's service account on port 3306.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure tags and egress rule from subnet B.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure tags and ingress rule from subnet A to subnet B.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Configure an ingress firewall rule that allows communication from the src IP range of subnet A to the tag "data-tag" that is applied to the mysql Compute Engine VM on port 3306.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Configure an ingress firewall rule that allows communication from the frontend's unique service account to the unique service account of the mysql Compute Engine VM on port 3306.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure a network tag "fe-tag" to be applied to all instances in subnet A and a network tag "data-tag" to be applied to all instances in subnet B. Then configure an egress firewall rule that allows communication from Compute Engine VMs tagged with data-tag to destination Compute Engine VMs tagged fe-tag.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Configure a network tag "fe-tag" to be applied to all instances in subnet A and a network tag "data-tag" to be applied to all instances in subnet B. Then configure an ingress firewall rule that allows communication from Compute Engine VMs tagged with fe-tag to destination Compute Engine VMs tagged with data-tag.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,24 +78,22 @@ Frontend VM in subnet A needs to access MySQL VM in subnet B on port 3306. Subne
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Service Account based rules: To najbardziej precyzyjna i bezpieczna metoda. Adresy IP mogą się zmieniać, a tagi mogą być omyłkowo przypisane do innych maszyn w podsieci. Reguła firewalla oparta na TOŻSAMOŚCI (Service Account) gwarantuje, że tylko konkretna aplikacja frontendu może rozmawiać z konkretną bazą, niezależnie od tego, jakie inne maszyny są w tych podsieciach.
+B. Ingress firewall rule + Service Accounts: To jest najbezpieczniejsza i najbardziej precyzyjna metoda. Zamiast adresów IP czy tagów (które mogą być nadane wielu maszynom), używasz tożsamości (Service Account). Pozwalasz na ruch na port 3306 tylko jeśli źródłem jest `SA-Frontend` a celem `SA-Database`. Nawet jeśli maszyny zmienią IP lub zostaną przeniesione, reguła pozostaje szczelna.
 
 Dlaczego inne są błędne:
-A. Subnet IP range: Zbyt szerokie. Każda inna maszyna w podsieci A (nawet zainfekowana) mogłaby wtedy uderzyć do bazy danych.
-C, D. Tags: Tagi są lepsze niż IP, ale nadal są mniej bezpieczne niż SA, ponieważ administrator instancji (Instance Admin) może dowolnie dodawać/usuwać tagi, podczas gdy do zmiany SA wymagane są wyższe uprawnienia (ServiceAccountUser).
-
-Konsensus społeczności ExamTopics: Zdecydowana większość za B. Korzystanie z SA w regułach firewalla to 'best practice' dla mikroserwisów w GCP.</pre>
+A. Tag 'data-tag' + Subnet A IP: Mniej bezpieczne niż SA, ponieważ każda maszyna w Subnecie A (nawet nieuprawniona) mogłaby się połączyć.
+C. Egress rule on Data VM: Błąd logiczny. Firewall blokuje/zezwala na ruch przychodzący do bazy (Ingress). Egress na bazie nie zatrzyma prób połączenia od innych VM.
+D. Tag fe-tag to data-tag: Możliwe, ale gorsze od B (Service Accounts są silniejszą tożsamością niż tagi).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Reguły oparte na SA są bezpieczniejsze, ponieważ są 'stałe' dla danej funkcji logicznej, nawet jeśli zmienisz architekturę sieciową lub adresację IP.</p>
+<p>Service Account-based firewalls to 'best practice' dla mikro-segmentacji w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewalls#service-accounts" target="_blank">https://cloud.google.com/vpc/docs/firewalls#service-accounts</a></li>
-
+<li><a href="https://cloud.google.com/vpc/docs/firewalls#service_accounts" target="_blank">Filtering by service account</a></li>
 </ul>
 </div>
 </div>

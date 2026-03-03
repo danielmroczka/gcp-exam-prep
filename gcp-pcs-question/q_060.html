@@ -52,15 +52,14 @@
 <h2>Question 60 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Which service allows you to centrally manage and analyze security findings across your GCP organization?
+A company is running their webshop on Google Kubernetes Engine and wants to analyze customer transactions in BigQuery. You need to ensure that no credit card numbers are stored in BigQuery What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Stackdriver Monitoring</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Security Command Center</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Forseti Security</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud IAM</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create a BigQuery view with regular expressions matching credit card numbers to query and delete affected rows.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Use the Cloud Data Loss Prevention API to redact related infoTypes before data is ingested into BigQuery.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Leverage Security Command Center to scan for the assets of type Credit Card Number in BigQuery.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Enable Cloud Identity-Aware Proxy to filter out credit card numbers before storing the logs in BigQuery.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Which service allows you to centrally manage and analyze security findings acros
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Security Command Center (SCC): Jest to centralna platforma bezpieczeństwa (SIEM/SOAR w wersji cloud-native) dla Google Cloud. Agreguje ona informacje o podatnościach, zagrożeniach (np. crypto mining) i błędnych konfiguracjach ze wszystkich projektów w organizacji.
+B. Cloud DLP API: To jest dokładnie to, do czego służy DLP. Pozwala na przeskanowanie strumienia danych przed ich zapisaniem w BigQuery i zamazanie (redakcję) lub zaszyfrowanie numerów kart kredytowych, zapewniając, że wrażliwe dane nigdy nie trafią do bazy analitycznej.
 
 Dlaczego inne są błędne:
-A. Stackdriver (Cloud Monitoring): Skupia się na wydajności (CPU, RAM, Uptime), a nie na wykrywaniu włamań czy audycie bezpieczeństwa.
-C. Forseti: To narzędzie open-source, które może przesyłać dane DO SCC, ale samo w sobie nie jest usługą 'zarządzaną' przez Google dostępną jako standardowa platforma SCC.
-D. Cloud IAM: System uprawnień, nie służy do analizy 'findings' (znalezisk/incydentów).
-
-Konsensus społeczności ExamTopics: 100% głosów na B. SCC to jedyny poprawny wybór dla 'central security management'.</pre>
+A. BigQuery view: Dane już by tam były (w tabeli źródłowej), co łamie wymóg 'no credit card numbers are stored'.
+C. SCC scan: Wykryje problem po fakcie, ale dane już będą zapisane.
+D. Cloud IAP: Kontroluje dostęp do aplikacji webowej, nie zajmuje się filtrowaniem payloadu danych przesyłanych do bazy danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> SCC Premium oferuje zaawansowane funkcje, takie jak Event Threat Detection (analiza logów w poszukiwaniu hakerów) czy Container Threat Detection (monitoring runtime kontenerów).</p>
+<p>Pre-ingestion de-identification za pomocą DLP to najlepsza praktyka ochrony danych w jeziorach danych i hurtowniach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center" target="_blank">https://cloud.google.com/security-command-center</a></li>
-
+<li><a href="https://cloud.google.com/dlp/docs/tutorials/bigquery" target="_blank">DLP API for BigQuery</a></li>
 </ul>
 </div>
 </div>

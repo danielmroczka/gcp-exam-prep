@@ -52,15 +52,14 @@
 <h2>Question 180 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user permission to create and manage security policies in Cloud Armor across the organization. Which role?
+Your organization develops software involved in many open source projects and is concerned about software supply chain threats. You need to deliver provenance for the build to demonstrate the software is untampered. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/compute.networkAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/compute.securityAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.admin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/iam.securityAdmin</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> 1. Hire an external auditor to review and provide provenance. 2. Define the scope and conditions. 3. Get support from the Security department or representative. 4. Publish the attestation to your public web page.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> 1. Review the software process. 2. Generate private and public key pairs and use Pretty Good Privacy (PGP) protocols to sign the output software artifacts together with a file containing the address of your enterprise and point of contact. 3. Publish the PGP signed attestation to your public web page.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> 1. Publish the software code on GitHub as open source. 2. Establish a bug bounty program, and encourage the open source</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> 1. Generate Supply Chain Levels for Software Artifacts (SLSA) level 3 assurance by using Cloud Build. 2. View the build provenance in the Security insights side panel within the Google Cloud console.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -68,7 +67,7 @@ Grant a user permission to create and manage security policies in Cloud Armor ac
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,28 +75,25 @@ Grant a user permission to create and manage security policies in Cloud Armor ac
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. compute.securityAdmin: Ta rola daje pełne uprawnienia do zarządzania zasobami bezpieczeństwa sieciowego, takimi jak reguły firewalla, certyfikaty SSL oraz właśnie polityki Cloud Armor.
+D. SLSA level 3 via Cloud Build: SLSA (Supply-chain Levels for Software Artifacts) to standard bezpieczeństwa łańcucha dostaw. Cloud Build potrafi automatycznie generować 'build provenance' (dowód pochodzenia), który jest podpisany cyfrowo przez Google. Poziom 3 (SLSA Level 3) gwarantuje, że proces budowania był odizolowany i nikt nie mógł w nim manipulować, co zapewnia 'untampered' status oprogramowania.
 
 Dlaczego inne są błędne:
-A. networkAdmin: Skupia się na routingu, podsieciach i VPN, nie ma pełnych praw do edycji polityk bezpieczeństwa (Cloud Armor).
-C. compute.admin: Daje te uprawnienia, ale jest ZBYT szeroka (pozwala też kasować wszystkie maszyny VM), co narusza zasadę Least Privilege.
-D. iam.securityAdmin: Zarządza uprawnieniami LUDZI (IAM), a nie politykami TECHNICZNYMI sieci (Cloud Armor).
-
-Konsensus społeczności ExamTopics: 100% na B. To standardowa rola dla 'Security Engineer' w GCP.</pre>
+A. External auditor: Zbyt wolne i drogie, nie zapewnia ciągłości dowodów przy każdym buildzie.
+B. PGP signing manually: Trudne do skalowania i nie dowodzi 'bezpieczeństwa procesu budowania' (tylko autentyczności finalnego pliku).
+C. GitHub/Bug bounty: Pomaga w jakości kodu, ale nie dostarcza technicznego dowodu 'provenance' dla procesu budowania.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Wiele osób myli role 'Security Admin' (D) i 'Compute Security Admin' (B). Zapamiętaj: Rola D jest od IAM (ludzie). Rola B jest od Firewalla/Armora (sieć). To najczęstsza pułapka na egzaminie Professional Cloud Security Engineer.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p>Standard SLSA i Build Provenance to kluczowe mechanizmy ochrony przed atakami typu 'SolarWinds'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/access/iam#compute.securityAdmin" target="_blank">https://cloud.google.com/compute/docs/access/iam#compute.securityAdmin</a></li>
-
+<li><a href="https://cloud.google.com/build/docs/securing-builds/slsa-supply-chain-security" target="_blank">Software supply chain security Cloud Build</a></li>
 </ul>
 </div>
 </div>

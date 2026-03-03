@@ -52,15 +52,14 @@
 <h2>Question 33 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Which boot disk encryption solution should you use on a MIG cluster to control the key lifecycle?
+A customer wants to move their sensitive workloads to a Compute Engine-based cluster using Managed Instance Groups (MIGs). The jobs are bursty and must be completed quickly. They have a requirement to be able to control the key lifecycle. Which boot disk encryption solution should you use on the cluster to meet this customer's requirements?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CSEK</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CMEK using Cloud KMS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Customer-supplied encryption keys (CSEK)</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Customer-managed encryption keys (CMEK) using Cloud Key Management Service (KMS)</li>
 <li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Encryption by default</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Pre-encrypting files</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Pre-encrypting files before transferring to Google Cloud Platform (GCP) for analysis</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Which boot disk encryption solution should you use on a MIG cluster to control t
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. CMEK (Customer-Managed Encryption Keys): Pozwala użytkownikowi na pełną kontrolę nad kluczem (rotacja, wyłączanie, niszczenie) przechowywanym w Cloud KMS. Co najważniejsze, CMEK jest w pełni wspierany przez Managed Instance Groups (MIG) i Instance Templates.
+B. CMEK using Cloud KMS: Customer-Managed Encryption Keys (CMEK) pozwalają na pełną kontrolę nad cyklem życia klucza (tworzenie, rotacja, niszczenie) bezpośrednio w konsoli GCP lub przez API. Są wspierane przez Managed Instance Groups (MIGs), co pozwala na automatyczne szyfrowanie dysków bootujących nowo tworzonych maszyn w klastrze.
 
 Dlaczego inne są błędne:
-A. CSEK (Customer-Supplied): Wymaga podania klucza przy każdym uruchomieniu VM. Nie jest to wspierane przez MIG, ponieważ Google nie mogłoby automatycznie skalować (startować nowych VM) bez Twojej interwencji i podania klucza.
-C. Default encryption: Kluczami zarządza Google, więc użytkownik nie ma kontroli nad ich cyklem życia (rotation schedule itp.).
-D. Pre-encrypting: Nie chroni całego dysku systemowego (boot disk), a jedynie wybrane pliki.
-
-Konsensus społeczności ExamTopics: Prawie 100% głosów na B. Dla grup instancji CMEK to jedyna metoda dająca kontrolę i automatyzację.</pre>
+A. CSEK: Customer-Supplied Encryption Keys nie są obecnie wspierane przez Managed Instance Groups przy automatycznym skalowaniu.
+C. Default encryption: Nie pozwala użytkownikowi na zarządzanie cyklem życia klucza.
+D. Pre-encrypting files: Nie rozwiąże problemu szyfrowania całego dysku bootującego (OS).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Przy użyciu CMEK w MIG, nadajesz systemowemu kontu serwisowemu (Compute Service Agent) uprawnienia do używania Twojego klucza w KMS. To pozwala Google na automatyczne tworzenie dysków w Twoim imieniu.</p>
+<p>W wymaganiach 'MIG' + 'Control key lifecycle' w GCP, CMEK jest zazwyczaj jedynym i właściwym wyborem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/disks/customer-managed-encryption" target="_blank">https://cloud.google.com/compute/docs/disks/customer-managed-encryption</a></li>
-
+<li><a href="https://cloud.google.com/compute/docs/disks/customer-managed-encryption" target="_blank">CMEK for Compute Engine</a></li>
 </ul>
 </div>
 </div>

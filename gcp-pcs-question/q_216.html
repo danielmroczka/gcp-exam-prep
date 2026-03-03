@@ -52,15 +52,14 @@
 <h2>Question 216 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Grant a user access to manage and view all organization-level policies. Which role?
+Your organization wants to be continuously evaluated against CIS Google Cloud Computing Foundations Benchmark v1.3.0 (CIS Google Cloud Foundation 1.3). Some of the controls are irrelevant to your organization and must be disregarded in evaluation. You need to create an automated system or process to ensure that only the relevant controls are evaluated. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.organizationAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/orgpolicy.policyAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/iam.securityAdmin</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/resourcemanager.organizationViewer</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Mark all security findings that are irrelevant with a tag and a value that indicates a security exception. Select all marked findings, and mute them on the console every time they appear. Activate Security Command Center (SCC) Premium.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Activate Security Command Center (SCC) Premium. Create a rule to mute the security findings in SCC so they are not evaluated.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Download all findings from Security Command Center (SCC) to a CSV file. Mark the findings that are part of CIS Google Cloud Foundation 1.3 in the file. Ignore the entries that are irrelevant and out of scope for the company.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Ask an external audit company to provide independent reports including needed CIS benchmarks. In the scope of the audit, clarify that some of the controls are not needed and must be disregarded.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ Grant a user access to manage and view all organization-level policies. Which ro
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. orgpolicy.policyAdmin: To najbardziej granularna rola do zarządzania politykami organizacji (Org Policies). Pozwala na ustawianie restrykcji (np. zakaz zewnętrznych IP) bez nadawania pełnych uprawnień administratora całej firmy.
+B. SCC Premium + Mute rules: Security Command Center (SCC) Premium posiada wbudowane skanery zgodności (np. z CIS Benchmark). 'Mute rules' (reguły wyciszania) pozwalają na automatyczne ukrywanie specyficznych znalezisk, które administrator uznał za nieistotne lub zaakceptowane ryzyko. Zapewnia to 'czysty' raport skupiony tylko na istotnych kontrolach.
 
 Dlaczego inne są błędne:
-A. organizationAdmin: Zdecydowanie za wysoka (może wszystko, łącznie z usuwaniem firmy).
-C. securityAdmin: Zarządza uprawnieniami LUDZI (IAM), a nie 'politykami zasobów' (Org Policy).
-D. Viewer: Tylko do odczytu.
-
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Separacja obowiązków pomiędzy zarządzaniem tożsamością a zarządzaniem standardami floty.</pre>
+A. Manual tags + Manual mute: Bardzo pracochłonne, nie jest to 'automated system'.
+C. CSV file: Nie jest to system ciągłej ewaluacji (continuous evaluation).
+D. External audit: Zbyt rzadkie i nie zapewnia ciągłego monitoringu wewnątrz platformy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Analiza spornych kwestii (AI):</b> Pamiętaj: `policyAdmin` (B) nie musi mieć dostępu do projektów, aby nałożyć na nie restrykcję. To rola 'Governance', która definiuje reguły gry dla wszystkich innych deweloperów w organizacji.</p>
+<p>Wyciszanie (Muting) znalezisk w SCC pozwala na zarządzanie 'Compliance Score' organizacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role</a></li>
-
+<li><a href="https://cloud.google.com/security-command-center/docs/how-to-mute-findings" target="_blank">Muting findings in SCC</a></li>
 </ul>
 </div>
 </div>

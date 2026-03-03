@@ -52,15 +52,14 @@
 <h2>Question 344 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-enforce 2-step verification (2SV) for Super admins in Cloud Identity. IdP only uses username/password. What to do?
+Your organization currently uses a third-party identity provider (IdP) that only requires a username and password for authentication. You need to enforce 2-step verification (2SV) for the Super admins in Cloud Identity. What should you do?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create OU for Super admins, enable 2SV within Cloud Identity for OU.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Collaborate with third-party IdP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Monitor and alert.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Evaluate options, implement strongest.</li>
-
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create an organizational unit (OU) for Super admins, and enable 2SV within Cloud Identity for the OU.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Collaborate with the third-party IdP to enable 2SV for Super admins while maintaining the current Cloud Identity configuration.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Implement monitoring tools to track the authentication methods used by Super admins in Cloud Identity. Alert on those not using 2SV.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Evaluate the 2SV options for Super admins offered by both the third-party IdP and Cloud Identity. Implement the solution that provides the strongest second factor.</li>
 </ul>
 </div>
 <a class="btn btn-primary reveal-solution" href="#">Show Suggested Answer</a>
@@ -79,25 +78,22 @@ enforce 2-step verification (2SV) for Super admins in Cloud Identity. IdP only u
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Post-SSO 2SV: Nawet jeśli Twoje główne logowanie (IdP) nie ma MFA, Google pozwala na dodanie 'drugiego kroku' po swojej stronie. Umieszczenie Super Adminów w osobnej jednostce organizacyjnej (OU) i włączenie tam 2SV wymusi na nich użycie np. Titan Key po poprawnym zalogowaniu się w firmowym IdP.
+A. Create OU for Super Admins + Enable 2SV: W Cloud Identity / Google Workspace ustawienia 2SV (2-step verification) można konfigurować na poziomie jednostek organizacyjnych (OU). Najlepszą praktyką jest umieszczenie kont o wysokich uprawnieniach (Super Admins) w dedykowanej OU i wymuszenie tam najsilniejszej polityki 2SV, niezależnie od tego, co oferuje zewnętrzny IdP (który może być słabszy).
 
 Dlaczego inne są błędne:
-B. Collaborate: Może trwać miesiące. Rozwiązanie A jest natychmiastowe i pod Twoją kontrolą.
-C. Monitor: Wykryje włamanie, ale mu nie zapobiegnie.
-D. Evaluate: To nie jest techniczne rozwiązanie problemu.
-
-Konsensus społeczności ExamTopics: 100% na A. To kluczowa funkcja bezpieczeństwa dla kont uprzywilejowanych w środowiskach hybrydowych.</pre>
+B. IdP alignment: Jeśli Twój IdP nie wspiera 2SV, nie możesz na nim polegać. Google Cloud pozwala na wymuszenie 2SV już po procesie SSO (post-SSO challenge).
+C. Monitoring only: To nie jest wymuszenie (enforcement) wymagane w pytaniu.
+D. Evaluate and implement: To ogólne stwierdzenie, podczas gdy A podaje konkretną ścieżkę techniczną wewnątrz platformy Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Super Admini są jedynymi kontami, które mogą ominąć SSO w sytuacjach awaryjnych, więc posiadanie u nich 2SV bezpośrednio w Google jest absolutnie krytyczne.</p>
+<p>Wymuszenie 2SV na poziomie OU to najskuteczniejszy sposób na ochronę kont uprzywilejowanych w Google Cloud.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>
-
+<li><a href="https://support.google.com/a/answer/9116814" target="_blank">Enforce 2SV for users</a></li>
 </ul>
 </div>
 </div>
