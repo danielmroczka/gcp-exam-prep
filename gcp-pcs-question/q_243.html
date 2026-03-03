@@ -52,14 +52,14 @@
 <h2>Question 243 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-VM in VPC without internet. Web interface port 5601. Expose to users and enforce Google credentials. What to do?
+Analyze VPC network traffic to detect data exfiltration via SSH tunneling. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Bastion host OS Login.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC routing to internet gateway.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SSH bastion jump host.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> HTTP LB + IAP + firewall allow IAP range.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ VM in VPC without internet. Web interface port 5601. Expose to users and enforce
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ VM in VPC without internet. Web interface port 5601. Expose to users and enforce
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. IAP + Load Balancer: Identity-Aware Proxy (IAP) w połączeniu z Load Balancerem HTTP(S) pozwala na wystawienie interfejsu webowego (port 5601) do internetu w sposób bezpieczny. IAP wymusza logowanie Google (wymóg 'enforce Google credentials'). Maszyna VM może pozostać w sieci bez internetu, ponieważ Load Balancer komunikuje się z nią przez sieć wewnętrzną Google.
+B. Cloud IDS: SSH Tunneling to metoda 'ukrywania' ruchu wewnątrz szyfrowanego połączenia SSH. Cloud IDS posiada zaawansowane algorytmy detekcji, które potrafią rozpoznać nietypowe przepływy danych wewnątrz sesji SSH, co wskazuje na próbę eksfiltracji danych.
 
 Dlaczego inne są błędne:
-A, C. Bastion/SSH: Służą do dostępu terminalowego, a nie do wygodnego udostępnienia interfejsu WEBOWEGO dla zwykłych użytkowników.
-B. Internet gateway: Dałoby maszynie internet, ale nie wymusiłoby uwierzytelniania Google przy wejściu na stronę (wymagana byłaby własna implementacja logowania).
+A. Cloud Armor: Chroni LB, nie monitoruje portu 22 (SSH) maszyn VM.
+C. Flow Logs: Zobaczą tylko 'ruch na porcie 22', nie 'zrozumieją' co jest w środku sesji SSH.
+D. IAP: Służy do bezpiecznego logowania przez SSH, ale nie jest systemem detekcji włamań (IDS) analizującym treść ruchu.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla D. IAP to standardowa brama Zero Trust dla aplikacji webowych w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. SSH tunneling detection = Cloud IDS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Firewall na maszynie VM musi zezwalać na ruch przychodzący tylko z zakresów IP Load Balancera (35.191.0.0/16 i 130.211.0.0/22), co uniemożliwia ominięcie proxy IAP.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci security na Reddit podkreślają: hakerzy często używają SSH do 'wyprowadzania' danych, bo ten port jest zazwyczaj otwarty. Cloud IDS (B) to jedyne narzędzie w GCP, które potrafi to wykryć na podstawie wzorców ruchu (Traffic analysis).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap/docs/tutorial-gce" target="_blank">https://cloud.google.com/iap/docs/tutorial-gce</a></li>
+<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
 
 </ul>
 </div>

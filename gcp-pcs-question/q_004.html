@@ -79,20 +79,20 @@ Your team wants to centrally manage GCP IAM permissions from their on-premises A
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud Directory Sync (GCDS): Jest to darmowe narzędzie Google, które synchronizuje użytkowników i grupy z LDAP/Active Directory do Google Cloud Identity. Pozwala to na zarządzanie uprawnieniami w GCP bezpośrednio na grupach, które odzwierciedlają strukturę AD.
+A. GCDS: Google Cloud Directory Sync to narzędzie do tzw. 'provisioningu'. Odczytuje ono grupy z Twojego AD i tworzy ich lustrzane odbicia w Google Cloud Identity. Dzięki temu możesz nadać rolę IAM grupie `GCP-Admins`, a GCDS zadba o to, by jej skład zawsze zgadzał się z tym, co jest w AD.
 
 Dlaczego inne są błędne:
-B. SAML SSO: SAML służy do uwierzytelniania (logowania), ale sam w sobie nie synchronizuje składu grup z AD do systemu IAM w GCP. Bez GCDS grupy w GCP nie wiedziałyby, jacy użytkownicy do nich należą.
-C i D: Pisanie własnych skryptów przy użyciu API jest nieefektywne i błędotwórcze, gdy istnieje gotowe, wspierane narzędzie GCDS.
+B. SAML SSO: SAML służy do autentykacji (logowania). Pozwala użytkownikowi wejść do konsoli, ale bez GCDS system IAM nie wiedziałby, do jakich grup ten użytkownik należy w chmurze (tożsamości grupowe muszą fizycznie istnieć w katalogu Google).
+C, D: To manualne próby budowania tego, co GCDS robi automatycznie i w sposób wspierany przez Google.
 
-Konsensus społeczności ExamTopics: Zdecydowana większość wskazuje na A. GCDS to 'prawy ramię' AD w ekosystemie Google.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla A. GCDS to 'must-have' dla każdej firmy używającej AD.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Kluczowe jest rozróżnienie między Provisioningiem (GCDS) a Federacją (SAML). GCDS tworzy 'tożsamości' w Google, a SAML pozwala na 'logowanie' się nimi przy użyciu hasła z AD.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Częstym błędem w tej dyskusji jest mylenie logowania (SSO) z autoryzacją (IAM). Eksperci podkreślają: SSO sprawia, że użytkownik MOŻE się zalogować, ale to GCDS sprawia, że system IAM WIE, jakie uprawnienia mu nadać na podstawie jego przynależności do grup zsynchronizowanych z AD.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction" target="_blank">https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction</a></li>

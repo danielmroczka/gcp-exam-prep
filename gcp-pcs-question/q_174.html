@@ -52,15 +52,14 @@
 <h2>Question 174 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-SOC monitor/detect network anomalies. Explore environment using network payloads and headers. Which product?
+Identify which IP addresses are accessing your public Cloud Storage bucket. Which log source?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud IDS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC SC logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Armor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Packet Mirroring.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Admin Activity logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Data Access logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Storage Usage logs</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ SOC monitor/detect network anomalies. Explore environment using network payloads
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,27 +76,27 @@ SOC monitor/detect network anomalies. Explore environment using network payloads
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A. (Uwaga: E jest fundamentem, ale A jest 'produktem' dla SOC).
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud IDS (Intrusion Detection System): Jest to usługa zarządzana, stworzona specjalnie dla zespołów SOC. Wykorzystuje technologię Packet Mirroring pod spodem, aby analizować zarówno nagłówki (headers), jak i zawartość pakietów (payloads) pod kątem znanych ataków, wirusów i anomalii. Dostarcza gotowe, czytelne alerty do SCC.
+B. Data Access logs: Gdy włączysz logi Data Access dla usługi Storage, każde żądanie (nawet do publicznego bucketu) rejestruje adres IP klienta, który pobrał plik. Jest to standardowy sposób audytu ruchu do bucketów.
 
 Dlaczego inne są błędne:
-C. VPC Flow Logs: Widzą tylko nagłówki (headers), nie widzą zawartości (payload).
-E. Packet Mirroring: To metoda dostarczania danych, a nie 'produkt' do monitorowania i detekcji. Musiałbyś sam zbudować cały system analizy. Cloud IDS jest gotowym rozwiązaniem.
-B, D: Nie służą do ogólnego monitorowania anomalii wewnątrz całej sieci VPC i nie widzą payloadu maszyn VM w ten sposób.
+A. Admin Activity: Nie rejestrują pobierania plików.
+C. VPC Flow Logs: Publiczne buckety są dostępne przez publiczne API Google, ruch do nich z internetu NIE przechodzi przez Twoją sieć VPC, więc Flow Logi go nie widzą.
+D. Usage logs: To starszy mechanizm (CSV w buckecie), obecnie Google promuje ujednolicone logi audytowe (B).
 
-Konsensus społeczności ExamTopics: Przewaga na A jako rozwiązanie 'managed' dla SOC.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To jedyny sposób na poznanie IP 'internetowych' gości w GCS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Cloud IDS oparty jest na silniku Palo Alto Networks, co daje dostęp do ogromnej bazy sygnatur zagrożeń przy minimalnym wysiłku konfiguracyjnym.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele osób myśli, że do publicznych danych nie ma logów. Błąd! Nawet jeśli plik jest publiczny, Google loguje żądania API, o ile Ty (jako właściciel bucketu) włączyłeś płatne logi Data Access.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/ids/docs/overview" target="_blank">https://cloud.google.com/ids/docs/overview</a></li>
+<li><a href="https://cloud.google.com/storage/docs/audit-logging" target="_blank">https://cloud.google.com/storage/docs/audit-logging</a></li>
 
 </ul>
 </div>

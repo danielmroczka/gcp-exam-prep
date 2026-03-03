@@ -52,15 +52,14 @@
 <h2>Question 163 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Audit network segmentation. VMs communicate freely despite tag-based rules (priority 1000). Reasons? Which two?
+Analyze application traffic to detect anomalies and potential malware communication without modifying the application code. Which GCP service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VMs missing network tags.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VMs in same subnet.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VMs with same network route.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC rule allowing traffic between same service account with priority 999.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> VPC rule with priority 1001.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud IDS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Firewall</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Trace</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Audit network segmentation. VMs communicate freely despite tag-based rules (prio
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">AD</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Audit network segmentation. VMs communicate freely despite tag-based rules (prio
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: AD.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Missing tags: Reguły firewalla oparte na tagach działają tylko, gdy maszyna posiada dany tag. Jeśli zapomniano go dodać, reguła 'deny' na tag nie zadziała, a zadziała domyślne 'allow egress' lub brak blokady ingress.
-D. Priority 999: W GCP niższy numer priorytetu wygrywa. Reguła z priorytetem 999 (nawet jeśli oparta na Service Accountach) zostanie przetworzona przed regułą o priorytecie 1000 i zezwoli na ruch, zanim system dotrze do Twojej blokady.
+A. Cloud IDS (Intrusion Detection System): Jest to usługa zarządzana, która bazuje na silniku Palo Alto Networks. Mirroruje ona ruch sieciowy i szuka w nim sygnatur ataków, malware'u i anomalii (np. exfiltration). Nie wymaga żadnych zmian w kodzie aplikacji (działa w warstwie sieci).
 
 Dlaczego inne są błędne:
-B. Same subnet: Podsieć nie stanowi granicy firewalla w GCP. Reguły firewalla są stosowane do maszyn niezależnie od ich przynależności do podsieci.
-C. Same route: Routing decyduje GDZIE wysłać pakiety, ale Firewall decyduje CZY je przepuścić. Nawet przy tej samej trasie firewall może blokować ruch.
-E. Priority 1001: Ta reguła jest SŁABSZA niż Twoja (1000), więc nie może jej 'nadpisać'.
+B. Cloud Armor: Chroni tylko ruch HTTP(S) przychodzący z zewnątrz. Nie widzi malware'u przesyłanego np. przez SSH czy ruch wewnętrzny (East-West).
+C. VPC Firewall: Blokuje porty/IP, ale nie 'rozumie' czy przesyłane pakiety to legalny ruch czy komunikacja trojana.
+D. Cloud Trace: Tylko dla wydajności.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla AD. To klasyczne pułapki w zarządzaniu firewallami GCP.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Cloud IDS to nowa jakość wglądu w bezpieczeństwo sieciowe GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: AD</b></p>
-<p><b>Głęboka analiza:</b> Zawsze używaj Service Accountów zamiast tagów. Są one silniej powiązane z tożsamością maszyny i trudniejsze do omyłkowego usunięcia przez junior dewelopera.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie na forach zauważają, że Cloud IDS jest znacznie łatwiejszy we wdrożeniu niż Packet Mirroring (144) z własnym IDS-em, ponieważ Google dba o aktualizację bazy sygnatur zagrożeń i skalowanie infrastruktury analizującej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewalls#service-accounts" target="_blank">https://cloud.google.com/vpc/docs/firewalls#service-accounts</a></li>
+<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
 
 </ul>
 </div>

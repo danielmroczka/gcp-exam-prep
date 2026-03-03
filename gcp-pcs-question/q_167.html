@@ -52,14 +52,14 @@
 <h2>Question 167 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Resource hierarchy with org policies at each node. Which LB types denied in VPC A?
+Audit who has the permission to access a specific GCS bucket across the entire organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> All load balancer types denied per global policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> INTERNAL_TCP_UDP, INTERNAL_HTTP_HTTPS denied per folder policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> EXTERNAL types denied per project policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Both folder and project policies combined.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -79,22 +79,24 @@ Resource hierarchy with org policies at each node. Which LB types denied in VPC 
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. All types denied: W hierarchii polityk organizacji GCP obowiązuje zasada dziedziczenia restrykcji. Jeśli na samej górze (Organization) ustawiono blokadę na wszystkie typy Load Balancerów, to ta blokada 'spływa' na wszystkie foldery i projekty. Niższe polityki (np. na poziomie folderu) mogą tylko DODATKOWO ograniczać, ale nie mogą zezwolić na coś, co góra zablokowała (chyba że wyłączysz dziedziczenie, ale pytanie sugeruje kumulację restrykcji).
+A. Policy Analyzer: Pozwala na zadanie pytania: 'Kto ma dostęp do bucketu X?'. Przeszukuje on wszystkie polityki IAM (na poziomie bucketu, projektu, folderu i organizacji) i zwraca pełną listę osób i grup z dostępem.
 
 Dlaczego inne są błędne:
-B, C, D: Skupiają się na mniejszych fragmentach hierarchii. Zasada 'Deny wins' na poziomie globalnym sprawia, że żadna maszyna w VPC A nie może stworzyć żadnego typu LB.
+B. Policy Troubleshooter: Sprawdza tylko 'dlaczego ten JEDEN konkretny użytkownik ma/nie ma dostępu'. Nie daje zbiorczego raportu.
+C. IAM Recommender: Podpowiada jak ograniczyć dostęp, ale nie służy do inwentaryzacji obecnych praw.
+D. Cloud Audit Logs: Rejestrują moment NADANIA uprawnienia, ale bardzo trudno z nich wyczytać AKTUALNY stan (kto ma dostęp TERAZ).
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. Zrozumienie hierarchii Org Policy jest kluczem do egzaminu.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Policy Analyzer to główne narzędzie 'Access Review'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Administrator może przerwać dziedziczenie (inheritFromParent: false), ale bez tej jawnej flagi restrykcje z góry są absolutne.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Na Reddit eksperci radzą: 'Jeśli audytor pyta o listę uprawnień -> idź do Policy Analyzer'. Potrafi on nawet uwzględnić uprawnienia wynikające z grup, do których użytkownik należy, co jest niemożliwe do ręcznego sprawdzenia przy dużej skali.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>
+<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
 
 </ul>
 </div>

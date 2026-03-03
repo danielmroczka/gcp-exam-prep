@@ -52,14 +52,14 @@
 <h2>Question 196 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Updated policy: require CMEK instead of GMEK for existing Cloud Storage files. Re-encrypt efficiently. What to do?
+Protect a GKE cluster against 'Container Escape' attacks where a malicious process tries to access the host kernel. Which feature?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Reupload with key file.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Encrypt locally and upload.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Copy to new bucket.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Change encryption type on bucket and rewrite objects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> GKE Sandbox (gVisor)</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Network Policies</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Updated policy: require CMEK instead of GMEK for existing Cloud Storage files. R
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,26 @@ Updated policy: require CMEK instead of GMEK for existing Cloud Storage files. R
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Rewrite objects: Sama zmiana domyślnego klucza na buckecie (Change type) wpływa tylko na NOWE pliki. Aby 'przeszyfrować' istniejące dane bez ich pobierania na dysk, należy użyć operacji 'rewrite' (np. `gsutil rewrite -k ...`). Google przepisuje wtedy dane wewnątrz swojej infrastruktury, nakładając nowy klucz CMEK.
+B. GKE Sandbox: Wykorzystuje technologię gVisor, która tworzy dodatkową warstwę izolacji (user-space kernel) dla każdego poda. Jeśli proces w kontenerze 'ucieknie', trafi do piaskownicy gVisor, a nie do prawdziwego jądra systemu operacyjnego węzła (hosta).
 
 Dlaczego inne są błędne:
-A, B: Przesyłanie terabajtów danych przez łącze internetowe w celu ich prze-szyfrowania jest skrajnie nieefektywne i kosztowne.
-C. Copy to new bucket: Zadziała, ale 'rewrite' w miejscu jest zazwyczaj szybszy i nie wymaga tworzenia nowej infrastruktury oraz zmiany URL-i do plików.
+A, D: Chronią sieć, nie izolują procesów od jądra systemu.
+C. Cloud Armor: Chroni HTTP, nie ma wpływu na bezpieczeństwo procesów wewnątrz Linuxa.
 
-Konsensus społeczności ExamTopics: 100% na D. 'gsutil rewrite' to standardowa komenda do zmiany kluczy w GCS.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Container Escape = GKE Sandbox.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Operacja rewrite jest atomowa dla pojedynczego obiektu i gwarantuje, że nowa wersja pliku jest poprawnie zabezpieczona nowym kluczem przed usunięciem starej wersji.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja w sieci dotyczy wydajności. GKE Sandbox (B) generuje narzut (~10-20%), dlatego inżynierowie radzą używać go tylko dla 'Untrusted Code' – czyli aplikacji od dostawców zewnętrznych lub takich, które przetwarzają dane z nieznanych źródeł.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#rewrite" target="_blank">https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#rewrite</a></li>
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/sandbox" target="_blank">https://cloud.google.com/kubernetes-engine/docs/concepts/sandbox</a></li>
 
 </ul>
 </div>

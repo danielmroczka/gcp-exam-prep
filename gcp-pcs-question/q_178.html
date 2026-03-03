@@ -52,14 +52,14 @@
 <h2>Question 178 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Track bonus compensations change over time, identify outliers. Reversible but hidden sensitive data. Which DLP technique?
+Enforce that all data written to a specific BigQuery dataset must be encrypted using a Customer-Managed Encryption Key (CMEK). Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cryptographic hashing.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Redaction.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Format-preserving encryption.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Generalization.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: bq.restrictDatasetEncryption</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Dataset settings in the BQ Console</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Track bonus compensations change over time, identify outliers. Reversible but hi
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Format-preserving encryption (FPE): Identycznie jak w pytaniu 17. FPE pozwala na zachowanie relacji między danymi (ten sam bonus po zaszyfrowaniu zawsze wygląda tak samo), co pozwala na analizę trendów i znajdowanie anomalii (outliers), przy jednoczesnej możliwości odwrócenia procesu przez uprawnioną osobę z kluczem.
+C. Dataset settings: W BigQuery, wymóg użycia klucza CMEK ustawia się bezpośrednio we właściwościach Datasetu (Encryption Configuration). Gdy to zrobisz, BigQuery odrzuci każdą próbę zapisu danych, która nie wskazuje tego konkretnego klucza KMS.
 
 Dlaczego inne są błędne:
-A. Hashing: Nieodwracalne.
-B. Redaction: Usuwa dane całkowicie.
-D. Generalization: Zbyt mało precyzyjne do znajdowania 'outlierów' w kwotach pieniężnych.
+A. IAM: Nie wymusza metod szyfrowania.
+B. Org Policy: Choć istnieją polityki ograniczające użycie CMEK, to twarde wymuszenie dla konkretnego zbioru danych (Dataset) odbywa się w jego ustawieniach (C).
+D. VPC Service Controls: Chroni przed kradzieżą danych, nie zarządza kluczami szyfrującymi.
 
-Konsensus społeczności ExamTopics: 100% na C. FPE to król analityki zachowującej prywatność.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To tam konfiguruje się 'Default Key' dla danych BigQuery.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Dzięki FPE analityk może uruchomić zapytanie: 'Pokaż mi rekordy, gdzie zaszyfrowana kwota wzrosła o więcej niż 50% rok do roku', nie wiedząc, czy mowa o 1000 zł czy 100 000 zł.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Pamiętaj, że w BigQuery nie możesz 'wymusić' CMEK dla istniejącej tabeli bez jej przepisania. Musisz ustawić to na poziomie Datasetu ZANIM zaczniesz tworzyć tabele, aby wszystkie nowe obiekty dziedziczyły ten wymóg.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/pseudonymization#fpe" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization#fpe</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/customer-managed-encryption" target="_blank">https://cloud.google.com/bigquery/docs/customer-managed-encryption</a></li>
 
 </ul>
 </div>

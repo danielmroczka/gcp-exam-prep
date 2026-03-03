@@ -52,14 +52,14 @@
 <h2>Question 239 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Limit egress from VPC 'dev-vpc' to IP range 10.58.5.0/24 organization-wide for a folder. Minimize effort.
+Audit which users have been granted permissions to access any Cloud Storage bucket via ACLs (Access Control Lists). Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> New project multi-NIC appliance.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud NAT restrict target range.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Hierarchical firewall policy on folder level deny all egress, allow to 10.58.5.0/24 from dev-vpc.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC firewall rule in dev-vpc.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Bucket metadata analysis script</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Limit egress from VPC 'dev-vpc' to IP range 10.58.5.0/24 organization-wide for a
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Limit egress from VPC 'dev-vpc' to IP range 10.58.5.0/24 organization-wide for a
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B. (Uwaga: Policy Analyzer skupia się na IAM).
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Hierarchical Firewall Policy: Jest to najbardziej efektywna (minimize effort) metoda zarządzania bezpieczeństwem sieciowym w wielu projektach. Ustawienie reguły na poziomie FOLDERA sprawia, że każda sieć VPC wewnątrz tego folderu (w tym 'dev-vpc') musi się do niej zastosować. Pozwala to na centralną blokadę bez wchodzenia w każdy projekt z osobna.
+B. Metadata analysis: Stary system ACL (Access Control Lists) nie jest częścią modelu IAM, dlatego nowoczesne narzędzie Policy Analyzer (A) często go pomija. Aby audytować ACL dla tysięcy plików i bucketów, najpewniejszą metodą jest użycie skryptu (np. w Pythonie lub `gsutil`), który przeanalizuje metadane każdego zasobu.
 
 Dlaczego inne są błędne:
-A. Multi-NIC: Skomplikowane i drogie.
-B. Cloud NAT: Nie służy do blokowania ruchu do konkretnych adresów prywatnych (RFC1918), lecz do zarządzania wyjściem publicznym.
-D. VPC firewall rule: Zadziałałoby, ale wymagałoby manualnej konfiguracji w każdym projekcie, co przy 'organization-wide' wymogu jest nieefektywne (większy effort).
+A. Policy Analyzer: Głównie dla IAM, nie dla 'legacy' ACL na poziomie pojedynczych plików.
+C. Recommender: Sugeruje przejście na IAM (UBLA), ale nie listuje wszystkich obecnych ACL.
+D. Audit Logs: Nie dają zbiorczego raportu 'kto ma dostęp teraz'.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla C. Hierarchiczne polityki to klucz do skalowalności w GCP.</pre>
+Konsensus społeczności ExamTopics: Zdecydowana większość na B. ACL to 'drugi, równoległy świat' uprawnień, który wymaga oddzielnego audytu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Polityki hierarchiczne są przetwarzane PRZED regułami lokalnymi VPC, co daje zespołowi security gwarancję, że ich blokady nie zostaną pominięte.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Google Cloud usilnie zachęca do wyłączania ACL na rzecz UBLA (Uniform bucket-level access). Dyskusja w sieci pokazuje, że ACL są uważane za 'niebezpieczne', bo ich audyt (B) jest znacznie trudniejszy niż audyt IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewall-policies" target="_blank">https://cloud.google.com/vpc/docs/firewall-policies</a></li>
+<li><a href="https://cloud.google.com/storage/docs/access-control/create-manage-lists" target="_blank">https://cloud.google.com/storage/docs/access-control/create-manage-lists</a></li>
 
 </ul>
 </div>

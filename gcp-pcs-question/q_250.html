@@ -52,14 +52,14 @@
 <h2>Question 250 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-GCS: objects older than 365 days downgrade to Coldline automatically. Reduce cost. What to do?
+Ensure that all Compute Engine instances are created with 'OS Login' enabled by default across the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Asset Inventory report.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Run Job with Cloud Scheduler.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Autoclass.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Lifecycle policy JSON: SetStorageClass to COLDLINE, age 365.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: compute.requireOsLogin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Instance Templates</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ GCS: objects older than 365 days downgrade to Coldline automatically. Reduce cos
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ GCS: objects older than 365 days downgrade to Coldline automatically. Reduce cos
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Object Lifecycle Management: Jest to wbudowana, bezkosztowa funkcja Cloud Storage. Pozwala na zdefiniowanie reguły: 'Jeśli wiek obiektu > 365 dni, zmień klasę na COLDLINE'. Wszystko dzieje się automatycznie pod spodem, bez angażowania Twoich serwerów.
+B. Organization Policy: Polityka `compute.requireOsLogin` pozwala na wymuszenie użycia systemu OS Login dla wszystkich maszyn w firmie. OS Login integruje dostęp SSH z tożsamością IAM Google Cloud, eliminując potrzebę zarządzania statycznymi kluczami SSH przez administratorów.
 
 Dlaczego inne są błędne:
-A. Inventory report: Tylko pokaże Ci problem, ale go nie naprawi.
-B. Cloud Run Job: Niepotrzebnie skomplikowane i generuje koszty obliczeniowe za coś, co chmura robi natywnie za darmo.
-C. Autoclass: Zmienia klasy dynamicznie na podstawie częstotliwości DOSTĘPU (access pattern), a nie sztywnego wieku 365 dni. Pytanie precyzuje warunek czasowy.
+A. IAM: Nie wymusza tej funkcji systemowej.
+C. Templates: Deweloper może je pominąć przy ręcznym tworzeniu VM.
+D. VPC SC: Dla API, nie dla logowania do systemu operacyjnego.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla D. To standardowa metoda optymalizacji kosztów GCS.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. OS Login to fundament bezpiecznego SSH w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Uważaj na operację 'SetStorageClass'. Choć obniża koszt składowania, samo jej wykonanie jest traktowane jako operacja typu Class A (płatna). Przy milionach małych plików warto policzyć, czy to się opłaca.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach podkreślają: 'Klucze SSH w metadanych projektu to zmora bezpieczeństwa'. Wymuszenie OS Login polityką (B) sprawia, że gdy pracownik odchodzi z firmy i traci konto Google, automatycznie traci też dostęp do wszystkich maszyn Linux, co jest niemożliwe do uzyskania przy tradycyjnych kluczach SSH.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/lifecycle" target="_blank">https://cloud.google.com/storage/docs/lifecycle</a></li>
+<li><a href="https://cloud.google.com/compute/docs/oslogin" target="_blank">https://cloud.google.com/compute/docs/oslogin</a></li>
 
 </ul>
 </div>

@@ -79,21 +79,21 @@ A company has been running their application on Compute Engine. A bug in the app
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Process Health: Monitoring zdrowia procesów (Process Health) pozwala sprawdzić, czy dana aplikacja lub skrypt działa. Jeśli proces zniknie (crash), system natychmiast wyśle powiadomienie (Alerting Policy).
+A. Process Health Alert: Ta polityka monitoruje, czy dany proces (aplikacja) żyje. Jeśli haker uruchomi skrypt powodujący crash, proces zniknie, a Stackdriver (Cloud Monitoring) natychmiast wyśle powiadomienie (Email/SMS/PagerDuty).
 
 Dlaczego inne są błędne:
-B. CPU usage: Crash aplikacji nie zawsze wiąże się z wysokim CPU (może to być np. błąd pamięci). Ponadto 80% to normalne obciążenie dla wielu systemów.
-C. User-defined metric: Pozwala na zliczanie wystąpień w logach i wyświetlanie ich na dashboardzie, ale samo stworzenie dashboardu nie wysyła powiadomienia (brak Alerting Policy).
-D. BigQuery: Służy do analizy historycznej, a nie do powiadamiania w czasie rzeczywistym o incydentach.
+B. CPU usage: Crash może nastąpić przy niskim zużyciu CPU (np. brak pamięci).
+C. User-defined metric: Stworzy dashboard, ale dashboard to nie alert. Nikt nie patrzy w dashboard 24/7.
+D. BigQuery: Rozwiązanie analityczne, bardzo wolne (scheduled query co godzinę to nie jest powiadomienie o incydencie w czasie rzeczywistym).
 
-Konsensus społeczności ExamTopics: Większość za A. Process Health to najbardziej precyzyjny sposób wykrycia 'padu' konkretnego procesu.</pre>
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. To najszybsza metoda wykrycia 'padu' usługi.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Skuteczny monitoring incydentów wymaga powiadomienia (Push), a nie tylko możliwości sprawdzenia (Pull). Tylko opcja A łączy precyzyjny warunek (zdrowie procesu) z aktywnym kanałem powiadomień.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Niektórzy użytkownicy forów argumentują, że opcja C byłaby dobra do liczenia prób ataku. Jednak zadanie wyraźnie mówi: 'get notified' (zostań powiadomiony). W ekosystemie GCP 'Notification' = 'Alerting Policy'. Opcja A to jedyny gotowy automat do tego celu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/monitoring/alerts/types-of-conditions#process-health" target="_blank">https://cloud.google.com/monitoring/alerts/types-of-conditions#process-health</a></li>

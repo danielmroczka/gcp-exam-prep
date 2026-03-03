@@ -52,14 +52,14 @@
 <h2>Question 161 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Manage encryption key for solution including CE, GKE, GCS, BQ, and Pub/Sub. Which option?
+Encrypt sensitive data in a Cloud Storage bucket using a key that you provide and manage yourself outside of Google Cloud. Which encryption method?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> EKM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CMEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> CSEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google default.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Google-managed encryption keys</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Customer-managed encryption keys (CMEK)</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Customer-supplied encryption keys (CSEK)</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Client-side encryption</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Manage encryption key for solution including CE, GKE, GCS, BQ, and Pub/Sub. Whic
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Manage encryption key for solution including CE, GKE, GCS, BQ, and Pub/Sub. Whic
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. CMEK: Customer-Managed Encryption Keys (KMS) posiadają najszersze wsparcie w ekosystemie Google Cloud. Wszystkie wymienione usługi (Compute, GKE, Storage, BigQuery, Pub/Sub) wspierają integrację z Cloud KMS w celu szyfrowania danych kluczem zarządzanym przez klienta.
+C. Customer-supplied encryption keys (CSEK): To jedyna metoda (poza client-side), w której materiał klucza rezyduje u klienta. Przy każdej operacji (upload/download) klient musi podać klucz w żądaniu HTTP. Google używa go tylko w RAM i nie zapisuje go nigdzie.
 
 Dlaczego inne są błędne:
-A. EKM: Nie wszystkie usługi wspierają EKM (np. wsparcie dla Pub/Sub czy niektórych funkcji GKE jest ograniczone lub nowsze).
-C. CSEK: Posiada bardzo wąskie wsparcie (głównie tylko GCS i Compute Engine). Nie użyjesz CSEK w BigQuery czy Pub/Sub.
-D. Google default: Daje zerową kontrolę nad kluczem (wymóg 'Manage encryption key').
+A. Google-managed: Google zarządza wszystkim.
+B. CMEK: Klucz jest w Cloud KMS (zarządzany przez Google, choć Ty nim sterujesz). Klucz fizycznie 'mieszka' w chmurze.
+D. Client-side: Dane są szyfrowane PRZED wysłaniem do chmury. Choć technicznie poprawne, CSEK (C) jest specyficzną Funkcją GCS, o którą zazwyczaj pyta egzamin w kontekście 'kluczy podawanych przy API'.
 
-Konsensus społeczności ExamTopics: 100% na B. CMEK to uniwersalny standard dla kluczy własnych w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% na C. CSEK to najwyższy poziom 'Key Sovereignty' wbudowany w GCS API.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Wybierając rozwiązanie projektowe, zawsze sprawdzaj macierz wsparcia (support matrix). CMEK to jedyna odpowiedź 'bezpieczna' dla tak zróżnicowanego stosu technologicznego.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Debata dotyczy wygody. CSEK jest bardzo trudny w zarządzaniu (brak wsparcia w Konsoli, klucz trzeba podawać przy każdym wywołaniu `gsutil`). Eksperci radzą: używaj CSEK tylko jeśli prawo Twojego kraju absolutnie zabrania przechowywania kluczy w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/cmek" target="_blank">https://cloud.google.com/kms/docs/cmek</a></li>
+<li><a href="https://cloud.google.com/storage/docs/encryption/customer-supplied-keys" target="_blank">https://cloud.google.com/storage/docs/encryption/customer-supplied-keys</a></li>
 
 </ul>
 </div>

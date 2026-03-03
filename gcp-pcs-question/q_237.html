@@ -52,14 +52,14 @@
 <h2>Question 237 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Full control of keys generated and stored outside Google, integrate with many services including BigQuery. What to do?
+Analyze VPC network traffic to detect data exfiltration via ICMP tunneling. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CSEK API calls.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google managed HSM HSM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud External Key Management (EKM).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Imported key material in Cloud KMS.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Full control of keys generated and stored outside Google, integrate with many se
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Full control of keys generated and stored outside Google, integrate with many se
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Cloud EKM: Pozwala na używanie kluczy, które fizycznie nigdy nie opuszczają Twojego on-premises HSM (lub HSM partnera). Cloud KMS służy tylko jako łącznik. EKM jest w pełni zintegrowany z BigQuery, co pozwala na analitykę przy zachowaniu pełnej kontroli nad kluczem.
+B. Cloud IDS: ICMP Tunneling to ukrywanie danych w pakietach 'ping'. Cloud IDS posiada silnik głębokiej inspekcji pakietów (DPI), który potrafi wykryć nietypową treść (payload) wewnątrz protokołu ICMP, co jest charakterystyczne dla tego typu exfiltration.
 
 Dlaczego inne są błędne:
-A. CSEK: Nie jest wspierany przez BigQuery (tylko GCS i PD).
-B. Google managed HSM: Klucze są w infrastrukturze Google, nie masz nad nimi 'pełnej kontroli' poza chmurą.
-D. Imported key: Po imporcie materiał klucza rezyduje w pamięci systemów Google, co narusza wymóg 'stored outside Google'.
+A. Cloud Armor: Dla HTTP, nie dla ICMP.
+C. Flow Logs: Widzą, że jest ruch ICMP, ale nie widzą jego treści (nie wykryją tunelu).
+D. IAP: Dla ludzi.
 
-Konsensus społeczności ExamTopics: 100% na C. EKM to jedyna opcja dla kluczy zewnętrznych w BQ.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Wykrywanie tuneli sieciowych to domena IDS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Przy EKM możesz natychmiast 'odciąć' chmurę od swoich danych, po prostu wyłączając dostęp do klucza w swoim lokalnym systemie HSM.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach security podkreślają: ICMP jest często pomijany przez administratorów. Cloud IDS (B) to Twoja jedyna nadzieja na złapanie zaawansowanego hakera, który 'wyprowadza' dane bajt po bajcie w odpowiedziach na pingi.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>
+<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
 
 </ul>
 </div>

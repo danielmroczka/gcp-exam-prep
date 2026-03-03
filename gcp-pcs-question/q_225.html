@@ -52,14 +52,14 @@
 <h2>Question 225 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Retain Cloud Storage records for 7 years permanently. What to do?
+Audit which users have been granted permissions to any resource within the organization via Google Groups. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Retention policy 7y, monitor alerts.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Retention policy 7y, remove update permissions.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Bucket policy only, bucket lock.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Retention policy 7y, bucket lock.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Retain Cloud Storage records for 7 years permanently. What to do?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,25 @@ Retain Cloud Storage records for 7 years permanently. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Retention Policy + Bucket Lock: Ustawienie polityki retencji (A) to pierwszy krok. Jednak dopóki polityka nie jest 'zablokowana' (Bucket Lock), administrator może ją skrócić lub usunąć. Funkcja 'Lock' sprawia, że polityka staje się niezmienna (immutable), co jest wymogiem prawnym dla danych typu WORM (Write Once, Read Many).
+A. Policy Analyzer: To jedyne narzędzie, które potrafi 'rozwinąć' (expand) grupy. Pokaże Ci, że użytkownik Jan ma dostęp, bo należy do grupy 'Devs', która ma rolę na folderze 'Prod'. To kluczowe dla audytu tożsamości grupowej.
 
 Dlaczego inne są błędne:
-A. Monitor alerts: Poinformuje Cię, że ktoś skasował dane, ale im nie zapobiegnie.
-B. Remove permissions: Zawsze istnieje ktoś z uprawnieniami (np. Owner lub Admin), kto mógłby je przywrócić i skasować dane. Tylko Bucket Lock jest 'silniejszy' od uprawnień ludzkich.
-C. Bucket policy only: To mechanizm IAM (wyłączenie ACL), nie ma związku z czasem przechowywania danych.
+B, C, D: Nie potrafią mapować członków grup na zasoby w skali całej organizacji w jednym raporcie.
 
-Konsensus społeczności ExamTopics: 100% na D. Dla trwałości i niezmienności (Compliance) 'Lock' jest niezbędny.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla A. Audyt grup = Policy Analyzer.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> UWAGA: Raz zablokowanej polityki Bucket Lock nie może usunąć nawet pomoc techniczna Google. Jeśli ustawisz 7 lat przez pomyłkę, będziesz płacić za ten storage przez 7 lat.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na Reddit audytorzy podkreślają: 'Nigdy nie ufaj samej liście użytkowników w IAM'. Większość praw dostępu ukryta jest w grupach. Policy Analyzer (A) to jedyny sposób, by jednym kliknięciem zobaczyć PRAWDZIWY zasięg uprawnień każdego pracownika.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/bucket-lock" target="_blank">https://cloud.google.com/storage/docs/bucket-lock</a></li>
+<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
 
 </ul>
 </div>

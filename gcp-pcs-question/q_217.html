@@ -52,14 +52,14 @@
 <h2>Question 217 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Route all internet traffic from GCP through on-prem internet. Secure, highest bandwidth. What to do?
+Analyze VPC network traffic to detect data exfiltration to an unauthorized Cloud Storage bucket. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> HA VPN.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Routing VM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Interconnect with HA VPN.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Interconnect through on-prem firewall.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery via Log Sink</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Service Controls with VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Trace</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Packet Mirroring</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Route all internet traffic from GCP through on-prem internet. Secure, highest ba
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Route all internet traffic from GCP through on-prem internet. Secure, highest ba
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Cloud Interconnect (Forced Tunneling): Aby uzyskać najwyższą przepustowość, niezbędny jest Cloud Interconnect. Konfiguracja polega na rozgłoszeniu przez BGP trasy domyślnej (0.0.0.0/0) z Twojego routera on-prem do chmury Google. Dzięki temu cały ruch maszyn GCP do internetu zostanie skierowany 'pod prąd' do Twojego centrum danych i przejdzie przez Twój lokalny firewall.
+B. VPC SC + Flow Logs: VPC Service Controls fizycznie blokuje exfiltration. VPC Flow Logs dostarczają Dowodów (logów) na próby takiego działania. Razem tworzą system detekcji i prewencji kopiowania danych poza zaufane granice.
 
 Dlaczego inne są błędne:
-A. HA VPN: Ma ograniczenia przepustowości (ok. 3Gbps na tunel), nie spełnia wymogu 'highest bandwidth' tak dobrze jak Interconnect.
-B. Routing VM: To pojedynczy punkt awarii i wąskie gardło wydajnościowe.
-C. Interconnect + VPN: Szyfrowanie IPsec na VPN dodatkowo obniża wydajność. Jeśli nie potrzebujesz dodatkowego szyfrowania warstwy 3, samo D jest bardziej wydajne.
+A. BigQuery: Narzędzie analityczne, samo nic nie wykryje bez zapytania SQL po fakcie.
+C. Cloud Trace: Dla deweloperów aplikacji.
+D. Packet Mirroring: Zbyt niskopoziomowe (analizuje bity), nie 'rozumie' logicznej granicy bucketów tak dobrze i tanio jak VPC SC (B).
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na D. To klasyczna architektura dla firm z własnymi centrami inspekcji ruchu.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To standardowa architektura ochrony danych w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Takie podejście nazywa się 'Egress Filtering at the Edge'. Pozwala na egzekwowanie tych samych polityk bezpieczeństwa dla pracowników w biurze i dla maszyn w chmurze.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele osób wybiera D. Eksperci wyjaśniają: Packet Mirroring jest świetny do szukania wirusów. Do szukania 'wycieku danych przez API Google' służy VPC Service Controls, bo ono widzi nazwy bucketów i tożsamości, czego sniffer sieciowy (D) nie widzi po zaszyfrowaniu TLS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/overview</a></li>
+<li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/overview</a></li>
 
 </ul>
 </div>

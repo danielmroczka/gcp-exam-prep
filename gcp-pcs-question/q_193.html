@@ -52,13 +52,14 @@
 <h2>Question 193 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Remove PII from driver licenses in GCS older than 12 months. Archive anonymized files. What to do?
+Ensure that all Compute Engine instances in a project are created with a specific Service Account. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> TTL 12 months bucket policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> DLP inspection job to de-identify and archive, delete original.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Autoclass.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: compute.restrictServiceAccounts</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Instance Templates</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Shared VPC</li>
 
 </ul>
 </div>
@@ -78,23 +79,24 @@ Remove PII from driver licenses in GCS older than 12 months. Archive anonymized 
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. DLP De-identify: Pytanie wymaga MODYFIKACJI zawartości plików (usunięcia PII), a nie tylko ich usunięcia czy przeniesienia. Tylko Cloud DLP potrafi 'otworzyć' plik, zamazać dane wrażliwe (de-identify) i zapisać nową wersję dokumentu.
+B. Organization Policy: Polityka `compute.restrictServiceAccounts` pozwala zdefiniować listę 'dozwolonych' kont serwisowych dla danego projektu. Każda próba stworzenia VM z innym kontem (lub z domyślnym kontem Compute Engine) zostanie zablokowana przez platformę.
 
 Dlaczego inne są błędne:
-A. TTL policy: Skasowałoby cały plik po 12 miesiącach, bez tworzenia zanonimizowanego archiwum.
-C. Autoclass: Służy wyłącznie do optymalizacji kosztów poprzez automatyczną zmianę klasy storage (Standard/Nearline), nie dotyczy treści danych.
+A. IAM: Pozwala na nadanie praw, ale nie 'wymusza' użycia konkretnego konta przy tworzeniu zasobu.
+C. Templates: To tylko wzorce, użytkownik może stworzyć VM ręcznie omijając szablon.
+D. Shared VPC: Architektura sieciowa, brak wpływu na tożsamość maszyny.
 
-Konsensus społeczności ExamTopics: 100% na B. DLP to jedyne narzędzie do 'inteligentnej' modyfikacji danych wrażliwych.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Org Policy to jedyny sposób na twarde wymuszenie tożsamości floty.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Ten proces nazywa się 'Data Redaction'. Możesz skonfigurować DLP tak, aby na zdjęciu prawa jazdy zamazał tylko numer PESEL i imię, zostawiając resztę do celów statystycznych.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Największym zagrożeniem w GCP jest używanie 'Default Service Account' (który ma rolę Editor). Na forach inżynierowie security radzą używać polityki B, aby ZMUSIĆ deweloperów do używania dedykowanych kont o niskich uprawnieniach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/inspecting-storage" target="_blank">https://cloud.google.com/dlp/docs/inspecting-storage</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
 
 </ul>
 </div>

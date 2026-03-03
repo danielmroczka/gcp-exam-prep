@@ -52,14 +52,14 @@
 <h2>Question 229 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure DevOps can only create resources in Europe regions for GDPR. What to do?
+What is the primary benefit of using Google Cloud Key Access Justifications (KAJ) with CMEK?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAP with Access Context Manager.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Org policy 'Resource Location Restriction'.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Org policy 'Restrict Resource Service Usage'.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAM custom roles.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate key rotation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide a reason for Google to access your data, which you can then approve or deny.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage IAM roles for KMS.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To protect against DDoS.</li>
 
 </ul>
 </div>
@@ -79,24 +79,22 @@ Ensure DevOps can only create resources in Europe regions for GDPR. What to do?
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Resource Location Restriction: To dedykowana polityka organizacji (`gcp.resourceLocations`), która pozwala na zdefiniowanie listy dozwolonych regionów dla wszystkich zasobów w folderze lub projekcie. Każda próba stworzenia VM, bucketu czy bazy poza EU zostanie odrzucona przez API.
+B. Key Access Justifications (KAJ): To mechanizm suwerenności. Gdy Google potrzebuje użyć Twojego klucza (nawet CMEK), musi podać kod uzasadnienia (np. `CUSTOMER_INITIATED_ACCESS`). Możesz ustawić politykę, która blokuje operację, jeśli uzasadnienie jest niewłaściwe.
 
 Dlaczego inne są błędne:
-A. IAP: Kontroluje logowanie osób, nie ma wpływu na lokalizację fizyczną zasobów chmurowych.
-C. Restrict Service Usage: Pozwala wybrać KTÓRE usługi można włączyć (np. BQ tak, SQL nie), ale nie ogranicza ich lokalizacji.
-D. IAM custom roles: Można by zabrać uprawnienia, ale IAM nie potrafi natywnie filtrować 'gdzie' zasób powstaje (np. nie ma uprawnienia `compute.instances.createInPoland`).
+A, C, D: Nie są to funkcje usługi KAJ.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To standardowe narzędzie dla compliance RODO.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To najwyższy poziom kontroli nad danymi.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Polityka ta jest dziedziczona w dół hierarchii zasobów. Możesz ją ustawić na folderze 'EU-Projects' i mieć pewność, że wszystko w środku zostanie w Europie.</p>
+<p><b>Analiza spornych kwestii (AI):</b> KAJ (B) jest odpowiedzią na wymogi suwerenności danych w UE i Azji. Pozwala on technicznie udowodnić audytorom, że firma ma kontrolę nad tym, KIEDY i DLACZEGO dostawca chmury korzysta z kluczy klienta.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
+<li><a href="https://cloud.google.com/key-access-justifications/docs/overview" target="_blank">https://cloud.google.com/key-access-justifications/docs/overview</a></li>
 
 </ul>
 </div>

@@ -80,22 +80,22 @@ When creating a secure container image, which two items should you incorporate i
 <pre>Odpowiedź: BC.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Single app per container: Zapewnia separację procesów i ułatwia monitorowanie oraz ograniczanie uprawnień.
-C. Remove unnecessary tools: Usunięcie powłok (shells), menedżerów pakietów i edytorów (obrazy 'distroless') drastycznie zmniejsza powierzchnię ataku.
+B. Single app per container: Fundament mikroserwisów i bezpieczeństwa. Ułatwia izolację, ograniczanie zasobów i monitorowanie.
+C. Remove unnecessary tools: Usunięcie shella, menedżerów pakietów czy edytorów (tzw. obrazy distroless) uniemożliwia hakerowi eskalację ataku po udanym przejęciu aplikacji.
 
 Dlaczego inne są błędne:
-A. PID 1: Aplikacja POWINNA działać jako PID 1 (lub przez dedykowany system init jak tini), aby poprawnie obsługiwać sygnały (np. SIGTERM).
-D. Public images: Korzystanie z publicznych obrazów bez weryfikacji jest ryzykowne; lepiej używać zaufanych obrazów bazowych.
-E. Many layers: Warstwy nie ukrywają danych (każda warstwa jest dostępna do odczytu). Sekrety powinny być wstrzykiwane w runtime, a nie w warstwach obrazu.
+A. PID 1: Aplikacja POWINNA być PID 1 (lub używać inita jak `tini`), aby poprawnie obsługiwać sygnały zamknięcia.
+D. Public images: Korzystanie z publicznych, niezweryfikowanych obrazów to ogromne ryzyko (malware, exploity).
+E. Many layers: Warstwy nie ukrywają danych. Każda warstwa jest dostępna dla każdego, kto ma obraz. Dane wrażliwe w warstwie zostają tam na zawsze, nawet jeśli je 'usuniesz' w kolejnej.
 
-Konsensus społeczności ExamTopics: Bardzo wysoka zgodność co do BC jako fundamentalnych zasad higieny kontenerów.</pre>
+Konsensus społeczności ExamTopics: 100% na BC. To fundamenty bezpieczeństwa kontenerów (Docker Best Practices).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BC</b></p>
-<p><b>Głęboka analiza:</b> Minimalizm to podstawa bezpieczeństwa kontenerów. Mniejszy obraz to nie tylko bezpieczeństwo, ale też szybsze skanowanie i szybszy start aplikacji.</p>
+<p><b>Analiza spornych kwestii (AI):</b> W dyskusjach na Reddit podnoszony jest argument, że PID 1 (opcja A) jest skomplikowany. Niektórzy twierdzą, że nie powinno się być PID 1 bez inita. Jednak w kontekście tego pytania, kluczowe są zasady minimalizacji powierzchni ataku (C) i separacji procesów (B), które są niekwestionowanymi standardami security.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/best-practices-for-building-containers" target="_blank">https://cloud.google.com/architecture/best-practices-for-building-containers</a></li>

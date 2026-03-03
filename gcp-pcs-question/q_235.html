@@ -52,14 +52,14 @@
 <h2>Question 235 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Troubleshoot access issue: CMEK in project prj-a region europe-west3, bucket in prj-b region europe-west1. Why access issue?
+What is the primary purpose of the Google Cloud Binary Authorization attestations?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Firewall rule.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud HSM support.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Different projects.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Different regions.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate the build of container images.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide a digital signature that a container image has passed a specific security check.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage Kubernetes namespaces.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To provide a container registry.</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Troubleshoot access issue: CMEK in project prj-a region europe-west3, bucket in 
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,25 @@ Troubleshoot access issue: CMEK in project prj-a region europe-west3, bucket in 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Regional mismatch: W Cloud Storage obowiązuje twarda zasada: klucz CMEK (Cloud KMS) musi znajdować się w tym samym regionie co bucket, który ma nim być szyfrowany. Próba użycia klucza z Frankfurtu (`europe-west3`) do zaszyfrowania bucketu w Belgii (`europe-west1`) zawsze zakończy się błędem.
+B. Attestations (BinAuth): Atestacja to cyfrowy 'stempel' (podpis). Jeśli Twój skaner podatności stwierdzi, że obraz jest czysty, tworzy atestację. BinAuth w klastrze GKE sprawdza ten stempel. Brak stempla = brak wdrożenia.
 
 Dlaczego inne są błędne:
-A. Firewall: Nie ma wpływu na komunikację między wewnętrznymi usługami Google (KMS a GCS).
-B. Cloud HSM: Regiony wspierają HSM tak samo.
-C. Different projects: To nie jest problem. GCS wspiera klucze z innych projektów (tzw. cross-project CMEK), o ile nadano odpowiednie uprawnienia IAM. Główną barierą jest tutaj różnica regionów.
+A, C, D: Jak w pytaniu 205 – to funkcje innych usług.
 
-Konsensus społeczności ExamTopics: 100% na D. Regiony muszą się zgadzać dla GCS CMEK.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Atestacja = Dowód Bezpieczeństwa Obrazu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Wyjątkiem są buckety multi-regionalne (np. `eu`), które wymagają klucza stworzonego również w lokalizacji multi-regionalnej `eu`.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na Reddit dotyczy 'Separation of Duties' w pipeline. Budowanie obrazu robi Cloud Build, skanowanie robi Container Analysis, a Atestację (B) podpisuje kluczem KMS dedykowany 'Attestor'. BinAuth jest tylko strażnikiem sprawdzającym ten podpis.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#restrictions" target="_blank">https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#restrictions</a></li>
+<li><a href="https://cloud.google.com/binary-authorization/docs/key-concepts#attestations" target="_blank">https://cloud.google.com/binary-authorization/docs/key-concepts#attestations</a></li>
 
 </ul>
 </div>

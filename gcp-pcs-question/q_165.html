@@ -52,15 +52,14 @@
 <h2>Question 165 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Best practices for authentication and authorization. Which two?
+Grant a service account permission to write logs to Cloud Logging. Which role is most appropriate?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Google default encryption.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Manually add users.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Basic roles (Owner/Editor).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SSO/SAML integration.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Granular access with predefined roles.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/logging.admin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/logging.writer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/logging.viewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/logging.logWriter</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Best practices for authentication and authorization. Which two?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">DE</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Best practices for authentication and authorization. Which two?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: DE.
+<pre>Odpowiedź: D.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. SSO/SAML integration: Zapewnia spójne i bezpieczne logowanie przy użyciu tożsamości firmowych, centralizację zarządzania kontami i wymuszanie MFA w IdP.
-E. Granular access: Używanie ról predefiniowanych (np. Storage Object Viewer) lub custom zamiast szerokich ról podstawowych realizuje zasadę najniższych uprawnień (Least Privilege).
+D. logging.logWriter: Jest to precyzyjna rola dla maszyn i procesów (kont serwisowych). Daje ona uprawnienie tylko do wysyłania (pisania) logów. Nie pozwala na czytanie cudzych logów ani na ich usuwanie.
 
 Dlaczego inne są błędne:
-A. Encryption: Dotyczy ochrony danych 'at rest', nie dotyczy procesu uwierzytelniania i autoryzacji OSÓB.
-B. Manual users: Rozwiązanie nieskalowalne i niebezpieczne (brak automatycznego deprovisioningu przy odejściu pracownika).
-C. Basic roles: Rola Editor daje uprawnienia do usuwania prawie wszystkiego w projekcie - jest to skrajne naruszenie dobrych praktyk.
+A. Admin: Zdecydowanie za wysokie uprawnienia (może usuwać logi).
+B. Writer: W starych dokumentacjach ta rola istniała, ale `logWriter` (D) jest obecnie obowiązującym i najbardziej trafnym standardem dla SA.
+C. Viewer: Pozwala tylko czytać, nie pisać.
 
-Konsensus społeczności ExamTopics: 100% na DE. To fundamenty IAM w każdej chmurze.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla D. Zawsze szukaj najbardziej specyficznej roli dla zadania.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: DE</b></p>
-<p><b>Głęboka analiza:</b> Google dąży do całkowitego wycofania ról podstawowych (Owner/Editor/Viewer) na rzecz ról granularnych w systemach produkcyjnych.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> To klasyczny przykład pułapki 'nomenklaturowej'. Wiele osób wybiera 'Writer' (B), ale poprawna nazwa roli technicznej w IAM to `logging.logWriter`. Egzamin sprawdza Twoją dokładność w nazwach ról.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/best-practices" target="_blank">https://cloud.google.com/iam/docs/best-practices</a></li>
+<li><a href="https://cloud.google.com/logging/docs/access-control#roles" target="_blank">https://cloud.google.com/logging/docs/access-control#roles</a></li>
 
 </ul>
 </div>

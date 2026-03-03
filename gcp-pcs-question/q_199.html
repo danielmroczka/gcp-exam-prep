@@ -52,14 +52,14 @@
 <h2>Question 199 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Analyze logs for possible intrusions in IAP protected apps. Which logs?
+Identify which Google Cloud service accounts have been granted the 'Editor' role at the organization level. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Data Access audit logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Denied audit logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Identity user log events.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Admin Activity audit logs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Analyze logs for possible intrusions in IAP protected apps. Which logs?
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Data Access audit logs: Identity-Aware Proxy zapisuje każde żądanie (zarówno udane, jak i zablokowane) do dziennika logów audytowych typu 'Data Access'. Zawierają one informację o tożsamości użytkownika, adresie IP źródłowym i wyniku autoryzacji, co jest kluczowe do wykrywania prób włamań (np. powtarzające się błędy 403 z nietypowego IP).
+A. Policy Analyzer: Pozwala na stworzenie zapytania: 'Pokaż wszystkich członków typu Service Account, którzy mają przypisaną rolę Editor na poziomie Organizacji'. Jest to najszybszy sposób na wykrycie krytycznych nadużyć uprawnień w całej firmie.
 
 Dlaczego inne są błędne:
-B. Policy Denied logs: Nie jest to standardowa nazwa dziennika logów w GCP. Blokady IAP trafiają do Data Access logs.
-C. Cloud Identity logs: Rejestrują zdarzenia logowania do samego konta Google (np. zmiana hasła), ale nie szczegółowe żądania HTTP do konkretnych aplikacji chronionych przez IAP.
-D. Admin Activity: Rejestrują tylko zmiany w KONFIGURACJI IAP (np. kto wyłączył IAP), a nie ruch użytkowników przez to proxy.
+B. Policy Troubleshooter: Tylko dla pojedynczych przypadków 'nie działa'.
+C. IAM Recommender: Podpowie Ci, że te konta nie używają wszystkich praw, ale nie zrobi inwentaryzacji 'wszystkich Editorów'.
+D. Audit Logs: Musiałbyś przeszukać logi z całego roku, aby znaleźć momenty nadań.
 
-Konsensus społeczności ExamTopics: 100% na A. Zrozumienie gdzie trafiają logi runtime IAP jest niezbędne.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To klasyczny przypadek użycia 'Compliance Audit'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Logi te muszą być ręcznie włączone w ustawieniach 'Audit Logs' dla usługi 'Identity-Aware Proxy API' w konsoli IAM.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Na forach podkreśla się, że rola Editor na poziomie organizacji to 'bomba z opóźnionym zapłonem'. Każdy proces z takim kontem może skasować całą sieć firmową. Policy Analyzer (A) jest niezbędny do regularnego 'sprzątania' takich uprawnień.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap/docs/audit-logging" target="_blank">https://cloud.google.com/iap/docs/audit-logging</a></li>
+<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
 
 </ul>
 </div>

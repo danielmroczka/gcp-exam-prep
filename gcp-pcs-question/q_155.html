@@ -52,14 +52,14 @@
 <h2>Question 155 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure Cloud Storage buckets cannot have data publicly available across the organization. Enforce proactively. What to do?
+Identify unused firewall rules to reduce the attack surface. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Remove Owner roles, use DLP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Remove Owner roles, enforce domain restricted sharing.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Configure uniform bucket-level access, enforce domain restricted sharing org policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Remove *.setIamPolicy, enforce domain restricted sharing.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Firewall Insights</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Audit Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Security Command Center Standard</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Ensure Cloud Storage buckets cannot have data publicly available across the orga
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Ensure Cloud Storage buckets cannot have data publicly available across the orga
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. UBLA + Domain Restricted Sharing: Uniform Bucket-Level Access (UBLA) wyłącza system ACL, przenosząc całą kontrolę do IAM (łatwiejszy audyt). Polityka organizacji `iam.allowedPolicyMemberDomains` (Domain Restricted Sharing) uniemożliwia nadawanie ról IAM komukolwiek spoza Twojej organizacji (np. `allUsers` lub `allAuthenticatedUsers`). To połączenie proaktywnie blokuje próby upublicznienia danych.
+A. Firewall Insights: To narzędzie analityczne, które monitoruje użycie reguł firewalla w czasie rzeczywistym. Potrafi ono wskazać reguły, przez które nie przeszedł żaden pakiet przez ostatnie 30 dni, co pozwala na ich bezpieczne usunięcie.
 
 Dlaczego inne są błędne:
-A. DLP: Wykrywa dane wrażliwe, ale nie zapobiega technicznie upublicznieniu całego bucketu.
-B. Remove Owner: Ownerzy są problemem, ale usunięcie roli nie zablokuje uprawnień `storage.buckets.setIamPolicy`, które mogą posiadać inne role.
-D. setIamPolicy: Odebranie tego uprawnienia deweloperom uniemożliwi im pracę, a polityka 'Domain Restricted Sharing' i tak musi być włączona, aby zadziałać prewencyjnie dla wszystkich.
+B. Flow Logs: Pokazują co przeszło, ale nie analizują automatycznie 'czego brakuje' w odniesieniu do bazy reguł.
+C. Audit Logs: Pokazują kto stworzył regułę, nie czy jest ona używana przez ruch sieciowy.
+D. SCC Standard: Nie posiada tak zaawansowanej analityki sieciowej jak dedykowany moduł Firewall Insights.
 
-Konsensus społeczności ExamTopics: 100% na C. To najsilniejsza kombinacja dla ochrony danych w GCS.</pre>
+Konsensus społeczności ExamTopics: 100% na A. To jedyne narzędzie do higieny firewalli.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Pamiętaj, że polityka organizations jest silniejsza niż uprawnienia administratora projektu. Nawet Owner projektu nie będzie mógł udostępnić bucketu światu, jeśli polityka domeny mu na to zabrania.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci przypominają: nieużywana reguła 'Allow' to potencjalna 'dziura' czekająca na wykorzystanie przez hakera po zmianie konfiguracji innej maszyny. Firewall Insights (A) to fundament procesu 'Rule Pruning' w dużych organizacjach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/org-policy-constraints#domain-restricted-sharing" target="_blank">https://cloud.google.com/storage/docs/org-policy-constraints#domain-restricted-sharing</a></li>
+<li><a href="https://cloud.google.com/firewall-insights/docs/overview" target="_blank">https://cloud.google.com/firewall-insights/docs/overview</a></li>
 
 </ul>
 </div>

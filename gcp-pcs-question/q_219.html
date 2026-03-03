@@ -52,15 +52,14 @@
 <h2>Question 219 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Regulatory warehouse (BQ, SQL, GCS): lifecycle management for keys, separate provider from data, visibility into requests. Which two?
+Audit which users have been granted permissions to any resource within a specific project, including inherited ones. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CMEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CSEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Key Access Justifications.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Access Transparency and Approval.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Cloud EKM.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Regulatory warehouse (BQ, SQL, GCS): lifecycle management for keys, separate pro
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">CE</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,25 @@ Regulatory warehouse (BQ, SQL, GCS): lifecycle management for keys, separate pro
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: CE.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-E. Cloud EKM: Pozwala na trzymanie kluczy u zewnętrznego dostawcy (Separate provider), zapewniając pełną kontrolę nad ich cyklem życia (Lifecycle management).
-C. Key Access Justifications (KAJ): Zapewnia widoczność (Visibility) każdego żądania użycia klucza przez Google, zmuszając system do podania powodu i dając Ci prawo do automatycznej blokady takich żądań.
+A. Policy Analyzer: Pozwala wygenerować raport 'kto ma dostęp do projektu X i dlaczego'. Uwzględnia dziedziczenie z góry (organizacja/foldery), co jest niezbędne dla rzetelnego audytu.
 
 Dlaczego inne są błędne:
-A. CMEK: Klucze rezydują w chmurze Google, nie ma separacji dostawcy (klucze i dane są u jednego dostawcy - Google).
-B. CSEK: Posiada bardzo słabe wsparcie dla BigQuery i SQL (wymóg 'warehouse').
-D. Access Transparency: Loguje dostęp do ZASOBÓW, ale KAJ (C) jest bardziej specyficzny dla kontroli nad KLUCZAMI szyfrującymi, co jest fundamentem suwerenności w tym pytaniu.
+B, C, D: Jak w poprzednich Analogicznych pytaniach (194, 208, 213).
 
-Konsensus społeczności ExamTopics: 100% poparcia dla CE. To duet usług dla 'Sovereign Cloud'.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla A. Jedno narzędzie do wszystkich raportów 'Who has access'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: CE</b></p>
-<p><b>Głęboka analiza:</b> EKM + KAJ to najwyższy dostępny poziom kontroli nad danymi w chmurze publicznej, spełniający wymogi dla najbardziej wrażliwych sektorów (np. szwajcarska bankowość).</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Pytanie to podkreśla znaczenie 'inherited permissions'. W GCP większość uprawnień pochodzi 'z góry'. Zwykłe sprawdzenie zakładki IAM w projekcie nie pokaże Ci administratorów organizacji, którzy mają pełny dostęp. Tylko Policy Analyzer (A) to pokaże.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>
+<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
 
 </ul>
 </div>

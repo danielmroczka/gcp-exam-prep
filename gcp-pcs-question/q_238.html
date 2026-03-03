@@ -52,14 +52,14 @@
 <h2>Question 238 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect against person-in-the-middle attacks from fake login page. Which security measure?
+Ensure that all Cloud SQL instances are created with 'Public IP' disabled across the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Security key</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google prompt</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Text message or phone call code</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google Authenticator application</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: sql.restrictPublicIp</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud SQL configuration settings</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Protect against person-in-the-middle attacks from fake login page. Which securit
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,25 +76,27 @@ Protect against person-in-the-middle attacks from fake login page. Which securit
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Security Key (FIDO2): Jak wspomniano wcześniej, fizyczne klucze Titan/Yubikey weryfikują autentyczność domeny serwera. Jeśli haker podstawi fałszywą stronę (MITM), klucz rozpozna, że domena nie pasuje i nie wyda tokena autoryzacyjnego.
+B. Organization Policy: Polityka `sql.restrictPublicIp` pozwala na centralne zablokowanie możliwości przypisywania publicznych adresów IP do baz danych Cloud SQL. Gwarantuje to, że bazy będą dostępne tylko przez sieć wewnętrzną (Private IP/PSC).
 
 Dlaczego inne są błędne:
-B, C, D: Wszystkie te metody wymagają 'zatwierdzenia' przez użytkownika. Haker może stworzyć stronę, która prosi o kod SMS/Authenticatora i natychmiast przekazuje go do prawdziwego Google (Proxy Phishing). Użytkownik nie ma jak technicznie sprawdzić autentyczności strony tak jak robi to klucz USB/NFC.
+A. IAM: Nie wymusza cech technicznych bazy.
+C. SQL Settings: To ustawienie dla pojedynczej bazy, nie 'across organization'.
+D. VPC Service Controls: Chroni API SQL, ale nie zapobiega samemu posiadaniu Public IP przez instancję bazy.
 
-Konsensus społeczności ExamTopics: 100% na A. To jedyny systemowy mechanizm odporny na Proxy Phishing.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To standardowy 'Security Guardrail' w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Protokół FIDO2 używa kryptografii asymetrycznej powiązanej z konkretnym adresem URL, co czyni przejęcie sesji technicznie niemożliwym bez fizycznego dostępu do urządzenia.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> To jedna z najważniejszych polityk w firmie. Publiczne IP na bazie danych to 'prośba o kłopoty'. Eksperci na Reddit radzą: 'Włącz B na poziomie organizacji pierwszego dnia migracji do chmury'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/9122284" target="_blank">https://support.google.com/a/answer/9122284</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#sql" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#sql</a></li>
 
 </ul>
 </div>

@@ -52,14 +52,14 @@
 <h2>Question 248 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Suspicious login attempt to impersonate privileged SA from unknown IP. Investigate effectively. What to do?
+Grant a user access to manage and view all VPC flow logs for a specific folder. Where should you apply the IAM role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable audit logs for resources.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Review audit logs for time period.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Vulnerability scan.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Event Threat Detection in SCC + cross-reference with audit logs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Organization level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Folder level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Project level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Resource level</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Suspicious login attempt to impersonate privileged SA from unknown IP. Investiga
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Suspicious login attempt to impersonate privileged SA from unknown IP. Investiga
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. SCC Event Threat Detection: Jest to usługa, która automatycznie 'czyta' logi za Ciebie i szuka w nich anomalii (np. `impersonation_anomalous_principal`). Dostarcza gotowy alert. Połączenie tego z ręcznym przeszukaniem Audit Logs (cross-reference) pozwala na szybkie i skuteczne dochodzenie incydentu.
+B. Folder level: Jeśli chcesz, aby administrator logów widział ruch we wszystkich projektach danego działu (np. 'Europe-Apps'), nadaj rolę `logging.admin` na poziomie ich wspólnego foldera. Dzięki dziedziczeniu, użytkownik zyska dostęp do logów we wszystkich obecnych i przyszłych projektach wewnątrz tego foldera.
 
 Dlaczego inne są błędne:
-A. Enable logs: To krok, który powinien być zrobiony dawno temu. Samo włączenie logów TERAZ nie pomoże w badaniu ataku z przeszłości.
-B. Review logs: Można to robić ręcznie, ale przy tysiącach wpisów bez automatycznej detekcji (ETD) bardzo łatwo przeoczyć subtelny atak impersonacji. Opcja D jest bardziej 'efektywna' (effective).
-C. Vulnerability scan: Szuka dziur w kodzie/systemie, nie służy do badania incydentów związanych ze skradzionymi tożsamościami.
+A. Organization level: Zbyt szeroki zakres.
+C. Project level: Musiałbyś nadawać uprawnienia osobno dla każdego projektu, co jest nieefektywne.
+D. Resource level: Nie dotyczy zarządzania usługą logowania.
 
-Konsensus społeczności ExamTopics: 100% na D. SCC ETD to Twój pierwszy detektyw w chmurze.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Skalowalne zarządzanie uprawnieniami per dział/zespół.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Event Threat Detection posiada gotowe reguły na wykrywanie wycieków kluczy i nietypowych zachowań kont serwisowych, co oszczędza setki godzin pracy analityka SOC.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Pamiętaj: w GCP hierarchia zasobów (Org -> Foldery -> Projekty) to fundament bezpieczeństwa w skali Enterprise. Nadanie uprawnień na poziomie foldera (B) to 'złoty środek' między centralizacją a zbyt szerokimi dostępami.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/access-control-folders" target="_blank">https://cloud.google.com/resource-manager/docs/access-control-folders</a></li>
 
 </ul>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 207 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-VMs without public IPs failing build pipeline (Packer) needing internet access for packages. Which two?
+A company wants to ensure that all their GKE clusters are created with 'Alias IP' enabled for better network security. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> HTTP LB.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud NAT instance.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Private Google Access.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Update VPC routes.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Cloud VPN tunnel.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: compute.restrictVpcPeering</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> GKE cluster configuration settings</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy constraint: gcp.resourceLocations</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ VMs without public IPs failing build pipeline (Packer) needing internet access f
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">BC</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,26 @@ VMs without public IPs failing build pipeline (Packer) needing internet access f
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: BC.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud NAT: Pozwala maszynom bez publicznych IP na wychodzenie do internetu w celu pobrania pakietów (np. `apt-get install`). Jest to niezbędne dla narzędzi typu Packer budujących obrazy.
-C. Private Google Access: Pozwala maszynom na komunikację z API Google (np. Cloud Storage, skąd Packer może pobierać skrypty lub wysyłać gotowy obraz) bez wychodzenia przez publiczny internet.
+C. Cluster configuration: Alias IP to ustawienie sieciowe klastra GKE, które musi zostać włączone podczas jego tworzenia. Zapewnia ono, że pody mają adresy IP z zakresów podsieci VPC, co ułatwia zarządzanie firewallem i poprawia bezpieczeństwo komunikacji.
 
 Dlaczego inne są błędne:
-A. HTTP LB: Służy do ruchu przychodzącego od użytkowników, nie pomaga VM w wychodzeniu po pakiety.
-D. Update routes: Same trasy nie wystarczą bez urządzenia wykonującego translację adresów (NAT).
-E. Cloud VPN: Łączy z inną siecią prywatną, nie daje dostępu do publicznych repozytoriów pakietów w internecie.
+A. IAM: Nie wymusza specyficznych opcji konfiguracyjnych sieci.
+B, D: To polityki organizacji, ale nie istnieje (w standardowym zestawie) polityka o nazwie 'must use Alias IP'. To ustawienie kontroluje się na poziomie szablonów wdrożeniowych lub instrukcji operacyjnych (C).
 
-Konsensus społeczności ExamTopics: 100% na BC. To standardowy zestaw dla izolowanych środowisk budowania.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To techniczny parametr GKE.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: BC</b></p>
-<p><b>Głęboka analiza:</b> Cloud NAT zapewnia, że adresy prywatne Twoich maszyn budujących nie są widoczne w internecie, co zwiększa bezpieczeństwo procesu CI/CD.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Alias IP jest obecnie domyślnie włączony w GKE Autopilot i nowoczesnych klastrach VPC-native. Debata w sieci dotyczy migracji ze starych klastrów 'routes-based'. Eksperci zaznaczają, że Alias IP jest kluczowy dla integracji z VPC Service Controls.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/nat/docs/overview" target="_blank">https://cloud.google.com/nat/docs/overview</a></li>
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips</a></li>
 
 </ul>
 </div>

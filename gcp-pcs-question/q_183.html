@@ -52,14 +52,14 @@
 <h2>Question 183 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Clinical trials in BigQuery. Obfuscate start/end dates for each row but preserve interval data. Bias prevention. What to do?
+You need to classify and redact sensitive information in images stored in a Cloud Storage bucket. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Date shifting with context set to unique ID of subject.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Extract date with TimePartConfig.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Bucketing.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> FFX mode of FPE.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Vision API</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud DLP API</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> AutoML Vision</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Video Intelligence API</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Clinical trials in BigQuery. Obfuscate start/end dates for each row but preserve
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Clinical trials in BigQuery. Obfuscate start/end dates for each row but preserve
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Date shifting: Technika ta w Cloud DLP polega na przesunięciu daty o losową liczbę dni. Używając 'context' (np. ID pacjenta), DLP zapewnia, że wszystkie daty dla danej osoby zostaną przesunięte o Tyle Samo Dni. Dzięki temu interwał między 'start' a 'end' pozostaje identyczny jak w oryginale, co pozwala na analitykę medyczną przy jednoczesnym ukryciu rzeczywistych dat.
+B. Cloud DLP API: Posiada dedykowaną funkcję `image.redact`. Potrafi ona wykryć tekst na obrazku (np. numer karty na zrzucie ekranu) przy użyciu wbudowanego OCR, a następnie nałożyć czarny prostokąt na to miejsce (redaction).
 
 Dlaczego inne są błędne:
-B. TimePartConfig: Wyodrębnia tylko część daty (np. rok), co niszczy precyzję interwału (dni).
-C. Bucketing: Grupuje daty w przedziały (np. 'Styczeń 2023'), co również uniemożliwia dokładne obliczenie liczby dni trwania leczenia.
-D. FPE: Szyfruje dane, ale nie zachowuje logicznych relacji czasowych (interwałów) w taki sposób jak natywna funkcja 'Date shifting'.
+A. Vision API: Wykryje tekst (OCR), ale nie posiada gotowej funkcji Automatycznego Zamazywania danych wrażliwych (redaction). Musiałbyś pisać własny kod. DLP robi to 'z pudełka'.
+C. AutoML: Służy do trenowania własnych modeli rozpoznawania obiektów, nie do ochrony PII.
+D. Video Intelligence: Do analizy wideo, nie statycznych obrazów w storage.
 
-Konsensus społeczności ExamTopics: 100% na A. To podręcznikowy przykład użycia 'deterministic date shifting'.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Redakcja PII to domena DLP API.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Ta technika jest kluczowa dla HIPAA i RODO w analityce medycznej. Pozwala na naukowe badanie czasu trwania chorób bez ryzyka identyfikacji pacjenta po konkretnym dniu wizyty w szpitalu.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na Reddit dotyczy precyzji. DLP API używa zaawansowanych algorytmów, aby nie zamazować całego obrazka, a jedynie konkretne pole (np. tylko PESEL na dowodzie osobistym), co zachowuje użyteczność reszty dokumentu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/dlp/docs/transformations-reference#date-shifting" target="_blank">https://cloud.google.com/dlp/docs/transformations-reference#date-shifting</a></li>
+<li><a href="https://cloud.google.com/dlp/docs/redacting-sensitive-data-images" target="_blank">https://cloud.google.com/dlp/docs/redacting-sensitive-data-images</a></li>
 
 </ul>
 </div>

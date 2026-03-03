@@ -52,14 +52,14 @@
 <h2>Question 189 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Spikes in traffic from multiple IPs. Unknown if malicious. Limit traffic per client over specified interval to maintain availability.
+Protect your web application from botnets and scrapers using advanced behavioral analysis. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Throttle action in Cloud Armor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> rate_based_ban in Cloud Armor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC firewall throttle.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Deny action in Cloud Armor.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor Premium</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Firewall</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud IAP</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud DNS</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Spikes in traffic from multiple IPs. Unknown if malicious. Limit traffic per cli
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Throttle action: Funkcja Rate Limiting w Cloud Armor pozwala na zdefiniowanie akcji 'throttle'. Polega ona na tym, że nadmiarowe żądania od danego klienta są odrzucane (np. błąd 429), ale użytkownik nie jest całkowicie blokowany. Pozwala to na 'przycięcie' skoków ruchu przy jednoczesnym zachowaniu dostępności dla legalnych żądań po ustąpieniu piku.
+A. Cloud Armor Premium: Dopiero wersja Premium (Managed Protection) oferuje integrację z reCAPTCHA Enterprise i zaawansowane reguły 'Bot Management'. Pozwala to na wykrywanie botów nie po adresie IP, a po ich zachowaniu (behawiorze), co jest skuteczne przeciwko botnetom.
 
 Dlaczego inne są błędne:
-B. rate_based_ban: Całkowicie blokuje IP na określony czas po przekroczeniu limitu. To zbyt agresywne, jeśli nie mamy pewności, czy ruch jest złośliwy (malicious).
-C. VPC firewall: Nie posiada funkcji 'throttle' ani 'rate limiting' na poziomie aplikacji/sesji HTTP.
-D. Deny action: Natychmiast odrzuca ruch, nie oferuje mechanizmu 'limitowania' w czasie.
+B. Firewall: Blokuje IP, botnety mają tysiące IP - firewall jest bezużyteczny.
+C. IAP: Chroni przed ludźmi bez konta, boty mogą próbować kraść sesje lub atakować formularze.
+D. DNS: Nie ma funkcji analizy behawioralnej ruchu.
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. Throttle to idealne narzędzie do walki z niepewnym przeciążeniem.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Bot Management to funkcja Premium Cloud Armor.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Cloud Armor Rate Limiting może identyfikować klientów nie tylko po IP, ale też po ciasteczkach (cookies) lub nagłówkach HTTP, co zapobiega karaniu wielu osób za jednym adresem NAT.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele firm uważa, że darmowy Cloud Armor wystarczy. Analiza incydentów pokazuje jednak, że nowoczesne boty (scrapers) potrafią emulować ruch ludzki. Tylko analiza behawioralna i Threat Intelligence z wersji Premium (A) są w stanie je odróżnić.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/armor/docs/rate-limiting-overview" target="_blank">https://cloud.google.com/armor/docs/rate-limiting-overview</a></li>
+<li><a href="https://cloud.google.com/armor/docs/managed-protection-overview#bot-management" target="_blank">https://cloud.google.com/armor/docs/managed-protection-overview#bot-management</a></li>
 
 </ul>
 </div>

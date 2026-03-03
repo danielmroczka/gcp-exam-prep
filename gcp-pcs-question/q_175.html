@@ -52,15 +52,14 @@
 <h2>Question 175 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-End-to-end encryption (transit, use, rest) within Google Cloud. Which two?
+You need to ensure that only authorized employees can access a corporate web application from any location, including home. Which architecture?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> EKM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CSEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> HSM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Confidential Computing and Istio.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Client-side encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPN for everyone.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Identity-Aware Proxy (IAP).</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Shared VPC with firewalls.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Armor IP whitelisting.</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ End-to-end encryption (transit, use, rest) within Google Cloud. Which two?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">DE</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,26 +76,27 @@ End-to-end encryption (transit, use, rest) within Google Cloud. Which two?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: DE.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Confidential Computing + Istio: Confidential Computing szyfruje dane 'in use' (w RAM). Istio (Service Mesh) szyfruje dane 'in transit' między mikroserwisami za pomocą mTLS. Razem z domyślnym szyfrowaniem 'at rest' tworzy to pełny łańcuch ochrony.
-E. Client-side encryption: To najbardziej radykalna forma E2E. Szyfrujesz dane u siebie, wysyłasz szyfrogram i deszyfrujesz go u odbiorcy. Google nigdy nie widzi danych jawnych w żadnym stanie.
+B. IAP: Pozwala na bezpieczny dostęp do aplikacji webowej przez publiczny internet bez VPN. IAP weryfikuje tożsamość użytkownika przez Google Cloud Identity. To idealne rozwiązanie dla pracy zdalnej (any location).
 
 Dlaczego inne są błędne:
-A, B, C: To metody zarządzania kluczami dla danych 'at rest'. Nie rozwiązują one problemu szyfrowania danych w trakcie obliczeń (in use) ani automatycznie w locie między usługami (in transit).
+A. VPN: Działa, ale jest uciążliwy dla użytkowników i generuje narzut administracyjny (zarządzanie klientami VPN na komputerach). IAP jest prostszy i bardziej nowoczesny.
+C. Shared VPC: To tylko sieć, nie rozwiązuje problemu autoryzacji osób z domów.
+D. Cloud Armor: IP pracowników domowych są dynamiczne, więc whitelisting (biała lista) IP nie zadziała.
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na DE. To kompletny stos technologiczny ochrony danych w każdym stanie.</pre>
+Konsensus społeczności ExamTopics: 100% na B. IAP to król dostępu zdalnego w modelu Zero Trust.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: DE</b></p>
-<p><b>Głęboka analiza:</b> Większość usług chmurowych deszyfruje dane w pamięci RAM, aby móc na nich operować. Confidential Computing (TEE) to przełom pozwalający na pracę na danych bez ich deszyfrowania w niebezpiecznych warstwach systemu.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie na Reddit podkreślają: 'IAP to koniec ery haseł przesyłanych przez VPN'. Z IAP użytkownik po prostu klika w link, loguje się swoim kontem firmowym (z 2FA) i pracuje. To znacznie bezpieczniejsze i wygodniejsze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/confidential-computing" target="_blank">https://cloud.google.com/confidential-computing</a></li>
+<li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>
 
 </ul>
 </div>

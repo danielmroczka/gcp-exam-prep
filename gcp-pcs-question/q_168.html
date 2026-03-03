@@ -52,14 +52,14 @@
 <h2>Question 168 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Defense-in-depth for GCS in Project A (readable from B only, no outside access, no copy to external bucket). What to do?
+Protect a web application from 'Zero-day' vulnerabilities in the application code. Which service is best for virtual patching?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Domain restricted sharing, UBLA.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Service Controls with A and B in perimeter.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Private Access and firewall rules.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Peering.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud IDS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Identity-Aware Proxy</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Defense-in-depth for GCS in Project A (readable from B only, no outside access, 
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. VPC Service Controls (Perimeter): To 'opcja atomowa' bezpieczeństwa danych. Stworzenie perymetru obejmującego projekty A i B sprawia, że dane mogą krążyć między nimi, ale nie mogą zostać wyprowadzone (skopiowane) do żadnego projektu poza perymetrem, nawet przez osobę z uprawnieniami administratora. Spełnia to wymóg 'no copy to external bucket'.
+B. Cloud Armor: Poprzez swoje reguły WAF, Cloud Armor umożliwia tzw. 'Virtual Patching'. Jeśli zostanie odkryta nowa podatność (Zero-day), możesz włączyć odpowiednią regułę na brzegu sieci, która zablokuje próby jej wykorzystania, ZANIM programiści zdążą poprawić kod aplikacji.
 
 Dlaczego inne są błędne:
-A. Domain restricted: Chroni przed udostępnianiem osobom trzecim, ale nie chroni przed kopiowaniem danych przez Twoich pracowników do ich własnych projektów w chmurze.
-C. Private Access: Pozwala na dostęp bez internetu, ale nie nakłada żadnych restrykcji na logiczne granice kopiowania danych.
-D. VPC Peering: To technologia sieciowa, nie ma wpływu na bezpieczeństwo usług API Cloud Storage.
+A. VPC Firewall: Nie ma pojęcia o lukach w kodzie aplikacyjnym (SQLi, XSS).
+C. Cloud IDS: Wykryje atak (log), ale go nie zablokuje w czasie rzeczywistym tak skutecznie jak WAF.
+D. IAP: Chroni przed wejściem osób nieuprawnionych, ale nie chroni przed atakiem na kod ze strony zalogowanego (ale złośliwego) użytkownika.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. VPC SC to jedyna ochrona przed 'Data Exfiltration'.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Virtual patching to termin nierozerwalnie związany z WAF.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> VPC SC chroni przed zagrożeniem 'Inside Threat'. Nawet jeśli pracownik chce ukraść bazę klientów i skopiować ją do swojego prywatnego bucketu, operacja ta zostanie zablokowana przez perymetr.</p>
+<p><b>Analiza spornych kwestii (AI):</b> W dyskusjach o Log4j eksperci pokazywali, jak Cloud Armor uratował tysiące firm. Google wydało gotową regułę WAF w ciągu kilku godzin, dając klientom czas na spokojne patchowanie serwerów przez kolejne dni.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/overview</a></li>
+<li><a href="https://cloud.google.com/armor/docs/security-policy-concepts#preconfigured-rules" target="_blank">https://cloud.google.com/armor/docs/security-policy-concepts#preconfigured-rules</a></li>
 
 </ul>
 </div>

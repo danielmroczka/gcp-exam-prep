@@ -52,14 +52,14 @@
 <h2>Question 246 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure containers with vulnerabilities above CVSS 'medium' are not deployed to production. GKE/Cloud Run. What to do?
+What is the primary benefit of using Google Cloud Certificate Manager?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Manual rebuild.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Post-build manual checks.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Binary Authorization + policy threshold.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Artifact Registry permissions block.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate the build of container images.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide a centralized way to manage and deploy SSL/TLS certificates for Google Cloud Load Balancers.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage Kubernetes namespaces.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To provide a container registry.</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Ensure containers with vulnerabilities above CVSS 'medium' are not deployed to p
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,25 @@ Ensure containers with vulnerabilities above CVSS 'medium' are not deployed to p
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Binary Authorization: Usługa ta potrafi automatycznie sprawdzać wyniki skanowania z Artifact Analysis. Możesz skonfigurować politykę, która blokuje uruchomienie kontenera, jeśli skaner znalazł jakąkolwiek podatność powyżej zadanego progu (threshold), np. High lub Critical.
+B. Certificate Manager: To centralny punkt kontroli nad certyfikatami SSL/TLS. Pozwala na automatyczne wystawianie, odnawianie (przez Let's Encrypt lub Google CA) i wdrażanie certyfikatów na Load Balancerach bez manualnej pracy administratora przy każdej domenie.
 
 Dlaczego inne są błędne:
-A, B: Rozwiązania manualne, nieskalowalne i nie dające technicznej gwarancji blokady na poziomie platformy (runtime).
-D. Artifact Registry: Pozwala przechowywać obrazy, ale nie potrafi ZABLOKOWAĆ ich uruchomienia w klastrze GKE na podstawie treści (vulnerabilities).
+A, C, D: To funkcje innych usług.
 
-Konsensus społeczności ExamTopics: 100% na C. Binary Authorization to jedyny strażnik wdrożeń kontenerowych.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Zarządzanie SSL = Certificate Manager.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Taka polityka nazywa się 'Vulnerability check' wewnątrz reguły Binary Authorization. Chroni ona przed wdrożeniem obrazu, który był bezpieczny wczoraj, ale dzisiaj wykryto w nim nową krytyczną lukę.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> W dyskusjach o Certificate Managerze podkreśla się wsparcie dla 'Wildcard certificates' i certyfikatów 'Publicly trusted'. Eksperci zauważają, że automatyzacja odnawiania certyfikatów (B) eliminuje jedną z najczęstszych przyczyn awarii systemów IT – wygaśnięcie certyfikatu SSL.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization/docs/vulnerability-checks" target="_blank">https://cloud.google.com/binary-authorization/docs/vulnerability-checks</a></li>
+<li><a href="https://cloud.google.com/certificate-manager/docs/overview" target="_blank">https://cloud.google.com/certificate-manager/docs/overview</a></li>
 
 </ul>
 </div>

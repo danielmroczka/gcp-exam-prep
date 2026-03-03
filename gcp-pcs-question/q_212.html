@@ -52,14 +52,14 @@
 <h2>Question 212 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Sync users with GCDS. Managed users already created personal accounts with corporate email. What to do?
+Ensure that all data in a project is encrypted using Customer-Managed Encryption Keys (CMEK) by default. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> GCDS search rules.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Transfer tool for unmanaged users.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Custom script Admin SDK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> GCDS exclusion rules.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: storage.restrictDatasetEncryption</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Policy constraint: gcp.restrictCmekCryptoKeyProjects</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy constraint: gcp.restrictNonCmekServices</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Sync users with GCDS. Managed users already created personal accounts with corpo
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,25 @@ Sync users with GCDS. Managed users already created personal accounts with corpo
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Transfer Tool: Identycznie jak w pytaniu 170. To jedyne narzędzie do rozwiązywania konfliktów ('Conflicting Accounts') i masowego zapraszania użytkowników do przejścia pod zarząd firmy.
+C. Organization Policy (CMEK restriction): Istnieje zestaw polityk organizacji (np. `gcp.restrictCmekCryptoKeyProjects`), który pozwala wymusić użycie CMEK dla wszystkich wspieranych usług w projekcie. To 'wymusza' na użytkownikach podanie klucza KMS przy tworzeniu dysków, bucketów czy baz danych.
 
 Dlaczego inne są błędne:
-A, D: GCDS tylko wykrywa problem, nie potrafi 'zmusić' istniejącego konta osobistego do zmiany statusu.
-C. Custom script: Jest niepotrzebny i trudny w realizacji ze względu na ograniczenia prywatności kont osobistych (nie masz do nich dostępu przez SDK, dopóki nie zostaną przeniesione).
-
-Konsensus społeczności ExamTopics: 100% na B. To standardowa procedura 'Domain Clean-up'.</pre>
+A. IAM: Nie wymusza technologii szyfrowania.
+B. restrictDatasetEncryption: Ogranicza się tylko do BigQuery.
+D. restrictNonCmekServices: Brzmi podobnie, ale to polityka C jest standardowym mechanizmem kontroli 'kluczy zaufanych projektów' w Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Jeśli użytkownik nie zaakceptuje transferu, po utworzeniu konta zarządzanego jego stare konto osobiste zostanie przemianowane na `użytkownik%domena.com@gtempaccount.com`.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na Reddit podkreślają, że samo 'wymuszenie CMEK' to połowa sukcesu. Musisz też wskazać, z których projektów KMS te klucze mogą pochodzić (C), aby uniemożliwić deweloperom używanie kluczy z ich prywatnych, niekontrolowanych projektów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/7062710" target="_blank">https://support.google.com/cloudidentity/answer/7062710</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#cmek" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#cmek</a></li>
 
 </ul>
 </div>

@@ -52,15 +52,14 @@
 <h2>Question 156 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Move IT infrastructure to GCP. Leverage on-prem AD as IdP. Integrate and configure access management. Which two?
+Ensure that a specific group of users can only create Compute Engine instances in the 'europe-west1' region. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Identity Platform to provision.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SAML integration to provision.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> GCDS to Cloud Identity.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAM roles for each AD group.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> IAM groups corresponding to each AD group.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM conditions on the compute.instances.create permission.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: compute.allowedLocations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Resource Labels.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls.</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Move IT infrastructure to GCP. Leverage on-prem AD as IdP. Integrate and configu
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">CE</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Move IT infrastructure to GCP. Leverage on-prem AD as IdP. Integrate and configu
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: CE.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. GCDS: Jest to narzędzie do provisioningu (przenoszenia kont i grup). Musisz je skonfigurować, aby struktura użytkowników i grup z AD pojawiła się w chmurze Google.
-E. IAM groups: Najlepszą praktyką zarządzania dostępem jest nadawanie uprawnień GRUPOM, a nie pojedynczym osobom. Grupy te w GCP powinny odpowiadać grupom bezpieczeństwa w AD (zsynchronizowanym przez GCDS).
+B. Organization Policy: Polityka `gcp.resourceLocations` (często w pytaniach jako `compute.allowedLocations`) pozwala na zdefiniowanie 'dozwolonych regionów' dla zasobów. Jest to najsilniejsza metoda, działająca na poziomie platformy, gwarantująca zgodność z wymogami rezydencji danych (GDPR).
 
 Dlaczego inne są błędne:
-A. Identity Platform: To usługa dla aplikacji B2C (Twoich klientów), nie dla Twoich pracowników IT.
-B. SAML: Służy do uwierzytelniania (logowania), ale samo w sobie nie 'tworzy' (provision) użytkowników ani grup w systemie IAM Google.
-D. IAM roles for groups: To masło maślane. Przypisujesz ROLe do GRUP (E), a nie tworzysz 'ról dla każdej grupy' (co sugeruje błędną nomenklaturę lub proces).
+A. IAM conditions: Warunki IAM mogą filtrować po tagach, ale filtrowanie samej operacji 'Create' po regionie jest znacznie trudniejsze i mniej niezawodne niż odgórna polityka organizacji (B).
+C. Labels: To tylko opisy, nie blokują technicznie stworzenia zasobu w innym regionie.
+D. VPC Service Controls: Chroni przed eksfiltracją, a nie przed wyborem regionu dla nowych VM.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla CE. Standardowy wzorzec łączenia AD z Google Cloud.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Rezydencja danych = Org Policy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: CE</b></p>
-<p><b>Głęboka analiza:</b> GCDS zapewnia synchronizację składu grup. Jeśli dodasz kogoś do grupy 'Admins' w AD, GCDS doda go do grupy 'Admins' w Google, która już posiada przypisane role IAM.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na forach dotyczy tego, jak polityka ta wpływa na już istniejące zasoby. Odpowiedź: Polityka organizacji blokuje PRZYSZŁE akcje. Jeśli masz już VM w USA, a włączysz politykę na EU, stara maszyna będzie działać dalej, ale nowej w USA już nikt nie stworzy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction" target="_blank">https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
 
 </ul>
 </div>

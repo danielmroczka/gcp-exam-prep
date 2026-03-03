@@ -52,14 +52,14 @@
 <h2>Question 226 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Protect VMs from boot/kernel malware. Data in use cannot be read by host system. Hardware-based. What to do?
+Grant a user access to view and manage all firewall rules in a specific project. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Shielded VM + Cloud Run function check.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SCC VM Threat Detection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Shielded VM + Confidential Computing.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Hardened images + Confidential Computing.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/compute.networkAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/compute.securityAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.admin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/iam.securityAdmin</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Protect VMs from boot/kernel malware. Data in use cannot be read by host system.
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,28 +76,27 @@ Protect VMs from boot/kernel malware. Data in use cannot be read by host system.
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Shielded VM + Confidential Computing: To duet zabezpieczeń sprzętowych. Shielded VMs (Secure Boot, vTPM) chronią integralność procesu bootowania i kernela przed rootkitami. Confidential Computing szyfruje dane w pamięci RAM, uniemożliwiając ich odczyt nawet przez hypervisor lub system operacyjny hosta (wymóg 'cannot be read by host system').
+B. compute.securityAdmin: Ta rola jest zaprojektowana specjalnie dla administratorów bezpieczeństwa sieciowego. Daje uprawnienia do tworzenia, usuwania i modyfikowania reguł firewalla, certyfikatów SSL i polityk Cloud Armor, bez konieczności nadawania uprawnień do zarządzania samymi maszynami VM czy trasami.
 
 Dlaczego inne są błędne:
-A. Cloud Run function: Nie ma związku z bezpieczeństwem kernela maszyn wirtualnych.
-B. SCC VM Threat Detection: To narzędzie detekcyjne (reaktywne), a pytanie prosi o 'Protect' (prewencję sprzętową).
-D. Hardened images: To dobre rozwiązanie software'owe, ale nie zastępuje sprzętowej weryfikacji bootowania (Secure Boot), którą zapewniają Shielded VMs.
+A. networkAdmin: Pozwala na zarządzanie całą siecią (trasy, podsieci), co jest zbyt szerokie, jeśli celem jest tylko firewall.
+C. compute.admin: Zdecydowanie za wysokie uprawnienia (może kasować VM).
+D. iam.securityAdmin: Zarządza uprawnieniami LUDZI, nie regułami SIECI.
 
-Konsensus społeczności ExamTopics: 100% na C. Hardware-based protection = Shielded + Confidential.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To standardowa rola dla 'Network Security'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Shielded VM zapewnia 'Root of Trust'. Jeśli kernel zostanie podmieniony, Secure Boot zablokuje start maszyny. Confidential VM (AMD SEV) dopełnia to ochroną danych w trakcie obliczeń.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na forach często pada pytanie o różnicę między A i B. Eksperci wyjaśniają: jeśli Twoim zadaniem jest 'bezpieczeństwo' (firewall), wybierz Security Admin (B). Jeśli zadaniem jest 'budowanie sieci' (IP, subnets), wybierz Network Admin (A).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/shielded-vm" target="_blank">https://cloud.google.com/shielded-vm</a></li>
-<li><a href="https://cloud.google.com/confidential-computing" target="_blank">https://cloud.google.com/confidential-computing</a></li>
+<li><a href="https://cloud.google.com/compute/docs/access/iam#compute.securityAdmin" target="_blank">https://cloud.google.com/compute/docs/access/iam#compute.securityAdmin</a></li>
 
 </ul>
 </div>

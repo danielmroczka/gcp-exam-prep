@@ -52,14 +52,14 @@
 <h2>Question 215 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure application teams can only add users from within organization to their groups. What to do?
+Protect your GKE cluster from 'Man-in-the-Middle' attacks between the nodes and the control plane. Which feature?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Groups configuration in Google Workspace Admin console.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> IAM policy with condition.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM deny policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> BigQuery logs + Cloud Function.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> GKE cluster-level certificates and TLS encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Network Policies</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Ensure application teams can only add users from within organization to their gr
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,26 @@ Ensure application teams can only add users from within organization to their gr
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Workspace Admin Settings: W konsoli administracyjnej Google Workspace (lub Cloud Identity) istnieje globalne ustawienie dla grup: 'Allow members from outside your organization'. Wyłączenie tej opcji na poziomie całej domeny uniemożliwia każdemu (w tym zespołom deweloperskim) dodanie zewnętrznego adresu e-mail do jakiejkolwiek grupy firmowej.
+B. TLS encryption: GKE automatycznie zarządza certyfikatami dla wszystkich komponentów klastra. Cała komunikacja między węzłami (Nodes) a serwerem API (Master/Control Plane) jest domyślnie szyfrowana protokołem TLS z wzajemną autentykacją (mTLS), co uniemożliwia ataki MitM.
 
 Dlaczego inne są błędne:
-B, C: IAM w GCP zarządza uprawnieniami do zasobów (np. VM, GCS), ale nie kontroluje samej logiki wewnętrznej Składu Grup Google (to domena Identity Providera).
-D. Logs + Function: To rozwiązanie reaktywne (naprawia po fakcie). Rozwiązanie A jest natywne i prewencyjne.
+A, D: Chronią przed niechcianym ruchem (blokada), ale nie zapewniają integralności i poufności przesyłanych danych (szyfrowania) tak jak TLS.
+C. Cloud Armor: Chroni tylko ruch zewnętrzny HTTP.
 
-Konsensus społeczności ExamTopics: 100% na A. Kontrola tożsamości zaczyna się w panelu Admina Google.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To wbudowany mechanizm bezpieczeństwa Kubernetes.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> To ustawienie jest kluczowe dla ochrony przed wyciekiem danych poprzez omyłkowe dodanie kogoś do grupy, która posiada szerokie uprawnienia w chmurze.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci przypominają: Google Cloud zarządza rotacją tych certyfikatów za Ciebie. Jest to jeden z głównych powodów, dla których firmy wybierają GKE zamiast samodzielnego zarządzania Kubernetesem na maszynach VM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/167094" target="_blank">https://support.google.com/a/answer/167094</a></li>
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#node_communication" target="_blank">https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#node_communication</a></li>
 
 </ul>
 </div>

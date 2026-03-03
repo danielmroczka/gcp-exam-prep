@@ -52,15 +52,14 @@
 <h2>Question 209 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Trusted container images on GKE from central registry signed by authority. Which two?
+What is the primary benefit of using Google Cloud Access Transparency?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Container Threat Detection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Trusted image org policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Custom org policy Binary Authorization.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> PodSecurity standards.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Binary Authorization policy with attestations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate IAM role requests.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide logs of actions taken by Google personnel on your data or configurations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage SSL certificates.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To protect against DDoS.</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Trusted container images on GKE from central registry signed by authority. Which
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">CE</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,25 @@ Trusted container images on GKE from central registry signed by authority. Which
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: CE.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-E. Binary Authorization: Usługa ta weryfikuje 'atestacje' (podpisy cyfrowe) przed uruchomieniem kontenera. Spełnia wymóg 'signed by authority'.
-C. Org Policy for BinAuth: Pozwala na wymuszenie użycia Binary Authorization we wszystkich klastrach w organizacji, co zapewnia, że nikt nie stworzy 'niezabezpieczonego' klastra omijającego te kontrole.
+B. Access Transparency: Udostępnia logi, które dokumentują KAŻDY przypadek, gdy pracownik Google uzyskał dostęp do Twoich danych (np. podczas rozwiązywania zgłoszenia w support). To kluczowe dla zaufania i wymogów prawnych.
 
 Dlaczego inne są błędne:
-A. Threat Detection: Monitoruje runtime, nie weryfikuje podpisów przed wdrożeniem.
-B. Trusted image policy: Dotyczy obrazów VM (Compute Engine), a nie kontenerów GKE.
-D. PodSecurity: Dotyczy uprawnień wewnątrz klastra (np. zakaz kontenerów uprzywilejowanych), nie weryfikuje źródła obrazu.
+A, C, D: To funkcje innych usług (IAM, Certificate Manager, Cloud Armor).
 
-Konsensus społeczności ExamTopics: 100% na CE. BinAuth to jedyne narzędzie do weryfikacji podpisów kontenerów w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Pytanie o definicję unikalnej funkcji Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: CE</b></p>
-<p><b>Głęboka analiza:</b> Ten model tworzy proces, w którym obraz jest 'atestowany' (podpisywany) przez klucz KMS zespołu security dopiero po przejściu wszystkich testów.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele osób myli Access Transparency (B) z Access Approval. Zapamiętaj: Transparency to LOGI (po fakcie), Approval to ZGODA (przed faktem). Oba razem tworzą kompletny system nadzoru nad dostawcą chmury.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>
+<li><a href="https://cloud.google.com/access-transparency" target="_blank">https://cloud.google.com/access-transparency</a></li>
 
 </ul>
 </div>

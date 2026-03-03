@@ -52,14 +52,14 @@
 <h2>Question 198 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-On-prem hosts need access to Google Cloud APIs privately. Minimize costs and optimize efficiency.
+Analyze VPC flow logs to detect potential beaconing behavior to a known malicious IP. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC peering.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> IPsec VPN tunnel to VPC with Private Google Access enabled.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Client-side encryption.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Dedicated Interconnect.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery via Log Sink</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Event Threat Detection (ETD)</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Trace</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Packet Mirroring</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ On-prem hosts need access to Google Cloud APIs privately. Minimize costs and opt
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud VPN + PGA for on-prem: Cloud VPN jest znacznie tańszy niż Interconnect (D). Funkcja Private Google Access for on-premises pozwala lokalnym serwerom na komunikację z API Google (np. GCS, BQ) przy użyciu prywatnych adresów IP przez tunel VPN. Jest to najbardziej kosztowo efektywne rozwiązanie spełniające wymóg prywatności.
+B. Event Threat Detection: Jest to usługa, która w czasie rzeczywistym skanuje logi i szuka wzorców ataków. Beaconing (regularne wysyłanie sygnałów do serwera C2) jest jednym z podstawowych wzorców, które ETD wykrywa automatycznie dzięki integracji z Threat Intelligence Google.
 
 Dlaczego inne są błędne:
-A. VPC peering: Służy do łączenia dwóch sieci wewnątrz chmury, nie łączy on-premises z chmurą.
-C. Client-side encryption: Chroni dane, ale nie rozwiązuje problemu routingu i prywatnego dostępu do API.
-D. Dedicated Interconnect: Bardzo drogi (koszty stałe portów i łącza), zazwyczaj nieuzasadniony, jeśli głównym celem jest tylko 'access to APIs' przy niskich kosztach.
+A. BigQuery: Pozwala na analizę ręczną, ale nie jest systemem Automatycznej detekcji w czasie rzeczywistym.
+C. Cloud Trace: Dla wydajności kodu.
+D. Packet Mirroring: Zbyt ciężkie i drogie rozwiązanie do wykrywania Beaconingu, który widać doskonale w samych metadanych logów Flow (B).
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To standardowe rozwiązanie 'Entry-level Enterprise'.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Beaconing = Event Threat Detection.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Wymaga to konfiguracji lokalnego DNS, aby zapytania o `*.googleapis.com` zwracały adresy z zakresu `restricted` lub `private` VIP Google.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na GitHubie podkreślają, że ETD oszczędza mnóstwo czasu analitykom SOC. Zamiast pisać zapytania SQL szukające regularności w logach, dostajesz gotowy alert: 'VM X rozmawia z C2 co dokładnie 60 sekund'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-settings" target="_blank">https://cloud.google.com/vpc/docs/configure-private-google-access-settings</a></li>
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview</a></li>
 
 </ul>
 </div>

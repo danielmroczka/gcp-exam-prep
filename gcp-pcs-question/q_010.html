@@ -79,21 +79,21 @@ Your team needs to obtain a unified log view of all development cloud projects i
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Aggregated Sink na poziomie folderu: Utworzenie sinka na poziomie folderu NONPROD z opcją includeChildren=True automatycznie zbiera logi ze wszystkich obecnych i przyszłych projektów w tym folderze. Eksport do Pub/Sub jest standardem dla systemów SIEM potrzebujących danych w czasie rzeczywistym.
+A. Aggregated Sink na folderze: To najbardziej profesjonalna metoda. Ustawiając sink na poziomie FOLDERU z flagą `includeChildren=True`, automatycznie zbierasz logi ze wszystkich obecnych i przyszłych projektów w tym folderze. Pub/Sub to standard dla SIEM (real-time).
 
 Dlaczego inne są błędne:
-B. Billing account parent: Logi konta rozliczeniowego nie zawierają logów aktywności wewnątrz projektów (np. logów GKE czy VM).
-C. Manual sinks: Konfigurowanie sinka w każdym projekcie z osobna jest niezarządzalne przy dużej skali (brak 'unified view').
-D. Publicly shared bucket: Jest to ogromne ryzyko bezpieczeństwa (logi mogą zawierać PII).
+B. Billing parent: Logi konta rozliczeniowego dotyczą pieniędzy, a nie aktywności systemowej wewnątrz projektów.
+C. Each project: Nieskalowalne. Przy 100 projektach musiałbyś ręcznie klikać 100 razy.
+D. Publicly shared bucket: Skrajne naruszenie bezpieczeństwa. Logi systemowe nigdy nie powinny być publiczne.
 
-Konsensus społeczności ExamTopics: 100% głosów na A. Agregowane zlewy (aggregated sinks) to jedyna skalowalna metoda zbierania logów w strukturze hierarchicznej.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Agregacja to klucz do Enterprise Logging.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> To podejście 'set and forget'. Nowe projekty deweloperskie utworzone w folderze NONPROD będą automatycznie objęte monitoringiem SIEM bez żadnej dodatkowej konfiguracji.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na GitHubie zauważają, że aggregated sinks pozwalają na oszczędności – filtrujesz logi raz na górze hierarchii, zamiast zarządzać filtrami w każdym projekcie. To rozwiązanie jest odporne na tzw. 'Shadow IT' – jeśli deweloper stworzy nowy projekt w tym folderze, logi zaczną płynąć do SIEM od pierwszej sekundy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/export/aggregated_sinks" target="_blank">https://cloud.google.com/logging/docs/export/aggregated_sinks</a></li>

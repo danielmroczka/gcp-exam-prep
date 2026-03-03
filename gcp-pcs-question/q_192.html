@@ -52,14 +52,14 @@
 <h2>Question 192 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Securely access Google APIs from CI/CD pipelines on GKE. What to do?
+Grant a user access to only view billing reports for a specific project. Where should you apply the IAM role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Two SAs, Workload Identity, separate namespaces.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SA for nodes pool.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Individual SAs for each pipeline, Workload Identity.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SAs keys as K8s secrets.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Organization level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Billing Account level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Project level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Resource level</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Securely access Google APIs from CI/CD pipelines on GKE. What to do?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,26 @@ Securely access Google APIs from CI/CD pipelines on GKE. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A. (Uwaga: C również jest architektonicznie poprawne, ale A kładzie nacisk na izolację namespace, co jest lepszą praktyką K8s).
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Workload Identity + Namespaces: To najbezpieczniejsza metoda. Workload Identity (A) eliminuje potrzebę używania kluczy JSON. Rozdzielenie potoków CI/CD do osobnych Namespaces zapewnia dodatkową warstwę izolacji wewnątrz klastra K8s (RBAC, Network Policies).
+C. Project level: Chociaż system billingowy jest oddzielny, możesz nadać uprawnienia do widzenia kosztów powiązanych z konkretnym projektem bezpośrednio w jego polityce IAM. Dzięki temu użytkownik widzi wydatki 'swojego' zespołu, nie znając budżetu całej firmy.
 
 Dlaczego inne są błędne:
-B. SA for nodes pool: Bardzo niebezpieczne. Każdy kontener na węźle dziedziczyłby uprawnienia węzła (zbyt szeroki dostęp).
-D. SA keys as secrets: K8s Secrets są przechowywane w bazie etcd (często niezaszyfrowanej domyślnie) i są to nadal statyczne, długotrwałe klucze, których chcemy uniknąć.
+A, B: Dałoby to dostęp do danych finansowych innych projektów (naruszenie poufności).
+D: Nie ma raportów billingu na poziomie 'pojedynczego dysku' w systemie IAM.
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na A. Workload Identity to 'must-have' dla GKE security.</pre>
+Konsensus społeczności ExamTopics: 100% na C. Najlepsza praktyka dla autonomii zespołów deweloperskich.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Workload Identity wiąże konto serwisowe Kubernetes (KSA) z kontem serwisowym Google (GSA). Aplikacja po prostu używa standardowych bibliotek Google, które 'magicznie' otrzymują tokeny.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Pamiętaj o różnicy między 'Billing Account Viewer' (widzi wszystko) a rolami projektowymi. Eksperci na forach podkreślają, że nadawanie uprawnień finansowych na poziomie projektu (C) jest kluczowe dla modelu 'You build it, you run it, you pay for it'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity</a></li>
+<li><a href="https://cloud.google.com/billing/docs/how-to/billing-access" target="_blank">https://cloud.google.com/billing/docs/how-to/billing-access</a></li>
 
 </ul>
 </div>

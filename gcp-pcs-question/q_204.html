@@ -52,14 +52,14 @@
 <h2>Question 204 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Detect cryptocurrency mining software using SCC.
+Audit which users have the permission to modify firewall rules in a specific VPC. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Virtual Machine Threat Detection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Container Threat Detection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Rapid Vulnerability Detection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Web Security Scanner.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Detect cryptocurrency mining software using SCC.
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. VM Threat Detection: Jest to funkcja SCC Premium, która skanuje pamięć RAM instancji Compute Engine bez instalowania agentów. Potrafi wykryć znane sygnatury złośliwego oprogramowania, w tym procesy koparek kryptowalut, które często ukrywają się przed standardowymi narzędziami systemu operacyjnego.
+A. Policy Analyzer: Pozwala zadać precyzyjne pytanie: 'Pokaż mi wszystkich użytkowników i grupy, które posiadają uprawnienie compute.firewalls.update na tym zasobie sieciowym'. Narzędzie to przeszukuje wszystkie poziomy hierarchii IAM i zwraca ujednoliconą listę osób.
 
 Dlaczego inne są błędne:
-B. Container Threat Detection: Robi to samo, ale dla KONTENERÓW. Pytanie zazwyczaj dotyczy ogólnie środowiska Compute, gdzie VMTD jest bardziej fundamentalną odpowiedzią.
-C. Rapid Vulnerability Detection: Szuka luk konfiguracyjnych (np. słabe hasła), nie zajmuje się monitoringiem runtime pod kątem wirusów/minerów.
-D. Web Security Scanner: Szuka błędów w kodzie stron WWW.
+B. Policy Troubleshooter: Tylko dla scenariuszy 'dlaczego nie mogę'.
+C. IAM Recommender: Sugeruje usuwanie nieużywanych ról.
+D. Audit Logs: Powie Ci kto ZMIENIŁ regułę w przeszłości, ale nie pokaże listy osób, które MAJĄ prawo to zrobić TERAZ.
 
-Konsensus społeczności ExamTopics: 100% na A. VMTD to najnowocześniejsza metoda wykrywania minerów w chmurze.</pre>
+Konsensus społeczności ExamTopics: 100% na A. To główne narzędzie do 'Access Inwentaryzacji'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> VMTD działa na poziomie hypervisora, więc haker, który zdobędzie roota na Twojej maszynie i ukryje proces minera, i tak zostanie wykryty przez 'podglądanie' pamięci z zewnątrz przez Google.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Na Reddit specjaliści ostrzegają: uprawnienia do firewalla często 'ukryte' są w rolach Editor lub Owner nadanych na poziomie folderu. Tylko Policy Analyzer (A) potrafi je 'wyłowić' i pokazać w jednym raporcie audytowym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/concepts-vm-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-vm-threat-detection-overview</a></li>
+<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
 
 </ul>
 </div>

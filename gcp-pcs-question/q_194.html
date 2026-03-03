@@ -52,15 +52,14 @@
 <h2>Question 194 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Control unmanaged consumer accounts using corporate email. Which two?
+Audit which users have been granted permissions to a specific BigQuery table via inherited roles from folders or the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Mandate delete.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Reconcile accounts.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Evict before sync.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> GCDS aliases.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Transfer tool to invite transfer.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Control unmanaged consumer accounts using corporate email. Which two?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">BE</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Control unmanaged consumer accounts using corporate email. Which two?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: BE.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Reconcile accounts: Proces uzgadniania pozwala zidentyfikować, którzy użytkownicy AD posiadają już swoje prywatne odpowiedniki w chmurze (konflikty).
-E. Transfer Tool: To oficjalne narzędzie do wysyłania zaproszeń użytkownikom, aby 'oddali' swoje konta pod zarząd firmy.
+A. Policy Analyzer: Jest to jedyne narzędzie, które 'rozumie' dziedziczenie. Potrafi ono przeanalizować całe drzewo uprawnień i pokazać, że użytkownik Jan ma dostęp do tabeli, bo ma rolę nadaną na folderze 3 poziomy wyżej.
 
 Dlaczego inne są błędne:
-A. Mandate delete: Nie masz technicznej możliwości 'zmuszenia' Google do usunięcia czyjegoś prywatnego konta bez procesu transferu lub weryfikacji domeny.
-C. Evict: Nie jest to standardowy termin ani czynność w procesie przejmowania domeny.
-D. GCDS aliases: Aliasy nie rozwiązują problemu własności konta głównego.
+B. Policy Troubleshooter: Sprawdza tylko pojedyncze żądanie dostępu, nie buduje mapy wszystkich uprawnionych osób.
+C. IAM Recommender: Tylko sugeruje zmiany.
+D. Audit Logs: Nie pokażą Ci dziedziczenia, a jedynie momenty nadań poszczególnych ról w różnych miejscach czasu i przestrzeni.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla BE. To dwa filary procesu sprzątania domeny.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla A. Policy Analyzer to 'rentgen' Twojego IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: BE</b></p>
-<p><b>Głęboka analiza:</b> Jeśli użytkownik zignoruje zaproszenie z Transfer Tool, administrator może po prostu stworzyć konto zarządzane przez GCDS, co spowoduje, że stare konto osobiste użytkownika zostanie zmuszone do zmiany adresu e-mail na inny (np. @gmail.com).</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na Reddit zwraca uwagę na 'Privilege Escalation'. Dzięki Policy Analyzer (A) możesz wykryć, że ktoś nadał rolę 'Owner' na folderze, co niechcący dało dostęp do tajnych tabel finansowych w projektach pod spodem. To kluczowe narzędzie dla higieny IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/7062710" target="_blank">https://support.google.com/cloudidentity/answer/7062710</a></li>
+<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
 
 </ul>
 </div>

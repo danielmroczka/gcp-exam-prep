@@ -52,14 +52,14 @@
 <h2>Question 164 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Restrict use of default networks in organization following best practices. What to do?
+Which service provides a centralized way to manage and enforce access control policies for web applications without using a VPN?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Org policy compute.skipDefaultNetworkCreation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cron job to delete default networks.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Org level Owner, VPC SC compute API.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> CI/CD pipeline templates.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud VPN</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Identity-Aware Proxy (IAP)</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Shared VPC</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Restrict use of default networks in organization following best practices. What 
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Restrict use of default networks in organization following best practices. What 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. compute.skipDefaultNetworkCreation: Jest to specjalna polityka organizacji, która zapobiega automatycznemu tworzeniu sieci VPC o nazwie 'default' w każdym nowym projekcie. Jest to zalecana praktyka (best practice), aby uniknąć bałaganu w sieciach i przypadkowego wystawienia maszyn z domyślnymi regułami firewall (które w sieci default są zbyt otwarte).
+B. IAP: Pozwala na udostępnienie wewnętrznych aplikacji (np. Jira, Wiki) bezpośrednio w internecie, ale pod warunkiem przejścia silnej autoryzacji Google. Zastępuje VPN, dając użytkownikom łatwiejszy dostęp (przez przeglądarkę) przy zachowaniu wyższego bezpieczeństwa (Zero Trust).
 
 Dlaczego inne są błędne:
-B. Cron job: Rozwiązanie 'brudne', działające po fakcie (reaktywne). Pozwala na powstanie sieci i jej krótki byt.
-C. Owner/VPC SC: Zbyt skomplikowane i niecelowe. VPC SC nie służy do ograniczania tworzenia sieci wewnątrz projektów.
-D. CI/CD templates: Pomagają, ale nie zapobiegają ręcznemu stworzeniu projektu przez konsolę z domyślną siecią.
+A. Cloud VPN: Wymóg pytania to 'WITHOUT using a VPN'.
+C. Cloud Armor: To firewall (WAF), nie zarządza tożsamością i sesjami użytkowników tak jak IAP.
+D. Shared VPC: To tylko topologia sieciowa.
 
-Konsensus społeczności ExamTopics: 100% na A. To fundament bezpieczeństwa nowej organizacji w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% na B. IAP to definicja modelu 'BeyondCorp'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Sieć 'default' ma reguły firewall zezwalające na SSH i RDP z całego internetu. Wyłączenie jej tworzenia to pierwszy krok do zabezpieczenia środowiska.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Główna korzyść z IAP (B) podnoszona w sieci to 'Context-Aware Access'. Możesz np. zezwolić na dostęp bez VPN, ale tylko jeśli użytkownik ma służbowego laptopa z zaszyfrowanym dyskiem i łączy się z terytorium Polski.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
+<li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>
 
 </ul>
 </div>

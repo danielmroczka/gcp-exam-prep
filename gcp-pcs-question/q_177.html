@@ -52,14 +52,14 @@
 <h2>Question 177 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Identify network anomalies and capture payloads within VPCs. Which method?
+Analyze VPC network traffic to detect data exfiltration to an external IP. Which log source is most cost-effective for identifying the amount of data transferred?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Organization policy constraint.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Packet mirroring policies.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Packet Mirroring</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Audit Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud IDS logs</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Identify network anomalies and capture payloads within VPCs. Which method?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ Identify network anomalies and capture payloads within VPCs. Which method?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Packet Mirroring: Tylko ta metoda pozwala na przechwycenie rzeczywistej zawartości komunikacji (payloads). Możesz wysłać te dane do systemu IDS, który przeanalizuje je pod kątem anomalii i zagrożeń.
+A. VPC Flow Logs: Rejestrują liczbę bajtów (`bytes_sent`) dla każdego przepływu IP. Są znacznie tańsze niż Packet Mirroring (B) czy Cloud IDS (D), bo rejestrują tylko statystyki, a nie całą treść pakietów.
 
 Dlaczego inne są błędne:
-C. VPC Flow Logs: Widzą tylko statystyki połączeń (headers). Nie widzą tego, co użytkownik wpisał w formularzu lub jakie dane przesłał plikiem (payload).
-A, D: Nie monitorują ruchu sieciowego w warstwie pakietów.
+B. Packet Mirroring: Skrajnie drogie przy dużej skali, bo kopiuje każdy bit danych.
+C. Audit Logs: Rejestrują akcje w API, nie widzą ilości przesyłanych danych wewnątrz otwartych tuneli sieciowych.
+D. Cloud IDS: Służy do detekcji typów ataków, a nie do prostego zliczania wolumenu ruchu do celów billingu czy podstawowego audytu exfiltration.
 
-Konsensus społeczności ExamTopics: 100% na B. Payload = Packet Mirroring.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Flow Logi to podstawowe narzędzie analityki sieciowej.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Packet Mirroring w GCP jest skalowalne i pozwala na monitorowanie ruchu nawet między instancjami w tej samej podsieci, który nie przechodzi przez żaden zewnętrzny router.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach radzą: ustaw 'sampling' Flow Logów na 100%, jeśli naprawdę boisz się wycieku danych, lub na 10%, aby tylko monitorować trendy. To najbardziej elastyczne kosztowo narzędzie monitoringu sieciowego w GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/packet-mirroring" target="_blank">https://cloud.google.com/vpc/docs/packet-mirroring</a></li>
+<li><a href="https://cloud.google.com/vpc/docs/using-flow-logs" target="_blank">https://cloud.google.com/vpc/docs/using-flow-logs</a></li>
 
 </ul>
 </div>

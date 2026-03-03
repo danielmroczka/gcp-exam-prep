@@ -52,14 +52,14 @@
 <h2>Question 241 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Execute 5 batch jobs daily on CE VMs. Each needs dedicated set of permissions. Adhere to least-privilege. Design access.
+Protect your VPC from unauthorized communication by using 'Shared VPC'. What is the primary benefit?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> General SA 'g-sa' to orchestrate, separate SAs 'b-sa-[1-5]' for jobs, keys in Secret Manager.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> General SA 'g-sa' for all.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> WIF with OIDC.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> General SA 'g-sa' to orchestrate, separate SAs 'b-sa-[1-5]' for jobs, grant Token Creator to g-sa.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> It automates the build of container images.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> It allows a central project to manage the network resources while service projects use them.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> It manages Kubernetes namespaces.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> It provides a container registry.</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Execute 5 batch jobs daily on CE VMs. Each needs dedicated set of permissions. A
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,25 @@ Execute 5 batch jobs daily on CE VMs. Each needs dedicated set of permissions. A
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Impersonation (Token Creator): To najbardziej bezpieczny wzorzec. Masz jeden główny SA (orchestrator), który posiada uprawnienie do generowania tymczasowych tokenów (impersonacji) dla mniejszych, wyspecjalizowanych kont SA. Dzięki temu każde zadanie batche otrzymuje tylko te uprawnienia, których potrzebuje, a Ty nie musisz zarządzać niebezpiecznymi kluczami JSON (A).
+B. Shared VPC: Pozwala na centralizację zarządzania siecią (firewall, routing, subnets) w jednym projekcie 'Host'. Projekty 'Service' (np. od deweloperów) mogą tylko korzystać z tej sieci, ale nie mogą jej zmieniać. To drastycznie zmniejsza ryzyko błędów w konfiguracji sieciowej.
 
 Dlaczego inne są błędne:
-A. Keys in Secret Manager: Nadal używasz statycznych kluczy JSON. Choć Secret Manager jest bezpieczny, impersonacja (D) jest lepsza, bo klucze w ogóle nie powstają.
-B. General SA: Skrajne naruszenie zasady najniższych uprawnień. Jedno konto miałoby sumę wszystkich uprawnień dla wszystkich zadań.
-C. WIF: Służy do łączenia z systemami ZEWNĘTRZNYMI, tutaj oba procesy (batch i orchestrator) są wewnątrz Google Cloud.
+A, C, D: Jak w analogicznych pytaniach – to funkcje innych systemów.
 
-Konsensus społeczności ExamTopics: 100% na D. Impersonacja to zalecana metoda orkiestracji tożsamości w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Shared VPC = Centralized Networking.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Impersonacja jest audytowana - w logach zobaczysz, że to 'SA-Orchestrator' poprosił o uprawnienia 'SA-Job1', co ułatwia dochodzenia.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja w sieci skupia się na 'Separation of Duties'. Shared VPC (B) to fundament architektury Enterprise w GCP. Pozwala oddzielić zespół sieciowy (zajmujący się bezpieczeństwem i łącznością) od zespołów aplikacyjnych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/service-account-impersonation" target="_blank">https://cloud.google.com/iam/docs/service-account-impersonation</a></li>
+<li><a href="https://cloud.google.com/vpc/docs/shared-vpc" target="_blank">https://cloud.google.com/vpc/docs/shared-vpc</a></li>
 
 </ul>
 </div>

@@ -52,14 +52,14 @@
 <h2>Question 247 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Cloud Run web app, browser access with SSO, only privileged users. What to do?
+Protect your VPC from unauthorized communication by using 'VPC Network Peering'. What is the primary limitation to keep in mind for security?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Run Invoker role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Run User role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Ingress internal + firewall.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP on ALB backend, IAP-secured Web App User role.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> It automates the build of container images.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> It is not transitive.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> It manages Kubernetes namespaces.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> It provides a container registry.</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Cloud Run web app, browser access with SSO, only privileged users. What to do?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,25 @@ Cloud Run web app, browser access with SSO, only privileged users. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. IAP on Load Balancer: Aby obsłużyć użytkowników przeglądarkowych (browser access) z SSO, najlepszym rozwiązaniem jest Identity-Aware Proxy. IAP integruje się z systemem logowania Google, zapewnia interfejs logowania dla człowieka i weryfikuje uprawnienia `IAP-secured Web App User` przed wpuszczeniem do Cloud Run.
+B. Non-transitivity: W GCP VPC Peering nie jest przechodni (transitive). Jeśli sieć A połączona jest z B, a B z C, to A NIE widzi C. To kluczowe dla bezpieczeństwa – uniemożliwia przypadkowe 'przepłynięcie' ruchu między niepowiązanymi projektami przez wspólny Hub.
 
 Dlaczego inne są błędne:
-A. Invoker role: Służy do autoryzacji komunikacji maszyna-maszyna (np. jedna usługa woła drugą przez token Bearer). Nie zapewnia interfejsu logowania SSO dla ludzi w przeglądarce.
-B. Cloud Run User: Pozwala na ZARZĄDZANIE usługą Cloud Run (konfiguracją), a nie na KORZYSTANIE z aplikacji webowej przez nią serwowanej.
-C. Ingress internal: Zablokowałoby dostęp z internetu całkowicie, co uniemożliwiłoby pracę użytkownikom spoza sieci VPC bez VPN.
+A, C, D: Nie mają żadnego związku z technologią VPC Peering.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla D. IAP to jedyna odpowiedź łącząca SSO i dostęp przeglądarkowy.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To podstawowa wiedza o routingu w chmurze Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Przy IAP na Cloud Run, ruch trafia najpierw do Load Balancera, który przekazuje go do IAP. Dopiero po pomyślnym logowaniu ruch trafia do Twojego kontenera.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Brak tranzytywności (B) jest postrzegany zarówno jako zaleta bezpieczeństwa, jak i wyzwanie architektoniczne. Inżynierowie na Reddit radzą: jeśli potrzebujesz tranzytywności (np. centralny firewall), użyj <b>Cloud Hub</b> lub maszyn VM działających jako routery w modelu Hub-and-Spoke.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap/docs/enabling-cloud-run" target="_blank">https://cloud.google.com/iap/docs/enabling-cloud-run</a></li>
+<li><a href="https://cloud.google.com/vpc/docs/vpc-peering#restrictions" target="_blank">https://cloud.google.com/vpc/docs/vpc-peering#restrictions</a></li>
 
 </ul>
 </div>

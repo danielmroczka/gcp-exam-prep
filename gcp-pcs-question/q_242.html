@@ -52,14 +52,14 @@
 <h2>Question 242 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Org policy: allowed domains terramearth.com. 'Apps' folder policy: allowed domains flowlogistic.com, inherit: false. Result of granting access to project in folder to testuser@terramearth.com?
+Grant a user access to manage and view all VPC flow logs across the organization. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Success, both allowed.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Success, inherited.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Fail, need policy on project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Fail, only flowlogistic.com allowed.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/logging.admin at the organization level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/compute.networkAdmin at the organization level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/logging.viewer at the project level</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/resourcemanager.organizationAdmin</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Org policy: allowed domains terramearth.com. 'Apps' folder policy: allowed domai
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ Org policy: allowed domains terramearth.com. 'Apps' folder policy: allowed domai
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Explicit override (Fail): Flaga `inheritFromParent: false` (lub brak zaznaczenia 'inherit' w UI) sprawia, że polityka na poziomie folderu CAŁKOWICIE zastępuje wszystko, co było nad nią. Skoro folder dopuszcza tylko 'flowlogistic.com', to domena z poziomu organizacji ('terramearth.com') przestaje być zaufana w tym miejscu hierarchii. Próba dodania użytkownika zakończy się błędem.
+A. logging.admin (Org Level): Podobnie jak w pytaniu 211, zarządzanie logami (Flow Logs to logi!) wymaga uprawnień Logging Admin. Nadanie tej roli na poziomie organizacji pozwala na centralne zarządzanie zbieraniem i audytem ruchu sieciowego we wszystkich projektach firmy.
 
 Dlaczego inne są błędne:
-A, B: Błędne założenie o łączeniu (merge) polityk. Polityki organizacji typu 'list' są zastępowane, a nie sumowane, jeśli wyłączysz dziedziczenie.
-C: Brak polityki na projekcie oznacza, że projekt dziedziczy z foldera. Folder już zablokował dostęp.
+B. networkAdmin: Nie zarządza konfiguracją usługi Cloud Logging.
+C. Project level: Zbyt wąski zakres (nie 'across organization').
+D. organizationAdmin: Zbyt wysoka rola.
 
-Konsensus społeczności ExamTopics: 100% na D. Podstawowa wiedza o działaniu Org Policy Service.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Zarządzanie logami w skali firmy = Org-level Logging Admin.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> To częsty błąd administratorów. Jeśli chcesz DODAĆ domenę do już istniejących, musisz w nowej polityce wymienić ODWIE domeny lub włączyć dziedziczenie.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na forach inżynierowie radzą: 'Stwórz centralny projekt logów i nadaj roli A zespołowi Security na poziomie organizacji'. Dzięki temu logi ze wszystkich VPC będą trafiać do jednego, bezpiecznego miejsca pod ich kontrolą.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>
+<li><a href="https://cloud.google.com/logging/docs/access-control" target="_blank">https://cloud.google.com/logging/docs/access-control</a></li>
 
 </ul>
 </div>

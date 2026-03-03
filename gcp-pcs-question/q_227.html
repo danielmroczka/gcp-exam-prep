@@ -52,15 +52,14 @@
 <h2>Question 227 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Reduce risk of cookie replay attacks with web and CLI sessions. Which two?
+Ensure that all Cloud Storage buckets are created with 'Public Access Prevention' enabled by default. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Shorter session control duration.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Short OAuth token duration.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Short reauthentication policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Third-party IdP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Security Key Authentication with 2SV.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: storage.publicAccessPrevention</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Bucket settings in the Console</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Reduce risk of cookie replay attacks with web and CLI sessions. Which two?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">AE</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Reduce risk of cookie replay attacks with web and CLI sessions. Which two?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: AE.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Shorter session duration: Krótszy czas sesji sprawia, że skradzione ciasteczko sesyjne wygasa szybciej, co drastycznie ogranicza okno czasowe dla hakerów próbujących je wykorzystać.
-E. Security Key (FIDO2): Klucze fizyczne są jedyną metodą MFA, która weryfikuje pochodzenie (origin) żądania. Nawet jeśli haker skradnie ciasteczko, nie będzie mógł go użyć na innym urządzeniu bez fizycznego klucza, który jest powiązany z daną sesją i przeglądarką.
+B. Organization Policy (PAP): Polityka `storage.publicAccessPrevention` jest najskuteczniejszym sposobem na globalne zablokowanie publicznych bucketów. Gdy jest włączona na poziomie organizacji lub projektu, Google Cloud automatycznie blokuje każdą próbę nadania uprawnień `allUsers` lub `allAuthenticatedUsers`.
 
 Dlaczego inne są błędne:
-B. OAuth token duration: Dotyczy kont serwisowych i API, a pytanie precyzuje 'sessions' (zazwyczaj sesje użytkowników ludzkich).
-C. Reauthentication policy: Jest blisko, ale 'Session control duration' (A) jest bardziej bezpośrednim parametrem dla 'cookie replay'.
-D. Third-party IdP: Sama zmiana dostawcy tożsamości nie chroni przed kradzieżą i ponownym użyciem ciasteczka Google Cloud.
+A. IAM: Nie zapobiega pomyłkom administratorów przy nadawaniu ról.
+C. Console settings: To akcja manualna na pojedynczym zasobie, nie zapewnia 'default across org'.
+D. VPC Service Controls: Blokuje exfiltration przez API, ale nie zarządza 'publiczną dostępnością' plików w internecie w tak bezpośredni sposób jak PAP.
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na AE. Krótkie sesje i fizyczne klucze to najskuteczniejsza obrona.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To fundament ochrony danych w GCS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: AE</b></p>
-<p><b>Głęboka analiza:</b> Atak 'Cookie Replay' polega na skopiowaniu ciasteczka sesyjnego z komputera ofiary. Nowoczesne systemy Endpoint Verification próbują powiązać ciasteczko z ID sprzętowym komputera, co dopełnia ochronę.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na Reddit podkreślają, że PAP (B) to 'must-have' dla firm regulowanych. Chroni ona przed najczęstszym błędem ludzkim – przypadkowym upublicznieniem danych firmowych przez jednego dewelopera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>
+<li><a href="https://cloud.google.com/storage/docs/public-access-prevention" target="_blank">https://cloud.google.com/storage/docs/public-access-prevention</a></li>
 
 </ul>
 </div>

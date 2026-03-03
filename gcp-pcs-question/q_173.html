@@ -52,14 +52,14 @@
 <h2>Question 173 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Encryption service: rotation every 45 days, FIPS 140-2 Level 3, US redundancy. Which solution?
+Grant a user access to view security findings in SCC only for projects with a specific label (e.g., department:finance). Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CMEK with Cloud KMS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> CMEK with Cloud HSM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> CSEK.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google-managed.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> IAM Conditions</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Service Controls</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy</li>
 
 </ul>
 </div>
@@ -79,24 +79,23 @@ Encryption service: rotation every 45 days, FIPS 140-2 Level 3, US redundancy. W
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud HSM: To usługa sprzętowych modułów bezpieczeństwa Google Cloud. Jako jedyna posiada certyfikację FIPS 140-2 na poziomie <b>Level 3</b> (standardowy Cloud KMS to Level 1). Cloud HSM wspiera automatyczną rotację (np. co 45 dni) i jest dostępny w konfiguracjach multi-regionalnych (US redundancy).
+B. IAM Conditions: Pozwalają na nadanie roli (np. `securitycenter.findingsViewer`) pod pewnym warunkiem. Jednym z dostępnych warunków jest sprawdzenie atrybutów zasobu (Resource Labels). Dzięki temu użytkownik zobaczy alerty tylko z projektów oznaczonych jako 'finance'.
 
 Dlaczego inne są błędne:
-A. Cloud KMS (software): Posiada certyfikację tylko Level 1. Nie spełnia wymogu fizycznej ochrony klucza na poziomie Level 3.
-C. CSEK: Wymaga ręcznej rotacji przez klienta (wysyłanie nowego klucza), Google nie może go 'automatycznie rotować co 45 dni'.
-D. Google-managed: Użytkownik nie ma wpływu na harmonogram rotacji (zazwyczaj co kilka lat, a nie 45 dni).
+A. Standard IAM: Bez warunków (Conditions) rola działałaby na wszystkich projektach w folderze/organizacji.
+C, D: Nie służą do granularnego nadawania uprawnień do odczytu alertów SCC.
 
-Konsensus społeczności ExamTopics: 100% na B. Level 3 = HSM.</pre>
+Konsensus społeczności ExamTopics: 100% na B. IAM Conditions to potężne narzędzie precyzyjnej kontroli dostępu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> FIPS 140-2 Level 3 wymaga odporności na fizyczną ingerencję (tamper-evident). Cloud HSM to fizyczne urządzenia w serwerowniach Google, do których dostęp jest niemożliwy nawet dla personelu Google.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci przypominają: Tagi (Tags) są nowszym i bezpieczniejszym mechanizmem niż Etykiety (Labels) dla warunków IAM, ponieważ Etykiety może zmienić każdy Project Editor, a Tagi są zarządzane centralnie. Jednak w starszych pytaniach 'Labels' są często używane jako synonim atrybutu do filtrowania.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/hsm/docs/fips-140-2-level-3-compliance" target="_blank">https://cloud.google.com/hsm/docs/fips-140-2-level-3-compliance</a></li>
+<li><a href="https://cloud.google.com/iam/docs/conditions-overview" target="_blank">https://cloud.google.com/iam/docs/conditions-overview</a></li>
 
 </ul>
 </div>

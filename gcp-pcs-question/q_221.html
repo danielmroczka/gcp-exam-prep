@@ -52,14 +52,14 @@
 <h2>Question 221 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Alert about new VM with external IP despite folder policy deny. What caused this?
+Protect a GKE cluster against 'Pod-to-Pod' unauthorized communication within the same cluster. Which feature?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Static IP reserved before policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Dry run mode.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Project level overwrite with 'allow'.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Org level 'allow' overwrite.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> VPC Firewall</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Network Policies</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Master Authorized Networks</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Alert about new VM with external IP despite folder policy deny. What caused this
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Alert about new VM with external IP despite folder policy deny. What caused this
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Project level overwrite: W hierarchii GCP polityki organizacji mogą być nadpisywane na niższych poziomach. Jeśli administrator projektu ustawił własną politykę `compute.restrictPublicIp` na 'Allow All' i wyłączył dziedziczenie (inherit: false), to ta polityka wygrywa z restrykcją z poziomu folderu.
+B. Network Policies: To wewnątrzklastrowy firewall dla Kubernetes. Pozwala na zdefiniowanie reguł ruchu między podami (np. 'Pod A może rozmawiać tylko z Podem B'). Bez tego domyślnie wszystkie pody w klastrze mogą rozmawiać ze wszystkimi.
 
 Dlaczego inne są błędne:
-A. Static IP: Nawet jeśli IP było zarezerwowane, polityka prewencyjna powinna zablokować PRZYPIĘCIE go do nowej maszyny.
-B. Dry run mode: W politykach organizacji (Org Policy) nie istnieje tryb 'dry run' w taki sam sposób jak w VPC SC (choć jest simulator). Polityka jest albo aktywna, albo nie.
-D. Org level: Polityka z poziomu Organizacji jest NAD folderem. Folder nadpisuje Org, a Projekt nadpisuje Folder. 'Góra' nie może nadpisać 'dołu' bez zmiany ustawień na dole.
+A. VPC Firewall: Działa na poziomie węzłów (maszyn VM), nie widzi ruchu między kontenerami na tej samej maszynie.
+C. Cloud Armor: Chroni ruch zewnętrzny.
+D. Master Authorized Networks: Chroni API klastra, nie komunikację między aplikacjami.
 
-Konsensus społeczności ExamTopics: 100% na C. Klasyczne zrozumienie dziedziczenia i nadpisywania (override) w hierarchii GCP.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Pod-to-Pod security = Network Policies.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Aby zapobiec takim sytuacjom, administrator organizacji może użyć flagi 'Locked', która uniemożliwia nadpisywanie danej polityki na niższych szczeblach hierarchii.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na GitHubie specjaliści od K8s przypominają: aby Network Policies (B) działały, Twój klaster musi używać odpowiedniego sterownika sieci (np. Calico lub GKE Dataplane V2). Zawsze włączaj to na początku tworzenia klastra!</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy</a></li>
 
 </ul>
 </div>

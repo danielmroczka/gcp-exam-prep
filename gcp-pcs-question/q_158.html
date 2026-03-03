@@ -52,14 +52,14 @@
 <h2>Question 158 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Web app logs preserved for 12 years within Europe. Minimize overhead and cost-effective. What to do?
+Protect your VPC from data exfiltration where an authorized user tries to copy data from your Cloud Storage to a bucket in their personal GCP project. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> GCS bucket in EUROPE-WEST1, modify code.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Logging agent to custom log bucket in EUROPE-WEST1 with 12y retention.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Pub/Sub to GCS in EUROPE-WEST1.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Custom retention policy of 12y on EUROPE-WEST1 log bucket.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud IAM</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> VPC Service Controls</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Firewall rules</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Armor</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Web app logs preserved for 12 years within Europe. Minimize overhead and cost-ef
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud Logging Log Bucket (retention): Cloud Logging pozwala na tworzenie własnych 'log buckets' z retencją do 10 lat (domyślnie w UI, więcej przez API/CLI). Możesz wskazać lokalizację (EUROPE-WEST1), co spełnia wymóg rezydencji. Użycie agenta na VM (B) automatyzuje zbieranie bez zmiany kodu aplikacji (A).
+B. VPC Service Controls: Jest to jedyna usługa, która potrafi zapobiec kopiowaniu danych Między projektami na poziomie API Google. Tworzy perymetr, który blokuje dostęp do danych z zewnątrz oraz uniemożliwia wysyłanie danych do zasobów (bucketów) niebędących częścią tego perymetru.
 
 Dlaczego inne są błędne:
-A. Modify code: Zmiana kodu jest kosztowna i zwiększa narzut (overhead).
-C. Pub/Sub to GCS: To bardziej skomplikowany rurociąg niż natywna funkcja 'Log Buckets'. GCS ma wprawdzie dłuższą retencję, ale Log Buckets są łatwiejsze w analizie historycznej.
-D. Custom retention: Ta opcja nie precyzuje SKĄD biorą się logi (wymagany agent). B jest kompletną odpowiedzią 'end-to-end'.
+A. IAM: Uprawniony użytkownik MOŻE czytać dane. IAM nie zabroni mu wysłać tych danych do innego bucketu, do którego też ma uprawnienia (np. prywatnego).
+C. Firewall: Chroni sieć, nie 'rozumie' operacji kopiowania między API Google.
+D. Cloud Armor: Chroni aplikacje webowe przed atakami typu SQLi/DDoS.
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na B. Log Buckets to nowoczesna metoda długoterminowej retencji w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% na B. VPC SC to definicja ochrony przed eksfiltracją.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Od niedawna Cloud Logging wspiera Log Analytics, co pozwala na przeszukiwanie tych 12-letnich logów za pomocą SQL, co jest ogromną zaletą przy audytach.</p>
+<p><b>Analiza spornych kwestii (AI):</b> To pytanie jest kluczowe dla zrozumienia różnicy między Autoryzacją (IAM) a Granicą Sieciową (VPC SC). Na forach inżynierowie nazywają VPC SC 'zaporą ogniową dla API', która chroni dane przed 'zaufanymi, ale nieuczciwymi' użytkownikami.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/routing/overview#buckets" target="_blank">https://cloud.google.com/logging/docs/routing/overview#buckets</a></li>
+<li><a href="https://cloud.google.com/vpc-service-controls" target="_blank">https://cloud.google.com/vpc-service-controls</a></li>
 
 </ul>
 </div>

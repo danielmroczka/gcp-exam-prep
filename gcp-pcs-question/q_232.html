@@ -52,14 +52,14 @@
 <h2>Question 232 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-separate prod and dev logs. Developers see dev logs, security see all. Minimal privilege. What to do?
+Analyze VPC network traffic to detect unauthorized port scanning from an internal VM. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> logging.viewer at org for security, at dev folder for developers.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> logging.viewer at org for security, logging.admin at org for developers.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> logging.admin for security, logging.viewer for developers at folder.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> logging.admin at org for both.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ separate prod and dev logs. Developers see dev logs, security see all. Minimal p
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ separate prod and dev logs. Developers see dev logs, security see all. Minimal p
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Hierarchical IAM: Nadanie roli `logging.viewer` na poziomie Organizacji sprawia, że zespół Security widzi logi ze wszystkich projektów (dziedziczenie w dół). Nadanie tej samej roli deweloperom TYLKO na poziomie folderu 'Dev' sprawia, że nie widzą oni niczego w folderze 'Prod'. To idealnie realizuje zasadę najniższych uprawnień.
+B. Cloud IDS: To jedyne narzędzie w GCP z silnikiem inspekcji behawioralnej ruchu 'East-West'. Potrafi rozpoznać wzorzec 'Port Scanning' (próby połączeń na wiele portów w krótkim czasie) i wygenerować alert bezpieczeństwa.
 
 Dlaczego inne są błędne:
-B, D. Admin at org: Nadawanie roli Admina lub Viewer na poziomie Organizacji deweloperom dałoby im wgląd w logi produkcyjne, co jest zabronione.
-C. Admin for security: Viewer zazwyczaj wystarcza do przeglądania logów. Admin to zbyt wysokie uprawnienie dla zespołu, który ma tylko 'widzieć' logi.
+A. Cloud Armor: Chroni tylko Load Balancer.
+C. Flow Logs: Rejestrują połączenia, ale musiałbyś sam pisać algorytmy, by odróżnić skanowanie portów od zwykłego ruchu. IDS (B) robi to automatycznie.
+D. IAP: Dla ludzi, nie dla maszyn.
 
-Konsensus społeczności ExamTopics: 100% na A. To klasyczne wykorzystanie hierarchii zasobów GCP.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Skanowanie portów = Intrusion Detection.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Dzięki temu rozwiązaniu nie musisz zarządzać uprawnieniami w każdym projekcie osobno. Folder 'Dev' staje się logicznym kontenerem uprawnień dla programistów.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na forach zwraca uwagę na 'Lateral Movement'. Skanowanie portów jest pierwszym krokiem hakera po zainfekowaniu jednej VM w Twojej sieci. Cloud IDS (B) jest kluczowy, by złapać atak ZANIM haker dobierze się do bazy danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/access-control-folders" target="_blank">https://cloud.google.com/resource-manager/docs/access-control-folders</a></li>
+<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
 
 </ul>
 </div>

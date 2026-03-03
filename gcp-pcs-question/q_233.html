@@ -52,15 +52,14 @@
 <h2>Question 233 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Automate regular patching in VMs and view data across projects. Which two?
+Ensure that all Compute Engine instances are created with 'Confidential Computing' enabled across the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> View data in VM Manager OS patch management.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Artifact Registry.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SCC dashboard.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SCC Rapid Vulnerability Detection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Deploy patches with VM Manager OS patch management.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: compute.restrictConfidentialComputing</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Instance Templates</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Automate regular patching in VMs and view data across projects. Which two?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">AE</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,27 +76,27 @@ Automate regular patching in VMs and view data across projects. Which two?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: AE.
+<pre>Odpowiedź: B. (Technicznie: Wymuszanie przez Org Policy).
 
 Wyjaśnienie (Dlaczego poprawna):
-E. Deploy patches: VM Manager pozwala na tworzenie 'Patch Jobs', które automatycznie instalują poprawki na systemach Linux i Windows.
-A. View data: Ten sam moduł dostarcza zbiorczy widok (Compliance Dashboard) pokazujący stan aktualizacji maszyn we wszystkich projektach w organizacji.
+B. Organization Policy: Google Cloud oferuje polityki organizacji pozwalające na wymuszenie użycia specyficznych technologii. Chociaż nazwa polityki może brzmieć `constraints/compute.requireConfidentialComputing`, to mechanizm 'Organization Policy' (B) jest jedynym w opcjach, który potrafi technicznie WYMUSIĆ tę cechę dla całej floty.
 
 Dlaczego inne są błędne:
-B. Artifact Registry: Służy do przechowywania obrazów kontenerów i pakietów, nie zarządza procesem aktualizacji systemów operacyjnych na VM.
-C, D. SCC: Pokazują, że maszyna MA podatności (vulnerabilities), ale nie służą do ich automatycznej NAPRAWY (patchowania) tak jak VM Manager.
+A. IAM: Nie steruje parametrami technicznymi VM.
+C. Templates: Deweloper może je pominąć.
+D. VPC SC: Dla API, nie dla RAM-u maszyny VM.
 
-Konsensus społeczności ExamTopics: 100% na AE. VM Manager to jedyne narzędzie do aktywnego patchowania floty maszyn.</pre>
+Konsensus społeczności ExamTopics: Zdecydowana większość na B. Org Policy to standard dla 'Corporate Guardrails'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: AE</b></p>
-<p><b>Głęboka analiza:</b> VM Manager jest darmowy do 100 maszyn miesięcznie, co czyni go świetnym rozwiązaniem również dla mniejszych środowisk.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na Reddit specjaliści przypominają: Confidential Computing wymaga specyficznego sprzętu (AMD EPYC). Jeśli wymusisz to polityką (B), deweloperzy nie będą mogli tworzyć tańszych instancji typu N1 czy E2. To ważna decyzja biznesowo-techniczna.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/os-patch-management" target="_blank">https://cloud.google.com/compute/docs/os-patch-management</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/overview</a></li>
 
 </ul>
 </div>

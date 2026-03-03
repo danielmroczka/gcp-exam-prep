@@ -52,14 +52,14 @@
 <h2>Question 214 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Encrypt data while in use by VMs. Policy enforced across organization. What to do?
+What is the primary purpose of the Google Cloud Confidential VMs?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CMEK org policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Confidential VM org policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> EKM org policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Default encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate VM patching.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To encrypt data in use (in RAM) using hardware-based encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage SSH keys.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To provide a VPN for VMs.</li>
 
 </ul>
 </div>
@@ -79,19 +79,19 @@ Encrypt data while in use by VMs. Policy enforced across organization. What to d
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Confidential VM: Jest to technologia Google Cloud oparta na procesorach AMD SEV, która szyfruje dane bezpośrednio w pamięci RAM podczas ich przetwarzania (in use). Użycie polityki organizacji `compute.restrictNonConfidentialComputing` wymusza na wszystkich deweloperach tworzenie wyłącznie takich bezpiecznych maszyn.
+B. Confidential VMs: To technologia chroniąca dane 'w użyciu'. Wykorzystuje sprzętowe szyfrowanie pamięci RAM (np. AMD SEV), dzięki czemu nawet jeśli haker (lub Google) uzyska dostęp do fizycznej pamięci serwera, zobaczy tylko zaszyfrowane dane.
 
 Dlaczego inne są błędne:
-A, C, D: Chronią dane 'at rest' (na dysku). Gdy procesor musi wykonać obliczenia, dane są deszyfrowane w RAM, gdzie bez Confidential VM mogą być podatne na ataki typu 'cold boot' lub dostęp z poziomu hypervisora.
+A, C, D: To funkcje innych usług (VM Manager, OS Login, Cloud VPN).
 
-Konsensus społeczności ExamTopics: 100% na B. Dane 'in use' = Confidential Computing.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Confidential Computing = Encryption in Use.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Confidential VMs są kluczowe dla scenariuszy Multi-party Computation, gdzie kilka firm chce wspólnie analizować dane bez wzajemnego udostępniania ich treści jawnej.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie na forach podkreślają, że Confidential VMs (B) to 'trzeci filar' szyfrowania. GCP szyfruje dane 'at rest' (dysk) i 'in transit' (sieć) domyślnie. Ta technika zamyka lukę, chroniąc dane podczas ich aktywnego procesowania w procesorze i pamięci.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction" target="_blank">https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction</a></li>

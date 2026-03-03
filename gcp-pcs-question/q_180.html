@@ -52,14 +52,14 @@
 <h2>Question 180 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Software supply chain threats. Deliver provenance for the build. What to do?
+Grant a user permission to create and manage security policies in Cloud Armor across the organization. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> External auditor.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> PGP sign output artifacts.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> GitHub open source, bug bounty.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SLSA level 3 assurance via Cloud Build.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/compute.networkAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/compute.securityAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.admin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/iam.securityAdmin</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Software supply chain threats. Deliver provenance for the build. What to do?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ Software supply chain threats. Deliver provenance for the build. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. SLSA Level 3: SLSA (Supply-chain Levels for Software Artifacts) to standard bezpieczeństwa budowania oprogramowania. Cloud Build posiada wbudowaną funkcję generowania danych o pochodzeniu (provenance), które są chronione przed modyfikacją (falsification). Spełnienie wymogów Level 3 gwarantuje, że proces budowania był izolowany i audytowalny.
+B. compute.securityAdmin: Ta rola daje pełne uprawnienia do zarządzania zasobami bezpieczeństwa sieciowego, takimi jak reguły firewalla, certyfikaty SSL oraz właśnie polityki Cloud Armor.
 
 Dlaczego inne są błędne:
-B. PGP signing: To tylko technika, SLSA to cały framework procesowy i standard bezpieczeństwa uznawany przez Google i branżę.
-A, C: Są to działania wspomagające, ale nie zapewniają technicznego dowodu pochodzenia (provenance) w sposób zintegrowany z platformą budowania.
+A. networkAdmin: Skupia się na routingu, podsieciach i VPN, nie ma pełnych praw do edycji polityk bezpieczeństwa (Cloud Armor).
+C. compute.admin: Daje te uprawnienia, ale jest ZBYT szeroka (pozwala też kasować wszystkie maszyny VM), co narusza zasadę Least Privilege.
+D. iam.securityAdmin: Zarządza uprawnieniami LUDZI (IAM), a nie politykami TECHNICZNYMI sieci (Cloud Armor).
 
-Konsensus społeczności ExamTopics: 100% na D. SLSA to obecnie najważniejszy standard supply chain w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To standardowa rola dla 'Security Engineer' w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Provenance zawiera informację o tym, z jakiego repozytorium, jakiego commita i przez jakie narzędzia powstał dany obraz. Binary Authorization może następnie sprawdzać ten atest SLSA przed wdrożeniem.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele osób myli role 'Security Admin' (D) i 'Compute Security Admin' (B). Zapamiętaj: Rola D jest od IAM (ludzie). Rola B jest od Firewalla/Armora (sieć). To najczęstsza pułapka na egzaminie Professional Cloud Security Engineer.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/build/docs/securing-builds/generate-build-provenance" target="_blank">https://cloud.google.com/build/docs/securing-builds/generate-build-provenance</a></li>
+<li><a href="https://cloud.google.com/compute/docs/access/iam#compute.securityAdmin" target="_blank">https://cloud.google.com/compute/docs/access/iam#compute.securityAdmin</a></li>
 
 </ul>
 </div>

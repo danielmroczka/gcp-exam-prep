@@ -52,15 +52,14 @@
 <h2>Question 171 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Hardened OS image in security team project. Ensure all VMs in org only use that image. Minimize overhead. Which two?
+Rotate an encryption key in Cloud KMS and ensure that all new data is encrypted with the new version, while still being able to decrypt old data. What happens automatically?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> compute.imageUser in own projects.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> compute.imageUser in OS image project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Store image in every project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Image access organization policy constraint.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Remove VM creation permission.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> The old key version is deleted.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> The new key version becomes the 'Primary' version.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> All old data is automatically re-encrypted.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Decryption of old data requires manual version selection.</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Hardened OS image in security team project. Ensure all VMs in org only use that 
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">BD</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Hardened OS image in security team project. Ensure all VMs in org only use that 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: BD.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. compute.imageUser role: Deweloperzy potrzebują tej roli nadanej w projekcie zespołu security, aby ich maszyny w innych projektach mogły 'sięgnąć' po ten konkretny obraz systemu.
-D. Organization Policy: Restrykcja `compute.trustedImageProjects` pozwala zdefiniować listę projektów, z których wolno pobierać obrazy. Ustawienie tej listy tylko na Twój projekt security zablokuje możliwość użycia obrazów publicznych (np. czystego Debiana) czy obrazów z innych projektów.
+B. Primary version: Gdy rotujesz klucz (ręcznie lub automatycznie), nowa wersja staje się wersją 'Primary'. Od tego momentu każde nowe żądanie szyfrowania będzie używać tej nowej wersji. Stare wersje pozostają w stanie 'Enabled', aby umożliwić deszyfrowanie danych, które zostały nimi zabezpieczone w przeszłości.
 
 Dlaczego inne są błędne:
-A. Own projects: Nadanie roli tam nie daje dostępu do obrazu w Innym (bezpiecznym) projekcie.
-C. Store in every project: Ogromny narzut administracyjny (overhead) i trudność w aktualizacji wszystkich kopii obrazu.
-E. Remove permission: Deweloperzy nie mogliby w ogóle tworzyć maszyn, co jest sprzeczne z sensem pracy.
+A. Deleted: Błąd. Skasowanie starej wersji uniemożliwiłoby odczyt starych danych.
+C. Re-encrypted: Google NIE przeprowadza automatycznego re-szyfrowania Twoich TB danych przy rotacji klucza (to byłoby zbyt drogie i obciążające).
+D. Manual selection: Google Cloud automatycznie rozpoznaje, którą wersją klucza dane zostały zaszyfrowane i używa właściwej wersji przy deszyfrowaniu (jeśli tylko użytkownik ma do niej uprawnienia).
 
-Konsensus społeczności ExamTopics: 100% poparcia dla BD. To standardowy wzorzec 'Golden Image' w chmurze.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To kluczowa zasada działania KMS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: BD</b></p>
-<p><b>Głęboka analiza:</b> To połączenie zapewnia tzw. 'Enforcement' (D) oraz 'Enablement' (B). Deweloperzy nadal mogą tworzyć maszyny, ale system pilnuje, aby ich fundament był bezpieczny.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele osób na egzaminie myśli, że rotacja = re-szyfrowanie (C). Eksperci wyjaśniają: re-szyfrowanie to proces manualny (tzw. scrubbing lub re-keying). Rotacja w KMS to tylko zmiana klucza dla 'przyszłych' operacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/images/restricting-image-access" target="_blank">https://cloud.google.com/compute/docs/images/restricting-image-access</a></li>
+<li><a href="https://cloud.google.com/kms/docs/key-rotation" target="_blank">https://cloud.google.com/kms/docs/key-rotation</a></li>
 
 </ul>
 </div>

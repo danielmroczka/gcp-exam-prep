@@ -52,14 +52,14 @@
 <h2>Question 216 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Continuously evaluated against CIS Benchmark. Disregard irrelevant controls. Automated. What to do?
+Grant a user access to manage and view all organization-level policies. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Tag findings, mute manually.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SCC Premium, mute rules.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Download CSV, mark manually.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> External audit company.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.organizationAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/orgpolicy.policyAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/iam.securityAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/resourcemanager.organizationViewer</li>
 
 </ul>
 </div>
@@ -79,23 +79,24 @@ Continuously evaluated against CIS Benchmark. Disregard irrelevant controls. Aut
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. SCC Mute Rules: Security Command Center Premium posiada wbudowany moduł Compliance, który stale ocenia Twoją chmurę względem CIS Benchmark. Funkcja 'Mute rules' pozwala na automatyczne ukrywanie (wyciszanie) znalezisk, które uznałeś za nieistotne lub zaakceptowałeś ryzyko, co zapewnia 'zautomatyzowaną' i czystą listę rzeczywistych problemów.
+B. orgpolicy.policyAdmin: To najbardziej granularna rola do zarządzania politykami organizacji (Org Policies). Pozwala na ustawianie restrykcji (np. zakaz zewnętrznych IP) bez nadawania pełnych uprawnień administratora całej firmy.
 
 Dlaczego inne są błędne:
-A, C: Rozwiązania manualne, sprzeczne z wymogiem automatyzacji i ciągłości.
-D. External audit: Jest kosztowny i zazwyczaj odbywa się okresowo (np. raz na rok), a nie 'continuously'.
+A. organizationAdmin: Zdecydowanie za wysoka (może wszystko, łącznie z usuwaniem firmy).
+C. securityAdmin: Zarządza uprawnieniami LUDZI (IAM), a nie 'politykami zasobów' (Org Policy).
+D. Viewer: Tylko do odczytu.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Mute rules to klucz do utrzymania 'hygiene' w SCC.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Separacja obowiązków pomiędzy zarządzaniem tożsamością a zarządzaniem standardami floty.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Możesz stworzyć regułę wyciszającą np. dla wszystkich projektów deweloperskich, gdzie brak kluczy CMEK na bucketach jest akceptowalny, podczas gdy na produkcji nadal będzie to traktowane jako krytyczny alert.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Pamiętaj: `policyAdmin` (B) nie musi mieć dostępu do projektów, aby nałożyć na nie restrykcję. To rola 'Governance', która definiuje reguły gry dla wszystkich innych deweloperów w organizacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security-command-center/docs/how-to-mute-findings" target="_blank">https://cloud.google.com/security-command-center/docs/how-to-mute-findings</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role</a></li>
 
 </ul>
 </div>

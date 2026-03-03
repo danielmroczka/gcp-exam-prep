@@ -52,14 +52,14 @@
 <h2>Question 185 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure OS images across projects are trusted and meet requirements. What to do?
+Identify security misconfigurations like world-readable Cloud Storage buckets across the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Org policy: boot disks created only from trusted image project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Shielded VM service on all projects.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Function monitor new VM creation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Automate security scanner for CVEs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Security Command Center: Security Health Analytics</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Event Threat Detection</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Flow Logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Ensure OS images across projects are trusted and meet requirements. What to do?
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. compute.trustedImageProjects: Jest to polityka organizacji, która pozwala zdefiniować 'białą listę' projektów, z których wolno pobierać obrazy systemowe. Dzięki temu możesz wymusić, aby każda VM w firmie startowała tylko z Twojego 'utwardzonego' projektu security, a nie z publicznych (i potencjalnie niezabezpieczonych) obrazów.
+A. Security Health Analytics (SHA): To moduł SCC, który automatycznie skanuje konfigurację Twoich zasobów (Posture Management). Wykrywa on setki błędów, w tym publicznie dostępne buckety, i zgłasza je jako 'findings'.
 
 Dlaczego inne są błędne:
-B. Shielded VM: Zapewnia integralność, ale nie zapobiega użyciu 'zaufanego' (ale źle skonfigurowanego) obrazu z obcego źródła.
-C. Cloud Function: To rozwiązanie reaktywne. Lepiej zablokować akcję u źródła (A).
-D. Security scanner: Powie Ci o problemach po fakcie, nie zapobiega ich powstaniu.
+B. ETD: Szuka śladów ataków (np. mining, brute force) w logach, a nie błędów w Statycznej Konfiguracji.
+C. Flow Logs: Pokazują ruch, ale nie wiedzą czy bucket jest publiczny (ruch do bucketu to API, nie Flow Logi).
+D. Audit Logs: Powie Ci kto udostępnił bucket, ale nie daje zbiorczego dashboardu 'co jest źle teraz'.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowy mechanizm 'Enforcement' dla standardów OS.</pre>
+Konsensus społeczności ExamTopics: 100% na A. SHA to fundament widoczności bezpieczeństwa.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Polityka ta blokuje zarówno operacje przez Konsolę, jak i przez gcloud/Terraform. Jest to fundament ładu (governance) w dużej skali.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele osób pyta: 'A co z Forseti?'. Wyjaśnienie: Forseti było prekursorem, ale obecnie SHA (A) jest wbudowanym, natywnym i wspieranym przez Google rozwiązaniem klasy Enterprise dostępnym w konsoli SCC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/compute/docs/images/restricting-image-access" target="_blank">https://cloud.google.com/compute/docs/images/restricting-image-access</a></li>
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview</a></li>
 
 </ul>
 </div>

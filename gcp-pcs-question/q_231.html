@@ -52,14 +52,14 @@
 <h2>Question 231 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
- hold key material fully under control, rationale for accessing key required. What to do?
+Grant a user access to manage and view all organization policies, but not modify VPC networks. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> CMEK, IAM deny.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Generate on-prem, upload to KMS, activate KAJ.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> CMEK backed by HSM, data access logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> External key in KMS (EKM), activate KAJ.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.organizationAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/orgpolicy.policyAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.networkAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/viewer</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. External key (EKM) + KAJ: 'Fully under control' oznacza, że materiał klucza nie może znajdować się w infrastrukturze Google (co zapewnia EKM). 'Rationale required' to definicja usługi Key Access Justifications, która wymusza podanie powodu każdego użycia klucza.
+B. orgpolicy.policyAdmin: Jak już ustaliliśmy (216, 222), ta rola służy do zarządzania Standardami Floty (Governance). Pozwala na nałożenie zakazu np. tworzenia publicznych IP, ale sama w sobie nie daje uprawnień do edycji sieci VPC (subnets, routes).
 
 Dlaczego inne są błędne:
-A, C. CMEK: Materiał klucza jest w systemach Google (nawet jeśli w HSM), co nie spełnia wymogu pełnej kontroli zewnętrznej.
-B. Upload to KMS: To tzw. 'Imported Key'. Od momentu wgrania, Google ma dostęp do materiału klucza w swojej pamięci, co niweluje wymóg 'material fully under control' (poza Google).
+A. organizationAdmin: Może wszystko, w tym zmieniać sieć.
+C. networkAdmin: Służy właśnie do modyfikacji sieci, co jest zakazane.
+D. Viewer: Tylko do odczytu.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla D. To jedyny model pełnej suwerenności klucza.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Podstawowa separacja obowiązków.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> W tym modelu Google wysyła do Twojego EKM pakiet: 'Chcę odszyfrować dysk X, powód: naprawa błędu systemowego'. Twój EKM może automatycznie odpowiedzieć: 'Odmowa - powód niezgodny z polityką'.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Pytanie to testuje precyzyjne rozróżnienie między 'Governance' (zasady) a 'Infrastructure Administration' (realizacja). Rola B to 'ustawodawca', rola C to 'wykonawca'. Compliance officer powinien mieć tylko rolę B.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/key-access-justifications/docs/overview" target="_blank">https://cloud.google.com/key-access-justifications/docs/overview</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/overview</a></li>
 
 </ul>
 </div>

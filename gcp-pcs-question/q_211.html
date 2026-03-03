@@ -52,15 +52,14 @@
 <h2>Question 211 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-GDPR: data residency and operational sovereignty in EU. Which two?
+Grant a user access to manage and view VPC flow logs, but not other network resources. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Resource locations constraint.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Key Access Justifications.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Identity federation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> VPC Flow Logs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/compute.networkAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/logging.admin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.networkViewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/logging.configWriter</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ GDPR: data residency and operational sovereignty in EU. Which two?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">AC</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,27 +76,27 @@ GDPR: data residency and operational sovereignty in EU. Which two?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: AC.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Resource locations: Gwarantuje, że dane fizycznie spoczywają w Europie (Residency).
-C. Key Access Justifications (KAJ): Daje kontrolę nad użyciem kluczy szyfrujących. Pozwala automatycznie odrzucać prośby o odszyfrowanie danych, jeśli uzasadnienie (np. wsparcie techniczne spoza EU) nie jest zgodne z Twoją polityką suwerenności (Operational Sovereignty).
+B. logging.admin: Chociaż Flow Logi dotyczą sieci, ich Konfiguracja (włączanie/wyłączanie) oraz Przeglądanie odbywa się w usłudze Cloud Logging. Rola `logging.admin` pozwala na pełne zarządzanie logami w projekcie.
 
 Dlaczego inne są błędne:
-B, E: To narzędzia monitoringu technicznego, nie wspierają bezpośrednio wymogów prawnych dot. lokalizacji danych i suwerenności kluczy.
-D. Identity federation: Dotyczy tożsamości, a nie miejsca składowania danych czy kontroli nad kluczami.
+A. networkAdmin: Zbyt wysoka (pozwala zmieniać trasy i firewalle).
+C. networkViewer: Pozwala widzieć sieć, ale nie daje uprawnień do zarządzania konfiguracją Logów (sinks, retention).
+D. configWriter: Pozwala tworzyć zlewy logów, ale `logging.admin` (B) jest bardziej kompletną odpowiedzią dla 'manage and view' wszystkich aspektów logowania audytowego sieci.
 
-Konsensus społeczności ExamTopics: 100% na AC. KAJ to przełomowa usługa dla suwerenności danych w EU.</pre>
+Konsensus społeczności ExamTopics: Zdecydowana większość na B. Zarządzanie logami to domena Logging IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: AC</b></p>
-<p><b>Głęboka analiza:</b> KAJ działa tylko z EKM (External Key Manager). Dzięki temu Google nie może odczytać Twoich danych bez Twojej zgody i podania poprawnego powodu dostępu.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> To pytanie jest podchwytliwe. Wiele osób idzie w stronę roli 'Network' (A/C). Jednak w GCP Flow Logi to 'logi', a nie 'sieć'. Jeśli chcesz nimi zarządzać, musisz mieć uprawnienia w stosie Logging, a nie Compute.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/key-access-justifications/docs/overview" target="_blank">https://cloud.google.com/key-access-justifications/docs/overview</a></li>
+<li><a href="https://cloud.google.com/logging/docs/access-control" target="_blank">https://cloud.google.com/logging/docs/access-control</a></li>
 
 </ul>
 </div>

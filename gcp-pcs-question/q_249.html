@@ -52,14 +52,14 @@
 <h2>Question 249 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-AI image classification model security responsibilities. Managed service. What to do?
+Analyze VPC network traffic to detect data exfiltration via DNS exfiltration (unusual query volumes). Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> PaaS transfers all concerns to Google.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Focus on code and IAM within dev team.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Shared responsibility model: IAM, secure upload/download, monitoring logs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Custom firewalls and intrusion detection.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Event Threat Detection (ETD) with Cloud Logging</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ AI image classification model security responsibilities. Managed service. What t
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Shared responsibility: Nawet w usługach AI (PaaS/SaaS) obowiązuje model współdzielony. Google odpowiada za bezpieczeństwo samej infrastruktury ML, ale to TY odpowiadasz za to, kto ma dostęp do modelu (IAM), czy dane przesyłane do modelu są bezpieczne (upload/download) oraz za monitorowanie logów użycia w celu wykrycia nadużyć.
+C. ETD + Logging: Podobnie jak w pytaniu 223, ETD analizuje logi (Cloud DNS i VPC Flow Logs) i szuka anomalii ilościowych. Nagły skok liczby zapytań DNS o unikalne subdomeny jest klasyczną sygnaturą wycieku danych przez protokół DNS, co ETD wykrywa automatycznie.
 
 Dlaczego inne są błędne:
-A. PaaS transfers all: Błąd. Nigdy nie oddajesz całej odpowiedzialności Google. Zawsze odpowiadasz za konfigurację dostępu i swoje dane.
-B. Focus on code only: To za mało. Musisz dbać o cały cykl życia danych i monitorowanie platformy.
-D. Custom firewalls: W usługach zarządzanych typu Vertex AI nie masz zazwyczaj dostępu do warstwy firewalli Google, na których działają te modele.
+A. Cloud Armor: Nie widzi ruchu DNS Twoich maszyn VM.
+B. Cloud IDS: Wykrywa tunelowanie (treść), ale ETD (C) jest częściej optymalną odpowiedzią na 'unusual volumes' (statystyczne anomalie w logach).
+D. IAP: Nie dotyczy ruchu sieciowego DNS.
 
-Konsensus społeczności ExamTopics: 100% na C. Zrozumienie modelu odpowiedzialności to fundament certyfikacji Security.</pre>
+Konsensus społeczności ExamTopics: 100% na C. Detekcja exfiltration na podstawie logów = ETD.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Google odpowiada za to, żeby nikt 'z boku' nie włamał się do Twojego modelu. Ty odpowiadasz za to, żebyś sam nie dał dostępu niepowołanym osobom poprzez złe role IAM.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Na GitHubie eksperci zauważają, że hakerzy często używają wolnych, ale stałych strumieni zapytań DNS, by nie wywołać alarmu. ETD (C) wykorzystuje modele ML Google, by odróżnić normalny ruch DNS od 'złośliwego szeptu' eksfiltracji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview</a></li>
 
 </ul>
 </div>

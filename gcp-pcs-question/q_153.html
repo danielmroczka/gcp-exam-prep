@@ -52,14 +52,14 @@
 <h2>Question 153 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Use Cloud External Key Manager (EKM) to encrypt BigQuery data. First steps?
+You need to analyze VPC flow logs to identify data exfiltration attempts. Which service provides a way to run SQL queries over these logs?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create key with URI in GCP project, grant project access to EKM partner.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Create key with URI in Cloud KMS, grant project access.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Create key with URI in supported EKM partner system, grant partner access to GCP project.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Create external key in Cloud KMS.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery via Log Sink</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Trace</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Security Command Center</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Use Cloud External Key Manager (EKM) to encrypt BigQuery data. First steps?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,25 +76,27 @@ Use Cloud External Key Manager (EKM) to encrypt BigQuery data. First steps?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Partner system key creation: W modelu EKM, materiał klucza (key material) musi fizycznie znajdować się poza infrastrukturą Google. Pierwszym krokiem jest więc stworzenie klucza u certyfikowanego partnera (np. Equinix, Thales). Dopiero po uzyskaniu URI (identyfikatora) tego klucza, można go 'podpiąć' do Cloud KMS.
+A. BigQuery: Logi Flow (VPC Flow Logs) można wyeksportować za pomocą mechanizmu 'Log Sink' do BigQuery. Tam, dzięki potężnemu silnikowi SQL, można analizować miliony rekordów w poszukiwaniu nietypowych ilości danych wysyłanych pod nieznane, zewnętrzne adresy IP.
 
 Dlaczego inne są błędne:
-A, B, D: Wszystkie te opcje sugerują, że tworzenie klucza zaczyna się wewnątrz projektu GCP lub KMS, co jest błędne dla kluczy *zewnętrznych* (EKM). KMS służy tylko jako interfejs (referencja) do klucza, który już istnieje u partnera.
+B. Cloud Armor: To firewall, nie służy do analityki historycznej SQL.
+C. Cloud Trace: Służy do analizy opóźnień aplikacji.
+D. SCC: Pokazuje gotowe alerty, ale nie jest interaktywnym silnikiem SQL do samodzielnej analizy surowych Flow Logów.
 
-Konsensus społeczności ExamTopics: 100% na C. Klucz EKM powstaje 'na zewnątrz' i jest 'rejestrowany' wewnątrz chmury.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla A. Analiza Big Data logów = BigQuery.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Przy EKM każde żądanie szyfrowania/deszyfrowania powoduje wywołanie API z Google Cloud do infrastruktury partnera. Jeśli łącze z partnerem padnie, dostęp do danych w chmurze zostanie zablokowany.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na GitHubie sugerują użycie gotowych dashboardów w Lookerze podpiętych pod BigQuery. Pozwala to na wizualizację trendów wyjścia danych (Egress), co znacznie ułatwia wykrycie 'powolnej' eksfiltracji, która mogłaby umknąć standardowym systemom IDS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>
+<li><a href="https://cloud.google.com/vpc/docs/using-flow-logs#bq-queries" target="_blank">https://cloud.google.com/vpc/docs/using-flow-logs#bq-queries</a></li>
 
 </ul>
 </div>

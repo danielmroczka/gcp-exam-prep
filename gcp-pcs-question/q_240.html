@@ -52,14 +52,14 @@
 <h2>Question 240 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-issue certificates for many HTTP load balancer frontends from on-prem CA. Minimal affect, scale. What to do?
+What is the primary benefit of using Google Cloud Access Approval with Cloud KMS?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Certificate Manager Google managed public certs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Subordinate CA in Google Certificate Authority Service from on-prem PKI.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Certificate Manager import certificates.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> External TCP/UDP Network LB.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate key rotation.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To provide a way to approve or deny requests by Google personnel to use your keys for cryptographic operations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage IAM roles for KMS.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To protect against DDoS.</li>
 
 </ul>
 </div>
@@ -79,24 +79,22 @@ issue certificates for many HTTP load balancer frontends from on-prem CA. Minima
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Certificate Authority Service (CAS): Pozwala na stworzenie w GCP urzędu certyfikacji (Subordinate CA), który jest podpisany przez Twój lokalny (on-prem) Root CA. Dzięki temu możesz automatycznie wystawiać tysiące certyfikatów dla Load Balancerów, które będą zaufane w Twojej firmie, bez ręcznego importowania każdego z nich.
+B. Access Approval (KMS): Jeśli pracownik Google musi użyć Twojego klucza (np. w procesie odzyskiwania danych), musi poprosić o Twoją ZGODĘ. To najwyższy poziom kontroli operacyjnej nad kluczami szyfrującymi.
 
 Dlaczego inne są błędne:
-A. Google managed public certs: Są zaufane publicznie, ale nie są podpisane przez Twoje firmowe PKI, co może być wymogiem bezpieczeństwa wewnętrznego.
-C. Import certificates: Niewykonalne przy 'many' (dużej skali) ze względu na narzut operacyjny i konieczność ręcznej rotacji każdego z nich.
-D. Network LB: Nie kończy TLS, więc nie rozwiązuje problemu zarządzania certyfikatami na frontendzie (przerzuca problem na maszyny VM).
+A, C, D: Jak w poprzednich pytaniach o Access Approval (200).
 
-Konsensus społeczności ExamTopics: 100% na B. CAS to usługa stworzona do integracji PKI z chmurą.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Kontrola nad ludźmi Google = Access Approval.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> CAS wspiera protokoły automatyzacji (jak ACME), co pozwala na bezobsługową rotację certyfikatów na Load Balancerach.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach podkreślają: CMEK + Access Approval (B) to duet, który sprawia, że Google staje się jedynie 'wynajętym sejfem', do którego tylko TY masz klucz otwierający dostęp dla obsługi.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/certificate-authority-service/docs/overview" target="_blank">https://cloud.google.com/certificate-authority-service/docs/overview</a></li>
+<li><a href="https://cloud.google.com/access-approval/docs/overview" target="_blank">https://cloud.google.com/access-approval/docs/overview</a></li>
 
 </ul>
 </div>

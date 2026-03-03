@@ -52,14 +52,14 @@
 <h2>Question 236 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Regulated workloads: data residency, access requirements, support from same location. What to do?
+Grant a user access to manage and view all VPC service control perimeters across the organization. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Access Transparency.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Deploy Assured Workloads.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Permitted regions.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Data Access and Access Transparency logs.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/accesscontextmanager.policyAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/resourcemanager.organizationAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/compute.networkAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/viewer</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Regulated workloads: data residency, access requirements, support from same loca
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ Regulated workloads: data residency, access requirements, support from same loca
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Assured Workloads: Jest to usługa zaprojektowana dokładnie do rozwiązywania złożonych wymogów regulacyjnych. Automatycznie konfiguruje ona projekt/folder tak, aby spełniał wymogi rezydencji danych (Residency), ogranicza personel wsparcia Google do konkretnych lokalizacji (Support location) i wymusza stosowanie silnego szyfrowania.
+A. accesscontextmanager.policyAdmin: To specyficzna rola do zarządzania perymetrami VPC Service Controls i poziomami dostępu (Access Levels) w Access Context Managerze. Pozwala na pełne zarządzanie granicami danych w całej firmie.
 
 Dlaczego inne są błędne:
-A, D. Logs: Pomagają w audycie, ale nie 'zapewniają' rezydencji ani nie ograniczają fizycznej lokalizacji personelu Google.
-C. Permitted regions: To tylko jeden z elementów (część polityki organizacji), a Assured Workloads to kompletny pakiet (Residency + Compliance + Sovereignty).
+B. organizationAdmin: Zbyt wysoka rola.
+C. networkAdmin: Zarządza routingiem i subnets, nie ma praw do zarządzania 'Perymetrami API' (VPC SC).
+D. Viewer: Tylko do odczytu.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Assured Workloads to 'rozwiązanie pudełkowe' dla rygorystycznych norm.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Perymetry = Access Context Manager Admin.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Assured Workloads wspiera takie standardy jak FedRAMP, IL4, CJIS oraz wymogi specyficzne dla Unii Europejskiej (EU Regions and Support).</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Wiele osób szuka słowa 'VPC' w nazwie roli. Eksperci wyjaśniają: VPC Service Controls to nazwa handlowa, ale technicznie usługa ta rezyduje w Access Context Managerze (A). To częsta pułapka nazewnictwa na egzaminie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/assured-workloads/docs/overview" target="_blank">https://cloud.google.com/assured-workloads/docs/overview</a></li>
+<li><a href="https://cloud.google.com/access-context-manager/docs/access-control" target="_blank">https://cloud.google.com/access-context-manager/docs/access-control</a></li>
 
 </ul>
 </div>

@@ -52,14 +52,14 @@
 <h2>Question 151 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Privacy team uses crypto-shredding (deleting keys) to delete PII. Implement this on GCP while utilizing majority of platform's services and minimizing overhead. What to do?
+Enforce that all Cloud Storage buckets in a specific project must have Uniform bucket-level access enabled. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Client-side encryption, delete keys on-prem.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud External Key Manager.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Customer-managed encryption keys (CMEK).</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Google default encryption.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: storage.uniformBucketLevelAccess</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Bucket settings in the Console</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Privacy team uses crypto-shredding (deleting keys) to delete PII. Implement this
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Privacy team uses crypto-shredding (deleting keys) to delete PII. Implement this
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. CMEK: Cloud KMS (Customer-Managed Encryption Keys) pozwala użytkownikowi na pełne zarządzanie cyklem życia klucza, w tym na jego trwałe usunięcie (destruction). Gdy klucz CMEK zostanie usunięty, wszystkie dane nim zaszyfrowane (np. w GCS, BigQuery, PD) stają się bezpowrotnie nieczytelne. Jest to proces zwany 'crypto-shredding'. Wykorzystanie CMEK jest natywnie wspierane przez większość usług GCP (majority of services), co minimalizuje narzut konfiguracyjny.
+B. Organization Policy: Pozwala na nałożenie odgórnego wymogu `storage.uniformBucketLevelAccess`. Gdy ta polityka jest włączona na poziomie projektu lub folderu, system uniemożliwi stworzenie jakiegokolwiek nowego bucketu z włączonymi ACL-ami oraz zablokuje wyłączenie UBLA w istniejących bucketach.
 
 Dlaczego inne są błędne:
-A. Client-side encryption: Zapewnia bezpieczeństwo, ale wymaga manualnego szyfrowania danych przed wysłaniem do chmury, co zwiększa narzut (overhead) i uniemożliwia korzystanie z wielu natywnych funkcji analitycznych chmury (np. BigQuery nie widzi treści).
-B. Cloud EKM: Służy do trzymania kluczy poza Google. Choć wspiera crypto-shredding, jest bardziej skomplikowany w konfiguracji (większy overhead) niż standardowy CMEK.
-D. Google default: Kluczami zarządza Google. Nie możesz ich 'usunąć', aby wykonać crypto-shredding na życzenie Twojego zespołu privacy.
+A. IAM: Kontroluje kto ma dostęp, ale nie wymusza technicznego sposobu zarządzania tym dostępem (IAM vs ACL).
+C. Console settings: To zmiana manualna dla jednego bucketu, a nie 'wymuszenie' (enforcement) dla całego projektu.
+D. VPC Service Controls: Chroni przed kradzieżą danych przez API, nie zajmuje się konfiguracją uprawnień wewnątrz bucketu.
 
-Konsensus społeczności ExamTopics: 100% na C. CMEK to złoty środek między kontrolą a użytecznością platformy.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Org Policy to standard dla wymuszania konfiguracji zgodnej z polityką firmy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Crypto-shredding jest często jedyną skuteczną metodą usunięcia danych z kopii zapasowych (backupów) rozproszonych po wielu lokalizacjach. Usunięcie klucza nadrzędnego natychmiast unieważnia wszystkie kopie danych.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci podkreślają, że UBLA jest obecnie zalecanym sposobem zarządzania Storage'em, ponieważ upraszcza audyt (wszystko jest w IAM). Użycie polityki organizacji (B) gwarantuje, że żaden deweloper 'przez pomyłkę' nie wystawi pliku światu za pomocą starego mechanizmu ACL.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/cmek" target="_blank">https://cloud.google.com/kms/docs/cmek</a></li>
+<li><a href="https://cloud.google.com/storage/docs/uniform-bucket-level-access" target="_blank">https://cloud.google.com/storage/docs/uniform-bucket-level-access</a></li>
 
 </ul>
 </div>

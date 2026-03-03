@@ -52,14 +52,14 @@
 <h2>Question 176 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Prevent users from exposing objects in buckets externally organization-wide. Least overhead. What to do?
+Grant a user permission to view the IAM policy of an organization, but not change it. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cron job Cloud Function.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Org policy constraints/storage.publicAccessPrevention.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Org policy constraints/storage.uniformBucketLevelAccess.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.organizationAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/resourcemanager.organizationViewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/iam.securityReviewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/viewer</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Prevent users from exposing objects in buckets externally organization-wide. Lea
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Prevent users from exposing objects in buckets externally organization-wide. Lea
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. publicAccessPrevention: Jest to polityka organizacji stworzona specjalnie w tym jednym celu. Jej włączenie na poziomie organizacji sprawia, że żaden użytkownik (nawet z pełnymi uprawnieniami) nie może nadać uprawnień `allUsers` lub `allAuthenticatedUsers` do żadnego bucketu ani obiektu. Jest to rozwiązanie o najmniejszym narzucie (jeden przełącznik w konsoli).
+C. roles/iam.securityReviewer: Ta rola jest zaprojektowana specjalnie do audytu. Daje uprawnienia `getIamPolicy` na wszystkich zasobach, co pozwala widzieć kto ma jakie uprawnienia, bez możliwości ich edycji.
 
 Dlaczego inne są błędne:
-A. Cloud Function: To rozwiązanie reaktywne (naprawia po fakcie), a nie prewencyjne. Wymaga pisania i utrzymywania kodu.
-C. Uniform Access (UBLA): Ułatwia zarządzanie, ale samo w sobie nie zabrania administratorowi nadać uprawnienia `allUsers` w systemie IAM. Wymaga polityki B do pełnej blokady.
-D. VPC Service Controls: Bardzo potężne, ale wprowadza ogromny narzut konfiguracyjny (overhead) i nie jest przeznaczone tylko do blokady publicznych bucketów, lecz do izolacji API.
+A. Admin: Pozwala na zmiany.
+B. Organization Viewer: Pozwala widzieć Strukturę, ale nie daje uprawnienia do podglądu ról przypisanych do użytkowników (IAM Policy).
+D. Viewer: Zbyt szeroka rola (widzi też dane biznesowe), naruszenie 'Least Privilege'.
 
-Konsensus społeczności ExamTopics: 100% na B. Najprostsza i najbardziej skuteczna metoda ochrony przed wyciekiem.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To standardowa rola audytorska.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Po włączeniu tej polityki, każda próba wgrania pliku z flagą 'public-read' zakończy się błędem 403 Access Denied na poziomie API Google.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Pytanie to testuje precyzję. Rola `organizationViewer` (B) brzmi logicznie, ale technicznie nie daje wglądu w uprawnienia innych ludzi. Tylko rola z 'Security' w nazwie (C) otwiera drzwi do audytu bezpieczeństwa IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/storage/docs/public-access-prevention" target="_blank">https://cloud.google.com/storage/docs/public-access-prevention</a></li>
+<li><a href="https://cloud.google.com/iam/docs/understanding-roles#security-reviewer-role" target="_blank">https://cloud.google.com/iam/docs/understanding-roles#security-reviewer-role</a></li>
 
 </ul>
 </div>

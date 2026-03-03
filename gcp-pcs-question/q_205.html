@@ -52,15 +52,14 @@
 <h2>Question 205 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Workload identity federation for external identities. Protect against identity spoofing. Which two?
+What is the primary benefit of using Google Cloud Binary Authorization?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable data access logs for IAM.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Limit external identities impersonating SA.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Dedicated project for pools/providers.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Immutable attributes in attribute mappings.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Limit resources SA can access.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate the build of container images.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To ensure that only trusted and verified container images are deployed to GKE.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage Kubernetes namespaces.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To provide a container registry.</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Workload identity federation for external identities. Protect against identity s
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">CD</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,27 +76,27 @@ Workload identity federation for external identities. Protect against identity s
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: CD.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Dedicated project: Izolacja konfiguracji federacji w osobnym projekcie zapobiega przypadkowym zmianom przez osoby mające dostęp do projektów aplikacyjnych.
-D. Immutable attributes: Używanie niezmiennych atrybutów (np. stałego ID użytkownika zamiast nazwy profilu, która może ulec zmianie u dostawcy IdP) zapobiega atakom polegającym na przejęciu tożsamości poprzez zmianę metadanych po stronie zewnętrznej.
+B. Binary Authorization: To 'bramkarz' (enforcement point) dla GKE. Sprawdza on, czy dany obraz kontenera został podpisany przez Twój pipeline budowania i czy przeszedł testy bezpieczeństwa. Jeśli nie – BinAuth nie pozwoli na uruchomienie takiego poda.
 
 Dlaczego inne są błędne:
-A. Logging: Pomaga w wykryciu ataku PO fakcie, nie 'chroni przed spoofingiem' (nie zapobiega mu).
-B, E: To dobre praktyki IAM ogólnie (Least Privilege), ale nie są specyficzne dla mechanizmu ochrony samej federacji przed 'spoofingiem' (podszywaniem się) tak jak poprawne mapowanie atrybutów (D).
+A. Automate build: To zadanie dla Cloud Build.
+C. Namespaces: To funkcja samego Kubernetes.
+D. Registry: Tym zajmuje się Artifact Registry.
 
-Konsensus społeczności ExamTopics: Zdecydowana większość na CD. Poprawne mapowanie tożsamości to fundament bezpiecznej federacji.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. BinAuth to fundament Supply Chain Security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: CD</b></p>
-<p><b>Głęboka analiza:</b> Przy WIF kluczowe jest sprawdzenie 'subject' (sub) w tokenie OIDC/SAML. Jeśli mapujesz uprawnienia na 'display name', haker u dostawcy może zmienić swoją nazwę na Twoją i wejść do chmury. Mapowanie na stały numer ID (D) to uniemożliwia.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na GitHubie nazywają BinAuth (B) 'polisą ubezpieczeniową'. Nawet jeśli haker przejmie Twoje hasło do GKE i spróbuje odpalić tam obraz z wirusem ze swojego prywatnego komputera, BinAuth go zablokuje, bo obraz nie będzie miał podpisu Twojej firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/best-practices-for-using-workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/best-practices-for-using-workload-identity-federation</a></li>
+<li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>
 
 </ul>
 </div>

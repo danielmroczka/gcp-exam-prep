@@ -52,14 +52,14 @@
 <h2>Question 190 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Set up and enforce SAML SSO for all users using Active Directory. What to do?
+Grant a user access to manage and view findings in SCC for the entire organization. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Create SAML profile, URLs, X.509 cert, Entity ID and ACS in IdP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> OIDC prerequisites in AD.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SAML profile, cert, change password URL.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Manage profile assignments, OIDC, verify domain.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/securitycenter.admin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/securitycenter.viewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/securitycenter.editor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/securitycenter.findingsEditor</li>
 
 </ul>
 </div>
@@ -79,23 +79,24 @@ Set up and enforce SAML SSO for all users using Active Directory. What to do?
 <pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. SAML Configuration: Poprawna konfiguracja federacji wymaga wymiany parametrów technicznych między Google (Service Provider) a AD (Identity Provider). Musisz podać w IdP adresy URL logowania/wylogowania, Entity ID oraz ACS (Assertion Consumer Service) URL wygenerowane przez Google, a w Google wgrać certyfikat X.509 z IdP.
+A. securitycenter.admin: To najbardziej potężna rola w SCC. Pozwala na zarządzanie ustawieniami całej usługi, konfigurowanie źródeł danych oraz pełną pracę na wszystkich znaleziskach (findings) w całej organizacji.
 
 Dlaczego inne są błędne:
-B, D. OIDC: Pytanie precyzuje protokół SAML. OIDC to zupełnie inna metoda federacji.
-C. Change password URL: Jest to opcjonalne ustawienie poprawiające UX, ale nie jest to fundament 'set up and enforce SAML SSO' tak kompletny jak zestaw parametrów w punkcie A.
+B. Viewer: Tylko do odczytu, nie pozwala na 'zarządzanie' (np. zamykanie alertów).
+C. Editor: W SCC role są bardziej granularne, `admin` jest standardową odpowiedzią na pełne zarządzanie organizacyjne.
+D. findingsEditor: Pozwala zmieniać status alertów, ale nie pozwala na 'zarządzanie' całą usługą SCC (np. włączanie nowych modułów).
 
-Konsensus społeczności ExamTopics: 100% na A. To standardowy zestaw danych dla zestawienia federacji SAML.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Pełne zarządzanie = Admin.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Pamiętaj, że po stronie Google musisz również 'włączyć' profil SSO dla użytkowników, inaczej system nadal będzie pytał o hasło Google zamiast przekierować do AD.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Na forach inżynierowie przypominają o zasadzie Least Privilege. Jeśli ktoś ma tylko 'obsługiwać' alerty, daj mu `findingsEditor` (D). Jeśli ma 'wdrożyć' SCC w firmie, daj mu `admin` (A).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/60224" target="_blank">https://support.google.com/cloudidentity/answer/60224</a></li>
+<li><a href="https://cloud.google.com/security-command-center/docs/access-control" target="_blank">https://cloud.google.com/security-command-center/docs/access-control</a></li>
 
 </ul>
 </div>

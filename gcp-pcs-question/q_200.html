@@ -52,14 +52,14 @@
 <h2>Question 200 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Enforce CMEK for all new Cloud Storage resources in org1. What command/policy?
+What is the primary benefit of using Google Cloud Access Approval?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> restrictStorageNonCmekServices / allow.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> restrictNonCmekServices / deny / storage.googleapis.com.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> restrictStorageNonCmekServices / deny.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> restrictNonCmekServices / allow.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> To automate the approval of IAM role requests.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> To require your explicit approval before Google personnel can access your data or configurations.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> To manage SSL certificates.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> To provide a way for users to request access to projects.</li>
 
 </ul>
 </div>
@@ -79,23 +79,24 @@ Enforce CMEK for all new Cloud Storage resources in org1. What command/policy?
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. restrictNonCmekServices: To polityka organizacji (`gcp.restrictNonCmekServices`), która działa jak 'deny-list'. Wskazanie usługi `storage.googleapis.com` w tej polityce oznacza: 'Zablokuj tworzenie wszelkich zasobów w Cloud Storage, które nie używają klucza CMEK'.
+B. Access Approval: To 'hamulec bezpieczeństwa' nałożony na dostawcę chmury. Jeśli inżynier Google musi wejść do Twojego projektu (np. by naprawić błąd bazy), system wysyła Ci powiadomienie. Dopóki nie klikniesz 'Zatwierdzam', Google nie ma technicznego dostępu do Twoich danych.
 
 Dlaczego inne są błędne:
-A, C. restrictStorageNonCmekServices: Nie jest to standardowa nazwa ograniczenia (constraint) w politykach organizacji Google Cloud. Poprawna nazwa to `restrictNonCmekServices` działająca dla wielu usług.
-D. Allow: Polityka ta działa zazwyczaj jako Deny dla niebezpiecznych stanów.
+A. Automate IAM: To zadanie dla rozwiązań typu IGA lub ServiceNow, nie dla Access Approval.
+C. SSL: Tym zajmuje się Certificate Manager.
+D. Request access: To funkcja IAM / Cloud Identity, a nie mechanizm kontroli dostawcy.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. To precyzyjne pytanie o nazwę technicznego ograniczenia w GCP.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To definicja kontroli nad dostępem administracyjnym Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Ta polityka jest bardzo restrykcyjna - po jej włączeniu deweloperzy nie będą mogli stworzyć nawet pustego bucketu bez wskazania klucza KMS.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Inżynierowie compliance na Reddit zauważają, że Access Approval (B) jest 'brakującym ogniwem' do uzyskania pełnej kontroli w chmurze publicznej. W połączeniu z logami Access Transparency daje 100% pewności, że żadna akcja Google nie odbyła się 'za plecami' klienta.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/kms/docs/customer-managed-encryption-keys#restrict-cmek-usage" target="_blank">https://cloud.google.com/kms/docs/customer-managed-encryption-keys#restrict-cmek-usage</a></li>
+<li><a href="https://cloud.google.com/access-approval" target="_blank">https://cloud.google.com/access-approval</a></li>
 
 </ul>
 </div>

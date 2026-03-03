@@ -52,14 +52,14 @@
 <h2>Question 244 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Ensure users can only access BigQuery data during working hours. What to do?
+Ensure that all GKE clusters are created with 'Network Policy' enabled by default across the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery Data Viewer + IAM condition working hours.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> gsutil script add/remove daily.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SA adds/removes users daily.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Scheduler + Cloud Function modify org policy.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: compute.restrictVpcPeering</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Policy constraint: gcp.resourceLocations</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy (Note: Direct GKE constraints exist in modern Org Policy sets)</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Ensure users can only access BigQuery data during working hours. What to do?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,25 @@ Ensure users can only access BigQuery data during working hours. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: D (lub podobna polityka GKE).
 
 Wyjaśnienie (Dlaczego poprawna):
-A. IAM Conditions: To natywna i najbardziej elegancka metoda. Pozwala ona na zdefiniowanie warunku czasowego (np. `request.time.getHours() >= 9 && request.time.getHours() <= 17`) bezpośrednio w przypisaniu roli IAM. Uprawnienia pojawiają się i znikają automatycznie, bez potrzeby uruchamiania żadnych skryptów.
+D. Organization Policy: (Podobnie jak w 224). Wymuszanie cech technicznych klastrów GKE (jak włączony wewnątrzklastrowy firewall - Network Policy) to zadanie dla 'Organization Policy Service'. Pozwala to na nałożenie twardego wymogu na wszystkich administratorów klastrów w firmie.
 
 Dlaczego inne są błędne:
-B, C: Rozwiązania manualne/skryptowe, które są trudne w audycie, podatne na awarie (co jeśli skrypt usuwający nie zadziała?) i wprowadzają niepotrzebne skomplikowanie.
-D. Org policy: Polityki organizacji nie służą do nadawania uprawnień Data Viewer poszczególnym użytkownikom.
+A, B, C: Jak w analogicznych pytaniach o wymuszanie standardów.
 
-Konsensus społeczności ExamTopics: 100% na A. IAM Conditions to 'right tool for the job' przy ograniczeniach czasowych.</pre>
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. Org Policy to król Guardrails.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> Warunki IAM wykorzystują język CEL (Common Expression Language). Możesz w nich uwzględnić również dni tygodnia (np. tylko od poniedziałku do piątku).</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> W dyskusjach o GKE Hardening eksperci radzą: 'Nie pozwól nikomu stworzyć klastra bez Network Policy'. Polityka organizacji (D) to jedyny sposób, by to wymusić technicznie, uniemożliwiając powstawanie niezabezpieczonych 'silosów' kontenerowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/conditions-overview" target="_blank">https://cloud.google.com/iam/docs/conditions-overview</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/overview</a></li>
 
 </ul>
 </div>

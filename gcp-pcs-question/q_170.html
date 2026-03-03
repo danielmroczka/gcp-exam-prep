@@ -52,14 +52,14 @@
 <h2>Question 170 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Users created consumer user accounts using corporate domain name. How to manage?
+Audit changes to organization-level policies. Which log source?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> GCDS.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> New managed account for each.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Transfer tool for unmanaged user accounts.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Single sign-on.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Admin Activity logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Data Access logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> System Event logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Flow Logs</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Users created consumer user accounts using corporate domain name. How to manage?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">C</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Users created consumer user accounts using corporate domain name. How to manage?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Transfer Tool: To specjalne narzędzie w konsoli administracyjnej (Admin Console) służące do wyszukiwania kont osobistych (unmanaged) utworzonych na adresy e-mail w Twojej firmowej domenie. Narzędzie pozwala wysłać prośbę do użytkownika o migrację konta pod kontrolę firmy.
+A. Admin Activity logs: Każda zmiana polityki organizacji (np. włączenie zakazu publicznych IP) jest operacją administracyjną modyfikującą metadane organizacji. Takie zdarzenia trafiają wyłącznie do dziennika Admin Activity.
 
 Dlaczego inne są błędne:
-A. GCDS: Synchronizuje tożsamości, ale gdy napotka istniejące konto osobiste o tym samym adresie, zgłosi 'conflict' i nie utworzy konta zarządzanego. GCDS nie rozwiązuje konfliktu, on go wykrywa.
-B. New account: Nie zadziała, jeśli adres e-mail jest już zajęty przez konto osobiste (Conflicting account).
-D. SSO: Można włączyć dopiero PO pomyślnej migracji kont pod zarząd firmy.
+B. Data Access: Rejestrują użycie usług, a nie zmianę ich globalnych reguł (policy).
+C. System Event: Dotyczą problemów Google.
+D. VPC Flow Logs: Dotyczą pakietów sieciowych.
 
-Konsensus społeczności ExamTopics: 100% na C. To jedyna oficjalna ścieżka rozwiązywania problemu 'conflicting accounts'.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Podstawowa wiedza o audycie Governance.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Użytkownik ma 30 dni na zaakceptowanie prośby. Jeśli odmówi, administrator może zdecydować o wymuszeniu zmiany adresu e-mail na koncie osobistym użytkownika.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na forach podkreśla się, że te logi są kluczowe dla wykrywania 'Insider Threat' – sytuacji, w której nieuczciwy admin wyłącza zabezpieczenia (np. zakaz zewnętrznych IP), aby ułatwić sobie kradzież danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/7062710" target="_blank">https://support.google.com/cloudidentity/answer/7062710</a></li>
+<li><a href="https://cloud.google.com/logging/docs/audit/understanding-audit-logs#admin-activity" target="_blank">https://cloud.google.com/logging/docs/audit/understanding-audit-logs#admin-activity</a></li>
 
 </ul>
 </div>

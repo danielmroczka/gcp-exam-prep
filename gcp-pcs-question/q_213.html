@@ -52,14 +52,14 @@
 <h2>Question 213 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-GitHub Actions CI/CD access to GCP resources most secure way. What to do?
+Audit which users have been granted the 'Service Account User' role across the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> SA key in GitHub config.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> SA key in repository.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> GKE Workload Identity.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Workload Identity Federation with GitHub as pool provider.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy Analyzer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Policy Troubleshooter</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAM Recommender</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Audit Logs</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ GitHub Actions CI/CD access to GCP resources most secure way. What to do?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,25 @@ GitHub Actions CI/CD access to GCP resources most secure way. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Workload Identity Federation (WIF): Pozwala GitHubowi na wymianę swojego tokena OIDC na krótkotrwały token dostępu GCP. Eliminuje to potrzebę posiadania statycznych, długowiecznych kluczy JSON (A, B) w systemie zewnętrznym, co jest ogromną zaletą bezpieczeństwa.
+A. Policy Analyzer: Pozwala na zadanie pytania o konkretną rolę (`roles/iam.serviceAccountUser`) w skali całej organizacji. Jest to kluczowe, bo ta rola pozwala na impersonację kont serwisowych i jest częstym celem audytów bezpieczeństwa.
 
 Dlaczego inne są błędne:
-A, B: Statyczne klucze JSON to ryzyko. Jeśli GitHub zostanie zhakowany lub ktoś podejrzy konfigurację, haker ma wieczny dostęp do Twojej chmury.
-C. GKE Workload Identity: Służy do komunikacji WEWNĄTRZ GKE (pod -> GCP), nie pomaga zewnętrznemu GitHubowi w dostaniu się do chmury.
+B, C, D: Jak w poprzednich analogicznych pytaniach – te narzędzia nie służą do inwentaryzacji 'kto ma daną rolę' w skali globalnej.
 
-Konsensus społeczności ExamTopics: 100% na D. WIF to obecnie jedyna zalecana metoda dla zewnętrznych potoków CI/CD.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowe zadanie audytowe IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> WIF pozwala na mapowanie atrybutów GitHub (np. 'repo: firma/projekt') na konkretne role w GCP, co zapewnia, że tylko określone repozytorium może wykonać wdrożenie.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja w sieci skupia się na niebezpieczeństwie roli SA User. Jeśli ktoś ma tę rolę na poziomie folderu, może 'stać się' dowolnym kontem serwisowym w projektach pod spodem. Policy Analyzer (A) to jedyny sposób, by to szybko wyłapać.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workload-identity-federation</a></li>
+<li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>
 
 </ul>
 </div>

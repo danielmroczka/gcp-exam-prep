@@ -52,14 +52,14 @@
 <h2>Question 154 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-VMs should not have external IP. connect to internet for updates. Which service?
+Authenticate a mobile application to access GCP resources securely without embedding long-lived keys. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAP.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud NAT.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> TCP/UDP LB.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud DNS.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Firebase Authentication with Identity Platform</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Service Account Keys in the app binary</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud VPN</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ VMs should not have external IP. connect to internet for updates. Which service?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ VMs should not have external IP. connect to internet for updates. Which service?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Cloud NAT: Jest to usługa zaprojektowana dokładnie dla tego przypadku użycia. Pozwala ona maszynom, które posiadają tylko prywatne adresy IP, na inicjowanie połączeń wychodzących do internetu (egress), co jest niezbędne do pobierania poprawek bezpieczeństwa (updates).
+A. Firebase Auth / Identity Platform: To rozwiązanie pozwala na logowanie użytkowników (przez Google, Facebook, e-mail) i wymianę ich tożsamości na krótkotrwałe tokeny dostępu do zasobów GCP. Eliminuje to potrzebę zaszywania jakichkolwiek kluczy w kodzie aplikacji mobilnej.
 
 Dlaczego inne są błędne:
-A. IAP: Służy do autoryzacji ruchu PRZYCHODZĄCEGO (ingress) do maszyn bez publicznego IP, nie pomaga maszynom w wychodzeniu do internetu.
-C. TCP/UDP LB: Służy do rozdzielania ruchu PRZYCHODZĄCEGO do floty maszyn.
-D. Cloud DNS: Służy do rozwiązywania nazw domenowych, nie zapewnia tunelu/translacji adresów do wyjścia poza sieć prywatną.
+B. SA Keys in binary: Kardynalny błąd bezpieczeństwa. Każdy może wyciągnąć klucz z pliku APK/IPA i przejąć kontrolę nad Twoją chmurą.
+C. Cloud VPN: Nie rozwiązuje problemu tożsamości aplikacji mobilnej na telefonach tysięcy użytkowników.
+D. VPC Service Controls: Chroni API, ale nie służy do autentykacji użytkowników końcowych.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Cloud NAT to fundament bezpiecznej architektury 'private-only'.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Bezpieczny dostęp mobilny = Identity Platform.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Cloud NAT jest usługą wysokiej dostępności (HA) i nie wymaga utrzymywania własnych instancji-bramek (NAT gateways), co oszczędza czas i pieniądze.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na Reddit często debatuje się o 'Google Sign-In'. Wyjaśnienie: Firebase Auth/Identity Platform jest 'nadzbiorem' tych technologii, oferującym funkcje Enterprise, takie jak multi-tenancy i wsparcie dla protokołów SAML/OIDC, co jest kluczowe dla profesjonalnych aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/nat/docs/overview" target="_blank">https://cloud.google.com/nat/docs/overview</a></li>
+<li><a href="https://cloud.google.com/identity-platform" target="_blank">https://cloud.google.com/identity-platform</a></li>
 
 </ul>
 </div>

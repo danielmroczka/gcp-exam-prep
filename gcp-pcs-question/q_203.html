@@ -52,14 +52,14 @@
 <h2>Question 203 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Keep instance logging data within Netherlands (europe-west4) for compliance.
+Enforce that all data in a project must be stored in the 'us-central1' region. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Org policy gcp.resourceLocations.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Log sink to GCS in europe-west4.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> New log bucket in europe-west4, redirect _Default.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Logging storage region update via gcloud CLI.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy: Resource Location Restriction</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Resource Labels</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC Service Controls</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Keep instance logging data within Netherlands (europe-west4) for compliance.
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ Keep instance logging data within Netherlands (europe-west4) for compliance.
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D (lub C - oba mechanizmy są używane, ale D jest nowszą metodą systemową).
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Logging storage region: Google Cloud pozwala na zdefiniowanie domyślnej lokalizacji dla bucketów logów na poziomie projektu lub organizacji. Ustawienie tego parametru (np. przez gcloud) gwarantuje, że logi systemowe i audytowe nie opuszczą fizycznie wybranego regionu.
+B. Resource Location Restriction: To najsilniejszy mechanizm rezydencji danych w GCP. Pozwala na zdefiniowanie białej listy regionów. Jeśli deweloper spróbuje stworzyć SQL lub VM w Europie, API Google odrzuci to żądanie z błędem 'Policy Violation'.
 
 Dlaczego inne są błędne:
-A. Org policy: Blokuje tworzenie zasobów w innych regionach, ale nie służy do konfiguracji samego mechanizmu Cloud Logging.
-B. Log sink to GCS: Pomaga, ale logi i tak trafiają najpierw do domyślnego bucketu `_Default`, który może być w innym regionie. Trzeba zmienić lokalizację samego storage'u logów (D/C).
+A. IAM: Kontroluje 'kto', nie 'gdzie'.
+C. Labels: To tylko tekstowe metadane do filtrowania kosztów.
+D. VPC SC: Chroni przed wyciekiem danych, a nie przed wyborem lokalizacji zasobu.
 
-Konsensus społeczności ExamTopics: Przewaga na D/C. To kluczowe dla zgodności z lokalnymi przepisami o ochronie danych.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Standardowa metoda compliance.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Po zmianie regionu storage'u logów, wszystkie nowo przychodzące logi trafiają do nowej lokalizacji. Stare logi pozostają w poprzednim regionie aż do wygaśnięcia ich retencji.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Pytanie to często pojawia się w kontekście regulacji prawnych (np. dane obywateli USA muszą zostać w USA). Eksperci na forach zauważają, że polityka B jest 'dziedziczna' – jeśli ustawisz ją na folderze 'US-Workloads', wszystkie projekty wewnątrz będą automatycznie zablokowane na inne regiony.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/logging/docs/region-restrictions" target="_blank">https://cloud.google.com/logging/docs/region-restrictions</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>
 
 </ul>
 </div>

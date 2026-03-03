@@ -52,14 +52,14 @@
 <h2>Question 222 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Minimize service account keys for on-prem Windows apps. Implement WIF with IdP on-prem. What to do?
+Grant a user access to manage and view all organization policies, but not change IAM roles. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Workload identity pool with ADFS, rule for impersonation.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Workload identity pool with ADFS, all principals impersonate.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> OIDC on same machine.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> OIDC, all principals impersonate.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.organizationAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/orgpolicy.policyAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/iam.securityAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/viewer</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Minimize service account keys for on-prem Windows apps. Implement WIF with IdP o
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">A</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,26 +76,27 @@ Minimize service account keys for on-prem Windows apps. Implement WIF with IdP o
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. WIF with ADFS: Windows Server natywnie używa ADFS (Active Directory Federation Services), który wspiera SAML/OIDC. Workload Identity Federation pozwala na wymianę tokena ADFS na token GCP. Dodanie reguły (A) zapewnia, że tylko konkretne maszyny/aplikacje mogą przejąć tożsamość konta serwisowego w chmurze (zasada najniższych uprawnień).
+B. orgpolicy.policyAdmin: Jak już ustaliliśmy (216), ta rola daje władzę nad Standardami (Org Policy), ale celowo NIE daje władzy nad Ludźmi (IAM). To idealna separacja dla zespołu Compliance.
 
 Dlaczego inne są błędne:
-B, D. All principals: Skrajnie niebezpieczne. Każdy użytkownik Twojego AD mógłby wtedy przejąć uprawnienia administratora w chmurze.
-C. OIDC on same machine: Sama obecność protokołu nie rozwiązuje problemu autoryzacji i wymiany tożsamości bez mechanizmu WIF.
+A. Admin: Może wszystko.
+C. securityAdmin: Zarządza właśnie IAM (rolami), co jest zabronione w pytaniu.
+D. Viewer: Nic nie może zmienić.
 
-Konsensus społeczności ExamTopics: 100% na A. To standardowa architektura eliminacji kluczy JSON w środowisku Windows/AD.</pre>
+Konsensus społeczności ExamTopics: 100% na B. Separacja Governance od IAM to podstawa audytu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: A</b></p>
-<p><b>Głęboka analiza:</b> WIF używa tzw. 'Security Token Service' (STS) Google, który weryfikuje podpis Twojego lokalnego ADFS i na tej podstawie wydaje token OAuth2.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> To pytanie często powraca, by sprawdzić czy rozumiesz różnicę między 'Policy' (zasady floty) a 'Role' (prawa osób). Rola B zarządza tym pierwszym, rola C tym drugim.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workload-identity-federation</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#granting_the_role</a></li>
 
 </ul>
 </div>

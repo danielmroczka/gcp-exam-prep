@@ -52,14 +52,14 @@
 <h2>Question 172 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-DevOps team investigatng deployment issue. Least-privilege, access only during issue. How to grant?
+Protect your VPC network from scanning and exploitation by internal compromised VMs. Which feature?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Project Viewer role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Custom IAM role.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SA with Project Owner, give SA User to team.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SA with limited permissions, give SA User to team.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Cloud Armor</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Cloud IDS</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> VPC Firewall rules</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> IAP</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ DevOps team investigatng deployment issue. Least-privilege, access only during i
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ DevOps team investigatng deployment issue. Least-privilege, access only during i
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Limited SA + SA User: Stworzenie konta serwisowego (SA) z zestawem uprawnień specyficznych dla problemu (np. logi, konfiguracja wdrożeń) i nadanie zespołowi roli `roles/iam.serviceAccountUser` pozwala im na 'podszycie się' pod to konto. Jest to lepsze niż nadawanie uprawnień bezpośrednio osobom, ponieważ łatwiej jest odebrać dostęp do SA po zakończeniu incydentu.
+B. Cloud IDS: Jest to jedyna usługa, która potrafi monitorować ruch 'wewnątrz' sieci (East-West traffic). Jeśli jedna z Twoich maszyn zostanie zainfekowana i zacznie skanować porty innych maszyn w tym samym VPC, Cloud IDS to wykryje i zgłosi alarm.
 
 Dlaczego inne są błędne:
-A. Project Viewer: Zbyt szerokie (widzą wszystko) i zazwyczaj nadawane na stałe, co narusza zasadę 'access ONLY during issue'.
-B. Custom IAM role: Nadanie roli osobie na stałe to zły pomysł. Pytanie kładzie nacisk na tymczasowość i granularność.
-C. SA with Project Owner: Skrajne naruszenie zasad bezpieczeństwa. Nigdy nie używaj roli Owner dla zadań operacyjnych.
+A. Cloud Armor: Chroni tylko brzeg sieci (ruch z internetu).
+C. VPC Firewall: Może zablokować ruch, ale nie 'wykryje' faktu skanowania portów (nie dostarczy alertu o podejrzanym behawiorze tak jak IDS).
+D. IAP: Służy do autoryzacji osób, nie monitoruje ruchu między maszynami.
 
-Konsensus społeczności ExamTopics: Większość na D. To podejście promujące tożsamości techniczne dla zadań technicznych.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Cloud IDS to Twoje 'oczy' wewnątrz sieci VPC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Obecnie najlepszą odpowiedzią na ten scenariusz byłoby <b>IAM Conditions</b> z czasem wygaśnięcia (Expiry Date), ale w ramach starszych pytań egzaminacyjnych, model SA jako 'identyfikatora zadania' jest poprawny.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja na Reddit dotyczy tego, dlaczego IDS jest lepszy od Flow Logów. Odpowiedź: Flow Logi powiedzą Ci 'VM A połączyła się z 100 portami VM B'. IDS powie Ci: 'VM A wykonuje skanowanie portów charakterystyczne dla robaka X'. To różnica między surowymi danymi a inteligentną detekcją.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iam/docs/best-practices" target="_blank">https://cloud.google.com/iam/docs/best-practices</a></li>
+<li><a href="https://cloud.google.com/intrusion-detection-system/docs/overview" target="_blank">https://cloud.google.com/intrusion-detection-system/docs/overview</a></li>
 
 </ul>
 </div>

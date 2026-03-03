@@ -52,14 +52,14 @@
 <h2>Question 218 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Prevent malicious people from using unattended laptops after authentication into GCP. What to do?
+Ensure that all Cloud Storage buckets are encrypted using CMEK by default across the organization. Which tool?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Policy for employees.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Disable APIs.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Strong passwords.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Shorten session length timeout for Google Cloud services.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> IAM roles</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Organization Policy constraint: storage.restrictDatasetEncryption</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Organization Policy constraint: gcp.restrictCmekCryptoKeyProjects</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Organization Policy constraint: storage.uniformBucketLevelAccess</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Prevent malicious people from using unattended laptops after authentication into
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">D</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Prevent malicious people from using unattended laptops after authentication into
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D.
+<pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-D. Session Control: Administratorzy Google Cloud mogą wymusić maksymalny czas trwania sesji (np. 1 godzina). Po tym czasie użytkownik zostanie wylogowany i będzie musiał ponownie podać hasło/MFA. Skraca to czas, w którym osoba niepowołana może korzystać z już otwartej sesji na cudzym komputerze.
+C. gcp.restrictCmekCryptoKeyProjects: Ta polityka organizacji pozwala na zdefiniowanie 'zaufanych projektów z kluczami'. Wymusza ona, aby każda nowa usługa (w tym GCS) używała klucza CMEK z tej listy, co de facto wymusza szyfrowanie CMEK dla każdego nowego bucketu.
 
 Dlaczego inne są błędne:
-A. Policy: To tylko papierowy zapis, nie stanowi technicznej blokady (prevent).
-B. Disable APIs: Uniemożliwi pracę uprawnionym osobom.
-C. Strong passwords: Chronią przed atakiem brute-force, ale nie pomagają, gdy sesja jest już otwarta i komputer zostawiony bez nadzoru.
+A. IAM: Nie technologia szyfrowania.
+B. Dataset: Tylko dla BigQuery.
+D. UBLA: Dotyczy uprawnień, nie szyfrowania.
 
-Konsensus społeczności ExamTopics: 100% na D. To jedyny techniczny mechanizm ograniczający czas życia aktywnej autoryzacji.</pre>
+Konsensus społeczności ExamTopics: 100% na C. Najsilniejszy mechanizm kontroli kluczy w firmie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: D</b></p>
-<p><b>Głęboka analiza:</b> Ustawienie to znajduje się w konsoli Google Admin pod hasłem 'Google Cloud session control'. Wpływa ono na dostęp do konsoli webowej oraz sesji gcloud CLI.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> To pytanie sprawdza znajomość specyficznych identyfikatorów polityk. Zapamiętaj: polityki zaczynające się od `gcp.restrictCmek...` to jedyny sposób na centralne sterowanie 'wymuszaniem' własnych kluczy w całej chmurze Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#cmek" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#cmek</a></li>
 
 </ul>
 </div>

@@ -80,22 +80,22 @@ A company is running workloads in a dedicated server room. They must only be acc
 <pre>Odpowiedź: AC.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Cloud VPN: Umożliwia bezpieczne połączenie on-premises z VPC przez publiczny internet przy użyciu szyfrowanych tuneli IPsec.
-C. Cloud Interconnect: Oferuje bezpośrednie, fizyczne połączenie o wysokiej przepustowości między lokalną siecią a Google Cloud, nie przechodząc przez publiczny internet.
+A. Cloud VPN: Tworzy bezpieczny, zaszyfrowany tunel IPsec między on-prem a GCP przez internet.
+C. Cloud Interconnect: Tworzy bezpośrednie, fizyczne połączenie omijające internet. Oba te rozwiązania pozwalają na komunikację po prywatnych adresach IP, co spełnia wymóg 'private company network'.
 
 Dlaczego inne są błędne:
-B. Shared VPC: Służy do współdzielenia sieci wewnątrz Google Cloud między projektami, a nie do łączenia z on-premises.
-D. VPC Peering: Łączy dwie sieci VPC wewnątrz Google Cloud.
-E. Private Access: Pozwala VMom na dostęp do API Google (np. Cloud Storage) bez publicznego IP, ale nie daje łączności z lokalną serwerownią klienta.
+B. Shared VPC: Służy do współdzielenia sieci Wewnątrz chmury, nie łączy jej z lokalną serwerownią.
+D. VPC Peering: Łączy dwie sieci VPC wewnątrz GCP.
+E. Private Access: Pozwala maszynom GCP sięgać DO usług Google (np. GCS) bez publicznego IP, ale nie daje łączności DO lokalnej serwerowni klienta.
 
-Konsensus społeczności ExamTopics: Zdecydowane AC. To dwa standardowe sposoby budowania chmury hybrydowej.</pre>
+Konsensus społeczności ExamTopics: 100% na AC. Standardowy duet rozwiązań dla chmury hybrydowej.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AC</b></p>
-<p><b>Głęboka analiza:</b> Wybór między VPN a Interconnect zazwyczaj zależy od kosztów i wymagań SLA/przepustowości. Oba jednak tworzą 'prywatny most' do infrastruktury klienta.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Dyskusja w sieci skupia się na wydajności. Jeśli firma ma 'dedicated server room', zazwyczaj potrzebuje stabilności. Cloud Interconnect (C) jest rozwiązaniem docelowym dla Enterprise, a Cloud VPN (A) najszybszym do wdrożenia. Obie opcje tworzą wymagany prywatny most.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/how-to/choose-product" target="_blank">https://cloud.google.com/network-connectivity/docs/how-to/choose-product</a></li>

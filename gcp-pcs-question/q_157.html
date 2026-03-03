@@ -52,15 +52,14 @@
 <h2>Question 157 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Creating a new Google Cloud organization. Actions for super admin accounts. Which two?
+Audit every single access to sensitive data in BigQuery, including SQL queries and people who viewed the results. Which log?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Access level to prevent login.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Disable IAM roles for super admin.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Physical token for MFA.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Private connection.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Provide non-privileged identities for day-to-day activities.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Admin Activity logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Data Access logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> System Event logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> BigQuery Job logs</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Creating a new Google Cloud organization. Actions for super admin accounts. Whic
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">CE</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Creating a new Google Cloud organization. Actions for super admin accounts. Whic
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: CE.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. Physical token: Super Admin to najbardziej krytyczne konto. Powinno być zabezpieczone najsilniejszą metodą MFA - fizycznym kluczem (np. Titan), który jest odporny na phishing.
-E. Non-privileged identities: Administratorzy nie powinni używać konta Super Admin do codziennych zadań (czytanie maili, tworzenie VM). Powinni mieć zwykłe konta, a po uprawnienia Super Admina sięgać tylko w sytuacjach awaryjnych (zasada 'least privilege').
+B. Data Access logs: Dla BigQuery logi te rejestrują zdarzenia `query_job.completed`, które zawierają treść zapytania SQL, oraz zdarzenia `tabledata.list` (kto przeglądał wyniki). Jest to jedyny pełny ślad audytowy dostępu do danych.
 
 Dlaczego inne są błędne:
-A. Prevent login: Super Admin musi móc się zalogować, aby zarządzać organizacją.
-B. Disable IAM roles: Super Admin w Google Workspace automatycznie posiada najwyższe uprawnienia, których nie można po prostu 'wyłączyć' bez utraty zdolności do zarządzania domeną.
-D. Private connection: Logowanie administratora odbywa się przez internetowe serwisy Google (OAuth2), nie wymaga stałego łącza prywatnego (Interconnect/VPN).
+A. Admin Activity: Rejestrują tylko zmiany w strukturze (np. stworzenie nowej tabeli), a nie odczyt danych.
+C. System Event: Dotyczą problemów infrastruktury Google.
+D. Job logs: To techniczny status zadań, niepełny dla audytu tożsamości i bezpieczeństwa danych tak jak ustrukturyzowane logi audytowe (B).
 
-Konsensus społeczności ExamTopics: 100% na CE. To fundamenty 'Account Hygiene' dla administratorów IT.</pre>
+Konsensus społeczności ExamTopics: 100% na B. To kręgosłup audytu Big Data.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: CE</b></p>
-<p><b>Głęboka analiza:</b> Super Admin jest jedyną osobą, która może zresetować hasła innym administratorom i wyłączyć 2SV. Kompromitacja tego konta to koniec bezpieczeństwa firmy.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci ostrzegają: logi Data Access dla BigQuery potrafią generować gigantyczne koszty przy intensywnym użytkowaniu bazy. Zaleca się ich filtrowanie lub eksport tylko dla wybranych, najbardziej wrażliwych zbiorów danych (Datasets).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/a/answer/9011374" target="_blank">https://support.google.com/a/answer/9011374</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/reference/audit-logging" target="_blank">https://cloud.google.com/bigquery/docs/reference/audit-logging</a></li>
 
 </ul>
 </div>

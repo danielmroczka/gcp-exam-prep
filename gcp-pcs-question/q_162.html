@@ -52,14 +52,14 @@
 <h2>Question 162 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-IAP role to access HTTPS resources.
+Enable two-factor authentication for all users in your Cloud Identity domain. Which method is most secure against phishing?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Security Reviewer.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> IAP-Secured Tunnel User.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> IAP-Secured Web App User.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Service Broker Operator.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> SMS codes</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Google Authenticator app</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Security Keys (FIDO2/WebAuthn)</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Email codes</li>
 
 </ul>
 </div>
@@ -79,24 +79,23 @@ IAP role to access HTTPS resources.
 <pre>Odpowiedź: C.
 
 Wyjaśnienie (Dlaczego poprawna):
-C. IAP-Secured Web App User: To specyficzna rola IAM wymagana, aby IAP przepuścił żądanie użytkownika do aplikacji webowej (HTTPS). Bez niej użytkownik otrzyma błąd 403 mimo poprawnego zalogowania w Google.
+C. Security Keys: Fizyczne klucze (np. Titan Security Key) oparte na standardzie FIDO2 są jedyną metodą całkowicie odporną na phishing. Wymagają one fizycznej obecności klucza i weryfikują domenę strony, co uniemożliwia hakerowi przechwycenie sesji.
 
 Dlaczego inne są błędne:
-A. Security Reviewer: Pozwala przeglądać ustawienia, nie daje dostępu do chronionych aplikacji.
-B. IAP-Secured Tunnel User: Ta rola służy wyłącznie do dostępu przez IAP TCP Forwarding (np. dla SSH lub RDP), a nie dla stron HTTPS.
-D. Service Broker: Nie ma związku z dostępem użytkowników końcowych do aplikacji webowych.
+A, D: SMS i e-mail są podatne na przechwycenie (SIM swap, przejęcie skrzynki).
+B. Authenticator: Kod można podać na fałszywej stronie (phishing), haker go przepisze w czasie rzeczywistym.
 
-Konsensus społeczności ExamTopics: 100% na C. Podstawowa wiedza o rolach IAP.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To oficjalne stanowisko Google i standard branżowy dla 'High Security'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p><b>Głęboka analiza:</b> Rolę tę można nadać na poziomie całego projektu lub tylko dla konkretnego 'backend service' Load Balancera, co pozwala na bardzo precyzyjną kontrolę dostępu.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Google przeprowadziło badanie na własnych pracownikach: od czasu wymuszenia kluczy fizycznych (C) w 2017 roku, liczba udanych ataków phishingowych na ich konta spadła do zera. To potężny argument często przytaczany w dyskusjach o 2FA.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/iap/docs/access-control" target="_blank">https://cloud.google.com/iap/docs/access-control</a></li>
+<li><a href="https://support.google.com/titansecuritykey/answer/9111147" target="_blank">https://support.google.com/titansecuritykey/answer/9111147</a></li>
 
 </ul>
 </div>

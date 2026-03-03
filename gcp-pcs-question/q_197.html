@@ -52,15 +52,14 @@
 <h2>Question 197 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Cloud Run: ensure only trusted container images are deployed. Which two?
+Grant a user access to manage and view all security settings, but only within a specific folder, not the organization. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Enable Binary Authorization on service.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Org policy constraints/run.allowedBinaryAuthorizationPolicies.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Binary Authorization on K8s cluster.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Cloud Run breakglass.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="E">E.</span> Org policy compute.trustedImageProjects.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/resourcemanager.folderAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/iam.securityAdmin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/securitycenter.admin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/owner</li>
 
 </ul>
 </div>
@@ -69,7 +68,7 @@ Cloud Run: ensure only trusted container images are deployed. Which two?
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">AB</span>
+<span class="correct-answer">B</span>
 <br/>
 </span>
 </div>
@@ -77,28 +76,27 @@ Cloud Run: ensure only trusted container images are deployed. Which two?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: AB.
+<pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Enable on service: Musisz włączyć sprawdzanie podpisów bezpośrednio w konfiguracji usługi Cloud Run.
-B. Org policy: Pozwala administratorowi wymusić, aby KAŻDA nowa usługa Cloud Run w firmie obowiązkowo korzystała z wybranej polityki Binary Authorization. Zapobiega to omijaniu kontroli przez deweloperów.
+B. iam.securityAdmin: Ta rola pozwala na zarządzanie wszystkimi politykami IAM i uprawnieniami. Nadanie jej na poziomie Foldera (B) ogranicza zasięg władzy administratora bezpieczeństwa tylko do projektów znajdujących się w tym folderze.
 
 Dlaczego inne są błędne:
-C. K8s cluster: Cloud Run jest usługą serverless, nie zarządzasz w nim klastrem K8s bezpośrednio (mimo że pod spodem może być Knative).
-D. Breakglass: To funkcja OMIJANIA zabezpieczeń w sytuacjach awaryjnych, a nie ich 'zapewniania'.
-E. compute.trustedImageProjects: Dotyczy obrazów dysków dla Compute Engine, nie dotyczy obrazów kontenerów dla Cloud Run.
+A. Folder Admin: Zarządza Strukturą folderów (tworzenie/przenoszenie), ale nie jest dedykowaną rolą do zarządzania 'ustawieniami bezpieczeństwa' (IAM) w sposób tak bezpośredni jak Security Admin.
+C. securitycenter.admin: Zarządza usługą SCC, a nie uprawnieniami IAM użytkowników.
+D. Owner: Zbyt szeroka rola, naruszenie Least Privilege.
 
-Konsensus społeczności ExamTopics: 100% na AB. To standardowa metoda wymuszania standardów kontenerowych w modelu serverless.</pre>
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To standardowa rola dla regionalnych adminów security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: AB</b></p>
-<p><b>Głęboka analiza:</b> Binary Authorization dla Cloud Run jest obecnie w fazie GA i pozwala na integrację z Artifact Registry w celu weryfikacji atestów zbudowanych przez Cloud Build.</p>
+<p><b>Sugerowana odpowiedź: B</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> To pytanie sprawdza znajomość hierarchii zasobów. Zapamiętaj: każdą rolę w GCP można nadać na poziomie Organizacji, Foldera lub Projektu. Aby ograniczyć dostęp terytorialnie/działowo, zawsze wybieraj Folder (B).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization/docs/run/overview" target="_blank">https://cloud.google.com/binary-authorization/docs/run/overview</a></li>
+<li><a href="https://cloud.google.com/iam/docs/understanding-roles#security-admin-role" target="_blank">https://cloud.google.com/iam/docs/understanding-roles#security-admin-role</a></li>
 
 </ul>
 </div>

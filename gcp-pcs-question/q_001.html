@@ -79,21 +79,21 @@ Your team needs to make sure that a Compute Engine instance does not have access
 <pre>Odpowiedź: AC.
 
 Wyjaśnienie (Dlaczego poprawna):
-A. Public IP: Brak publicznego adresu IP uniemożliwia bezpośrednią komunikację dwukierunkową z internetem. Jest to podstawowy krok izolacji.
-C. Private Google Access: Ta funkcja na poziomie podsieci pozwala instancjom posiadającym tylko prywatne adresy IP na łączenie się z publicznymi adresami IP usług Google (np. Cloud Storage, BigQuery). Jej wyłączenie gwarantuje całkowitą izolację od usług Google.
+A. Public IP: Usunięcie publicznego adresu IP to pierwszy poziom izolacji. Bez niego maszyna nie może nawiązać bezpośredniego połączenia dwukierunkowego z internetem.
+C. Private Google Access (PGA): Ta funkcja na poziomie podsieci pozwala maszynom bez publicznego IP na routing ruchu do publicznych adresów IP usług Google (jak Cloud Storage czy BigQuery) przez sieć wewnętrzną. Jej wyłączenie (pozostawienie disabled) jest niezbędne, aby zablokować dostęp do usług Google.
 
 Dlaczego inne są błędne:
-B. IP Forwarding: Ta opcja pozwala maszynie wirtualnej na przekazywanie pakietów, których adres docelowy nie pasuje do jej własnego. Jest używana np. w routerach programowych, ale nie kontroluje bezpośrednio dostępu do internetu/API.
-D. Static routes: Trasy statyczne określają kierunek ruchu, ale same w sobie nie odcinają dostępu do usług, jeśli istnieją trasy domyślne (default internet gateway).
+B. IP Forwarding: Dotyczy możliwości przesyłania pakietów przez maszynę (np. w roli routera/NAT). Jej stan nie wpływa bezpośrednio na dostęp SAMEJ maszyny do internetu czy API.
+D. Static routes: Choć trasy sterują ruchem, samo ich istnienie nie daje dostępu do API Google bez odpowiedniego punktu wyjścia (Public IP lub PGA). Wyłączenie tras mogłoby popsuć całą sieć VPC, a nie tylko izolować jedną instancję.
 
-Konsensus społeczności ExamTopics: 100% wskazuje na AC jako jedyną metodę pełnej izolacji od obu typów zasobów.</pre>
+Konsensus społeczności ExamTopics: 100% głosów na AC. Społeczność podkreśla, że PGA jest często zapominanym elementem izolacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AC</b></p>
-<p><b>Głęboka analiza:</b> Scenariusz wymaga odcięcia DWÓCH dróg wyjścia: do publicznego internetu (rozwiązane przez brak Public IP) oraz do usług Google (rozwiązane przez brak Private Google Access). Warto pamiętać, że PGA jest domyślnie wyłączone w nowych podsieciach.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Głównym punktem debaty w sieci jest to, czy wyłączenie PGA wystarczy. Eksperci zauważają, że w nowoczesnych sieciach GCP istnieje również Private Service Connect (PSC), który mógłby być trzecią drogą wyjścia, ale nie ma go w opcjach. Dlatego AC pozostaje jedyną poprawną odpowiedzią w ramach dostępnego zestawu. Pułapką jest tu opcja D – trasy statyczne są potrzebne do komunikacji wewnątrz VPC, ich wyłączenie to 'przysłowiowe spalenie mostu', a nie precyzyjna kontrola dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">https://cloud.google.com/vpc/docs/private-google-access</a></li>

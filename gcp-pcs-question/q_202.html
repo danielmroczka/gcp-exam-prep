@@ -52,14 +52,14 @@
 <h2>Question 202 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Thousands of projects. Multiple OPEN_MYSQL_PORT findings. Prevent this centrally.
+Grant a user access to manage and view all audit logs across the organization. Which role?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Hierarchical firewall policy deny 0.0.0.0/0.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Hierarchical firewall policy allow only internal IP ranges.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Armor policy.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> VPC firewall rule in each VPC.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> roles/logging.admin</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> roles/logging.viewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> roles/logging.privateLogViewer</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> roles/iam.securityReviewer</li>
 
 </ul>
 </div>
@@ -68,7 +68,7 @@ Thousands of projects. Multiple OPEN_MYSQL_PORT findings. Prevent this centrally
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">A</span>
 <br/>
 </span>
 </div>
@@ -76,27 +76,27 @@ Thousands of projects. Multiple OPEN_MYSQL_PORT findings. Prevent this centrally
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: A.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Hierarchical firewall policy: Pozwala na zdefiniowanie reguł na poziomie Organizacji lub Folderu, które są nadrzędne wobec reguł wewnątrz projektów. Ustawienie reguły 'zezwól na port 3306 TYLKO z zakresów wewnętrznych' na samej górze hierarchii skutecznie zablokuje każdą próbę otwarcia MySQL na świat, nawet jeśli administrator projektu stworzy u siebie regułę 'allow 0.0.0.0/0'.
+A. logging.admin: Ta rola daje pełną kontrolę nad usługą Cloud Logging w całej firmie. Pozwala na tworzenie zlewów (sinks), ustawianie retencji oraz przeglądanie wszystkich logów, w tym audytowych.
 
 Dlaczego inne są błędne:
-A. Deny 0.0.0.0/0: Zbyt ogólne, mogłoby zablokować też legalny ruch (np. HTTP na porcie 80). Rozwiązanie musi być specyficzne dla 'MYSQL_PORT'.
-C. Cloud Armor: Nie chroni bezpośrednio portów TCP baz danych na poziomie sieci VPC.
-D. Each VPC: Niewykonalne przy tysiącach projektów (brak centralizacji).
+B. Viewer: Nie widzi logów Data Access ani Access Transparency (tych najbardziej wrażliwych).
+C. PrivateLogViewer: Pozwala czytać logi prywatne, ale nie pozwala na ich 'zarządzanie' (np. eksport do BigQuery), o co pyta zadanie ('manage').
+D. SecurityReviewer: Widzi polityki IAM i niektóre logi, ale nie jest rolą 'zarządzającą' systemem logowania.
 
-Konsensus społeczności ExamTopics: 100% poparcia dla B. Hierarchiczne polityki to najpotężniejszy oręż administratora sieci.</pre>
+Konsensus społeczności ExamTopics: 100% na A. Zarządzanie logowaniem = Logging Admin.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> Polityki hierarchiczne mają unikalną akcję 'goto_next', która pozwala na przepuszczenie pakietu do sprawdzenia przez lokalny firewall projektu, jeśli spełnia on Twoje ogólne kryteria bezpieczeństwa.</p>
+<p><b>Sugerowana odpowiedź: A</b></p>
+<p><b>Analiza spornych kwestii (AI):</b> Na forach podkreśla się, że Logging Admin (A) to rola 'niebezpieczna', bo pozwala usunąć logi (tzw. log deletion), co hakerzy robią po włamanie, by zatrzeć ślady. Zaleca się nadawanie jej tylko centralnemu zespołowi SOC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc/docs/firewall-policies" target="_blank">https://cloud.google.com/vpc/docs/firewall-policies</a></li>
+<li><a href="https://cloud.google.com/logging/docs/access-control" target="_blank">https://cloud.google.com/logging/docs/access-control</a></li>
 
 </ul>
 </div>

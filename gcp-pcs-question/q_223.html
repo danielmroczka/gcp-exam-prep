@@ -52,14 +52,14 @@
 <h2>Question 223 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Reduce risk of open gcloud CLI sessions. Minimal duration. What to do?
+Analyze VPC network traffic to detect data exfiltration via DNS tunneling. Which service?
 </div>
 <div class="question-choices-container">
 <ul>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> Google session control 1h.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Reauthentication frequency 1h.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> SA credential lifetime 1h.</li>
-<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> SA key expiry 1h.</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="A">A.</span> BigQuery via Log Sink</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="B">B.</span> Event Threat Detection (ETD) with Cloud DNS logs</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="C">C.</span> Cloud Trace</li>
+<li class="multi-choice-item"><span class="multi-choice-letter" data-choice-letter="D">D.</span> Packet Mirroring</li>
 
 </ul>
 </div>
@@ -79,24 +79,24 @@ Reduce risk of open gcloud CLI sessions. Minimal duration. What to do?
 <pre>Odpowiedź: B.
 
 Wyjaśnienie (Dlaczego poprawna):
-B. Reauthentication frequency: W Google Cloud Session Control można ustawić parametr 'reauthentication frequency' (częstotliwość ponownego uwierzytelniania). Jeśli ustawisz 1h, to po godzinie każde polecenie `gcloud` zmusi użytkownika do ponownego zalogowania się w przeglądarce i podania hasła/MFA. To bezpośrednio redukuje ryzyko 'wiszących' sesji w terminalu.
+B. ETD + DNS Logs: DNS Tunneling to metoda ukrywania danych w zapytaniach DNS. ETD posiada dedykowany detektor, który analizuje logi z Cloud DNS i szuka nietypowo długich lub licznych zapytań o dziwne subdomeny, co jest sygnaturą tego ataku.
 
 Dlaczego inne są błędne:
-A. Session control: To ogólna nazwa funkcji, ale techniczny parametr to właśnie 'reauthentication frequency' (B).
-C. SA credential lifetime: Dotyczy kont serwisowych, a pytanie sugeruje sesje użytkowników (ludzi) używających gcloud.
-D. SA key expiry: Klucze statyczne JSON domyślnie nie wygasają same z siebie tak szybko i nie są używane do 'sesji gcloud' przez ludzi w standardowy sposób.
+A. BigQuery: Wymagałoby ręcznego pisania bardzo trudnych algorytmów analitycznych.
+C. Cloud Trace: Nie widzi ruchu sieciowego DNS.
+D. Packet Mirroring: Zadziałałoby, ale analiza surowego ruchu UDP/53 jest znacznie trudniejsza i droższa niż analiza logów przez gotowy silnik ETD (B).
 
-Konsensus społeczności ExamTopics: 100% na B. To jedyny sposób na wymuszenie 'świeżości' autentykacji w CLI.</pre>
+Konsensus społeczności ExamTopics: 100% na B. DNS Tunneling detection to mocna strona ETD.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p><b>Głęboka analiza:</b> To ustawienie jest krytyczne dla deweloperów pracujących na współdzielonych maszynach (np. terminale w biurze) lub w środowiskach wysokiego ryzyka.</p>
+<p><b>Analiza spornych kwestii (AI):</b> Eksperci na forach zauważają, że hakerzy uwielbiają DNS, bo jest on zazwyczaj otwarty na każdym firewallu. ETD (B) to jedyny automat w GCP, który potrafi to 'wyłowić' bez zapychania sieci kopiami pakietów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>
+<li><a href="https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview</a></li>
 
 </ul>
 </div>
