@@ -79,14 +79,22 @@ In order to meet PCI DSS requirements, a customer wants to ensure that all outbo
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CD.
 
-Wyjaśnienie: Compute Engine (C) i GKE (D) pozwalają na pełną kontrolę nad ruchem wychodzącym (egress) za pomocą reguł zapory ogniowej VPC.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Compute Engine (CE): Jako usługa IaaS daje pełną kontrolę nad stosem sieciowym. Możesz tworzyć reguły Firewall typu 'egress' (wychodzące), które blokują cały ruch i zezwalają tylko na autoryzowane połączenia.
+D. Google Kubernetes Engine (GKE): Pozwala na stosowanie polityk sieciowych (Network Policies) oraz reguł firewalla VPC dla węzłów klastra, co umożliwia pełną kontrolę ruchu wychodzącego z podów i węzłów.
+
+Dlaczego inne są błędne:
+A, B. App Engine i Cloud Functions: To usługi typu serverless (PaaS). Domyślnie ich ruch wychodzący przechodzi przez współdzielone adresy IP Google i nie podlega pod Twoje reguły VPC Firewall (chyba że użyjesz VPC Access Connector, ale to już jest 'additional control').
+E. Cloud Storage: Jest to usługa obiektowa, a nie środowisko obliczeniowe generujące ruch sieciowy, który można filtrować regułami firewall.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na CD. Kontrola 'egress' jest natywna dla modelu IaaS/CaaS w VPC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CD</b></p>
-<p>PCI DSS wymaga autoryzacji ruchu wychodzącego. VPC Firewall zapewnia tę funkcjonalność dla IaaS/CaaS.</p>
+<p><b>Głęboka analiza:</b> PCI DSS (wymóg 1.2.1) wymaga ograniczania ruchu wychodzącego do tego, co jest niezbędne. W GCP najłatwiej to osiągnąć w usługach, które są bezpośrednio przypięte do sieci VPC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewalls" target="_blank">https://cloud.google.com/vpc/docs/firewalls</a></li>

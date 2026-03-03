@@ -78,14 +78,21 @@ You need to validate that all data written to BigQuery was done using the App En
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Metoda wykluczania (Hide Matching) pozwala sprawdzić czy istnieją jakiekolwiek wpisy logów pochodzące od INNYCH tożsamości niż ta pożądana.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Filter + Hide Matching: To sprytna metoda audytu. Filtrujesz logi BigQuery pod kątem operacji zapisu, a następnie UKRYWASZ (Hide Matching) wpisy pochodzące od poprawnego konta serwisowego. Jeśli wynikowa lista jest PUSTA, oznacza to, że nikt inny nie pisał do bazy. Jeśli coś zostało, masz dowód na użycie innego konta.
+
+Dlaczego inne są błędne:
+B. Show Matching + empty: Jeśli pokażesz tylko poprawne konto i lista będzie pusta, to znaczy, że ono NIC nie napisało - to odwrotność tego, co chcesz sprawdzić.
+C, D: Sprawdzenie uprawnień powie Ci, kto MOŻE pisać, ale nie potwierdzi, kto FAKTYCZNIE pisał w przeszłości (audyt historyczny wymaga logów).
+
+Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. To praktyczna umiejętność korzystania z Logs Explorera.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jeśli po ukryciu poprawnego konta lista logów jest pusta, oznacza to, że tylko to konto wykonywało operacje.</p>
+<p><b>Głęboka analiza:</b> Ten wzorzec audytowy pozwala na szybkie wykrycie 'szumu' lub nieautoryzowanych działań bez konieczności przeglądania milionów poprawnych wpisów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/view/logs-explorer-queries" target="_blank">https://cloud.google.com/logging/docs/view/logs-explorer-queries</a></li>

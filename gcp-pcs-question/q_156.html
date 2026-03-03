@@ -79,14 +79,23 @@ Move IT infrastructure to GCP. Leverage on-prem AD as IdP. Integrate and configu
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CE.
 
-Wyjaśnienie: GCDS (C) synchronizuje konta i grupy z AD. Następnie nadajesz uprawnienia tym zsynchronizowanym grupom (E) w IAM.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. GCDS: Jest to narzędzie do provisioningu (przenoszenia kont i grup). Musisz je skonfigurować, aby struktura użytkowników i grup z AD pojawiła się w chmurze Google.
+E. IAM groups: Najlepszą praktyką zarządzania dostępem jest nadawanie uprawnień GRUPOM, a nie pojedynczym osobom. Grupy te w GCP powinny odpowiadać grupom bezpieczeństwa w AD (zsynchronizowanym przez GCDS).
+
+Dlaczego inne są błędne:
+A. Identity Platform: To usługa dla aplikacji B2C (Twoich klientów), nie dla Twoich pracowników IT.
+B. SAML: Służy do uwierzytelniania (logowania), ale samo w sobie nie 'tworzy' (provision) użytkowników ani grup w systemie IAM Google.
+D. IAM roles for groups: To masło maślane. Przypisujesz ROLe do GRUP (E), a nie tworzysz 'ról dla każdej grupy' (co sugeruje błędną nomenklaturę lub proces).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla CE. Standardowy wzorzec łączenia AD z Google Cloud.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CE</b></p>
-<p>Nie nadawaj uprawnień rolom (D), lecz przypisuj role grupom (E).</p>
+<p><b>Głęboka analiza:</b> GCDS zapewnia synchronizację składu grup. Jeśli dodasz kogoś do grupy 'Admins' w AD, GCDS doda go do grupy 'Admins' w Google, która już posiada przypisane role IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction" target="_blank">https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction</a></li>

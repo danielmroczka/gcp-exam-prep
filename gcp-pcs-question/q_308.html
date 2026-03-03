@@ -78,14 +78,22 @@ Publish yearly analytics reports. Ensure no PII is published, data integrity pre
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: DLP (Sensitive Data Protection) potrafi przetworzyć raporty (tekst/tabele) przed publikacją, maskując imiona czy adresy, przy jednoczesnym zachowaniu reszty danych analitycznych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. DLP Discovery & Transformation: DLP API potrafi przeanalizować gotowy raport i inteligentnie zamaskować tylko dane wrażliwe (np. imiona), pozostawiając resztę danych (statystyki, kwoty) nietkniętą. Pozwala to na publikację raportu bez ryzyka naruszenia prywatności, przy zachowaniu jego pełnej wartości informacyjnej.
+
+Dlaczego inne są błędne:
+A. Delete: Usunięcie danych źródłowych uniemożliwiłoby stworzenie raportu w ogóle.
+B. Quarantine: To izolacja plików, nie jest to proces 'czyszczenia' raportu przed publikacją.
+D. Encrypt: Zaszyfrowane dane w publicznym raporcie są bezużyteczne dla czytelnika. Maskowanie (transformacja) jest lepszym wyborem dla publicznych dokumentów.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To klasyczny przypadek użycia 'InfoType redaction'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Proces transformacji (maskowanie/pseudonimizacja) jest tu lepszy niż usuwanie całych rekordów.</p>
+<p><b>Głęboka analiza:</b> DLP wspiera techniki takie jak 'Substitution' (zastąpienie imienia tekstem [NAZWISKO]), co pozwala zachować kontekst dokumentu dla czytelnika przy pełnym bezpieczeństwie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp" target="_blank">https://cloud.google.com/dlp</a></li>

@@ -78,14 +78,22 @@ Restriction for BigQuery in a folder. Analytics team manage restrictions only at
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: 'Scoped access policies' pozwalają na delegowanie zarządzania perymetrami VPC SC do konkretnych folderów, co jest idealne dla samodzielnych zespołów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Scoped Access Policies: Pozwalają one na delegowanie zarządzania perymetrami VPC Service Controls do konkretnych folderów. Zespół analityczny dostaje rolę ACM Editor TYLKO na swojej polityce 'scoped', co pozwala im na izolację BigQuery bez dostępu do globalnych ustawień firmy.
+
+Dlaczego inne są błędne:
+A. Org-level: Narusza zasadę 'least privilege' i autonomii zespołu.
+C. Firewall: Nie chroni API BigQuery (to rola VPC SC).
+D. Restrict Service Usage: Blokuje włączenie usługi, a nie dostęp sieciowy do danych wewnątrz niej.
+
+Konsensus społeczności ExamTopics: 100% na B. Scoped policies to klucz do delegowanego bezpieczeństwa w Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Standardowo polityki ACM są globalne dla całej organizacji. Scoped policies ograniczają zasięg zmian.</p>
+<p><b>Głęboka analiza:</b> Dzięki Scoped Policies możesz uniknąć 'wąskiego gardła' w centralnym zespole IT, dając zaufanym zespołom kontrolę nad ich własnymi granicami danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/access-context-manager/docs/scoped-access-policies" target="_blank">https://cloud.google.com/access-context-manager/docs/scoped-access-policies</a></li>

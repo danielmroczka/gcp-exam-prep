@@ -79,14 +79,23 @@ Migrate projects to a new organization node. Which two preparation steps?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CE.
 
-Wyjaśnienie: Przed migracją musisz wiedzieć, jakie uprawnienia zostaną utracone (dziedziczone z org - C) i usunąć projekty z perymetrów (E), które nie będą działać w nowej strukturze.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Identify inherited roles: Podczas migracji projekt traci wszystkie uprawnienia dziedziczone z 'starej' organizacji. Musisz wiedzieć, kogo dopisać w 'nowej' organizacji, aby systemy nie przestały działać.
+E. Remove from VPC SC: Projekt nie może zostać przeniesiony, dopóki jest częścią perymetru bezpieczeństwa. Musisz go najpierw 'uwolnić' z perymetru w starej organizacji i dodać do nowego perymetru w nowej organizacji po migracji.
+
+Dlaczego inne są błędne:
+A. Custom roles: Role niestandardowe na poziomie projektu migrują się razem z nim. Nie trzeba ich usuwać.
+B. Disallow inheritance: Nie jest to wymóg techniczny migracji, choć warto wiedzieć, co spłynie z góry w nowym miejscu.
+D. Create folder: Można to zrobić, ale nie jest to krytyczny krok 'przygotowawczy' (pre-requisite) tak jak C i E.
+
+Konsensus społeczności ExamTopics: 100% na CE. To techniczne wymogi procesu 'Project Move' między organizacjami.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CE</b></p>
-<p>Migracja projektu między organizacjami to skomplikowany proces wymagający 'wyczyszczenia' powiązań globalnych.</p>
+<p><b>Głęboka analiza:</b> Migracja projektu to operacja wysokiego ryzyka. Zawsze sprawdź, czy w nowej organizacji nie ma sprzecznych polityk (Org Policies), które mogłyby unieruchomić usługi w projekcie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/project-migration" target="_blank">https://cloud.google.com/resource-manager/docs/project-migration</a></li>

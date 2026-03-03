@@ -78,14 +78,22 @@ Prevent malicious people from using unattended laptops after authentication into
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Google Cloud Session Control pozwala na wymuszenie ponownego logowania po określonym czasie (np. 1h), co ogranicza ryzyko przejęcia otwartej sesji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Session Control: Administratorzy Google Cloud mogą wymusić maksymalny czas trwania sesji (np. 1 godzina). Po tym czasie użytkownik zostanie wylogowany i będzie musiał ponownie podać hasło/MFA. Skraca to czas, w którym osoba niepowołana może korzystać z już otwartej sesji na cudzym komputerze.
+
+Dlaczego inne są błędne:
+A. Policy: To tylko papierowy zapis, nie stanowi technicznej blokady (prevent).
+B. Disable APIs: Uniemożliwi pracę uprawnionym osobom.
+C. Strong passwords: Chronią przed atakiem brute-force, ale nie pomagają, gdy sesja jest już otwarta i komputer zostawiony bez nadzoru.
+
+Konsensus społeczności ExamTopics: 100% na D. To jedyny techniczny mechanizm ograniczający czas życia aktywnej autoryzacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Dotyczy to zarówno konsoli przeglądarkowej, jak i sesji gcloud CLI.</p>
+<p><b>Głęboka analiza:</b> Ustawienie to znajduje się w konsoli Google Admin pod hasłem 'Google Cloud session control'. Wpływa ono na dostęp do konsoli webowej oraz sesji gcloud CLI.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>

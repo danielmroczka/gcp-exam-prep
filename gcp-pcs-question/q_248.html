@@ -78,14 +78,22 @@ Suspicious login attempt to impersonate privileged SA from unknown IP. Investiga
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Event Threat Detection (część SCC) automatycznie wykrywa podejrzane wzorce w logach (np. anomalie w impersonacji). Połączenie tego z ręczną analizą logów audytowych daje najpełniejszy obraz.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. SCC Event Threat Detection: Jest to usługa, która automatycznie 'czyta' logi za Ciebie i szuka w nich anomalii (np. `impersonation_anomalous_principal`). Dostarcza gotowy alert. Połączenie tego z ręcznym przeszukaniem Audit Logs (cross-reference) pozwala na szybkie i skuteczne dochodzenie incydentu.
+
+Dlaczego inne są błędne:
+A. Enable logs: To krok, który powinien być zrobiony dawno temu. Samo włączenie logów TERAZ nie pomoże w badaniu ataku z przeszłości.
+B. Review logs: Można to robić ręcznie, ale przy tysiącach wpisów bez automatycznej detekcji (ETD) bardzo łatwo przeoczyć subtelny atak impersonacji. Opcja D jest bardziej 'efektywna' (effective).
+C. Vulnerability scan: Szuka dziur w kodzie/systemie, nie służy do badania incydentów związanych ze skradzionymi tożsamościami.
+
+Konsensus społeczności ExamTopics: 100% na D. SCC ETD to Twój pierwszy detektyw w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>SCC dostarcza gotowy alert, a Logs Explorer pozwala na szczegółowe dochodzenie (Forensics).</p>
+<p><b>Głęboka analiza:</b> Event Threat Detection posiada gotowe reguły na wykrywanie wycieków kluczy i nietypowych zachowań kont serwisowych, co oszczędza setki godzin pracy analityka SOC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-event-threat-detection-overview</a></li>

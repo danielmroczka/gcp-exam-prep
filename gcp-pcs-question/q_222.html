@@ -78,14 +78,21 @@ Minimize service account keys for on-prem Windows apps. Implement WIF with IdP o
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: WIF wspiera SAML (ADFS). Najbezpieczniej jest użyć reguł (A), które ograniczają, którzy użytkownicy AD mogą przejmować daną tożsamość w GCP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. WIF with ADFS: Windows Server natywnie używa ADFS (Active Directory Federation Services), który wspiera SAML/OIDC. Workload Identity Federation pozwala na wymianę tokena ADFS na token GCP. Dodanie reguły (A) zapewnia, że tylko konkretne maszyny/aplikacje mogą przejąć tożsamość konta serwisowego w chmurze (zasada najniższych uprawnień).
+
+Dlaczego inne są błędne:
+B, D. All principals: Skrajnie niebezpieczne. Każdy użytkownik Twojego AD mógłby wtedy przejąć uprawnienia administratora w chmurze.
+C. OIDC on same machine: Sama obecność protokołu nie rozwiązuje problemu autoryzacji i wymiany tożsamości bez mechanizmu WIF.
+
+Konsensus społeczności ExamTopics: 100% na A. To standardowa architektura eliminacji kluczy JSON w środowisku Windows/AD.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Nie należy pozwalać wszystkim (B) na impersonację konta serwisowego.</p>
+<p><b>Głęboka analiza:</b> WIF używa tzw. 'Security Token Service' (STS) Google, który weryfikuje podpis Twojego lokalnego ADFS i na tej podstawie wydaje token OAuth2.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workload-identity-federation</a></li>

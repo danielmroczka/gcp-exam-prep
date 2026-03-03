@@ -78,14 +78,21 @@ Old financial application. Risk of side-channel attacks. Protect confidentiality
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Confidential VMs sprzętowo izolują i szyfrują pamięć, co jest jedyną skuteczną ochroną przed atakami próbującymi odczytać dane bezpośrednio z RAM.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Confidential VMs: Wykorzystują sprzętowe szyfrowanie pamięci RAM (AMD SEV). Dane są deszyfrowane dopiero wewnątrz procesora, co chroni je przed odczytem z poziomu hypervisora lub innych procesów próbujących wykorzystać luki w architekturze sprzętowej.
+
+Dlaczego inne są błędne:
+A. Access control: Chroni przed logowaniem, ale nie chroni przed lukami sprzętowymi procesora.
+D. CMEK: Szyfruje dane na dysku, dane w RAM są jawne bez technologii Confidential VM.
+
+Konsensus społeczności ExamTopics: 100% na C. Słowo 'in memory' to zawsze Confidential Computing.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Szyfrowanie dysków (D) nie pomaga, gdy dane są już załadowane do pamięci procesora.</p>
+<p><b>Głęboka analiza:</b> Confidential Computing pozwala na przetwarzanie danych bez ich deszyfrowania w niebezpiecznych warstwach stosu technologicznego (tzw. Trusted Execution Environment).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction" target="_blank">https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction</a></li>

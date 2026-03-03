@@ -78,14 +78,21 @@ Access denied between CE instances in Shared VPC and BigQuery in a perimeter. Wh
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: W Shared VPC ruch sieciowy jest 'własnością' projektu hosta. Aby ruch z VM trafił do chronionego BigQuery, projekt hosta musi być częścią perymetru.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Add host project: W architekturze Shared VPC, sieć fizycznie 'należy' do projektu hosta. Gdy VM z projektu usługowego (service project) próbuje połączyć się z usługą chronioną perymetrem (BigQuery), VPC Service Controls sprawdza, czy sieć, z której pochodzi ruch, jest zaufana. Dlatego to projekt HOSTA sieci musi być częścią perymetru.
+
+Dlaczego inne są błędne:
+B. Service project: Sam projekt usługowy zazwyczaj już jest w perymetrze, ale to nie wystarcza, bo ruch 'sieciowy' jest przypisany do hosta sieci.
+C, D. Perimeter bridge: Służą do łączenia OBU projektów, jeśli są w RÓŻNYCH perymetrach. Tutaj kluczowym problemem jest brak hosta sieci w obwodzie bezpieczeństwa.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. To jeden z najczęstszych błędów przy wdrażaniu VPC SC w Shared VPC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>VPC Service Controls wymagają, aby wszystkie projekty biorące udział w komunikacji sieciowej (host sieci) i usługowej (BigQuery) były w tym samym perymetrze lub połączone mostem.</p>
+<p><b>Głęboka analiza:</b> VPC Service Controls chroni nie tylko projekty, ale całe sieci VPC. W Shared VPC 'tożsamością sieciową' jest projekt hosta.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/shared-vpc" target="_blank">https://cloud.google.com/vpc-service-controls/docs/shared-vpc</a></li>

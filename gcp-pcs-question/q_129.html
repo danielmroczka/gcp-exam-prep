@@ -78,14 +78,21 @@ Domain restricted sharing policy active. External partner cannot access resource
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Polityki organizacji wspierają wyjątki dla konkretnych Customer ID (Workspace/Cloud Identity), co pozwala zachować ogólne restrykcje przy dopuszczeniu wybranych partnerów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Custom Policy with Customer ID: Polityka 'Domain Restricted Sharing' pozwala na zdefiniowanie wyjątków dla konkretnych identyfikatorów klientów Google Cloud (Customer ID). Jest to najbezpieczniejsza metoda, ponieważ dopuszczasz TYLKO wybraną firmę partnerską, zachowując blokadę dla całego reszty świata.
+
+Dlaczego inne są błędne:
+A, B. Turn off / Allow All: Całkowicie niweluje sens posiadania polityki bezpieczeństwa i naraża firmę na wyciek danych do prywatnych kont pracowników.
+C. Google Group: Grupy służą do IAM, ale 'Domain Restricted Sharing' to polityka organizacji, która blokuje nadanie uprawnienia IAM komukolwiek spoza listy dozwolonych domen, nawet jeśli jest w Twojej grupie. Musisz dodać domenę/ID partnera do samej polityki (D).
+
+Konsensus społeczności ExamTopics: 100% na D. To standardowy sposób współpracy B2B w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>To najbardziej granularna i bezpieczna metoda zarządzania zaufanymi domenami zewnętrznymi.</p>
+<p><b>Głęboka analiza:</b> Customer ID partnera znajdziesz w ich konsoli Admin lub otrzymasz od ich administratora. Wygląda on zazwyczaj jak `C01234567`.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains</a></li>

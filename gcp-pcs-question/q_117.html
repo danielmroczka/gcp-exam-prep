@@ -78,14 +78,21 @@ Minimize risk of CI/CD credentials (hosted on CE) being stolen. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Użycie tożsamości instancji (SA przypisane do VM) eliminuje potrzebę posiadania kluczy JSON. Wyłączenie możliwości tworzenia kluczy (C) to dodatkowa warstwa ochrony.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Custom SA + No Keys: Najbezpieczniejszą metodą jest przypisanie tożsamości bezpośrednio do VM (Service Account). Jeśli dodatkowo nałożysz politykę organizacji `iam.disableServiceAccountKeyCreation`, haker, który przejmie maszynę, nie będzie mógł wygenerować statycznego pliku JSON z kluczem, który mógłby wynieść poza chmurę.
+
+Dlaczego inne są błędne:
+A, B. Dedicated user account: Konta użytkowników (ludzi) nie powinny być używane do automatyzacji CI/CD na maszynach.
+D. Lifetime extension: Przedłużenie czasu życia tokenów zwiększa ryzyko, a nie je minimalizuje.
+
+Konsensus społeczności ExamTopics: 100% na C. Kombinacja tożsamości instancji i blokady tworzenia kluczy to 'best practice' dla serwerów CI/CD.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Jeśli SA nie posiada kluczy, atakujący nie może ich pobrać z VM.</p>
+<p><b>Głęboka analiza:</b> To podejście wymusza korzystanie z krótkotrwałych tokenów pobieranych z metadanych, które są ważne tylko na tej konkretnej maszynie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/best-practices-for-using-service-accounts" target="_blank">https://cloud.google.com/iam/docs/best-practices-for-using-service-accounts</a></li>

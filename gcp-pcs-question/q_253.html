@@ -78,14 +78,21 @@ Chatbot powered by GenAI. Ensure no PII is communicated. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: DLP API potrafi w czasie rzeczywistym skanować zapytania (input) i odpowiedzi (output) AI, maskując dane wrażliwe przed ich wyświetleniem.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud DLP API: Chatboty pracują na strumieniach tekstu. DLP API potrafi w milisekundach przeskanować zapytanie (input) i odpowiedź modelu (output), identyfikując i maskując PII (imiona, adresy) przed ich wyświetleniem użytkownikowi.
+
+Dlaczego inne są błędne:
+A. Cloud KMS: Szyfruje dane na dysku, ale chatbot musi widzieć tekst jawny, aby odpowiedzieć. Szyfrowanie nie zapobiega wyświetleniu PII użytkownikowi w oknie chatu.
+C. VPC SC: Chroni bazę danych chatbota przed kradzieżą, ale nie kontroluje Treści rozmowy przesyłanej protokołem HTTPS do klienta.
+
+Konsensus społeczności ExamTopics: 100% na B. DLP to standard dla czyszczenia treści AI.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Szyfrowanie (A) nie chroni przed wyświetleniem PII w oknie chatu użytkownikowi.</p>
+<p><b>Głęboka analiza:</b> Możesz użyć DLP do 'pseudonimizacji' - model AI dostanie pytanie: 'Co kupił [USER_1]?', co chroni prywatność nawet przed dostawcą modelu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/inspecting-text-examples" target="_blank">https://cloud.google.com/dlp/docs/inspecting-text-examples</a></li>

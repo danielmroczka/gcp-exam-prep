@@ -78,14 +78,22 @@ Prod projects attaching to Shared VPCs outside networking folder (data exfiltrat
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Ograniczenie 'compute.restrictSharedVpcHostProjects' (A) ustawione na folderze produkcyjnym pozwala maszynom z tego folderu łączyć się tylko z sieciami znajdującymi się w folderze 'networking'.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Scoped Org Policy: Ograniczenie `compute.restrictSharedVpcHostProjects` pozwala wskazać listę zaufanych projektów hostów (lub całych folderów z hostami). Ustawienie tej polityki na poziomie folderu 'Prod' (A) zapewnia, że tylko projekty produkcyjne zostaną ograniczone, podczas gdy folder 'Dev' pozostanie nietknięty (brak impactu na dev).
+
+Dlaczego inne są błędne:
+B. Networking folder: To folder, w którym SĄ sieci, a restrykcję musisz nałożyć tam, gdzie są VM-y (w projektach usługowych), aby nie mogły się one 'podpiąć' do obcych sieci.
+C. Project level: Niewydajne przy wielu projektach (większy overhead).
+D. Org level: Zablokowałoby też swobodę w folderze deweloperskim, co jest sprzeczne z wymogiem 'without impacting dev'.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To idealne zastosowanie hierarchicznego nakładania polityk organizacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to bardzo skuteczne narzędzie zapobiegające 'ucieczce' VM do niezaufanych lub źle skonfigurowanych sieci.</p>
+<p><b>Głęboka analiza:</b> Ta polityka jest kluczowa, aby deweloper nie mógł podpiąć produkcyjnej VM do swojej prywatnej, niezabezpieczonej sieci VPC w innym projekcie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>

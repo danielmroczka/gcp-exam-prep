@@ -78,14 +78,21 @@ Ensure application teams can only add users from within organization to their gr
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: W konsoli administracyjnej Google Workspace można ustawić dla grup restrykcję 'Allow members outside your organization', którą należy wyłączyć.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Workspace Admin Settings: W konsoli administracyjnej Google Workspace (lub Cloud Identity) istnieje globalne ustawienie dla grup: 'Allow members from outside your organization'. Wyłączenie tej opcji na poziomie całej domeny uniemożliwia każdemu (w tym zespołom deweloperskim) dodanie zewnętrznego adresu e-mail do jakiejkolwiek grupy firmowej.
+
+Dlaczego inne są błędne:
+B, C: IAM w GCP zarządza uprawnieniami do zasobów (np. VM, GCS), ale nie kontroluje samej logiki wewnętrznej Składu Grup Google (to domena Identity Providera).
+D. Logs + Function: To rozwiązanie reaktywne (naprawia po fakcie). Rozwiązanie A jest natywne i prewencyjne.
+
+Konsensus społeczności ExamTopics: 100% na A. Kontrola tożsamości zaczyna się w panelu Admina Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to najprostsza metoda kontroli składu grup tożsamości.</p>
+<p><b>Głęboka analiza:</b> To ustawienie jest kluczowe dla ochrony przed wyciekiem danych poprzez omyłkowe dodanie kogoś do grupy, która posiada szerokie uprawnienia w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/167094" target="_blank">https://support.google.com/a/answer/167094</a></li>

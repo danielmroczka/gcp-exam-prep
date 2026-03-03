@@ -78,14 +78,22 @@ Healthcare provider: data residency, administrative approval required, auditable
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Assured Workloads (B) automatyzuje wymogi rezydencji. Access Approval dodaje krok zgody człowieka na działania administratorów Google.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Assured Workloads + Access Approval: Ten zestaw idealnie pasuje do wymogów: 1. Data residency (Assured Workloads wymusza regiony). 2. Administrative approval (Access Approval wymusza Twoją zgodę dla Google). 3. Auditable (Logging + Access Transparency dokumentują wszystko).
+
+Dlaczego inne są błędne:
+A. Standard region: Nie 'wymusza' rezydencji tak twardo i automatycznie jak Assured Workloads. Brak Access Approval.
+C. VPC SC: Chroni przed wyciekiem, ale nie jest mechanizmem 'zatwierdzania dostępu personelu Google' (Access Approval).
+D. ACLs: Przeżytek, nie spełniają nowoczesnych wymogów compliance dla dużych organizacji medycznych.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Assured Workloads to 'healthcare compliance' w jednym pakiecie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>To połączenie usług adresuje wszystkie trzy wymogi: lokalizację, kontrolę dostępu i audytowalność.</p>
+<p><b>Głęboka analiza:</b> Assured Workloads tworzy 'bezpieczną bańkę', w której wszystkie nowo tworzone zasoby muszą być zgodne z wybranym standardem (np. HIPAA dla zdrowia).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/assured-workloads/docs/overview" target="_blank">https://cloud.google.com/assured-workloads/docs/overview</a></li>

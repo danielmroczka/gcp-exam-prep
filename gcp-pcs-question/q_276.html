@@ -78,14 +78,22 @@ Fully isolate Dev and Prod. One central entry point from on-prem. Secure network
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Architektura 'Hub and Spoke' (D) z centralnym VPC wejściowym (Hub) i odizolowanymi VPC środowiskowymi (Spokes) zapewnia pełną kontrolę i separację. Ruch między Spokes jest blokowany brakiem tranzytywności peeringu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Hub-and-Spoke (Transit VPC): To najbardziej bezpieczna architektura Enterprise. Masz centralną sieć 'Hub' (Transit VPC), która łączy się z on-premises. Sieci środowiskowe (Dev i Prod) są podłączone (peered) do Hub-a, ale NIE są połączone ze sobą. Ponieważ VPC Peering nie jest tranzytywny, ruch z Dev nigdy nie trafi do Prod, a oba mają jeden punkt kontroli wejścia.
+
+Dlaczego inne są błędne:
+A. Peer VPCs: Jeśli połączysz Dev z Prod peeringiem, to naruszasz zasadę 'fully isolate'.
+B. Shared VPC: Wszystkie środowiska współdzielą te same tablice routingu i routery wewnątrz jednej sieci VPC, co jest słabszą izolacją niż osobne sieci VPC (D).
+C. VPC SC: Służy do izolacji API (Storage, SQL), nie do budowania topologii warstwy 3 (routingu IP) między VM-ami.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. To wzorcowa topologia sieciowa dla dużych organizacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>VPC Peering nie jest tranzytywny, więc ruch z Dev nie trafi do Prod przez Hub.</p>
+<p><b>Głęboka analiza:</b> W Hubie możesz postawić centralne urządzenie NGFW (np. Fortinet, Palo Alto), które będzie skanować cały ruch przechodzący z on-premises do wszystkich Twoich chmurowych Spokes.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/best-practices-vpc-design#hub-and-spoke" target="_blank">https://cloud.google.com/architecture/best-practices-vpc-design#hub-and-spoke</a></li>

@@ -76,14 +76,23 @@ Export logs to GCS. Error: log sinks don't support uniform bucket-level access. 
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A. (Uwaga: Obecnie logi wspierają Uniform Bucket Access, ale pytanie dotyczy starszego zachowania). Wyjaśnienie: Jeśli sink nie wspiera Uniform Access, bucket musi używać Fine-grained access (ACL).</pre>
+<pre>Odpowiedź: A. (Uwaga: To pytanie historyczne, obecnie Cloud Logging wspiera UBLA).
+
+Wyjaśnienie (Dlaczego poprawna):
+A. Change to Fine-grained access: Starsze wersje mechanizmu eksportu logów (Sink) wymagały użycia list ACL na poziomie pojedynczych obiektów (plików logów), aby poprawnie zapisywać dane. Uniform Bucket-Level Access (UBLA) wyłącza ACL, co powodowało błąd. Rozwiązaniem było przełączenie bucketu na model 'Fine-grained'.
+
+Dlaczego inne są błędne:
+B. Update destination: Zmiana celu nie rozwiązuje problemu konfiguracji uprawnień na buckecie GCS.
+C, D: Nadanie roli IAM jest poprawne w nowym modelu, ale pytanie opisuje konkretny błąd techniczny ('sinks don't support uniform...'), którego jedyną solucją w tamtym czasie było wyłączenie uniform access.
+
+Konsensus społeczności ExamTopics: Większość na A ze względu na historyczny kontekst pytania. Warto jednak wiedzieć, że dzisiaj (2024+) opcja C/D byłaby bardziej pożądana.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To historyczne ograniczenie wymagało użycia ACL, aby tożsamość sinka mogła zapisać plik w buckecie.</p>
+<p><b>Głęboka analiza:</b> Google stale aktualizuje swoje usługi. Zawsze zwracaj uwagę, czy pytanie dotyczy 'ograniczenia technicznego' (które może być stare) czy 'najlepszej praktyki' (która ewoluuje).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/export/using_exported_logs" target="_blank">https://cloud.google.com/logging/docs/export/using_exported_logs</a></li>

@@ -78,14 +78,22 @@ VPC where security team controls network resources like firewall rules. Separati
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Shared VPC to natywny model separacji obowiązków w GCP. Zespół sieciowy/security zarządza projektem hosta (siecią), a deweloperzy projektami usługowymi (aplikacjami).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Shared VPC: Jest to natywny mechanizm GCP zaprojektowany dokładnie do separacji obowiązków (Separation of Duties). Zespół bezpieczeństwa zarządza siecią w 'Host Project', a deweloperzy używają tej sieci w swoich 'Service Projects'. Deweloper może stworzyć VM, ale nie ma uprawnień do zmiany reguł firewalla w sieci, do której ta VM należy.
+
+Dlaczego inne są błędne:
+A. Multi-NIC: Bardzo skomplikowane i trudne w utrzymaniu przy setkach aplikacji.
+B. VPC Peering: Nie zapewnia centralizacji zarządzania; każda strona nadal zarządza własnym firewallem.
+C. IAM roles only: W jednym projekcie deweloper z rolą Compute Admin mógłby teoretycznie wpłynąć na zasoby sieciowe, jeśli nie zostaną nałożone bardzo skomplikowane role custom. Shared VPC (D) daje czystą izolację projektową.
+
+Konsensus społeczności ExamTopics: 100% na D. Shared VPC to fundament architektury Enterprise w Google Cloud.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>W tym modelu deweloperzy mogą tworzyć VM, ale nie mogą zmieniać reguł firewalla w sieci, do której te VM są przypięte.</p>
+<p><b>Głęboka analiza:</b> W modelu Shared VPC, deweloperzy dostają rolę `compute.networkUser` tylko na konkretnych podsieciach, co daje im 'prawo użytkowania', ale nie 'prawo własności' do sieci.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/shared-vpc" target="_blank">https://cloud.google.com/vpc/docs/shared-vpc</a></li>

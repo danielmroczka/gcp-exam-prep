@@ -78,14 +78,21 @@ Integrate GCDS with LDAP. Replicate user/group lifecycle, disable manually creat
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Opcja 'Suspend' jest bezpieczniejsza niż delete. Zadanie cykliczne (recurring task) zapewnia automatyzację cyklu życia użytkownika.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Suspend + Recurring task: Aby zachować AD/LDAP jako źródło prawdy, GCDS musi działać regularnie (recurring). Wybranie opcji 'Suspend' (zawieszenie) zamiast 'Delete' jest bezpieczniejsze - konta osób nieobecnych w LDAP zostaną zablokowane, co uniemożliwi im logowanie, ale pozwoli na odzyskanie danych w razie pomyłki. To skutecznie eliminuje ręcznie stworzone konta, których nie ma w LDAP.
+
+Dlaczego inne są błędne:
+B. Delete: Jest zbyt drastyczne na początek integracji. Można niechcący usunąć ważne konta systemowe. Manualne uruchamianie nie zapewnia ciągłości bezpieczeństwa.
+C, D. Exclude: Jeśli wykluczysz ręcznie stworzone konta, to one nadal będą aktywne i będą stanowić lukę w polityce 'jedynego źródła prawdy'. Celem jest ich wyeliminowanie (disabling).
+
+Konsensus społeczności ExamTopics: Silne poparcie dla A. 'Suspend' to złoty standard przy pierwszej fazie wdrożenia GCDS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>GCDS pozwala na synchronizację stanu konta (aktywne/zawieszone) na podstawie obecności w LDAP.</p>
+<p><b>Głęboka analiza:</b> GCDS posiada funkcję 'Sync non-existent users'. Jeśli konto istnieje w chmurze, a nie ma go w pliku/LDAP, GCDS może je zawiesić, co gwarantuje pełną replikację stanu z AD.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/612003" target="_blank">https://support.google.com/a/answer/612003</a></li>

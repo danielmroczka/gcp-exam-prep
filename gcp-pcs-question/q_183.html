@@ -78,14 +78,22 @@ Clinical trials in BigQuery. Obfuscate start/end dates for each row but preserve
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: 'Date shifting' w DLP przesuwa daty o losową liczbę dni, ale jeśli użyjesz tego samego klucza kontekstu (ID pacjenta), obie daty (start i stop) zostaną przesunięte o Tyle Samo, co zachowa czas trwania (interwał).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Date shifting: Technika ta w Cloud DLP polega na przesunięciu daty o losową liczbę dni. Używając 'context' (np. ID pacjenta), DLP zapewnia, że wszystkie daty dla danej osoby zostaną przesunięte o Tyle Samo Dni. Dzięki temu interwał między 'start' a 'end' pozostaje identyczny jak w oryginale, co pozwala na analitykę medyczną przy jednoczesnym ukryciu rzeczywistych dat.
+
+Dlaczego inne są błędne:
+B. TimePartConfig: Wyodrębnia tylko część daty (np. rok), co niszczy precyzję interwału (dni).
+C. Bucketing: Grupuje daty w przedziały (np. 'Styczeń 2023'), co również uniemożliwia dokładne obliczenie liczby dni trwania leczenia.
+D. FPE: Szyfruje dane, ale nie zachowuje logicznych relacji czasowych (interwałów) w taki sposób jak natywna funkcja 'Date shifting'.
+
+Konsensus społeczności ExamTopics: 100% na A. To podręcznikowy przykład użycia 'deterministic date shifting'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To zaawansowana technika DLP pozwalająca na analitykę czasową bez ujawniania rzeczywistych dat zdarzeń.</p>
+<p><b>Głęboka analiza:</b> Ta technika jest kluczowa dla HIPAA i RODO w analityce medycznej. Pozwala na naukowe badanie czasu trwania chorób bez ryzyka identyfikacji pacjenta po konkretnym dniu wizyty w szpitalu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/transformations-reference#date-shifting" target="_blank">https://cloud.google.com/dlp/docs/transformations-reference#date-shifting</a></li>

@@ -78,14 +78,21 @@ Ensure containers with vulnerabilities above CVSS 'medium' are not deployed to p
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Binary Authorization potrafi integrować się z wynikami skanowania podatności i blokować wdrożenia, które nie spełniają określonych reguł (np. brak wysokich CVE).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Binary Authorization: Usługa ta potrafi automatycznie sprawdzać wyniki skanowania z Artifact Analysis. Możesz skonfigurować politykę, która blokuje uruchomienie kontenera, jeśli skaner znalazł jakąkolwiek podatność powyżej zadanego progu (threshold), np. High lub Critical.
+
+Dlaczego inne są błędne:
+A, B: Rozwiązania manualne, nieskalowalne i nie dające technicznej gwarancji blokady na poziomie platformy (runtime).
+D. Artifact Registry: Pozwala przechowywać obrazy, ale nie potrafi ZABLOKOWAĆ ich uruchomienia w klastrze GKE na podstawie treści (vulnerabilities).
+
+Konsensus społeczności ExamTopics: 100% na C. Binary Authorization to jedyny strażnik wdrożeń kontenerowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Tworzysz regułę: 'nie dopuszczaj obrazu, jeśli skaner znalazł coś powyżej Medium'.</p>
+<p><b>Głęboka analiza:</b> Taka polityka nazywa się 'Vulnerability check' wewnątrz reguły Binary Authorization. Chroni ona przed wdrożeniem obrazu, który był bezpieczny wczoraj, ale dzisiaj wykryto w nim nową krytyczną lukę.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization/docs/vulnerability-checks" target="_blank">https://cloud.google.com/binary-authorization/docs/vulnerability-checks</a></li>

@@ -78,14 +78,22 @@ subset of Google Cloud logs for on-prem SIEM, minimize risk of data exposure. Wh
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Użycie sinka z filtrem (C) zapewnia, że do SIEM trafia tylko niezbędny podzbiór danych. Pub/Sub i Dataflow to bezpieczny i skalowalny rurociąg dostarczania.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Filtered Log Sink + Pub/Sub: To najbardziej bezpieczna i wydajna metoda. Tworzysz 'Log Sink' z precyzyjnym filtrem (np. tylko logi bezpieczeństwa, bez logów aplikacji z PII), co spełnia wymóg 'subset' i 'minimize exposure'. Pub/Sub i Dataflow zapewniają bezpieczne i skalowalne dostarczenie tych danych do SIEM on-prem.
+
+Dlaczego inne są błędne:
+A. All logs: Narusza wymóg 'minimize risk' (niepotrzebne przesyłanie wrażliwych logów aplikacyjnych).
+B. Log view: Służy do ograniczania widoczności logów WEWNĄTRZ chmury (w Logs Explorerze), nie jest to mechanizm eksportu do systemów on-premises.
+D. GCS + SA key: Przesyłanie statycznych kluczy JSON (SA keys) poza chmurę jest odradzane.
+
+Konsensus społeczności ExamTopics: 100% na C. Filtrowany sink to jedyna metoda na precyzyjny eksport danych logowania.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>To podejście minimalizuje ilość danych opuszczających chmurę i eliminuje potrzebę statycznych kluczy (jak w D).</p>
+<p><b>Głęboka analiza:</b> Wykorzystanie filtra w sinku (`resource.type="gce_instance" AND severity>=WARNING`) drastycznie zmniejsza koszty przesyłu danych i ułatwia pracę analitykom SIEM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk" target="_blank">https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk</a></li>

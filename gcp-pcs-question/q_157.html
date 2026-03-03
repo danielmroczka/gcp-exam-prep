@@ -79,14 +79,23 @@ Creating a new Google Cloud organization. Actions for super admin accounts. Whic
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CE.
 
-Wyjaśnienie: Super Admin powinien używać sprzętowego MFA (C) i posiadać osobne, zwykłe konto do codziennej pracy (E), aby minimalizować ryzyko przypadkowych błędów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Physical token: Super Admin to najbardziej krytyczne konto. Powinno być zabezpieczone najsilniejszą metodą MFA - fizycznym kluczem (np. Titan), który jest odporny na phishing.
+E. Non-privileged identities: Administratorzy nie powinni używać konta Super Admin do codziennych zadań (czytanie maili, tworzenie VM). Powinni mieć zwykłe konta, a po uprawnienia Super Admina sięgać tylko w sytuacjach awaryjnych (zasada 'least privilege').
+
+Dlaczego inne są błędne:
+A. Prevent login: Super Admin musi móc się zalogować, aby zarządzać organizacją.
+B. Disable IAM roles: Super Admin w Google Workspace automatycznie posiada najwyższe uprawnienia, których nie można po prostu 'wyłączyć' bez utraty zdolności do zarządzania domeną.
+D. Private connection: Logowanie administratora odbywa się przez internetowe serwisy Google (OAuth2), nie wymaga stałego łącza prywatnego (Interconnect/VPN).
+
+Konsensus społeczności ExamTopics: 100% na CE. To fundamenty 'Account Hygiene' dla administratorów IT.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CE</b></p>
-<p>To fundament higieny bezpieczeństwa w zarządzaniu tożsamością uprzywilejowaną.</p>
+<p><b>Głęboka analiza:</b> Super Admin jest jedyną osobą, która może zresetować hasła innym administratorom i wyłączyć 2SV. Kompromitacja tego konta to koniec bezpieczeństwa firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/9011374" target="_blank">https://support.google.com/a/answer/9011374</a></li>

@@ -76,14 +76,23 @@ Securely access Google APIs from CI/CD pipelines on GKE. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A. (Uwaga: C również jest poprawne architektonicznie, ale A jest częstszą odpowiedzią egzaminacyjną dla separacji Infra/App). Wyjaśnienie: Workload Identity to najbezpieczniejsza metoda nadawania tożsamości podom w GKE.</pre>
+<pre>Odpowiedź: A. (Uwaga: C również jest architektonicznie poprawne, ale A kładzie nacisk na izolację namespace, co jest lepszą praktyką K8s).
+
+Wyjaśnienie (Dlaczego poprawna):
+A. Workload Identity + Namespaces: To najbezpieczniejsza metoda. Workload Identity (A) eliminuje potrzebę używania kluczy JSON. Rozdzielenie potoków CI/CD do osobnych Namespaces zapewnia dodatkową warstwę izolacji wewnątrz klastra K8s (RBAC, Network Policies).
+
+Dlaczego inne są błędne:
+B. SA for nodes pool: Bardzo niebezpieczne. Każdy kontener na węźle dziedziczyłby uprawnienia węzła (zbyt szeroki dostęp).
+D. SA keys as secrets: K8s Secrets są przechowywane w bazie etcd (często niezaszyfrowanej domyślnie) i są to nadal statyczne, długotrwałe klucze, których chcemy uniknąć.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. Workload Identity to 'must-have' dla GKE security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Eliminuje to potrzebę zarządzania kluczami JSON wewnątrz klastra.</p>
+<p><b>Głęboka analiza:</b> Workload Identity wiąże konto serwisowe Kubernetes (KSA) z kontem serwisowym Google (GSA). Aplikacja po prostu używa standardowych bibliotek Google, które 'magicznie' otrzymują tokeny.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity</a></li>

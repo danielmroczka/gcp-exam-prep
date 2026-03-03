@@ -78,14 +78,22 @@ How can you restrict access to a specific Cloud Storage bucket so that only user
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: VPC Service Controls w połączeniu z Access Context Manager pozwala na tworzenie obwodów bezpieczeństwa opartych na adresie IP źródła.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. VPC Service Controls (VPC SC): Pozwala na stworzenie perymetru wokół usług API Google (np. Cloud Storage API). W połączeniu z Access Levels (zdefiniowanymi w Access Context Manager) można zablokować dostęp do API każdemu, kto nie łączy się z konkretnego zakresu adresów IP (Twój corporate network).
+
+Dlaczego inne są błędne:
+A. Cloud IAM: Zarządza TOŻSAMOŚCIĄ (kto), ale nie potrafi natywnie odciąć dostępu dla uprawnionego użytkownika logującego się z publicznego internetu zamiast z biura.
+B. Bucket ACLs: Podobnie jak IAM, zarządzają tożsamością, nie mają pojęcia o lokalizacji sieciowej użytkownika.
+D. Firewall rules: Chronią maszyny VM, ale nie chronią publicznego API Cloud Storage (storage.googleapis.com), które znajduje się poza Twoją siecią VPC.
+
+Konsensus społeczności ExamTopics: Prawie 100% na C. To jedyna metoda na 'obwód bezpieczeństwa' dla usług zarządzanych (PaaS/SaaS) w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>VPC SC to jedyna metoda odcięcia dostępu na podstawie lokalizacji sieciowej dla usług API Google.</p>
+<p><b>Głęboka analiza:</b> VPC Service Controls to jedyny sposób na walkę z kradzieżą danych (data exfiltration). Nawet jeśli ktoś ukradnie klucze administratora, nie pobierze danych spoza biura, jeśli perymetr na to nie pozwala.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/access-level-usage" target="_blank">https://cloud.google.com/vpc-service-controls/docs/access-level-usage</a></li>

@@ -78,14 +78,22 @@ SA key publicly exposed. Key used to generate short-lived credentials. Immediate
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Jeśli na podstawie klucza wygenerowano tokeny (short-lived credentials), samo usunięcie klucza (B) ich nie unieważni. Tylko usunięcie lub dezaktywacja CAŁEGO konta (A) natychmiast odetnie dostęp.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Delete Service Account: Jeśli klucz został użyty do wygenerowania 'short-lived credentials' (tokenów OAuth2), samo usunięcie klucza (B) NIE unieważni tych tokenów. Będą one ważne aż do ich naturalnego wygaśnięcia (np. 1h). Jedynym sposobem na natychmiastowe odcięcie dostępu we wszystkich systemach Google jest usunięcie (lub zawieszenie) CAŁEGO konta serwisowego.
+
+Dlaczego inne są błędne:
+B. Disable key: Nie unieważnia tokenów już wygenerowanych na podstawie tego klucza. Haker nadal ma dostęp przez te tokeny.
+C. Wait: Niedopuszczalne przy kompromitacji (incydencie).
+D. Rotate key: Podobnie jak B, nie unieważnia istniejących aktywnych sesji/tokenów.
+
+Konsensus społeczności ExamTopics: 100% na A. To jedyna 'opcja atomowa' gwarantująca natychmiastowe zatrzymanie wycieku.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Tokeny OAuth2 są sprawdzane względem stanu konta przy każdym użyciu. Usunięcie konta to najszybsza 'opcja atomowa' w przypadku wycieku.</p>
+<p><b>Głęboka analiza:</b> Google Cloud przy każdym użyciu tokena sprawdza, czy konto SA nadal istnieje i czy nie jest wyłączone. Usunięcie konta to najszybsza metoda propagacji blokady dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys#compromised-key" target="_blank">https://cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys#compromised-key</a></li>

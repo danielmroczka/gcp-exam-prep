@@ -78,14 +78,22 @@ Apps access external web services. monitor, control, and log access. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Secure Web Proxy to usługa stworzona do filtrowania i logowania ruchu WYCHODZĄCEGO (egress) na poziomie URL/FQDN, co nie jest możliwe w zwykłym firewallu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Secure Web Proxy: To dedykowana usługa Google Cloud do filtrowania ruchu WYCHODZĄCEGO (egress) do internetu. Pozwala na tworzenie reguł opartych na nazwach FQDN (np. 'pozwól tylko na github.com'), monitorowanie pełnych adresów URL oraz logowanie całej aktywności sieciowej aplikacji.
+
+Dlaczego inne są błędne:
+B. Cloud NAT: Pozwala na wyjście, ale nie oferuje zaawansowanego filtrowania po nazwach domenowych ani logowania URL-i.
+C. Firewall rules: Operują na adresach IP. Większość usług webowych ma dynamiczne IP, co czyni firewall bezużytecznym do blokowania domen.
+D. Cloud Armor: Chroni ruch PRZYCHODZĄCY (ingress) do Twoich aplikacji, nie zajmuje się tym, gdzie Twoje aplikacje same 'dzwonią'.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. SWP to brakujące ogniwo ochrony egress w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Pozwala na precyzyjne zezwalanie tylko na konkretne adresy API partnerów zewnętrznych.</p>
+<p><b>Głęboka analiza:</b> Secure Web Proxy nie wymaga instalowania agentów na VM. Działa jako transparentne lub jawne proxy wewnątrz Twojej sieci VPC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/secure-web-proxy/docs/overview" target="_blank">https://cloud.google.com/secure-web-proxy/docs/overview</a></li>

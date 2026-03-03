@@ -78,14 +78,22 @@ You need to create a Service Account that can list Compute Engine instances. You
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Tworzenie ról niestandardowych (Custom Roles) pozwala na precyzyjne ograniczenie uprawnień do absolutnego minimum.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Custom Role: Najlepszą praktyką bezpieczeństwa (Least Privilege) jest nadanie tylko tych uprawnień, które są absolutnie niezbędne. Stworzenie roli niestandardowej z tylko jednym uprawnieniem `compute.instances.list` jest bardziej precyzyjne niż użycie jakiejkolwiek roli predefiniowanej.
+
+Dlaczego inne są błędne:
+A. Access Scopes: To przestarzała metoda (legacy). Obecnie steruje się dostępem wyłącznie przez role IAM. Scopes nie zastępują uprawnień IAM.
+C. Compute Viewer: Daje dostęp do listy, ale TEŻ do podglądu wszystkich szczegółów maszyn, ich dysków, obrazów itp. - to za dużo.
+D. Project Viewer: Daje dostęp do podglądu wszystkiego w całym projekcie (Storage, SQL, BigQuery) - skrajne naruszenie zasady najniższych uprawnień.
+
+Konsensus społeczności ExamTopics: Silne poparcie dla B. Role Custom to 'złoty standard' dla precyzyjnych zadań automatyzacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Zgodnie z zasadą Least Privilege, jeśli rola predefiniowana (jak Compute Viewer) ma zbyt wiele uprawnień, należy stworzyć rolę Custom.</p>
+<p><b>Głęboka analiza:</b> Jeśli zadanie można wykonać rolą predefiniowaną, która nie ma nadmiarowych uprawnień, użyj jej. Jeśli jednak każda rola gotowa jest zbyt szeroka (jak tu), stwórz rolę Custom.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/creating-custom-roles" target="_blank">https://cloud.google.com/iam/docs/creating-custom-roles</a></li>

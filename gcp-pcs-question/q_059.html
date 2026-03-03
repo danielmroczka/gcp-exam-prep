@@ -78,14 +78,21 @@ How does Google Cloud ensure data is encrypted at rest by default?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Wszystkie dane w GCP są domyślnie szyfrowane przy użyciu kluczy zarządzanych przez Google.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Google-managed encryption keys: To jest domyślny stan w Google Cloud. Każdy bajt danych zapisany na dysku (GCS, BigQuery, PD) jest automatycznie szyfrowany (AES-256) kluczami zarządzanymi przez Google, bez żadnej akcji ze strony użytkownika.
+
+Dlaczego inne są błędne:
+A, B: Są to OPCJONALNE metody szyfrowania, które użytkownik musi sam włączyć i skonfigurować (CMEK/CSEK).
+D. Not encrypted: Błędne założenie. Google szyfruje wszystko domyślnie od lat.
+
+Konsensus społeczności ExamTopics: 100% na C. To fundamentalna cecha bezpieczeństwa infrastruktury Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Szyfrowanie odbywa się na poziomie warstwy fizycznej przed zapisem na dysk.</p>
+<p><b>Głęboka analiza:</b> Szyfrowanie to odbywa się na poziomie warstwy fizycznej (bloków danych). Klucze są przechowywane w bezpiecznym systemie zarządzania kluczami Google i są odseparowane od samych danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/docs/security/encryption/at-rest" target="_blank">https://cloud.google.com/docs/security/encryption/at-rest</a></li>

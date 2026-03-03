@@ -78,14 +78,22 @@ Analyze logs for possible intrusions in IAP protected apps. Which logs?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: IAP loguje każde udane i nieudane żądanie dostępu do logów 'Data Access'. Zawierają one informacje o tożsamości użytkownika i wyniku autoryzacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Data Access audit logs: Identity-Aware Proxy zapisuje każde żądanie (zarówno udane, jak i zablokowane) do dziennika logów audytowych typu 'Data Access'. Zawierają one informację o tożsamości użytkownika, adresie IP źródłowym i wyniku autoryzacji, co jest kluczowe do wykrywania prób włamań (np. powtarzające się błędy 403 z nietypowego IP).
+
+Dlaczego inne są błędne:
+B. Policy Denied logs: Nie jest to standardowa nazwa dziennika logów w GCP. Blokady IAP trafiają do Data Access logs.
+C. Cloud Identity logs: Rejestrują zdarzenia logowania do samego konta Google (np. zmiana hasła), ale nie szczegółowe żądania HTTP do konkretnych aplikacji chronionych przez IAP.
+D. Admin Activity: Rejestrują tylko zmiany w KONFIGURACJI IAP (np. kto wyłączył IAP), a nie ruch użytkowników przez to proxy.
+
+Konsensus społeczności ExamTopics: 100% na A. Zrozumienie gdzie trafiają logi runtime IAP jest niezbędne.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Logi te muszą być explicite włączone w sekcji IAM & Admin -> Audit Logs.</p>
+<p><b>Głęboka analiza:</b> Logi te muszą być ręcznie włączone w ustawieniach 'Audit Logs' dla usługi 'Identity-Aware Proxy API' w konsoli IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/audit-logging" target="_blank">https://cloud.google.com/iap/docs/audit-logging</a></li>

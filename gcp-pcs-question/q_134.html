@@ -78,14 +78,22 @@ Cloud Interconnect. On-prem access to Google APIs only over Interconnect, not in
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: restricted.googleapis.com (199.36.153.4/30) pozwala na dostęp tylko do usług wspieranych przez VPC SC, co eliminuje ryzyko eksfiltracji przez inne API.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. restricted.googleapis.com: Jest to specjalna domena (VIP: 199.36.153.4/30), która zezwala na dostęp wyłącznie do tych API Google, które są kompatybilne z VPC Service Controls. Użycie tej domeny (poprzez DNS on-prem) gwarantuje, że ruch trafi do Google przez prywatne łącze Interconnect i nie będzie można go 'wynieść' do usług nieobjętych perymetrem.
+
+Dlaczego inne są błędne:
+A. PGA on subnets: Dotyczy ruchu Z CHMURY do Google, a pytanie prosi o dostęp Z ON-PREM.
+B. PSC: Służy do publikowania własnych usług lub dostępu do konkretnych API, ale `restricted` VIP jest bardziej standardową odpowiedzią dla całego pakietu usług VPC SC w scenariuszach hybrydowych.
+C. private.googleapis.com: Daje dostęp do WSZYSTKICH API (np. YouTube), co jest mniej bezpieczne i może omijać restrykcje VPC SC (data exfiltration risk).
+
+Konsensus społeczności ExamTopics: 100% na D.restricted = VPC SC compliance.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Domena 'private' (199.36.153.8/30) daje dostęp do wszystkich API Google (w tym YouTube itp.), co może być niezgodne z polityką bezpieczeństwa.</p>
+<p><b>Głęboka analiza:</b> Przy tej konfiguracji musisz stworzyć strefę DNS on-prem dla `*.googleapis.com` typu CNAME kierującą do `restricted.googleapis.com`.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity" target="_blank">https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity</a></li>

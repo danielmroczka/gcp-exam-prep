@@ -78,14 +78,22 @@ Isolate GCS access for a project, allow team to manage restrictions at project l
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Context-Aware Access (CAA) pozwala na zdefiniowanie warunków dostępu (np. 'tylko z komputerów firmowych') i przypisanie ich bezpośrednio do zasobów w projekcie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Context-Aware Access (CAA) at Project Level: CAA pozwala na zdefiniowanie warunków dostępu (np. 'tylko z zarządzanych komputerów firmowych') i przypisanie ich bezpośrednio do projektu. Spełnia to wymóg izolacji dostępu i pozwala zespołowi na samodzielne zarządzanie tymi regułami na ich poziomie.
+
+Dlaczego inne są błędne:
+A. IAM roles: Zarządzają tylko tożsamością (kto), nie sprawdzają stanu urządzenia ( corporate computers).
+B. Firewall: Nie ma wglądu w to, czy laptop użytkownika jest 'firmowy' i ma aktualny system operacyjny.
+D. VPC SC: Bardzo potężne, ale zazwyczaj perymetrami zarządza centralny zespół security, co narusza wymóg 'allow team to manage at project level'. CAA (C) jest bardziej elastyczne dla pojedynczych projektów.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. To idealny balans między bezpieczeństwem a autonomią zespołu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Pozwala to na granularną kontrolę bez potrzeby zamykania wszystkiego w perymetrze VPC SC.</p>
+<p><b>Głęboka analiza:</b> CAA wykorzystuje dane z Google Endpoint Verification, aby sprawdzić np. czy dysk laptopa jest zaszyfrowany i czy system ma hasło ekranowe.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/access-context-manager/docs/context-aware-access" target="_blank">https://cloud.google.com/access-context-manager/docs/context-aware-access</a></li>

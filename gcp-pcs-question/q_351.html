@@ -78,14 +78,21 @@ Data Warehouse folder: analysis team read-only access to all BQ data in projects
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Nadanie roli na poziomie folderu (B) jest najmniej pracochłonne, ponieważ uprawnienie automatycznie spływa na wszystkie obecne i przyszłe projekty oraz zestawy danych w tym folderze.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Folder-level IAM: Dzięki dziedziczeniu w GCP, nadanie roli `BigQuery Data Viewer` na poziomie folderu sprawia, że zespół automatycznie zyskuje dostęp do wszystkich obecnych i przyszłych projektów oraz tabel w tym folderze. To drastycznie redukuje narzut administracyjny (minimal overhead).
+
+Dlaczego inne są błędne:
+A, C: Wymagają powtarzania czynności dla każdego projektu/datasetu, co jest błędotwórcze i nieefektywne.
+D. Metadata Viewer: Pozwala widzieć nazwy tabel, ale NIE pozwala na czytanie danych (SELECT), co jest sprzeczne z celem zespołu analitycznego.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Wykorzystanie hierarchii to podstawa administracji GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Rola 'Metadata Viewer' (D) nie pozwala na czytanie danych, tylko schematów.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie promuje model 'Data Lake'. Deweloperzy wrzucają dane do nowych projektów w folderze 'Warehouse', a analitycy mają do nich dostęp od razu, bez proszenia IT o uprawnienia.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/access-control-folders" target="_blank">https://cloud.google.com/resource-manager/docs/access-control-folders</a></li>

@@ -78,14 +78,21 @@ You need to identify Google's inherent PCI controls. Which document should you r
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Macierz odpowiedzialności określa podział zadań między Google a klientem.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Customer Responsibility Matrix: Jest to kluczowy dokument dostarczany przez Google (często w ramach Compliance Reports Manager), który punkt po punkcie wskazuje, za które wymogi PCI DSS odpowiada Google (np. ochrona fizyczna serwerowni), a za które odpowiada klient (np. konfiguracja firewalla).
+
+Dlaczego inne są błędne:
+B, C. PCI DSS/SSC: To ogólne standardy branżowe, nie powiedzą Ci, co konkretnie Google już za Ciebie zrobiło w swojej infrastrukturze.
+D. Compute Engine docs: Zawierają instrukcje techniczne, ale nie są oficjalnym dokumentem audytowym potwierdzającym spełnienie wymogów zgodności.
+
+Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. Macierz odpowiedzialności to Biblia dla każdego inżyniera compliance.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Ten dokument jest kluczowy dla audytorów PCI w chmurze.</p>
+<p><b>Głęboka analiza:</b> Zgodnie z modelem współdzielonej odpowiedzialności, Google posiada certyfikację PCI dla swojej infrastruktury, ale to Ty musisz zapewnić zgodność swojej aplikacji i jej konfiguracji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/compliance/pci-dss" target="_blank">https://cloud.google.com/security/compliance/pci-dss</a></li>

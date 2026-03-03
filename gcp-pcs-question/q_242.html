@@ -78,14 +78,21 @@ Org policy: allowed domains terramearth.com. 'Apps' folder policy: allowed domai
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Ustawienie 'inheritFromParent: false' na poziomie folderu powoduje, że polityka organizacji na tym poziomie CAŁKOWICIE zastępuje politykę z góry. Zatem w tym folderze dozwolona jest tylko domena flowlogistic.com.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Explicit override (Fail): Flaga `inheritFromParent: false` (lub brak zaznaczenia 'inherit' w UI) sprawia, że polityka na poziomie folderu CAŁKOWICIE zastępuje wszystko, co było nad nią. Skoro folder dopuszcza tylko 'flowlogistic.com', to domena z poziomu organizacji ('terramearth.com') przestaje być zaufana w tym miejscu hierarchii. Próba dodania użytkownika zakończy się błędem.
+
+Dlaczego inne są błędne:
+A, B: Błędne założenie o łączeniu (merge) polityk. Polityki organizacji typu 'list' są zastępowane, a nie sumowane, jeśli wyłączysz dziedziczenie.
+C: Brak polityki na projekcie oznacza, że projekt dziedziczy z foldera. Folder już zablokował dostęp.
+
+Konsensus społeczności ExamTopics: 100% na D. Podstawowa wiedza o działaniu Org Policy Service.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Dziedziczenie polityk organizacji jest hierarchiczne, ale może zostać przerwane na dowolnym poziomie.</p>
+<p><b>Głęboka analiza:</b> To częsty błąd administratorów. Jeśli chcesz DODAĆ domenę do już istniejących, musisz w nowej polityce wymienić ODWIE domeny lub włączyć dziedziczenie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>

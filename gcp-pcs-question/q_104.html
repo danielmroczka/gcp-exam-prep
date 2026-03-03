@@ -78,14 +78,22 @@ Leadership is worried about Google employees accessing sensitive data on GCP. Wh
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Access Transparency (logi) i Access Approval (wymóg zgody na dostęp) to mechanizmy dające klientowi wgląd i kontrolę nad działaniami personelu Google wspierającego chmurę.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Access Transparency + Approval: To jedyne rozwiązanie adresujące dostęp 'pracowników Google'. Access Transparency dostarcza logi z takich działań, a Access Approval pozwala Ci jawnie zatwierdzić każdą prośbę inżyniera Google o dostęp do Twoich danych (np. w celu naprawy błędu).
+
+Dlaczego inne są błędne:
+A. CMEK: Szyfruje dane, ale przy standardowym CMEK inżynier Google z uprawnieniami systemowymi mógłby teoretycznie nadal mieć dostęp 'w locie' (chyba że użyjesz EKM + KAJ, ale D jest bardziej bezpośrednią odpowiedzią na obawy o 'ludzi').
+B. IAM: Kontroluje TWOICH użytkowników, nie ma wpływu na systemowy dostęp wsparcia technicznego Google.
+C. Admin activity logs: Rejestrują Twoje działania, nie działania pracowników Google.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. To sztandarowe produkty Google dla suwerenności danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Access Approval pozwala zatwierdzić lub odrzucić prośbę inżyniera Google o dostęp do danych w celu wsparcia technicznego.</p>
+<p><b>Głęboka analiza:</b> Access Approval to mechanizm 'Human-in-the-loop'. Bez Twojej aktywnej zgody (kliknięcia w e-mailu/konsoli), inżynier Google nie zobaczy Twoich danych nawet jeśli ma uprawnienia systemowe.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/access-approval" target="_blank">https://cloud.google.com/access-approval</a></li>

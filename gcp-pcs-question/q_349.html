@@ -78,14 +78,21 @@ deploy 2-step verification (2SV) phased migration to minimize complexity. What t
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: 'Configuration groups' pozwalają na włączanie 2SV dla wybranych grup użytkowników niezależnie od ich struktury OU, co ułatwia testowe i etapowe wdrożenia w dużych firmach.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Configuration Groups: Google Cloud pozwala na włączanie funkcji takich jak 2SV dla konkretnych grup użytkowników (niezależnie od ich położenia w strukturze OU). Pozwala to na etapowe (phased) wdrażanie, np. najpierw dział IT, potem Marketing itp., bez przenoszenia ich kont między jednostkami organizacyjnymi.
+
+Dlaczego inne są błędne:
+A. New OU: Przenoszenie użytkowników między OU tylko po to, by włączyć 2SV, jest uciążliwe i psuje inne ustawienia dziedziczone z OU. Grupy są bardziej elastyczne.
+C, D: Dotyczą całych jednostek OU, co jest mniej granularne i trudniejsze do kontrolowanego, etapowego wdrożenia niż model oparty na grupach.
+
+Konsensus społeczności ExamTopics: 100% na B. Grupy konfiguracyjne to zalecana metoda dla etapowych zmian w Workspace/Cloud Identity.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to bardziej elastyczne niż przenoszenie użytkowników między jednostkami organizacyjnymi (OU).</p>
+<p><b>Głęboka analiza:</b> Używając grup, możesz najpierw włączyć 2SV dla grupy 'Security Volunteers' i zebrać feedback przed wymuszeniem go na całej firmie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/9122284" target="_blank">https://support.google.com/a/answer/9122284</a></li>

@@ -78,14 +78,22 @@ Reduce risk of open gcloud CLI sessions. Minimal duration. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Reauthentication frequency w Google Cloud Session Control wymusza na użytkowniku ponowne podanie hasła/MFA co określony czas, aby gcloud mógł dalej działać.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Reauthentication frequency: W Google Cloud Session Control można ustawić parametr 'reauthentication frequency' (częstotliwość ponownego uwierzytelniania). Jeśli ustawisz 1h, to po godzinie każde polecenie `gcloud` zmusi użytkownika do ponownego zalogowania się w przeglądarce i podania hasła/MFA. To bezpośrednio redukuje ryzyko 'wiszących' sesji w terminalu.
+
+Dlaczego inne są błędne:
+A. Session control: To ogólna nazwa funkcji, ale techniczny parametr to właśnie 'reauthentication frequency' (B).
+C. SA credential lifetime: Dotyczy kont serwisowych, a pytanie sugeruje sesje użytkowników (ludzi) używających gcloud.
+D. SA key expiry: Klucze statyczne JSON domyślnie nie wygasają same z siebie tak szybko i nie są używane do 'sesji gcloud' przez ludzi w standardowy sposób.
+
+Konsensus społeczności ExamTopics: 100% na B. To jedyny sposób na wymuszenie 'świeżości' autentykacji w CLI.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>To bezpośrednio adresuje problem 'porzuconych' sesji w terminalu.</p>
+<p><b>Głęboka analiza:</b> To ustawienie jest krytyczne dla deweloperów pracujących na współdzielonych maszynach (np. terminale w biurze) lub w środowiskach wysokiego ryzyka.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>

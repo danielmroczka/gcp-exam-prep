@@ -77,14 +77,21 @@ Process large location data securely, adhering to data residency. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Regionalne buckety GCS (C) gwarantują, że dane fizycznie nie opuszczą wybranego regionu, co spełnia wymogi rezydencji danych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Regional buckets: Gwarantują, że dane fizycznie nie opuszczą wybranego regionu (np. Warszawy), co spełnia wymogi rezydencji danych. Object Lifecycle pozwala na automatyczne sprzątanie danych po ich przetworzeniu.
+
+Dlaczego inne są błędne:
+A. Labels: To tylko opisy, nie gwarantują lokalizacji danych na dysku.
+B. Global buckets: Rozrzucają dane po całym kontynencie, co narusza wymogi rezydencji.
+
+Konsensus społeczności ExamTopics: 100% na C. Rezydencja danych = Regional resources.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Buckety Multi-regional (Global) mogą rozpraszać dane po całym kontynencie/świecie.</p>
+<p><b>Głęboka analiza:</b> Przy rezydencji danych kluczowe jest również monitorowanie logów audytowych, aby upewnić się, że żadna operacja administracyjna nie spowodowała wycieku danych do innego regionu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/locations" target="_blank">https://cloud.google.com/storage/docs/locations</a></li>

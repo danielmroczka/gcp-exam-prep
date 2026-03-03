@@ -78,14 +78,21 @@ What are the steps to encrypt data using envelope encryption?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Standardowy proces: 1. Generuj DEK. 2. Szyfruj dane DEKiem. 3. Szyfruj (opakuj) DEK KEKiem.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. DEK -> Data -> KEK: To standardowy przepływ: 1. Aplikacja generuje klucz danych (DEK). 2. Używa go do zaszyfrowania dużego zbioru danych. 3. Wysyła mały klucz DEK do KMS, aby został zaszyfrowany (opakowany - wrapped) kluczem nadrzędnym (KEK).
+
+Dlaczego inne są błędne:
+A. Encrypt data with KEK: Błąd. Dane szyfruje się DEKiem. KEK służy tylko do szyfrowania DEKa. Przesyłanie dużych danych do KMS w celu szyfrowania KEKiem byłoby bardzo wolne i nieefektywne.
+B, D: KEK nie jest generowany 'lokalnie' w aplikacji, lecz rezyduje bezpiecznie w usłudze Cloud KMS.
+
+Konsensus społeczności ExamTopics: 100% na C. Zrozumienie mechanizmu wrap/unwrap jest kluczowe dla inżyniera security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Dane są szyfrowane DEKiem (szybkie szyfrowanie symetryczne), a DEK jest chroniony przez KEK (zarządzany centralnie).</p>
+<p><b>Głęboka analiza:</b> Szyfrowanie kopertowe pozwala na zmianę klucza nadrzędnego (re-keying) poprzez odszyfrowanie i ponowne zaszyfrowanie tylko małego klucza DEK, bez konieczności deszyfrowania całego terabajta danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/envelope-encryption" target="_blank">https://cloud.google.com/kms/docs/envelope-encryption</a></li>

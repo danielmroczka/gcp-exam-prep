@@ -78,14 +78,22 @@ Which service provides visibility into Google's own internal audit logs for acti
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Access Transparency dostarcza logi dokumentujące dostęp inżynierów Google do Twoich zasobów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Access Transparency: To unikalna usługa Google Cloud, która udostępnia Ci logi dokumentujące każde działanie inżynierów Google, którzy uzyskali dostęp do Twoich danych lub zasobów (np. podczas rozwiązywania zgłoszenia do supportu). Log zawiera powód dostępu i lokalizację inżyniera.
+
+Dlaczego inne są błędne:
+A. Cloud Audit Logs: Rejestrują działania TWOICH użytkowników i systemów w Twoim projekcie. Nie obejmują działań pracowników Google 'pod maską'.
+C. Access Approval: To krok DALEJ niż logowanie - pozwala Ci ZATWIERDZIĆ lub ODRZUCIĆ prośbę o dostęp, zanim inżynier Google go uzyska. Pytanie dotyczy 'widoczności' (logs), co zapewnia Access Transparency.
+D. Security Command Center: To dashboard bezpieczeństwa, który może wyświetlać alerty, ale nie jest źródłem logów o dostępie personelu Google.
+
+Konsensus społeczności ExamTopics: Zdecydowane B. To kluczowa funkcja dla klientów z sektorów regulowanych (bankowość, zdrowie).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to kluczowa funkcja dla budowania zaufania i spełniania wymogów regulacyjnych.</p>
+<p><b>Głęboka analiza:</b> Access Transparency loguje dostęp do danych 'at rest'. Jeśli inżynier Google musi wejść na Twój serwer, dostaniesz o tym powiadomienie i ślad w logach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/access-transparency" target="_blank">https://cloud.google.com/access-transparency</a></li>

@@ -78,14 +78,22 @@ Identify common misconfigurations and compliance violations across organization 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Security Health Analytics (SHA) to moduł SCC Premium stworzony specjalnie do wykrywania błędnych konfiguracji i luk w zabezpieczeniach (np. publiczne porty, brak rotacji kluczy).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Security Health Analytics (SHA): To moduł SCC Premium dedykowany do 'Posture Management'. Automatycznie skanuje on zasoby (bucket, VM, IAM) pod kątem błędów (np. brak MFA, publiczne porty) i prezentuje je w czytelnym dashboardzie Compliance.
+
+Dlaczego inne są błędne:
+A. Asset Inventory: To tylko lista zasobów, nie posiada silnika analizy podatności.
+C. Audit Logs: Pokazują historię zmian, ale nie dają gotowej oceny stanu bezpieczeństwa 'na teraz'.
+D. Event Threat Detection: Szuka aktywnych włamań (malware, mining), a nie błędów w konfiguracji (compliance).
+
+Konsensus społeczności ExamTopics: 100% na B. SHA to fundament widoczności bezpieczeństwa w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>SHA automatycznie skanuje inwentarz i raportuje stan zgodności z wieloma standardami.</p>
+<p><b>Głęboka analiza:</b> SHA wspiera standardy takie jak CIS, NIST i PCI DSS, automatycznie przypisując błędy do konkretnych wymogów tych norm.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview</a></li>

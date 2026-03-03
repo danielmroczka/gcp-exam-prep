@@ -78,14 +78,22 @@ Cloud Run services under non-prod folder. Grant external access to approved FQDN
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Hierarchiczne polityki pozwalają na zdefiniowanie domyślnej blokady na poziomie folderu, którą można uszczegółowić regułami przypiętymi do konkretnych sieci VPC (polityki per-VPC).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Hierarchical Firewall Policies: Ustawienie blokady wyjścia (deny outbound) na poziomie foldera zapewnia bezpieczeństwo domyślne. Następnie tworzysz polityki przypisane do konkretnych sieci VPC (polityki per-VPC), które dopuszczają ruch tylko do wybranych nazw domenowych (FQDN). To najbardziej granularny model kontroli egress.
+
+Dlaczego inne są błędne:
+A. Global allowlist: Nie pozwala na rozróżnienie między różnymi sieciami VPC.
+C. Project-level: Niezarządzalne przy dużej skali projektów serverless.
+D. Cloud NAT: Ma ograniczone funkcje filtrowania FQDN w porównaniu do dedykowanych polityk firewall klasy Enterprise.
+
+Konsensus społeczności ExamTopics: 100% na B. Polityki per-VPC to zaawansowana technika zarządzania bezpieczeństwem sieciowym.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Filtrowanie FQDN w GCP realizuje się zazwyczaj za pomocą Secure Web Proxy lub Cloud NAT (w specyficznych wersjach), ale kluczem jest struktura polityk hierarchicznych.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie wymaga usługi Cloud Firewall Enterprise, aby móc korzystać z filtrów opartych na nazwach domenowych (FQDN) zamiast samych IP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewall-policies" target="_blank">https://cloud.google.com/vpc/docs/firewall-policies</a></li>

@@ -76,14 +76,23 @@ Separate new application with internet access from internal systems. Effective i
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D. (Uwaga: C również izoluje, ale D zapewnia całkowitą separację zasobów i uprawnień na poziomie projektu). Wyjaśnienie: Nowy projekt to najsilniejsza granica administracyjna i bezpieczeństwa w GCP.</pre>
+<pre>Odpowiedź: D.
+
+Wyjaśnienie (Dlaczego poprawna):
+D. New Project + Peering: Projekt jest najsilniejszą granicą izolacji w GCP (oddzielne uprawnienia, billing, zasoby). Umieszczenie ryzykownej aplikacji w nowym projekcie i połączenie go precyzyjnym peeringiem z siecią wewnętrzną to najprostszy i najskuteczniejszy model izolacji.
+
+Dlaczego inne są błędne:
+A, B. Same project: Bardzo ryzykowne. Błąd w konfiguracji IAM lub firewallu może otworzyć drogę hakerowi do całego środowiska.
+C. VPC SC: Chroni przed kradzieżą danych przez API, ale nie tworzy tak czystej izolacji administracyjnej dla warstwy sieciowej IP maszyn VM jak osobne projekty.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. Projekt to podstawowa jednostka bezpieczeństwa.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Peering pozwala na kontrolowaną komunikację tylko tam, gdzie jest to niezbędne.</p>
+<p><b>Głęboka analiza:</b> Dzięki peeringowi możesz kontrolować komunikację na poziomie IP, a haker przejmujący 'Project Editor' w nowej aplikacji nadal nie będzie miał żadnych uprawnień w Twoim projekcie z bazą danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/vpc-peering" target="_blank">https://cloud.google.com/vpc/docs/vpc-peering</a></li>

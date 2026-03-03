@@ -77,16 +77,24 @@ SOC monitor/detect network anomalies. Explore environment using network payloads
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A.
+<pre>Odpowiedź: A. (Uwaga: E jest fundamentem, ale A jest 'produktem' dla SOC).
 
-Wyjaśnienie: Cloud IDS (Intrusion Detection System) to zarządzana usługa, która automatycznie analizuje ruch (payload) pod kątem zagrożeń, wykorzystując pod spodem mechanizmy Packet Mirroring.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud IDS (Intrusion Detection System): Jest to usługa zarządzana, stworzona specjalnie dla zespołów SOC. Wykorzystuje technologię Packet Mirroring pod spodem, aby analizować zarówno nagłówki (headers), jak i zawartość pakietów (payloads) pod kątem znanych ataków, wirusów i anomalii. Dostarcza gotowe, czytelne alerty do SCC.
+
+Dlaczego inne są błędne:
+C. VPC Flow Logs: Widzą tylko nagłówki (headers), nie widzą zawartości (payload).
+E. Packet Mirroring: To metoda dostarczania danych, a nie 'produkt' do monitorowania i detekcji. Musiałbyś sam zbudować cały system analizy. Cloud IDS jest gotowym rozwiązaniem.
+B, D: Nie służą do ogólnego monitorowania anomalii wewnątrz całej sieci VPC i nie widzą payloadu maszyn VM w ten sposób.
+
+Konsensus społeczności ExamTopics: Przewaga na A jako rozwiązanie 'managed' dla SOC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Cloud IDS jest łatwiejszy w obsłudze niż ręczne Packet Mirroring z własnym oprogramowaniem analitycznym.</p>
+<p><b>Głęboka analiza:</b> Cloud IDS oparty jest na silniku Palo Alto Networks, co daje dostęp do ogromnej bazy sygnatur zagrożeń przy minimalnym wysiłku konfiguracyjnym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/ids/docs/overview" target="_blank">https://cloud.google.com/ids/docs/overview</a></li>

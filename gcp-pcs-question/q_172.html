@@ -78,14 +78,22 @@ DevOps team investigatng deployment issue. Least-privilege, access only during i
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Użycie konta serwisowego jako 'identyfikatora' dla konkretnego zadania pozwala na precyzyjne ograniczenie uprawnień. DevOps loguje się na SA tylko wtedy, gdy jest to potrzebne.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Limited SA + SA User: Stworzenie konta serwisowego (SA) z zestawem uprawnień specyficznych dla problemu (np. logi, konfiguracja wdrożeń) i nadanie zespołowi roli `roles/iam.serviceAccountUser` pozwala im na 'podszycie się' pod to konto. Jest to lepsze niż nadawanie uprawnień bezpośrednio osobom, ponieważ łatwiej jest odebrać dostęp do SA po zakończeniu incydentu.
+
+Dlaczego inne są błędne:
+A. Project Viewer: Zbyt szerokie (widzą wszystko) i zazwyczaj nadawane na stałe, co narusza zasadę 'access ONLY during issue'.
+B. Custom IAM role: Nadanie roli osobie na stałe to zły pomysł. Pytanie kładzie nacisk na tymczasowość i granularność.
+C. SA with Project Owner: Skrajne naruszenie zasad bezpieczeństwa. Nigdy nie używaj roli Owner dla zadań operacyjnych.
+
+Konsensus społeczności ExamTopics: Większość na D. To podejście promujące tożsamości techniczne dla zadań technicznych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Nowoczesną metodą dla tego scenariusza jest również 'IAM Conditions' z limitem czasowym.</p>
+<p><b>Głęboka analiza:</b> Obecnie najlepszą odpowiedzią na ten scenariusz byłoby <b>IAM Conditions</b> z czasem wygaśnięcia (Expiry Date), ale w ramach starszych pytań egzaminacyjnych, model SA jako 'identyfikatora zadania' jest poprawny.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/best-practices" target="_blank">https://cloud.google.com/iam/docs/best-practices</a></li>

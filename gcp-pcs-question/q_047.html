@@ -78,14 +78,22 @@ You want to protect your public-facing application from DDoS attacks and SQL inj
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud Armor oferuje ochronę warstwy 7 (WAF) oraz ochronę przed atakami DDoS dla zewnętrznych Load Balancerów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud Armor: Jest to usługa WAF (Web Application Firewall) i ochrony przed DDoS od Google. Oferuje gotowe reguły chroniące przed atakami z listy OWASP Top 10 (w tym SQL Injection, XSS) oraz zaawansowaną ochronę przed atakami wolumetrycznymi DDoS na warstwie 3, 4 i 7.
+
+Dlaczego inne są błędne:
+A. VPC Firewall: Działa na warstwie 3/4 (IP/Port). Nie potrafi 'zrozumieć' treści żądania HTTP, więc nie wykryje ataku SQL Injection zaszytego w adresie URL.
+C. Cloud IAP: Służy do uwierzytelniania użytkowników, a nie do inspekcji ruchu pod kątem ataków hakerskich.
+D. Cloud Endpoints: To brama API (API Gateway) służąca do zarządzania i monitorowania API, nie jest to narzędzie stricte obronne typu WAF.
+
+Konsensus społeczności ExamTopics: 100% na B. Cloud Armor to jedyna poprawna odpowiedź dla ochrony L7 (SQLi/XSS).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Cloud Armor zawiera gotowe reguły (WAF) chroniące przed atakami z listy OWASP Top 10.</p>
+<p><b>Głęboka analiza:</b> Cloud Armor współpracuje z Load Balancerem HTTP(S). Ruch jest filtrowany na brzegu sieci Google (Edge), co oznacza, że szkodliwe pakiety nigdy nie docierają do Twojej sieci VPC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor/docs/cloud-armor-overview" target="_blank">https://cloud.google.com/armor/docs/cloud-armor-overview</a></li>

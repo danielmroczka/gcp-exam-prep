@@ -78,14 +78,22 @@ Retail customer needs to make sure reviews do not include sensitive data before 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud DLP API służy do wykrywania i maskowania danych wrażliwych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud DLP API: Jest to usługa zaprojektowana specjalnie do automatycznego wykrywania, klasyfikowania i maskowania danych wrażliwych (PII, numery kart itp.) w tekstach i obrazach. Idealnie nadaje się do skanowania treści generowanych przez użytkowników (recenzji).
+
+Dlaczego inne są błędne:
+A. Cloud KMS: Służy do szyfrowania danych, nie do 'rozumienia' ich treści i wykrywania w nich imion czy adresów.
+C. BigQuery: To baza danych. Można w niej składować dane, ale sama w sobie nie skanuje wchodzącego tekstu pod kątem wrażliwości (chyba że wywołasz z niej funkcję DLP).
+D. Web Security Scanner: Szuka luk technicznych w kodzie (np. XSS), a nie danych osobowych w treściach wpisywanych przez ludzi.
+
+Konsensus społeczności ExamTopics: 100% na B. DLP to standardowa odpowiedź na wszystko co dotyczy 'PII discovery'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>DLP to właściwa usługa do ochrony danych PII w treściach użytkowników.</p>
+<p><b>Głęboka analiza:</b> DLP może działać w trybie 'Inspect' (znajdź) lub 'De-identify' (zamaskuj/zastąp). W tym scenariuszu aplikacja wysyłałaby recenzję do API DLP przed zapisem w bazie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp" target="_blank">https://cloud.google.com/dlp</a></li>

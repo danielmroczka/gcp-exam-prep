@@ -78,14 +78,22 @@ Privacy team uses crypto-shredding (deleting keys) to delete PII. Implement this
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: CMEK (Cloud KMS) pozwala użytkownikowi na trwałe usunięcie klucza szyfrującego dane w usługach takich jak GCS, BigQuery czy CE. Bez klucza dane stają się nieczytelne (crypto-shredding).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. CMEK: Cloud KMS (Customer-Managed Encryption Keys) pozwala użytkownikowi na pełne zarządzanie cyklem życia klucza, w tym na jego trwałe usunięcie (destruction). Gdy klucz CMEK zostanie usunięty, wszystkie dane nim zaszyfrowane (np. w GCS, BigQuery, PD) stają się bezpowrotnie nieczytelne. Jest to proces zwany 'crypto-shredding'. Wykorzystanie CMEK jest natywnie wspierane przez większość usług GCP (majority of services), co minimalizuje narzut konfiguracyjny.
+
+Dlaczego inne są błędne:
+A. Client-side encryption: Zapewnia bezpieczeństwo, ale wymaga manualnego szyfrowania danych przed wysłaniem do chmury, co zwiększa narzut (overhead) i uniemożliwia korzystanie z wielu natywnych funkcji analitycznych chmury (np. BigQuery nie widzi treści).
+B. Cloud EKM: Służy do trzymania kluczy poza Google. Choć wspiera crypto-shredding, jest bardziej skomplikowany w konfiguracji (większy overhead) niż standardowy CMEK.
+D. Google default: Kluczami zarządza Google. Nie możesz ich 'usunąć', aby wykonać crypto-shredding na życzenie Twojego zespołu privacy.
+
+Konsensus społeczności ExamTopics: 100% na C. CMEK to złoty środek między kontrolą a użytecznością platformy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>CMEK zapewnia najlepszy balans między kontrolą nad cyklem życia klucza a łatwością integracji z natywnymi usługami GCP.</p>
+<p><b>Głęboka analiza:</b> Crypto-shredding jest często jedyną skuteczną metodą usunięcia danych z kopii zapasowych (backupów) rozproszonych po wielu lokalizacjach. Usunięcie klucza nadrzędnego natychmiast unieważnia wszystkie kopie danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/cmek" target="_blank">https://cloud.google.com/kms/docs/cmek</a></li>

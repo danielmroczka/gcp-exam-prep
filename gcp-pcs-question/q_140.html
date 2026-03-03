@@ -78,14 +78,21 @@ Regulated industry. Data stored for specific time and deleted after. Minimize co
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Object Lifecycle Management w Cloud Storage to najtańsza i najprostsza metoda automatycznego usuwania starych kopii zapasowych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Cloud Storage Lifecycle Management: To najtańsza (bucket GCS jest znacznie tańszy niż dyski czy bazy) i najbardziej zautomatyzowana metoda. Możesz ustawić regułę 'Delete' dla obiektów starszych niż np. 7 lat. System Google sam dba o usunięcie, a Ty płacisz tylko za storage.
+
+Dlaczego inne są błędne:
+A. Persistent disks: Są najdroższą formą przechowywania danych archiwalnych.
+B, C: Bazy danych (BigQuery/Bigtable) są świetne do analizy, ale jako czyste archiwum 'long-term' są droższe w utrzymaniu niż klasy Coldline/Archive w Cloud Storage.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. GCS Lifecycle to 'best practice' dla retencji danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Można zdefiniować regułę 'Age: 365 days, Action: Delete', co zdejmuje obowiązek manualnego sprzątania.</p>
+<p><b>Głęboka analiza:</b> W branżach regulowanych warto połączyć to z funkcją 'Bucket Lock', aby mieć pewność, że nikt nie usunie danych przed upływem wymaganego czasu, ale system usunie je punktualnie po jego upływie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/lifecycle" target="_blank">https://cloud.google.com/storage/docs/lifecycle</a></li>

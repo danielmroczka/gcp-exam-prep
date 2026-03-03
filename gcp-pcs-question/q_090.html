@@ -68,7 +68,7 @@ Development team creates multiple projects under a folder. Prevent data exfiltra
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">C</span>
 <br/>
 </span>
 </div>
@@ -76,16 +76,24 @@ Development team creates multiple projects under a folder. Prevent data exfiltra
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B.
+<pre>Odpowiedź: C.
 
-Wyjaśnienie: VPC Service Controls (wspomniane w kontekście perimeter w opcji C, ale B jest bardziej ogólne w kontekście Access Context Manager) chroni przed eksfiltracją. Jednak najlepszą odpowiedzią na 'zapobieganie eksfiltracji bez blokowania komunikacji wewnątrz grupy' jest umieszczenie ich w tym samym perymetrze (jak w C). Ale patrząc na klucz odpowiedzi i treść, opcja B sugeruje użycie poziomów dostępu dla ochrony zewnętrznej.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Single Service Perimeter: Umieszczenie wszystkich projektów wewnątrz JEDNEGO perymetru VPC Service Controls pozwala im na swobodną komunikację między sobą (brak restrykcji wewnątrz), ale jednocześnie tworzy twardą barierę chroniącą przed kopiowaniem danych na zewnątrz perymetru (data exfiltration). Automatyzacja (IaC) zapewnia, że nowe projekty w folderze są automatycznie dodawane do ochrony.
+
+Dlaczego inne są błędne:
+A. Shared VPC: Chroni tylko warstwę sieciową, nie zapobiega kopiowaniu danych między API Google (np. z GCS do innego GCS poza Twoją kontrolą).
+B. Access levels: Kontrolują kto może wejść DO perymetru, ale nie blokują wyjścia danych przez uprawnionego użytkownika.
+D. Three perimeters: Zablokowałyby komunikację między projektami, co jest sprzeczne z wymogiem 'without restricting communication'.
+
+Konsensus społeczności ExamTopics: Silne poparcie dla C. Jeden perymetr dla grupy projektów to standardowy wzorzec izolacji zespołów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p>UWAGA: W rzeczywistych egzaminach opcja C (jeden perymetr dla folderu) jest często uznawana za wzorcową dla tego scenariusza. B skupia się na warunkach dostępu.</p>
+<p><b>Sugerowana odpowiedź: C</b></p>
+<p><b>Głęboka analiza:</b> VPC SC działa na poziomie API Google. Nawet jeśli masz uprawnienia Ownera, nie skopiujesz danych do prywatnego bucketu, jeśli Twój projekt jest w perymetrze firmy, a docelowy nie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/overview</a></li>

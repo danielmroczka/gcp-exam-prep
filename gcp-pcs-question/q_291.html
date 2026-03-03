@@ -78,14 +78,22 @@ Third-party IdP, grant console access without syncing identities. Users receive 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Workforce Identity Federation pozwala na logowanie bez kont w Cloud Identity. CEL (Common Expression Language) mapuje atrybuty z zewnętrznego tokena na uprawnienia w GCP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Workforce Identity Federation (WIF): Jest to usługa pozwalająca na logowanie pracowników do GCP BEZ tworzenia kont w Google Cloud Identity (wymóg 'without syncing'). Mapowanie atrybutów za pomocą języka CEL pozwala na dynamiczne przydzielanie ról IAM na podstawie atrybutów z zewnętrznego tokena IdP.
+
+Dlaczego inne są błędne:
+B. Periodic sync: Jawnie zabronione przez wymóg 'without syncing'.
+C. Identity Platform: Służy do logowania klientów do Twojej aplikacji, nie pracowników do Konsoli Google.
+D. IAP: Chroni Twoje aplikacje, a nie dostęp administracyjny do platformy GCP bez kont użytkowników.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. WIF to rewolucja w 'stateless' IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To rozwiązanie 'stateless' dla tożsamości użytkowników.</p>
+<p><b>Głęboka analiza:</b> To podejście eliminuje potrzebę synchronizacji tysięcy użytkowników przez GCDS, co upraszcza infrastrukturę i zwiększa bezpieczeństwo.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workforce-identity-federation</a></li>

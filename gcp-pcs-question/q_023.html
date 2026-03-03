@@ -78,14 +78,22 @@ Leadership team is concerned that PII is being stored as part of the regular cha
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: DLP API potrafi wykrywać i zamazywać (redact) dane PII na obrazach/zdjęciach.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. DLP API (Redaction): Funkcja 'redaction' (redagowanie/zamazywanie) w DLP API pozwala na wykrycie danych wrażliwych (np. w tekście lub na zrzutach ekranu z chatu) i ich trwałe usunięcie lub zamaskowanie. Pozwala to zachować resztę logów do analizy (data utility).
+
+Dlaczego inne są błędne:
+A. Cloud KMS: Szyfrowanie ukrywa dane przed niepowołanymi, ale nie usuwa ich z logów. Użytkownik z kluczem nadal widzi PII, co nie rozwiązuje obawy o ich samo 'przechowywanie'.
+B. Lifecycle Management: Usunięcie całych rekordów chatu niszczy użyteczność danych (data utility).
+D. Generalization/Bucketing: Są to techniki de-identyfikacji dla danych strukturalnych (np. wiek zamieniony na przedział). Dla logów tekstowych ('regular chat logs') najskuteczniejsza jest redakcja.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Redakcja to standardowe podejście do czyszczenia logów z PII.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Redakcja DLP pozwala zachować przydatność danych przy jednoczesnym usunięciu wrażliwych informacji.</p>
+<p><b>Głęboka analiza:</b> DLP API posiada ponad 150 wbudowanych detektorów (infoTypes), które automatycznie rozpoznają numery kart, adresy i imiona w strumieniach tekstowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/redacting-sensitive-data-images" target="_blank">https://cloud.google.com/dlp/docs/redacting-sensitive-data-images</a></li>

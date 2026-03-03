@@ -78,14 +78,22 @@ regulated data GCS: update existing GMEK encrypted to use CMEK. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Zmiana ustawienia bucketu (D) wpływa tylko na NOWE pliki. Aby zaszyfrować stare, musisz je 'nadpisać' (write action), co wymusi użycie nowego klucza domyślnego bucketu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Config change + Rewrite: Aby w pełni przejść na CMEK, musisz: 1. Stworzyć klucz w KMS. 2. Ustawić go jako domyślny dla bucketu (to chroni nowe pliki). 3. Wykonać operację 'rewrite' (np. `gsutil rewrite -k`) na wszystkich starych plikach, co wymusi ich przeszyfrowanie nowym kluczem CMEK.
+
+Dlaczego inne są błędne:
+A. Bucket config only: Nie zmienia szyfrowania plików, które już tam są. Pozostaną one pod kluczami Google (GMEK).
+B. Org policy: Zablokuje tworzenie nowych niezaszyfrowanych plików, ale nie naprawi tych istniejących.
+C. Write action only: Bez zmiany konfiguracji domyślnej bucketu (D), operacja zapisu mogłaby nadal używać starego typu szyfrowania.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. To kompletna procedura migracji szyfrowania.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Można to zrobić komendą 'gsutil rewrite' dla całego bucketu.</p>
+<p><b>Głęboka analiza:</b> Operacja 'rewrite' w GCS jest bardzo wydajna, ponieważ odbywa się w całości wewnątrz infrastruktury Google (nie pobierasz i nie wysyłasz danych ponownie).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#rewrite" target="_blank">https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#rewrite</a></li>

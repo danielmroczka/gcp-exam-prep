@@ -78,14 +78,22 @@ Web app accessed from on-prem. TLS interception for incoming traffic to detect m
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Cloud Next Generation Firewall (NGFW) Enterprise oferuje funkcję TLS inspection, która deszyfruje ruch w celu inspekcji przez IDS/IPS.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Cloud NGFW Enterprise (TLS Inspection): Jest to zaawansowana usługa firewalla, która potrafi deszyfrować ruch TLS (interception) w celu głębokiej inspekcji pod kątem malware przez silniki IDS/IPS. Konfiguracja przez politykę hierarchiczną (C) zapewnia centralne wymuszenie tej kontroli dla wielu sieci VPC.
+
+Dlaczego inne są błędne:
+A. Secure Web Proxy: Służy do ochrony ruchu WYCHODZĄCEGO (egress), nie przychodzącego.
+B. Internal proxy LB: Kończy sesję TLS, ale sam w sobie nie posiada silnika antywirusowego klasy Enterprise.
+D. Standard Firewall: Nie wspiera inspekcji TLS.
+
+Konsensus społeczności ExamTopics: 100% na C. TLS Interception to funkcja specyficzna dla NGFW Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Konfiguracja na poziomie polityki hierarchicznej zapewnia jednolitą ochronę.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie wymaga zainstalowania certyfikatu CA firmy na serwerach aplikacyjnych, aby ufały one sesjom deszyfrowanym przez firewall Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/firewall/docs/enterprise/tls-inspection-overview" target="_blank">https://cloud.google.com/firewall/docs/enterprise/tls-inspection-overview</a></li>

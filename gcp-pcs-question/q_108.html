@@ -78,14 +78,22 @@ Transfer data between GCP and on-prem at 50 Gbps. Secure connectivity. What to u
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Dedicated Interconnect oferuje fizyczne połączenia 10 Gbps lub 100 Gbps. Aby uzyskać 50 Gbps, można zagregować kilka łączy 10G lub użyć 100G.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Dedicated Interconnect: To jedyne rozwiązanie oferujące tak ogromną przepustowość. Możesz zagregować kilka łączy 10 Gbps (LACP) lub użyć łączy 100 Gbps. Zapewnia prywatne, stabilne i bezpieczne połączenie fizyczne.
+
+Dlaczego inne są błędne:
+C. Cloud VPN: Przepustowość jednego tunelu to ok. 3 Gbps. Aby uzyskać 50 Gbps, potrzebowałbyś ok. 17 tuneli, co jest architektonicznym koszmarem i jest bardzo drogie. VPN służy do mniejszych obciążeń.
+D. Partner Interconnect: Zazwyczaj oferuje mniejsze przepustowości (od 50 Mbps do 10 Gbps). Dla 50 Gbps Dedicated Interconnect jest standardem.
+B. Cloud Router: To tylko komponent zarządzający routingiem (BGP), nie jest samym kablem/łączem o określonej przepustowości.
+
+Konsensus społeczności ExamTopics: Zdecydowane A ze względu na wymóg '50 Gbps'. To domena Interconnecta.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Cloud VPN ma limity przepustowości na tunel (ok. 3 Gbps), więc przy 50 Gbps jest niepraktyczny.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, że Interconnect sam w sobie nie szyfruje ruchu (chyba że włączysz MACsec). Jeśli 'secure' w pytaniu oznacza szyfrowanie warstwy 3, musiałbyś uruchomić VPN PO Interconnectcie, ale przy 50Gbps jedyną wydajną opcją jest MACsec.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview</a></li>

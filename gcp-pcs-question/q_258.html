@@ -77,14 +77,21 @@ Access Context Manager: allow access only from corporate network (specific IPs) 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Najbardziej bezpośrednią metodą ograniczenia dostępu do sieci korporacyjnej jest zdefiniowanie listy dozwolonych podsieci IP w Access Level.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Access Level with IP ranges: Najprostszym i najskuteczniejszym sposobem na zdefiniowanie 'sieci korporacyjnej' w polityce dostępu jest wskazanie zakresów publicznych adresów IP Twoich biur i bramek VPN.
+
+Dlaczego inne są błędne:
+A. Authorized Devices: Skupia się na sprzęcie, a nie na lokalizacji sieciowej użytkownika.
+B. IPs + OS: Dodanie wymogu OS niepotrzebnie komplikuje politykę i zwiększa narzut operacyjny.
+
+Konsensus społeczności ExamTopics: 100% na C. IP allowlisting to fundament polityk dostępu kontekstowego.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Urządzenia (A, B) to dodatkowa warstwa, ale IP to fundament wymogu 'z sieci biurowej'.</p>
+<p><b>Głęboka analiza:</b> Ten 'Access Level' przypisujesz następnie do perymetru VPC SC, co tworzy 'mur' chroniący Twoje dane przed dostępem z publicznego internetu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/access-context-manager/docs/create-access-level" target="_blank">https://cloud.google.com/access-context-manager/docs/create-access-level</a></li>

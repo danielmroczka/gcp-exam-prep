@@ -78,14 +78,22 @@ Which boot disk encryption solution should you use on a MIG cluster to control t
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: CMEK pozwala użytkownikowi zarządzać kluczami w KMS, co jest obsługiwane przez MIG.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. CMEK (Customer-Managed Encryption Keys): Pozwala użytkownikowi na pełną kontrolę nad kluczem (rotacja, wyłączanie, niszczenie) przechowywanym w Cloud KMS. Co najważniejsze, CMEK jest w pełni wspierany przez Managed Instance Groups (MIG) i Instance Templates.
+
+Dlaczego inne są błędne:
+A. CSEK (Customer-Supplied): Wymaga podania klucza przy każdym uruchomieniu VM. Nie jest to wspierane przez MIG, ponieważ Google nie mogłoby automatycznie skalować (startować nowych VM) bez Twojej interwencji i podania klucza.
+C. Default encryption: Kluczami zarządza Google, więc użytkownik nie ma kontroli nad ich cyklem życia (rotation schedule itp.).
+D. Pre-encrypting: Nie chroni całego dysku systemowego (boot disk), a jedynie wybrane pliki.
+
+Konsensus społeczności ExamTopics: Prawie 100% głosów na B. Dla grup instancji CMEK to jedyna metoda dająca kontrolę i automatyzację.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>CMEK oferuje kontrolę nad rotacją i cyklem życia klucza w chmurze.</p>
+<p><b>Głęboka analiza:</b> Przy użyciu CMEK w MIG, nadajesz systemowemu kontu serwisowemu (Compute Service Agent) uprawnienia do używania Twojego klucza w KMS. To pozwala Google na automatyczne tworzenie dysków w Twoim imieniu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/disks/customer-managed-encryption" target="_blank">https://cloud.google.com/compute/docs/disks/customer-managed-encryption</a></li>

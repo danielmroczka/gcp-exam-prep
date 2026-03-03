@@ -78,14 +78,22 @@ Prevent developers from creating user-managed SA keys. How to enforce?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Ograniczenie 'iam.disableServiceAccountKeyCreation' blokuje generowanie nowych kluczy JSON dla kont serwisowych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. iam.disableServiceAccountKeyCreation: Ta konkretna polityka organizacji blokuje możliwość generowania statycznych plików kluczy JSON dla kont serwisowych. Zmusza to deweloperów do używania bezpieczniejszych metod, takich jak Workload Identity czy tożsamość instancji.
+
+Dlaczego inne są błędne:
+A. Secret Manager: Można w nim trzymać klucze, ale nie zapobiega to ich TWORZENIU przez deweloperów.
+B. Disable SA creation: Zbyt drastyczne. Deweloperzy mogą potrzebować tworzyć KONTA (tożsamości), ale nie powinni tworzyć do nich niebezpiecznych KLUCZY (haseł w pliku).
+D. getAccessToken: To uprawnienie jest potrzebne do pobierania tokenów tymczasowych, które SĄ bezpieczne. Odebranie go uniemożliwiłoby poprawną pracę bez kluczy statycznych.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To standardowa restrykcja w bezpiecznych organizacjach.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Jest to zalecane, aby wymusić używanie bezpieczniejszych metod (Workload Identity, tożsamość instancji).</p>
+<p><b>Głęboka analiza:</b> Klucze JSON są wieczne (chyba że je ręcznie zrotujesz) i są najczęstszą przyczyną wycieków danych w chmurze po trafieniu na GitHub.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>

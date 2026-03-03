@@ -78,14 +78,22 @@ Ensure DevOps can only create resources in Europe regions for GDPR. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: To standardowy sposób na wymuszanie geolokalizacji zasobów w całej organizacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Resource Location Restriction: To dedykowana polityka organizacji (`gcp.resourceLocations`), która pozwala na zdefiniowanie listy dozwolonych regionów dla wszystkich zasobów w folderze lub projekcie. Każda próba stworzenia VM, bucketu czy bazy poza EU zostanie odrzucona przez API.
+
+Dlaczego inne są błędne:
+A. IAP: Kontroluje logowanie osób, nie ma wpływu na lokalizację fizyczną zasobów chmurowych.
+C. Restrict Service Usage: Pozwala wybrać KTÓRE usługi można włączyć (np. BQ tak, SQL nie), ale nie ogranicza ich lokalizacji.
+D. IAM custom roles: Można by zabrać uprawnienia, ale IAM nie potrafi natywnie filtrować 'gdzie' zasób powstaje (np. nie ma uprawnienia `compute.instances.createInPoland`).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To standardowe narzędzie dla compliance RODO.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Polityka ta blokuje operacje API 'Create' poza dozwoloną listą regionów.</p>
+<p><b>Głęboka analiza:</b> Polityka ta jest dziedziczona w dół hierarchii zasobów. Możesz ją ustawić na folderze 'EU-Projects' i mieć pewność, że wszystko w środku zostanie w Europie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>

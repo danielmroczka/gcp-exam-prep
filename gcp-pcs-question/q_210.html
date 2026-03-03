@@ -78,14 +78,22 @@ Discover publicly exposed network assets and audit them in least time. What to d
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud Asset Inventory pozwala na błyskawiczne wyliczenie wszystkich zasobów z publicznymi IP. Następnie skaner (jak Web Security Scanner lub Nessus) może je przetestować.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud Asset Inventory: Pozwala na natychmiastowe (least time) wygenerowanie listy wszystkich zasobów z publicznymi adresami IP w całej organizacji przy użyciu prostego zapytania API. Po zidentyfikowaniu 'celów', skaner sieciowy może przeprowadzić audyt ich podatności.
+
+Dlaczego inne są błędne:
+A. Platform security scanner: Nie jest to nazwa konkretnej usługi Google, która automatycznie inwentaryzuje całą sieć pod kątem publicznych IP w ten sposób.
+C. External vendor: Zajmie to znacznie więcej czasu niż użycie natywnego API Cloud Asset Inventory.
+D. Notify Google: Google nie zajmuje się audytowaniem Twoich publicznych zasobów na życzenie.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Cloud Asset Inventory to najpotężniejsze narzędzie inwentaryzacyjne w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Automatyzacja odkrywania zasobów jest kluczowa w dynamicznych środowiskach chmurowych.</p>
+<p><b>Głęboka analiza:</b> Dzięki Cloud Asset Inventory możesz znaleźć np. zapomniane VM-y z publicznym IP, o których istnieniu nikt już nie pamiętał, a które stanowią lukę w bezpieczeństwie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/asset-inventory/docs/overview" target="_blank">https://cloud.google.com/asset-inventory/docs/overview</a></li>

@@ -79,14 +79,23 @@ Audit network segmentation. VMs communicate freely despite tag-based rules (prio
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AD.
 
-Wyjaśnienie: Jeśli tagi są brakujące (A), reguły tag-based nie zadziałają. Jeśli istnieje reguła o wyższym priorytecie (np. 999) oparta na SA (D), to ona pozwoli na ruch mimo blokad na tagach.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Missing tags: Reguły firewalla oparte na tagach działają tylko, gdy maszyna posiada dany tag. Jeśli zapomniano go dodać, reguła 'deny' na tag nie zadziała, a zadziała domyślne 'allow egress' lub brak blokady ingress.
+D. Priority 999: W GCP niższy numer priorytetu wygrywa. Reguła z priorytetem 999 (nawet jeśli oparta na Service Accountach) zostanie przetworzona przed regułą o priorytecie 1000 i zezwoli na ruch, zanim system dotrze do Twojej blokady.
+
+Dlaczego inne są błędne:
+B. Same subnet: Podsieć nie stanowi granicy firewalla w GCP. Reguły firewalla są stosowane do maszyn niezależnie od ich przynależności do podsieci.
+C. Same route: Routing decyduje GDZIE wysłać pakiety, ale Firewall decyduje CZY je przepuścić. Nawet przy tej samej trasie firewall może blokować ruch.
+E. Priority 1001: Ta reguła jest SŁABSZA niż Twoja (1000), więc nie może jej 'nadpisać'.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla AD. To klasyczne pułapki w zarządzaniu firewallami GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AD</b></p>
-<p>W GCP reguły oparte na Service Accountach są często silniejsze i bardziej polecane niż te na tagach.</p>
+<p><b>Głęboka analiza:</b> Zawsze używaj Service Accountów zamiast tagów. Są one silniej powiązane z tożsamością maszyny i trudniejsze do omyłkowego usunięcia przez junior dewelopera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewalls#service-accounts" target="_blank">https://cloud.google.com/vpc/docs/firewalls#service-accounts</a></li>

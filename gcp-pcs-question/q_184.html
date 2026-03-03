@@ -78,14 +78,21 @@ Sensitive BigQuery workload. Prevent data exfiltration, only authorized IP addre
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: VPC Service Controls (perymetr) pozwala na ograniczenie dostępu do API BigQuery tylko do konkretnych adresów IP (przez Access Level).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. VPC Service Controls (Perimeter + Access Level): Perymetr bezpieczeństwa odcina dostęp do API BigQuery z internetu. Dodanie 'Access Level' z listą dozwolonych adresów IP (np. biura) tworzy jedyną 'dziurę' w tym murze. Jest to jedyna metoda, która fizycznie blokuje dostęp do danych dla osób z poprawnym hasłem, ale logujących się z nieautoryzowanych lokalizacji.
+
+Dlaczego inne są błędne:
+B. Cloud Armor: Chroni aplikacje webowe przed atakami L7, nie kontroluje bezpośredniego dostępu do API Google Cloud (konsola BQ, gcloud).
+C, D. Org policies: Mogą zabronić używania BQ w ogóle, ale nie potrafią filtrować dostępu do API na podstawie adresu IP klienta.
+
+Konsensus społeczności ExamTopics: 100% na A. VPC SC to standard dla 'IP-based API restriction'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Cloud Armor (B) nie chroni bezpośrednich zapytań do API BigQuery wykonanych np. przez konsolę lub gcloud, a VPC SC tak.</p>
+<p><b>Głęboka analiza:</b> To podejście realizuje zasadę 'Context-Aware Access'. Nawet jeśli haker ukradnie token sesji administratora, nie będzie mógł wykonać zapytania SQL, bo jego IP nie pasuje do perymetru firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/access-level-usage" target="_blank">https://cloud.google.com/vpc-service-controls/docs/access-level-usage</a></li>

@@ -78,14 +78,22 @@ ensure only images that passed vulnerability scanning and meet corporate policie
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Binary Authorization (A) automatycznie integruje się z wynikami skanowania Artifact Analysis i blokuje wdrożenia obrazów z krytycznymi błędami.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. BinAuth + Artifact Analysis: To kompletny, automatyczny łańcuch zaufania. Skaner (Artifact Analysis) wykonuje brudną robotę (szukanie CVE), a strażnik (Binary Authorization) sprawdza werdykt skanera przed wpuszczeniem obrazu do klastra. Wszystko jest w pełni zintegrowane i zarządzane przez Google.
+
+Dlaczego inne są błędne:
+B. Scan only: Brak mechanizmu blokady (enforcement). Obraz z krytyczną luką i tak zostanie uruchomiony.
+C. Custom script: Zwiększa narzut i jest mniej pewne niż natywna funkcja BinAuth.
+D. Manual inspection: Całkowicie nieskalowalne i sprzeczne z wymogiem automatyzacji.
+
+Konsensus społeczności ExamTopics: 100% na A. Podstawowe pytanie o architekturę bezpiecznych wdrożeń GKE.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To najbardziej 'cloud-native' i zautomatyzowany sposób na wymuszenie standardów obrazów.</p>
+<p><b>Głęboka analiza:</b> Ten model zapobiega też 'driftowi' - jeśli w już działającym obrazie zostanie wykryta nowa luka, BinAuth może zablokować jego kolejne restarty lub nowe wdrożenia.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization/docs/vulnerability-checks" target="_blank">https://cloud.google.com/binary-authorization/docs/vulnerability-checks</a></li>

@@ -78,14 +78,22 @@ Protect GKE application. Scans once per week, detect XSS, authenticate with Goog
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Web Security Scanner to narzędzie DAST, które skanuje aplikacje (w tym na GKE) pod kątem XSS i wspiera uwierzytelnianie przy skanowaniu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Web Security Scanner: To narzędzie DAST, które potrafi skanować publiczne punkty końcowe (w tym aplikacje na GKE). Wspiera ono harmonogramy (np. raz w tygodniu) i potrafi udawać zalogowanego użytkownika Google, aby skanować części aplikacji ukryte za autoryzacją. Specjalizuje się w wykrywaniu XSS.
+
+Dlaczego inne są błędne:
+A. Cloud Armor: To firewall (WAF). On BLOKUJE ataki, ale nie 'skanuje' aplikacji w celu znalezienia luk przed hakerem.
+C. Security Health Analytics: Sprawdza błędną konfigurację CHMURY (np. czy bucket jest publiczny), a nie błędy w KODZIE strony WWW.
+D. Container Threat Detection: Monitoruje anomalie wewnątrz uruchomionego kontenera (np. crypto mining), nie szuka luk XSS w warstwie webowej.
+
+Konsensus społeczności ExamTopics: 100% głosów na B. Tylko WSS jest skanerem warstwy aplikacyjnej.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>WSS potrafi 'zalogować się' do aplikacji jako użytkownik testowy, aby przeszukać ukryte za logowaniem ścieżki.</p>
+<p><b>Głęboka analiza:</b> WSS działa poprzez wstrzykiwanie bezpiecznych payloadów testowych i sprawdzanie, czy zostaną one wykonane przez przeglądarkę, co precyzyjnie identyfikuje luki XSS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview</a></li>

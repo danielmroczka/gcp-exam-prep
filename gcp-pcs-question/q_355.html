@@ -78,14 +78,22 @@ prevent and detect misconfigurations in folder based on industry-specific and in
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Security Posture (A) to najnowszy mechanizm GCP do definiowania 'idealnego stanu' bezpieczeństwa jako kodu (YAML) i automatycznego wymuszania go oraz wykrywania odchyleń (drift).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Security Posture Management: To najnowocześniejsze narzędzie w SCC. Pozwala zdefiniować cały zestaw reguł (polityki organizacji + detektory SHA) w jednym pliku YAML ('Posture file'). Możesz go następnie 'przypiąć' do folderu, co zapewnia zarówno blokowanie błędów (prevent), jak i stałe monitorowanie zgodności (detect).
+
+Dlaczego inne są błędne:
+B. Custom policies: To tylko połowa sukcesu (prevent), nie oferują dashboardu detekcji 'findings' tak jak SCC Posture.
+C. Assured Workloads: Świetne dla rezydencji danych, ale Posture (A) jest bardziej elastyczne dla specyficznych 'internal compliance' i reguł SHA.
+D. Workload Manager: Skupia się na aplikacjach Enterprise (SAP, SQL Server), nie jest ogólnym narzędziem 'Posture' dla folderu.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. Posture Management to nowy standard 'Governance as Code' w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Posture łączy w sobie SHA i polityki organizacji w jeden zarządzalny byt.</p>
+<p><b>Głęboka analiza:</b> Dzięki Posture Management zespół security może przygotować 'szablon bezpiecznego folderu' i mieć pewność, że każdy projekt w nim stworzony będzie od razu zgodny ze standardem firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-postures-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-postures-overview</a></li>

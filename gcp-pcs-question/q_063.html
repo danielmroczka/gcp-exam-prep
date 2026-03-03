@@ -78,14 +78,22 @@ For compliance reasons, an organization needs to ensure that in-scope PCI Kubern
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Kombinacja Taints i Tolerations pozwala na pełną izolację węzłów (Nodes), zapewniając, że tylko konkretne pody mogą na nich działać.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Taints and Tolerations: To jedyny mechanizm w Kubernetes gwarantujący WYŁĄCZNOŚĆ. 'Taint' na węźle odpycha wszystkie pody, które nie mają odpowiedniej 'tolerancji'. Dzięki temu tylko pody PCI (z tolerancją) mogą tam trafić, a żadne inne pody (bez tolerancji) nigdy nie zostaną tam uruchomione.
+
+Dlaczego inne są błędne:
+A. nodeSelector: Gwarantuje, że pod PCI trafi na węzeł PCI, ale NIE ZABRANIA innym, zwykłym podom trafienia na ten sam węzeł. To nie zapewnia wymaganej izolacji ('Nodes can ONLY contain in-scope Pods').
+B. Pod Security Policy: Służy do ograniczania uprawnień wewnątrz kontenera (np. brak roota), a nie do sterowania harmonogramowaniem na węzłach w celu izolacji sprzętowej.
+D. Namespaces: To izolacja logiczna wewnątrz API, nie ma wpływu na fizyczne rozmieszczenie podów na węzłach.
+
+Konsensus społeczności ExamTopics: 100% na C. Izolacja PCI w K8s zawsze opiera się na Taints & Tolerations.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>nodeSelector (opcja A) zapewnia, że pod trafi na odpowiedni węzeł, ale nie zabrania innym podom trafienia na ten sam węzeł. Tylko Taints gwarantują wyłączność.</p>
+<p><b>Głęboka analiza:</b> Aby spełnić wymogi PCI DSS w GKE, musisz udowodnić, że dane kart płatniczych nie są procesowane na tym samym kernelu co inne, mniej bezpieczne aplikacje.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/" target="_blank">https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/</a></li>

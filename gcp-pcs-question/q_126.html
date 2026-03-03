@@ -78,14 +78,21 @@ Maintain client IP by default while using Standard network tier. Which LB?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Network Load Balancer (TCP/UDP Network LB) jest Load Balancerem pasywnym, który nie kończy połączenia, więc adres IP klienta trafia bezpośrednio do VM.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. TCP/UDP Network Load Balancer: Jest to Load Balancer 'pass-through'. Nie kończy on połączenia TCP/UDP, tylko przekazuje pakiety bezpośrednio do VM. Dzięki temu docelowa maszyna widzi oryginalny adres IP klienta w nagłówkach IP bez żadnej dodatkowej konfiguracji.
+
+Dlaczego inne są błędne:
+A, B. Proxy LBs: Są to urządzenia typu proxy, które kończą połączenie u siebie i nawiązują nowe do VM. Aby zobaczyć IP klienta, wymagają użycia nagłówków PROXY protocol.
+C. Internal TCP/UDP: Choć zachowuje IP, działa tylko wewnątrz sieci VPC, nie jest dostępny dla użytkowników zewnętrznych w Standard Tierze.
+
+Konsensus społeczności ExamTopics: 100% na D. Network LB = IP visibility by default.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Inne LB (proxy) wymagają nagłówków typu X-Forwarded-For lub PROXY protocol, aby przekazać IP klienta.</p>
+<p><b>Głęboka analiza:</b> Network LB jest tańszy i prostszy, ale nie wspiera zaawansowanych funkcji L7 (jak URL routing czy Cloud Armor).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/load-balancing/docs/network" target="_blank">https://cloud.google.com/load-balancing/docs/network</a></li>

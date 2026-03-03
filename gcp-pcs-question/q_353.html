@@ -78,14 +78,22 @@ process PII for analytics, adhere to privacy, retain original format and consist
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: FPE (D) zapewnia zachowanie formatu (np. numer konta wygląda jak numer konta) i spójności (ten sam numer daje ten sam zaszyfrowany wynik), co jest kluczowe dla integralności analitycznej przy jednoczesnym ukryciu PII.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. SDP (DLP) + FPE: Pytanie zawiera dwa kluczowe wymogi: 'original format' i 'avoid irreversible deletion'. Format-Preserving Encryption (FPE) zapewnia, że np. zaszyfrowany numer karty nadal ma 16 cyfr i poprawny format, a proces jest odwracalny dla uprawnionych osób (nie jest to 'irreversible deletion' jak przy haszowaniu).
+
+Dlaczego inne są błędne:
+A. Dataset encryption: Chroni bazę przed hakerem, ale analityk z dostępem do BQ i tak widziałby dane jawne.
+B. VPC SC: Chroni granice, nie zmienia treści danych wewnątrz.
+C. Hashing: Jest nieodwracalny (irreversible) i całkowicie zmienia format danych, co narusza oba wymogi pytania.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. FPE to standard dla analityki Big Data zachowującej prywatność.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Hashing (C) jest nieodwracalny i zmienia format danych.</p>
+<p><b>Głęboka analiza:</b> Dzięki FPE zachowujesz tzw. 'Referential Integrity'. Jeśli zaszyfrujesz ID klienta tym samym kluczem w dwóch różnych tabelach, nadal będziesz mógł je połączyć (JOIN), nie wiedząc kim jest klient.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/pseudonymization#fpe" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization#fpe</a></li>

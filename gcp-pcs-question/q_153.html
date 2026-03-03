@@ -78,14 +78,20 @@ Use Cloud External Key Manager (EKM) to encrypt BigQuery data. First steps?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Przy EKM klucz fizycznie znajduje się poza Google (u partnera jak Equinix, Thales, Fortanix). Najpierw tworzysz klucz tam, a potem łączysz go z Cloud KMS podając URI partnera.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Partner system key creation: W modelu EKM, materiał klucza (key material) musi fizycznie znajdować się poza infrastrukturą Google. Pierwszym krokiem jest więc stworzenie klucza u certyfikowanego partnera (np. Equinix, Thales). Dopiero po uzyskaniu URI (identyfikatora) tego klucza, można go 'podpiąć' do Cloud KMS.
+
+Dlaczego inne są błędne:
+A, B, D: Wszystkie te opcje sugerują, że tworzenie klucza zaczyna się wewnątrz projektu GCP lub KMS, co jest błędne dla kluczy *zewnętrznych* (EKM). KMS służy tylko jako interfejs (referencja) do klucza, który już istnieje u partnera.
+
+Konsensus społeczności ExamTopics: 100% na C. Klucz EKM powstaje 'na zewnątrz' i jest 'rejestrowany' wewnątrz chmury.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>EKM pozwala na zachowanie fizycznej separacji kluczy od chmury, w której znajdują się dane.</p>
+<p><b>Głęboka analiza:</b> Przy EKM każde żądanie szyfrowania/deszyfrowania powoduje wywołanie API z Google Cloud do infrastruktury partnera. Jeśli łącze z partnerem padnie, dostęp do danych w chmurze zostanie zablokowany.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>

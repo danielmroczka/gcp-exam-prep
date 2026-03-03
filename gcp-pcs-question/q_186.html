@@ -78,14 +78,21 @@ Central image repository in perimeter. Team needs deploying a third-party disk i
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Gdy projekt jest w perymetrze VPC SC, każde wyjście po dane do innego projektu wymaga reguły 'Egress'. Musisz zezwolić na pobieranie z zewnętrznego projektu (zasób) przez usługę Compute Engine.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. VPC SC Egress Rule: Gdy projekt jest zamknięty w perymetrze VPC Service Controls, nie może on 'sięgnąć' po dane (w tym obrazy dysków) do żadnego projektu na zewnątrz. Musisz stworzyć regułę wyjściową (Egress), która zezwala usłudze Compute Engine (`compute.googleapis.com`) na pobranie zasobu z konkretnego zewnętrznego projektu.
+
+Dlaczego inne są błędne:
+A. trustedImageProjects: Ta polityka mówi CO WOLNO, ale VPC SC to 'mur', który fizycznie blokuje połączenie API do zewnętrznego projektu. Bez reguły Egress (B) polityka A nic nie pomoże.
+C, D: Zbyt ogólne (`ANY_IDENTITY`) i nie precyzują celu ani usługi, co narusza zasadę najniższych uprawnień i często nie wystarcza do poprawnej konfiguracji VPC SC.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na B. Zarządzanie wyjątkami w VPC SC to jeden z najtrudniejszych tematów egzaminu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>VPC SC domyślnie blokuje komunikację z zasobami poza perymetrem, nawet jeśli IAM na to pozwala.</p>
+<p><b>Głęboka analiza:</b> Reguły Egress w VPC SC są wymagane, ponieważ operacja 'copy image' to w rzeczywistości żądanie API Twojego projektu do API projektu zewnętrznego o udostępnienie danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/egress-rules" target="_blank">https://cloud.google.com/vpc-service-controls/docs/egress-rules</a></li>

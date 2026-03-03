@@ -78,14 +78,22 @@ An engineer accidentally deletes a service account used for VM-to-GCS transfers.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: GCP pozwala na przywrócenie (undelete) usuniętego konta serwisowego w ciągu 30 dni od usunięcia.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Undelete command: Google Cloud umożliwia przywrócenie usuniętego konta serwisowego w ciągu 30 dni od usunięcia. Jest to najszybsza metoda, ponieważ przywraca konto wraz z jego unikalnym identyfikatorem (Unique ID), co sprawia, że wszystkie istniejące uprawnienia IAM (które są przypisane do ID, a nie do nazwy) znów zaczynają działać.
+
+Dlaczego inne są błędne:
+A. Disable auth: Skrajne naruszenie bezpieczeństwa. Dane byłyby publiczne.
+C. New SA with same name: Nowe konto otrzyma NOWY Unique ID. Nawet jeśli nazwa jest ta sama, uprawnienia IAM starego konta NIE będą działać. Musiałbyś ręcznie odtworzyć całą politykę IAM.
+D. Another SA: Wymagałoby zmian w konfiguracji aplikacji na wszystkich maszynach, co jest wolniejsze i wprowadza chaos.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To 'life-saver' w sytuacjach awaryjnych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Przywrócenie konta zachowuje jego unikalny identyfikator (Unique ID), co jest bezpieczniejsze i szybsze niż ponowne konfigurowanie uprawnień.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, że w GCP uprawnienia są przypisane do numeru seryjnego konta (Unique ID). Nazwa jest tylko etykietą. Dlatego 'undelete' jest jedynym sposobem na zachowanie ciągłości dostępu bez re-konfiguracji IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts#undeleting" target="_blank">https://cloud.google.com/iam/docs/creating-managing-service-accounts#undeleting</a></li>

@@ -78,14 +78,21 @@ Access Approval with custom signing key stored in HSM outside Google Cloud (EKM)
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Tylko Cloud EKM pozwala na użycie kluczy fizycznie znajdujących się poza infrastrukturą Google (np. w zewnętrznym HSM) do operacji wewnątrz chmury.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. External HSM + Cloud EKM: To zaawansowana konfiguracja suwerenności. Klucz podpisu Twojej zgody na dostęp personelu Google nie rezyduje w chmurze. Dzięki EKM, Google prosi Twój lokalny system o podpisanie autoryzacji dostępu. Bez fizycznego działania Twojego HSM, inżynier Google nie wejdzie do projektu.
+
+Dlaczego inne są błędne:
+A, D: Klucz byłby wewnątrz Google, co narusza wymóg 'outside Google Cloud'.
+B. Export: Google Cloud KMS nie wspiera eksportu materiału klucza na zewnątrz w celu jego 'stałego' tam używania przez usługi chmurowe.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To szczytowy punkt kontroli nad dostępem dostawcy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>To rozwiązanie spełnia rygorystyczne wymogi suwerenności kluczy.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie zapewnia tzw. 'Veto Power' dla klienta. Nawet nakaz sądowy wydany chmurze nie pozwoli na odczyt danych bez akcji Twojego zewnętrznego klucza.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>

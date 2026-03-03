@@ -78,14 +78,22 @@ automatically scan deployment pipeline for vulnerabilities and ensure only scann
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Binary Authorization (D) to mechanizm egzekwowania (enforcement), który sprawdza istnienie podpisanych dowodów (atestacji) pomyślnego skanu przed uruchomieniem kontenera.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Binary Authorization + Attestations: Jest to kompletne, natywne rozwiązanie GCP. Proces polega na tym, że skaner (Container Analysis) po znalezieniu braku krytycznych podatności tworzy cyfrowy podpis (atestację). Binary Authorization w klastrze GKE sprawdza ten podpis przed uruchomieniem kontenera. Jeśli atestacji brak, wdrożenie jest automatycznie blokowane.
+
+Dlaczego inne są błędne:
+A. K8s RBAC: Zarządza tym, co użytkownik może zrobić wewnątrz klastra, nie weryfikuje 'bezpieczeństwa' obrazu kontenera przed uruchomieniem.
+B. gcloud describe: Dostarcza informacji, ale sam w sobie nie stanowi mechanizmu blokady (enforcement). Musiałbyś sam dopisać całą logikę blokowania.
+C. Cloud Code: To wtyczka do IDE pomagająca programiście pisać kod, nie jest elementem wymuszania standardów w pipeline produkcyjnym.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. To standardowa architektura 'Secure Software Supply Chain'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Samo skanowanie (B) nie blokuje wdrożenia bez Binary Authorization.</p>
+<p><b>Głęboka analiza:</b> Binary Authorization pozwala na zdefiniowanie polityki 'Require Attestations' od zaufanych skanerów, co gwarantuje, że nieprzebadany kod nigdy nie trafi na produkcję.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>

@@ -78,14 +78,22 @@ Scan GKE images for security issues and share reports with security team without
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Artifact Registry posiada wbudowaną funkcję skanowania obrazów pod kątem podatności (Vulnerability Scanning). Jest to rozwiązanie natywne, bezpieczne i zintegrowane z GCP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Artifact Registry Vulnerability Scanning: Jest to natywna usługa Google, która automatycznie skanuje każdy obraz 'pushowany' do rejestru pod kątem znanych podatności (CVE). Raporty są przechowywane wewnątrz GCP i dostępne tylko dla osób z odpowiednimi rolami IAM, co spełnia wszystkie wymogi pytania.
+
+Dlaczego inne są błędne:
+A. Container Threat Detection: Monitoruje obrazy w RUNTIME (podczas działania), a nie skanuje ich statycznie w rejestrze przed uruchomieniem.
+B. Public bucket: Skrajne naruszenie wymogu 'without exposing outside GCP'.
+D. GitHub scanning: Odbywa się poza GCP, co może być niezgodne z wymogiem izolacji raportów wewnątrz platformy.
+
+Konsensus społeczności ExamTopics: 100% na C. To najprostsza i najbardziej zintegrowana metoda skanowania obrazów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Skanowanie odbywa się automatycznie przy każdym 'push' obrazu, a raporty są dostępne w konsoli dla uprawnionych osób.</p>
+<p><b>Głęboka analiza:</b> Skanowanie w Artifact Registry dzieli się na 'On-push' (automatyczne) i 'Continuous' (stałe monitorowanie nowych CVE dla już istniejących obrazów).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/artifact-registry/docs/analysis/vulnerability-scanning" target="_blank">https://cloud.google.com/artifact-registry/docs/analysis/vulnerability-scanning</a></li>

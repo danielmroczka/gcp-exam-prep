@@ -78,14 +78,21 @@ You have 3,000 objects in a bucket. You don't want individual object management 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Uniform bucket-level access wyłącza ACL i wymusza zarządzanie uprawnieniami wyłącznie przez IAM, co jest zalecaną praktyką na poziomie całego kontenera.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Uniform bucket-level access (UBLA): Wyłącza on system ACL (Access Control Lists) dla pojedynczych obiektów i wymusza używanie wyłącznie systemu IAM na poziomie całego bucketu. Zapewnia to spójność, łatwiejszy audyt (wszystko widać w IAM) i eliminuje ryzyko, że pojedynczy plik zostanie 'zapomniany' z błędnym uprawnieniem.
+
+Dlaczego inne są błędne:
+A, B. allUsers: Udostępnia dane całemu światu - absolutny błąd bezpieczeństwa.
+C. Default bucket ACL: Nadal używa systemu ACL, który jest trudny do audytowania w skali tysięcy obiektów i nie daje centralnego wglądu tak jak IAM.
+
+Konsensus społeczności ExamTopics: 100% na D. UBLA to nowoczesny standard zarządzania dostępem do danych w GCS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Dzięki IAM zyskujesz lepszą widoczność w logach audytowych i upraszczasz zarządzanie dostępem.</p>
+<p><b>Głęboka analiza:</b> Przy 3000 obiektach zarządzanie każdym z nich z osobna (ACL) jest niemożliwe. IAM na poziomie bucketu to jedyny sposób na zachowanie ładu i zgodności z politykami firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/uniform-bucket-level-access" target="_blank">https://cloud.google.com/storage/docs/uniform-bucket-level-access</a></li>

@@ -78,14 +78,22 @@ Secrets in environment variables of Cloud Functions. Identify in timely manner. 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: DLP (Sensitive Data Protection) potrafi skanować metadane i konfigurację usług w poszukiwaniu haseł i kluczy API. Integracja z SCC automatyzuje raportowanie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. DLP Scan: Cloud DLP (Sensitive Data Protection) posiada funkcję skanowania konfiguracji usług Google Cloud. Można zaplanować codzienny skan metadanych Cloud Functions, który wykryje wzorce haseł czy kluczy API w zmiennych środowiskowych i zaraportuje to do SCC.
+
+Dlaczego inne są błędne:
+A. Peer reviews: Metoda manualna, nie gwarantuje detekcji wszystkich błędów w czasie rzeczywistym.
+B. Custom scan: Wymaga pisania kodu, DLP (C) jest gotową usługą 'managed'.
+D. DAST: Testuje aplikację 'z zewnątrz' (HTTP), nie widzi zmiennych środowiskowych serwera.
+
+Konsensus społeczności ExamTopics: 100% na C. DLP to standard dla 'Secret Scanning' w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Przechowywanie sekretów w zmiennych środowiskowych jest błędem; powinny być w Secret Managerze.</p>
+<p><b>Głęboka analiza:</b> Prawidłowym miejscem na sekrety jest Secret Manager, ale DLP jest jedynym narzędziem do DETEKCJI pomyłek polegających na ich wpisaniu w env vars.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/inspecting-storage" target="_blank">https://cloud.google.com/dlp/docs/inspecting-storage</a></li>

@@ -78,14 +78,22 @@ Expand application to a second region. Use a single external IP to distribute re
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Tylko Premium Tier w Google Cloud wspiera globalne adresy IP i globalny Load Balancing HTTP(S).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Premium Tier Network: Tylko Premium Tier w Google Cloud wspiera globalne adresy IP (Anycast IP) i globalny Load Balancing. Pozwala to na użycie JEDNEGO adresu IP dla całego świata, który automatycznie kieruje ruch do najbliższego regionu (np. US lub EU) w zależności od lokalizacji klienta.
+
+Dlaczego inne są błędne:
+A. NEGs: Są mechanizmem backendowym (np. dla kontenerów), ale same w sobie nie decydują o globalności adresu IP Load Balancera.
+C. Standard Tier: Działa tylko regionalnie. Musiałbyś mieć osobne adresy IP dla każdego regionu i zarządzać nimi np. przez zewnętrzny DNS, co nie spełnia wymogu 'single external IP'.
+D. Cloud VPN: Służy do łączności hybrydowej, nie do globalnego serwowania aplikacji webowych pod jednym IP.
+
+Konsensus społeczności ExamTopics: 100% na B. To kluczowa różnica między poziomami sieci w Google Cloud.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Standard Tier działa regionalnie, co uniemożliwia użycie jednego IP dla wielu regionów w sposób natywny dla LB.</p>
+<p><b>Głęboka analiza:</b> Premium Tier przesyła ruch po światłowodach Google tak długo, jak to możliwe. Standard Tier wyrzuca ruch do publicznego internetu tak szybko, jak to możliwe. Tylko Premium pozwala na globalną magię Anycast IP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-tiers/docs/overview" target="_blank">https://cloud.google.com/network-tiers/docs/overview</a></li>

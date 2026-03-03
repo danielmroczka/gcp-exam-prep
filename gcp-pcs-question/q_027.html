@@ -78,14 +78,22 @@ Your team wants visibility into all projects and wants to organize projects base
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Foldery wewnątrz organizacji pozwalają na logiczne grupowanie projektów i delegowanie uprawnień.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Folders under Organization Node: Hierarchia GCP (Organizacja -> Foldery -> Projekty) to jedyny sposób na strukturalne uporządkowanie zasobów. Foldery pozwalają na grupowanie projektów wg jednostek biznesowych i delegowanie uprawnień IAM na poziomie tych grup.
+
+Dlaczego inne są błędne:
+B. gmail.com accounts: Konta prywatne są niezarządzalne w firmie i stanowią ogromne ryzyko bezpieczeństwa (brak centralnej kontroli).
+C. Labels: Etykiety są przydatne do filtrowania kosztów (billing), ale nie dają struktury hierarchicznej ani nie pozwalają na dziedziczenie uprawnień IAM.
+D. VPC: Sieć VPC to element techniczny, nie służy do organizacji projektów ani zarządzania widocznością uprawnień w skali firmy.
+
+Konsensus społeczności ExamTopics: Zdecydowane A. Foldery to fundament ładu (governance) w Google Cloud.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Hierarchia: Organizacja -> Foldery -> Projekty to najlepsza praktyka GCP.</p>
+<p><b>Głęboka analiza:</b> Posiadanie 'Organization Node' jest warunkiem koniecznym do używania folderów. Bez niego każdy projekt jest 'samotną wyspą' bez centralnego nadzoru.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/creating-managing-folders" target="_blank">https://cloud.google.com/resource-manager/docs/creating-managing-folders</a></li>

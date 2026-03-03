@@ -78,14 +78,22 @@ Your organization has many projects. You want to audit and enforce security poli
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Forseti Security to zestaw narzędzi open-source do audytowania i egzekwowania polityk bezpieczeństwa w GCP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Forseti Security: Jest to zestaw narzędzi open-source (obecnie SCC Enterprise ma wiele jego funkcji), który pozwala na skanowanie całej organizacji pod kątem niezgodności z politykami (np. publiczne buckety, nieautoryzowane reguły firewall) i automatyczne naprawianie tych błędów.
+
+Dlaczego inne są błędne:
+B. Cloud IAM: Zarządza tym, kto ma dostęp, ale sam w sobie nie audytuje ani nie wymusza polityk infrastrukturalnych (np. typu VM czy regionu).
+C. Stackdriver Logging: Rejestruje zdarzenia, ale nie egzekwuje polityk ani nie raportuje automatycznie o ich naruszeniu bez dodatkowej konfiguracji alertów.
+D. Resource Manager: Służy do organizacji struktury (projekty, foldery), a nie do audytu technicznego bezpieczeństwa zasobów.
+
+Konsensus społeczności ExamTopics: Zdecydowane A. Forseti to klasyczny przykład narzędzia do wymuszania 'compliance as code'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Forseti pozwala na ciągłe monitorowanie konfiguracji i automatyczne naprawianie niezgodności.</p>
+<p><b>Głęboka analiza:</b> Forseti składa się z modułów takich jak Inventory, Scanner i Enforcer. Scanner porównuje aktualny stan z Twoją zdefiniowaną polityką, a Enforcer może automatycznie przywrócić poprawną konfigurację.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://forsetisecurity.org/" target="_blank">https://forsetisecurity.org/</a></li>

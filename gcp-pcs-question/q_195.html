@@ -78,14 +78,22 @@ Identify all principals who can change firewall rules in production. Auditing.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Zmiana reguł wymaga uprawnień create, update lub delete. Policy Analyzer potrafi wyliczyć wszystkie osoby i konta posiadające te konkretne uprawnienia.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Policy Analyzer (write permissions): Aby zmienić regułę firewalla, użytkownik musi posiadać uprawnienia typu 'zapis' (create, update, delete). Policy Analyzer potrafi przeszukać całą skomplikowaną strukturę IAM (w tym grupy i dziedziczenie) i wygenerować listę osób, które posiadają te konkretne, niebezpieczne uprawnienia.
+
+Dlaczego inne są błędne:
+A. get/list: To uprawnienia 'tylko do odczytu'. Osoba z tymi uprawnieniami nie może ZMIENIĆ reguł.
+B. Firewall Insights: Pomaga w optymalizacji reguł, ale nie analizuje 'kto ma do nich klucze' w systemie IAM.
+C. Security Health Analytics: Powie Ci, że masz źle skonfigurowany firewall, ale nie da Ci pełnej listy uprawnionych osób tak precyzyjnie jak Policy Analyzer.
+
+Konsensus społeczności ExamTopics: 100% na D. Policy Analyzer to główne narzędzie audytowe dla IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Policy Analyzer przeszukuje grupy i dziedziczenie, aby dać pełną listę uprawnionych osób.</p>
+<p><b>Głęboka analiza:</b> Policy Analyzer rozwiązuje problem 'ukrytych' uprawnień - np. gdy ktoś jest właścicielem grupy, która jest w innej grupie, która ma rolę Network Admin. Ręczne znalezienie tego jest niemożliwe.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>

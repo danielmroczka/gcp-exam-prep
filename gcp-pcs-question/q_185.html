@@ -78,14 +78,22 @@ Ensure OS images across projects are trusted and meet requirements. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Ograniczenie 'Trusted Image Projects' w politykach organizacji wymusza używanie tylko zatwierdzonych obrazów z centralnego repozytorium.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. compute.trustedImageProjects: Jest to polityka organizacji, która pozwala zdefiniować 'białą listę' projektów, z których wolno pobierać obrazy systemowe. Dzięki temu możesz wymusić, aby każda VM w firmie startowała tylko z Twojego 'utwardzonego' projektu security, a nie z publicznych (i potencjalnie niezabezpieczonych) obrazów.
+
+Dlaczego inne są błędne:
+B. Shielded VM: Zapewnia integralność, ale nie zapobiega użyciu 'zaufanego' (ale źle skonfigurowanego) obrazu z obcego źródła.
+C. Cloud Function: To rozwiązanie reaktywne. Lepiej zablokować akcję u źródła (A).
+D. Security scanner: Powie Ci o problemach po fakcie, nie zapobiega ich powstaniu.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowy mechanizm 'Enforcement' dla standardów OS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dzięki temu masz pewność, że żadna VM nie zostanie uruchomiona na bazie publicznego, potencjalnie niezabezpieczonego obrazu.</p>
+<p><b>Głęboka analiza:</b> Polityka ta blokuje zarówno operacje przez Konsolę, jak i przez gcloud/Terraform. Jest to fundament ładu (governance) w dużej skali.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/images/restricting-image-access" target="_blank">https://cloud.google.com/compute/docs/images/restricting-image-access</a></li>

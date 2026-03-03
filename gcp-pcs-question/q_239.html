@@ -78,14 +78,22 @@ Limit egress from VPC 'dev-vpc' to IP range 10.58.5.0/24 organization-wide for a
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Polityki hierarchiczne (Hierarchical Firewall Policies) pozwalają na wymuszenie reguł na poziomie folderu, co oszczędza czas przy wielu projektach.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Hierarchical Firewall Policy: Jest to najbardziej efektywna (minimize effort) metoda zarządzania bezpieczeństwem sieciowym w wielu projektach. Ustawienie reguły na poziomie FOLDERA sprawia, że każda sieć VPC wewnątrz tego folderu (w tym 'dev-vpc') musi się do niej zastosować. Pozwala to na centralną blokadę bez wchodzenia w każdy projekt z osobna.
+
+Dlaczego inne są błędne:
+A. Multi-NIC: Skomplikowane i drogie.
+B. Cloud NAT: Nie służy do blokowania ruchu do konkretnych adresów prywatnych (RFC1918), lecz do zarządzania wyjściem publicznym.
+D. VPC firewall rule: Zadziałałoby, ale wymagałoby manualnej konfiguracji w każdym projekcie, co przy 'organization-wide' wymogu jest nieefektywne (większy effort).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. Hierarchiczne polityki to klucz do skalowalności w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Opcja D wymagałaby konfiguracji w każdym projekcie osobno.</p>
+<p><b>Głęboka analiza:</b> Polityki hierarchiczne są przetwarzane PRZED regułami lokalnymi VPC, co daje zespołowi security gwarancję, że ich blokady nie zostaną pominięte.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewall-policies" target="_blank">https://cloud.google.com/vpc/docs/firewall-policies</a></li>

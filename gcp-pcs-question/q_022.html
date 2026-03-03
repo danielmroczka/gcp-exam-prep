@@ -78,14 +78,22 @@ A website design company recently migrated all customer sites to App Engine. Som
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Cloud IAP pozwala na łatwe ograniczenie dostępu do aplikacji App Engine na podstawie tożsamości użytkownika.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Cloud Identity-Aware Proxy (IAP): To najlepsze rozwiązanie dla aplikacji webowych. IAP weryfikuje tożsamość użytkownika (Identity) oraz kontekst (Context), pozwalając na dostęp z dowolnej lokalizacji (Any location) bez potrzeby używania VPN, o ile użytkownik jest zautoryzowany w IAM.
+
+Dlaczego inne są błędne:
+A. .htaccess: App Engine nie jest serwerem Apache; pliki .htaccess nie są obsługiwane.
+B. App Engine firewall: Pozwala tylko na filtrowanie adresów IP. Jeśli pracownicy są 'w dowolnej lokalizacji' (dynamiczne IP), nie da się stworzyć skutecznej listy allowlist.
+D. Cloud VPN: Wymagałby od każdego klienta i pracownika posiadania tunelu VPN lub klienta VPN, co jest skomplikowane i niepotrzebne przy aplikacjach HTTP.
+
+Konsensus społeczności ExamTopics: Prawie 100% wskazuje na C. IAP to fundament modelu BeyondCorp (Zero Trust).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>IAP to najlepszy sposób na ochronę aplikacji webowych bez konieczności używania VPN.</p>
+<p><b>Głęboka analiza:</b> IAP działa na poziomie warstwy 7. Po włączeniu IAP, App Engine odrzuca wszystkie żądania, które nie posiadają ważnego dowodu tożsamości od proxy Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>

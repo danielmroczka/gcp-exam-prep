@@ -78,14 +78,22 @@ Connect CE instances between two organizations. Encrypted connection, private IP
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Cloud VPN automatycznie szyfruje ruch (IPsec) i pozwala na routing między prywatnymi adresami IP różnych sieci.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud VPN: Umożliwia połączenie dwóch sieci VPC (nawet w różnych organizacjach) przy użyciu prywatnych adresów IP. Ruch jest automatycznie szyfrowany za pomocą tunelu IPsec, co spełnia oba wymogi: 'private IPs' i 'encrypted connection'.
+
+Dlaczego inne są błędne:
+B. VPC Peering: Pozwala na komunikację po prywatnych IP, ale sam w sobie NIE szyfruje ruchu (ruch idzie siecią Google w jawnym tekście, choć jest odizolowany od internetu). Pytanie prosi o 'encrypted connection'.
+C. VPC SC: To bariera dla API usług, nie jest to tunel komunikacyjny dla maszyn VM.
+D. Apigee: Służy do zarządzania API, nie do łączenia warstwy sieciowej (L3) między maszynami wirtualnymi.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. VPN to standardowa odpowiedź na wymóg 'encrypted private link'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>VPC Peering (B) nie szyfruje ruchu natywnie (jest on przesyłany siecią Google, ale nie tunelowany IPsecem). VPN gwarantuje szyfrowanie.</p>
+<p><b>Głęboka analiza:</b> Choć sieć Google jest bardzo bezpieczna, niektóre standardy (jak PCI czy HIPAA) wymagają jawnego szyfrowania (np. AES) przy przechodzeniu między różnymi podmiotami prawnymi (organizacjami).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview" target="_blank">https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview</a></li>

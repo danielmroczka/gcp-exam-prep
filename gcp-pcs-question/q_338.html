@@ -78,14 +78,22 @@ ensure all GKE nodes always run the latest release to minimize vulnerability ris
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Polityka organizacji (B) może wymusić na wszystkich zespołach włączanie opcji 'Auto-upgrade' dla ich klastrów GKE.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Org Policy Enforcement: Aby mieć pewność, że wszystkie zespoły w firmie dbają o bezpieczeństwo węzłów, administrator może wymusić włączenie funkcji 'Auto-upgrade' za pomocą polityki organizacji. Uniemożliwia to stworzenie klastra z wyłączonymi automatycznymi poprawkami.
+
+Dlaczego inne są błędne:
+A. gcloud describe: Służy do sprawdzania, nie do zapewniania (enforcement).
+C. Migrate: To czynność manualna, nie jest to 'automatyczny proces' zapewniający stałą aktualność w czasie.
+D. Manually upgrade: Nieskalowalne i podatne na błędy ludzkie (zapomnienie).
+
+Konsensus społeczności ExamTopics: 100% na B. Polityki organizacji to jedyny sposób na skalowalne egzekwowanie standardów GKE.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Gwarantuje to, że żaden klaster nie zostanie pozostawiony bez poprawek z powodu zapomnienia administratora.</p>
+<p><b>Głęboka analiza:</b> Node auto-upgrades w GKE zazwyczaj odbywają się kilka dni po aktualizacji Mastera, co zapewnia stabilność klastra.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades</a></li>

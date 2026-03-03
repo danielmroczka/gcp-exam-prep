@@ -78,14 +78,22 @@ Centralize VM image management and automate security baselines (patching). What 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: VM Manager jest natywną usługą do patchowania floty VM w dużej skali. Centralne repozytorium obrazów zapewnia, że wszystkie nowe maszyny startują z bezpiecznego stanu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. VM Manager + Central Registry: VM Manager to jedyna natywna usługa Google do automatyzacji aktualizacji systemów (patching). Centralny projekt z obrazami ('Golden Images') zapewnia, że każda nowa maszyna startuje z bezpiecznego fundamentu.
+
+Dlaczego inne są błędne:
+B. Sole-tenancy: Dotyczy izolacji sprzętowej, nie ma nic wspólnego z patchowaniem OS.
+C. Cloud Build: Buduje obrazy, ale nie potrafi 'naprawić' (zaktualizować) maszyny, która już działa od miesiąca. Robi to VM Manager.
+D. Posture management: Raportuje błędy, ale samo 'patchowanie' to techniczna domena VM Managera.
+
+Konsensus społeczności ExamTopics: 100% na A. To jedyne kompletne rozwiązanie cyklu życia OS VM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dzięki VM Manager zyskujesz jeden dashboard dla całej organizacji.</p>
+<p><b>Głęboka analiza:</b> Dzięki VM Manager możesz jednym kliknięciem sprawdzić, ile maszyn w całej firmie wymaga krytycznej poprawki bezpieczeństwa wydanej dzisiaj rano.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/os-patch-management" target="_blank">https://cloud.google.com/compute/docs/os-patch-management</a></li>

@@ -78,14 +78,22 @@ An organization wants to migrate its current data backup and disaster recovery s
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud Storage to najbardziej efektywne kosztowo i skalowalne miejsce na backupy.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud Storage: Jest to najbardziej skalowalna, trwała (11 dziewiątek trwałości) i kosztowo efektywna usługa do przechowywania backupów. Użycie gsutil w zaplanowanych zadaniach to standardowy sposób automatyzacji transferu danych z on-premises.
+
+Dlaczego inne są błędne:
+A. BigQuery: To magazyn danych analitycznych, nie nadaje się do przechowywania surowych kopii zapasowych systemów plików czy baz danych. Jest bardzo drogi jako 'zwykły storage'.
+C. Persistent Disks: Są przypięte do VM. Używanie ich jako globalnego rozwiązania DR jest drogie i nieefektywne (brak łatwego dostępu spoza VM).
+D. Cloud Datastore: To baza dokumentowa NoSQL, nie służy do backupów infrastrukturalnych.
+
+Konsensus społeczności ExamTopics: 100% głosów na B. Cloud Storage to fundament każdego planu Backup & DR w Google Cloud.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Klasy Coldline/Archive są idealne dla scenariuszy DR.</p>
+<p><b>Głęboka analiza:</b> Cloud Storage oferuje klasy archiwalne (Coldline i Archive), które są drastycznie tańsze dla danych rzadko odczytywanych, co jest idealne dla kopii zapasowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/storage-classes" target="_blank">https://cloud.google.com/storage/docs/storage-classes</a></li>

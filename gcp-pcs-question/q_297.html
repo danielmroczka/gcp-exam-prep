@@ -78,14 +78,22 @@ Manage IAM and org policies at scale for multinational organization with rapid e
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Hierarchia folderów pozwala na dziedziczenie polityk 'z góry' (globalne standardy) z jednoczesną możliwością ich doprecyzowania na niższych poziomach (regionalna autonomia).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Hierarchical folders: To jedyny model skalowalny. Pozwala na zdefiniowanie twardych standardów na poziomie Organizacji, które są dziedziczone przez wszystkie foldery. Jednocześnie zespoły regionalne mogą mieć własne pod-foldery z dodatkowymi, specyficznymi politykami, co daje im wymaganą autonomię.
+
+Dlaczego inne są błędne:
+A. Project level: Niezarządzalne przy tysiącach projektów.
+B. Manual delegation: Prowadzi do chaosu i braku spójności globalnej.
+C. Optional templates: Zbyt słabe wymuszenie (enforcement) dla branż regulowanych.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. Foldery to fundament 'Cloud Governance'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>To jedyny model skalowalnego zarządzania tysiącami projektów w GCP.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj o zasadzie 'deny-wins' w politykach organizacji - restrykcja z góry hierarchii jest niemal niemożliwa do obejścia na dole, co zapewnia globalne bezpieczeństwo.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>

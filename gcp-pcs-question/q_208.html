@@ -76,14 +76,24 @@ Buckets accidentally public. Investigate impact and remediate. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: C. (Uwaga: D również jest rozsądne, ale C kładzie nacisk na zapobieganie regresji przez politykę organizacji). Wyjaśnienie: publicAccessPrevention to najsilniejszy mechanizm ochronny przed ponownym upublicznieniem.</pre>
+<pre>Odpowiedź: C.
+
+Wyjaśnienie (Dlaczego poprawna):
+C. Remediate & Investigate: Najpierw naprawiasz (Change permissions). Następnie sprawdzasz wpływ (Bucket usage logs pokazują kto faktycznie pobrał pliki). Na koniec zabezpieczasz na przyszłość (publicAccessPrevention org policy), co jest najsilniejszym środkiem prewencyjnym.
+
+Dlaczego inne są błędne:
+A. Data access logs: W przypadku bucketów PUBLICZNYCH (allUsers), pobrania często NIE trafiają do standardowych Data Access logs (bo nie ma 'tożsamości' do zalogowania). Bucket usage logs są tu bardziej wiarygodne.
+B. VPC SC: Perymetr chroni API, ale nie naprawia błędnych uprawnień IAM na już publicznych zasobach w sposób bezpośredni dla 'wszystkich'.
+D. Mute finding: Ukrywanie alertu w SCC to 'zamiatanie pod dywan', a nie rozwiązanie problemu.
+
+Konsensus społeczności ExamTopics: Przewaga na C. Kluczem jest 'publicAccessPrevention' jako środek zapobiegawczy na poziomie organizacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Bucket usage logs lub Data Access logs pozwalają sprawdzić, czy ktoś faktycznie pobrał dane, gdy były publiczne.</p>
+<p><b>Głęboka analiza:</b> Bucket usage logs (Storage Usage Logs) są generowane codziennie jako pliki CSV i zawierają informację o każdym żądaniu HTTP, nawet od anonimowych użytkowników.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/public-access-prevention" target="_blank">https://cloud.google.com/storage/docs/public-access-prevention</a></li>

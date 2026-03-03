@@ -78,14 +78,22 @@ Vendor IdP integration, SSO, no vendor users lifecycle management. Secure way. W
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Workforce Identity Federation (C) jest idealne dla partnerów, ponieważ nie tworzysz dla nich fizycznych kont w swoim katalogu Google (brak lifecycle managementu po Twojej stronie).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Workforce Identity Federation (WIF): Jest to idealne rozwiązanie, gdy nie chcesz zarządzać kontami (lifecycle) osób trzecich. Użytkownik loguje się do swojego IdP, a WIF wymienia jego token na dostęp do Twojego GCP. Gdy partner usunie pracownika, straci on dostęp do Twoich zasobów natychmiast, bez Twojej ingerencji.
+
+Dlaczego inne są błędne:
+A. GCDS sync: Wymagałbyś dostępu do serwerów LDAP partnera i tworzyłbyś konta 'shadow' w swojej domenie, co jest sprzeczne z wymogiem 'no lifecycle management'.
+B. Custom app: Niepotrzebny narzut deweloperski.
+D. Manual accounts: Skrajne przeciwieństwo wymogów (wymagałoby manualnego usuwania kont po zakończeniu współpracy).
+
+Konsensus społeczności ExamTopics: 100% na C. WIF to przyszłość współpracy międzyorganizacyjnej w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Użytkownik federowany istnieje tylko w pamięci sesji podczas pracy w Twoim projekcie.</p>
+<p><b>Głęboka analiza:</b> Przy WIF nie płacisz za licencje Cloud Identity dla partnerów, ponieważ nie są oni zarejestrowani jako Twoi użytkownicy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workforce-identity-federation</a></li>

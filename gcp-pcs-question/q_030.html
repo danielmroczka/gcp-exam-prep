@@ -78,14 +78,22 @@ You want to have a historical record of what was running in GCP at any point in 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Forseti Inventory tworzy regularne migawki stanu zasobów, umożliwiając analizę historyczną.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Forseti Inventory: Jest to narzędzie (często używane w GCP, obecnie wiele jego funkcji ma Cloud Asset Inventory), które tworzy regularne migawki (snapshots) wszystkich zasobów w organizacji. Pozwala to na sprawdzenie stanu infrastruktury z przeszłości (audyt historyczny).
+
+Dlaczego inne są błędne:
+A. Resource Manager: Pozwala na tworzenie projektów i folderów, ale sam w sobie nie przechowuje historycznych stanów 'każdego zasobu' w czasie.
+C. Stackdriver dashboards: Pokazują aktualne metryki i stan (np. CPU), ale nie służą do inwentaryzacji konfiguracji zasobów z przeszłości.
+D. Security Command Center: Pokazuje błędy konfiguracji (findings) i aktualny inwentarz, ale funkcja 'historycznego rekordu' dla dowolnego punktu w czasie jest domeną systemów inwentaryzacji jak Forseti.
+
+Konsensus społeczności ExamTopics: Przewaga głosów na B. Forseti to standardowe narzędzie open-source polecane przez Google do tego celu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Forseti to standardowe narzędzie open-source do audytu inwentarza w GCP.</p>
+<p><b>Głęboka analiza:</b> Obecnie natywną usługą Google do tego celu jest <b>Cloud Asset Inventory</b>, który wspiera 'Time Travel'. Jednak w kontekście pytań egzaminacyjnych Forseti nadal często pojawia się jako poprawna odpowiedź dla inwentaryzacji historycznej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://forsetisecurity.org/docs/latest/concepts/inventory.html" target="_blank">https://forsetisecurity.org/docs/latest/concepts/inventory.html</a></li>

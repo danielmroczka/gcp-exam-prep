@@ -78,14 +78,22 @@ protect web app from layer 7 attacks (XSS/SQLi) minimize impact on legitimate tr
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Cloud Armor (D) z regułami WAF (OWASP Top 10) to dedykowane rozwiązanie do ochrony przed XSS i SQLi na brzegu sieci, minimalizujące obciążenie serwerów aplikacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Cloud Armor (Edge WAF): Ustawienie polityk bezpieczeństwa Cloud Armor na Load Balancerze (D) to najlepsza praktyka. Wykorzystuje ona globalną infrastrukturę Google do filtrowania ataków L7 (SQLi/XSS) ZANIM dotrą one do Twojej sieci. Pozwala na precyzyjne dostrojenie reguł (customized), co minimalizuje wpływ na legalny ruch.
+
+Dlaczego inne są błędne:
+A. Throttling: Pomaga na DDoS, ale nie chroni przed pojedynczym, złośliwym zapytaniem SQL Injection.
+B. NGFW: Działa na warstwie sieciowej (IP), nie 'rozumie' ataków wewnątrz protokołu HTTP tak dobrze jak WAF.
+C. Backend rules: Lepiej blokować na LB (D), aby szkodliwy ruch w ogóle nie wchodził głębiej do infrastruktury.
+
+Konsensus społeczności ExamTopics: 100% na D. Cloud Armor na LB to definicja ochrony L7 w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Customized rules (D) pozwalają na lepsze dostrojenie ochrony pod konkretną aplikację, unikając false positives.</p>
+<p><b>Głęboka analiza:</b> Cloud Armor posiada gotowe zestawy reguł (np. `sqli-v33-stable`), które są regularnie aktualizowane, chroniąc Cię przed najnowszymi wariantami ataków bez Twojej ingerencji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor/docs/waf-rules" target="_blank">https://cloud.google.com/armor/docs/waf-rules</a></li>

@@ -78,14 +78,21 @@ Deny-list known IP range for website behind Application Load Balancer. What to d
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Cloud Armor jest zintegrowany z Load Balancerem i pozwala na blokowanie ruchu ZANIM trafi on do Twojej sieci VPC (na brzegu sieci Google).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud Armor: Jest to jedyna usługa w GCP, która pozwala na blokowanie adresów IP na brzegu sieci Google (Edge), ZANIM trafią one do Load Balancera i Twojej sieci. Jest to najbardziej efektywne i skalowalne rozwiązanie dla aplikacji webowych.
+
+Dlaczego inne są błędne:
+B. IAP: Służy do uwierzytelniania osób, nie do masowego blokowania zakresów IP agresorów.
+D. VPC Firewall: Działa głęboko w sieci, blisko VM. W przypadku dużego ataku, Twoja sieć VPC musiałaby procesować te pakiety tylko po to, by je odrzucić, co marnuje zasoby. Armor robi to 'przed drzwiami'.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. Cloud Armor to standardowy WAF/IP-filter w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Firewall VPC (D) działa dopiero na poziomie interfejsu VM, co jest mniej efektywne przy dużych atakach.</p>
+<p><b>Głęboka analiza:</b> Cloud Armor wspiera również gotowe listy IP od Google (Threat Intelligence), co pozwala na automatyczne blokowanie botnetów bez ręcznej pracy administratora.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor/docs/security-policy-concepts" target="_blank">https://cloud.google.com/armor/docs/security-policy-concepts</a></li>

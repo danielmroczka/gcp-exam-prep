@@ -78,14 +78,21 @@ Your company is using Cloud Dataproc. You want to be able to create, rotate, and
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud KMS zarządza kluczami KEK, które szyfrują klucze DEK.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud KMS to manage KEK: W hierarchii kluczy Google Cloud, użytkownik zarządza kluczami nadrzędnymi (KEK - Key Encryption Keys) w usłudze Cloud KMS. Te klucze służą do szyfrowania kluczy danych (DEK), którymi fizycznie zapisywane są bloki na dysku. KMS pozwala na rotację i niszczenie właśnie kluczy KEK.
+
+Dlaczego inne są błędne:
+A, C. DEK (Data Encryption Key): Klucze te są zarządzane automatycznie przez infrastrukturę Google blisko danych dla wydajności. Użytkownik nie zarządza nimi bezpośrednio w KMS.
+D. CSEK: Dotyczy kluczy dostarczanych przez klienta przy każdej operacji, a nie zarządzanych w ramach usługi Cloud KMS.
+
+Konsensus społeczności ExamTopics: Wyraźna przewaga opcji B. Zrozumienie różnicy między KEK a DEK jest kluczowe na egzaminie Security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>KMS to natywna usługa GCP do zarządzania kluczami szyfrującymi.</p>
+<p><b>Głęboka analiza:</b> Model ten nazywa się 'Envelope Encryption'. Twoja kontrola skupia się na kluczu nadrzędnym (KEK). Jeśli go zniszczysz, klucz DEK staje się nieużyteczny, a dane nieczytelne.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/key-management-service" target="_blank">https://cloud.google.com/kms/docs/key-management-service</a></li>

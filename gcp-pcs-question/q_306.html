@@ -78,14 +78,22 @@ Validate if keys rotated every 90 days. Effective detection strategy. What to do
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Security Health Analytics (SHA) posiada gotowy detektor, który automatycznie sprawdza wiek kluczy KMS i zgłasza błąd, jeśli nie były rotowane w zadanym czasie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. SCC SHA Detector: Security Health Analytics posiada gotowy, wbudowany detektor `KMS_KEY_NOT_ROTATED`. Automatycznie sprawdza on wszystkie klucze w organizacji i zgłasza błąd w dashboardzie, jeśli wiek klucza przekroczył 90 dni bez rotacji. To najbardziej 'efektywne' i najmniej pracochłonne rozwiązanie.
+
+Dlaczego inne są błędne:
+A. Asset Inventory: Pozwala na jednorazowe sprawdzenie, ale nie jest ciągłym systemem alarmowania.
+B. Cloud Run: Wymagałoby pisania i utrzymywania własnego kodu, co jest zbędne, gdy funkcja jest już wbudowana w chmurę.
+C. Logging metric: Rejestruje zdarzenie rotacji, ale bardzo trudno na jej podstawie wykryć BRAK zdarzenia (zaniedbanie) w określonym czasie.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. SCC SHA to Twój automatyczny audytor konfiguracji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Automatyczne znaleziska w SCC są znacznie łatwiejsze w utrzymaniu niż własne skrypty czy metryki.</p>
+<p><b>Głęboka analiza:</b> Alerty z SCC można zintegrować z Pub/Sub i Cloud Functions, aby automatycznie powiadamiać właściciela klucza lub nawet wymusić rotację (Self-remediation).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics-overview</a></li>

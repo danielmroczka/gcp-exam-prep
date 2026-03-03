@@ -78,14 +78,21 @@ Microservices (CE + Cloud Functions): secure data in use (memory), minimize unau
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Tylko Confidential Computing (A) zapewnia sprzętową izolację pamięci operacyjnej (RAM), co chroni przed odczytem danych przez inne procesy lub hosta.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Confidential Computing: To jedyna technologia chroniąca dane 'w użyciu' (in memory). Dla CE są to Confidential VMs (AMD SEV). Dla Cloud Functions Google zapewnia sprzętową izolację pamięci na poziomie mikro-VM (gVisor) w swojej infrastrukturze, co minimalizuje ryzyko nieuprawnionego odczytu RAM.
+
+Dlaczego inne są błędne:
+B, C: Chronią treść danych logicznie, ale nie zapobiegają technicznemu odczytowi pamięci RAM przez złośliwy proces na hoście.
+D. GCS CMEK: Chroni dane na dysku, nie ma wpływu na bezpieczeństwo pamięci RAM procesora.
+
+Konsensus społeczności ExamTopics: 100% na A. Dane 'in use' = Confidential Computing.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Inne metody (B, C) chronią dane na dysku lub w komunikacji, ale nie podczas faktycznego przetwarzania w procesorze.</p>
+<p><b>Głęboka analiza:</b> Confidential VMs szyfrują RAM kluczem, którego nie zna nawet system operacyjny Google (hypervisor), co czyni ataki typu 'memory dump' bezużytecznymi dla hakera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/confidential-computing" target="_blank">https://cloud.google.com/confidential-computing</a></li>

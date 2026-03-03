@@ -78,14 +78,22 @@ Private CE instances access Google services (Cloud Storage) without traversing i
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Private Google Access to funkcja podsieci umożliwiająca komunikację z publicznymi API Google przez sieć wewnętrzną dla VM-ów bez publicznych IP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Private Google Access: To najprostsza metoda. Pozwala maszynom w podsieci, które nie mają publicznych IP, na wysyłanie ruchu do publicznych adresów IP usług Google przez sieć wewnętrzną Google. Jest to darmowe i wymaga tylko jednego kliknięcia w ustawieniach podsieci.
+
+Dlaczego inne są błędne:
+B. Private Service Connect (PSC): Pozwala na to samo, ale jest bardziej skomplikowane (wymaga tworzenia endpointów/IP wewnątrz VPC). PGA jest rozwiązaniem domyślnym i prostszym dla standardowych usług Google.
+C. Static external IPs: Przeciwieństwo wymogu 'without traversing internet'.
+D. Cloud NAT: Pozwala wyjść do internetu, ale PGA jest dedykowane i bezpieczniejsze dla samych usług Google (ruch nigdy nie opuszcza sieci Google).
+
+Konsensus społeczności ExamTopics: 100% na A. Podstawowe pytanie o definicję PGA.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to najprostsza metoda dostępu do GCS z prywatnych sieci VPC.</p>
+<p><b>Głęboka analiza:</b> Bez włączonego PGA (lub PSC), próba połączenia się z `storage.googleapis.com` z maszyny bez publicznego IP zakończy się błędem 'Network unreachable'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">https://cloud.google.com/vpc/docs/private-google-access</a></li>

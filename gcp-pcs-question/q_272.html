@@ -78,14 +78,22 @@ Ensure CE instances only in EU. Remediate non-compliant and prevent future ones.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Polityka organizacji (D) blokuje nowe naruszenia, ale dla już istniejących wymagana jest manualna lub zautomatyzowana migracja do dozwolonych regionów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Prevent & Remediate: Polityka organizacji (`compute.allowedLocations`) prewencyjnie zablokuje stworzenie KAŻDEJ nowej maszyny poza EU. Jednak polityka nie usuwa maszyn już działających - musisz je jawnie zidentyfikować i przenieść (migrate), aby osiągnąć stan 100% zgodności.
+
+Dlaczego inne są błędne:
+A. Third-party: Lepiej użyć natywnych narzędzi (Org Policy), jeśli są dostępne.
+B. SCC + Function: To świetne rozwiązanie reaktywne, ale opcja D (Org Policy) jest lepsza, bo działa PREWENCYJNIE (nie pozwala popełnić błędu).
+C. Resource Manager: To tylko nazwa usługi, a D precyzuje akcję (deny + migrate).
+
+Konsensus społeczności ExamTopics: 100% na D. Zawsze najpierw blokuj (policy), potem sprzątaj (migrate).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Sama polityka 'restrict' nie przenosi danych, blokuje tylko tworzenie nowych zasobów.</p>
+<p><b>Głęboka analiza:</b> Na egzaminie zawsze szukaj odpowiedzi, która łączy 'prevent' (polityka) z 'remediate' (akcja na istniejących zasobach).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>

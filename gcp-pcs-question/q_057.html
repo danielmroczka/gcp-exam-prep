@@ -78,14 +78,22 @@ You need to store secrets that are automatically rotated every 30 days. Which se
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Secret Manager to dedykowana usługa do zarządzania sekretami z wbudowaną funkcją rotacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Secret Manager: To dedykowana usługa GCP do zarządzania sekretami (hasła, klucze API). Posiada ona natywną funkcję rotacji, która potrafi automatycznie wywołać funkcję Cloud Function co X dni w celu wygenerowania nowego hasła i aktualizacji np. w bazie danych.
+
+Dlaczego inne są błędne:
+A. Cloud KMS: Służy do zarządzania kluczami SZYFRUJĄCYMI (KEK). Można nim rotować klucze, ale nie służy do przechowywania i rotowania haseł tekstowych czy kluczy API aplikacji.
+C. Metadata: Dane tam zapisane są jawne (nieszyfrowane) dla każdego, kto ma dostęp do VM. Nie wspiera rotacji.
+D. Cloud SQL: To baza danych. Możesz tam trzymać hasła, ale musisz sam napisać całą logikę ich bezpiecznego pobierania i rotowania.
+
+Konsensus społeczności ExamTopics: 100% na B. Secret Manager to właściwe miejsce na sekrety aplikacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Secret Manager pozwala na bezpieczne przechowywanie API keys, haseł i certyfikatów.</p>
+<p><b>Głęboka analiza:</b> Secret Manager jest wersjonowany. Aplikacja może zawsze prosić o wersję 'latest', co sprawia, że rotacja jest przezroczysta dla kodu aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/secret-manager/docs/rotating-secrets" target="_blank">https://cloud.google.com/secret-manager/docs/rotating-secrets</a></li>

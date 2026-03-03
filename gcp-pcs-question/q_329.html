@@ -78,14 +78,22 @@ Python app on Cloud Run connect to Cloud SQL in different project securely with 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud SQL Auth Proxy zapewnia bezpieczny tunel (IAM-based) bez potrzeby wystawiania bazy na publiczne IP. Jest natywnie wspierany przez Cloud Run.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud SQL Auth Proxy: Jest to natywny i najbardziej bezpieczny sposób łączenia się z bazami SQL w Google Cloud. Cloud Run posiada wbudowaną integrację (wystarczy zaznaczyć bazę w ustawieniach), która uruchamia proxy automatycznie. Użycie 'Private IP' zapewnia, że ruch nie opuszcza sieci Google, a proxy dba o autoryzację IAM i szyfrowanie TLS bez potrzeby zarządzania certyfikatami (minimal overhead).
+
+Dlaczego inne są błędne:
+A. Public IP: Zwiększa powierzchnię ataku na bazę danych.
+C. Client certificate: Bardzo trudne w zarządzaniu przy wielu mikroserwisach (overhead związany z rotacją certyfikatów). Proxy (B) robi to za Ciebie.
+D. Authorized network: Nie zadziała bezpośrednio dla Cloud Run, który nie posiada stałego adresu IP, który można by dodać do listy. Wymagałoby to użycia Cloud NAT lub Proxy.
+
+Konsensus społeczności ExamTopics: 100% na B. Cloud SQL Proxy to standardowy łącznik dla serverless.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Konfiguracja połączenia w Cloud Run automatycznie zarządza instancją proxy pod spodem.</p>
+<p><b>Głęboka analiza:</b> Auth Proxy weryfikuje uprawnienia konta serwisowego Cloud Run do bazy danych. Jeśli deweloper nie nadał roli `Cloud SQL Client`, połączenie zostanie odrzucone mimo poprawnych haseł do bazy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/sql/docs/mysql/connect-run" target="_blank">https://cloud.google.com/sql/docs/mysql/connect-run</a></li>

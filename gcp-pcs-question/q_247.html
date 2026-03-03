@@ -78,14 +78,22 @@ Cloud Run web app, browser access with SSO, only privileged users. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: IAP (Identity-Aware Proxy) na Load Balancerze zapewnia SSO i kontrolę dostępu na poziomie warstwy 7 dla Cloud Run.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. IAP on Load Balancer: Aby obsłużyć użytkowników przeglądarkowych (browser access) z SSO, najlepszym rozwiązaniem jest Identity-Aware Proxy. IAP integruje się z systemem logowania Google, zapewnia interfejs logowania dla człowieka i weryfikuje uprawnienia `IAP-secured Web App User` przed wpuszczeniem do Cloud Run.
+
+Dlaczego inne są błędne:
+A. Invoker role: Służy do autoryzacji komunikacji maszyna-maszyna (np. jedna usługa woła drugą przez token Bearer). Nie zapewnia interfejsu logowania SSO dla ludzi w przeglądarce.
+B. Cloud Run User: Pozwala na ZARZĄDZANIE usługą Cloud Run (konfiguracją), a nie na KORZYSTANIE z aplikacji webowej przez nią serwowanej.
+C. Ingress internal: Zablokowałoby dostęp z internetu całkowicie, co uniemożliwiłoby pracę użytkownikom spoza sieci VPC bez VPN.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. IAP to jedyna odpowiedź łącząca SSO i dostęp przeglądarkowy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Opcja A (Invoker) działa na poziomie API, ale dla użytkowników przeglądarkowych IAP oferuje lepsze User Experience i integrację z SSO.</p>
+<p><b>Głęboka analiza:</b> Przy IAP na Cloud Run, ruch trafia najpierw do Load Balancera, który przekazuje go do IAP. Dopiero po pomyślnym logowaniu ruch trafia do Twojego kontenera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/enabling-cloud-run" target="_blank">https://cloud.google.com/iap/docs/enabling-cloud-run</a></li>

@@ -78,14 +78,22 @@ A customer wants to ensure that their data is only stored in a specific geograph
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Polityka 'Resource Location Restriction' pozwala na zdefiniowanie listy dozwolonych lokalizacji dla zasobów GCP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Resource Location Restriction: Jest to polityka organizacji (constraint: `gcp.resourceLocations`), która pozwala zdefiniować listę dozwolonych regionów/stref dla wszystkich usług w hierarchii. Każda próba utworzenia zasobu (np. bucketu) poza EU zostanie zablokowana.
+
+Dlaczego inne są błędne:
+A. Cloud IAM: Zarządza uprawnieniami osób, a nie właściwościami fizycznymi zasobów.
+B. Resource Labels: To tylko metadane (tagi) do opisu zasobów, nie wymuszają one niczego technicznie.
+D. Shared VPC: To architektura sieciowa, nie kontroluje ona geolokalizacji zasobów storage czy compute.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. To standardowe rozwiązanie dla wymogów rezydencji danych (Data Residency).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Jest to kluczowe dla zgodności z regulacjami takimi jak RODO (GDPR).</p>
+<p><b>Głęboka analiza:</b> Polityka ta jest dziedziczona. Jeśli ustawisz ją na poziomie organizacji, żaden deweloper w żadnym projekcie nie stworzy zasobu w niedozwolonej lokalizacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>

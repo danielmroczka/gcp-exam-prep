@@ -78,14 +78,21 @@ You are creating an internal application that needs to access a user's Google Dr
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Domain-wide delegation pozwala SA na dostęp do danych użytkowników Workspace.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Domain-wide delegation: Pozwala kontu serwisowemu na podszywanie się (impersonację) pod dowolnego użytkownika w domenie Google Workspace (G Suite). Dzięki temu aplikacja może uzyskać dostęp do plików na Drive danego użytkownika bez jego interakcji, używając uprawnień nadanych centralnie przez administratora.
+
+Dlaczego inne są błędne:
+A, B. Service Account User: Ta rola wewnątrz GCP pozwala użytkownikowi na używanie konta serwisowego do uruchamiania VM, ale nie ma nic wspólnego z dostępem do danych w G Suite/Drive.
+C. Admin credentials: Używanie haseł administratora w kodzie aplikacji jest skrajnie niebezpieczne i niezgodne z żadnymi standardami bezpieczeństwa.
+
+Konsensus społeczności ExamTopics: Zdecydowane poparcie dla D. Jest to jedyny poprawny sposób na automatyzację zadań w Workspace przez aplikacje serwerowe.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Jest to zalecana metoda dla aplikacji serwerowych integrujących się z Workspace.</p>
+<p><b>Głęboka analiza:</b> Delegacja na całą domenę wymaga precyzyjnego ograniczenia zakresów (OAuth Scopes) w konsoli Admin G Suite, aby konto serwisowe miało dostęp tylko do niezbędnych API (np. tylko Drive, bez poczty).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority" target="_blank">https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority</a></li>

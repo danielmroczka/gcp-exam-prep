@@ -78,14 +78,21 @@ VM in VPC without internet. Web interface port 5601. Expose to users and enforce
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Identity-Aware Proxy (IAP) w połączeniu z Load Balancerem to jedyna metoda na wystawienie usługi webowej z jednoczesnym wymuszeniem uwierzytelniania Google bez VPN.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. IAP + Load Balancer: Identity-Aware Proxy (IAP) w połączeniu z Load Balancerem HTTP(S) pozwala na wystawienie interfejsu webowego (port 5601) do internetu w sposób bezpieczny. IAP wymusza logowanie Google (wymóg 'enforce Google credentials'). Maszyna VM może pozostać w sieci bez internetu, ponieważ Load Balancer komunikuje się z nią przez sieć wewnętrzną Google.
+
+Dlaczego inne są błędne:
+A, C. Bastion/SSH: Służą do dostępu terminalowego, a nie do wygodnego udostępnienia interfejsu WEBOWEGO dla zwykłych użytkowników.
+B. Internet gateway: Dałoby maszynie internet, ale nie wymusiłoby uwierzytelniania Google przy wejściu na stronę (wymagana byłaby własna implementacja logowania).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. IAP to standardowa brama Zero Trust dla aplikacji webowych w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Firewall musi pozwalać na ruch z zakresu IP Load Balancera/IAP (35.191.0.0/16 i 130.211.0.0/22).</p>
+<p><b>Głęboka analiza:</b> Firewall na maszynie VM musi zezwalać na ruch przychodzący tylko z zakresów IP Load Balancera (35.191.0.0/16 i 130.211.0.0/22), co uniemożliwia ominięcie proxy IAP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/tutorial-gce" target="_blank">https://cloud.google.com/iap/docs/tutorial-gce</a></li>

@@ -78,14 +78,22 @@ On-premises apps access Google Cloud without hard coded credentials using existi
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Workload Identity Federation (WIF) jest przeznaczone dla aplikacji (maszyn), podczas gdy Workforce Federation (B) jest dla ludzi (pracowników).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Workload Identity Federation (WIF): Jest to usługa zaprojektowana dokładnie dla tego scenariusza. Pozwala ona aplikacjom działającym poza Google Cloud (on-prem, AWS, Azure) na używanie ich własnych tożsamości do bezpiecznego pobierania krótkotrwałych tokenów GCP. Eliminuje to potrzebę używania statycznych i niebezpiecznych kluczy JSON (hard coded credentials).
+
+Dlaczego inne są błędne:
+A. Secure Web Proxy: Służy do filtrowania ruchu wychodzącego Z chmury, nie zarządza tożsamością maszyn on-prem.
+B. Workforce Identity Federation: Służy do logowania pracowników (ludzi), a nie procesów aplikacyjnych (workloads).
+C. Identity-Aware Proxy (IAP): Zarządza dostępem do aplikacji webowych, nie jest mechanizmem uwierzytelniania API dla on-prem.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. WIF to 'keyless' przyszłość integracji hybrydowej.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>WIF pozwala aplikacjom on-prem na użycie ich lokalnych tożsamości do bezpiecznej komunikacji z GCP.</p>
+<p><b>Głęboka analiza:</b> WIF wspiera OIDC i SAML, co pozwala na mapowanie np. ról z Active Directory bezpośrednio na role IAM w chmurze bez żadnych haseł zapisanych w kodzie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workload-identity-federation</a></li>

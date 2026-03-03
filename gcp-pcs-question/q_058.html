@@ -78,14 +78,22 @@ What is the purpose of the Cloud Identity-Aware Proxy (IAP)?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Cloud IAP weryfikuje tożsamość użytkownika i kontekst żądania przed wpuszczeniem go do aplikacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Identity and Context Control: IAP działa jako centralny punkt autoryzacji dla aplikacji HTTP(S) i SSH/RDP. Zamiast używać VPN, IAP sprawdza tożsamość użytkownika (czy jest zalogowany w Google) oraz kontekst (np. czy ma firmowy laptop, czy jest w dobrym kraju) i dopiero wtedy wpuszcza go do zasobu.
+
+Dlaczego inne są błędne:
+A. VPN: IAP to alternatywa dla VPN (model BeyondCorp), nie jest on tunelem VPN.
+B. SQL Injection: To zadanie dla WAF (Cloud Armor). IAP nie sprawdza treści zapytań pod kątem ataków hakerskich.
+D. DNS: Tym zajmuje się Cloud DNS.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To definicja IAP jako bramy Zero Trust.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>IAP umożliwia model bezpieczeństwa 'BeyondCorp' (Zero Trust).</p>
+<p><b>Głęboka analiza:</b> IAP pozwala na udostępnienie wewnętrznych aplikacji (np. Jira, Git) bezpośrednio w internecie w sposób bezpieczniejszy niż tradycyjny VPN, ponieważ każda próba dostępu jest weryfikowana tożsamościowo.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>

@@ -78,14 +78,22 @@ You want data on Compute Engine disks to be encrypted with keys managed by Cloud
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Zarządzanie uprawnieniami na poziomie KeyRing pozwala na dziedziczenie ich przez wszystkie klucze wewnątrz, co ułatwia administrację grupową.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. KeyRing level management: W hierarchii Cloud KMS, KeyRing (pęk kluczy) grupuje wiele kluczy. Nadanie uprawnień IAM na poziomie KeyRing sprawia, że są one dziedziczone przez wszystkie klucze wewnątrz. To najbardziej efektywny sposób zarządzania dostępem grupowym.
+
+Dlaczego inne są błędne:
+A. Key level: Wymagałoby to osobnej konfiguracji dla każdego klucza (np. dla każdego dysku), co jest czasochłonne i błędotwórcze przy dużej skali.
+C. KeyRing per disk: Niweluje sens grupowania i centralizacji zarządzania uprawnieniami.
+D. Organization level: Nadaje dostęp do WSZYSTKICH kluczy w całej firmie, co drastycznie narusza zasadę najniższych uprawnień.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na B. To standardowa dobra praktyka administracyjna w KMS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to zgodne z zasadą efektywnego zarządzania zasobami w KMS.</p>
+<p><b>Głęboka analiza:</b> Dziedziczenie uprawnień w KMS działa tak samo jak w Resource Managerze. Pozwala to na separację np. kluczy produkcyjnych (KeyRing 'Prod') od deweloperskich (KeyRing 'Dev').</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/resource-hierarchy" target="_blank">https://cloud.google.com/kms/docs/resource-hierarchy</a></li>

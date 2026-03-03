@@ -78,14 +78,22 @@ Manage encryption key for solution including CE, GKE, GCS, BQ, and Pub/Sub. Whic
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: CMEK (Customer-Managed Encryption Keys) to jedyna opcja wspierana przez szerokie spektrum usług (w tym Pub/Sub i GKE) zapewniająca jednocześnie kontrolę klienta.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. CMEK: Customer-Managed Encryption Keys (KMS) posiadają najszersze wsparcie w ekosystemie Google Cloud. Wszystkie wymienione usługi (Compute, GKE, Storage, BigQuery, Pub/Sub) wspierają integrację z Cloud KMS w celu szyfrowania danych kluczem zarządzanym przez klienta.
+
+Dlaczego inne są błędne:
+A. EKM: Nie wszystkie usługi wspierają EKM (np. wsparcie dla Pub/Sub czy niektórych funkcji GKE jest ograniczone lub nowsze).
+C. CSEK: Posiada bardzo wąskie wsparcie (głównie tylko GCS i Compute Engine). Nie użyjesz CSEK w BigQuery czy Pub/Sub.
+D. Google default: Daje zerową kontrolę nad kluczem (wymóg 'Manage encryption key').
+
+Konsensus społeczności ExamTopics: 100% na B. CMEK to uniwersalny standard dla kluczy własnych w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>CSEK (C) ma bardzo ograniczone wsparcie usług (głównie GCS i CE).</p>
+<p><b>Głęboka analiza:</b> Wybierając rozwiązanie projektowe, zawsze sprawdzaj macierz wsparcia (support matrix). CMEK to jedyna odpowiedź 'bezpieczna' dla tak zróżnicowanego stosu technologicznego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/cmek" target="_blank">https://cloud.google.com/kms/docs/cmek</a></li>

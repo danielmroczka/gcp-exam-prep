@@ -78,14 +78,22 @@ Defense: master encryption key never leaves on-prem hardware. Revoke access inde
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Cloud EKM (External Key Manager) to jedyna usługa, gdzie materiał klucza fizycznie NIGDY nie opuszcza Twojego lokalnego HSM (D).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Cloud EKM: To jedyna usługa, gdzie materiał klucza (master key) fizycznie NIGDY nie opuszcza Twojego lokalnego urządzenia HSM (D). Google tylko 'prosi' Twój HSM o wykonanie operacji. Możesz natychmiast 'odciąć' chmurę (Revoke access) poprzez wyłączenie klucza u siebie, całkowicie niezależnie od systemów Google (CSP).
+
+Dlaczego inne są błędne:
+A. CMEK: Klucz jest w Google.
+B. CSEK: Klucz trafia na chwilę do pamięci RAM Google podczas operacji szyfrowania - technicznie 'opuszcza on-prem'.
+C. Imported keys: Po imporcie klucz rezyduje w chmurze Google.
+
+Konsensus społeczności ExamTopics: 100% na D. EKM to fundament suwerenności kluczy w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>W przypadku CSEK (B) klucz trafia na chwilę do pamięci RAM Google w celu wykonania operacji. EKM trzyma go całkowicie na zewnątrz.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie jest wymagane przez organizacje, które mają prawny zakaz powierzania materiału klucza podmiotom trzecim (nawet w formie zaszyfrowanej).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>

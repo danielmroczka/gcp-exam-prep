@@ -78,14 +78,22 @@ Security team needs view-only access to Admin Activity, Data Access, and Access 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Rola Private Log Viewer pozwala na podgląd logów Data Access i Access Transparency, które są ukryte dla zwykłych 'Viewerów'.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Private Log Viewer: Standardowa rola `logging.viewer` (D) pozwala widzieć tylko logi publiczne (Admin Activity i System). Aby widzieć logi wrażliwe, takie jak 'Data Access' (kto czytał dane) oraz 'Access Transparency' (co robili inżynierowie Google), wymagana jest rola `roles/logging.privateLogViewer`.
+
+Dlaczego inne są błędne:
+B. logging.admin: Daje pełne uprawnienia, w tym do usuwania logów czy zmiany sinków - naruszenie zasady 'view-only'.
+C. Project Viewer: Widzi Admin Activity, ale nie ma uprawnień do przeglądania prywatnych/wrażliwych dzienników logów.
+D. logging.viewer: Zbyt słaba rola - nie widzi logów Data Access ani Access Transparency.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To klasyczne pytanie o separację logów standardowych od prywatnych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Standardowa rola logging.viewer widzi tylko logi Admin Activity i logi systemowe.</p>
+<p><b>Głęboka analiza:</b> Logi Data Access mogą zawierać PII lub nazwy plików, dlatego Google domyślnie ukrywa je przed zwykłymi obserwatorami projektu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/access-control#roles" target="_blank">https://cloud.google.com/logging/docs/access-control#roles</a></li>

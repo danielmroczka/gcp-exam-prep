@@ -78,14 +78,21 @@ Continuously evaluated against CIS Benchmark. Disregard irrelevant controls. Aut
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: SCC Premium oferuje wbudowaną zgodność z CIS. Funkcja 'Mute rules' pozwala na automatyczne ukrywanie znalezisk, które są zaakceptowane jako ryzyko lub nieistotne.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. SCC Mute Rules: Security Command Center Premium posiada wbudowany moduł Compliance, który stale ocenia Twoją chmurę względem CIS Benchmark. Funkcja 'Mute rules' pozwala na automatyczne ukrywanie (wyciszanie) znalezisk, które uznałeś za nieistotne lub zaakceptowałeś ryzyko, co zapewnia 'zautomatyzowaną' i czystą listę rzeczywistych problemów.
+
+Dlaczego inne są błędne:
+A, C: Rozwiązania manualne, sprzeczne z wymogiem automatyzacji i ciągłości.
+D. External audit: Jest kosztowny i zazwyczaj odbywa się okresowo (np. raz na rok), a nie 'continuously'.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Mute rules to klucz do utrzymania 'hygiene' w SCC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Wyciszone (muted) znaleziska nie wpływają na wynik ogólny zgodności w dashboardzie.</p>
+<p><b>Głęboka analiza:</b> Możesz stworzyć regułę wyciszającą np. dla wszystkich projektów deweloperskich, gdzie brak kluczy CMEK na bucketach jest akceptowalny, podczas gdy na produkcji nadal będzie to traktowane jako krytyczny alert.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/how-to-mute-findings" target="_blank">https://cloud.google.com/security-command-center/docs/how-to-mute-findings</a></li>

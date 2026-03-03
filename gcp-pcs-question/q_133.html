@@ -78,14 +78,21 @@ Data residency requirements. Store data in specific locations. Hierarchy contain
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Ustawienie ograniczenia na poziomie projektu (C) daje największą elastyczność, jeśli różne projekty w tej samej strukturze folderów muszą znajdować się w różnych regionach.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Project Level: Ustawienie polityki organizacji na poziomie projektu zapewnia największą precyzję (granularność). Jeśli Twoja firma działa globalnie, ustawienie restrykcji na poziomie Organizacji (D) lub Folderu (A) mogłoby zablokować deweloperom możliwość tworzenia zasobów w regionach, które są im potrzebne w innych projektach.
+
+Dlaczego inne są błędne:
+A, D: Zbyt szerokie. Dziedziczenie w dół zablokowałoby całą firmę lub cały pion biznesowy do jednego regionu.
+B. Resource: Polityki organizacji (Constraints) ustawia się na węzłach hierarchii (Org/Folder/Project), nie ustawia się ich bezpośrednio 'na zasobie' (np. na pojedynczym dysku).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Poziom projektu to najbezpieczniejsze miejsce na specyficzne wymogi prawne bez psucia reszty środowiska.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Polityki organizacji dziedziczą w dół, więc restrykcja na poziomie Org lub Folderu mogłaby uniemożliwić działanie projektów w innych regionach.</p>
+<p><b>Głęboka analiza:</b> Możesz również użyć Tagów i Warunków (IAM Conditions), ale standardowa polityka `gcp.resourceLocations` na poziomie projektu jest najbardziej uznawaną odpowiedzią egzaminacyjną.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>

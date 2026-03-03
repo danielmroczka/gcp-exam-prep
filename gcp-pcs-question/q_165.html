@@ -79,14 +79,23 @@ Best practices for authentication and authorization. Which two?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: DE.
 
-Wyjaśnienie: Federacja tożsamości (SSO - D) zapewnia spójne uwierzytelnianie, a używanie ról predefiniowanych lub custom (E) zamiast ról podstawowych (Owner/Editor) realizuje zasadę najniższych uprawnień.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. SSO/SAML integration: Zapewnia spójne i bezpieczne logowanie przy użyciu tożsamości firmowych, centralizację zarządzania kontami i wymuszanie MFA w IdP.
+E. Granular access: Używanie ról predefiniowanych (np. Storage Object Viewer) lub custom zamiast szerokich ról podstawowych realizuje zasadę najniższych uprawnień (Least Privilege).
+
+Dlaczego inne są błędne:
+A. Encryption: Dotyczy ochrony danych 'at rest', nie dotyczy procesu uwierzytelniania i autoryzacji OSÓB.
+B. Manual users: Rozwiązanie nieskalowalne i niebezpieczne (brak automatycznego deprovisioningu przy odejściu pracownika).
+C. Basic roles: Rola Editor daje uprawnienia do usuwania prawie wszystkiego w projekcie - jest to skrajne naruszenie dobrych praktyk.
+
+Konsensus społeczności ExamTopics: 100% na DE. To fundamenty IAM w każdej chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: DE</b></p>
-<p>Nigdy nie używaj roli Editor/Owner w środowisku produkcyjnym dla zwykłych użytkowników.</p>
+<p><b>Głęboka analiza:</b> Google dąży do całkowitego wycofania ról podstawowych (Owner/Editor/Viewer) na rzecz ról granularnych w systemach produkcyjnych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/best-practices" target="_blank">https://cloud.google.com/iam/docs/best-practices</a></li>

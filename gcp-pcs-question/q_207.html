@@ -79,14 +79,23 @@ VMs without public IPs failing build pipeline (Packer) needing internet access f
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BC.
 
-Wyjaśnienie: Cloud NAT (B) umożliwia dostęp do internetu dla pakietów OS. Private Google Access (C) umożliwia dostęp do API Google (np. Cloud Storage) bez publicznego IP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud NAT: Pozwala maszynom bez publicznych IP na wychodzenie do internetu w celu pobrania pakietów (np. `apt-get install`). Jest to niezbędne dla narzędzi typu Packer budujących obrazy.
+C. Private Google Access: Pozwala maszynom na komunikację z API Google (np. Cloud Storage, skąd Packer może pobierać skrypty lub wysyłać gotowy obraz) bez wychodzenia przez publiczny internet.
+
+Dlaczego inne są błędne:
+A. HTTP LB: Służy do ruchu przychodzącego od użytkowników, nie pomaga VM w wychodzeniu po pakiety.
+D. Update routes: Same trasy nie wystarczą bez urządzenia wykonującego translację adresów (NAT).
+E. Cloud VPN: Łączy z inną siecią prywatną, nie daje dostępu do publicznych repozytoriów pakietów w internecie.
+
+Konsensus społeczności ExamTopics: 100% na BC. To standardowy zestaw dla izolowanych środowisk budowania.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BC</b></p>
-<p>Bez Cloud NAT maszyna nie pobierze niczego z publicznych repozytoriów Debiana/RedHata.</p>
+<p><b>Głęboka analiza:</b> Cloud NAT zapewnia, że adresy prywatne Twoich maszyn budujących nie są widoczne w internecie, co zwiększa bezpieczeństwo procesu CI/CD.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/nat/docs/overview" target="_blank">https://cloud.google.com/nat/docs/overview</a></li>

@@ -78,14 +78,22 @@ On-prem hosts need access to Google Cloud APIs privately. Minimize costs and opt
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud VPN jest tańszy niż Interconnect. Private Google Access dla on-premises pozwala na dostęp do API Google przez tunel VPN przy użyciu prywatnych adresów IP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud VPN + PGA for on-prem: Cloud VPN jest znacznie tańszy niż Interconnect (D). Funkcja Private Google Access for on-premises pozwala lokalnym serwerom na komunikację z API Google (np. GCS, BQ) przy użyciu prywatnych adresów IP przez tunel VPN. Jest to najbardziej kosztowo efektywne rozwiązanie spełniające wymóg prywatności.
+
+Dlaczego inne są błędne:
+A. VPC peering: Służy do łączenia dwóch sieci wewnątrz chmury, nie łączy on-premises z chmurą.
+C. Client-side encryption: Chroni dane, ale nie rozwiązuje problemu routingu i prywatnego dostępu do API.
+D. Dedicated Interconnect: Bardzo drogi (koszty stałe portów i łącza), zazwyczaj nieuzasadniony, jeśli głównym celem jest tylko 'access to APIs' przy niskich kosztach.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To standardowe rozwiązanie 'Entry-level Enterprise'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Wymaga to konfiguracji 'private.googleapis.com' lub 'restricted.googleapis.com' w lokalnym DNS.</p>
+<p><b>Głęboka analiza:</b> Wymaga to konfiguracji lokalnego DNS, aby zapytania o `*.googleapis.com` zwracały adresy z zakresu `restricted` lub `private` VIP Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-settings" target="_blank">https://cloud.google.com/vpc/docs/configure-private-google-access-settings</a></li>

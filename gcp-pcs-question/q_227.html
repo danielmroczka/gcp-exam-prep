@@ -79,14 +79,23 @@ Reduce risk of cookie replay attacks with web and CLI sessions. Which two?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AE.
 
-Wyjaśnienie: Krótsze sesje (A) ograniczają czas życia skradzionego ciasteczka. Klucze fizyczne (E) są odporne na ataki typu man-in-the-middle, które często służą do kradzieży ciasteczek.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Shorter session duration: Krótszy czas sesji sprawia, że skradzione ciasteczko sesyjne wygasa szybciej, co drastycznie ogranicza okno czasowe dla hakerów próbujących je wykorzystać.
+E. Security Key (FIDO2): Klucze fizyczne są jedyną metodą MFA, która weryfikuje pochodzenie (origin) żądania. Nawet jeśli haker skradnie ciasteczko, nie będzie mógł go użyć na innym urządzeniu bez fizycznego klucza, który jest powiązany z daną sesją i przeglądarką.
+
+Dlaczego inne są błędne:
+B. OAuth token duration: Dotyczy kont serwisowych i API, a pytanie precyzuje 'sessions' (zazwyczaj sesje użytkowników ludzkich).
+C. Reauthentication policy: Jest blisko, ale 'Session control duration' (A) jest bardziej bezpośrednim parametrem dla 'cookie replay'.
+D. Third-party IdP: Sama zmiana dostawcy tożsamości nie chroni przed kradzieżą i ponownym użyciem ciasteczka Google Cloud.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na AE. Krótkie sesje i fizyczne klucze to najskuteczniejsza obrona.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AE</b></p>
-<p>Sesja zabezpieczona kluczem fizycznym jest znacznie trudniejsza do odtworzenia na innym urządzeniu.</p>
+<p><b>Głęboka analiza:</b> Atak 'Cookie Replay' polega na skopiowaniu ciasteczka sesyjnego z komputera ofiary. Nowoczesne systemy Endpoint Verification próbują powiązać ciasteczko z ID sprzętowym komputera, co dopełnia ochronę.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>

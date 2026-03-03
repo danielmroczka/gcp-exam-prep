@@ -79,14 +79,22 @@ Workload identity federation for external identities. Protect against identity s
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CD.
 
-Wyjaśnienie: Użycie niezmiennych atrybutów (D) zapobiega przejęciu tożsamości przez zmianę metadanych po stronie dostawcy IdP. Dedykowany projekt (C) izoluje konfigurację federacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Dedicated project: Izolacja konfiguracji federacji w osobnym projekcie zapobiega przypadkowym zmianom przez osoby mające dostęp do projektów aplikacyjnych.
+D. Immutable attributes: Używanie niezmiennych atrybutów (np. stałego ID użytkownika zamiast nazwy profilu, która może ulec zmianie u dostawcy IdP) zapobiega atakom polegającym na przejęciu tożsamości poprzez zmianę metadanych po stronie zewnętrznej.
+
+Dlaczego inne są błędne:
+A. Logging: Pomaga w wykryciu ataku PO fakcie, nie 'chroni przed spoofingiem' (nie zapobiega mu).
+B, E: To dobre praktyki IAM ogólnie (Least Privilege), ale nie są specyficzne dla mechanizmu ochrony samej federacji przed 'spoofingiem' (podszywaniem się) tak jak poprawne mapowanie atrybutów (D).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na CD. Poprawne mapowanie tożsamości to fundament bezpiecznej federacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CD</b></p>
-<p>Bezpieczeństwo WIF opiera się na precyzyjnym mapowaniu zaufanych atrybutów z zewnętrznego tokena na role w GCP.</p>
+<p><b>Głęboka analiza:</b> Przy WIF kluczowe jest sprawdzenie 'subject' (sub) w tokenie OIDC/SAML. Jeśli mapujesz uprawnienia na 'display name', haker u dostawcy może zmienić swoją nazwę na Twoją i wejść do chmury. Mapowanie na stały numer ID (D) to uniemożliwia.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/best-practices-for-using-workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/best-practices-for-using-workload-identity-federation</a></li>

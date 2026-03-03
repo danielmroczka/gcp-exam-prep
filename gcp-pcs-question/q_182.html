@@ -78,14 +78,22 @@ Internal audit needs list of VMs with critical OS security updates available but
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: OS Config agent (część VM Managera) zbiera informacje o stanie poprawek i prezentuje je w dedykowanym dashboardzie zgodności (compliance).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. OS Config agent: Agent ten (część VM Managera) stale monitoruje stan systemu operacyjnego i raportuje dostępne aktualizacje do konsoli Google Cloud. Dashboard 'Patch compliance' dostarcza gotowy raport o brakujących krytycznych poprawkach, co jest idealnym dowodem dla audytu.
+
+Dlaczego inne są błędne:
+A. SCC scan: SCC Premium wykrywa podatności (CVE) w aplikacjach i błędne konfiguracje chmury, ale to VM Manager jest dedykowanym narzędziem do szczegółowego raportowania stanu poprawek OS.
+B. gcloud version: Sama informacja o wersji systemu nie mówi nic o tym, jakie konkretnie poprawki bezpieczeństwa (patches) są dostępne w repozytoriach dla tej wersji.
+C. Logging agent: Rejestruje co się stało w przeszłości, ale nie posiada bazy danych o dostępnych, a jeszcze nie zainstalowanych poprawkach systemowych.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. Zrozumienie roli agenta OS Config jest kluczowe.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Jest to najszybsza metoda uzyskania zagregowanego raportu dla audytora.</p>
+<p><b>Głęboka analiza:</b> Audytorzy szukają dowodu na 'skuteczność procesów patchowania'. Dashboard VM Managera pokazuje 'Compliance state' dla całej floty, co jest znacznie lepsze niż setki pojedynczych logów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.instanceConfigs" target="_blank">https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.instanceConfigs</a></li>

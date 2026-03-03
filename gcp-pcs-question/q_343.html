@@ -78,14 +78,22 @@ cost-effective, quick implementation for auditors to analyze exported logs in GC
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: BigQuery potrafi czytać dane bezpośrednio z plików JSON/CSV w Cloud Storage bez ich importowania (External Table). Jest to najszybsza i najtańsza metoda udostępnienia dużych zbiorów logów do zapytań SQL.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. BigQuery External Tables: Pozwalają one na odpytywanie danych bezpośrednio w Cloud Storage przy użyciu SQL. Jest to najszybsza implementacja (kilka kliknięć) i najbardziej kosztowo efektywna dla audytorów, ponieważ nie płacisz za import i przechowywanie danych w BigQuery, a jedynie za samo zapytanie.
+
+Dlaczego inne są błędne:
+A. Download: Bardzo powolne przy dużych logach i trudne do analizy (brak możliwości zapytań SQL).
+C. Dataflow + Elasticsearch: Bardzo drogie i skomplikowane w konfiguracji (duży overhead).
+D. Cloud Run: Niepotrzebnie skomplikowane podejście do prostej analizy plików logów.
+
+Konsensus społeczności ExamTopics: 100% na B. To standardowa technika 'Log Investigation' bez generowania dużych kosztów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Audytorzy mogą używać standardowego SQL do analizy danych, płacąc tylko za przeskanowane dane.</p>
+<p><b>Głęboka analiza:</b> BigQuery wspiera formaty JSON i Parquet, w których Cloud Logging zapisuje logi w GCS, co czyni integrację natychmiastową.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/bigquery/docs/external-data-cloud-storage" target="_blank">https://cloud.google.com/bigquery/docs/external-data-cloud-storage</a></li>

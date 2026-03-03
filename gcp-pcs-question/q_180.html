@@ -78,14 +78,21 @@ Software supply chain threats. Deliver provenance for the build. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: SLSA (Supply-chain Levels for Software Artifacts) to standard bezpieczeństwa budowania oprogramowania. Cloud Build natywnie generuje dane o pochodzeniu (provenance) obrazów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. SLSA Level 3: SLSA (Supply-chain Levels for Software Artifacts) to standard bezpieczeństwa budowania oprogramowania. Cloud Build posiada wbudowaną funkcję generowania danych o pochodzeniu (provenance), które są chronione przed modyfikacją (falsification). Spełnienie wymogów Level 3 gwarantuje, że proces budowania był izolowany i audytowalny.
+
+Dlaczego inne są błędne:
+B. PGP signing: To tylko technika, SLSA to cały framework procesowy i standard bezpieczeństwa uznawany przez Google i branżę.
+A, C: Są to działania wspomagające, ale nie zapewniają technicznego dowodu pochodzenia (provenance) w sposób zintegrowany z platformą budowania.
+
+Konsensus społeczności ExamTopics: 100% na D. SLSA to obecnie najważniejszy standard supply chain w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Pozwala to udowodnić, że dany obraz kontenera powstał dokładnie z określonego kodu źródłowego w zaufanym środowisku budowania.</p>
+<p><b>Głęboka analiza:</b> Provenance zawiera informację o tym, z jakiego repozytorium, jakiego commita i przez jakie narzędzia powstał dany obraz. Binary Authorization może następnie sprawdzać ten atest SLSA przed wdrożeniem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/build/docs/securing-builds/generate-build-provenance" target="_blank">https://cloud.google.com/build/docs/securing-builds/generate-build-provenance</a></li>

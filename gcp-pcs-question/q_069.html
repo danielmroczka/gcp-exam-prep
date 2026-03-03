@@ -78,14 +78,22 @@ An organization uses a well-established directory service as the `source of trut
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: GCDS to narzędzie dedykowane do synchronizacji tożsamości z lokalnych systemów do chmury Google.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. GCDS: Jest to standardowe narzędzie Google do łączenia zewnętrznych systemów tożsamości (LDAP/AD) z chmurą Google. Pozwala zachować on-premises jako 'źródło prawdy', przesyłając dane o użytkownikach i grupach do Google.
+
+Dlaczego inne są błędne:
+B. Cloud Identity: To nazwa usługi docelowej, a nie 'rozwiązanie łączące' z on-premises.
+C. SAML: Służy do logowania (authentication), ale nie przesyła danych o strukturze kont i grup (provisioning). Do pełnego wdrożenia zazwyczaj potrzebujesz OBU: GCDS i SAML.
+D. Pub/Sub: To usługa przesyłania wiadomości, nie ma nic wspólnego z zarządzaniem tożsamością.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. GCDS to 'most' łączący lokalne katalogi z chmurą.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Pozwala na zachowanie istniejącej struktury grup i użytkowników w ekosystemie GCP.</p>
+<p><b>Głęboka analiza:</b> GCDS jest darmowy i instalowany lokalnie u klienta. Odczytuje dane z AD przez LDAP i wysyła je do Google przez bezpieczne HTTPS API.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction" target="_blank">https://cloud.google.com/architecture/identity/federating-gcp-with-active-directory-introduction</a></li>

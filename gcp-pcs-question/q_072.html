@@ -79,14 +79,23 @@ In a shared security responsibility model for IaaS, which two layers does the cu
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BD.
 
-Wyjaśnienie: W modelu IaaS klient odpowiada za konfigurację sieci (Firewall) oraz polityki dostępu (IAM).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Network Security: Google odpowiada za bezpieczeństwo kabli i routerów fizycznych, ale to KLIENT odpowiada za konfigurację reguł firewall, VPC i izolację sieciową swoich maszyn.
+D. Access Policies: Klient jest w 100% odpowiedzialny za to, komu nadaje role IAM i jakie polityki dostępu (np. IAP) konfiguruje dla swoich zasobów.
+
+Dlaczego inne są błędne:
+A. Hardware: Za to odpowiada wyłącznie Google (dostawca chmury).
+C. Storage Encryption: W IaaS Google szyfruje dane domyślnie, ale to KLIENT może chcieć zarządzać własnymi kluczami (CMEK). Jednak 'Access Policies' i 'Network' są bardziej fundamentalnymi elementami 'odpowiedzialności klienta' w standardowych diagramach modelu. (Uwaga: Niektóre źródła uznają C za poprawną zamiast B, ale BD to najczęstszy duet egzaminacyjny).
+E. Boot: Bezpieczeństwo procesu bootowania infrastruktury bazowej to rola Google. Klient odpowiada tylko za OS wewnątrz VM.
+
+Konsensus społeczności ExamTopics: Przewaga głosów na BD. Sieć i tożsamość to filary odpowiedzialności klienta w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BD</b></p>
-<p>Google zapewnia bezpieczeństwo infrastruktury (Hardware, Boot), ale konfiguracja tych warstw wewnątrz projektu leży po stronie klienta.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj zasadę: Google odpowiada za bezpieczeństwo CHMURY (of the cloud), a Ty za bezpieczeństwo W CHMURZE (in the cloud).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>

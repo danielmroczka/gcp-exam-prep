@@ -78,14 +78,22 @@ Execute 5 batch jobs daily on CE VMs. Each needs dedicated set of permissions. A
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Impersonacja kont serwisowych (Token Creator role) jest bezpieczniejsza niż używanie statycznych kluczy (A). Orchestrator (g-sa) pobiera krótkotrwałe tokeny dla poszczególnych zadań (b-sa-1..5).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Impersonation (Token Creator): To najbardziej bezpieczny wzorzec. Masz jeden główny SA (orchestrator), który posiada uprawnienie do generowania tymczasowych tokenów (impersonacji) dla mniejszych, wyspecjalizowanych kont SA. Dzięki temu każde zadanie batche otrzymuje tylko te uprawnienia, których potrzebuje, a Ty nie musisz zarządzać niebezpiecznymi kluczami JSON (A).
+
+Dlaczego inne są błędne:
+A. Keys in Secret Manager: Nadal używasz statycznych kluczy JSON. Choć Secret Manager jest bezpieczny, impersonacja (D) jest lepsza, bo klucze w ogóle nie powstają.
+B. General SA: Skrajne naruszenie zasady najniższych uprawnień. Jedno konto miałoby sumę wszystkich uprawnień dla wszystkich zadań.
+C. WIF: Służy do łączenia z systemami ZEWNĘTRZNYMI, tutaj oba procesy (batch i orchestrator) są wewnątrz Google Cloud.
+
+Konsensus społeczności ExamTopics: 100% na D. Impersonacja to zalecana metoda orkiestracji tożsamości w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>To rozwiązanie eliminuje ryzyko wycieku kluczy JSON i zapewnia pełną izolację uprawnień dla każdego zadania.</p>
+<p><b>Głęboka analiza:</b> Impersonacja jest audytowana - w logach zobaczysz, że to 'SA-Orchestrator' poprosił o uprawnienia 'SA-Job1', co ułatwia dochodzenia.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/service-account-impersonation" target="_blank">https://cloud.google.com/iam/docs/service-account-impersonation</a></li>

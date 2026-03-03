@@ -78,17 +78,25 @@ evaluate impact of Context-Aware Access policy on VPC SC perimeter without block
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Tryb 'Dry run' w VPC SC (A) rejestruje wszystkie naruszenia polityki (w tym CAA), ale ich nie blokuje, co pozwala na analizę logów przed wdrożeniem produkcyjnym.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. VPC SC Dry Run: Tryb ten jest stworzony dokładnie do 'ewaluacji wpływu' (evaluate impact). Gdy dodasz nową politykę dostępu (CAA) do perymetru w trybie Dry Run, system będzie logował każde żądanie, które ZOSTAŁOBY zablokowane, ale pozwoli mu przejść. Możesz wtedy przeanalizować logi i poprawić reguły przed ich włączeniem.
+
+Dlaczego inne są błędne:
+B. Dashboard: Pokazuje co się dzieje, ale nie pozwala na 'testowanie' nowych reguł bez ich włączania.
+C. Firewall/MFA: To inne warstwy, nie służą do testowania logiki perymetru VPC SC.
+D. Post-incident: Za późno. Celem jest uniknięcie incydentu (zablokowania użytkowników).
+
+Konsensus społeczności ExamTopics: 100% na A. Dry Run to jedyna bezpieczna metoda zmian w VPC SC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dzięki temu zobaczysz, którzy użytkownicy zostaliby odcięci bez faktycznego paraliżu pracy.</p>
+<p><b>Głęboka analiza:</b> Logi Dry Run trafiają do Logs Explorera z flagą `dryRun: true`. Możesz je łatwo odfiltrować i sprawdzić, czy któryś z Twoich dyrektorów nie zostałby odcięty od bazy danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run-overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/dry-run-overview</a></li>
+<li><a href="https://cloud.google.com/vpc/service-controls/docs/dry-run-overview" target="_blank">https://cloud.google.com/vpc/service-controls/docs/dry-run-overview</a></li>
 
 </ul>
 </div>

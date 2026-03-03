@@ -78,14 +78,22 @@ Troubleshoot access issue: CMEK in project prj-a region europe-west3, bucket in 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Klucz CMEK w Cloud KMS musi znajdować się w TYM SAMYM REGIONIE co bucket Cloud Storage, aby mógł zostać użyty do szyfrowania.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Regional mismatch: W Cloud Storage obowiązuje twarda zasada: klucz CMEK (Cloud KMS) musi znajdować się w tym samym regionie co bucket, który ma nim być szyfrowany. Próba użycia klucza z Frankfurtu (`europe-west3`) do zaszyfrowania bucketu w Belgii (`europe-west1`) zawsze zakończy się błędem.
+
+Dlaczego inne są błędne:
+A. Firewall: Nie ma wpływu na komunikację między wewnętrznymi usługami Google (KMS a GCS).
+B. Cloud HSM: Regiony wspierają HSM tak samo.
+C. Different projects: To nie jest problem. GCS wspiera klucze z innych projektów (tzw. cross-project CMEK), o ile nadano odpowiednie uprawnienia IAM. Główną barierą jest tutaj różnica regionów.
+
+Konsensus społeczności ExamTopics: 100% na D. Regiony muszą się zgadzać dla GCS CMEK.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Cross-region CMEK nie jest dozwolony dla GCS ze względu na wydajność i dostępność.</p>
+<p><b>Głęboka analiza:</b> Wyjątkiem są buckety multi-regionalne (np. `eu`), które wymagają klucza stworzonego również w lokalizacji multi-regionalnej `eu`.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#restrictions" target="_blank">https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#restrictions</a></li>

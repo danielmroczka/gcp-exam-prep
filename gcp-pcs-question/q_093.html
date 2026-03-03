@@ -78,14 +78,22 @@ Cloud Storage bucket in Project A should only be readable from Project B. Data c
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: VPC Service Controls to jedyny mechanizm w GCP, który zapobiega kopiowaniu danych między zaufanymi a niezaufanymi projektami (data exfiltration).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. VPC Service Controls (Perimeter): To jedyne rozwiązanie w GCP, które zapobiega eksfiltracji danych między zaufanymi a niezaufanymi projektami. Umieszczenie projektów A i B w jednym perymetrze pozwala im na wymianę danych, ale blokuje każdą próbę kopiowania danych poza ten perymetr (nawet przez użytkownika z pełnymi uprawnieniami IAM).
+
+Dlaczego inne są błędne:
+B. Domain Restricted Sharing: Uniemożliwia nadawanie uprawnień osobom spoza firmy, ale nie blokuje 'wynoszenia' danych przez pracowników na ich prywatne konta w chmurze.
+C. Private Access: Pozwala na dostęp do API Google bez internetu, ale nie nakłada restrykcji na TO, do których bucketów (Twoich czy obcych) można pisać.
+D. VPC Peering: Łączy sieci, nie ma wpływu na bezpieczeństwo usług API takich jak Cloud Storage.
+
+Konsensus społeczności ExamTopics: 100% na A. VPC SC to standardowa odpowiedź na wymóg 'cannot be copied to buckets outside'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Perymetr bezpieczeństwa odcina dostęp do API usług (jak GCS) z zewnątrz, nawet przy posiadaniu poprawnych poświadczeń IAM.</p>
+<p><b>Głęboka analiza:</b> Perymetr VPC SC tworzy 'mur' na poziomie API Google. To tak, jakby Twoje buckety przestały istnieć dla reszty świata, a te ze świata przestały istnieć dla Twoich VM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/overview</a></li>

@@ -78,14 +78,22 @@ Spikes in traffic from multiple IPs. Unknown if malicious. Limit traffic per cli
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Akcja 'throttle' w Cloud Armor pozwala na ograniczenie liczby żądań (rate limiting) bez całkowitego blokowania użytkownika, co jest idealne dla niepewnego ruchu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Throttle action: Funkcja Rate Limiting w Cloud Armor pozwala na zdefiniowanie akcji 'throttle'. Polega ona na tym, że nadmiarowe żądania od danego klienta są odrzucane (np. błąd 429), ale użytkownik nie jest całkowicie blokowany. Pozwala to na 'przycięcie' skoków ruchu przy jednoczesnym zachowaniu dostępności dla legalnych żądań po ustąpieniu piku.
+
+Dlaczego inne są błędne:
+B. rate_based_ban: Całkowicie blokuje IP na określony czas po przekroczeniu limitu. To zbyt agresywne, jeśli nie mamy pewności, czy ruch jest złośliwy (malicious).
+C. VPC firewall: Nie posiada funkcji 'throttle' ani 'rate limiting' na poziomie aplikacji/sesji HTTP.
+D. Deny action: Natychmiast odrzuca ruch, nie oferuje mechanizmu 'limitowania' w czasie.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. Throttle to idealne narzędzie do walki z niepewnym przeciążeniem.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Rate limiting chroni backend przed przeciążeniem, jednocześnie pozwalając na obsługę legalnego ruchu z tych samych adresów.</p>
+<p><b>Głęboka analiza:</b> Cloud Armor Rate Limiting może identyfikować klientów nie tylko po IP, ale też po ciasteczkach (cookies) lub nagłówkach HTTP, co zapobiega karaniu wielu osób za jednym adresem NAT.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor/docs/rate-limiting-overview" target="_blank">https://cloud.google.com/armor/docs/rate-limiting-overview</a></li>

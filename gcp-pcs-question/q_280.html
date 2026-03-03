@@ -78,14 +78,22 @@ Cloud Run access via IAP: only AppDev group, restricted to internal IPs. What to
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Access Context Manager (B) pozwala na tworzenie polityk opartych na wielu warunkach (tożsamość + IP), które są następnie egzekwowane przez IAP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Access Context Manager + IAP: To połączenie pozwala na zdefiniowanie 'Context-Aware Access' (CAA). Tworzysz Access Level, który wymaga przynależności do grupy 'AppDev' ORAZ połączenia z określonych zakresów adresów IP. Następnie przypinasz ten poziom dostępu do polityki IAP chroniącej Twój serwis Cloud Run.
+
+Dlaczego inne są błędne:
+A. VPN gateway: Sam VPN nie kontroluje uprawnień grupowych IAM w warstwie aplikacji Cloud Run.
+C. Firewall rules: Cloud Run jest usługą serverless i nie można do niej przypisać standardowych reguł firewalla VPC w celu filtrowania IP użytkowników przeglądarkowych. Tylko IAP/WAF to potrafi.
+D. NIDS: To system detekcji włamań, nie służy do kontroli dostępu opartej na grupach i IP.
+
+Konsensus społeczności ExamTopics: 100% na B. CAA to jedyna metoda na wymuszenie IP przy dostępie do serverless przez IAP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>CAA (Context-Aware Access) to jedyna metoda na wymuszenie IP przy dostępie do Cloud Run przez IAP.</p>
+<p><b>Głęboka analiza:</b> IAP najpierw sprawdza 'kto' (IAM), a potem 'skąd/jak' (Context-Aware Access). Tylko pomyślne przejście obu testów pozwala na dostęp do aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/app-engine-quickstart" target="_blank">https://cloud.google.com/iap/docs/app-engine-quickstart</a></li>

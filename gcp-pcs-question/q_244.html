@@ -78,14 +78,21 @@ Ensure users can only access BigQuery data during working hours. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: IAM Conditions pozwalają na nadawanie uprawnień czasowych (np. na podstawie pory dnia lub daty) bezpośrednio w polityce IAM.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. IAM Conditions: To natywna i najbardziej elegancka metoda. Pozwala ona na zdefiniowanie warunku czasowego (np. `request.time.getHours() >= 9 && request.time.getHours() <= 17`) bezpośrednio w przypisaniu roli IAM. Uprawnienia pojawiają się i znikają automatycznie, bez potrzeby uruchamiania żadnych skryptów.
+
+Dlaczego inne są błędne:
+B, C: Rozwiązania manualne/skryptowe, które są trudne w audycie, podatne na awarie (co jeśli skrypt usuwający nie zadziała?) i wprowadzają niepotrzebne skomplikowanie.
+D. Org policy: Polityki organizacji nie służą do nadawania uprawnień Data Viewer poszczególnym użytkownikom.
+
+Konsensus społeczności ExamTopics: 100% na A. IAM Conditions to 'right tool for the job' przy ograniczeniach czasowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to rozwiązanie automatyczne i natywne, nie wymagające pisania skryptów do dodawania/usuwania użytkowników.</p>
+<p><b>Głęboka analiza:</b> Warunki IAM wykorzystują język CEL (Common Expression Language). Możesz w nich uwzględnić również dni tygodnia (np. tylko od poniedziałku do piątku).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/conditions-overview" target="_blank">https://cloud.google.com/iam/docs/conditions-overview</a></li>

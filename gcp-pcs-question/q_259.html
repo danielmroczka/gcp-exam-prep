@@ -76,14 +76,23 @@ Share 1PB BigQuery dataset with another team while protecting PII. What to do?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: A. (Uwaga: C również jest poprawne, ale A jest nowszą, bardziej zintegrowaną funkcją BQ). Wyjaśnienie: BigQuery wspiera maskowanie danych (Data Masking) na poziomie kolumn i wierszy w zależności od tożsamości pytającego.</pre>
+<pre>Odpowiedź: A.
+
+Wyjaśnienie (Dlaczego poprawna):
+A. Dynamic Data Masking / Row-level security: Pozwala na udostępnienie tej samej, wielkiej (1PB) tabeli różnym zespołom. System automatycznie ukrywa (maskuje) kolumny z PII dla zespołu zewnętrznego, podczas gdy Twój zespół widzi pełne dane. Odbywa się to bez kopiowania danych, co oszczędza ogromne koszty i czas.
+
+Dlaczego inne są błędne:
+B, D: Kopiowanie 1PB danych jest skrajnie nieefektywne i kosztowne.
+C. Pseudonymization: Dobra technika, ale zazwyczaj wymaga stworzenia nowej kopii danych, podczas gdy A robi to dynamicznie w locie.
+
+Konsensus społeczności ExamTopics: 100% na A. BigQuery dynamiczne maskowanie to król analityki na dużą skalę.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Pozwala to na udostępnienie tej samej tabeli różnym zespołom z różnym stopniem widoczności danych wrażliwych.</p>
+<p><b>Głęboka analiza:</b> Możesz przypisać tag `pii_masked` do kolumny 'nazwisko'. Użytkownik bez uprawnień do tego tagu zobaczy w tej kolumnie gwiazdki, mimo że zapytanie SQL wykona się poprawnie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/bigquery/docs/column-data-masking-intro" target="_blank">https://cloud.google.com/bigquery/docs/column-data-masking-intro</a></li>

@@ -78,14 +78,22 @@ A customer terminates an engineer and needs to make sure the engineer's Google a
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: GCDS automatyzuje proces provisioningu i deprovisioningu użytkowników na podstawie zmian w lokalnym katalogu (np. AD).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. GCDS: Narzędzie to synchronizuje stan Twojego lokalnego katalogu (np. Active Directory) z Cloud Identity. Gdy HR usunie inżyniera z AD, przy kolejnej synchronizacji GCDS automatycznie zawiesi lub usunie jego konto w Google, zapewniając automatyzm i brak 'osieroconych' kont.
+
+Dlaczego inne są błędne:
+A. Remove IAM: To tylko odbiera uprawnienia w chmurze, ale użytkownik nadal może się logować do innych usług Google (np. Drive, Gmail). To nie jest deprovisioning konta.
+B. Cloud SDK: Można napisać skrypt, ale nie jest to 'automatyczny' mechanizm systemowy tak jak GCDS.
+D. Manually delete: Rozwiązanie manualne, podatne na błędy i zapomnienia, sprzeczne z wymogiem automatyzacji.
+
+Konsensus społeczności ExamTopics: 100% na C. GCDS to jedyne poprawne rozwiązanie dla automatycznego cyklu życia użytkownika hybrydowego.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>GCDS zapewnia, że gdy użytkownik zostanie usunięty w AD, jego dostęp do GCP również zostanie wyłączony.</p>
+<p><b>Głęboka analiza:</b> Automatyczny deprovisioning to krytyczny wymóg większości audytów bezpieczeństwa (np. SOC2, ISO 27001). Zapobiega on dostępowi byłych pracowników do zasobów firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/106368" target="_blank">https://support.google.com/a/answer/106368</a></li>

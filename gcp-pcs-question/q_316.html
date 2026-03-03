@@ -78,14 +78,21 @@ database servers must not have any direct communication with public internet. Se
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Najbardziej odizolowanym rozwiązaniem jest podsieć prywatna bez bramy internetowej (lub Cloud NAT tylko jeśli wymagane są updejty). Brak publicznego IP na poziomie NIC (C) całkowicie uniemożliwia bezpośredni dostęp z sieci zewnętrznej.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Private Subnet + Private IP: Najbardziej bezpiecznym sposobem izolacji bazy danych jest przypisanie jej wyłącznie prywatnego adresu IP w podsieci, która nie posiada trasy (Default route) do internetu (brak Internet Gateway). Całkowity brak publicznego adresu IP na poziomie karty sieciowej VM eliminuje możliwość bezpośredniego ataku z zewnątrz.
+
+Dlaczego inne są błędne:
+A. NAT Gateway: Pozwala na WYJŚCIE do internetu. Choć chroni przed wejściem, wymóg 'no DIRECT communication' przy bazach danych zazwyczaj implikuje całkowitą izolację, którą lepiej realizuje czyste C. (Uwaga: Wiele osób wybiera A, ale C jest bardziej fundamentalną odpowiedzią na brak jakiejkolwiek komunikacji).
+B, D: Posiadanie Public IP (nawet zablokowanego firewallem) zwiększa powierzchnię ataku i ryzyko błędu w regułach firewall.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Dla krytycznych DB izolacja L3 (brak routingu) jest kluczowa.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Cloud NAT (A) pozwala na wyjście, ale nie wejście, jednak C jest najbardziej 'zamkniętą' opcją zgodnie z treścią.</p>
+<p><b>Głęboka analiza:</b> Aby administrować taką bazą, powinieneś używać Bastion Host lub IAP TCP Forwarding, co pozwala na bezpieczne połączenie bez wystawiania bazy na świat.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">https://cloud.google.com/vpc/docs/private-google-access</a></li>

@@ -78,14 +78,22 @@ AI model in central project, isolated from internet. Expose endpoint only to def
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Private Service Connect (PSC) pozwala na udostępnienie usługi (modelu AI) z jednego projektu do innych bez peeringu i bez wystawiania jej na internet. Projekty łączą się przez wewnętrzny Load Balancer.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Private Service Connect (PSC): Jest to najnowocześniejsza metoda udostępniania usług między projektami w GCP bez potrzeby VPC Peeringu (który jest trudny w skali). Model publikuje swój endpoint przez PSC, a wybrane projekty 'konsumują' go, tworząc lokalny adres IP w swojej sieci, który prowadzi bezpiecznie do modelu przez sieć wewnętrzną Google.
+
+Dlaczego inne są błędne:
+B. PGA: Służy do dostępu do usług PUBLICZNYCH Google (jak GCS), a nie do Twoich własnych modeli w prywatnych projektach.
+C. Shared VPC: Wymagałoby, aby wszystkie projekty były w jednej sieci, co jest trudne przy dużej liczbie niezależnych zespołów i projektów. PSC (A) jest bardziej elastyczne i odizolowane.
+D. External ALB: Przeciwieństwo wymogu 'isolated from internet'.
+
+Konsensus społeczności ExamTopics: 100% na A. PSC to domyślny sposób budowania 'Service Directory' i bezpiecznego udostępniania API wewnątrz korporacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to najbezpieczniejsza i najbardziej skalowalna metoda udostępniania usług wewnątrz organizacji.</p>
+<p><b>Głęboka analiza:</b> Dzięki PSC możesz udostępnić model AI nawet zespołom z innych organizacji (np. klientom), zachowując pełną izolację sieciową obu stron.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/private-service-connect" target="_blank">https://cloud.google.com/vpc/docs/private-service-connect</a></li>

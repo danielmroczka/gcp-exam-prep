@@ -78,14 +78,21 @@ Copy data between two VPC SC perimeters (A and B). Minimize exfiltration risk, l
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Ingress/Egress rules w VPC SC są bardziej precyzyjne (least privilege) niż Bridge, ponieważ pozwalają na ograniczenie ruchu do konkretnych metod, tożsamości i zasobów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Ingress/Egress Rules: Są bardziej precyzyjne niż mosty (bridges). Pozwalają na zezwolenie na konkretną operację (np. tylko `objects.get`) tylko dla wybranej tożsamości, co realizuje zasadę najniższych uprawnień lepiej niż otwarcie całego projektu mostem.
+
+Dlaczego inne są błędne:
+A, B. Perimeter bridge: Otwiera zaufanie dla WSZYSTKICH usług i tożsamości między projektami, co zwiększa ryzyko eksfiltracji danych.
+D. Bidirectional: Jeśli kopiujemy w jedną stronę, dwukierunkowe zaufanie jest niepotrzebnym ryzykiem.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Nowoczesne VPC SC opiera się na granularnych regułach wejścia/wyjścia.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Bridge (A, B) otwiera zaufanie między CAŁYMI projektami/perymetrami, co jest mniej granularne.</p>
+<p><b>Głęboka analiza:</b> Reguły te pozwalają na filtrowanie po atrybutach takich jak metoda API czy źródłowe konto serwisowe.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/ingress-egress-rules" target="_blank">https://cloud.google.com/vpc-service-controls/docs/ingress-egress-rules</a></li>

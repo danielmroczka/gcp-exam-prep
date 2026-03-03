@@ -78,14 +78,22 @@ Remove public IP addresses from VMs but they still need to communicate to extern
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud NAT pozwala instancjom bez publicznego IP na inicjowanie połączeń wychodzących do internetu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud NAT: Jest to usługa zaprojektowana dokładnie dla tego scenariusza. Pozwala ona maszynom VM bez publicznych adresów IP na inicjowanie połączeń WYCHODZĄCYCH do internetu (np. w celu pobrania poprawek systemowych), jednocześnie uniemożliwiając internetowi inicjowanie połączeń PRZYCHODZĄCYCH do tych maszyn.
+
+Dlaczego inne są błędne:
+A. Cloud Armor: Chroni przed ruchem PRZYCHODZĄCYM do Twoich aplikacji webowych.
+C. Cloud Router: Zarządza trasami (BGP), ale sam w sobie nie wykonuje translacji adresów (NAT) wymaganej do wyjścia prywatnej maszyny do publicznej sieci. Cloud NAT wymaga Cloud Routera do działania, ale to NAT jest usługą rozwiązującą problem.
+D. Cloud VPN: Służy do łączenia z inną siecią prywatną, a nie z publicznym internetem.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To podstawowy element 'Hardened VPC'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to kluczowa usługa dla bezpieczeństwa, ukrywająca adresy wewnętrzne maszyn przed internetem.</p>
+<p><b>Głęboka analiza:</b> Cloud NAT jest 'gateway-less'. Nie tworzy on pojedynczego punktu awarii (choke point) jak tradycyjne bramki NAT na maszynach VM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/nat/docs/overview" target="_blank">https://cloud.google.com/nat/docs/overview</a></li>

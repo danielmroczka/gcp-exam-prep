@@ -79,14 +79,23 @@ Hardened OS image in security team project. Ensure all VMs in org only use that 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BD.
 
-Wyjaśnienie: Nadanie roli imageUser (B) pozwala deweloperom pobierać obraz. Polityka organizacji (D) ogranicza źródła obrazów tylko do Twojego projektu bezpieczeństwa.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. compute.imageUser role: Deweloperzy potrzebują tej roli nadanej w projekcie zespołu security, aby ich maszyny w innych projektach mogły 'sięgnąć' po ten konkretny obraz systemu.
+D. Organization Policy: Restrykcja `compute.trustedImageProjects` pozwala zdefiniować listę projektów, z których wolno pobierać obrazy. Ustawienie tej listy tylko na Twój projekt security zablokuje możliwość użycia obrazów publicznych (np. czystego Debiana) czy obrazów z innych projektów.
+
+Dlaczego inne są błędne:
+A. Own projects: Nadanie roli tam nie daje dostępu do obrazu w Innym (bezpiecznym) projekcie.
+C. Store in every project: Ogromny narzut administracyjny (overhead) i trudność w aktualizacji wszystkich kopii obrazu.
+E. Remove permission: Deweloperzy nie mogliby w ogóle tworzyć maszyn, co jest sprzeczne z sensem pracy.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla BD. To standardowy wzorzec 'Golden Image' w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BD</b></p>
-<p>To połączenie uprawnień i restrykcji gwarantuje standardy bezpieczeństwa w całej firmie.</p>
+<p><b>Głęboka analiza:</b> To połączenie zapewnia tzw. 'Enforcement' (D) oraz 'Enablement' (B). Deweloperzy nadal mogą tworzyć maszyny, ale system pilnuje, aby ich fundament był bezpieczny.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/images/restricting-image-access" target="_blank">https://cloud.google.com/compute/docs/images/restricting-image-access</a></li>

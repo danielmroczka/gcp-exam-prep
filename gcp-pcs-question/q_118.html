@@ -78,14 +78,21 @@ Inspect traffic between trusted and untrusted subnets using a virtual appliance 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Model 'Multi-NIC' to standardowa architektura dla urządzeń NGFW w chmurze, gdzie appliance działa jako brama między dwiema odizolowanymi sieciami.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Multi-NIC Appliance: Aby firewall (virtual appliance) mógł skutecznie filtrować ruch między dwiema strefami, musi on fizycznie (logicznie w chmurze) znajdować się w OBU tych strefach jednocześnie. Model Multi-NIC (instancja z wieloma interfejsami sieciowymi, z których każdy jest w innym VPC) to standardowa architektura NGFW w chmurze.
+
+Dlaczego inne są błędne:
+A, B. One VPC: Wewnątrz jednej sieci VPC maszyny mogą często komunikować się bezpośrednio przez trasy domyślne, co utrudnia wymuszenie 'przejścia' przez firewall. Dwie sieci VPC dają twardą izolację.
+C. VPC Peering: Peering służy do bezpośredniej komunikacji z pominięciem firewalla. Bardzo trudno jest 'wstawić' appliance w środek peeringu bez skomplikowanego routingu (Transit VPC).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. To klasyczna architektura 'Network hub' lub 'Security VPC'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Pozwala to na fizyczne rozdzielenie ruchu i pełną inspekcję pakiety-po-pakiecie przy przechodzeniu między interfejsami (NIC).</p>
+<p><b>Głęboka analiza:</b> W tej konfiguracji maszyna w VPC 'Untrusted' wysyła ruch do interfejsu eth0 firewalla, firewall go sprawdza i jeśli jest OK, wypuszcza przez interfejs eth1 do VPC 'Trusted'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/best-practices-vpc-design#multi-nic" target="_blank">https://cloud.google.com/architecture/best-practices-vpc-design#multi-nic</a></li>

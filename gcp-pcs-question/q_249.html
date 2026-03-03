@@ -78,14 +78,22 @@ AI image classification model security responsibilities. Managed service. What t
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Zawsze należy pamiętać o modelu współdzielonej odpowiedzialności. Nawet w usługach zarządzanych klient odpowiada za dostęp (IAM) i bezpieczeństwo danych wejściowych/wyjściowych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Shared responsibility: Nawet w usługach AI (PaaS/SaaS) obowiązuje model współdzielony. Google odpowiada za bezpieczeństwo samej infrastruktury ML, ale to TY odpowiadasz za to, kto ma dostęp do modelu (IAM), czy dane przesyłane do modelu są bezpieczne (upload/download) oraz za monitorowanie logów użycia w celu wykrycia nadużyć.
+
+Dlaczego inne są błędne:
+A. PaaS transfers all: Błąd. Nigdy nie oddajesz całej odpowiedzialności Google. Zawsze odpowiadasz za konfigurację dostępu i swoje dane.
+B. Focus on code only: To za mało. Musisz dbać o cały cykl życia danych i monitorowanie platformy.
+D. Custom firewalls: W usługach zarządzanych typu Vertex AI nie masz zazwyczaj dostępu do warstwy firewalli Google, na których działają te modele.
+
+Konsensus społeczności ExamTopics: 100% na C. Zrozumienie modelu odpowiedzialności to fundament certyfikacji Security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Google odpowiada za platformę, ale Ty odpowiadasz za to, kto ma do niej klucze i jakie dane tam wysyłasz.</p>
+<p><b>Głęboka analiza:</b> Google odpowiada za to, żeby nikt 'z boku' nie włamał się do Twojego modelu. Ty odpowiadasz za to, żebyś sam nie dał dostępu niepowołanym osobom poprzez złe role IAM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>

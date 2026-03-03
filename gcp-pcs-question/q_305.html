@@ -78,14 +78,22 @@ Vertex AI Workbench Instances: automatically up-to-date, users cannot alter OS s
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Workbench posiada dedykowane polityki organizacji, które wymuszają harmonogram aktualizacji i blokują dostęp 'root', co uniemożliwia użytkownikom psucie konfiguracji systemu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Workbench Specific Org Policies: Workbench posiada dedykowane polityki organizacji, które uniemożliwiają użytkownikom (nawet z uprawnieniami dewelopera) uzyskanie dostępu 'root' do systemu operacyjnego instancji analitycznej. Dodatkowo wymuszają one automatyczny harmonogram aktualizacji, co gwarantuje spójność i bezpieczeństwo całego zespołu.
+
+Dlaczego inne są błędne:
+B. VM Manager: Świetny dla zwykłych VM, ale Workbench jest usługą 'zarządzaną', która posiada własny, lepszy mechanizm aktualizacji wbudowany w platformę.
+C. Prevent SSH: Uniemożliwiłoby pracę wielu analitykom potrzebującym terminala do zadań niskopoziomowych.
+D. IAM Roles: Ograniczają co użytkownik może kliknąć w UI, ale nie blokują działań wewnątrz systemu operacyjnego, jeśli deweloper ma tam dostęp (co robi polityka A).
+
+Konsensus społeczności ExamTopics: 100% na A. To specyficzna wiedza o zarządzaniu środowiskami AI w Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Zapewnia to spójność środowiska pracy analityków danych.</p>
+<p><b>Głęboka analiza:</b> Te polityki są kluczowe w bankowości, gdzie musisz mieć 100% pewności, że środowisko analityczne jest niezmienne (immutable) i wolne od nieautoryzowanego oprogramowania.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction" target="_blank">https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction</a></li>

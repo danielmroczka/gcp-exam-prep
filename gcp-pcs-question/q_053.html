@@ -78,14 +78,22 @@ A user needs to view the configuration of a VPC network but should not be able t
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Rola 'Compute Network Viewer' daje uprawnienia do podglądu zasobów sieciowych bez możliwości edycji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Compute Network Viewer: Rola ta (`roles/compute.networkViewer`) jest precyzyjnie dopasowana do wymogu. Pozwala na podgląd wszystkich zasobów sieciowych (VPC, firewall, trasy), ale nie daje dostępu do podglądu samych maszyn wirtualnych ani żadnych uprawnień edycji.
+
+Dlaczego inne są błędne:
+A. Compute Network Admin: Pozwala na modyfikację sieci - naruszenie wymogu 'should not be able to change'.
+C. Compute Viewer: Pozwala na podgląd zasobów obliczeniowych (VM), co jest zbyt szerokim uprawnieniem, jeśli użytkownik potrzebuje tylko wglądu w sieć.
+D. Project Viewer: Daje dostęp do podglądu WSZYSTKICH usług w projekcie (SQL, Storage itp.) - naruszenie zasady najniższych uprawnień.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na B jako najbardziej granularną rolę dla administratora sieci bez uprawnień edycji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to bardziej precyzyjna rola niż ogólny Project Viewer.</p>
+<p><b>Głęboka analiza:</b> Wybieranie ról specyficznych dla usługi (np. Network Viewer) zamiast ogólnych (Project Viewer) to kluczowy element zdania egzaminu Professional Security Engineer.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/access/iam#compute.networkViewer" target="_blank">https://cloud.google.com/compute/docs/access/iam#compute.networkViewer</a></li>

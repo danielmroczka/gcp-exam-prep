@@ -78,14 +78,20 @@ Efficiently route logs from _Default to a new log bucket. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Najbardziej wydajną metodą jest edycja domyślnego sinka (_Default) i zmiana jego celu na nowo utworzony bucket. Nie wymaga to tworzenia dodatkowych filtrów ani sinków.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Edit _Default sink: To najprostsza metoda (least effort). Sink `_Default` jest systemowym mechanizmem zbierania logów. Edytując jego cel (destination) i wskazując nowy Log Bucket, zmieniasz kierunek całego domyślnego potoku danych bez potrzeby tworzenia nowych, skomplikowanych reguł.
+
+Dlaczego inne są błędne:
+A, B, C: Wymagają więcej kroków (tworzenie nowych zasobów, zarządzanie filtrami wykluczeń), co jest mniej efektywne i trudniejsze w utrzymaniu.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. Zawsze edytuj istniejące systemowe zlewy logów, jeśli to możliwe.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Sink _Default jest zarządzany przez Google, ale jego cel można modyfikować.</p>
+<p><b>Głęboka analiza:</b> Log Buckets pozwalają na ustawienie retencji niezależnie od projektu, co jest kluczowe dla optymalizacji kosztów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/routing/overview#sinks" target="_blank">https://cloud.google.com/logging/docs/routing/overview#sinks</a></li>

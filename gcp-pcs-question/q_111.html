@@ -78,14 +78,22 @@ Identify network anomalies (VM-to-VM, internet-to-VM, VM-to-Google) within and a
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: VPC Flow Logs rejestrują cały ruch sieciowy (źródło, cel, porty, bajty), co pozwala na wykrywanie anomalii bez przechwytywania pełnych pakietów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. VPC Flow Logs: Rejestrują one każdy przepływ sieciowy (5-tuple: source/dest IP, source/dest port, protocol) wraz z liczbą bajtów i pakietów. Jest to najbardziej efektywna metoda na wykrywanie anomalii (np. nagłego wycieku danych do internetu lub nietypowej komunikacji między VM-ami).
+
+Dlaczego inne są błędne:
+A. Organization policy: Nakłada restrykcje konfiguracyjne (np. 'zakaz tworzenia VM w Azji'), nie monitoruje bieżącego ruchu sieciowego.
+B. Packet mirroring: Kopiuje PEŁNE pakiety (łącznie z treścią). Jest to bardzo drogie i zazwyczaj stosowane do głębokiej inspekcji (IDS), a nie do ogólnej identyfikacji anomalii przepływów, gdzie Flow Logi są szybsze i tańsze.
+D. Cloud Audit Logs: Rejestrują zmiany w konfiguracji (np. 'ktoś zmienił firewall'), ale nie widzą samego ruchu sieciowego (pakietów).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Flow Logi to standardowy sensor dla SIEM sieciowego w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Flow logs to najbardziej skalowalna metoda monitorowania ruchu sieciowego w GCP.</p>
+<p><b>Głęboka analiza:</b> Flow Logi w GCP są generowane z interfejsów sieciowych (NIC) VM, co pozwala widzieć nawet ruch, który został odrzucony przez firewall.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/using-flow-logs" target="_blank">https://cloud.google.com/vpc/docs/using-flow-logs</a></li>

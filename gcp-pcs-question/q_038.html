@@ -78,14 +78,22 @@ A customer decides to use customer-supplied encryption keys (CSEK) for Cloud Sto
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: CSEK wymagają podania klucza przy wgrywaniu pliku, np. za pomocą gsutil.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. gsutil with key: CSEK wymagają, aby to klient dostarczał klucz przy każdej operacji zapisu/odczytu. Narzędzie gsutil posiada specjalne flagi (lub plik konfiguracyjny .boto), w których wskazuje się klucz szyfrujący. Google używa go w pamięci RAM i natychmiast usuwa.
+
+Dlaczego inne są błędne:
+A. Upload key: Przechowywanie klucza w tym samym buckecie co dane niweluje sens szyfrowania.
+C. Console: Konsola Google Cloud nie wspiera CSEK, ponieważ Google nie może (z założenia tej usługi) dotknąć Twojego klucza w sposób trwały.
+D. Encrypt locally: To szyfrowanie 'client-side', a nie CSEK. CSEK to szyfrowanie 'server-side' kluczem dostarczonym przez klienta.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na B. CSEK to najbardziej restrykcyjna forma szyfrowania w GCP obsługiwana głównie przez CLI.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Google nie przechowuje kluczy CSEK, muszą być dostarczane przy każdej operacji.</p>
+<p><b>Głęboka analiza:</b> Jeśli zgubisz klucz CSEK, Google NIE może Ci pomóc w odzyskaniu danych. Dane są bezpowrotnie stracone, ponieważ materiał klucza nigdy nie został zapisany w systemach Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/encryption/customer-supplied-keys" target="_blank">https://cloud.google.com/storage/docs/encryption/customer-supplied-keys</a></li>

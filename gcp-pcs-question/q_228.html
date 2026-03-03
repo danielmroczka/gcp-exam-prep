@@ -77,14 +77,25 @@ Highly regulated workload (VM + GCS): DEK outside Google, control keys through t
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: BC. (D jest również poprawne jako czynność, ale B i C to technologie). Wyjaśnienie: EKM (B) trzyma klucze na zewnątrz. Confidential VMs (C) chronią dane w pamięci.</pre>
+<pre>Odpowiedź: BC.
+
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud EKM: Pozwala na trzymanie materiału klucza (DEK/KEK) u zewnętrznego partnera (Third party) poza Google. Spełnia to wymóg kontroli kluczy poza chmurą.
+C. Confidential VMs: Szyfrują dane w pamięci RAM podczas ich przetwarzania (Encrypt in memory), co jest niezbędne dla rygorystycznych wymogów ochrony danych w użyciu.
+
+Dlaczego inne są błędne:
+A. CMEK: Klucze rezydują w infrastrukturze Google, co narusza wymóg 'outside Google'.
+D. Migrate: To czynność, a nie technologia/produkt, o który pyta scenariusz.
+E. VPC SC: Chroni granice sieciowe API, nie szyfruje danych w pamięci ani nie zarządza kluczami zewnętrznymi.
+
+Konsensus społeczności ExamTopics: 100% na BC. To najwyższy zestaw suwerenności danych w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BC</b></p>
-<p>To combo rozwiązuje wszystkie wymogi suwerenności i ochrony danych w użyciu.</p>
+<p><b>Głęboka analiza:</b> Ten zestaw (EKM + Confidential) to tzw. 'Sovereign Cloud' w wersji IaaS. Pozwala on na przetwarzanie danych nawet gdy nie ufasz administratorom platformy chmurowej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>

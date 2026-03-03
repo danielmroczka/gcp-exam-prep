@@ -78,14 +78,22 @@ prevent and detect information leakages using Gemini in Vertex AI. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Model Armor to nowa usługa GCP dedykowana do ochrony modeli AI przed wyciekiem danych i atakami 'jailbreak'. Raportowanie w SCC umożliwia szybką reakcję.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Model Armor: Jest to nowa, dedykowana usługa Google Cloud zaprojektowana specjalnie do ochrony interakcji z modelami LLM (AI). Potrafi ona w czasie rzeczywistym blokować przesyłanie danych wrażliwych (leakage) w promptach oraz wykrywać ataki typu jailbreak. Integracja z SCC zapewnia detekcję incydentów.
+
+Dlaczego inne są błędne:
+A. VPC SC + DLP: VPC SC chroni granice API, a DLP skanuje storage. Model Armor (C) jest bardziej specyficzny dla dynamicznych rozmów z modelem AI (runtime prompt protection).
+B. Logging: Pozwala na audyt po fakcie (detect), ale nie zapobiega wyciekowi w momencie wysyłania pytania do AI (prevent).
+D. Firewall: Nie ma żadnego wglądu w treść zapytań przesyłanych protokołem HTTPS do usługi Vertex AI.
+
+Konsensus społeczności ExamTopics: 100% na C. Model Armor lo nowość w programie egzaminacyjnym skupiona na AI Security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>VPC SC (A) chroni granice danych, ale nie treść rozmowy z modelem AI, co robi Model Armor.</p>
+<p><b>Głęboka analiza:</b> Model Armor działa jako filtr przed modelem AI. Może np. automatycznie zamienić nazwisko klienta na gwiazdki ZANIM model je przetworzy, co chroni prywatność danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/products" target="_blank">https://cloud.google.com/security/products</a></li>

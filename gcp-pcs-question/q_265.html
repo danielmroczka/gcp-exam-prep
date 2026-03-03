@@ -78,14 +78,21 @@ PCI DSS preparation. Detect deviations on IaaS level in landing zone. What to do
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: SCC Premium posiada moduł 'Compliance', który automatycznie mapuje stan Twojej infrastruktury na wymogi PCI DSS i zgłasza naruszenia (np. brak szyfrowania, publiczne porty).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. SCC Premium Compliance: Posiada wbudowany moduł, który automatycznie mapuje stan Twojej chmury na konkretne punkty normy PCI DSS. Zgłasza znaleziska (findings), jeśli np. dyski nie są zaszyfrowane kluczem CMEK lub porty baz danych są publicznie dostępne. To jedyna zautomatyzowana metoda detekcji 'deviations'.
+
+Dlaczego inne są błędne:
+B. Manual audit: Wolny i błędotwórczy.
+C, D: To surowe dane. Musiałbyś sam wiedzieć jakiego dokładnie wpisu szukać pod dany punkt normy PCI. SCC robi to mapowanie za Ciebie.
+
+Konsensus społeczności ExamTopics: 100% na A. SCC to Twój automatyczny audytor PCI.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to najskuteczniejsza metoda ciągłego monitorowania zgodności z normami.</p>
+<p><b>Głęboka analiza:</b> SCC dostarcza raporty zgodności, które możesz pobrać w formacie PDF i pokazać audytorowi jako dowód ciągłego monitorowania bezpieczeństwa.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-compliance-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-compliance-overview</a></li>

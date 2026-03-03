@@ -79,17 +79,27 @@ BigQuery analytical data warehouse. Restrict query access based on rows and colu
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CE.
 
-Wyjaśnienie: Row-level security (C) pozwala na filtrowanie wierszy dla konkretnych użytkowników. Column-level policy tags (E) ograniczają dostęp do całych kolumn.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Row-level access policies: BigQuery pozwala na tworzenie polityk dostępu na poziomie wierszy. Wyrażenie filtrujące (np. `region = 'EU'`) ogranicza zwracane dane tylko do tych, do których użytkownik ma uprawnienia. Opcja FALSE w filtrze (C) jest częścią mechanizmu definiowania kto CZEGO nie widzi lub domyślnej blokady.
+E. Column-level policy tags: Korzystając z Data Catalog, można przypisać tagi do kolumn i ograniczyć dostęp do nich (np. ukryć kolumnę 'salary') dla konkretnych tożsamości.
+
+Dlaczego inne są błędne:
+A. Filter TRUE: Zwróciłoby wszystkie wiersze, co nie jest restrykcją.
+B. AEAD encryption: To metoda szyfrowania wewnątrz zapytań SQL, wymagająca od użytkownika zarządzania kluczami w locie. Nie jest to 'systemowa' metoda restrykcji dostępu do kolumn tak prosta jak policy tags.
+D. Dynamic data masking: Służy do zamazania części danych (np. `XXXX-XXXX-1234`), ale w pytaniu mowa o 'restrict access' (blokadzie), co lepiej realizują policy tags (E).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na CE. To dwa podstawowe mechanizmy bezpieczeństwa wewnątrz tabel BigQuery.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CE</b></p>
-<p>To połączenie zapewnia pełną kontrolę nad widocznością danych wewnątrz tabeli BigQuery.</p>
+<p><b>Głęboka analiza:</b> Row-level i Column-level security pozwalają na udostępnienie JEDNEJ tabeli wielu grupom użytkowników o różnych potrzebach, bez kopiowania danych do widoków.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/bigquery/docs/column-level-security-intro" target="_blank">https://cloud.google.com/bigquery/docs/column-level-security-intro</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/row-level-security-intro" target="_blank">https://cloud.google.com/bigquery/docs/row-level-security-intro</a></li>
 
 </ul>
 </div>

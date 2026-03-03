@@ -78,14 +78,22 @@ Connect on-prem to Shared VPC. Private transport link, private API endpoints fro
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Dedicated Interconnect to prywatne łącze. Domena restricted.googleapis.com wspiera tylko te API, które działają z VPC Service Controls.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Dedicated Interconnect + restricted.googleapis.com: Dedicated Interconnect zapewnia fizyczne, prywatne łącze (Private transport link). Domena `restricted.googleapis.com` (199.36.153.4/30) jest jedyną domeną VIP, która wymusza obsługę wyłącznie usług wspieranych przez VPC Service Controls, co spełnia wymóg 'APIs only via VPC SC'.
+
+Dlaczego inne są błędne:
+A. Cloud VPN: Choć bezpieczny, nie jest to 'dedykowane łącze fizyczne' (Interconnect jest wyżej w hierarchii wymagań 'transport link').
+B. private.googleapis.com: Ta domena (199.36.153.8/30) daje dostęp do WSZYSTKICH API Google (w tym YouTube, Gmail), a nie tylko tych chronionych przez VPC SC.
+C. Direct Peering: To peering publiczny dla API, nie zapewnia prywatnego łącza transportowego do sieci VPC.
+
+Konsensus społeczności ExamTopics: 100% na D.restricted VIP to standard dla VPC SC i łączności hybrydowej.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Domena restricted (199.36.153.4/30) jest zalecana przy używaniu VPC SC, aby wykluczyć nieobsługiwane usługi.</p>
+<p><b>Głęboka analiza:</b> Użycie 'restricted' VIP zapobiega wyciekowi danych do usług Google, które nie są objęte perymetrem bezpieczeństwa Twojej firmy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity" target="_blank">https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity</a></li>

@@ -77,14 +77,21 @@ Remove PII from driver licenses in GCS older than 12 months. Archive anonymized 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: DLP API posiada natywne funkcje skanowania bucketów GCS i tworzenia zanonimizowanych kopii danych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. DLP De-identify: Pytanie wymaga MODYFIKACJI zawartości plików (usunięcia PII), a nie tylko ich usunięcia czy przeniesienia. Tylko Cloud DLP potrafi 'otworzyć' plik, zamazać dane wrażliwe (de-identify) i zapisać nową wersję dokumentu.
+
+Dlaczego inne są błędne:
+A. TTL policy: Skasowałoby cały plik po 12 miesiącach, bez tworzenia zanonimizowanego archiwum.
+C. Autoclass: Służy wyłącznie do optymalizacji kosztów poprzez automatyczną zmianę klasy storage (Standard/Nearline), nie dotyczy treści danych.
+
+Konsensus społeczności ExamTopics: 100% na B. DLP to jedyne narzędzie do 'inteligentnej' modyfikacji danych wrażliwych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Lifecycle policy (A) potrafi tylko usuwać lub zmieniać klasę storage, nie potrafi modyfikować zawartości plików.</p>
+<p><b>Głęboka analiza:</b> Ten proces nazywa się 'Data Redaction'. Możesz skonfigurować DLP tak, aby na zdjęciu prawa jazdy zamazał tylko numer PESEL i imię, zostawiając resztę do celów statystycznych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/inspecting-storage" target="_blank">https://cloud.google.com/dlp/docs/inspecting-storage</a></li>

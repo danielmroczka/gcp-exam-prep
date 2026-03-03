@@ -78,14 +78,19 @@ End-to-end encryption of user login credentials behind load balancer. What to do
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: W chmurze 'End-to-end' dla HTTPS zazwyczaj oznacza szyfrowanie od przeglądarki użytkownika do punktu zakończenia TLS (Load Balancer Google) i dalej szyfrowany ruch do backendu (opcjonalnie).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. TLS on Load Balancer: Podstawową i wystarczającą metodą ochrony poświadczeń w internecie jest protokół HTTPS (TLS). Szyfruje on całą komunikację (w tym login i hasło) od przeglądarki użytkownika do punktu zakończenia TLS na Load Balancerze Google.
+
+Dlaczego inne są błędne:
+A, D: Szyfrowanie kluczem KMS w przeglądarce (client-side) jest niepraktyczne i nadmiarowe przy poprawnie działającym HTTPS.
+B. Hashing: Chroni hasło w bazie, ale jeśli samo przesyłanie nie jest szyfrowane (HTTP), haker przejmie hasz i może wykonać atak typu 'Pass-the-hash'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Zastosowanie HTTPS (TLS) na Load Balancerze jest standardem rynkowym dla ochrony poświadczeń w locie.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, aby na Load Balancerze wymusić przekierowanie z HTTP na HTTPS oraz używać nowoczesnych wersji TLS (1.2+).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/load-balancing/docs/https" target="_blank">https://cloud.google.com/load-balancing/docs/https</a></li>

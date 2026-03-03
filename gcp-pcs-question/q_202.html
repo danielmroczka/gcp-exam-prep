@@ -78,14 +78,22 @@ Thousands of projects. Multiple OPEN_MYSQL_PORT findings. Prevent this centrally
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Hierarchiczne polityki firewalla pozwalają na wymuszenie reguł na poziomie całej organizacji, które nadpisują lokalne ustawienia projektów (Owner nie może ich zmienić).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Hierarchical firewall policy: Pozwala na zdefiniowanie reguł na poziomie Organizacji lub Folderu, które są nadrzędne wobec reguł wewnątrz projektów. Ustawienie reguły 'zezwól na port 3306 TYLKO z zakresów wewnętrznych' na samej górze hierarchii skutecznie zablokuje każdą próbę otwarcia MySQL na świat, nawet jeśli administrator projektu stworzy u siebie regułę 'allow 0.0.0.0/0'.
+
+Dlaczego inne są błędne:
+A. Deny 0.0.0.0/0: Zbyt ogólne, mogłoby zablokować też legalny ruch (np. HTTP na porcie 80). Rozwiązanie musi być specyficzne dla 'MYSQL_PORT'.
+C. Cloud Armor: Nie chroni bezpośrednio portów TCP baz danych na poziomie sieci VPC.
+D. Each VPC: Niewykonalne przy tysiącach projektów (brak centralizacji).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Hierarchiczne polityki to najpotężniejszy oręż administratora sieci.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Zdefiniowanie 'allow only internal' na górze hierarchii skutecznie blokuje publiczny dostęp do baz danych we wszystkich podległych sieciach.</p>
+<p><b>Głęboka analiza:</b> Polityki hierarchiczne mają unikalną akcję 'goto_next', która pozwala na przepuszczenie pakietu do sprawdzenia przez lokalny firewall projektu, jeśli spełnia on Twoje ogólne kryteria bezpieczeństwa.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewall-policies" target="_blank">https://cloud.google.com/vpc/docs/firewall-policies</a></li>

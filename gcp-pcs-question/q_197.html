@@ -79,14 +79,23 @@ Cloud Run: ensure only trusted container images are deployed. Which two?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AB.
 
-Wyjaśnienie: Binary Authorization wspiera Cloud Run (A). Polityka organizacji (B) wymusza użycie konkretnych reguł BinAuth w całej strukturze projektów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Enable on service: Musisz włączyć sprawdzanie podpisów bezpośrednio w konfiguracji usługi Cloud Run.
+B. Org policy: Pozwala administratorowi wymusić, aby KAŻDA nowa usługa Cloud Run w firmie obowiązkowo korzystała z wybranej polityki Binary Authorization. Zapobiega to omijaniu kontroli przez deweloperów.
+
+Dlaczego inne są błędne:
+C. K8s cluster: Cloud Run jest usługą serverless, nie zarządzasz w nim klastrem K8s bezpośrednio (mimo że pod spodem może być Knative).
+D. Breakglass: To funkcja OMIJANIA zabezpieczeń w sytuacjach awaryjnych, a nie ich 'zapewniania'.
+E. compute.trustedImageProjects: Dotyczy obrazów dysków dla Compute Engine, nie dotyczy obrazów kontenerów dla Cloud Run.
+
+Konsensus społeczności ExamTopics: 100% na AB. To standardowa metoda wymuszania standardów kontenerowych w modelu serverless.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AB</b></p>
-<p>Binary Authorization to jedyny mechanizm gwarantujący, że kod przeszedł przez proces atestacji przed uruchomieniem.</p>
+<p><b>Głęboka analiza:</b> Binary Authorization dla Cloud Run jest obecnie w fazie GA i pozwala na integrację z Artifact Registry w celu weryfikacji atestów zbudowanych przez Cloud Build.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization/docs/run/overview" target="_blank">https://cloud.google.com/binary-authorization/docs/run/overview</a></li>

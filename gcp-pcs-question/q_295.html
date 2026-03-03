@@ -78,14 +78,21 @@ Binary Authorization: ensure only images built by Cloud Build are deployed and p
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Cloud Build potrafi automatycznie tworzyć atestacje (podpisy) zawierające Build ID. Binary Authorization sprawdza te podpisy przed dopuszczeniem obrazu do uruchomienia.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Cloud Build Attestation: Cloud Build potrafi automatycznie generować podpisaną atestację zawierającą ID procesu budowania. Binary Authorization w klastrze GKE weryfikuje ten podpis. To daje pewność, że obraz kontenera pochodzi z Twojego zaufanego pipeline'u, a nie został zbudowany lokalnie na laptopie dewelopera.
+
+Dlaczego inne są błędne:
+A, B: Nie są to techniczne mechanizmy wbudowane w Binary Authorization.
+D. SHA: Służy do detekcji po fakcie, nie jest 'bramkarzem' wdrożeń.
+
+Konsensus społeczności ExamTopics: 100% na C. Integracja Cloud Build z BinAuth to fundament bezpieczeństwa kontenerów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Zapewnia to integralność łańcucha budowania.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie realizuje standard SLSA (Supply-chain Levels for Software Artifacts), gwarantując integralność artefaktu binarnego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization/docs/cloud-build-attestations" target="_blank">https://cloud.google.com/binary-authorization/docs/cloud-build-attestations</a></li>

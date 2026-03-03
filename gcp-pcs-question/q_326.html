@@ -78,14 +78,22 @@ Node auto-updates missed notification issues in GKE. Scalable cloud-first proces
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: GKE Node Auto-upgrades to usługa zarządzana, która automatycznie dba o to, by węzły miały zainstalowane najnowsze poprawki bezpieczeństwa, gdy tylko wersja zostanie oznaczona jako stabilna.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. GKE Node Auto-upgrades: Jest to usługa zarządzana, która automatycznie dba o to, by węzły miały najnowsze poprawki bezpieczeństwa. Skaluje się ona automatycznie dla dowolnej liczby klastrów. Użycie 'Maintenance Windows' pozwala kontrolować, kiedy te aktualizacje mogą się odbywać, aby nie zakłócać pracy aplikacji.
+
+Dlaczego inne są błędne:
+B. Custom script: Rozwiązanie trudne w utrzymaniu i nieskalowalne.
+C. Self-managed: Zwiększa narzut operacyjny i ryzyko błędów (musisz sam dbać o wszystko). GKE jest właśnie po to, by Google robiło to za Ciebie.
+D. Daily reboot: Nie instaluje poprawek, po prostu restartuje potencjalnie dziurawy system.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To fundament bezpieczeństwa platformy GKE.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Maintenance windows pozwalają ograniczyć czas aktualizacji do godzin najmniejszego ruchu.</p>
+<p><b>Głęboka analiza:</b> Node auto-upgrades są powiązane z wersją Mastera klastra. Google najpierw aktualizuje Mastera, a potem stopniowo, w sposób bezpieczny, wymienia węzły robocze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades</a></li>

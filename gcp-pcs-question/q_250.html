@@ -78,14 +78,22 @@ GCS: objects older than 365 days downgrade to Coldline automatically. Reduce cos
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Object Lifecycle Management to wbudowana funkcja GCS do automatycznej zmiany klasy storage (np. Standard -> Coldline) bez pisania kodu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Object Lifecycle Management: Jest to wbudowana, bezkosztowa funkcja Cloud Storage. Pozwala na zdefiniowanie reguły: 'Jeśli wiek obiektu > 365 dni, zmień klasę na COLDLINE'. Wszystko dzieje się automatycznie pod spodem, bez angażowania Twoich serwerów.
+
+Dlaczego inne są błędne:
+A. Inventory report: Tylko pokaże Ci problem, ale go nie naprawi.
+B. Cloud Run Job: Niepotrzebnie skomplikowane i generuje koszty obliczeniowe za coś, co chmura robi natywnie za darmo.
+C. Autoclass: Zmienia klasy dynamicznie na podstawie częstotliwości DOSTĘPU (access pattern), a nie sztywnego wieku 365 dni. Pytanie precyzuje warunek czasowy.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. To standardowa metoda optymalizacji kosztów GCS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Autoclass (C) zarządza klasami dynamicznie na podstawie dostępu, ale tu mamy konkretny wymóg czasowy (365 dni).</p>
+<p><b>Głęboka analiza:</b> Uważaj na operację 'SetStorageClass'. Choć obniża koszt składowania, samo jej wykonanie jest traktowane jako operacja typu Class A (płatna). Przy milionach małych plików warto policzyć, czy to się opłaca.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/lifecycle" target="_blank">https://cloud.google.com/storage/docs/lifecycle</a></li>

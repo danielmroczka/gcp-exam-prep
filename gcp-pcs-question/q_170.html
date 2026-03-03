@@ -78,14 +78,22 @@ Users created consumer user accounts using corporate domain name. How to manage?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: 'Transfer Tool for Unmanaged Users' (TTUU) to narzędzie w konsoli Admin służące do wysyłania zaproszeń użytkownikom do migracji ich 'prywatnych' kont Google na konta zarządzane.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Transfer Tool: To specjalne narzędzie w konsoli administracyjnej (Admin Console) służące do wyszukiwania kont osobistych (unmanaged) utworzonych na adresy e-mail w Twojej firmowej domenie. Narzędzie pozwala wysłać prośbę do użytkownika o migrację konta pod kontrolę firmy.
+
+Dlaczego inne są błędne:
+A. GCDS: Synchronizuje tożsamości, ale gdy napotka istniejące konto osobiste o tym samym adresie, zgłosi 'conflict' i nie utworzy konta zarządzanego. GCDS nie rozwiązuje konfliktu, on go wykrywa.
+B. New account: Nie zadziała, jeśli adres e-mail jest już zajęty przez konto osobiste (Conflicting account).
+D. SSO: Można włączyć dopiero PO pomyślnej migracji kont pod zarząd firmy.
+
+Konsensus społeczności ExamTopics: 100% na C. To jedyna oficjalna ścieżka rozwiązywania problemu 'conflicting accounts'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Pomaga to rozwiązać problem tzw. 'conflicting accounts'.</p>
+<p><b>Głęboka analiza:</b> Użytkownik ma 30 dni na zaakceptowanie prośby. Jeśli odmówi, administrator może zdecydować o wymuszeniu zmiany adresu e-mail na koncie osobistym użytkownika.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/7062710" target="_blank">https://support.google.com/cloudidentity/answer/7062710</a></li>

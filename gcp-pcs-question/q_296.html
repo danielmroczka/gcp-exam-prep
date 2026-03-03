@@ -78,14 +78,20 @@ Greatest risk to regulatory compliance in highly regulated industry. Which situa
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Brak ustandaryzowanego procesu utwardzania (hardening) systemów operacyjnych przy jednoczesnym posiadaniu szerokich uprawnień przez użytkowników to największe zagrożenie dla stabilności i bezpieczeństwa środowiska.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Broad roles + no hardening: Połączenie zbyt szerokich uprawnień (np. Owner/Editor) z brakiem zabezpieczenia systemów operacyjnych (hardening) to największe ryzyko. Pozwala ono hakerowi, który przejął maszynę przez lukę w OS, na natychmiastowe przejęcie całej chmury i wszystkich danych, co dyskwalifikuje firmę z większości norm compliance.
+
+Dlaczego inne są błędne:
+A, B, C: To wszystko są dobre praktyki bezpieczeństwa, zwiększające zgodność, a nie ryzyka.
+
+Konsensus społeczności ExamTopics: 100% na D. Brak higieny IAM to najczęstsza przyczyna wycieków danych w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Luki w OS są częstym wektorem ataków, które omijają inne zabezpieczenia chmurowe.</p>
+<p><b>Głęboka analiza:</b> Zawsze preferuj granularne role predefiniowane i regularne skanowanie obrazów VM pod kątem luk CVE.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/instances/hardening-os-images" target="_blank">https://cloud.google.com/compute/docs/instances/hardening-os-images</a></li>

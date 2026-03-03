@@ -78,14 +78,21 @@ Only allow communication between Web and App tiers. Consistent security when aut
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Konta serwisowe są bezpieczniejsze niż tagi, ponieważ Instance Admin nie może ich dowolnie podmieniać (wymagana rola ServiceAccountUser). Szablon instancji (D) zapewnia spójność przy skalowaniu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Instance templates with service accounts: Użycie Kont Serwisowych (SA) w regułach firewalla jest bezpieczniejsze niż tagów, ponieważ Instance Admin nie może zmienić SA przypisanego do maszyny bez posiadania uprawnienia `iam.serviceAccounts.actAs`. Szablon instancji (Instance Template) gwarantuje, że każda nowa maszyna utworzona przez autoskalowanie automatycznie otrzyma właściwe konto SA.
+
+Dlaczego inne są błędne:
+A, C. Tags: Tagi sieciowe są mniej bezpieczne, ponieważ każdy `Compute Instance Admin` może je dowolnie modyfikować na działającej maszynie, omijając w ten sposób restrykcje firewalla.
+B. Service accounts: Sama tożsamość jest poprawna, ale bez użycia szablonów (D) trudniej o 'konsystencję przy autoskalowaniu'.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. SA to tożsamość, której nie da się łatwo 'podrobić' jak tagu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Reguły firewalla oparte na SA są bardziej niezawodne w środowiskach wielozespołowych.</p>
+<p><b>Głęboka analiza:</b> Reguła firewalla typu: 'Zezwól na port 8080 z SA-WEB do SA-APP' jest niezależna od adresów IP i tagów, co czyni ją odporną na błędy konfiguracyjne deweloperów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewalls#service-accounts" target="_blank">https://cloud.google.com/vpc/docs/firewalls#service-accounts</a></li>

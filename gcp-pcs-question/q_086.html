@@ -78,14 +78,22 @@ You are investigating a compromised service account key. You need to audit which
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Tworzenie zasobów to operacja typu 'write', która jest rejestrowana w logach Admin Activity.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Admin Activity logs: Ten dziennik logów rejestruje wszystkie operacje 'write' wykonane na infrastrukturze (tworzenie VM, tworzenie bucketów, zmiana sieci). Jeśli skradziony klucz został użyty do stworzenia nowych zasobów, ślad tego będzie właśnie tutaj.
+
+Dlaczego inne są błędne:
+A. Data Access logs: Rejestrują ODCZYT danych lub metadanych (np. kto pobrał plik). Nie powiedzą Ci o tworzeniu nowej infrastruktury.
+C. Access Transparency logs: Dotyczą działań inżynierów Google, a nie Twojego skradzionego klucza.
+D. Stackdriver Monitoring: Pokazuje metryki wydajności (CPU, zużycie dysku), nie służy do śledzenia zdarzeń administracyjnych typu 'create resource'.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Admin Activity to 'czarna skrzynka' dla zmian w konfiguracji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Admin Activity logs zawierają informacje o tym, kto, kiedy i jaki zasób utworzył lub zmodyfikował.</p>
+<p><b>Głęboka analiza:</b> Logi Admin Activity są przechowywane domyślnie przez 400 dni, co daje szerokie pole do analizy incydentów, które wydarzyły się dawno temu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/audit/understanding-audit-logs#admin-activity" target="_blank">https://cloud.google.com/logging/docs/audit/understanding-audit-logs#admin-activity</a></li>

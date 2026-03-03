@@ -79,14 +79,22 @@ Your team wants to limit users with administrative privileges at the organizatio
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AB.
 
-Wyjaśnienie: Organization Administrator (GCP) i Super Admin (Google Workspace/Cloud Identity) to najbardziej uprzywilejowane role.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Organization Administrator: Ta rola IAM w GCP pozwala na pełne zarządzanie uprawnieniami i politykami całej organizacji. Ktoś z tą rolą może nadać sobie każdą inną uprawnienie.
+B. Super Admin: To rola w Google Workspace / Cloud Identity. Super Admin może zarządzać samymi tożsamościami, resetować hasła innym administratorom i posiada pełną władzę nad domeną, która jest fundamentem organizacji w GCP.
+
+Dlaczego inne są błędne:
+C, D: To role administracyjne, ale ograniczone do konkretnych usług (GKE, VM) i zazwyczaj na poziomie projektu, a nie całej organizacji.
+E. Organization Role Viewer: To rola tylko do odczytu, nie daje żadnych uprawnień 'privilege' pozwalających na zmianę konfiguracji.
+
+Konsensus społeczności ExamTopics: 100% na AB. To duet 'najpotężniejszych' ról w ekosystemie Google Cloud.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AB</b></p>
-<p>Ograniczenie liczby osób z tymi uprawnieniami jest krytyczne dla bezpieczeństwa całej organizacji.</p>
+<p><b>Głęboka analiza:</b> Najlepszą praktyką jest posiadanie mniej niż 3 Super Adminów i Adminów Organizacji, a ich konta powinny być używane tylko do zadań 'Break Glass'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/access-control-org" target="_blank">https://cloud.google.com/resource-manager/docs/access-control-org</a></li>

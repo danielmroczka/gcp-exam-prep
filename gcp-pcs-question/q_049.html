@@ -78,14 +78,22 @@ A company wants to securely connect their on-premises data center to GCP with hi
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Dedicated Interconnect oferuje fizyczne połączenie bezpośrednio z infrastrukturą Google o przepustowości 10 Gbps lub 100 Gbps.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Dedicated Interconnect: Oferuje fizyczne, dedykowane łącze o przepustowościach 10 Gbps lub 100 Gbps. Jest to najbardziej wydajne i niezawodne rozwiązanie dla dużych przedsiębiorstw potrzebujących stałego, szerokiego pasma do chmury.
+
+Dlaczego inne są błędne:
+A. Cloud VPN: Przepustowość jednego tunelu to ok. 3 Gbps. Osiągnięcie stabilnych 10 Gbps+ wymagałoby wielu tuneli, co jest droższe i trudniejsze w zarządzaniu niż Interconnect.
+B. Carrier Peering: To połączenie dla dostępu do publicznych API Google (np. YouTube, Workspace), nie zapewnia ono prywatnego połączenia z siecią VPC dla Twoich maszyn VM.
+D. Partner Interconnect: Podobny do Dedicated, ale realizowany przez pośrednika (operatora). Zazwyczaj stosowany dla mniejszych przepustowości (poniżej 10 Gbps) lub gdy klient nie ma punktu styku z Google.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C ze względu na wymóg '10 Gbps+'. Dedicated to najwyższa półka wydajności.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Dla wysokich wymagań wydajnościowych Interconnect jest lepszy niż VPN.</p>
+<p><b>Głęboka analiza:</b> Dedicated Interconnect wymaga fizycznej kolokacji sprzętu klienta w tym samym punkcie (PoP) co routery Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview</a></li>

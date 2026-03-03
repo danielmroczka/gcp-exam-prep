@@ -78,14 +78,22 @@ Secrets in Secret Manager payloads only in europe-west1 and europe-west4. Highly
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: 'User-managed replication' w Secret Managerze pozwala na ręczny wybór listy regionów, w których sekret jest przechowywany i replikowany.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. User managed replication: Secret Manager pozwala na wybranie metody replikacji. Wybierając 'User managed', możesz jawnie wskazać listę regionów (np. BE i NL), w których sekret będzie przechowywany. Zapewnia to wysoką dostępność (HA) przy jednoczesnym zachowaniu wymogów rezydencji danych.
+
+Dlaczego inne są błędne:
+B. Automatic replication: Replikuje dane globalnie do wszystkich regionów Google, co narusza wymóg 'tylko w europe-west1 i west4'.
+C. Two secrets: Skomplikowane zarządzanie. Aplikacja musiałaby wiedzieć, do którego regionu uderzyć. Replikacja (A) robi to przezrozyście.
+D. Org policy deny: Nie istnieje polityka organizacji, która precyzyjnie 'wycina' regiony z automatycznej replikacji Secret Managera w taki sposób.
+
+Konsensus społeczności ExamTopics: 100% na A. Wybór regionów = User Managed replication.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Replikacja automatyczna (B) rozrzuca dane globalnie, co narusza wymóg rezydencji danych.</p>
+<p><b>Głęboka analiza:</b> Secret Manager w trybie User-managed gwarantuje, że payload sekretu nigdy nie opuści wybranych regionów, nawet w formie zaszyfrowanej kopii zapasowej Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#replication" target="_blank">https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#replication</a></li>

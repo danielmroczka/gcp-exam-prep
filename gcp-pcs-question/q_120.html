@@ -78,14 +78,22 @@ Enable VPC Service Controls and allow perimeter changes without preventing acces
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Tryb 'Dry run' pozwala na testowanie wpływu perymetru bez faktycznego blokowania ruchu API.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Dry run mode: Pozwala na zdefiniowanie konfiguracji perymetru i sprawdzenie w logach, co ZOSTAŁOBY zablokowane, gdyby polityka była aktywna. Nie przerywa jednak żadnego rzeczywistego ruchu API, co pozwala na bezpieczne testowanie bez ryzyka przestoju produkcyjnego.
+
+Dlaczego inne są błędne:
+A. Cloud Run: To usługa obliczeniowa, a nie tryb pracy perymetru.
+B. Native: Nie istnieje taki tryb w VPC SC.
+C. Enforced: To tryb aktywny, który natychmiast blokuje niedozwolony ruch - przeciwieństwo wymogu 'without preventing access'.
+
+Konsensus społeczności ExamTopics: 100% na D. To standardowy etap każdego wdrożenia VPC SC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Zablokowane zdarzenia są tylko logowane, co pozwala na bezpieczną walidację konfiguracji.</p>
+<p><b>Głęboka analiza:</b> Logi z trybu Dry Run zawierają szczegółowe informacje o 'violations', co pozwala administratorowi na precyzyjne dopisanie brakujących wyjątków przed ostatecznym włączeniem blokad.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run-overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/dry-run-overview</a></li>

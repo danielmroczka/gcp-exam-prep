@@ -78,14 +78,22 @@ Anonymize PHI in a non-reversible way. Do not preserve character set and length.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Hashing (haszowanie) jest procesem jednokierunkowym (nieodwracalnym) i całkowicie zmienia zestaw znaków oraz długość (np. SHA-256).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Cryptographic hashing: Haszowanie jest procesem jednokierunkowym (nieodwracalnym). Całkowicie zmienia ono format i długość danych (np. SHA-256 zawsze daje 64 znaki hex), co spełnia wymóg 'do not preserve character set and length'.
+
+Dlaczego inne są błędne:
+A. Deterministic encryption: Jest odwracalna (reversible) przy użyciu klucza.
+B. Format-preserving encryption: Z założenia zachowuje format i długość (np. numer telefonu po zaszyfrowaniu nadal ma 9 cyfr) - przeciwieństwo wymogu.
+D. Wrapped keys: To mechanizm zarządzania kluczami, a nie technika transformacji danych (anonymizacji).
+
+Konsensus społeczności ExamTopics: 100% na C. Hashing = non-reversible i zmiana formatu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Inne opcje (A, B) są odwracalne lub zachowują format, co nie spełnia wymogów pytania.</p>
+<p><b>Głęboka analiza:</b> Jeśli potrzebowałbyś łączyć te dane w przyszłości (referential integrity), musiałbyś użyć tej samej soli (salt) przy haszowaniu każdego rekordu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/transformations-reference#hashing" target="_blank">https://cloud.google.com/dlp/docs/transformations-reference#hashing</a></li>

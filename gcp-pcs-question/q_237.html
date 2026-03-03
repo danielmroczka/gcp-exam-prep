@@ -78,14 +78,22 @@ Full control of keys generated and stored outside Google, integrate with many se
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Cloud EKM pozwala na używanie zewnętrznych kluczy w BigQuery i innych usługach, przy czym klucz nigdy nie trafia do infrastruktury Google.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Cloud EKM: Pozwala na używanie kluczy, które fizycznie nigdy nie opuszczają Twojego on-premises HSM (lub HSM partnera). Cloud KMS służy tylko jako łącznik. EKM jest w pełni zintegrowany z BigQuery, co pozwala na analitykę przy zachowaniu pełnej kontroli nad kluczem.
+
+Dlaczego inne są błędne:
+A. CSEK: Nie jest wspierany przez BigQuery (tylko GCS i PD).
+B. Google managed HSM: Klucze są w infrastrukturze Google, nie masz nad nimi 'pełnej kontroli' poza chmurą.
+D. Imported key: Po imporcie materiał klucza rezyduje w pamięci systemów Google, co narusza wymóg 'stored outside Google'.
+
+Konsensus społeczności ExamTopics: 100% na C. EKM to jedyna opcja dla kluczy zewnętrznych w BQ.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>CSEK (A) nie jest wspierany przez BigQuery.</p>
+<p><b>Głęboka analiza:</b> Przy EKM możesz natychmiast 'odciąć' chmurę od swoich danych, po prostu wyłączając dostęp do klucza w swoim lokalnym systemie HSM.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>

@@ -78,14 +78,22 @@ Route all internet traffic from GCP through on-prem internet. Secure, highest ba
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Cloud Interconnect oferuje największą przepustowość. Kierowanie ruchu 0.0.0.0/0 przez on-premises to tzw. 'forced tunneling'.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Cloud Interconnect (Forced Tunneling): Aby uzyskać najwyższą przepustowość, niezbędny jest Cloud Interconnect. Konfiguracja polega na rozgłoszeniu przez BGP trasy domyślnej (0.0.0.0/0) z Twojego routera on-prem do chmury Google. Dzięki temu cały ruch maszyn GCP do internetu zostanie skierowany 'pod prąd' do Twojego centrum danych i przejdzie przez Twój lokalny firewall.
+
+Dlaczego inne są błędne:
+A. HA VPN: Ma ograniczenia przepustowości (ok. 3Gbps na tunel), nie spełnia wymogu 'highest bandwidth' tak dobrze jak Interconnect.
+B. Routing VM: To pojedynczy punkt awarii i wąskie gardło wydajnościowe.
+C. Interconnect + VPN: Szyfrowanie IPsec na VPN dodatkowo obniża wydajność. Jeśli nie potrzebujesz dodatkowego szyfrowania warstwy 3, samo D jest bardziej wydajne.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. To klasyczna architektura dla firm z własnymi centrami inspekcji ruchu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Pozwala to na wykorzystanie lokalnych systemów IDS/IPS/DLP dla całego ruchu z chmury.</p>
+<p><b>Głęboka analiza:</b> Takie podejście nazywa się 'Egress Filtering at the Edge'. Pozwala na egzekwowanie tych samych polityk bezpieczeństwa dla pracowników w biurze i dla maszyn w chmurze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/overview</a></li>

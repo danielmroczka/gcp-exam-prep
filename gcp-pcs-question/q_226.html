@@ -78,14 +78,22 @@ Protect VMs from boot/kernel malware. Data in use cannot be read by host system.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Shielded VMs (Secure Boot, vTPM) chronią przed modyfikacją bootloadera i kernela. Confidential Computing szyfruje dane w RAM, chroniąc przed dostępem z poziomu hypervisora/hosta.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Shielded VM + Confidential Computing: To duet zabezpieczeń sprzętowych. Shielded VMs (Secure Boot, vTPM) chronią integralność procesu bootowania i kernela przed rootkitami. Confidential Computing szyfruje dane w pamięci RAM, uniemożliwiając ich odczyt nawet przez hypervisor lub system operacyjny hosta (wymóg 'cannot be read by host system').
+
+Dlaczego inne są błędne:
+A. Cloud Run function: Nie ma związku z bezpieczeństwem kernela maszyn wirtualnych.
+B. SCC VM Threat Detection: To narzędzie detekcyjne (reaktywne), a pytanie prosi o 'Protect' (prewencję sprzętową).
+D. Hardened images: To dobre rozwiązanie software'owe, ale nie zastępuje sprzętowej weryfikacji bootowania (Secure Boot), którą zapewniają Shielded VMs.
+
+Konsensus społeczności ExamTopics: 100% na C. Hardware-based protection = Shielded + Confidential.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>To połączenie oferuje najwyższy poziom bezpieczeństwa sprzętowego dla IaaS.</p>
+<p><b>Głęboka analiza:</b> Shielded VM zapewnia 'Root of Trust'. Jeśli kernel zostanie podmieniony, Secure Boot zablokuje start maszyny. Confidential VM (AMD SEV) dopełnia to ochroną danych w trakcie obliczeń.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/shielded-vm" target="_blank">https://cloud.google.com/shielded-vm</a></li>

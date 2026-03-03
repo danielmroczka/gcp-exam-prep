@@ -78,14 +78,22 @@ Zero Trust Chrome Enterprise Premium governing access to GCS. authorized users o
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Context-Aware Access (C) w połączeniu z perymetrem VPC SC pozwala na odcięcie dostępu do danych, jeśli urządzenie nie spełnia wymogów (np. brak antywirusa, stary OS), nawet przy poprawnym haśle.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Context-Aware Access (CAA): To serce modelu Zero Trust w Google Cloud. Pozwala na zdefiniowanie 'Access Level' w ACM, który wymaga określonego stanu urządzenia (managed, patches, AV). Przypisanie tego poziomu do VPC SC (dla Cloud Storage) gwarantuje, że użytkownik nie pobierze danych nawet z poprawnym hasłem, jeśli jego laptop nie jest 'zdrowy' (managed device).
+
+Dlaczego inne są błędne:
+A. IAP + VPC SC: IAP chroni aplikacje webowe/SSH, ale dostęp do natywnego API Cloud Storage (np. przez gcloud lub konsolę) najlepiej zabezpiecza CAA na perymetrze VPC SC.
+B. VPN: Zaprzeczenie idei Zero Trust 'regardless of location'. VPN opiera się na lokalizacji sieciowej, a nie na tożsamości i stanie urządzenia.
+D. Cloud Firewall: Nie ma wglądu w to, czy system operacyjny laptopa użytkownika ma zainstalowane poprawki.
+
+Konsensus społeczności ExamTopics: 100% na C. To najbardziej zaawansowany i zalecany model izolacji danych wrażliwych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Jest to kwintesencja modelu BeyondCorp/Zero Trust w Google Cloud.</p>
+<p><b>Głęboka analiza:</b> Ten model (Chrome Enterprise Premium + ACM) eliminuje potrzebę VPN. Pracownik może być w kawiarni, ale jego laptop musi być zaszyfrowany i zarządzany przez firmę, aby system 'otworzył' dostęp do danych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/access-level-usage" target="_blank">https://cloud.google.com/vpc-service-controls/docs/access-level-usage</a></li>

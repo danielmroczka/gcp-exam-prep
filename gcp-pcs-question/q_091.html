@@ -79,14 +79,23 @@ Convert existing unmanaged users (using corporate domain for personal accounts) 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AD.
 
-Wyjaśnienie: Najpierw synchronizujesz konta (A), a następnie używasz narzędzia TTUU (D) do wykrycia konfliktów i zaproszenia użytkowników do migracji kont osobistych na firmowe.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. GCDS: Najpierw synchronizujesz tożsamości z lokalnego AD do Google, aby system wiedział, jakie konta POWINNY istnieć.
+D. Transfer Tool (TTUU): To narzędzie identyfikuje konta 'osobiste' założone na adresy w Twojej domenie i pozwala wysłać do ich właścicieli prośbę o przekazanie konta pod zarząd firmy (migracja do konta zarządzanego).
+
+Dlaczego inne są błędne:
+B. Recovery emails: Nie pomagają w przejęciu kontroli nad kontem.
+C. Force change: Można to zrobić, ale jest to bardzo inwazyjne i nie rozwiązuje problemu istniejących danych na kontach. TTUU jest zalecaną, łagodniejszą ścieżką.
+E. Ask to delete: Mało skuteczne i powoduje utratę danych służbowych, które pracownik mógł tam zgromadzić.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla AD. To standardowa procedura 'domykania' domeny w Google Cloud.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AD</b></p>
-<p>TTUU to jedyne oficjalne narzędzie Google do przejmowania kontroli nad kontami utworzonymi poza domeną zarządzaną.</p>
+<p><b>Głęboka analiza:</b> Konflikt kont (Conflicting Accounts) powstaje, gdy GCDS próbuje stworzyć konto, które już istnieje jako osobiste. TTUU to jedyny sposób na czyste rozwiązanie tego problemu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/7062710" target="_blank">https://support.google.com/cloudidentity/answer/7062710</a></li>

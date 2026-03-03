@@ -78,14 +78,22 @@ Encryption service: rotation every 45 days, FIPS 140-2 Level 3, US redundancy. W
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud HSM to usługa sprzętowa Google Cloud, która posiada certyfikację FIPS 140-2 Level 3. Wspiera automatyczną rotację i replikację regionalną.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud HSM: To usługa sprzętowych modułów bezpieczeństwa Google Cloud. Jako jedyna posiada certyfikację FIPS 140-2 na poziomie <b>Level 3</b> (standardowy Cloud KMS to Level 1). Cloud HSM wspiera automatyczną rotację (np. co 45 dni) i jest dostępny w konfiguracjach multi-regionalnych (US redundancy).
+
+Dlaczego inne są błędne:
+A. Cloud KMS (software): Posiada certyfikację tylko Level 1. Nie spełnia wymogu fizycznej ochrony klucza na poziomie Level 3.
+C. CSEK: Wymaga ręcznej rotacji przez klienta (wysyłanie nowego klucza), Google nie może go 'automatycznie rotować co 45 dni'.
+D. Google-managed: Użytkownik nie ma wpływu na harmonogram rotacji (zazwyczaj co kilka lat, a nie 45 dni).
+
+Konsensus społeczności ExamTopics: 100% na B. Level 3 = HSM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Standardowy Cloud KMS (programowy) to poziom Level 1. Dla Level 3 wymagany jest Cloud HSM.</p>
+<p><b>Głęboka analiza:</b> FIPS 140-2 Level 3 wymaga odporności na fizyczną ingerencję (tamper-evident). Cloud HSM to fizyczne urządzenia w serwerowniach Google, do których dostęp jest niemożliwy nawet dla personelu Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/hsm/docs/fips-140-2-level-3-compliance" target="_blank">https://cloud.google.com/hsm/docs/fips-140-2-level-3-compliance</a></li>

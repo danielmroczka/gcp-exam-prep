@@ -78,14 +78,20 @@ Resource hierarchy with org policies at each node. Which LB types denied in VPC 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Polityki organizacji w GCP działają według zasady 'deny wins' lub dziedziczenia restrykcji. Jeśli na poziomie organizacji zablokowano wszystkie typy LB, ta blokada obowiązuje w dół hierarchii, chyba że explicite dodano wyjątek (którego tu nie ma).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. All types denied: W hierarchii polityk organizacji GCP obowiązuje zasada dziedziczenia restrykcji. Jeśli na samej górze (Organization) ustawiono blokadę na wszystkie typy Load Balancerów, to ta blokada 'spływa' na wszystkie foldery i projekty. Niższe polityki (np. na poziomie folderu) mogą tylko DODATKOWO ograniczać, ale nie mogą zezwolić na coś, co góra zablokowała (chyba że wyłączysz dziedziczenie, ale pytanie sugeruje kumulację restrykcji).
+
+Dlaczego inne są błędne:
+B, C, D: Skupiają się na mniejszych fragmentach hierarchii. Zasada 'Deny wins' na poziomie globalnym sprawia, że żadna maszyna w VPC A nie może stworzyć żadnego typu LB.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. Zrozumienie hierarchii Org Policy jest kluczem do egzaminu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Hierarchia: Org -> Folder -> Project. Restrykcje z góry są domyślnie wiążące.</p>
+<p><b>Głęboka analiza:</b> Administrator może przerwać dziedziczenie (inheritFromParent: false), ale bez tej jawnej flagi restrykcje z góry są absolutne.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>

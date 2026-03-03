@@ -78,14 +78,22 @@ Test checks on credit card PAN. Minimize risk of exposure for 10k real records. 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: FPE (Format-Preserving Encryption) jest tu kluczowe, ponieważ pozwala aplikacji testować logikę sprawdzania formatu numeru karty, nie widząc jego rzeczywistej wartości.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. DLP + FPE: Pytanie wymaga możliwości TESTOWANIA logiki formantu PAN. FPE szyfruje numer tak, że wynik nadal wygląda jak numer karty i ma poprawną długość, co pozwala aplikacji 'myśleć', że pracuje na realnych danych, mimo że są one bezpiecznie zanonimizowane.
+
+Dlaczego inne są błędne:
+A. Confidential Computing: Chroni przed hakerem, ale programista i tak widziałby jawne dane w logach testowych.
+C. KMS: Binarny szyfrogram niszczy format numeru karty, uniemożliwiając testowanie logiki pola tekstowego.
+D. Random values: Może zniszczyć sumy kontrolne (Luhn), które aplikacja może chcieć walidować.
+
+Konsensus społeczności ExamTopics: 100% na B. FPE to 'best practice' dla bezpiecznych danych testowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>FPE sprawia, że numer karty nadal wygląda jak numer karty, co jest niezbędne dla kodu walidującego.</p>
+<p><b>Głęboka analiza:</b> FPE jest deterministyczne - ten sam numer karty zawsze da ten sam token, co pozwala na testowanie złączeń (joins) między bazami bez ujawniania PII.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/pseudonymization#fpe" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization#fpe</a></li>

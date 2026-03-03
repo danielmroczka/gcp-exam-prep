@@ -78,14 +78,22 @@ Restrict use of default networks in organization following best practices. What 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Ograniczenie polityki organizacji 'compute.skipDefaultNetworkCreation' zapobiega automatycznemu tworzeniu sieci 'default' w każdym nowym projekcie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. compute.skipDefaultNetworkCreation: Jest to specjalna polityka organizacji, która zapobiega automatycznemu tworzeniu sieci VPC o nazwie 'default' w każdym nowym projekcie. Jest to zalecana praktyka (best practice), aby uniknąć bałaganu w sieciach i przypadkowego wystawienia maszyn z domyślnymi regułami firewall (które w sieci default są zbyt otwarte).
+
+Dlaczego inne są błędne:
+B. Cron job: Rozwiązanie 'brudne', działające po fakcie (reaktywne). Pozwala na powstanie sieci i jej krótki byt.
+C. Owner/VPC SC: Zbyt skomplikowane i niecelowe. VPC SC nie służy do ograniczania tworzenia sieci wewnątrz projektów.
+D. CI/CD templates: Pomagają, ale nie zapobiegają ręcznemu stworzeniu projektu przez konsolę z domyślną siecią.
+
+Konsensus społeczności ExamTopics: 100% na A. To fundament bezpieczeństwa nowej organizacji w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To standardowy krok przy zabezpieczaniu nowej organizacji w GCP.</p>
+<p><b>Głęboka analiza:</b> Sieć 'default' ma reguły firewall zezwalające na SSH i RDP z całego internetu. Wyłączenie jej tworzenia to pierwszy krok do zabezpieczenia środowiska.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>

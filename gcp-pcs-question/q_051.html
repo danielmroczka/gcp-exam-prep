@@ -78,14 +78,22 @@ You want to ensure that only trusted container images are deployed to GKE. Which
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Binary Authorization to usługa kontroli wdrożeń, która zapewnia, że tylko podpisane i zatwierdzone obrazy trafią do klastra GKE.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Binary Authorization: Jest to usługa kontroli wdrożeń (enforcement), która fizycznie ZABLOKUJE próbę uruchomienia kontenera w GKE, jeśli nie posiada on cyfrowego podpisu (atestacji) potwierdzającego, że obraz jest zaufany i przeszedł testy.
+
+Dlaczego inne są błędne:
+A. Container Analysis: Służy do skanowania obrazów pod kątem podatności (Vulnerability Scanning). Dostarcza informacji, ale sama w sobie nie blokuje wdrożenia. Binary Authorization używa informacji z Container Analysis do podjęcia decyzji.
+C. Cloud Build: System CI/CD. Może budować i podpisywać obrazy, ale to nie on pilnuje tego, co faktycznie dzieje się w klastrze GKE.
+D. Artifact Registry: Repozytorium obrazów. Może przechowywać zaufane obrazy, ale nie kontroluje procesu ich uruchamiania.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Binary Authorization to jedyne narzędzie do aktywnego blokowania niezatwierdzonych kontenerów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Binary Authorization integruje się z Container Analysis, aby sprawdzać wyniki skanowania podatności przed wdrożeniem.</p>
+<p><b>Głęboka analiza:</b> BinAuth pozwala na tworzenie reguł typu: 'obraz musi być podpisany przez skaner bezpieczeństwa ORAZ przez menedżera QA' przed trafieniem na produkcję.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>

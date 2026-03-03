@@ -78,14 +78,21 @@ strongest level of security and control for highly sensitive data in GCP. What t
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Szyfrowanie po stronie klienta (Client-side encryption) oznacza, że dane są szyfrowane PRZED wysłaniem do chmury. Google widzi tylko zaszyfrowane bloki danych, nie mając nigdy dostępu do kluczy (nawet 'w locie').</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Client-side encryption + HSM: To najwyższy poziom bezpieczeństwa (Strongest level). Dane są szyfrowane PRZED wysłaniem do chmury. Google widzi tylko nieczytelne bloki bajtów. Użycie Cloud HSM do ochrony kluczy nadrzędnych zapewnia, że nawet przy posiadaniu kluczy w chmurze, są one chronione sprzętowo (FIPS 140-2 Level 3).
+
+Dlaczego inne są błędne:
+A. CSEK: Bardzo silne, ale CSEK szyfruje dane 'server-side' (klucz trafia na chwilę do RAM Google). Szyfrowanie 'client-side' (C) jest silniejsze, bo Google nigdy nie widzi klucza.
+B, D: Opierają się na zaufaniu do infrastruktury Google (server-side encryption), co z definicji jest słabsze niż szyfrowanie u siebie (client-side).
+
+Konsensus społeczności ExamTopics: 100% na C. Szyfrowanie u klienta to 'ultimate security' w chmurze.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Zastosowanie sprzętowych modułów HSM dla kluczy nadrzędnych dopełnia ten najwyższy poziom bezpieczeństwa.</p>
+<p><b>Głęboka analiza:</b> Wadą opcji C jest brak możliwości wyszukiwania i analizy danych przez natywne usługi chmurowe (np. BQ nie przeszuka zaszyfrowanego pliku). Jednak wymogiem pytania jest Maksymalne Bezpieczeństwo, a nie Użyteczność.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/encryption/client-side" target="_blank">https://cloud.google.com/storage/docs/encryption/client-side</a></li>

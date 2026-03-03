@@ -78,14 +78,21 @@ Applications in multiple clouds access GCP resources using short-lived credentia
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: WIF (Workload Identity Federation) wspiera AWS, Azure i OIDC, eliminując potrzebę używania statycznych kluczy kont serwisowych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Workload Identity Pools: To mechanizm federacji tożsamości. Tworzysz jedną pulę i dodajesz do niej dostawców (Providers) dla AWS i Azure. Aplikacje używają swoich natywnych poświadczeń (np. AWS IAM Role) do pobrania krótkotrwałych tokenów GCP poprzez impersonację.
+
+Dlaczego inne są błędne:
+B. SA key download: Tworzy statyczne, niebezpieczne klucze JSON - przeciwieństwo wymogu 'short-lived'.
+D. Firewall ingress: Kontroluje sieć, a nie tożsamość i uprawnienia aplikacji multi-cloud.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. WIF to jedyne skalowalne rozwiązanie multi-cloud w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Każdy chmura zewnętrzna ma własnego dostawcę (Provider) wewnątrz puli tożsamości.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie eliminuje 'Secret Management overhead' - nie musisz już rotować kluczy GCP na serwerach w AWS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workload-identity-federation</a></li>

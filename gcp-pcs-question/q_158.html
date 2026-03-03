@@ -78,14 +78,22 @@ Web app logs preserved for 12 years within Europe. Minimize overhead and cost-ef
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud Logging pozwala na tworzenie własnych 'log buckets' z definiowalnym czasem retencji (nawet do lat). Wybór regionu zapewnia rezydencję danych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud Logging Log Bucket (retention): Cloud Logging pozwala na tworzenie własnych 'log buckets' z retencją do 10 lat (domyślnie w UI, więcej przez API/CLI). Możesz wskazać lokalizację (EUROPE-WEST1), co spełnia wymóg rezydencji. Użycie agenta na VM (B) automatyzuje zbieranie bez zmiany kodu aplikacji (A).
+
+Dlaczego inne są błędne:
+A. Modify code: Zmiana kodu jest kosztowna i zwiększa narzut (overhead).
+C. Pub/Sub to GCS: To bardziej skomplikowany rurociąg niż natywna funkcja 'Log Buckets'. GCS ma wprawdzie dłuższą retencję, ale Log Buckets są łatwiejsze w analizie historycznej.
+D. Custom retention: Ta opcja nie precyzuje SKĄD biorą się logi (wymagany agent). B jest kompletną odpowiedzią 'end-to-end'.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na B. Log Buckets to nowoczesna metoda długoterminowej retencji w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Opcja D jest bliska, ale B precyzuje użycie agenta dla aplikacji na Compute Engine.</p>
+<p><b>Głęboka analiza:</b> Od niedawna Cloud Logging wspiera Log Analytics, co pozwala na przeszukiwanie tych 12-letnich logów za pomocą SQL, co jest ogromną zaletą przy audytach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/routing/overview#buckets" target="_blank">https://cloud.google.com/logging/docs/routing/overview#buckets</a></li>

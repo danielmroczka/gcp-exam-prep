@@ -78,14 +78,21 @@ separate prod and dev logs. Developers see dev logs, security see all. Minimal p
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Rola dziedziczy w dół. Nadanie uprawnień na poziomie organizacji daje dostęp do wszystkiego. Nadanie na poziomie folderu dev ogranicza deweloperów tylko do ich projektów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Hierarchical IAM: Nadanie roli `logging.viewer` na poziomie Organizacji sprawia, że zespół Security widzi logi ze wszystkich projektów (dziedziczenie w dół). Nadanie tej samej roli deweloperom TYLKO na poziomie folderu 'Dev' sprawia, że nie widzą oni niczego w folderze 'Prod'. To idealnie realizuje zasadę najniższych uprawnień.
+
+Dlaczego inne są błędne:
+B, D. Admin at org: Nadawanie roli Admina lub Viewer na poziomie Organizacji deweloperom dałoby im wgląd w logi produkcyjne, co jest zabronione.
+C. Admin for security: Viewer zazwyczaj wystarcza do przeglądania logów. Admin to zbyt wysokie uprawnienie dla zespołu, który ma tylko 'widzieć' logi.
+
+Konsensus społeczności ExamTopics: 100% na A. To klasyczne wykorzystanie hierarchii zasobów GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to podręcznikowy przykład zastosowania hierarchii zasobów i dziedziczenia uprawnień.</p>
+<p><b>Głęboka analiza:</b> Dzięki temu rozwiązaniu nie musisz zarządzać uprawnieniami w każdym projekcie osobno. Folder 'Dev' staje się logicznym kontenerem uprawnień dla programistów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/access-control-folders" target="_blank">https://cloud.google.com/resource-manager/docs/access-control-folders</a></li>

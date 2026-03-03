@@ -78,14 +78,22 @@ Customers complain about errors. Suspect Cloud Armor rules too strict. Collect r
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Aby zobaczyć szczegóły blokad Cloud Armor w logach, musisz włączyć logowanie na backendzie Load Balancera. Poziom VERBOSE (lub po prostu 'enable') pozwala na identyfikację, która reguła zadziałała.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. ALB Request Logging: Logi Cloud Armor są dołączane do logów żądań Load Balancera. Jeśli nie włączysz logowania na 'Backend Service' Load Balancera, nie zobaczysz dlaczego użytkownicy są blokowani. Poziom VERBOSE (lub po prostu 'enabled') ujawni identyfikator reguły Armor, która odrzuciła żądanie.
+
+Dlaczego inne są błędne:
+A. Sample rate: Pomoże, jeśli logowanie jest już włączone, ale tu problemem jest samo 'zbieranie' szczegółowych danych.
+C. Preview mode: Służy do sprawdzania NOWYCH reguł, a tu badamy błędy w regułach już DZIAŁAJĄCYCH.
+D. Log sink: To metoda eksportu logów, a nie ich generowania u źródła.
+
+Konsensus społeczności ExamTopics: 100% na B. Bez logów na LB, Cloud Armor jest 'niewidoczny' dla analityka.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Opcja C (preview) pomaga UNIKNĄĆ błędów w przyszłości, ale do diagnozy JUŻ ISTNIEJĄCYCH potrzebne są logi z aktywnej polityki.</p>
+<p><b>Głęboka analiza:</b> W logach szukaj pola `enforcedSecurityPolicy` – tam znajdziesz nazwę reguły, która 'zabiła' połączenie klienta.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor/docs/request-logging" target="_blank">https://cloud.google.com/armor/docs/request-logging</a></li>

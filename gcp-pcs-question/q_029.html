@@ -78,14 +78,21 @@ Your team sets up a Shared VPC. They need to enable Engineering Group A to attac
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Nadanie uprawnień na poziomie konkretnej podsieci realizuje zasadę najniższych uprawnień.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Compute Network User at the subnet level: Nadanie roli Network User bezpośrednio na zasobie podsieci (a nie na całym projekcie) precyzyjnie ogranicza uprawnienia inżynierów. Będą oni widzieć i mogli używać tylko tej jednej, konkretnej podsieci.
+
+Dlaczego inne są błędne:
+A. Host project level: Nadanie roli na poziomie całego projektu pozwoliłoby inżynierom używać KAŻDEJ podsieci w tym projekcie hosta, co narusza zasadę najniższych uprawnień.
+C, D. Shared VPC Admin: To rola o bardzo wysokich uprawnieniach, pozwalająca na konfigurowanie całej architektury Shared VPC, a nie tylko na 'używanie' sieci do tworzenia VM.
+
+Konsensus społeczności ExamTopics: Silne poparcie dla B. Jest to klasyczny przykład granularności IAM w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Rola Network User na poziomie podsieci ogranicza dostęp inżynierów tylko do tego zasobu.</p>
+<p><b>Głęboka analiza:</b> W Shared VPC projekt hosta 'wypożycza' podsieci projektom usługowym. Zarządzanie tym 'wypożyczaniem' na poziomie pojedynczych podsieci to najlepsza praktyka bezpieczeństwa sieciowego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/shared-vpc#iam_in_shared_vpc" target="_blank">https://cloud.google.com/vpc/docs/shared-vpc#iam_in_shared_vpc</a></li>

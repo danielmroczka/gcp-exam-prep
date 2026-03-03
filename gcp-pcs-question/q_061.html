@@ -78,14 +78,22 @@ You need to ensure that specific sensitive data in a BigQuery table is only visi
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Column-level security w BigQuery pozwala na ograniczanie dostępu do konkretnych kolumn na podstawie tagów polityk (policy tags).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Column-level security: To najbardziej szczegółowa metoda ochrony danych wewnątrz tabeli BigQuery. Używając tagów polityk (policy tags) z Data Catalog, możesz zablokować dostęp do wybranych kolumn (np. numer telefonu) dla konkretnych grup użytkowników, podczas gdy nadal mogą oni pracować na pozostałych kolumnach tej samej tabeli.
+
+Dlaczego inne są błędne:
+A. Dataset-level: Daje dostęp do całego zbioru danych (wszystkich tabel w środku). Najmniej granularne.
+B. Table-level: Daje dostęp do całej tabeli. Nadal mniej granularne niż pojedyncza kolumna.
+C. Row-level security: Pozwala na filtrowanie rekordów (wierszy), ale nie ukrywa konkretnych atrybutów (kolumn). Jeśli użytkownik ma dostęp do wiersza, widzi wszystkie jego kolumny.
+
+Konsensus społeczności ExamTopics: 100% na D. Policy tags to standardowe rozwiązanie dla ochrony PII w kolumnach.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Policy tags w Data Catalog umożliwiają precyzyjne zarządzanie dostępem do danych wrażliwych wewnątrz tabeli.</p>
+<p><b>Głęboka analiza:</b> Column-level security jest niezależne od zapytania SQL. Nawet jeśli użytkownik ma rolę Data Viewer na tabeli, brak uprawnienia do tagu polityki uniemożliwi mu odczytanie zawartości chronionej kolumny.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/bigquery/docs/column-level-security-intro" target="_blank">https://cloud.google.com/bigquery/docs/column-level-security-intro</a></li>

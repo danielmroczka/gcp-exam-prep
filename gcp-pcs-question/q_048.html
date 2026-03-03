@@ -78,14 +78,20 @@ Which role allows a user to manage encryption keys in Cloud KMS but not use them
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Rola 'Cloud KMS Admin' pozwala na zarządzanie kluczami (tworzenie, rotacja), ale nie daje uprawnień do operacji kryptograficznych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud KMS Admin: Rola `roles/cloudkms.admin` pozwala na zarządzanie zasobami KMS (tworzenie kluczy, ustawianie polityk IAM, rotacja), ale celowo NIE posiada uprawnienia `cloudkms.cryptoKeyVersions.useToEncrypt/Decrypt`. To realizuje separację obowiązków.
+
+Dlaczego inne są błędne:
+B, C, D: Te role (Decrypter, Encrypter, User) służą właśnie do WYKONYWANIA operacji kryptograficznych, a nie do zarządzania samymi kluczami (np. nie pozwalają ich usuwać czy zmieniać uprawnień).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. Separacja admina od użytkownika klucza to standard bezpieczeństwa.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Separacja uprawnień administracyjnych od użytkowych to podstawowa zasada bezpieczeństwa w KMS.</p>
+<p><b>Głęboka analiza:</b> Dzięki temu administrator kluczy może dbać o ich bezpieczeństwo i rotację, ale nie może odczytać zaszyfrowanych danych (np. z bazy), do których te klucze służą.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/reference/iam-roles" target="_blank">https://cloud.google.com/kms/docs/reference/iam-roles</a></li>

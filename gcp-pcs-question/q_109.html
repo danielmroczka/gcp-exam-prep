@@ -78,14 +78,22 @@ Authenticate responses to domain name lookups due to DDoS attacks. Which service
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: DNSSEC (DNS Security Extensions) dodaje podpisy cyfrowe do odpowiedzi DNS, zapewniając ich autentyczność.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud DNS z DNSSEC: Słowo 'authenticate responses' w kontekście DNS to definicja DNSSEC. Mechanizm ten dodaje podpisy cyfrowe do rekordów DNS, co pozwala klientowi sprawdzić, czy odpowiedź nie została podrobiona przez atakującego (np. podczas ataku DNS Poisoning).
+
+Dlaczego inne są błędne:
+B. Cloud NAT: Służy do translacji adresów dla wyjścia do internetu, nie ma nic wspólnego z autentykacją zapytań domenowych.
+C. HTTP(S) LB: Rozdziela ruch webowy, ale nie chroni protokołu DNS.
+D. Cloud Armor: Chroni przed DDoS na poziomie aplikacji i sieci, ale nie zapewnia autentyczności (integralności) rekordów DNS.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. Autentykacja DNS = DNSSEC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Chroni to przed atakami 'cache poisoning', gdzie napastnik podmienia adresy IP dla Twojej domeny.</p>
+<p><b>Głęboka analiza:</b> DNSSEC zapobiega atakom typu 'Man-in-the-Middle' w warstwie DNS, gwarantując użytkownikowi, że trafi na Twój prawdziwy adres IP, a nie na stronę podstawioną przez hakera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dns/docs/dnssec-configs" target="_blank">https://cloud.google.com/dns/docs/dnssec-configs</a></li>

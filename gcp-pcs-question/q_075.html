@@ -78,14 +78,22 @@ A workforce needs to access a CRM hosted on GCP. It requires an authentication l
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Cloud IAP integruje się z Cloud Identity, które wspiera 2FA (MFA) dla użytkowników.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud IAP: Zapewnia warstwę uwierzytelniania opartą na tożsamościach Google Cloud Identity / Google Workspace. Usługi te natywnie wspierają wiele metod 2FA (MFA), takich jak kody SMS, aplikacja Authenticator czy klucze bezpieczeństwa Titan.
+
+Dlaczego inne są błędne:
+B. Cloud Armor: To firewall aplikacyjny (WAF), nie zajmuje się logowaniem użytkowników ani MFA.
+C. Cloud Endpoints: Służy do zabezpieczania API dla komunikacji maszyna-maszyna, nie jest systemem logowania 2FA dla pracowników (ludzi).
+D. Cloud VPN: Tworzy tunel sieciowy, ale sam w sobie nie wymusza 2FA na poziomie aplikacji (chyba że użyjesz zewnętrznego rozwiązania zintegrowanego z VPN). IAP jest prostszy i bardziej 'cloud-native'.
+
+Konsensus społeczności ExamTopics: 100% na A. IAP to domyślna odpowiedź na 'bezpieczny dostęp pracowników do aplikacji'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>IAP umożliwia bezpieczny dostęp do aplikacji webowych z dowolnego miejsca przez internet.</p>
+<p><b>Głęboka analiza:</b> IAP pozwala na wymuszenie 2FA nawet jeśli sama aplikacja CRM (np. stara wersja on-prem przeniesiona do chmury) tego nie wspiera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>

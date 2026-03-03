@@ -78,14 +78,19 @@ You want a key generated on-premises to be used in the encryption process for Cl
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: CSEK pozwalają na użycie własnych kluczy (DEK) wygenerowanych poza Google do szyfrowania obiektów w GCS.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. CSEK to manage DEK: Customer-Supplied Encryption Keys pozwalają klientowi na wygenerowanie własnego klucza (który w tym modelu jest kluczem DEK) i dostarczanie go do Google Cloud tylko w momencie wykonywania operacji na danych. Google używa tego klucza do zaszyfrowania danych i natychmiast wyrzuca go z pamięci.
+
+Dlaczego inne są błędne:
+A, B. Cloud KMS: To usługa Google. Nawet jeśli zaimportujesz tam klucz, jest on zarządzany PRZEZ usłudze Google (CMEK), a nie dostarczany przez Ciebie przy każdej operacji z zewnątrz.
+D. CSEK KEK: W modelu CSEK nie ma podziału na KEK/DEK zarządzany przez Google; dostarczasz bezpośredni materiał klucza używany do operacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>W przypadku CSEK to klient dostarcza klucz, którym GCS szyfruje dane 'on the fly'.</p>
+<p><b>Głęboka analiza:</b> CSEK to najwyższy poziom kontroli, ale też największa odpowiedzialność. Jeśli Twoja aplikacja on-prem zgubi ten klucz, nikt (nawet Google) nie odzyska Twoich danych z GCS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/encryption/customer-supplied-keys" target="_blank">https://cloud.google.com/storage/docs/encryption/customer-supplied-keys</a></li>

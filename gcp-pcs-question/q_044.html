@@ -78,17 +78,25 @@ You want to prevent users from creating public IP addresses for their Compute En
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Organization Policy Service pozwala na nakładanie ograniczeń (constraints) na poziomie całej organizacji lub folderu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Organization Policy Service: Pozwala na nakładanie odgórnych ograniczeń (constraints) na poziomie całej firmy lub folderu. Ograniczenie `compute.restrictPublicIp` (lub podobne) fizycznie uniemożliwia przypisanie zewnętrznego adresu IP do interfejsu sieciowego VM.
+
+Dlaczego inne są błędne:
+A. VPC Firewall: Blokuje ruch na portach, ale nie uniemożliwia SAMEGO przypisania adresu IP do maszyny.
+C. Cloud IAM: Można by odebrać uprawnienia do edycji IP, ale to skomplikowane i trudne do wymuszenia globalnie przy wielu rolach. Org Policy jest bardziej precyzyjna i prewencyjna.
+D. Access Context Manager: Służy do kontroli dostępu do konsoli/API na podstawie kontekstu (np. skąd loguje się admin), a nie do ograniczania konfiguracji zasobów.
+
+Konsensus społeczności ExamTopics: Zdecydowane poparcie dla B. Słowo 'prevent' w kontekście konfiguracji infrastruktury często wskazuje na Org Policy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Ograniczenie 'compute.skipDefaultNetworkCreation' lub 'compute.restrictPublicIp' to skuteczne metody kontroli infrastruktury.</p>
+<p><b>Głęboka analiza:</b> Polityki organizacji działają prewencyjnie - operacja API utworzenia VM z publicznym IP zostanie odrzucona przez system Google, zanim maszyna powstanie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/overview" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/overview</a></li>
+<li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>
 
 </ul>
 </div>

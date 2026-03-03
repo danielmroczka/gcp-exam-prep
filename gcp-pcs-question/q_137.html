@@ -78,14 +78,21 @@ Granular data residency control. Folder structure multiple locations, projects a
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Identycznie jak w pytaniu 133, poziom projektu zapewnia precyzyjne dopasowanie do lokalizacji bez blokowania innych części organizacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Project Level: Podobnie jak w pytaniu 133, poziom projektu pozwala na precyzyjne dopasowanie restrykcji lokalizacji do konkretnego zastosowania bez 'psucia' globalnych planów innych działów firmy. W architekturze, gdzie projekty są już 'aligned to specific locations', ustawienie polityki właśnie tam jest najbardziej logiczne i bezpieczne.
+
+Dlaczego inne są błędne:
+A, D: Zbyt szerokie. Jeśli jeden folder ma projekty w US i EU, polityka na poziomie folderu uniemożliwiłaby działanie jednej z tych grup.
+B. Resource: Polityki organizacji nie wspierają przypisania do pojedynczych zasobów technicznych.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Granularność wymusza stosowanie polityk jak najbliżej zasobu (w dół hierarchii).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>W dużych organizacjach najlepiej definiować rezydencję tam, gdzie powstają zasoby (Projekt).</p>
+<p><b>Głęboka analiza:</b> Najlepszą praktyką jest ustawienie szerokiej, bezpiecznej polityki na górze (np. 'tylko regiony demokratyczne') i doprecyzowanie jej (np. 'tylko Polska') na poziomie projektu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>

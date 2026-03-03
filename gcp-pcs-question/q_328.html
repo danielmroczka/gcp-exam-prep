@@ -78,14 +78,22 @@ Partner needs read access to GCS. évaluated SA keys are required. Minimize risk
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Jeśli musisz używać kluczy statycznych, jedynym sposobem na ograniczenie ryzyka jest ich częsta rotacja i silna kontrola nad tym, kto te klucze może pobierać.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Hygiene of static keys: Skoro wymóg (evaluated constraint) mówi, że MUSISZ użyć kluczy statycznych (SA keys), to jedyną drogą ochrony jest: 1. Przechowywanie ich w bezpiecznym miejscu (Secret Manager). 2. Częsta rotacja (skracanie czasu przydatności skradzionego klucza). 3. Restrykcja tworzenia kluczy tylko dla uprawnionych procesów.
+
+Dlaczego inne są błędne:
+A. SDP scan: Chroni treść danych, ale nie chroni samego mechanizmu dostępu (klucza).
+B. VPC SC: Chroni przed wyciekiem, ale nie chroni przed nieautoryzowanym użyciem klucza z poprawnych adresów IP partnera.
+C. CMEK: Chroni dane na dysku, ale partner z kluczem SA i tak będzie mógł je odczytać (bo SA ma uprawnienia do odszyfrowania).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. Jeśli musisz używać 'złej' technologii (klucze JSON), musisz wokół niej zbudować 'dobre' procesy.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Automatyzacja rotacji w Secret Managerze drastycznie skraca czas przydatności skradzionego klucza.</p>
+<p><b>Głęboka analiza:</b> W idealnym świecie użyłbyś WIF, ale egzaminy często sprawdzają jak radzisz sobie z narzuconymi ograniczeniami technologicznymi.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/key-rotation" target="_blank">https://cloud.google.com/iam/docs/key-rotation</a></li>

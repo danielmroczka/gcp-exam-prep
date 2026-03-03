@@ -76,14 +76,23 @@ Enforce CMEK for all new Cloud Storage resources in org1. What command/policy?
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B. (Obecnie częściej używa się gcp.restrictNonCmekServices). Wyjaśnienie: Polityka 'gcp.restrictNonCmekServices' pozwala na zablokowanie tworzenia zasobów bez klucza CMEK dla wybranych usług.</pre>
+<pre>Odpowiedź: B.
+
+Wyjaśnienie (Dlaczego poprawna):
+B. restrictNonCmekServices: To polityka organizacji (`gcp.restrictNonCmekServices`), która działa jak 'deny-list'. Wskazanie usługi `storage.googleapis.com` w tej polityce oznacza: 'Zablokuj tworzenie wszelkich zasobów w Cloud Storage, które nie używają klucza CMEK'.
+
+Dlaczego inne są błędne:
+A, C. restrictStorageNonCmekServices: Nie jest to standardowa nazwa ograniczenia (constraint) w politykach organizacji Google Cloud. Poprawna nazwa to `restrictNonCmekServices` działająca dla wielu usług.
+D. Allow: Polityka ta działa zazwyczaj jako Deny dla niebezpiecznych stanów.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. To precyzyjne pytanie o nazwę technicznego ograniczenia w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Deny na 'storage.googleapis.com' w tej polityce oznacza: nie pozwól na Storage bez CMEK.</p>
+<p><b>Głęboka analiza:</b> Ta polityka jest bardzo restrykcyjna - po jej włączeniu deweloperzy nie będą mogli stworzyć nawet pustego bucketu bez wskazania klucza KMS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/customer-managed-encryption-keys#restrict-cmek-usage" target="_blank">https://cloud.google.com/kms/docs/customer-managed-encryption-keys#restrict-cmek-usage</a></li>

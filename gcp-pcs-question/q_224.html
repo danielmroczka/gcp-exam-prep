@@ -78,14 +78,22 @@ Private VMs, manage via SSH from remote. Secure and cost efficient. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: IAP TCP forwarding jest darmowy i nie wymaga publicznych adresów IP na maszynach docelowych. Jest bezpieczniejszy niż jump host (bastion).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. IAP TCP Forwarding: To najbardziej bezpieczne i darmowe (cost efficient) rozwiązanie. Nie wymaga publicznych IP, nie wymaga VPN. Musisz tylko: 1. Zezwolić w firewallu na ruch z zakresu IAP (35.235.240.0/20) na port 22. 2. Nadać użytkownikowi rolę `IAP-secured Tunnel User`. Użytkownik łączy się przez `gcloud compute ssh --tunnel-through-iap`.
+
+Dlaczego inne są błędne:
+A. VPN: Bardzo bezpieczny, ale droższy i trudniejszy w konfiguracji dla pojedynczych użytkowników zdalnych (wymaga klienta VPN).
+B. Public IPs: Zwiększa powierzchnię ataku, sprzeczne z wymogiem 'Private VMs'.
+D. Jump host (Bastion): Wymaga publicznego IP na bastionie, płacisz za dodatkową maszynę i musisz ją sam zabezpieczać. IAP to 'bastion jako usługa'.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To nowocześniejszy i tańszy bastion.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Ruch SSH jest tunelowany przez infrastrukturę Google i weryfikowany przez IAM.</p>
+<p><b>Głęboka analiza:</b> IAP TCP Forwarding loguje każde połączenie w Audit Logs, co daje znacznie lepszy wgląd w to, kto i kiedy wchodził na serwery, niż tradycyjne logi SSH.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/using-tcp-forwarding" target="_blank">https://cloud.google.com/iap/docs/using-tcp-forwarding</a></li>

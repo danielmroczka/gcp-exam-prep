@@ -52,7 +52,7 @@
 <h2>Question 97 / 361</h2>
 <div class="question-body mt-3 pt-3 border-top">
 <div class="card-text">
-Synchronization and SAML federation between Cloud Identity and AD. Reduce risk of user accounts being compromised. What should you do?
+Synchronization and SAML federation between Cloud Identity and AD. Reduce risk of user accounts being compromised. What to do?
 </div>
 <div class="question-choices-container">
 <ul>
@@ -78,14 +78,21 @@ Synchronization and SAML federation between Cloud Identity and AD. Reduce risk o
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Przy federacji (SSO) za hasło odpowiada system źródłowy (AD). Google wspiera 'post-SSO 2-step verification', co dodaje drugą warstwę ochrony po stronie Google przy użyciu najbezpieczniejszych kluczy fizycznych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. AD Policy + Post-SSO 2SV: Przy federacji SAML, hasło jest sprawdzane przez AD, więc to tam musi być silna polityka haseł. Google oferuje funkcję 'post-SSO 2-Step Verification', która dodaje wymóg drugiego składnika (klucz Titan/fizyczny) PO pomyślnym zalogowaniu się w AD. To najsilniejsza możliwa ochrona konta hybrydowego.
+
+Dlaczego inne są błędne:
+A, B. Password policy in Cloud Identity: Przy SSO hasło w Google nie jest używane, więc ta polityka nie ma znaczenia dla bezpieczeństwa logowania użytkowników AD.
+D. Codes via text: Kody SMS są podatne na ataki typu SIM swapping i phishing. Klucze fizyczne (C) są znacznie bezpieczniejsze.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. To najlepsza praktyka łączenia on-prem security z bezpieczeństwem chmury.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Klucze fizyczne (FIDO2) są znacznie odporniejsze na phishing niż kody SMS.</p>
+<p><b>Głęboka analiza:</b> Post-SSO MFA zapewnia, że nawet jeśli haker przejmie hasło pracownika w lokalnej sieci, nie wejdzie do zasobów chmurowych bez fizycznego klucza USB/NFC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/7543044" target="_blank">https://support.google.com/cloudidentity/answer/7543044</a></li>

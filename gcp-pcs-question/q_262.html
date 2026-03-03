@@ -78,14 +78,21 @@ Protect web app frontend/backend components. Restrict incoming, protect against 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Cloud Armor (WAF) chroni przed atakami L7 (XSS/SQLi). Firewall filtruje dostęp na poziomie sieciowym. Cloud IDS monitoruje ruch wewnętrzny pod kątem anomalii.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Firewall + Armor + IDS: Ten zestaw adresuje 3 filary bezpieczeństwa: 1. Firewall (blokuje porty/IP). 2. Cloud Armor (blokuje ataki L7 jak SQLi). 3. Cloud IDS (monitoruje ruch wewnątrz sieci w poszukiwaniu anomalii i malware). To kompletna ochrona 'Defense in depth'.
+
+Dlaczego inne są błędne:
+B, D. DNS: Chroni domenę, ale nie jest mechanizmem filtrowania ruchu przychodzącego do serwerów (Firewall).
+C. IAP: Służy do autoryzacji OSÓB, ale samo w sobie nie chroni przed złośliwymi botami atakującymi luki w kodzie aplikacji tak jak Cloud Armor.
+
+Konsensus społeczności ExamTopics: 100% na A. To wzorcowy stos zabezpieczeń w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To połączenie realizuje trzy filary: filtrację IP, ochronę aplikacji i monitoring zagrożeń.</p>
+<p><b>Głęboka analiza:</b> Cloud IDS jest unikalny, bo widzi ruch 'wschód-zachód' (między Twoimi VM), którego Cloud Armor na Load Balancerze nigdy nie zobaczy.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/products" target="_blank">https://cloud.google.com/security/products</a></li>

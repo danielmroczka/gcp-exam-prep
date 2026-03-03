@@ -78,14 +78,20 @@ Protect against person-in-the-middle attacks from fake login page. Which securit
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Klucze fizyczne (FIDO2) jako jedyne weryfikują tożsamość serwera (origin check), co uniemożliwia przesłanie poświadczeń na fałszywą stronę.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Security Key (FIDO2): Jak wspomniano wcześniej, fizyczne klucze Titan/Yubikey weryfikują autentyczność domeny serwera. Jeśli haker podstawi fałszywą stronę (MITM), klucz rozpozna, że domena nie pasuje i nie wyda tokena autoryzacyjnego.
+
+Dlaczego inne są błędne:
+B, C, D: Wszystkie te metody wymagają 'zatwierdzenia' przez użytkownika. Haker może stworzyć stronę, która prosi o kod SMS/Authenticatora i natychmiast przekazuje go do prawdziwego Google (Proxy Phishing). Użytkownik nie ma jak technicznie sprawdzić autentyczności strony tak jak robi to klucz USB/NFC.
+
+Konsensus społeczności ExamTopics: 100% na A. To jedyny systemowy mechanizm odporny na Proxy Phishing.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Pozostałe metody (B, C, D) są podatne na przekazanie kodu lub potwierdzenia promptu przez użytkownika na stronie phishingowej.</p>
+<p><b>Głęboka analiza:</b> Protokół FIDO2 używa kryptografii asymetrycznej powiązanej z konkretnym adresem URL, co czyni przejęcie sesji technicznie niemożliwym bez fizycznego dostępu do urządzenia.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/9122284" target="_blank">https://support.google.com/a/answer/9122284</a></li>

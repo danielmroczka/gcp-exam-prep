@@ -78,14 +78,22 @@ Your team needs to centralize control over networking resources like firewall ru
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Shared VPC pozwala centralnemu projektowi hosta zarządzać siecią dla wielu projektów usługowych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Shared VPC: Pozwala na wyznaczenie jednego projektu jako 'host project', w którym zespół sieciowy zarządza siecią VPC, firewallami i routingiem. Inne projekty ('service projects') mogą korzystać z tej sieci, ale nie mogą jej modyfikować. To idealnie centralizuje kontrolę.
+
+Dlaczego inne są błędne:
+B. Compute Admin: Nadanie uprawnień admina w każdym projekcie to decentralizacja, a nie centralizacja.
+C. VPC Peering: Pozwala na łączenie sieci, ale każda sieć nadal posiada własne firewalle i routing, co utrudnia centralne zarządzanie (brak wspólnej administracji).
+D. Cloud VPN: Służy do łączenia chmury z on-premises, a nie do strukturyzacji sieci wewnątrz chmury w celu centralizacji kontroli.
+
+Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. Shared VPC to standardowa architektura Enterprise w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Shared VPC to standard dla centralizacji zarządzania siecią i bezpieczeństwem.</p>
+<p><b>Głęboka analiza:</b> Shared VPC rozwiązuje problem 'shadow IT' w sieciach. Deweloperzy mogą tworzyć zasoby (VM, klastry), ale to zespół bezpieczeństwa decyduje, jakie porty są otwarte.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/shared-vpc" target="_blank">https://cloud.google.com/vpc/docs/shared-vpc</a></li>

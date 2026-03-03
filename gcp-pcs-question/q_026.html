@@ -78,14 +78,20 @@ An organization is migrating to G Suite. The risk team wants to ensure that netw
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: W przypadku usług SaaS (G Suite), Google odpowiada za bezpieczeństwo warstwy sieciowej.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Built-in security for SaaS: G Suite (Google Workspace) to produkt typu Software-as-a-Service. W tym modelu dostawca (Google) w pełni odpowiada za bezpieczeństwo infrastruktury, w tym za warstwę sieciową i ochronę przed atakami DDoS. Klient nie ma możliwości (ani potrzeby) konfigurowania własnych firewalli wewnątrz G Suite.
+
+Dlaczego inne są błędne:
+A, B, D: Wszystkie te opcje dotyczą produktów IaaS/PaaS (jak Compute Engine czy Load Balancery), gdzie budujesz własne sieci VPC. Nie mają one zastosowania do G Suite, który nie działa wewnątrz Twojej sieci VPC.
+
+Konsensus społeczności ExamTopics: Prawie 100% na C. To kluczowe pytanie sprawdzające zrozumienie modelu współdzielonej odpowiedzialności (Shared Responsibility Model).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Użytkownik SaaS nie ma kontroli nad firewallem czy siecią bazową usługi.</p>
+<p><b>Głęboka analiza:</b> W SaaS Twoja odpowiedzialność kończy się na zarządzaniu tożsamością (kto ma dostęp) i ochronie samych danych. Sieć jest 'pod maską' i zarządza nią dostawca.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>

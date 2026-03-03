@@ -78,14 +78,21 @@ Prevent employees from creating unmanaged Google accounts using corporate domain
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Rezerwacja kont (provisioning) dla wszystkich pracowników w Cloud Identity sprawia, że gdy użytkownik próbuje założyć konto 'osobiste' na ten sam e-mail, system poinformuje o konflikcie lub mu to uniemożliwi (jeśli używasz SSO).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Provision all identities: Jeśli stworzysz (sprovisionujesz) konta dla wszystkich pracowników w Cloud Identity (np. przez synchronizację z AD), to gdy użytkownik spróbuje założyć konto 'osobiste' na swój firmowy adres, system mu to uniemożliwi (bo adres jest już zajęty przez konto zarządzane). To najbardziej 'efficient' metoda zapobiegająca powstawaniu 'Shadow IT'.
+
+Dlaczego inne są błędne:
+B. Scan and disable: Google nie pozwala administratorowi firmy na 'wyłączenie' prywatnego konta użytkownika, dopóki ten nie przejdzie przez proces Transfer Tool.
+C, D: To unikanie problemu poprzez uciążliwą zmianę domeny, co nie jest rozwiązaniem merytorycznym.
+
+Konsensus społeczności ExamTopics: 100% na A. Rezerwacja tożsamości to standard higieny domeny.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Zapewnienie, że każde konto @firma.com jest pod kontrolą IT, rozwiązuje problem kont niezarządzanych.</p>
+<p><b>Głęboka analiza:</b> Najlepiej połączyć to z włączeniem SSO. Wtedy użytkownik nawet nie zna swojego hasła Google i nie ma jak 'założyć' konta poza Twoją kontrolą.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/175367" target="_blank">https://support.google.com/cloudidentity/answer/175367</a></li>

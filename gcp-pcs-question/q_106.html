@@ -79,14 +79,23 @@ Delegate permissions to business units (thousands of users). scale, no cross-uni
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BE.
 
-Wyjaśnienie: GCDS (E) synchronizuje tożsamość z on-premises. Foldery i Grupy (B) pozwalają na masowe zarządzanie uprawnieniami w sposób hierarchiczny i odseparowany.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Folders + Groups: Foldery pozwalają na logiczną izolację jednostek. Nadanie uprawnień GRUPOM na poziomie foldera to jedyny sposób na zarządzanie tysiącami użytkowników bez chaosu (skalowalność).
+E. GCDS: Synchronizuje użytkowników i grupy z on-premises, co zapewnia, że cykl życia konta (np. usunięcie po zwolnieniu) jest zarządzany w jednym, centralnym miejscu.
+
+Dlaczego inne są błędne:
+A. VPC SC: To warstwa sieciowa chroniąca przed wyciekiem danych, nie służy do delegowania uprawnień administracyjnych IAM dla tysięcy osób.
+C. Organization Units (OUs): Służą do nakładania ustawień w konsoli Admin Google (np. kto ma dostęp do YouTube), nie służą do zarządzania uprawnieniami do projektów w Google Cloud.
+D. IAM Conditions by prefix: Bardzo trudne do zarządzania przy tysiącach użytkowników i setkach projektów. Foldery są natywnym mechanizmem do tego celu.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla BE. To podręcznikowy wzorzec 'Enterprise Landing Zone'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BE</b></p>
-<p>Grupy Google to jedyny skalowalny sposób zarządzania uprawnieniami dla tysięcy użytkowników.</p>
+<p><b>Głęboka analiza:</b> Zarządzanie poprzez grupy (E) i hierarchię folderów (B) pozwala na delegowanie administracji. Możesz nadać rolę 'Folder Admin' szefowi IT danej jednostki, a on sam będzie zarządzał grupami zsynchronizowanymi z AD.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/groups-in-iam" target="_blank">https://cloud.google.com/iam/docs/groups-in-iam</a></li>

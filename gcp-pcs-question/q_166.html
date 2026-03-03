@@ -78,14 +78,22 @@ Inspect IP packet data for invalid or malicious content. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Pełna inspekcja zawartości pakietów (L3-L7) wymaga narzędzia IDS/IPS, któremu dostarcza się dane za pomocą usługi Packet Mirroring.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Packet Mirroring: Jest to jedyna usługa w GCP, która dostarcza kopię PEŁNEGO pakietu IP (łącznie z danymi warstwy aplikacji) do zewnętrznego systemu IDS/IPS (np. ze stajni Palo Alto, Fortinet lub open-source Zeek). Tylko to pozwala na inspekcję treści pakietu pod kątem wirusów czy exploitów.
+
+Dlaczego inne są błędne:
+B. VPC Flow Logs: Rejestrują tylko nagłówki (skąd, dokąd, port). Nie widzą 'contentu' (treści) pakietu.
+C. Fluentd: To agent logów aplikacyjnych i systemowych (pliki tekstowe), nie służy do inspekcji surowych pakietów sieciowych płynących przez kartę sieciową.
+D. Cloud Armor logs: Rejestrują zdarzenia HTTP (zapytania URL), nie widzą niskopoziomowego ruchu IP nie-HTTP (np. ataki w protokole ICMP czy DNS).
+
+Konsensus społeczności ExamTopics: 100% na A. Inspekcja payloadu = Packet Mirroring.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Inne logi (Flow Logs, Cloud Armor) dają tylko metadane lub logi HTTP, a nie pełną treść pakietu IP.</p>
+<p><b>Głęboka analiza:</b> Packet Mirroring nie wpływa na wydajność mirrorowanej instancji, ponieważ kopia pakietu jest robiona na poziomie programowalnego przełącznika sieciowego Google (Andromeda).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/packet-mirroring" target="_blank">https://cloud.google.com/vpc/docs/packet-mirroring</a></li>

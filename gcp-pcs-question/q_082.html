@@ -78,14 +78,22 @@ A batch processing system on VMs stores output in Cloud Storage. No VMs may reac
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Private Google Access umożliwia VM-om bez zewnętrznych adresów IP komunikację z publicznymi adresami IP usług Google.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Private Google Access: Podobnie jak w poprzednim pytaniu, PGA umożliwia maszynom bez dostępu do internetu (brak publicznego IP lub brak trasy) komunikację z usługami Google (GCS) przez sieć wewnętrzną.
+
+Dlaczego inne są błędne:
+A. Firewall rule: Zablokowanie portów nie rozwiąże problemu, jeśli maszyny nadal potrzebują rozmawiać z GCS, które rezyduje na publicznych zakresach IP Google.
+B. NAT Gateway: Służy do wyjścia na internet, a wymóg mówi 'no VMs may reach the public internet'.
+D. Mount GCS: Nawet jeśli zamontujesz bucket (np. przez gcsfuse), system pod spodem nadal musi wykonać wywołania API do Google, co wymaga połączenia sieciowego (które zapewnia właśnie PGA).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. PGA to fundament prywatnej komunikacji z chmurą Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Jest to najbardziej natywna i bezpieczna metoda dostępu do usług Google z prywatnych podsieci.</p>
+<p><b>Głęboka analiza:</b> Private Google Access jest włączane na poziomie podsieci (Subnet). Wszystkie maszyny w tej podsieci zyskują wtedy możliwość odpytywania API Google bez posiadania External IP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">https://cloud.google.com/vpc/docs/private-google-access</a></li>

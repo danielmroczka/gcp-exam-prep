@@ -78,14 +78,21 @@ Store and retrieve sensitive configuration data from an application on Compute E
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Secret Manager to dedykowana, bezpieczna usługa do przechowywania haseł, kluczy API i innych sekretów aplikacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Secret Manager: Jest to dedykowana usługa Google Cloud do bezpiecznego przechowywania sekretów (hasła, klucze API, certyfikaty). Dane są tam szyfrowane, wersjonowane, a dostęp do nich jest ściśle kontrolowany przez IAM z pełnym logowaniem audytowym.
+
+Dlaczego inne są błędne:
+A. Cloud KMS: Służy do zarządzania kluczami szyfrującymi (materiałem binarnym), a nie do przechowywania haseł tekstowych. Można nim coś zaszyfrować, ale to Secret Manager jest 'szufladą' na te zaszyfrowane dane.
+B, C. Metadata: Dane w metadanych (Custom/Guest) są przesyłane i przechowywane w jawnym tekście. Każdy, kto może uruchomić `curl` wewnątrz VM, odczyta te sekrety. To kardynalny błąd bezpieczeństwa.
+
+Konsensus społeczności ExamTopics: 100% na D. Secret Manager to jedyne poprawne miejsce na 'sensitive configuration data'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Metadata (opcja C) nie jest szyfrowana i każdy z dostępem do VM może ją odczytać. Secret Manager oferuje wersjonowanie i kontrolę IAM.</p>
+<p><b>Głęboka analiza:</b> Secret Manager integruje się z Cloud IAM, co pozwala nadać uprawnienia do sekretu tylko konkretnemu kontu serwisowemu danej aplikacji, co realizuje zasadę najniższych uprawnień.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/secret-manager" target="_blank">https://cloud.google.com/secret-manager</a></li>

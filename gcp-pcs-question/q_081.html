@@ -79,14 +79,23 @@ A customer is running an analytics workload where Compute Engine instances acces
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AB.
 
-Wyjaśnienie: Brak publicznych adresów IP (B) uniemożliwia bezpośredni dostęp z internetu. Private Google Access (A) pozwala instancjom bez publicznego IP na dostęp do usług Google (jak GCS) przez sieć wewnętrzną.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Private Google Access: Pozwala instancjom w podsieci, które nie posiadają publicznych adresów IP, na łączenie się z publicznymi adresami IP usług Google (takich jak Cloud Storage). Jest to niezbędne, aby maszyny odizolowane od internetu mogły nadal pracować z danymi w GCS.
+B. No public IP: Brak publicznego adresu IP fizycznie uniemożliwia bezpośrednie połączenie z maszyny do internetu oraz z internetu do maszyny.
+
+Dlaczego inne są błędne:
+C. Separate subnet: Sam podział na podsieci nie blokuje dostępu do internetu, jeśli podsieć ma trasę do internet gateway.
+D. IP forwarding: Dotyczy przekazywania pakietów przez maszynę (router programowy), nie kontroluje dostępu do API Google.
+E. Cloud NAT: Służy właśnie do umożliwienia maszynom bez publicznego IP dostępu DO internetu (np. po updejty), co jest sprzeczne z wymogiem 'cannot access the internet'.
+
+Konsensus społeczności ExamTopics: 100% na AB. Standardowa metoda izolacji obciążeń korzystających z usług Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AB</b></p>
-<p>To standardowa konfiguracja dla izolowanych obciążeń analitycznych przetwarzających dane wrażliwe.</p>
+<p><b>Głęboka analiza:</b> To klasyczne pytanie sprawdzające zrozumienie 'Private Google Access'. Kluczem jest zrozumienie, że API Google mają publiczne adresy IP, więc maszyna bez Public IP potrzebuje specjalnego 'mostu' (PGA), aby z nich korzystać bez wychodzenia do internetu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/private-google-access" target="_blank">https://cloud.google.com/vpc/docs/private-google-access</a></li>

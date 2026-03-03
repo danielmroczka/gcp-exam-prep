@@ -79,14 +79,23 @@ Data at rest residency within specific geographic boundaries. Recommendation?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Organization Policy Service z ograniczeniem 'Resource Location Restriction' wymusza tworzenie zasobów tylko w wybranych regionach.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Organization Policy constraints: Ograniczenie `gcp.resourceLocations` jest jedynym systemowym mechanizmem w GCP, który pozwala administratorowi centralnie wymusić lokalizację fizyczną danych (regiony/strefy) dla wszystkich usług (Storage, Compute, SQL).
+
+Dlaczego inne są błędne:
+B. Shielded VMs: Chronią integralność kernela i bootloadera, nie mają wpływu na to, w którym kraju stoi serwer.
+C. ACLs: Zarządzają uprawnieniami dostępu do plików, a nie ich lokalizacją fizyczną.
+D. Geolocation access: Służy do blokowania dostępu użytkownikom z danych krajów, ale dane firmy mogą nadal leżeć w innym kraju (to nie jest residency).
+E. Cloud Armor: Firewall L7, nie kontroluje miejsca składowania danych.
+
+Konsensus społeczności ExamTopics: 100% na A. Residency = Org Policy w terminologii GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To jedyny mechanizm gwarantujący, że deweloperzy nie stworzą zasobów w regionach niezgodnych z polityką firmy.</p>
+<p><b>Głęboka analiza:</b> Polityka ta działa prewencyjnie. Jeśli deweloper spróbuje stworzyć bucket w `us-central1`, a dozwolone jest tylko `europe-west1`, otrzyma błąd 'Policy violation'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>

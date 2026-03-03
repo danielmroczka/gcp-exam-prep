@@ -78,14 +78,21 @@ Logs management for 200 projects and 1500 VMs. Visibility for security team.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Centralny sink na poziomie organizacji (includeChildren=True) to jedyny sposób na efektywne i kompletne zbieranie logów z setek projektów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Aggregated sink + Pub/Sub: Przy 200 projektach, konfigurowanie każdego z nich (A) jest niemożliwe. Centralny sink na poziomie Organizacji z flagą `includeChildren` automatycznie zbiera logi ze wszystkiego. Pub/Sub to jedyna metoda na 'near real-time' dostarczanie danych do systemów zewnętrznych (SIEM).
+
+Dlaczego inne są błędne:
+C. No sinks: Logi zostaną w projektach, zespół security nie będzie miał do nich centralnego dostępu.
+D. Production folder only: Pominie logi z innych folderów (np. testowych lub stagingowych), co ogranicza widoczność (wymóg 'visibility').
+
+Konsensus społeczności ExamTopics: 100% na B. To jedyny skalowalny wzorzec audytu w Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Eksport do Pub/Sub pozwala na integrację z zewnętrznymi systemami SIEM w czasie rzeczywistym.</p>
+<p><b>Głęboka analiza:</b> Agregowany sink pozwala również na centralne filtrowanie. Możesz zdecydować, że do SIEM wysyłasz tylko logi bezpieczeństwa, a logi systemowe zostawiasz w projektach, aby oszczędzić koszty.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/export/aggregated_sinks" target="_blank">https://cloud.google.com/logging/docs/export/aggregated_sinks</a></li>

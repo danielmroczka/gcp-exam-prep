@@ -78,14 +78,19 @@ Granular and flexible control authorization to read data in BQ and GCS. What to 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: IAM jest podstawowym i najbardziej elastycznym systemem autoryzacji w GCP, pozwalającym na nadawanie uprawnień na poziomie projektów, bucketów, a nawet pojedynczych tabel.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. IAM (Identity and Access Management): Jest to system stworzony dokładnie do tego celu. Oferuje granularne role (np. `bigquery.dataViewer` tylko na konkretnej tabeli lub `storage.objectViewer` na konkretnym folderze w buckecie), co daje pełną elastyczność autoryzacji.
+
+Dlaczego inne są błędne:
+A. DLP: Służy do zmiany treści danych (maskowanie), nie jest systemem 'autoryzacji' (udzielania uprawnień).
+B, D: To mechanizmy ochrony danych (szyfrowanie), nie zajmują się logiką 'kto ma prawo czytać'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>IAM to fundament kontroli dostępu (kto ma dostęp do czego).</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, że w GCS możesz łączyć IAM z warunkami (Conditions), np. zezwalając na odczyt tylko jeśli plik ma określony prefiks lub tag.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/overview" target="_blank">https://cloud.google.com/iam/docs/overview</a></li>

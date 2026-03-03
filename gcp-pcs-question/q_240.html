@@ -78,14 +78,22 @@ issue certificates for many HTTP load balancer frontends from on-prem CA. Minima
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: CAS (Certificate Authority Service) pozwala na utworzenie urzędu certyfikacji w chmurze, który jest podpisany przez Twój lokalny Root CA. Pozwala to na automatyczne i skalowalne wystawianie certyfikatów wewnątrz GCP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Certificate Authority Service (CAS): Pozwala na stworzenie w GCP urzędu certyfikacji (Subordinate CA), który jest podpisany przez Twój lokalny (on-prem) Root CA. Dzięki temu możesz automatycznie wystawiać tysiące certyfikatów dla Load Balancerów, które będą zaufane w Twojej firmie, bez ręcznego importowania każdego z nich.
+
+Dlaczego inne są błędne:
+A. Google managed public certs: Są zaufane publicznie, ale nie są podpisane przez Twoje firmowe PKI, co może być wymogiem bezpieczeństwa wewnętrznego.
+C. Import certificates: Niewykonalne przy 'many' (dużej skali) ze względu na narzut operacyjny i konieczność ręcznej rotacji każdego z nich.
+D. Network LB: Nie kończy TLS, więc nie rozwiązuje problemu zarządzania certyfikatami na frontendzie (przerzuca problem na maszyny VM).
+
+Konsensus społeczności ExamTopics: 100% na B. CAS to usługa stworzona do integracji PKI z chmurą.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Eliminuje to potrzebę manualnego importowania tysięcy certyfikatów.</p>
+<p><b>Głęboka analiza:</b> CAS wspiera protokoły automatyzacji (jak ACME), co pozwala na bezobsługową rotację certyfikatów na Load Balancerach.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/certificate-authority-service/docs/overview" target="_blank">https://cloud.google.com/certificate-authority-service/docs/overview</a></li>

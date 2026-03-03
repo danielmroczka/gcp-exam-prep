@@ -78,14 +78,22 @@ Centralize logs for production projects. Search and analyze using Logs Explorer.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Aby logi były przeszukiwalne w Logs Explorerze, muszą trafić do tzw. 'Log Bucket'. Agregowany sink na poziomie organizacji lub folderu to standardowa metoda zbierania logów z wielu projektów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Aggregate sink to a logs bucket: Aby logi z wielu projektów były przeszukiwalne w UI (Logs Explorer), muszą trafić do zasobu typu 'Log Bucket'. Agregowany sink (na poziomie organizacji lub folderu) zbiera logi i kieruje je do centralnego bucketu logów w dedykowanym projekcie bezpieczeństwa.
+
+Dlaczego inne są błędne:
+A. Monitoring workspace: Służy do analizy metryk (liczbowych), a nie do przeszukiwania treści logów tekstowych.
+B. Logs Explorer at org level: Bez agregacji do centralnego miejsca, Logs Explorer musiałby odpytywać każdy projekt z osobna, co jest powolne i ograniczone (brak 'centralizacji').
+C. Cloud Storage: Logi w GCS są zapisywane jako pliki JSON/Text. Nie można ich przeszukiwać w Logs Explorerze (wymagają importu do BQ lub pobrania na dysk).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. To standardowa metoda budowania centralnego repozytorium logów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Eksport do Cloud Storage (C) sprawia, że logi są archiwalne i trudniejsze do szybkiego przeszukiwania w UI.</p>
+<p><b>Głęboka analiza:</b> Wykorzystanie Log Buckets pozwala na precyzyjne ustawienie retencji (np. 365 dni) niezależnie od ustawień w projektach źródłowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/central-log-storage" target="_blank">https://cloud.google.com/logging/docs/central-log-storage</a></li>

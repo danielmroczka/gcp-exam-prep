@@ -78,14 +78,22 @@ First time in GCP. Determine controls/policies and identify what Google manages.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Model współdzielonej odpowiedzialności (Shared Responsibility Model) to fundament bezpieczeństwa w chmurze, definiujący kto odpowiada za którą warstwę stosu technologicznego.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Shared Responsibilities Model: Jest to fundamentalny koncept bezpieczeństwa chmurowego. Zrozumienie tego modelu pozwala inżynierowi dokładnie określić, gdzie kończy się rola Google (np. ochrona fizyczna serwerów), a gdzie zaczyna rola klienta (np. konfiguracja IAM i firewalli). Jest to pierwszy krok każdego planu bezpieczeństwa.
+
+Dlaczego inne są błędne:
+A. Blueprints: Są pomocne, ale bez zrozumienia modelu (D) nie będziesz wiedział DLACZEGO dana konfiguracja jest bezpieczna i co faktycznie chroni.
+B. Risk Manager: To narzędzie finansowe/ubezpieczeniowe, nie jest bazą wiedzy o podziale obowiązków technicznych.
+C. Release notes: Informują o nowościach, a nie o podstawowych zasadach współpracy z dostawcą.
+
+Konsensus społeczności ExamTopics: 100% na D. Każdy kurs Security zaczyna się od tego modelu.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Zrozumienie tego modelu jest niezbędne do poprawnej konfiguracji zabezpieczeń własnych.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj: Google odpowiada za bezpieczeństwo CHMURY, Ty odpowiadasz za bezpieczeństwo W CHMURZE. Ten model zmienia się w zależności od usługi (IaaS vs PaaS vs SaaS).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>

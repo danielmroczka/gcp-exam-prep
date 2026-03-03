@@ -78,14 +78,21 @@ You need to optimize Cloud DLP usage to reduce cost. Data is in GCS and BigQuery
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Próbkowanie danych (sampling) poprzez limity wierszy i bajtów drastycznie zmniejsza liczbę skanowanych jednostek, a RegexFileSet ogranicza skanowanie tylko do wybranych plików.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Sampling and Filtering: Największy wpływ na koszt DLP ma ilość skanowanych danych. Użycie `rowsLimit` (dla BigQuery) i `bytesLimitPerFile` (dla GCS) pozwala na przeskanowanie reprezentatywnej PRÓBKI danych zamiast całości. `CloudStorageRegexFileSet` dodatkowo ogranicza skanowanie tylko do konkretnych typów plików (np. tylko logi .txt).
+
+Dlaczego inne są błędne:
+A, B. Regiony (outside US) nie mają bezpośredniego wpływu na optymalizację kosztów skanowania jako taką (cennik jest zazwyczaj spójny lub różnice są minimalne w porównaniu do redukcji wolumenu danych).
+D. FindingLimits: Ogranicza liczbę raportowanych znalezisk, ale DLP i tak musi przeskanować cały plik, aby je znaleźć, więc nie redukuje to kosztów operacji skanowania.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Próbkowanie (sampling) to kluczowa technika optymalizacji kosztów w Big Data.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Optymalizacja kosztów DLP opiera się na skanowaniu reprezentatywnych próbek zamiast całych zbiorów danych.</p>
+<p><b>Głęboka analiza:</b> Jeśli masz 1TB logów, skanowanie 100MB z każdego pliku (sampling) zazwyczaj wystarczy, aby wykryć, czy dany proces zaczął omyłkowo zapisywać PII, a kosztuje ułamek ceny pełnego skanu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/cost-control" target="_blank">https://cloud.google.com/dlp/docs/cost-control</a></li>

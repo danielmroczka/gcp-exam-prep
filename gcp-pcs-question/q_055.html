@@ -78,14 +78,22 @@ You want to enable SSO for your GCP users using your on-premises SAML 2.0 Identi
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Konfiguracja SSO odbywa się w konsoli administracyjnej Google Workspace/Cloud Identity.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. SAML SSO in Google Admin Console: To tam (w konsoli administracyjnej Google Workspace/Cloud Identity) konfiguruje się profile SSO. Wskazujesz tam URL logowania Twojego dostawcy (IdP), URL zmiany hasła i wgrywasz certyfikat X.509 do weryfikacji podpisów asercji SAML.
+
+Dlaczego inne są błędne:
+A. Cloud Identity: To nazwa całej usługi/domeny, a nie konkretna konfiguracja łącza SSO.
+B. Google Cloud Directory Sync (GCDS): Służy do synchronizacji kont i grup (provisioning), ale nie obsługuje samego procesu logowania (authentication).
+D. Cloud IAM: Służy do nadawania uprawnień WEWNĄTRZ chmury, nie konfiguruje się w nim zewnętrznych metod logowania do całego ekosystemu Google.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To standardowy krok konfiguracji federacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Google pełni rolę Service Provider (SP), a Twój system on-premises rolę Identity Provider (IdP).</p>
+<p><b>Głęboka analiza:</b> Przy tej konfiguracji Google staje się 'Service Providerem' (SP). Gdy użytkownik wpisze e-mail w Gmailu/Konsoli, zostanie przekierowany do Twojego on-premises IdP (np. ADFS lub Okta) w celu uwierzytelnienia.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/60224" target="_blank">https://support.google.com/cloudidentity/answer/60224</a></li>

@@ -79,14 +79,23 @@ A company wants to manage IAM permissions between users in development and produ
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BC.
 
-Wyjaśnienie: Foldery i grupy to najlepsze narzędzia do zarządzania dostępem na skalę.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Folders: Pozwalają na logiczną izolację środowisk. Możesz mieć folder 'Prod' i folder 'Dev', co ułatwia stosowanie różnych polityk.
+C. Google Groups: Zarządzanie uprawnieniami poprzez grupy (a nie pojedynczych użytkowników) to najlepsza praktyka IAM. Nadanie uprawnień grupie na poziomie foldera automatyzuje dostęp do wszystkich projektów w danym środowisku.
+
+Dlaczego inne są błędne:
+A. VPC: To warstwa sieciowa, a nie system zarządzania uprawnieniami użytkowników (IAM).
+D. Org Policy: Służy do nakładania restrykcji na zasoby (np. zakaz publicznych IP), a nie do nadawania uprawnień osobom.
+E. Individual users: To koszmar administracyjny i częste źródło błędów oraz nadmiarowych uprawnień (brak 'skalowalności' przy rotacji pracowników).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla BC. To fundamenty Google Cloud Landing Zone.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BC</b></p>
-<p>Struktura folderów zapewnia izolację, a grupy ułatwiają zarządzanie użytkownikami.</p>
+<p><b>Głęboka analiza:</b> Stosowanie grup pozwala na 'Self-service'. Zamiast zmieniać uprawnienia w chmurze, administrator AD dodaje osobę do lokalnej grupy, a GCDS synchronizuje to z folderem GCP.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/groups-in-iam" target="_blank">https://cloud.google.com/iam/docs/groups-in-iam</a></li>

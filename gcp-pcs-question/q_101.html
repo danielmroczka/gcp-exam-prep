@@ -78,14 +78,22 @@ Join user info in banking app with credit score from third party. Exposure risk 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Szyfrowanie deterministyczne (AES-SIV) zapewnia, że ta sama wartość wejściowa zawsze daje tę samą wartość zaszyfrowaną, co pozwala na łączenie tabel (referential integrity) bez ujawniania danych PII.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Deterministic encryption: Jest to metoda szyfrowania (w DLP np. AES-SIV), która dla tej samej wartości wejściowej zawsze generuje tę samą wartość zaszyfrowaną. Pozwala to na wykonywanie operacji 'JOIN' na zaszyfrowanych kolumnach w różnych bazach danych, zachowując integralność referencyjną bez ujawniania danych PII analitykom.
+
+Dlaczego inne są błędne:
+B. Secure hashes: Choć mogą być unikalne, zazwyczaj nie są tak łatwo 'odwracalne' dla uprawnionych procesów w ramach tego samego mechanizmu co pełne szyfrowanie DLP.
+C. Format-preserving encryption (FPE): Zachowuje format (np. cyfry na cyfry), co jest świetne dla użyteczności, ale pytanie kładzie nacisk na 'joining' i 'referential integrity', gdzie determinizm AES-SIV jest standardem dla operacji na bazach danych w DLP.
+D. Cryptographic hashing: Standardowe haszowanie (bez soli lub z losową solą) utrudnia łączenie danych, a bez soli jest podatne na ataki słownikowe. Deterministyczne szyfrowanie jest bezpieczniejsze i bardziej elastyczne w ekosystemie DLP.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. AES-SIV to fundament 'secure join' w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>DLP deterministic encryption jest idealne dla scenariuszy Big Data, gdzie klucze złącz muszą być unikalne, ale nieczytelne dla analityków.</p>
+<p><b>Głęboka analiza:</b> Determinizm pozwala na analizę trendów (np. ile razy dany zaszyfrowany ID wystąpił w logach) bez wiedzy, kim fizycznie jest ta osoba.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/concepts-pseudonymization#deterministic-encryption" target="_blank">https://cloud.google.com/dlp/docs/concepts-pseudonymization#deterministic-encryption</a></li>

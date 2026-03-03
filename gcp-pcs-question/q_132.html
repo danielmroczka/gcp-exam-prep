@@ -79,14 +79,23 @@ Export logs for login activity and API calls modifying resources for all project
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BC.
 
-Wyjaśnienie: Logi o modyfikacji zasobów (Admin Activity) są domyślne, ale logi logowania i odczytu danych (Data Access) wymagają włączenia (C). includeChildren (B) zapewnia zbieranie danych z całej organizacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Aggregated Log Sink (includeChildren): Pozwala na centralne zbieranie logów z całej hierarchii (wszystkich projektów) do jednego tematu Pub/Sub w celu przekazania do SIEM.
+C. Data Access Audit Logs: Logi o modyfikacjach (Admin Activity) są włączone domyślnie, ale logi o 'login activity' (logowaniu) i odczycie danych wymagają ręcznego włączenia w sekcji Audit Logs na poziomie organizacji.
+
+Dlaczego inne są błędne:
+A. Log Sink at org level: Bez flagi `includeChildren` sink zbierałby tylko logi dotyczące samej Organizacji jako zasobu, a nie logi z projektów pod nią.
+D. Workspace logs: Dotyczą Gmaila/Drive, nie dotyczą bezpośrednio logowania do konsoli GCP czy wywołań API chmurowych (które są w Data Access logs).
+E. SIEM processing: To krok po stronie odbiorcy, a nie konfiguracja po stronie GCP wymagana do 'eksportu'.
+
+Konsensus społeczności ExamTopics: 100% na BC. Włączenie logów i agregacja to podstawa audytu globalnego.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BC</b></p>
-<p>Eksport do Pub/Sub to jedyna metoda gwarantująca 'near real-time' dla systemów SIEM.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, że logi Data Access mogą generować ogromne ilości danych (i kosztów). Na produkcji warto filtrować je tylko do tych usług, które są krytyczne.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/export/aggregated_sinks" target="_blank">https://cloud.google.com/logging/docs/export/aggregated_sinks</a></li>

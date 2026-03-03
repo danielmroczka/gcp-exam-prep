@@ -79,14 +79,23 @@ Reduce impact of compromised symmetric key in Cloud KMS. Steps before incident. 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BD.
 
-Wyjaśnienie: Automatyczna rotacja (B) ogranicza 'okno czasowe', w którym klucz jest użyteczny. Limitowanie liczby wiadomości (D) ogranicza ilość danych, które można odszyfrować przy użyciu jednego klucza.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Automatic rotation: Dzięki częstej rotacji (np. co 90 dni), skradziony klucz staje się bezużyteczny dla nowych danych po upływie krótkiego czasu. Ogranicza to 'okno' ataku.
+D. Limit number of messages: Niektóre standardy (i dobra praktyka kryptograficzna) zalecają nieużywanie jednego klucza do zbyt dużej liczby operacji, aby uniknąć ataków kryptoanalitycznych. Mniej danych zaszyfrowanych jednym kluczem = mniejsza strata przy jego kompromitacji.
+
+Dlaczego inne są błędne:
+A. Disable compromised keys: To działanie REAKTYWNE (po incydencie), a pytanie prosi o kroki 'before incident'.
+C. Manual rotate: Jest mniej skuteczne i bardziej podatne na błędy ludzkie niż automatyzacja (B).
+E. Disable API: Uniemożliwi działanie Twoich systemów, co nie jest celem 'redukcji wpływu kompromitacji'.
+
+Konsensus społeczności ExamTopics: Przewaga na BD. Automatyzacja i higiena kryptograficzna to klucz do ograniczenia 'blast radius'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BD</b></p>
-<p>Opcja A to działanie PO incydencie, a nie profilaktyczne.</p>
+<p><b>Głęboka analiza:</b> Cloud KMS obsługuje rotację do 36500 wersji klucza. Starsze wersje nadal mogą służyć do odszyfrowania starych danych, ale nowe dane będą bezpieczne pod nowym kluczem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/key-rotation" target="_blank">https://cloud.google.com/kms/docs/key-rotation</a></li>

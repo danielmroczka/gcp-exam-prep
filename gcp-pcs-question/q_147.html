@@ -78,14 +78,22 @@ User lost second factor for 2SV. Minimize risk to reset access. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Wygenerowanie jednorazowych kodów zapasowych (backup codes) pozwala użytkownikowi na bezpieczne zalogowanie się i dodanie nowego urządzenia MFA.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Backup codes: Administrator domeny Google Workspace / Cloud Identity może wygenerować zestaw jednorazowych kodów zapasowych dla danego użytkownika. Pozwala to użytkownikowi na bezpieczne zalogowanie się JEDEN RAZ, aby mógł on dodać nowy klucz fizyczny lub aplikację Authenticator, bez konieczności osłabiania ochrony całego konta.
+
+Dlaczego inne są błędne:
+B. Disable for all: Absurdalne ryzyko bezpieczeństwa dla całej firmy.
+C. Disable for account: Mniej ryzykowne niż B, ale nadal pozostawia konto bez ochrony MFA przez pewien czas. Backup kody są lepszą praktyką.
+D. Reset credentials: Reset hasła nie rozwiązuje problemu zgubionego drugiego składnika (MFA nadal będzie wymagane).
+
+Konsensus społeczności ExamTopics: 100% na A. To oficjalna procedura odzyskiwania dostępu w Google.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Całkowite wyłączenie 2SV (C) jest mniej bezpieczne, ponieważ konto traci ochronę do czasu ponownego włączenia.</p>
+<p><b>Głęboka analiza:</b> Zawsze zachęcaj użytkowników do pobrania własnych kodów zapasowych wcześniej i trzymania ich w bezpiecznym, fizycznym miejscu (np. w sejfie).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/a/answer/1035070" target="_blank">https://support.google.com/a/answer/1035070</a></li>

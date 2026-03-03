@@ -78,14 +78,22 @@ AI/ML pipeline training on BQ sensitive data. Personal data not used in training
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Jedyną gwarancją, że dane osobowe nie trafią do modelu (ryzyko 'zapamiętania' przez model), jest ich usunięcie lub zamaskowanie (DLP) przed rozpoczęciem treningu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. DLP De-identification: Jedyną gwarancją, że dane osobowe 'nie zostaną użyte w treningu' (co mogłoby doprowadzić do wycieku danych przez gotowy model AI), jest ich usunięcie lub zamaskowanie (DLP) przed rozpoczęciem procesu uczenia. DLP API jest do tego dedykowanym i najbardziej skutecznym narzędziem w GCP.
+
+Dlaczego inne są błędne:
+B. IAP: Kontroluje kto wchodzi do systemu, nie kontroluje treści danych używanych przez algorytmy.
+C. CMEK: Chroni dane przed hakerem z zewnątrz, ale model AI widzi dane odszyfrowane podczas treningu, więc nadal 'widzi' PII i może się ich 'nauczyć'.
+D. Confidential VMs: Chronią pamięć RAM, ale nie zapobiegają 'zapamiętaniu' przez model danych wrażliwych, które mu podasz w zestawie treningowym.
+
+Konsensus społeczności ExamTopics: 100% na A. Czyszczenie danych u źródła to fundament prywatności w ML.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Szyfrowanie (C) nie chroni przed użyciem danych jawnych podczas obliczeń.</p>
+<p><b>Głęboka analiza:</b> Modele generatywne (LLM) są szczególnie podatne na 'cytowanie' unikalnych danych z zestawu treningowego, dlatego DLP jest krytycznym elementem pipeline'u AI.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/inspecting-storage" target="_blank">https://cloud.google.com/dlp/docs/inspecting-storage</a></li>

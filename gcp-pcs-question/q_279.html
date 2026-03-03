@@ -78,14 +78,22 @@ Hybrid cloud, private Artifact Registry. On-prem cannot resolve hostname. VPN/In
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Usługi Google (jak AR) używają publicznych domen. W sieciach prywatnych bez internetu należy skierować zapytania DNS o te domeny do specjalnych adresów VIP Google (restricted/private) za pomocą lokalnego serwera DNS.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. DNS for restricted/private domains: Artifact Registry używa publicznych nazw FQDN (`*.pkg.dev`). Jeśli Twoja sieć on-prem nie ma internetu, jej standardowy DNS nie rozwiąże tych nazw. Musisz stworzyć lokalną strefę DNS, która skieruje zapytania o Artifact Registry do adresów IP Private Google Access (zakresy `private.googleapis.com` lub `restricted.googleapis.com`).
+
+Dlaczego inne są błędne:
+B. IAM role: Nie pomoże, jeśli serwer w ogóle nie może 'znaleźć' adresu IP rejestru obrazów.
+C. PGA on subnet: Dotyczy ruchu Z CHMURY, nie rozwiązuje problemu DNS po stronie on-premises.
+D. Firewall: Może być otwarty, ale bez poprawnego DNS-a pakiet nigdy nie zostanie wysłany pod właściwy adres.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowy problem łączności hybrydowej 'DNS split-horizon'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To standardowy problem rozwiązany przez konfigurację Private Google Access dla on-premises.</p>
+<p><b>Głęboka analiza:</b> Aby to zadziałało, musisz skonfigurować swój lokalny DNS tak, aby dla domeny `pkg.dev` zwracał adresy CNAME kierujące do `restricted.googleapis.com`.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/configure-private-google-access-settings#dns-on-prem" target="_blank">https://cloud.google.com/vpc/docs/configure-private-google-access-settings#dns-on-prem</a></li>

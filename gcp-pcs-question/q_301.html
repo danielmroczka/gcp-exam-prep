@@ -78,14 +78,22 @@ Developers deploy code but cannot change firewall rules. Separation of duties. W
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Podział na role o wąskich uprawnieniach (C) to najpewniejszy sposób egzekwowania separacji obowiązków. Deweloper dostaje uprawnienia Compute, ale nie dostaje Network.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Granular Roles: Aby wymusić separację obowiązków (Separation of Duties), należy użyć ról o wąskich uprawnieniach. Deweloper dostaje rolę `compute.instanceAdmin` (bez uprawnień sieciowych), a zespół sieciowy rolę `compute.networkAdmin`. To jedyna metoda gwarantująca techniczne wymuszenie blokady zmian sieci przez programistów.
+
+Dlaczego inne są błędne:
+A. Verbal instruction: Błąd. Bezpieczeństwo musi być wymuszone systemowo, a nie tylko proceduralnie.
+B. CAA: Kontroluje lokalizację logowania, a nie uprawnienia do edycji zasobów (IAM to robi).
+D. Editor + Deny: IAM Deny Policies są trudniejsze w zarządzaniu niż proste nadanie tylko niezbędnych ról (C).
+
+Konsensus społeczności ExamTopics: 100% na C. Podstawowa zasada IAM: nadawaj tylko to, co jest niezbędne.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Rola Editor (D) jest zbyt szeroka i odradzana w takich scenariuszach.</p>
+<p><b>Głęboka analiza:</b> Google dąży do całkowitego wyeliminowania ról podstawowych (Owner/Editor) na rzecz ról predefiniowanych o wąskim zakresie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/understanding-roles" target="_blank">https://cloud.google.com/iam/docs/understanding-roles</a></li>

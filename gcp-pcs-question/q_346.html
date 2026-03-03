@@ -78,14 +78,22 @@ batch job on CE needs temporary write access to GCS. Minimum permissions. What t
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Impersonacja (C) pozwala procesowi tymczasowo 'przybrać' tożsamość z odpowiednimi uprawnieniami, co jest bezpieczniejsze niż nadawanie ich na stałe maszynie (D).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Least privilege + Impersonation: Rola `storage.objectCreator` pozwala tylko na WGRYWANIE nowych plików (nie pozwala na ich listowanie, czytanie czy usuwanie), co idealnie pasuje do wymogu 'write access' i zasady najniższych uprawnień. Impersonacja (generowanie tymczasowych tokenów) eliminuje ryzyko związane z kluczami statycznymi.
+
+Dlaczego inne są błędne:
+A. Storage Admin: Zbyt szerokie (pozwala usuwać buckety, zmieniać uprawnienia).
+B. Embed key: Krytyczny błąd bezpieczeństwa.
+D. Default SA: Domyślne konta mają zazwyczaj zbyt duże uprawnienia (rola Editor). Zawsze twórz własne konta serwisowe.
+
+Konsensus społeczności ExamTopics: 100% na C. To podręcznikowy przykład bezpiecznej automatyzacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Rola objectCreator (C) pozwala na wgrywanie plików, ale nie na ich usuwanie czy czytanie, co jest zgodne z zasadą minimalnych uprawnień.</p>
+<p><b>Głęboka analiza:</b> Impersonacja zapewnia, że nawet jeśli ktoś przejmie kontrolę nad procesem batche, nie znajdzie na dysku żadnych poświadczeń, które mógłby ukraść.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/service-account-impersonation" target="_blank">https://cloud.google.com/iam/docs/service-account-impersonation</a></li>

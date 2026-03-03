@@ -76,14 +76,23 @@ Keep instance logging data within Netherlands (europe-west4) for compliance.
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: D (lub C - oba mechanizmy są używane). Wyjaśnienie: Można skonfigurować domyślne ustawienia zapisu logów dla projektu/organizacji, wskazując konkretny region dla bucketów logów.</pre>
+<pre>Odpowiedź: D (lub C - oba mechanizmy są używane, ale D jest nowszą metodą systemową).
+
+Wyjaśnienie (Dlaczego poprawna):
+D. Logging storage region: Google Cloud pozwala na zdefiniowanie domyślnej lokalizacji dla bucketów logów na poziomie projektu lub organizacji. Ustawienie tego parametru (np. przez gcloud) gwarantuje, że logi systemowe i audytowe nie opuszczą fizycznie wybranego regionu.
+
+Dlaczego inne są błędne:
+A. Org policy: Blokuje tworzenie zasobów w innych regionach, ale nie służy do konfiguracji samego mechanizmu Cloud Logging.
+B. Log sink to GCS: Pomaga, ale logi i tak trafiają najpierw do domyślnego bucketu `_Default`, który może być w innym regionie. Trzeba zmienić lokalizację samego storage'u logów (D/C).
+
+Konsensus społeczności ExamTopics: Przewaga na D/C. To kluczowe dla zgodności z lokalnymi przepisami o ochronie danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Ustawienie 'Logging Storage Region' gwarantuje, że logi są fizycznie składowane w wybranej lokalizacji.</p>
+<p><b>Głęboka analiza:</b> Po zmianie regionu storage'u logów, wszystkie nowo przychodzące logi trafiają do nowej lokalizacji. Stare logi pozostają w poprzednim regionie aż do wygaśnięcia ich retencji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/region-restrictions" target="_blank">https://cloud.google.com/logging/docs/region-restrictions</a></li>

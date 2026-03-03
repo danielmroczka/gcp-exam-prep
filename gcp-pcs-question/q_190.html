@@ -78,14 +78,21 @@ Set up and enforce SAML SSO for all users using Active Directory. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Poprawna konfiguracja SAML SSO wymaga wymiany certyfikatów i URL-i między Google (SP) a Active Directory (IdP).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. SAML Configuration: Poprawna konfiguracja federacji wymaga wymiany parametrów technicznych między Google (Service Provider) a AD (Identity Provider). Musisz podać w IdP adresy URL logowania/wylogowania, Entity ID oraz ACS (Assertion Consumer Service) URL wygenerowane przez Google, a w Google wgrać certyfikat X.509 z IdP.
+
+Dlaczego inne są błędne:
+B, D. OIDC: Pytanie precyzuje protokół SAML. OIDC to zupełnie inna metoda federacji.
+C. Change password URL: Jest to opcjonalne ustawienie poprawiające UX, ale nie jest to fundament 'set up and enforce SAML SSO' tak kompletny jak zestaw parametrów w punkcie A.
+
+Konsensus społeczności ExamTopics: 100% na A. To standardowy zestaw danych dla zestawienia federacji SAML.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Kluczowe elementy to Entity ID i ACS URL, które IdP musi znać, aby poprawnie wysyłać asercje SAML.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, że po stronie Google musisz również 'włączyć' profil SSO dla użytkowników, inaczej system nadal będzie pytał o hasło Google zamiast przekierować do AD.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/60224" target="_blank">https://support.google.com/cloudidentity/answer/60224</a></li>

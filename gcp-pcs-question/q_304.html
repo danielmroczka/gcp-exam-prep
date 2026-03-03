@@ -78,14 +78,22 @@ Folders for teams. Teams need flexibility to modify org policies relevant to the
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Wykorzystanie Tagów i Warunków IAM (IAM Conditions) to najnowocześniejsza i najbezpieczniejsza metoda delegowania uprawnień administracyjnych tylko do wybranych zasobów (np. konkretnych folderów).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Tags + IAM Conditions: To najbardziej nowoczesna i bezpieczna metoda delegacji (least privilege). Pozwala nadać zespołowi uprawnienia administratora polityk organizacji, ale TYLKO pod warunkiem (Condition), że operacja dotyczy folderu oznaczonego konkretnym tagiem. Dzięki temu deweloperzy nie mogą zmienić polityk w cudzych folderach ani na poziomie całej firmy.
+
+Dlaczego inne są błędne:
+A. Custom role on folder: Choć bliskie prawdy, to Tagi (C) są obecnie silniej promowaną przez Google metodą granularnego ograniczania zasięgu ról administracyjnych.
+B. Shared credentials: Błąd krytyczny. Nigdy nie udostępniaj poświadczeń kont serwisowych ludziom.
+D. Org level for all: Skrajne naruszenie izolacji bezpieczeństwa.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. IAM Conditions to potężne narzędzie bezpiecznego zarządzania w skali.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Pozwala to uniknąć dawania uprawnień 'nadzorczych' na poziomie całej organizacji.</p>
+<p><b>Głęboka analiza:</b> Tagi zasobów (Resource Tags) są odporne na zmiany nazw folderów i działają niezależnie od hierarchii technicznej, co ułatwia zarządzanie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/conditions-overview" target="_blank">https://cloud.google.com/iam/docs/conditions-overview</a></li>

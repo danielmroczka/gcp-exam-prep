@@ -78,14 +78,22 @@
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: MACsec (szyfrowanie warstwy 2) wymaga identycznego klucza (PSK) po obu stronach łącza. Rozbieżność kluczy uniemożliwi zestawienie bezpiecznego połączenia mimo sprawnego łącza fizycznego.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Key Mismatch: MACsec (szyfrowanie warstwy 2) wymaga tzw. Pre-Shared Key (PSK). Jeśli klucz po stronie Google nie pasuje do klucza na Twoim routerze on-prem, sesja MACsec nie zostanie nawiązana, mimo że fizyczny link jest sprawny. Jest to najczęstsza przyczyna błędów konfiguracyjnych.
+
+Dlaczego inne są błędne:
+A. MACsec support: Skoro link był 'operational' (według treści), to znaczy, że sprzęt wspiera MACsec, a problem powstał później.
+B. Router: Zbyt ogólne. Trzeba sprawdzić konkretnie konfigurację kluczy.
+C. Key expiration: Klucze MACsec w GCP nie wygasają automatycznie w taki sposób, aby powodować 'down' bez zmiany konfiguracji, ale niespójność kluczy (D) przy próbie zmiany jest pewniejszym powodem awarii.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. Diagnostyka MACsec zaczyna się od weryfikacji PSK.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>To najczęstsza przyczyna błędów po wstępnej konfiguracji lub zmianie kluczy.</p>
+<p><b>Głęboka analiza:</b> MACsec w GCP wymaga użycia klucza Connectivity Association Key (CAK) i Connectivity Association Key Name (CKN). Oba te parametry muszą być identyczne po obu stronach światłowodu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/macsec-overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/macsec-overview</a></li>

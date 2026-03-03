@@ -78,14 +78,22 @@ Enforce Binary Authorization for all new Cloud Run jobs/services in production. 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Podobnie jak przy GKE, istnieją polityki organizacji, które wymuszają aktywność Binary Authorization na usługach Cloud Run w całej firmie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Org Policy Enforcement: Istnieje polityka organizacji `run.allowedBinaryAuthorizationPolicies`, która pozwala administratorowi wymusić stosowanie Binary Authorization dla wszystkich usług Cloud Run w danym folderze lub projekcie. To jedyny sposób na systemowe i centralne wyegzekwowanie tego wymogu.
+
+Dlaczego inne są błędne:
+B. SHA rule: Powie Ci, że ktoś nie używa BinAuth (detekcja), ale mu nie przeszkodzi (brak enforcementu).
+C. Remove roles: Deweloperzy nie mogliby w ogóle pracować. Celem jest pozwolenie im na pracę, ale przy zachowaniu standardu.
+D. Custom policy: Sama polityka BinAuth nie zadziała, jeśli nie zostanie jawnie 'włączona' (enforced) na poziomie usługi, co robi polityka organizacji (A).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To standardowy mechanizm zarządzania standardami serverless.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to najskuteczniejszy sposób na centralne zarządzanie standardem wdrożeń.</p>
+<p><b>Głęboka analiza:</b> Polityka ta jest dziedziczona. Jeśli ustawisz ją na folderze 'Production', każdy nowy mikroserwis Cloud Run tam stworzony będzie automatycznie wymagał atestacji obrazu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization/docs/run/overview" target="_blank">https://cloud.google.com/binary-authorization/docs/run/overview</a></li>

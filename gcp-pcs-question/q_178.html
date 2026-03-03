@@ -78,14 +78,22 @@ Track bonus compensations change over time, identify outliers. Reversible but hi
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: FPE pozwala na zaszyfrowanie danych w sposób odwracalny (z kluczem), zachowując ich format (np. cyfry pozostają cyframi), co ułatwia analizę zmian w czasie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Format-preserving encryption (FPE): Identycznie jak w pytaniu 17. FPE pozwala na zachowanie relacji między danymi (ten sam bonus po zaszyfrowaniu zawsze wygląda tak samo), co pozwala na analizę trendów i znajdowanie anomalii (outliers), przy jednoczesnej możliwości odwrócenia procesu przez uprawnioną osobę z kluczem.
+
+Dlaczego inne są błędne:
+A. Hashing: Nieodwracalne.
+B. Redaction: Usuwa dane całkowicie.
+D. Generalization: Zbyt mało precyzyjne do znajdowania 'outlierów' w kwotach pieniężnych.
+
+Konsensus społeczności ExamTopics: 100% na C. FPE to król analityki zachowującej prywatność.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Haszowanie (A) jest nieodwracalne, a redakcja (B) usuwa dane całkowicie.</p>
+<p><b>Głęboka analiza:</b> Dzięki FPE analityk może uruchomić zapytanie: 'Pokaż mi rekordy, gdzie zaszyfrowana kwota wzrosła o więcej niż 50% rok do roku', nie wiedząc, czy mowa o 1000 zł czy 100 000 zł.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/pseudonymization#fpe" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization#fpe</a></li>

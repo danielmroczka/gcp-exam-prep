@@ -78,14 +78,22 @@
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Dedicated Interconnect (A) oferuje najniższe opóźnienia (latency) i największą stabilność w porównaniu do VPN przez publiczny internet, co jest kluczowe dla komunikacji App <-> DB.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Dedicated Interconnect: Jest to rozwiązanie oferujące najniższe opóźnienia (latency) i najwyższą stabilność (przepustowość fizyczna). Dla aplikacji, gdzie frontend w chmurze musi przy każdym żądaniu pytać bazę danych on-premise, czas odpowiedzi łącza jest krytyczny. Interconnect jest znacznie szybszy i bardziej przewidywalny niż VPN.
+
+Dlaczego inne są błędne:
+B. Direct internet: Skrajnie niebezpieczne (brak prywatności) i zmienna wydajność.
+C. Hybrid NEGs: To mechanizm Load Balancera służący do adresowania backendów on-prem, ale potrzebuje on pod spodem bezpiecznego 'kabla', którym jest Interconnect (A).
+D. HA VPN: Bezpieczny, ale wprowadza narzut na szyfrowanie i korzysta z publicznego internetu, co zwiększa opóźnienia i ryzyko pętelek opóźnień (jitter).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. Latency = Interconnect.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dla aplikacji 3-warstwowej rozproszonej między chmurami, wydajność łącza jest krytyczna dla User Experience.</p>
+<p><b>Głęboka analiza:</b> W architekturze hybrydowej każda milisekunda na łączu między chmurą a bazą danych przekłada się na gorsze odczucia użytkownika końcowego. Interconnect to 'światłowód pod biurkiem' Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/dedicated-overview</a></li>

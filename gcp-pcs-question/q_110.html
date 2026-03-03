@@ -68,7 +68,7 @@ Confirm unauthorized access by a former employee using a SA key in the past 2 mo
 <div class="card-text question-answer bg-light white-text">
 <span class="correct-answer-box">
 <strong>Suggested Answer:</strong>
-<span class="correct-answer">B</span>
+<span class="correct-answer">D</span>
 <br/>
 </span>
 </div>
@@ -76,14 +76,24 @@ Confirm unauthorized access by a former employee using a SA key in the past 2 mo
 </div>
 <div class="q-card q-answer mb-4" style="display:none;">
 <h2>Wyjaśnienie</h2>
-<pre>Odpowiedź: B (lub D - kluczowe są logi audytowe). Wyjaśnienie: Logi audytowe (Admin Activity i Data Access) to główne źródło informacji o działaniach użytkowników i kont serwisowych.</pre>
+<pre>Odpowiedź: D. (Uwaga: B jest technicznie podobne, ale Logs Explorer to dedykowane narzędzie do tego celu).
+
+Wyjaśnienie (Dlaczego poprawna):
+D. Logs Explorer: Jest to główne narzędzie do przeszukiwania logów audytowych (Audit Logs). Pozwala na filtrowanie zdarzeń po `principalEmail` (identyfikatorze konta serwisowego) oraz po `serviceAccountKeyName`, co pozwoli precyzyjnie określić, co i kiedy zostało zrobione przy użyciu skradzionego klucza w ciągu ostatnich 2 miesięcy.
+
+Dlaczego inne są błędne:
+A. Security Health Analytics: Wykrywa błędy konfiguracji (np. 'klucz jest stary'), ale nie służy do analizy aktywności historycznej (kto co zrobił).
+B. Cloud Monitoring: Służy do wyświetlania wykresów i metryk (np. liczba błędów), nie jest optymalny do szczegółowego dochodzenia (forensics) w treści logów audytowych.
+C. DLP: Służy do szukania danych wrażliwych, nie do audytu aktywności systemowej.
+
+Konsensus społeczności ExamTopics: Przewaga głosów na D. Logs Explorer to narzędzie pierwszego wyboru przy incydentach.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
-<p><b>Sugerowana odpowiedź: B</b></p>
-<p>W Logs Explorerze można filtrować zdarzenia po 'principalEmail' powiązanym z kluczem konta serwisowego.</p>
+<p><b>Sugerowana odpowiedź: D</b></p>
+<p><b>Głęboka analiza:</b> Logi 'Admin Activity' są przechowywane domyślnie przez 400 dni, więc okres 2 miesięcy mieści się w standardowej retencji Logs Explorera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/audit" target="_blank">https://cloud.google.com/logging/docs/audit</a></li>

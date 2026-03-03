@@ -78,14 +78,21 @@ Restrict service account creation capability centrally across the organization i
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Ograniczenie 'iam.disableServiceAccountCreation' na poziomie organizacji lub folderu blokuje możliwość tworzenia nowych kont serwisowych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Disable SA Creation: Polityka organizacji `iam.disableServiceAccountCreation` całkowicie blokuje możliwość tworzenia nowych kont serwisowych w danej części hierarchii (np. w folderze Production). Jest to najsilniejsza, centralna metoda wymuszenia tego ograniczenia.
+
+Dlaczego inne są błędne:
+A. IAM: Musiałbyś odebrać uprawnienia każdemu użytkownikowi z osobna lub na poziomie grup, co jest trudne do utrzymania i nie gwarantuje, że nowy użytkownik (np. z rolą Editor) ich nie otrzyma. Org Policy działa niezależnie od roli IAM.
+B, C: Te restrykcje dotyczą KLUCZY (JSON) do istniejących już kont, a nie samego procesu tworzenia nowych kont serwisowych.
+
+Konsensus społeczności ExamTopics: 100% na D. Klasyczny przykład użycia prewencyjnych polityk organizacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Polityki organizacji to najsilniejszy sposób na centralne wymuszanie ograniczeń infrastrukturalnych.</p>
+<p><b>Głęboka analiza:</b> Tę politykę często stosuje się na produkcji, aby wymusić tworzenie kont SA wyłącznie poprzez zatwierdzone procesy IaC (Terraform) działające na koncie z uprawnieniami 'bypass'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints</a></li>

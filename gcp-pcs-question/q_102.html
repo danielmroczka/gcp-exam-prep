@@ -79,14 +79,23 @@ Small startup office manager needs to match payments to invoices and create bill
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CD.
 
-Wyjaśnienie: Billing Account Viewer (C) pozwala na podgląd faktur i płatności. Billing Account Costs Manager (D) pozwala na zarządzanie alertami budżetowymi i kosztami.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Billing Account Viewer: Pozwala na przeglądanie faktur, historii płatności i dopasowywanie ich do wydatków (wymóg 'match payments to invoices').
+D. Billing Account Costs Manager: Pozwala na zarządzanie budżetami i tworzenie alertów budżetowych (wymóg 'create billing alerts').
+
+Dlaczego inne są błędne:
+A. Organization Administrator: Zbyt szerokie uprawnienia, pozwalające na zarządzanie całą firmą.
+B. Project Creator: Pozwala na wydawanie pieniędzy poprzez tworzenie nowych projektów, co nie jest potrzebne do zarządzania fakturami.
+E. Billing Account User: Pozwala na przypisywanie konta rozliczeniowego do projektów, co wykracza poza rolę office managera zajmującego się fakturami.
+
+Konsensus społeczności ExamTopics: 100% na CD. To klasyczny podział ról finansowych wg zasady najniższych uprawnień.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CD</b></p>
-<p>Zgodnie z zasadą najniższych uprawnień, te dwie role dają dostęp do finansów bez możliwości edycji infrastruktury.</p>
+<p><b>Głęboka analiza:</b> Wiele osób myli rolę Viewer z Costs Manager. Viewer widzi CO się stało, ale tylko Costs Manager może ustawić progi powiadomień (alerts).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/billing/docs/how-to/billing-access" target="_blank">https://cloud.google.com/billing/docs/how-to/billing-access</a></li>

@@ -78,14 +78,21 @@ Cloud Interconnect. On-prem access to Google APIs only over Interconnect, use AP
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Identycznie jak w pytaniu 134. Użycie domeny 'restricted' zapewnia, że ruch z on-premises trafia tylko do bezpiecznych usług objętych perymetrem VPC SC.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. restricted.googleapis.com: Ponownie - domena 'restricted' jest kluczem do zgodności z VPC SC. Zapewnia ona dostęp tylko do zaufanych usług. Konfiguracja musi uwzględniać routing tych adresów IP (zakres 199.36.153.4/30) przez tunel/interconnect, aby ruch nie wyciekł do publicznego internetu.
+
+Dlaczego inne są błędne:
+C. private.googleapis.com: Pozwala na wyciek danych do usług nieobjętych perymetrem (np. YouTube).
+A. PGA on subnets: Dotyczy ruchu wychodzącego Z chmury, nie wejściowego Z on-prem.
+
+Konsensus społeczności ExamTopics: 100% na D. Standardowa konfiguracja hybrid-cloud z wymogami security.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Konfiguracja wymaga odpowiednich wpisów w lokalnym DNS i tras (routes) w BGP.</p>
+<p><b>Głęboka analiza:</b> Ta konfiguracja wymaga tzw. 'Split-horizon DNS' po stronie klienta, aby zapytania o usługi Google nie wychodziły do publicznych DNS-ów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity" target="_blank">https://cloud.google.com/vpc-service-controls/docs/set-up-private-connectivity</a></li>

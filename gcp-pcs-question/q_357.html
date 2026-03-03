@@ -78,14 +78,22 @@ Cloud Run: service A calls service B. least privilege. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Każda usługa powinna mieć własną tożsamość (SA). Nadanie kontu usługi A roli 'Invoker' na usłudze B to podręcznikowy przykład least privilege.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Service-to-Service Auth: Każda usługa powinna mieć własną tożsamość (SA). Usługa B powinna mieć wyłączony dostęp publiczny (allow unauthenticated = false). Następnie nadajesz kontu serwisowemu usługi A rolę `roles/run.invoker` tylko na usłudze B. To najczystsza forma Least Privilege.
+
+Dlaczego inne są błędne:
+B. Keys: Nigdy nie używaj statycznych kluczy do komunikacji między usługami wewnątrz chmury.
+C. One SA for both: Narusza izolację. Jeśli jedna usługa zostanie zhakowana, haker ma uprawnienia obu.
+D. Default SA: Posiada zbyt szerokie uprawnienia (Editor).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla A. To fundament bezpieczeństwa mikroserwisów.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Pozwala to na precyzyjną kontrolę: kto może 'rozmawiać' z backendem.</p>
+<p><b>Głęboka analiza:</b> Usługa A automatycznie pobiera token tożsamości (ID token) z serwera metadanych i dołącza go do nagłówka Authorization, co IAP pod spodem weryfikuje bez pisania dodatkowego kodu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/run/docs/authenticating/service-to-service" target="_blank">https://cloud.google.com/run/docs/authenticating/service-to-service</a></li>

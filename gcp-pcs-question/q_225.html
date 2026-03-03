@@ -78,14 +78,22 @@ Retain Cloud Storage records for 7 years permanently. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Bucket Lock (zablokowanie polityki) sprawia, że czas retencji nie może zostać skrócony ani usunięty, nawet przez administratora projektu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Retention Policy + Bucket Lock: Ustawienie polityki retencji (A) to pierwszy krok. Jednak dopóki polityka nie jest 'zablokowana' (Bucket Lock), administrator może ją skrócić lub usunąć. Funkcja 'Lock' sprawia, że polityka staje się niezmienna (immutable), co jest wymogiem prawnym dla danych typu WORM (Write Once, Read Many).
+
+Dlaczego inne są błędne:
+A. Monitor alerts: Poinformuje Cię, że ktoś skasował dane, ale im nie zapobiegnie.
+B. Remove permissions: Zawsze istnieje ktoś z uprawnieniami (np. Owner lub Admin), kto mógłby je przywrócić i skasować dane. Tylko Bucket Lock jest 'silniejszy' od uprawnień ludzkich.
+C. Bucket policy only: To mechanizm IAM (wyłączenie ACL), nie ma związku z czasem przechowywania danych.
+
+Konsensus społeczności ExamTopics: 100% na D. Dla trwałości i niezmienności (Compliance) 'Lock' jest niezbędny.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Jest to kluczowe dla spełnienia wymogów regulacyjnych dotyczących niezmienności danych (WORM).</p>
+<p><b>Głęboka analiza:</b> UWAGA: Raz zablokowanej polityki Bucket Lock nie może usunąć nawet pomoc techniczna Google. Jeśli ustawisz 7 lat przez pomyłkę, będziesz płacić za ten storage przez 7 lat.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/bucket-lock" target="_blank">https://cloud.google.com/storage/docs/bucket-lock</a></li>

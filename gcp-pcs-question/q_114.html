@@ -78,14 +78,22 @@ Detect firewall rules overlapped by higher/equal priority rules. Which product?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Firewall Insights to narzędzie do analizy optymalizacji reguł, w tym wykrywania reguł, które nigdy nie są używane lub są 'przykryte' przez inne.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Firewall Insights: Jest to narzędzie analityczne stworzone specjalnie do optymalizacji reguł firewalla. Potrafi ono wskazać reguły 'shadowed' (przykryte), czyli takie, które nigdy nie zostaną wykonane, ponieważ inna reguła o wyższym priorytecie (lub takim samym, ale wyżej na liście) obsługuje ten sam ruch.
+
+Dlaczego inne są błędne:
+A. SCC: Może zgłosić, że reguła jest zbyt szeroka (np. 0.0.0.0/0), ale nie służy do głębokiej analizy logicznej nakładania się (overlap) wielu reguł między sobą.
+B. Firewall Logging: Powie Ci, która reguła zadziałała dla konkretnego pakietu, ale nie da Ci zbiorczego raportu o tym, które reguły są w ogóle niepotrzebne.
+C. VPC Flow Logs: Widzą ruch, ale nie znają logiki Twojego firewalla i nie potrafią ocenić redundancji reguł.
+
+Konsensus społeczności ExamTopics: 100% na D. Firewall Insights to jedyne narzędzie do 'czyszczenia' firewalla.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Firewall Insights pomaga w utrzymaniu 'higieny' firewalla i wykrywaniu błędów konfiguracyjnych.</p>
+<p><b>Głęboka analiza:</b> Posiadanie zbyt wielu reguł firewalla (zwłaszcza przykrytych) spowalnia audyt i utrudnia zrozumienie rzeczywistego stanu bezpieczeństwa sieci.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/firewall-insights/docs/overview" target="_blank">https://cloud.google.com/firewall-insights/docs/overview</a></li>

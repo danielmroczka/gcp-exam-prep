@@ -78,14 +78,21 @@ Highly regulated: encrypt data while in use. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Ponownie - szyfrowanie danych w użyciu (w procesorze/pamięci) realizowane jest przez technologię Confidential Computing (Confidential VMs).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Confidential VM: Szyfrowanie 'while in use' odnosi się do danych znajdujących się w procesorze i pamięci RAM podczas obliczeń. Confidential VMs wykorzystują technologię Trusted Execution Environment (TEE), która sprzętowo izoluje i szyfruje RAM kluczem generowanym wewnątrz CPU.
+
+Dlaczego inne są błędne:
+A, D: Szyfrują dane 'at rest' (na dysku). Aby procesor mógł na nich pracować, muszą zostać odszyfrowane do pamięci RAM, gdzie stają się podatne na ataki bez technologii B.
+C. Shielded VM: Zapewnia integralność systemu (Secure Boot), ale nie szyfruje pamięci RAM w trakcie pracy aplikacji.
+
+Konsensus społeczności ExamTopics: 100% na B. Dane 'in use' = Confidential Computing.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Standardowe dyski (A, D) są szyfrowane w spoczynku, ale deszyfrowane w pamięci RAM w celu użycia.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie jest niezbędne dla 'Confidential Computing'. Chroni ono dane przed administratorem hypervisora (Google) oraz przed innymi procesami na tym samym hoście fizycznym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/confidential-computing" target="_blank">https://cloud.google.com/confidential-computing</a></li>

@@ -78,14 +78,22 @@ Update VPC Service Controls perimeter with new access level without breaking exi
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Tryb 'Dry run' pozwala na przetestowanie nowej konfiguracji (w tym poziomów dostępu) bez wpływu na rzeczywisty ruch.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Dry run configuration: VPC Service Controls pozwala na posiadanie dwóch konfiguracji jednocześnie: aktywnej (Enforced) i testowej (Dry run). Możesz dodać nowy Access Level do konfiguracji Dry Run i obserwować logi audytowe. Jeśli nie widzisz niespodziewanych blokad, możesz bezpiecznie promować te zmiany do konfiguracji aktywnej.
+
+Dlaczego inne są błędne:
+A. Replica: Bardzo trudne do utrzymania i nie daje wglądu w rzeczywisty ruch bez dublowania wszystkich systemów.
+B. Never matches: Nie pozwoli przetestować, czy nowy poziom dostępu faktycznie działa (przepuszcza ruch).
+C. Dry run on Enforced: Pytanie dotyczy zmiany KONKRETNEGO elementu (Access Level). Najmniej inwazyjne jest użycie dedykowanej warstwy testowej Dry Run dla całego perymetru.
+
+Konsensus społeczności ExamTopics: 100% na D. Dry Run to klucz do przeżycia przy zarządzaniu VPC SC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Logi generowane w trybie dry run pokazują, czy nowy poziom dostępu zadziałałby zgodnie z oczekiwaniami.</p>
+<p><b>Głęboka analiza:</b> VPC SC jest bardzo 'zero-jedynkowe'. Błąd w konfiguracji może natychmiast odciąć całą firmę od danych. Tryb Dry Run to obowiązkowy krok przed każdą zmianą.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/dry-run-overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/dry-run-overview</a></li>

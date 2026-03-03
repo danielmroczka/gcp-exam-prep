@@ -78,14 +78,22 @@ You need to analyze VPC network traffic for anomalies without installing agents 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: VPC Flow Logs rejestrują pakiety IP wysyłane i odbierane przez interfejsy sieciowe VM wewnątrz VPC.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. VPC Flow Logs: Rejestrują one metadane o wszystkich przepływach IP (źródło, cel, porty, liczba bajtów) bezpośrednio na poziomie sieci VPC. Nie wymagają one żadnego oprogramowania (agenta) wewnątrz systemu operacyjnego VM.
+
+Dlaczego inne są błędne:
+A. Stackdriver Logging: Może zawierać logi aplikacji, ale nie rejestruje automatycznie ruchu sieciowego na poziomie pakietów IP bez dodatkowej konfiguracji.
+C. Cloud Trace: Służy do analizy opóźnień w aplikacjach mikroserwisowych (profilowanie), a nie do monitoringu ruchu sieciowego.
+D. Packet Mirroring: Kopiuje pełne pakiety dla celów inspekcji (IDS/IPS). Jest bardziej skomplikowane i droższe w analizie niż Flow Logs, które zazwyczaj wystarczają do wykrywania anomalii (np. nagłych skoków transferu).
+
+Konsensus społeczności ExamTopics: Wyraźna przewaga opcji B jako najprostszej i 'agentless' metody monitoringu sieci.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Flow logs są generowane na poziomie sieci, nie wymagają obciążania procesora VM.</p>
+<p><b>Głęboka analiza:</b> Flow Logs są próbkowane, co pozwala na monitoring ogromnego ruchu przy minimalnym wpływie na wydajność sieci i koszty przechowywania logów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/using-flow-logs" target="_blank">https://cloud.google.com/vpc/docs/using-flow-logs</a></li>

@@ -78,14 +78,22 @@ App on CE VM access variable buckets in other projects. Google-recommended pract
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Przypisanie uprawnień IAM bezpośrednio kontu serwisowemu instancji do konkretnych bucketów to standardowa, bezpieczna i granularna metoda.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Direct IAM Bindings: Zalecaną praktyką jest nadanie roli (np. `roles/storage.objectViewer`) kontu serwisowemu (SA), które jest przypisane do Twojej maszyny VM, bezpośrednio na zasobie (buckecie), do którego ma on mieć dostęp. Jest to najbardziej granularne i audytowalne rozwiązanie.
+
+Dlaczego inne są błędne:
+A. Access scopes: To metoda przestarzała (legacy). Scopes nie powinny być używane do precyzyjnej autoryzacji; do tego służy IAM.
+C. Domain-wide delegation: Służy do dostępu do Google Workspace (Drive, Gmail), nie do Cloud Storage.
+D. Groups for SA: Choć grupy są świetne dla LUDZI, to dla tożsamości technicznych (SA) bezpośrednie przypisanie roli do zasobu jest zazwyczaj prostsze i bardziej czytelne w audycie (widzisz od razu która maszyna co widzi).
+
+Konsensus społeczności ExamTopics: 100% na B. IAM roles na koncie SA to fundament bezpieczeństwa GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Scopes (A) są przestarzałe i mniej granularne. Grupy (D) są świetne dla ludzi, ale dla pojedynczej tożsamości technicznej bezpośredni binding SA jest prostszy i poprawny.</p>
+<p><b>Głęboka analiza:</b> Zawsze używaj <b>Custom Service Accounts</b> zamiast domyślnego konta Compute Engine, aby móc nadać tak precyzyjne uprawnienia bez ryzyka nadmiarowego dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/best-practices-for-using-service-accounts" target="_blank">https://cloud.google.com/iam/docs/best-practices-for-using-service-accounts</a></li>

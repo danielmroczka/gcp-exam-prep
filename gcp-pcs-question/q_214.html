@@ -78,14 +78,20 @@ Encrypt data while in use by VMs. Policy enforced across organization. What to d
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Confidential VMs to technologia Google Cloud (oparta na AMD SEV), która szyfruje pamięć RAM podczas pracy maszyny.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Confidential VM: Jest to technologia Google Cloud oparta na procesorach AMD SEV, która szyfruje dane bezpośrednio w pamięci RAM podczas ich przetwarzania (in use). Użycie polityki organizacji `compute.restrictNonConfidentialComputing` wymusza na wszystkich deweloperach tworzenie wyłącznie takich bezpiecznych maszyn.
+
+Dlaczego inne są błędne:
+A, C, D: Chronią dane 'at rest' (na dysku). Gdy procesor musi wykonać obliczenia, dane są deszyfrowane w RAM, gdzie bez Confidential VM mogą być podatne na ataki typu 'cold boot' lub dostęp z poziomu hypervisora.
+
+Konsensus społeczności ExamTopics: 100% na B. Dane 'in use' = Confidential Computing.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>CMEK/EKM chronią dane 'at rest' (na dysku), a Confidential VM chroni dane 'in use'.</p>
+<p><b>Głęboka analiza:</b> Confidential VMs są kluczowe dla scenariuszy Multi-party Computation, gdzie kilka firm chce wspólnie analizować dane bez wzajemnego udostępniania ich treści jawnej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction" target="_blank">https://cloud.google.com/confidential-computing/confidential-vm/docs/introduction</a></li>

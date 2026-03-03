@@ -78,14 +78,22 @@ Critical web app, increase resilience against web attacks, enhance perimeter, pr
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Cloud Armor (C) chroni przed DDoS i atakami L7 (WAF). IAP zapewnia bezpieczny dostęp użytkowników. Firewall na poziomie VPC to dodatkowa warstwa odcięcia znanych agresorów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Defense in Depth (Armor + Firewall + IAP): Ten zestaw realizuje wszystkie wymogi: 1. Resilience against web attacks (Cloud Armor jako WAF). 2. Enhance perimeter (Firewall blokujący znanych agresorów). 3. Access control (IAP dla granularnego dostępu użytkowników).
+
+Dlaczego inne są błędne:
+A. Network LB: Nie wspiera Cloud Armor ani IAP w warstwie 7, co jest kluczowe dla ochrony aplikacji webowych.
+B. Increase resources: To 'pudrowanie' problemu (skalowanie w odpowiedzi na atak), a nie jego techniczne rozwiązanie.
+D. Disable external IPs: Choć dobre, uniemożliwiłoby wejście zwykłym użytkownikom do publicznej aplikacji bez dodatkowych, skomplikowanych mechanizmów (IAP jest tu lepszym sposobem kontroli dostępu).
+
+Konsensus społeczności ExamTopics: 100% na C. To kompletny stos bezpieczeństwa webowego w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>To kompletny stos obronny 'Defense in depth' dla usług webowych.</p>
+<p><b>Głęboka analiza:</b> Cloud Armor chroni przed botami i exploitami, IAP zapewnia, że tylko Twoi pracownicy wejdą do paneli administracyjnych, a Firewall VPC stanowi ostatnią linię obrony sieciowej.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/products" target="_blank">https://cloud.google.com/security/products</a></li>

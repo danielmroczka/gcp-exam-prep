@@ -79,17 +79,26 @@ Trusted container images on GKE from central registry signed by authority. Which
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CE.
 
-Wyjaśnienie: Binary Authorization (E) to usługa sprawdzająca podpisy (atesty). Polityka organizacji (C) może wymuszać włączenie tej usługi na wszystkich klastrach GKE.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+E. Binary Authorization: Usługa ta weryfikuje 'atestacje' (podpisy cyfrowe) przed uruchomieniem kontenera. Spełnia wymóg 'signed by authority'.
+C. Org Policy for BinAuth: Pozwala na wymuszenie użycia Binary Authorization we wszystkich klastrach w organizacji, co zapewnia, że nikt nie stworzy 'niezabezpieczonego' klastra omijającego te kontrole.
+
+Dlaczego inne są błędne:
+A. Threat Detection: Monitoruje runtime, nie weryfikuje podpisów przed wdrożeniem.
+B. Trusted image policy: Dotyczy obrazów VM (Compute Engine), a nie kontenerów GKE.
+D. PodSecurity: Dotyczy uprawnień wewnątrz klastra (np. zakaz kontenerów uprzywilejowanych), nie weryfikuje źródła obrazu.
+
+Konsensus społeczności ExamTopics: 100% na CE. BinAuth to jedyne narzędzie do weryfikacji podpisów kontenerów w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CE</b></p>
-<p>Atestacja to dowód, że obraz przeszedł pomyślnie przez określony etap (np. testy lub skan security).</p>
+<p><b>Głęboka analiza:</b> Ten model tworzy proces, w którym obraz jest 'atestowany' (podpisywany) przez klucz KMS zespołu security dopiero po przejściu wszystkich testów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
-<li><a href="https://cloud.google.com/binary-authorization/docs/overview" target="_blank">https://cloud.google.com/binary-authorization/docs/overview</a></li>
+<li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>
 
 </ul>
 </div>

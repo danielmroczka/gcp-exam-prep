@@ -78,14 +78,22 @@ An engineering team is launching a public web application. They want to avoid ex
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Cloud Armor to jedyna usługa w GCP, która oferuje IP blacklisting dla aplikacji webowych za Load Balancerem.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud Armor: Jest to jedyna usługa w GCP, która oferuje 'IP Blacklisting' i 'IP Whitelisting' na brzegu sieci (Edge) dla aplikacji webowych. Pozwala na zdefiniowanie polityk bezpieczeństwa, które odrzucają ruch ze wskazanych zakresów IP zanim trafią do Load Balancera.
+
+Dlaczego inne są błędne:
+B. Network LB: Działa na warstwie 4. Filtrowanie IP musiałbyś robić ręcznie w firewallu VPC na każdej maszynie, co jest mniej efektywne i trudniejsze w zarządzaniu.
+C. SSL Proxy LB: Nie posiada wbudowanego silnika WAF ani tak łatwego zarządzania czarnymi listami IP jak Cloud Armor.
+D. NAT Gateway: Służy do ukrywania adresów IP maszyn wychodzących do internetu, nie chroni aplikacji przed ruchem przychodzącym.
+
+Konsensus społeczności ExamTopics: 100% na A. Cloud Armor to standardowa odpowiedź na wszystko co dotyczy 'IP blocking' dla publicznych stron WWW.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Cloud Armor chroni przed atakami L7 i pozwala na dynamiczne zarządzanie dostępem.</p>
+<p><b>Głęboka analiza:</b> Cloud Armor pozwala również na stosowanie list IP od dostawców trzecich oraz automatyczne blokowanie adresów na podstawie geolokalizacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor" target="_blank">https://cloud.google.com/armor</a></li>

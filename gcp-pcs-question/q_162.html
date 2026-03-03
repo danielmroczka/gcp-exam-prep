@@ -78,14 +78,22 @@ IAP role to access HTTPS resources.
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Rola 'IAP-Secured Web App User' jest niezbędna, aby IAP wpuścił użytkownika do chronionej aplikacji HTTP(S).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. IAP-Secured Web App User: To specyficzna rola IAM wymagana, aby IAP przepuścił żądanie użytkownika do aplikacji webowej (HTTPS). Bez niej użytkownik otrzyma błąd 403 mimo poprawnego zalogowania w Google.
+
+Dlaczego inne są błędne:
+A. Security Reviewer: Pozwala przeglądać ustawienia, nie daje dostępu do chronionych aplikacji.
+B. IAP-Secured Tunnel User: Ta rola służy wyłącznie do dostępu przez IAP TCP Forwarding (np. dla SSH lub RDP), a nie dla stron HTTPS.
+D. Service Broker: Nie ma związku z dostępem użytkowników końcowych do aplikacji webowych.
+
+Konsensus społeczności ExamTopics: 100% na C. Podstawowa wiedza o rolach IAP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Rola Tunnel User (B) dotyczy dostępu SSH/RDP, a nie stron webowych.</p>
+<p><b>Głęboka analiza:</b> Rolę tę można nadać na poziomie całego projektu lub tylko dla konkretnego 'backend service' Load Balancera, co pozwala na bardzo precyzyjną kontrolę dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/access-control" target="_blank">https://cloud.google.com/iap/docs/access-control</a></li>

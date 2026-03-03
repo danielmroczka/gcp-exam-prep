@@ -78,14 +78,22 @@ Real-time recommendation engine (BQ, GCS, AR, GKE, Pub/Sub). ML model supply cha
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Najlepszą obroną przed atakami na łańcuch dostaw (supply chain) jest weryfikacja pochodzenia i czystości obrazów za pomocą skanowania i wymuszania atestacji przez Binary Authorization.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Supply Chain Defense: Ataki na łańcuch dostaw (Supply Chain) polegają na wstrzyknięciu złośliwego kodu do obrazów kontenerów lub modeli. Połączenie skanowania podatności (identyfikacja dziur) z Binary Authorization (blokowanie niezatwierdzonych obrazów) to najsilniejsza tarcza przed tego typu zagrożeniami.
+
+Dlaczego inne są błędne:
+B. Sanitize data: Ważne, ale nie chroni przed podmienionym kodem modelu w kontenerze.
+C. Rotate keys: Dobra praktyka, ale nie adresuje problemu 'złośliwego kodu' wewnątrz artefaktów.
+D. Firewall/IDS: Chronią sieć, nie chronią przed 'zaufanym' obrazem, który w środku ma zaszyty złośliwy skrypt.
+
+Konsensus społeczności ExamTopics: 100% na A.Supply Chain Security w chmurze to domena Binary Authorization.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Zapewnia to, że w GKE działają tylko obrazy, które przeszły pomyślnie przez Twój proces kontroli.</p>
+<p><b>Głęboka analiza:</b> W tej architekturze Binary Authorization zapewnia, że tylko obrazy podpisane przez Twoje zaufane klucze KMS mogą zostać uruchomione w GKE, co eliminuje ryzyko użycia 'zatrutych' modeli ML.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>

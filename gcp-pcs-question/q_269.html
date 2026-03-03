@@ -78,14 +78,22 @@ Alert on suspicious outbound traffic targeting known suspicious web domains usin
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: FQDN filtering z użyciem list Threat Intelligence w politykach firewall pozwala na automatyczne blokowanie i alarmowanie o ruchu do znanych złośliwych domen.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Egress policy + Threat Intelligence: Google Cloud Firewall posiada wbudowane listy Threat Intelligence (np. 'malicious-ips', 'known-command-and-control'). Ustawienie reguły 'egress deny' (lub allow z logowaniem) dla tych list pozwala na automatyczne wykrywanie i blokowanie komunikacji do złośliwych domen w całym VPC.
+
+Dlaczego inne są błędne:
+A. DNS logs: Pozwolą zobaczyć zapytanie, ale nie zablokują ruchu ani nie dostarczą tak inteligentnego alertu o 'znanym zagrożeniu' jak system Threat Intel.
+B. Chronicle: To świetny SIEM, ale SCC Premium (wymóg pytania) ma natywne funkcje wewnątrz GCP (D), które działają szybciej i bliżej infrastruktury.
+C. Cloud IDS: Monitoruje ruch, ale zazwyczaj polityka firewall (D) jest bardziej bezpośrednią metodą na 'alert i blokadę' znanych złośliwych domen.
+
+Konsensus społeczności ExamTopics: 100% na D. Threat Intelligence w firewallu to potężna funkcja SCC Premium.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Google dostarcza gotowe listy domen (C&C, Malware) w ramach usługi Cloud Armor i hierarchicznych polityk firewalla.</p>
+<p><b>Głęboka analiza:</b> Listy te są stale aktualizowane przez Google na podstawie danych z całego internetu, co zapewnia ochronę przed 'Zero-day' domenami C2.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewall-policies#threat-intel" target="_blank">https://cloud.google.com/vpc/docs/firewall-policies#threat-intel</a></li>

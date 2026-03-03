@@ -78,14 +78,22 @@ Folders for teams, dedicated SA for IaC. Teams manage resources in folders with 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Rola 'Folder Admin' (roles/resourcemanager.folderAdmin) daje pełne uprawnienia do zarządzania zasobami Wewnątrz folderu, nie dając dostępu do reszty organizacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Folder Admin: Nadanie roli `roles/resourcemanager.folderAdmin` na poziomie konkretnego foldera daje zespołowi pełną władzę nad ich projektami i zasobami wewnątrz, bez żadnych uprawnień do innych części organizacji. Jest to zgodne z zasadą najniższych uprawnień dla 'autonomicznych zespołów'.
+
+Dlaczego inne są błędne:
+B. Project creator at org: Pozwalałoby zespołom tworzyć projekty wszędzie, nawet poza ich folderem (chyba że Condition byłoby bardzo skomplikowane). A jest prostsze i bardziej natywne.
+C. Project editor at org: Skrajnie zbyt wysokie uprawnienia.
+D. Folder IAM administrator: Pozwala tylko zarządzać uprawnieniami, nie pozwala na tworzenie i zarządzanie samymi zasobami (np. VM, GKE) wewnątrz folderu tak szeroko jak Folder Admin.
+
+Konsensus społeczności ExamTopics: 100% na A. Delegacja folderowa to fundament Landing Zone.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dzięki temu zespół może sam tworzyć i usuwać projekty oraz zasoby w ramach swojego 'podwórka'.</p>
+<p><b>Głęboka analiza:</b> Folder Admin może tworzyć pod-foldery i projekty, co pozwala zespołowi na pełne zarządzanie cyklem życia ich własnej mikro-infrastruktury.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/access-control-folders" target="_blank">https://cloud.google.com/resource-manager/docs/access-control-folders</a></li>

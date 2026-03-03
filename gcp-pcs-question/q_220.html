@@ -78,14 +78,22 @@ VPC SC blocking Pub/Sub between Project A (restricted) and Project B (not restri
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Ingress rules w VPC SC pozwalają na precyzyjne dopuszczenie ruchu z konkretnych projektów lub tożsamości spoza perymetru do środka.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Ingress policy: W VPC Service Controls, reguły Ingress pozwalają na precyzyjne dopuszczenie ruchu z konkretnego projektu (B) lub tożsamości do usług wewnątrz perymetru (A). Jest to bardziej granularne (least privilege) niż most (bridge), ponieważ możesz zezwolić tylko na konkretną usługę (Pub/Sub) i konkretne metody API.
+
+Dlaczego inne są błędne:
+B. Access level: Pozwala użytkownikowi na dostęp z konkretnego IP, ale nie rozwiązuje problemu komunikacji między projektami, która jest blokowana przez politykę perymetru.
+C. Perimeter bridge: Wymaga, aby oba projekty były w perymetrach. Jeśli projekt B nie jest w perymetrze, nie możesz stworzyć mostu.
+D. Remove Pub/Sub: Drastycznie obniża poziom bezpieczeństwa całego perymetru.
+
+Konsensus społeczności ExamTopics: 100% na A. Ingress/Egress rules to nowocześniejsza i bardziej precyzyjna wersja mostów perymetru.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Bridge (C) zadziałałby tylko, gdyby oba projekty były w perymetrach. Ingress policy jest bardziej elastyczna dla projektów nieobjętych restrykcjami.</p>
+<p><b>Głęboka analiza:</b> Reguła Ingress w perymetrze projektu A powinna wskazywać: `from: project B`, `service: pubsub.googleapis.com`, `identity: ANY_IDENTITY` (lub konkretne SA).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/ingress-egress-rules" target="_blank">https://cloud.google.com/vpc-service-controls/docs/ingress-egress-rules</a></li>

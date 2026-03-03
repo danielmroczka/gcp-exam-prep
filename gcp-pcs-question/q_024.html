@@ -78,14 +78,21 @@ A company's application is deployed with a user-managed Service Account key. You
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Ręczna rotacja kluczy polega na utworzeniu nowego, wdrożeniu go i usunięciu starego.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Manual rotation process: Google nie oferuje automatycznej rotacji dla kluczy POBRANYCH (JSON keys). Zalecany proces to: 1. Stworzenie nowego klucza. 2. Wdrożenie go do aplikacji. 3. Upewnienie się, że aplikacja działa. 4. Skasowanie starego klucza.
+
+Dlaczego inne są błędne:
+A, B. Komendy enable-auto-rotate lub keys rotate nie istnieją w gcloud dla kluczy zarządzanych przez użytkownika. Google automatycznie rotuje tylko klucze, których NIE pobierasz (system-managed keys).
+D. Backup: Przechowywanie starych kluczy po rotacji jest niebezpieczne i sprzeczne z celem rotacji (zmniejszenie ryzyka przy wycieku).
+
+Konsensus społeczności ExamTopics: 100% na C. To standardowa procedura operacyjna dla kluczy SA.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Google nie oferuje automatycznej rotacji dla kluczy pobranych (JSON). To musi być proces zarządzany przez użytkownika.</p>
+<p><b>Głęboka analiza:</b> Najlepszą praktyką jest całkowite odejście od kluczy JSON na rzecz tożsamości instancji lub Workload Identity Federation, co eliminuje potrzebę manualnej rotacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/key-rotation" target="_blank">https://cloud.google.com/iam/docs/key-rotation</a></li>

@@ -78,14 +78,22 @@ export user login events to third-party SIEM in real time. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Pub/Sub (D) to jedyna metoda gwarantująca dostarczanie logów w czasie zbliżonym do rzeczywistego (push/streaming) dla systemów zewnętrznych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Pub/Sub Sink: Jest to jedyna metoda gwarantująca dostarczanie logów w czasie zbliżonym do rzeczywistego (real time). Pub/Sub działa w modelu 'push', więc sekundy po zalogowaniu użytkownika, informacja o tym trafia do SIEM.
+
+Dlaczego inne są błędne:
+A. Polling: Jest wolny i nieefektywny (możesz przegapić zdarzenia między odpytaniami).
+B. Workspace direct: Nie wszystkie zdarzenia logowania do GCP (zwłaszcza przez SA czy API) przechodzą przez standardowe logi Workspace. Cloud Logging (D) jest bardziej kompletny.
+C. GCS sink: Zapisuje logi w paczkach co kilka minut - nie jest to 'real time'.
+
+Konsensus społeczności ExamTopics: 100% na D. Pub/Sub to domyślny transport dla SIEM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Pooling (A) lub GCS (C) wprowadzają zbyt duże opóźnienia.</p>
+<p><b>Głęboka analiza:</b> Po stronie SIEM zazwyczaj uruchamia się mały proces (subscriber), który natychmiast 'wyciąga' wiadomości z Pub/Sub, co zapewnia minimalne opóźnienia (latency).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/export/aggregated_sinks" target="_blank">https://cloud.google.com/logging/docs/export/aggregated_sinks</a></li>

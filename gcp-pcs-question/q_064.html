@@ -78,14 +78,21 @@ In an effort for your company messaging app to comply with FIPS 140-2, a decisio
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: BoringCrypto to moduł kryptograficzny używany przez Google, który posiada certyfikację FIPS 140-2.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. BoringCrypto: Google używa modułu BoringCrypto (część BoringSSL), który posiada certyfikację FIPS 140-2. Aby zapewnić zgodność w warstwie aplikacji, należy używać tej biblioteki zarówno do szyfrowania danych na dyskach lokalnych (SSD), jak i do zabezpieczania komunikacji między instancjami.
+
+Dlaczego inne są błędne:
+B, D: Szyfrowanie dysków (CMEK/GMEK) odbywa się na poziomie infrastruktury Google i jest zgodne z FIPS, ale nie rozwiązuje problemu szyfrowania ruchu UDP w warstwie aplikacji.
+C: Zmiana UDP na TCP nie jest wymagana przez FIPS; FIPS dotyczy algorytmów i bibliotek kryptograficznych, a nie protokołu transportowego.
+
+Konsensus społeczności ExamTopics: Większość na A. BoringCrypto to kluczowe pojęcie przy pytaniach o FIPS w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dla pełnej zgodności FIPS 140-2 w warstwie aplikacji, należy używać zatwierdzonych bibliotek kryptograficznych do szyfrowania danych w spoczynku i w locie.</p>
+<p><b>Głęboka analiza:</b> Google Cloud zapewnia zgodność FIPS dla infrastruktury, ale klient jest odpowiedzialny za to, aby jego własna aplikacja używała zatwierdzonych modułów kryptograficznych do operacji wykonywanych 'wewnątrz' systemu operacyjnego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/fips-140-2-compliance" target="_blank">https://cloud.google.com/security/fips-140-2-compliance</a></li>

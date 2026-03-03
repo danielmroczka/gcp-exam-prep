@@ -78,14 +78,22 @@ Secure Web Proxy implemented. Developers cannot access URLs from Linux instances
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Secure Web Proxy jest proxy jawnym (explicit) lub przezroczystym. Jeśli nie jest przezroczyste, aplikacje na systemie Linux muszą mieć ustawione zmienne środowiskowe (http_proxy/https_proxy) wskazujące na adres proxy.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Proxy configuration: Secure Web Proxy (SWP) działa zazwyczaj jako proxy jawne (explicit). System operacyjny Linux nie kieruje automatycznie ruchu do proxy - musi zostać o tym 'poinformowany' przez zmienne środowiskowe (np. `export http_proxy=...`). Bez tej konfiguracji pakiety próbują iść bezpośrednio do internetu, co kończy się błędem.
+
+Dlaczego inne są błędne:
+A. Cloud NAT: Służy do omijania proxy, co jest sprzeczne z celem wdrożenia SWP (kontrolą ruchu).
+B. Restart: Nie zmieni konfiguracji sieciowej aplikacji.
+D. Firewall rule: SWP ma własne mechanizmy dopuszczania ruchu; problemem jest tu brak 'styku' klienta z proxy, a nie blokada na poziomie portów IP.
+
+Konsensus społeczności ExamTopics: 100% na C. Jawne proxy wymaga konfiguracji zmiennych środowiskowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Bez konfiguracji klient nie wie, że ma wysyłać ruch do proxy zamiast bezpośrednio do bramy domyślnej.</p>
+<p><b>Głęboka analiza:</b> SWP pozwala na inspekcję TLS i filtrowanie URL, co czyni go znacznie potężniejszym narzędziem niż zwykły firewall.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/secure-web-proxy/docs/overview" target="_blank">https://cloud.google.com/secure-web-proxy/docs/overview</a></li>

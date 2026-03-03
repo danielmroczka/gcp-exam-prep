@@ -78,14 +78,22 @@ Reduce Linux bastion host attack surface by removing public IPs. SREs need acces
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: IAP TCP forwarding pozwala na tunelowanie ruchu SSH przez port 443 do instancji, która nie posiada publicznego adresu IP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. IAP TCP Forwarding: Ta funkcja Identity-Aware Proxy pozwala na tunelowanie ruchu TCP (np. port 22 dla SSH) przez infrastrukturę Google bezpośrednio do maszyn posiadających tylko prywatne adresy IP. SRE loguje się do IAP za pomocą swoich poświadczeń firmowych, co eliminuje potrzebę wystawiania bastionu na świat.
+
+Dlaczego inne są błędne:
+A. Cloud VPN: Wymagałby od każdego SRE posiadania stałego połączenia VPN z każdego miejsca, z którego pracuje, co jest trudne w realizacji przy 'public locations'. IAP działa przez zwykłe HTTPS.
+B. OS Login with 2SV: To świetna funkcja, ale nadal wymaga połączenia sieciowego do maszyny. Jeśli usuniesz Public IP, SRE nie będzie miał 'jak' uderzyć do maszyny, aby OS Login zadziałał.
+D. Cloud Armor: Chroni aplikacje webowe (HTTP), nie służy do tunelowania ruchu SSH.
+
+Konsensus społeczności ExamTopics: 100% na C. IAP TCP Forwarding to oficjalna rekomendacja Google dla bezpiecznego SSH.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Użytkownik musi uwierzytelnić się w IAP (IAM), aby uzyskać dostęp do tunelu TCP.</p>
+<p><b>Głęboka analiza:</b> IAP TCP Forwarding jest darmowy. Wykorzystuje komendę `gcloud compute ssh --tunnel-through-iap`, co czyni dostęp dla SRE bardzo wygodnym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/using-tcp-forwarding" target="_blank">https://cloud.google.com/iap/docs/using-tcp-forwarding</a></li>

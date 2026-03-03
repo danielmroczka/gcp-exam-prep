@@ -78,14 +78,22 @@ Regulated workload audit evidence for access reviews. Which tool should you use?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: IAM Policy Analyzer pozwala na tworzenie raportów dotyczących tego, kto ma dostęp do jakich zasobów, co jest niezbędne podczas audytów.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Policy Analyzer: Jest to dedykowane narzędzie do audytu uprawnień. Potrafi odpowiedzieć na skomplikowane pytania typu: 'Kto ma dostęp do tego konkretnego bucketu, uwzględniając grupy i dziedziczenie?'. Pozwala na generowanie raportów, które są idealnym dowodem (audit evidence) dla audytorów.
+
+Dlaczego inne są błędne:
+A. Policy Troubleshooter: Służy do sprawdzania, dlaczego KONKRETNY użytkownik nie ma dostępu do KONKRETNEGO zasobu w danej chwili. Nie nadaje się do masowych przeglądów dostępów.
+C. IAM Recommender: Podpowiada jak ZMNIEJSZYĆ uprawnienia na podstawie historii użycia (Least Privilege), ale nie służy do raportowania aktualnego stanu dla audytu.
+D. Policy Simulator: Pozwala sprawdzić wpływ zmiany uprawnień ZANIM ją wprowadzisz, aby niczego nie popsuć.
+
+Konsensus społeczności ExamTopics: 100% na B. Policy Analyzer to 'must-have' przy każdym audycie IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Narzędzie to przeszukuje hierarchię uprawnień, uwzględniając dziedziczenie i grupy, dając pełny obraz dostępu.</p>
+<p><b>Głęboka analiza:</b> Policy Analyzer potrafi wyeksportować wyniki do BigQuery lub JSON, co umożliwia dalszą automatyczną analizę zgodności z wymogami regulacyjnymi.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/policy-analyzer-overview" target="_blank">https://cloud.google.com/iam/docs/policy-analyzer-overview</a></li>

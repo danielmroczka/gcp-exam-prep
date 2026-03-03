@@ -78,14 +78,22 @@ Which tool can help identify and classify sensitive information (like credit car
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud DLP API posiada ponad 100 wbudowanych 'infoTypes' do identyfikacji wrażliwych danych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud DLP API: Usługa ta posiada wbudowane silniki analizy tekstu (NLP), które potrafią w strumieniu tekstu (nieustrukturyzowanym) rozpoznać wzorce pasujące do ponad 100 typów danych wrażliwych, w tym numerów kart (CREDIT_CARD_NUMBER).
+
+Dlaczego inne są błędne:
+A. Cloud KMS: Służy do szyfrowania, nie do analizy treści.
+C. BigQuery: Może przechowywać dane, ale sam w sobie nie posiada funkcji 'automatycznego wykrywania wrażliwości' wewnątrz tekstu (choć można z niego wywołać DLP).
+D. Data Catalog: Służy do inwentaryzacji i opisywania (metadanych) zbiorów danych, a nie do głębokiej inspekcji zawartości plików tekstowych.
+
+Konsensus społeczności ExamTopics: 100% na B. DLP to jedyna odpowiedź na pytanie o 'identyfikację i klasyfikację' danych osobowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>DLP potrafi skanować teksty, obrazy i bazy danych w poszukiwaniu PII.</p>
+<p><b>Głęboka analiza:</b> DLP używa kombinacji wyrażeń regularnych, sum kontrolnych i modeli ML, aby minimalizować liczbę pomyłek (false positives) przy wykrywaniu np. numerów kart płatniczych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp" target="_blank">https://cloud.google.com/dlp</a></li>

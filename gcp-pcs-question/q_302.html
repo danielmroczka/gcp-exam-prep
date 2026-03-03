@@ -78,14 +78,20 @@ VPC SC for folder with PHI: only US-based personnel, restrict APIs to BigQuery a
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Scoped policy (A) izoluje zarządzanie. Funkcja 'VPC accessible services' pozwala na ograniczenie dostępnych API wewnątrz perymetru tylko do wybranych pozycji (GCS, BQ).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. VPC SC with Accessible Services: To rozwiązanie kompleksowe. 'Scoped policy' izoluje zarządzanie. 'Access Level' wymusza geolokalizację. Funkcja 'VPC accessible services' fizycznie wycina widoczność wszystkich innych API Google (np. SQL, Pub/Sub) wewnątrz perymetru, co drastycznie zmniejsza ryzyko pomyłek i eksfiltracji danych.
+
+Dlaczego inne są błędne:
+B, C, D: Żadna z tych opcji nie realizuje wymogu BLOKADY API na poziomie sieciowym tak precyzyjnie jak VPC Service Controls. Org Policy (B, D) blokuje tylko WŁĄCZENIE usługi, ale nie blokuje DOSTĘPU do API, jeśli usługa jest już włączona przez kogoś innego.
+
+Konsensus społeczności ExamTopics: 100% na A. Tylko VPC SC potrafi ograniczyć listę dostępnych API wewnątrz sieci.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>To rozwiązanie blokuje dostęp do wszystkich innych API Google (np. Pub/Sub, SQL) wewnątrz perymetru.</p>
+<p><b>Głęboka analiza:</b> To podejście 'Zero Trust API'. Nawet jeśli haker przejmie uprawnienia administratora SQL, nie połączy się z bazą, bo API SQL jest zablokowane na poziomie perymetru sieciowego.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/vpc-accessible-services" target="_blank">https://cloud.google.com/vpc-service-controls/docs/vpc-accessible-services</a></li>

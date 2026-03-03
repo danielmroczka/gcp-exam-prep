@@ -78,14 +78,22 @@ Prevent accidental deletion of Shared VPC host project. Which policy constraint?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Projekt hosta Shared VPC posiada tzw. 'lien' (zastaw), który uniemożliwia jego usunięcie. Ograniczenie to blokuje możliwość usunięcia tego liena przez użytkowników.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. compute.restrictXpnProjectLienRemoval: GCP automatycznie nakłada 'Lien' (zastaw) na projekt hosta Shared VPC, co uniemożliwia jego usunięcie. To konkretne ograniczenie polityki organizacji blokuje użytkownikom możliwość usunięcia tego zastawu, co jest jedynym sposobem na 'skuteczną' obronę przed skasowaniem hosta sieci.
+
+Dlaczego inne są błędne:
+A. restrictSharedVpcHostProjects: Służy do ograniczenia listy projektów, które MOGĄ stać się hostami, a nie chroni przed usunięciem już istniejących.
+C. restrictSharedVpcSubnetworks: Kontroluje, które podsieci są udostępniane projektom usługowym.
+D. sharedReservations: Dotyczy rezerwacji zasobów (compute reservations), a nie ochrony sieci Shared VPC.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Słowo 'Lien' jest kluczem do ochrony przed usunięciem w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Lien to mechanizm ochronny przed przypadkowym skasowaniem krytycznych zasobów.</p>
+<p><b>Głęboka analiza:</b> Zastawy (Liens) to potężny mechanizm bezpieczeństwa. Jeśli spróbujesz usunąć projekt z aktywnym lienem, operacja zostanie odrzucona przez API z błędem 400.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/project-liens" target="_blank">https://cloud.google.com/resource-manager/docs/project-liens</a></li>

@@ -78,14 +78,22 @@ VMs should not have external IP. connect to internet for updates. Which service?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Cloud NAT pozwala instancjom prywatnym na bezpieczne pobieranie poprawek i aktualizacji z internetu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud NAT: Jest to usługa zaprojektowana dokładnie dla tego przypadku użycia. Pozwala ona maszynom, które posiadają tylko prywatne adresy IP, na inicjowanie połączeń wychodzących do internetu (egress), co jest niezbędne do pobierania poprawek bezpieczeństwa (updates).
+
+Dlaczego inne są błędne:
+A. IAP: Służy do autoryzacji ruchu PRZYCHODZĄCEGO (ingress) do maszyn bez publicznego IP, nie pomaga maszynom w wychodzeniu do internetu.
+C. TCP/UDP LB: Służy do rozdzielania ruchu PRZYCHODZĄCEGO do floty maszyn.
+D. Cloud DNS: Służy do rozwiązywania nazw domenowych, nie zapewnia tunelu/translacji adresów do wyjścia poza sieć prywatną.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. Cloud NAT to fundament bezpiecznej architektury 'private-only'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to standardowe rozwiązanie dla zabezpieczonych środowisk produkcyjnych.</p>
+<p><b>Głęboka analiza:</b> Cloud NAT jest usługą wysokiej dostępności (HA) i nie wymaga utrzymywania własnych instancji-bramek (NAT gateways), co oszczędza czas i pieniądze.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/nat/docs/overview" target="_blank">https://cloud.google.com/nat/docs/overview</a></li>

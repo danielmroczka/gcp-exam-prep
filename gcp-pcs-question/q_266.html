@@ -78,14 +78,22 @@ Migrate complex application across several projects. Design authorization aligni
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Tworzenie ról niestandardowych (Custom Roles) pozwala na precyzyjne ograniczenie uprawnień do absolutnego minimum wymaganego dla danej czynności, co realizuje zasadę least privilege.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Custom Roles + Audit: To jedyna droga do prawdziwego 'Least Privilege'. Standardowe role (Editor/Owner) są zbyt szerokie. Stworzenie ról dopasowanych dokładnie do czynności wykonywanych przez aplikację i jej administratorów realizuje wymogi bezpieczeństwa.
+
+Dlaczego inne są błędne:
+B. Multiple IdPs: Komplikuje architekturę, nie rozwiązuje problemu nadmiarowych uprawnień Wewnątrz GCP.
+C. MFA: Zabezpiecza logowanie, ale nie ogranicza tego, co użytkownik może zrobić po zalogowaniu (autoryzacja).
+D. No action: Prowadzi do wycieków danych i naruszeń zgodności.
+
+Konsensus społeczności ExamTopics: 100% na A. Custom Roles to fundament dojrzałego IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Revoke default roles (usuwanie szerokich uprawnień jak Editor) jest kluczowe dla bezpieczeństwa migracji.</p>
+<p><b>Głęboka analiza:</b> Przy migracji warto użyć <b>IAM Policy Analyzer</b>, aby zobaczyć, które z obecnych uprawnień są faktycznie używane, a które można bezpiecznie usunąć.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/creating-custom-roles" target="_blank">https://cloud.google.com/iam/docs/creating-custom-roles</a></li>

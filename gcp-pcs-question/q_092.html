@@ -78,14 +78,22 @@ Web app in staging on GKE includes user data without validation. Attackers could
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Pytanie opisuje podatność XSS (Cross-Site Scripting). Web Security Scanner wykrywa takie luki, a użycie bezpiecznych szablonów (auto-escaping) to właściwa metoda naprawy.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. WSS and Auto-escaping: Opisany atak to Cross-Site Scripting (XSS). Web Security Scanner potrafi symulować takie ataki w środowisku stagingowym i je wykrywać. Rozwiązaniem programistycznym ('fix') jest użycie mechanizmów auto-escaping w silniku szablonów, co uniemożliwia interpretację danych użytkownika jako kodu JS.
+
+Dlaczego inne są błędne:
+A. IAP: Chroni przed nieautoryzowanym wejściem, ale nie naprawia błędów w kodzie samej aplikacji (XSS zadziała dla zalogowanego użytkownika).
+B. Cloud Armor: Może blokować próby ataku, ale pytanie prosi o 'prevent and FIX' (naprawę), a naprawa musi nastąpić w kodzie.
+C. Outdated libraries: To tylko jeden z wielu powodów XSS. WSS szuka błędów logicznych w wyświetlaniu danych, a nie tylko wersji bibliotek.
+
+Konsensus społeczności ExamTopics: 100% na D. Połączenie testów DAST i poprawnych praktyk kodowania to jedyna droga.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Obrona przed XSS wymaga zarówno testowania (DAST), jak i bezpiecznych praktyk programistycznych.</p>
+<p><b>Głęboka analiza:</b> XSS polega na wstrzyknięciu złośliwego skryptu, który uruchamia się u innego użytkownika. Kontekstowy auto-escaping sprawia, że znaki takie jak `<` stają się bezpiecznym `&lt;`.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview</a></li>

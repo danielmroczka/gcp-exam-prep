@@ -78,14 +78,18 @@ SaaS app compliance: privileged account activity, IAM changes, trace unauthorize
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: SCC Premium (D) z ETD i SHA w połączeniu z logami audytowymi (Audit Logs) zapewnia pełny wgląd w to, KTO, KIEDY i CO zrobił w systemie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. SCC Suite: Zestaw ETD (wykrywanie włamań), SHA (wykrywanie błędów konfiguracji) oraz Cloud Audit Logs (ślad zmian IAM) pokrywa wszystkie wymogi monitoringu compliance dla aplikacji SaaS.
+
+Dlaczego inne są błędne:
+A, B, C: Są to rozwiązania fragmentaryczne, skupiające się tylko na sieci lub samej archiwizacji logów, bez inteligentnej analizy zagrożeń tożsamościowych i konfiguracyjnych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>To kompleksowe podejście do monitorowania zgodności i działań administracyjnych.</p>
+<p><b>Głęboka analiza:</b> Integracja SCC z Audit Logs pozwala na korelację zdarzeń - np. 'ktoś z IP z Chin (ETD) zmienił rolę IAM (Audit Logs) na uprzywilejowaną'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center" target="_blank">https://cloud.google.com/security-command-center</a></li>

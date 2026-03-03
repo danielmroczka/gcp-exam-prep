@@ -78,14 +78,22 @@ Temporary partner team (18 months). Partner employees lose access if removed fro
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Federacja (WIF) gwarantuje, że gdy partner usunie pracownika ze swojego systemu, straci on automatycznie dostęp do Twojego GCP, ponieważ jego IdP przestanie wystawiać tokeny.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Workforce Identity Federation: Federacja z IdP partnera gwarantuje, że proces logowania odbywa się u nich. Jeśli partner usunie pracownika, ich IdP przestanie wydawać mu tokeny, a on natychmiast straci dostęp do Twojego GCP. Nie musisz ręcznie sprzątać kont - partner dba o swój cykl życia (lifecycle).
+
+Dlaczego inne są błędne:
+A. Temporary password: Bardzo słabe bezpieczeństwo, brak automatyzacji wygaśnięcia.
+C. JIT: Ogranicza uprawnienia, ale nie rozwiązuje problemu tożsamości użytkownika zewnętrznego.
+D. Add to own IdP: Wymaga od Ciebie manualnego zarządzania obcymi kontami, co jest błędotwórcze.
+
+Konsensus społeczności ExamTopics: 100% na B. Federacja to jedyny poprawny sposób współpracy z partnerami B2B.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to najbezpieczniejszy sposób współpracy z firmami trzecimi.</p>
+<p><b>Głęboka analiza:</b> WIF wspiera również ograniczanie dostępu tylko do osób o określonych atrybutach (np. tylko osoby z działu 'GCP-Consultants' u partnera).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/workforce-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workforce-identity-federation</a></li>

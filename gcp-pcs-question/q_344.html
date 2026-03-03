@@ -78,14 +78,22 @@ enforce 2-step verification (2SV) for Super admins in Cloud Identity. IdP only u
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Nawet przy użyciu zewnętrznego IdP dla uwierzytelniania podstawowego, Google pozwala na wymuszenie drugiego składnika (2SV) po stronie Cloud Identity dla wybranych grup lub jednostek organizacyjnych (OU).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Post-SSO 2SV: Nawet jeśli Twoje główne logowanie (IdP) nie ma MFA, Google pozwala na dodanie 'drugiego kroku' po swojej stronie. Umieszczenie Super Adminów w osobnej jednostce organizacyjnej (OU) i włączenie tam 2SV wymusi na nich użycie np. Titan Key po poprawnym zalogowaniu się w firmowym IdP.
+
+Dlaczego inne są błędne:
+B. Collaborate: Może trwać miesiące. Rozwiązanie A jest natychmiastowe i pod Twoją kontrolą.
+C. Monitor: Wykryje włamanie, ale mu nie zapobiegnie.
+D. Evaluate: To nie jest techniczne rozwiązanie problemu.
+
+Konsensus społeczności ExamTopics: 100% na A. To kluczowa funkcja bezpieczeństwa dla kont uprzywilejowanych w środowiskach hybrydowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dla kont o wysokich uprawnieniach (Super Admin) zaleca się zawsze dodatkową ochronę fizyczną (Titan Key).</p>
+<p><b>Głęboka analiza:</b> Super Admini są jedynymi kontami, które mogą ominąć SSO w sytuacjach awaryjnych, więc posiadanie u nich 2SV bezpośrednio w Google jest absolutnie krytyczne.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://support.google.com/cloudidentity/answer/9366694" target="_blank">https://support.google.com/cloudidentity/answer/9366694</a></li>

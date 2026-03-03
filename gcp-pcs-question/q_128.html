@@ -78,14 +78,22 @@ Public-facing application outage. Suspect firewall rules. Test if rules are work
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Firewall Rules Logging rejestruje dokładnie, która reguła zezwoliła lub zablokowała dany pakiet, co pozwala na szybką diagnozę.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Firewall Rules Logging: To najszybsza i najdokładniejsza metoda diagnozy. Rejestruje ona każdy pakiet, który został dopuszczony lub odrzucony przez konkretną regułę. W Logs Explorerze zobaczysz dokładnie nazwę reguły, która 'zabiła' ruch aplikacji.
+
+Dlaczego inne są błędne:
+B. Bastion host: Analiza z poziomu bastionu nie powie Ci, co dzieje się na interfejsach innych maszyn chronionych przez rozproszony firewall GCP.
+C. Disable rules: Bardzo ryzykowne i czasochłonne. Może pogorszyć sytuację bezpieczeństwa na produkcji.
+D. VPC Flow Logs: Rejestrują przepływy, ale nie zawsze precyzują nazwę reguły firewalla, która spowodowała blokadę tak czytelnie jak dedykowane logi firewalla.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. To standardowe narzędzie do debugowania sieci w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>VPC Flow Logs (D) również są przydatne, ale logi konkretnych reguł dają informację 'dlaczego' ruch został odrzucony.</p>
+<p><b>Głęboka analiza:</b> Firewall Logging pozwala również na audytowanie reguł, które nie są używane (brak trafień w logach), co pomaga w optymalizacji polityk.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewall-rules-logging" target="_blank">https://cloud.google.com/vpc/docs/firewall-rules-logging</a></li>

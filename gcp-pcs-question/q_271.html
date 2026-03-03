@@ -78,14 +78,22 @@ Near real-time log export to on-prem SIEM. Fault tolerance, auto scaling, retry 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Dataflow (B) to zalecana metoda dostarczania danych z Pub/Sub do zewnętrznych systemów, zapewniająca skalowalność i mechanizmy retry (Dead Letter Queues).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Dataflow pipeline: Dataflow jest jedyną usługą w tym zestawieniu, która jest w 100% zarządzana, skaluje się automatycznie (auto scaling) i posiada wbudowane mechanizmy obsługi błędów i ponowień (fault tolerance, retry) dla strumieni danych z Pub/Sub. Model primary/secondary zapewnia wysoką dostępność.
+
+Dlaczego inne są błędne:
+A. Cloud Function: Przy ogromnej liczbie logów (near real-time) funkcje te są mniej efektywne kosztowo i trudniejsze w zarządzaniu niż dedykowany rurociąg Dataflow.
+C. Syslog CE: VM z syslogiem to 'single point of failure' i brak automatycznego skalowania.
+D. Firewall query: Bardzo wolne i nie jest to metoda 'near real-time log export'.
+
+Konsensus społeczności ExamTopics: 100% na B. Dataflow to król potoków danych w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Pub/Sub przechowuje logi do 7 dni, co zapewnia odporność na awarie SIEM.</p>
+<p><b>Głęboka analiza:</b> Google udostępnia gotowe szablony Dataflow (Pub/Sub to Splunk, Pub/Sub to Elasticsearch), które wystarczy skonfigurować, co minimalizuje czas wdrożenia.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk" target="_blank">https://cloud.google.com/architecture/exporting-stackdriver-logs-to-splunk</a></li>

@@ -79,14 +79,23 @@ Regulatory warehouse (BQ, SQL, GCS): lifecycle management for keys, separate pro
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: CE.
 
-Wyjaśnienie: EKM (E) zapewnia separację dostawcy kluczy od chmury. KAJ (C) zapewnia widoczność i kontrolę nad każdym żądaniem użycia klucza.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+E. Cloud EKM: Pozwala na trzymanie kluczy u zewnętrznego dostawcy (Separate provider), zapewniając pełną kontrolę nad ich cyklem życia (Lifecycle management).
+C. Key Access Justifications (KAJ): Zapewnia widoczność (Visibility) każdego żądania użycia klucza przez Google, zmuszając system do podania powodu i dając Ci prawo do automatycznej blokady takich żądań.
+
+Dlaczego inne są błędne:
+A. CMEK: Klucze rezydują w chmurze Google, nie ma separacji dostawcy (klucze i dane są u jednego dostawcy - Google).
+B. CSEK: Posiada bardzo słabe wsparcie dla BigQuery i SQL (wymóg 'warehouse').
+D. Access Transparency: Loguje dostęp do ZASOBÓW, ale KAJ (C) jest bardziej specyficzny dla kontroli nad KLUCZAMI szyfrującymi, co jest fundamentem suwerenności w tym pytaniu.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla CE. To duet usług dla 'Sovereign Cloud'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: CE</b></p>
-<p>To połączenie jest wymagane dla najwyższych standardów suwerenności danych.</p>
+<p><b>Głęboka analiza:</b> EKM + KAJ to najwyższy dostępny poziom kontroli nad danymi w chmurze publicznej, spełniający wymogi dla najbardziej wrażliwych sektorów (np. szwajcarska bankowość).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>

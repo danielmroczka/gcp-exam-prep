@@ -79,14 +79,21 @@ End-to-end encryption (transit, use, rest) within Google Cloud. Which two?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: DE.
 
-Wyjaśnienie: Confidential Computing chroni dane 'in use' (w pamięci RAM). Istio szyfruje ruch 'in transit' między mikroserwisami (mTLS). Client-side encryption (E) to inna metoda na pełną kontrolę od nadawcy do odbiorcy.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Confidential Computing + Istio: Confidential Computing szyfruje dane 'in use' (w RAM). Istio (Service Mesh) szyfruje dane 'in transit' między mikroserwisami za pomocą mTLS. Razem z domyślnym szyfrowaniem 'at rest' tworzy to pełny łańcuch ochrony.
+E. Client-side encryption: To najbardziej radykalna forma E2E. Szyfrujesz dane u siebie, wysyłasz szyfrogram i deszyfrujesz go u odbiorcy. Google nigdy nie widzi danych jawnych w żadnym stanie.
+
+Dlaczego inne są błędne:
+A, B, C: To metody zarządzania kluczami dla danych 'at rest'. Nie rozwiązują one problemu szyfrowania danych w trakcie obliczeń (in use) ani automatycznie w locie między usługami (in transit).
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na DE. To kompletny stos technologiczny ochrony danych w każdym stanie.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: DE</b></p>
-<p>Standardowe szyfrowanie GCP chroni tylko dane 'at rest'. Pełne E2E wymaga dodatkowych technologii.</p>
+<p><b>Głęboka analiza:</b> Większość usług chmurowych deszyfruje dane w pamięci RAM, aby móc na nich operować. Confidential Computing (TEE) to przełom pozwalający na pracę na danych bez ich deszyfrowania w niebezpiecznych warstwach systemu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/confidential-computing" target="_blank">https://cloud.google.com/confidential-computing</a></li>

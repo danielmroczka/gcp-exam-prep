@@ -78,14 +78,22 @@ Secure GCS buckets: varying access, rest encryption, track changes, control over
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: CSEK (Customer-Supplied Encryption Keys) daje pełną kontrolę nad kluczami. Role predefiniowane i wersjonowanie zapewniają granularność i bezpieczeństwo danych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Comprehensive GCS Security: 1. Predefined roles (granularny dostęp). 2. CSEK (pełna kontrola klienta nad kluczami). 3. TLS (bezpieczny transport). 4. Versioning + Audit logs (śledzenie zmian). Ten zestaw spełnia wszystkie rygorystyczne wymogi pytania.
+
+Dlaczego inne są błędne:
+A. Server-side: Bez doprecyzowania oznacza klucze Google, co narusza wymóg 'control over keys'.
+B. ACLs: Są przestarzałe i odradzane przez Google na rzecz IAM.
+D. Object-level: Bardzo trudne w zarządzaniu i audycie w porównaniu do polityk na poziomie bucketu.
+
+Konsensus społeczności ExamTopics: 100% na C. CSEK to najwyższy wymóg kontroli klucza w GCS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Wersjonowanie (Object Versioning) pozwala na odzyskanie danych po przypadkowym nadpisaniu lub usunięciu.</p>
+<p><b>Głęboka analiza:</b> Przy CSEK musisz dostarczać klucz przy każdej operacji gsutil. Jeśli go zgubisz, dane w buckecie stają się bezpowrotnie nieczytelne.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/encryption/customer-supplied-keys" target="_blank">https://cloud.google.com/storage/docs/encryption/customer-supplied-keys</a></li>

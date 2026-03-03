@@ -78,14 +78,21 @@ A customer has an analytics workload running on Compute Engine. Your team create
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Reguły z niższym numerem priorytetu są przetwarzane jako pierwsze. Priorytet 999 (mniejszy niż 1000) nadpisze regułę deny.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Priority < 1000: W firewallu GCP niższy numer priorytetu oznacza WYŻSZĄ ważność reguły. Aby 'wyciąć' wyjątek z ogólnej blokady (deny, prio 1000), musisz stworzyć regułę allow z priorytetem np. 999. Reguły firewalla operują na zakresach IP (CIDR).
+
+Dlaczego inne są błędne:
+A. Priority > 1000: Reguła o priorytecie np. 1001 zostanie przetworzona PO regule blokującej (1000), więc ruch i tak zostanie odrzucony.
+C, D. Hostname: Standardowy VPC Firewall nie wspiera filtrowania po nazwach domenowych (FQDN). Wymagałoby to Secure Web Proxy lub Cloud NGFW Enterprise.
+
+Konsensus społeczności ExamTopics: 100% na B. Podstawowa wiedza o priorytetach i adresacji IP w firewallu VPC.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>VPC Firewall operuje na adresach IP (CIDR), a nie na nazwach hostów (FQDN). Dlatego opcja B jest poprawna.</p>
+<p><b>Głęboka analiza:</b> Priorytety w GCP mieszczą się w zakresie 0-65535. Reguły domniemane mają 65535. Twoje reguły zazwyczaj zaczynają się od 1000, co daje duży margines na dodawanie wyjątków 'nad' nimi (niższe numery).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/firewalls#priority-order" target="_blank">https://cloud.google.com/vpc/docs/firewalls#priority-order</a></li>

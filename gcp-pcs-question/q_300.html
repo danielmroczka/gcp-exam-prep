@@ -78,14 +78,21 @@ Network architecture for 3-tier app processing orders. isolation, remote mainten
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Izolacja warstw aplikacji za pomocą osobnych sieci VPC (C) zapewnia brak ruchu lateralnego. IAP (Identity-Aware Proxy) umożliwia bezpieczny dostęp serwisowy bez publicznych IP i kluczy SSH.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Multi-VPC + IAP: Izolacja warstw (Web, App, DB) w osobnych sieciach VPC zapewnia brak ruchu bocznego (peering nie jest tranzytywny). Użycie IAP TCP Forwarding dla dostawców (C) eliminuje potrzebę zarządzania niebezpiecznymi kluczami SSH i publicznymi adresami IP, co jest najbardziej bezpieczne (least privilege).
+
+Dlaczego inne są błędne:
+A. SSH keys: Zarządzanie kluczami dla ludzi z zewnątrz jest trudne i ryzykowne (klucze wyciekają).
+B, D. Single VPC: Słabsza izolacja warstw aplikacji niż przy użyciu twardych granic sieci VPC.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. IAP to nowocześniejszy standard dostępu serwisowego.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>IAP TCP Forwarding jest znacznie bezpieczniejszy i łatwiejszy w audycie niż tradycyjne SSH.</p>
+<p><b>Głęboka analiza:</b> Brak tranzytywności VPC Peeringu to potężna funkcja obronna - ruch z internetu (Web) nigdy nie trafi bezpośrednio do bazy (DB) przez sieć App.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap/docs/using-tcp-forwarding" target="_blank">https://cloud.google.com/iap/docs/using-tcp-forwarding</a></li>

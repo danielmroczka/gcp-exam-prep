@@ -78,14 +78,22 @@ BigQuery sensitive data: business user reports, data engineer lifecycle, securit
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Tworzenie dedykowanych widoków lub tabel w osobnym zbiorze danych (Dataset) dla użytkowników biznesowych pozwala na udostępnienie tylko niezbędnych wyników bez wglądu w dane surowe.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Curated tables (Views/Separation): Najbezpieczniejszą metodą udostępniania danych analitycznych użytkownikom biznesowym jest stworzenie osobnego Datasetu z 'oczyszczonymi' tabelami lub widokami, które nie zawierają kolumn wrażliwych. Nadanie tam roli `dataViewer` zapewnia dostęp do wyników bez wglądu w dane surowe.
+
+Dlaczego inne są błędne:
+A. Project Viewer: Daje dostęp do podglądu wszystkich usług, nie tylko BQ. To zbyt szerokie.
+B. Row-based access: Służy do filtrowania wierszy, ale zazwyczaj Inżynierowie Danych potrzebują dostępu do całości w celu budowania rurociągów, a to użytkownicy biznesowi powinni być ograniczeni.
+D. CSV via email: Skrajnie niebezpieczne, brak kontroli nad danymi po wysłaniu.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na C. Izolacja poprzez Dataset to standard 'Data Governance'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Zapewnia to separację danych i realizuje zasadę need-to-know.</p>
+<p><b>Głęboka analiza:</b> Możesz również użyć widoków autoryzowanych (Authorized Views), które pozwalają użytkownikowi czytać dane z widoku, mimo że nie ma on uprawnień do tabel źródłowych.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/bigquery/docs/dataset-access-controls" target="_blank">https://cloud.google.com/bigquery/docs/dataset-access-controls</a></li>

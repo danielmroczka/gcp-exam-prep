@@ -79,14 +79,22 @@ Automate regular patching in VMs and view data across projects. Which two?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AE.
 
-Wyjaśnienie: VM Manager to usługa dedykowana do zarządzania flotą VM, w tym do planowania instalacji poprawek (E) i monitorowania ich statusu (A).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+E. Deploy patches: VM Manager pozwala na tworzenie 'Patch Jobs', które automatycznie instalują poprawki na systemach Linux i Windows.
+A. View data: Ten sam moduł dostarcza zbiorczy widok (Compliance Dashboard) pokazujący stan aktualizacji maszyn we wszystkich projektach w organizacji.
+
+Dlaczego inne są błędne:
+B. Artifact Registry: Służy do przechowywania obrazów kontenerów i pakietów, nie zarządza procesem aktualizacji systemów operacyjnych na VM.
+C, D. SCC: Pokazują, że maszyna MA podatności (vulnerabilities), ale nie służą do ich automatycznej NAPRAWY (patchowania) tak jak VM Manager.
+
+Konsensus społeczności ExamTopics: 100% na AE. VM Manager to jedyne narzędzie do aktywnego patchowania floty maszyn.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AE</b></p>
-<p>SCC (C) może wyświetlać znaleziska, ale samo zarządzanie procesem patchowania leży w gestii VM Managera.</p>
+<p><b>Głęboka analiza:</b> VM Manager jest darmowy do 100 maszyn miesięcznie, co czyni go świetnym rozwiązaniem również dla mniejszych środowisk.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/os-patch-management" target="_blank">https://cloud.google.com/compute/docs/os-patch-management</a></li>

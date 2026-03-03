@@ -78,14 +78,22 @@ Migrate PII workflow to GCP. Mitigate risk of data exfiltration. Design security
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: DLP chroni przed ujawnieniem danych wewnątrz plików, a VPC Service Controls (VPC SC) chroni przed ich fizycznym wyniesieniem poza zaufany perymetr.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Cloud DLP + VPC SC: To połączenie adresuje dwa aspekty wycieku danych. Cloud DLP (Sensitive Data Protection) znajduje i maskuje dane wrażliwe Wewnątrz plików (np. zamiana numeru PESEL na [PII]). VPC Service Controls tworzy barierę na poziomie sieciowym API, która uniemożliwia fizyczne WYNIESIENIE danych poza zaufane projekty firmy.
+
+Dlaczego inne są błędne:
+A. Encryption: Chroni przed odczytem przez osoby niepowołane, ale nie zapobiega ich 'wyniesieniu' przez uprawnionego pracownika (tzw. Insider Threat).
+C. Restrict all traffic: Zbyt drastyczne, uniemożliwiłoby działanie platformy. VPC SC (B) jest bardziej inteligentnym sposobem blokowania eksfiltracji przez API usług Google.
+D. Expertise: Procedury nie zastępują technicznych barier systemowych.
+
+Konsensus społeczności ExamTopics: 100% na B. To duet 'Defense in Depth' dla ochrony danych osobowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>To połączenie adresuje zarówno poufność (DLP), jak i integralność granic danych (VPC SC).</p>
+<p><b>Głęboka analiza:</b> VPC SC to jedyna ochrona przed kopiowaniem danych między różnymi organizacjami GCP przez uprawnionego administratora.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc-service-controls/docs/overview" target="_blank">https://cloud.google.com/vpc-service-controls/docs/overview</a></li>

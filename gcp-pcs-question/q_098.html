@@ -78,14 +78,22 @@ Implementing protection against common web attacks. Validate policy changes befo
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Tryb 'Preview' w Cloud Armor pozwala na logowanie zdarzeń, które ZABLOKOWAŁABY reguła, bez faktycznego przerywania ruchu.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud Armor Preview Mode: To kluczowa funkcja dla bezpieczeństwa bez przestojów. Pozwala na uruchomienie reguł WAF (np. przeciwko SQLi), które tylko LOGUJĄ co by się stało, zamiast faktycznie blokować ruch. Dzięki temu możesz sprawdzić, czy reguła nie blokuje legalnych użytkowników (false positives) przed jej ostatecznym włączeniem.
+
+Dlaczego inne są błędne:
+B. VPC firewall monitor: Firewall VPC nie posiada dedykowanego trybu 'monitor mode' w takim sensie jak WAF (rejestruje tylko dopuszczenia/odrzucenia, ale nie wspiera zaawansowanej symulacji zmian).
+C. GFE protections: Są domyślne i niezmienne, nie masz nad nimi kontroli 'pre-enforcement'.
+D. VPC SC dry run: Chroni przed kradzieżą danych (exfiltration), ale nie jest to narzędzie do walki z 'common web attacks' (SQLi/XSS).
+
+Konsensus społeczności ExamTopics: 100% na A. Standardowy krok wdrożenia WAF w Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to kluczowe dla uniknięcia błędnych blokad (false positives) w środowisku produkcyjnym.</p>
+<p><b>Głęboka analiza:</b> Po kilku dniach w trybie Preview administrator analizuje logi. Jeśli nie ma błędnych blokad, jednym kliknięciem zmienia tryb na 'enforced'.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor/docs/configure-security-policies#preview-mode" target="_blank">https://cloud.google.com/armor/docs/configure-security-policies#preview-mode</a></li>

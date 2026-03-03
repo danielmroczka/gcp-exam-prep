@@ -78,14 +78,22 @@ Enforce access control policies for applications and resources. Which service?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Cloud IAP to główna usługa GCP do egzekwowania polityk dostępu kontekstowego do aplikacji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Identity-Aware Proxy (IAP): Jest to centralny punkt egzekwowania polityk dostępu (Access Control Policies) w modelu Zero Trust. IAP weryfikuje tożsamość użytkownika i warunki kontekstowe (np. czy to laptop firmowy) przed każdą sesją dostępu do zasobu.
+
+Dlaczego inne są błędne:
+B. Cloud NAT: Służy do translacji adresów dla wyjścia do internetu, nie kontroluje uprawnień dostępu użytkowników do aplikacji.
+C. Cloud Armor: To firewall warstwy 7, chroni przed atakami (WAF), ale 'standardowe' polityki dostępu oparte na tożsamości osób to domena IAP.
+D. Shielded VMs: Zapewniają integralność sprzętową i systemową maszyn, nie zarządzają dostępem użytkowników do tych maszyn w warstwie IAM/Auth.
+
+Konsensus społeczności ExamTopics: 100% na A. IAP = Access Control w modelu nowoczesnym.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>IAP działa jako 'bramkarz', sprawdzając uprawnienia IAM przed przekazaniem ruchu do backendu.</p>
+<p><b>Głęboka analiza:</b> IAP zastępuje potrzebę posiadania wielu skomplikowanych reguł firewalla i tuneli VPN jednym, spójnym systemem autoryzacji Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iap" target="_blank">https://cloud.google.com/iap</a></li>

@@ -78,14 +78,21 @@ Encryption strategy: sensitive data rotation, control region for keys, minimize 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Cloud KMS (CMEK) pozwala na wybór regionu przechowywania kluczy i automatyczną rotację. Domyślne szyfrowanie (Google-managed) minimalizuje opóźnienia i złożoność dla danych mniej ważnych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Default + Cloud KMS (CMEK): Domyślne szyfrowanie (Google-managed) zapewnia najniższe opóźnienia i zerowy narzut konfiguracyjny (idealne dla 'non-sensitive'). Użycie Cloud KMS (CMEK) dla danych wrażliwych pozwala na pełną kontrolę nad lokalizacją klucza (Control region) oraz harmonogramem rotacji (Sensitive data rotation).
+
+Dlaczego inne są błędne:
+A, B: Niepotrzebnie komplikują zarządzanie i mogą zwiększać opóźnienia dla danych, które nie wymagają specjalnej ochrony.
+C. EKM: External Key Manager wprowadza największe opóźnienia (klucz jest poza Google), co narusza wymóg 'minimize latency'.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. To najbardziej pragmatyczne i efektywne podejście.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Cloud KMS klucze są przechowywane w regionach wybranych przez użytkownika, co spełnia wymogi rezydencji danych.</p>
+<p><b>Głęboka analiza:</b> Cloud KMS pozwala na tworzenie kluczy regionalnych. Wybierając region `europe-west1`, masz pewność, że materiał klucza nigdy nie opuści tej lokalizacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/locations" target="_blank">https://cloud.google.com/kms/docs/locations</a></li>

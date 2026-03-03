@@ -78,14 +78,22 @@ Private VMs via Cloud NAT. Patch all VMs with critical OS updates and reports da
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: VM Manager (część Compute Engine) oferuje usługę 'OS patch management', która automatyzuje aktualizacje dla tysięcy instancji jednocześnie.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. VM Manager OS Patch Management: Jest to natywna usługa Google Cloud zaprojektowana dokładnie do automatyzacji aktualizacji systemów operacyjnych w dużej skali. Pozwala na definiowanie harmonogramów (patch jobs), automatyczne instalowanie poprawek bezpieczeństwa i generowanie raportów zgodności (compliance reports). Działa bezproblemowo z maszynami prywatnymi korzystającymi z Cloud NAT.
+
+Dlaczego inne są błędne:
+A. Manual login: Rozwiązanie całkowicie nieskalowalne i niebezpieczne przy flocie maszyn.
+B. GCS download: Wymagałoby napisania własnego systemu orkiestracji aktualizacji, co jest zbędne, gdy istnieje gotowa usługa VM Manager.
+C. Public IPs: Narusza podstawową zasadę bezpieczeństwa 'no public IPs' i jest niepotrzebne do samego procesu patchowania.
+
+Konsensus społeczności ExamTopics: 100% na D. VM Manager to standardowe rozwiązanie dla 'Patch Management' w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Ręczne logowanie (A) lub skrypty (C) są nieefektywne i trudne do raportowania w skali.</p>
+<p><b>Głęboka analiza:</b> VM Manager (część pakietu Compute Engine) wykorzystuje agenta OS Config zainstalowanego na maszynach. Pozwala on nie tylko na patchowanie, ale też na monitorowanie inwentarza oprogramowania i wymuszanie pożądanego stanu konfiguracji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/compute/docs/os-patch-management" target="_blank">https://cloud.google.com/compute/docs/os-patch-management</a></li>

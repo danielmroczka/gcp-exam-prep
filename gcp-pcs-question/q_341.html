@@ -78,14 +78,21 @@ protect Compute Engine app from SQLi/XSS, control traffic based on IP and user i
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Cloud Armor (WAF) chroni przed atakami L7 (SQLi/XSS). Cloud Firewall filtruje IP. IAP weryfikuje tożsamość użytkownika (User Identity).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Trio ochronne: 1. Cloud Armor (WAF) chroni przed SQLi/XSS. 2. Cloud Firewall (VPC) kontroluje ruch na poziomie portów i adresów IP. 3. Identity-Aware Proxy (IAP) wymusza weryfikację tożsamości użytkownika przed wpuszczeniem go do aplikacji. To połączenie realizuje wszystkie wymogi pytania.
+
+Dlaczego inne są błędne:
+A. DNS/CDN: Przyspieszają i chronią domenę, ale nie kontrolują tożsamości użytkownika (brak IAP).
+B, C: Brakuje im mechanizmu kontroli tożsamości użytkownika przeglądarkowego 'w locie' (brak IAP). Cloud IAM sam w sobie nie blokuje ruchu sieciowego bez pośrednictwa proxy.
+
+Konsensus społeczności ExamTopics: 100% na D. To wzorcowy stos 'Zero Trust Web Security'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>To połączenie adresuje wszystkie wymogi pytania: ochronę aplikacji, filtrację sieciową i kontrolę dostępu tożsamości.</p>
+<p><b>Głęboka analiza:</b> IAP i Cloud Armor działają na Load Balancerze, tworząc potężny front-end bezpieczeństwa, który odrzuca większość ataków zanim dotrą one do serwerów aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/products" target="_blank">https://cloud.google.com/security/products</a></li>

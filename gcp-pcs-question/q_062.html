@@ -78,14 +78,22 @@ An engineering team is launching a web application that will be public on the in
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Cloud Armor w połączeniu z zewnętrznym Load Balancerem HTTP(S) pozwala na filtrowanie ruchu na podstawie IP (blacklisting/whitelisting).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud Armor: Współpracuje z zewnętrznym Load Balancerem HTTP(S). Pozwala na filtrowanie ruchu na poziomie warstwy 7 (URL-based routing) i jednoczesne blokowanie adresów IP (blacklisting). Chroni przed bezpośrednim wystawieniem backendów na internet.
+
+Dlaczego inne są błędne:
+B. Network Load Balancing: Jest regionalny i działa na warstwie 4 (TCP/UDP). Nie potrafi kierować ruchem na podstawie URL i nie integruje się z Cloud Armor w celu zaawansowanego blokowania IP L7.
+C. SSL Proxy LB: Obsługuje ruch TCP z szyfrowaniem SSL, ale nie wspiera routingu opartego na ścieżkach URL (host/path rules), co jest wymogiem pytania.
+D. NAT Gateway: Służy do ruchu WYCHODZĄCEGO z maszyn prywatnych, a nie do obsługi ruchu przychodzącego od użytkowników publicznych.
+
+Konsensus społeczności ExamTopics: Zdecydowane poparcie dla A. Połączenie GCLB HTTP(S) + Cloud Armor to standard dla aplikacji webowych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Cloud Armor to usługa WAF i anty-DDoS, która idealnie nadaje się do ochrony publicznych aplikacji webowych.</p>
+<p><b>Głęboka analiza:</b> Wykorzystanie mechanizmu Anycast IP w Load Balancerze sprawia, że atak DDoS jest rozpraszany po całej infrastrukturze Google, a Cloud Armor blokuje go zanim dotrze do Twoich serwerów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/armor" target="_blank">https://cloud.google.com/armor</a></li>

@@ -78,14 +78,15 @@ Detect if GCS buckets outside EU contain healthcare data (PII). What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: DLP (Sensitive Data Protection) jest jedynym narzędziem, które 'zagląda' do plików i potrafi zidentyfikować konkretne typy danych (infoTypes) jak healthcare/PII.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Cloud DLP (Sensitive Data Protection): To jedyne narzędzie w GCP, które potrafi 'czytać' treść plików wewnątrz bucketów i identyfikować konkretne typy danych (np. numery ubezpieczenia zdrowotnego).</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Polityki organizacji (D) sprawdzają GDZIE jest bucket, ale nie CO w nim jest.</p>
+<p><b>Głęboka analiza:</b> DLP może wysyłać wyniki bezpośrednio do SCC, tworząc spójny widok incydentów.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/inspecting-storage" target="_blank">https://cloud.google.com/dlp/docs/inspecting-storage</a></li>

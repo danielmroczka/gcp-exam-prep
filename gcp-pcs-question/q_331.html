@@ -78,14 +78,22 @@ Automated system to ensure only approved images deployed to GKE. managed service
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Binary Authorization (B) to jedyna usługa GCP, która potrafi ZABLOKOWAĆ wdrożenie na podstawie braku wyników skanowania lub braku podpisu zaufanej osoby.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Binary Authorization + Skanowanie: To jedyne kompletne i zautomatyzowane rozwiązanie 'managed' w GCP. Binary Authorization fizycznie blokuje wdrożenie, jeśli obraz nie posiada podpisu (atestacji) wystawionego przez zautomatyzowany skaner podatności (Container Analysis) w pipeline CI/CD.
+
+Dlaczego inne są błędne:
+A. Restrict registry: Można ograniczyć źródło, ale to nie gwarantuje, że obraz w tym rejestrze jest bezpieczny i 'zatwierdzony' pod kątem podatności.
+C. Cloud Build triggers: Służy do budowania, ale nie mają mechanizmu blokady wewnątrz klastra GKE (runtime enforcement).
+D. Custom scripts: Przeciwieństwo wymogu 'managed services' (zwiększa narzut operacyjny).
+
+Konsensus społeczności ExamTopics: 100% na B. BinAuth to standard dla zaufanych wdrożeń GKE.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Integracja skanera podatności (Container Analysis) z Binary Authorization tworzy kompletny system kontroli jakości i bezpieczeństwa.</p>
+<p><b>Głęboka analiza:</b> To rozwiązanie realizuje koncepcję 'Shift Left' - bezpieczeństwo jest sprawdzane w pipeline, a chmura tylko weryfikuje 'bilet wstępu' (atestację) przy bramie klastra.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/binary-authorization" target="_blank">https://cloud.google.com/binary-authorization</a></li>

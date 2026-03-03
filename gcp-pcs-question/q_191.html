@@ -78,14 +78,22 @@ Ensure users only access console from corporate devices with valid enterprise ce
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: BeyondCorp Enterprise pozwala na definiowanie polityk dostępu kontekstowego, które sprawdzają stan urządzenia (np. posiadanie certyfikatu enterprise).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. BeyondCorp Enterprise (Endpoint Verification): Jest to jedyne rozwiązanie w GCP pozwalające na egzekwowanie polityk opartych na stanie urządzenia (device posture). Możesz stworzyć Access Level, który sprawdza, czy przeglądarka posiada poprawny certyfikat firmowy (enterprise certificate) i przypisać go do konsoli Google Cloud.
+
+Dlaczego inne są błędne:
+B. VPC Firewall: Chroni sieć VPC, nie ma wpływu na to, kto loguje się do publicznego portalu `console.cloud.google.com`.
+C. Org policy: Nie posiada natywnej funkcji sprawdzania certyfikatów na laptopach użytkowników.
+D. IAM condition: Może sprawdzać czas lub IP, ale nie posiada wbudowanego silnika weryfikacji certyfikatów klienckich na urządzeniach końcowych bez integracji z Access Context Managerem (częścią BeyondCorp).
+
+Konsensus społeczności ExamTopics: 100% na A. To flagowy przypadek użycia dla BeyondCorp / Endpoint Verification.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Dostęp kontekstowy (CAA) to fundament modelu Zero Trust w Google Cloud.</p>
+<p><b>Głęboka analiza:</b> Rozwiązanie to wymaga zainstalowania rozszerzenia 'Endpoint Verification' w przeglądarkach Chrome na komputerach pracowników.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/access-context-manager/docs/device-policy" target="_blank">https://cloud.google.com/access-context-manager/docs/device-policy</a></li>

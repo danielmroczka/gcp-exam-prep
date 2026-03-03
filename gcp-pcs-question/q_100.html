@@ -78,14 +78,21 @@ Encryption strategy: reduce complexity for non-sensitive data, flexibility for r
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Domyślne szyfrowanie Google spełnia FIPS 140-2 L1 i jest najprostsze. Cloud KMS (CMEK) daje kontrolę nad rotacją kluczy dla danych wrażliwych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Default + Cloud KMS (CMEK): Domyślne szyfrowanie Google (Google-managed keys) spełnia wymogi FIPS 140-2 L1 i nie wymaga żadnej konfiguracji (redukcja złożoności). Dla danych wrażliwych użycie Cloud KMS (CMEK) pozwala na definiowanie własnych harmonogramów rotacji kluczy (flexibility), co spełnia oba wymogi pytania.
+
+Dlaczego inne są błędne:
+A, B. KMS/EKM dla wszystkiego: Zwiększa niepotrzebnie złożoność i koszty dla danych, które nie są krytyczne.
+C. External KM: EKM jest najbardziej skomplikowaną formą zarządzania kluczami (wymaga dostawcy zewnętrznego), co narusza wymóg 'reduce complexity'.
+
+Konsensus społeczności ExamTopics: Wyraźna przewaga opcji D. To najbardziej zrównoważone podejście 'Risk-based security'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Cloud KMS jest certyfikowany FIPS 140-2 L2 (moduły sprzętowe) lub L1 (programowe), co spełnia wymóg pytania.</p>
+<p><b>Głęboka analiza:</b> Cloud KMS (programowy) ma certyfikację FIPS 140-2 L1. Jeśli potrzebowałbyś Level 3, musiałbyś użyć Cloud HSM. Pytanie precyzuje Level 1, co czyni standardowy KMS idealnym rozwiązaniem.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/fips-140-2" target="_blank">https://cloud.google.com/kms/docs/fips-140-2</a></li>

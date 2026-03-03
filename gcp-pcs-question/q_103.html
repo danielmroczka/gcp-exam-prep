@@ -78,14 +78,21 @@ Governance model for secrets in Secret Manager. Granular access, control over ro
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Osobne projekty (A) zapewniają najsilniejszą separację środowisk (Prod/Non-Prod). CMEK daje pełną kontrolę nad cyklem życia kluczy szyfrujących same sekrety.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Separate projects + CMEK: Osobne projekty (np. jeden dla Prod, jeden dla Dev) zapewniają najsilniejszą separację środowisk. Zarządzanie na poziomie projektu jest łatwiejsze (ease of management) niż pilnowanie uprawnień dla setek pojedynczych sekretów. Użycie CMEK daje pełną kontrolę nad rotacją kluczy szyfrujących te sekrety.
+
+Dlaczego inne są błędne:
+B, D. Single project: To 'jeden koszyk' dla wszystkich sekretów. Błąd ludzki w IAM może wystawić sekrety produkcyjne deweloperom.
+C. Secret-level IAM: Bardzo trudne w utrzymaniu przy dużej liczbie sekretów (brak 'ease of management'). Google-managed keys nie dają kontroli nad harmonogramem rotacji klucza nadrzędnego.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na A. Izolacja projektowa to fundament architektury GCP Enterprise.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Projekt jest podstawową granicą bezpieczeństwa w GCP. Zarządzanie na poziomie projektu jest łatwiejsze niż na poziomie pojedynczych sekretów przy dużej skali.</p>
+<p><b>Głęboka analiza:</b> Projekt jest w GCP jednostką rozliczeniową, sieciową i uprawnieniową. Separacja projektowa sekretów to standard zapobiegający lateralnemu poruszaniu się atakujących.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/secret-manager/docs/best-practices" target="_blank">https://cloud.google.com/secret-manager/docs/best-practices</a></li>

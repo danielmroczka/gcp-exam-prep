@@ -78,14 +78,22 @@ Manage identities for corporate and public users. Corporate must use domain name
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Identity Platform to usługa CIAM (Customer Identity and Access Management) od Google, która pozwala na obsługę zarówno użytkowników zewnętrznych, jak i integrację z korporacyjnymi IdP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Identity Platform: Jest to usługa CIAM (Customer Identity and Access Management). Pozwala na obsługę milionów użytkowników publicznych (przez e-mail, telefon, social login) oraz jednoczesną integrację z korporacyjnymi IdP dla pracowników. Spełnia wymóg zarządzania obiema grupami w jednym systemie.
+
+Dlaczego inne są błędne:
+A. Domain restricted: To polityka blokowania, nie system tożsamości.
+B. Workforce Federation: Służy tylko do logowania pracowników do konsoli chmury, nie dla użytkowników publicznych aplikacji.
+C. Workspace: Nie nadaje się do zarządzania milionami anonimowych klientów (koszt licencji i bezpieczeństwo).
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. Identity Platform to odpowiedź na każdy scenariusz CIAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Identity Platform wspiera wiele metod uwierzytelniania i jest oddzielona od IAM chmury.</p>
+<p><b>Głęboka analiza:</b> Identity Platform bazuje na Firebase Auth, ale oferuje funkcje klasy Enterprise, takie jak multi-tenancy i wsparcie dla protokołów SAML/OIDC.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/identity-platform" target="_blank">https://cloud.google.com/identity-platform</a></li>

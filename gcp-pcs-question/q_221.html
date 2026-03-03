@@ -78,14 +78,22 @@ Alert about new VM with external IP despite folder policy deny. What caused this
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: W hierarchii GCP polityki organizacji mogą być nadpisywane na niższych poziomach, jeśli flaga 'inheritFromParent' zostanie wyłączona, a nowa wartość ustawiona na 'allow'.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Project level overwrite: W hierarchii GCP polityki organizacji mogą być nadpisywane na niższych poziomach. Jeśli administrator projektu ustawił własną politykę `compute.restrictPublicIp` na 'Allow All' i wyłączył dziedziczenie (inherit: false), to ta polityka wygrywa z restrykcją z poziomu folderu.
+
+Dlaczego inne są błędne:
+A. Static IP: Nawet jeśli IP było zarezerwowane, polityka prewencyjna powinna zablokować PRZYPIĘCIE go do nowej maszyny.
+B. Dry run mode: W politykach organizacji (Org Policy) nie istnieje tryb 'dry run' w taki sam sposób jak w VPC SC (choć jest simulator). Polityka jest albo aktywna, albo nie.
+D. Org level: Polityka z poziomu Organizacji jest NAD folderem. Folder nadpisuje Org, a Projekt nadpisuje Folder. 'Góra' nie może nadpisać 'dołu' bez zmiany ustawień na dole.
+
+Konsensus społeczności ExamTopics: 100% na C. Klasyczne zrozumienie dziedziczenia i nadpisywania (override) w hierarchii GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Administrator projektu może obejść restrykcje foldera, jeśli posiada uprawnienia do edycji polityk na swoim poziomie.</p>
+<p><b>Głęboka analiza:</b> Aby zapobiec takim sytuacjom, administrator organizacji może użyć flagi 'Locked', która uniemożliwia nadpisywanie danej polityki na niższych szczeblach hierarchii.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>

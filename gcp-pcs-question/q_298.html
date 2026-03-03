@@ -78,14 +78,22 @@ Inconsistencies in IAM. visibility into changes to IAM policies, user activity, 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Logi audytowe (Audit Logs) są 'czarną skrzynką' GCP, rejestrującą każdą zmianę w IAM i aktywność użytkowników. SIEM pozwala na ich korelację i długoterminową analizę.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Audit Logs + SIEM: Logi audytowe (Admin Activity i Data Access) to jedyne źródło prawdy o tym, kto zmienił uprawnienia i kto ich użył. Eksport do SIEM (np. Splunk, Chronicle) pozwala na detekcję anomalii w czasie rzeczywistym i długoterminowy audyt zgodności.
+
+Dlaczego inne są błędne:
+A. Simulator: Służy do planowania zmian, nie widzi historii działań użytkowników.
+B. Metrics: Pokazują ile, ale nie KTO i CO zrobił (brak szczegółów zdarzeń).
+D. OS Config: Dotyczy wnętrza maszyny VM, nie widzi chmurowego systemu IAM.
+
+Konsensus społeczności ExamTopics: 100% na C. Logi audytowe to podstawa audytowalności IAM.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Logi Admin Activity rejestrują ZMIANY uprawnień, a Data Access ich UŻYCIE.</p>
+<p><b>Głęboka analiza:</b> Logi Admin Activity są darmowe i niezmywalne (tamper-proof), co czyni je idealnym materiałem dowodowym.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/logging/docs/audit" target="_blank">https://cloud.google.com/logging/docs/audit</a></li>

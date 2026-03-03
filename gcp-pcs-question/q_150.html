@@ -78,14 +78,21 @@ Reduce internet exposure of VMs hosting web services for external users. Already
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Load Balancer HTTP(S) posiada publiczne IP, ale backend (VM) może pozostać prywatny. LB przekazuje ruch do instancji przez sieć wewnętrzną Google.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. External HTTP(S) LB: Jest to zalecana architektura. Load Balancer posiada publiczny adres IP i przyjmuje ruch od użytkowników, a następnie przekazuje go do Twoich maszyn wirtualnych przez sieć wewnętrzną Google. Dzięki temu VM-y mogą pozostać w 100% prywatne (bez publicznych IP), co drastycznie zmniejsza ich powierzchnię ataku.
+
+Dlaczego inne są błędne:
+A, B. Cloud NAT: Służy do ruchu WYCHODZĄCEGO (z VM do internetu). Nie pozwoli użytkownikom z zewnątrz połączyć się z Twoimi usługami webowymi.
+D. Host project: Choć Shared VPC jest dobra, to zazwyczaj aplikacje (MIG) i ich Load Balancery tworzy się w projektach usługowych, aby zespoły deweloperskie miały autonomię w zarządzaniu swoimi usługami.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To standardowy wzorzec 'Safe Internet Front-end'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Cloud NAT (A) służy do ruchu WYCHODZĄCEGO, a tu celem jest obsługa użytkowników ZEWNĘTRZNYCH.</p>
+<p><b>Głęboka analiza:</b> Load Balancer HTTP(S) działa jako reverse-proxy. Haker nie może połączyć się bezpośrednio z Twoją maszyną (np. przez SSH czy luki protokołu TCP), bo LB 'rozumie' tylko protokół HTTP/HTTPS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/load-balancing/docs/https" target="_blank">https://cloud.google.com/load-balancing/docs/https</a></li>

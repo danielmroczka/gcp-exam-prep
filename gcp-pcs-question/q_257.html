@@ -78,14 +78,20 @@ GKE Pods access GCS objects securely with minimal management overhead. What to d
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Workload Identity dla GKE automatycznie mapuje konto K8s na konto GCP, eliminując potrzebę tworzenia i rotacji kluczy JSON.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Workload Identity: To natywny sposób GKE na bezpieczne nadawanie uprawnień podom. Automatycznie łączy konto K8s z kontem GCP, eliminując potrzebę tworzenia i rotowania kluczy JSON (minimal overhead).
+
+Dlaczego inne są błędne:
+B, C, D: Wszystkie te opcje opierają się na statycznych kluczach JSON, które stanowią ryzyko i wymagają dużego nakładu pracy przy zarządzaniu ich cyklem życia.
+
+Konsensus społeczności ExamTopics: 100% na A. Workload Identity to 'złoty standard' dla GKE.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Jest to najbezpieczniejsza i najmniej pracochłonna metoda nadawania uprawnień wewnątrz klastra.</p>
+<p><b>Głęboka analiza:</b> Przy Workload Identity pod pobiera tokeny bezpośrednio z serwera metadanych, co czyni go odpornym na kradzież kluczy z obrazu kontenera.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity</a></li>

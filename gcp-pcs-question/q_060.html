@@ -78,14 +78,22 @@ Which service allows you to centrally manage and analyze security findings acros
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Security Command Center (SCC) to centralna platforma bezpieczeństwa dla GCP.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Security Command Center (SCC): Jest to centralna platforma bezpieczeństwa (SIEM/SOAR w wersji cloud-native) dla Google Cloud. Agreguje ona informacje o podatnościach, zagrożeniach (np. crypto mining) i błędnych konfiguracjach ze wszystkich projektów w organizacji.
+
+Dlaczego inne są błędne:
+A. Stackdriver (Cloud Monitoring): Skupia się na wydajności (CPU, RAM, Uptime), a nie na wykrywaniu włamań czy audycie bezpieczeństwa.
+C. Forseti: To narzędzie open-source, które może przesyłać dane DO SCC, ale samo w sobie nie jest usługą 'zarządzaną' przez Google dostępną jako standardowa platforma SCC.
+D. Cloud IAM: System uprawnień, nie służy do analizy 'findings' (znalezisk/incydentów).
+
+Konsensus społeczności ExamTopics: 100% głosów na B. SCC to jedyny poprawny wybór dla 'central security management'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>SCC zbiera dane z różnych źródeł (DLP, Scanner, Binary Authorization) i prezentuje je w jednym miejscu.</p>
+<p><b>Głęboka analiza:</b> SCC Premium oferuje zaawansowane funkcje, takie jak Event Threat Detection (analiza logów w poszukiwaniu hakerów) czy Container Threat Detection (monitoring runtime kontenerów).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center" target="_blank">https://cloud.google.com/security-command-center</a></li>

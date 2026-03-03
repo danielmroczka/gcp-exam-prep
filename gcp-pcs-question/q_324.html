@@ -78,14 +78,22 @@ EU regulated workload. Restrict creation of resources outside EU without disrupt
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Najskuteczniejszą metodą jest nałożenie restrykcji 'Resource Location Restriction' na poziomie folderu lub konkretnego projektu dedykowanego dla tego obciążenia.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Hierarchical Org Policy: Polityka `gcp.resourceLocations` może być ustawiona na dowolnym poziomie hierarchii. Aby nie blokować globalnych aplikacji, nie ustawiasz jej na poziomie Organizacji, lecz na poziomie Folderu dedykowanego dla obciążeń EU lub bezpośrednio na ich Projektach. To zapewnia zgodność bez disruptingu reszty firmy.
+
+Dlaczego inne są błędne:
+A. Delete function: Rozwiązanie reaktywne i 'brudne'. Deweloper mógłby stworzyć i użyć zasobu zanim funkcja go skasuje.
+B. Subnets: Dotyczą tylko sieci, nie ograniczają miejsca tworzenia bucketów GCS czy baz BigQuery.
+C. VPC Service Controls: Chroni przed wyciekiem danych, ale sama w sobie nie narzuca rezydencji danych 'at rest' tak prosto i skutecznie jak Org Policy.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla D. To standardowy sposób zarządzania wymogami prawnymi per projekt.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Dzięki temu reszta organizacji (w innych folderach) może nadal działać globalnie.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, że polityka `allowedLocations` dotyczy tylko nowych zasobów. Jeśli w projekcie już coś było poza EU, będziesz musiał to ręcznie przenieść.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations</a></li>

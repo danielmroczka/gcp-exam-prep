@@ -79,14 +79,23 @@ SCC configuration. Alerts for crypto mining and misconfigurations. Which two fea
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AC.
 
-Wyjaśnienie: Security Health Analytics (C) wykrywa błędne konfiguracje (np. publiczne buckety). Event Threat Detection (A) analizuje logi pod kątem zagrożeń takich jak crypto mining.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Event Threat Detection: Analizuje logi (np. Cloud Audit Logs, VPC Flow Logs) w czasie rzeczywistym i wykrywa wzorce charakterystyczne dla zagrożeń takich jak właśnie crypto mining, brute force czy wycieki danych.
+C. Security Health Analytics: Skupia się na wykrywaniu błędnych konfiguracji infrastruktury (misconfigurations), np. otwartych portów SSH na cały świat czy braku wersjonowania bucketów.
+
+Dlaczego inne są błędne:
+B. Container Threat Detection: Monitoruje wnętrze działającego kontenera (np. próba odczytu pamięci przez obcy proces). Jest to Premium, ale A i C pokrywają szerszy zakres 'misconfigurations' i 'threats' wymienionych w pytaniu.
+D. Cloud DLP: Szuka danych wrażliwych, nie wykrywa ataków typu mining.
+E. Cloud Armor: Chroni aplikacje webowe przed atakami z zewnątrz.
+
+Konsensus społeczności ExamTopics: Silne poparcie dla AC. To dwa fundamentalne filary SCC Premium.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AC</b></p>
-<p>Container Threat Detection (B) jest bardziej specyficzny dla runtime kontenerów, a pytanie dotyczy 'compute environment' ogólnie i logów (Event).</p>
+<p><b>Głęboka analiza:</b> SHA to Twoje 'Compliance', a ETD to Twoje 'SOC'. Razem dają pełny obraz stanu bezpieczeństwa i aktywnych prób włamań.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-command-center-overview" target="_blank">https://cloud.google.com/security-command-center/docs/concepts-security-command-center-overview</a></li>

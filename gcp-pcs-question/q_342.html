@@ -78,14 +78,21 @@ regulated industry, low overhead encryption using private connectivity from on-p
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: MACsec (B) oferuje szyfrowanie warstwy 2 'wire-speed' na łączach Interconnect, co charakteryzuje się minimalnym narzutem (overhead) w porównaniu do tuneli IPsec (VPN).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Interconnect + MACsec: MACsec (szyfrowanie warstwy 2) oferuje najniższy narzut (low overhead), ponieważ odbywa się na poziomie sprzętowym portu sieciowego. Cloud Interconnect zapewnia wysoką dostępność i przepustowość wymaganą w branży finansowej/regulowanej.
+
+Dlaczego inne są błędne:
+A, D. IPsec (VPN): Szyfrowanie warstwy 3 (IPsec) wprowadza znacznie większy narzut procesora i nagłówków (overhead) oraz mniejszą przepustowość niż MACsec.
+C. L2TP: Nie zapewnia nowoczesnego, silnego szyfrowania wymaganego przez regulacje i nie jest natywną usługą bezpieczeństwa Google dla Interconnecta.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla B. MACsec to standard dla 'high-speed low-latency encryption'.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Jest to preferowane rozwiązanie dla bardzo szybkich łączy (10/100 Gbps), gdzie narzut IPsec byłby zbyt duży.</p>
+<p><b>Głęboka analiza:</b> MACsec chroni dane na całym odcinku światłowodu między Twoim routerem a routerem brzegowym Google, co spełnia wymogi ochrony danych w transmisji bez wpływu na wydajność aplikacji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/network-connectivity/docs/interconnect/concepts/macsec-overview" target="_blank">https://cloud.google.com/network-connectivity/docs/interconnect/concepts/macsec-overview</a></li>

@@ -79,14 +79,22 @@ PII in BigQuery daily ETL. Redact PII but re-identify for analytics. Which two c
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: BE.
 
-Wyjaśnienie: DLP deterministic encryption (E) pozwala na odwracalną transformację. Klucze do tego procesu są przechowywane i chronione w Cloud KMS (B).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+E. DLP deterministic encryption: AES-SIV to metoda, która dla tej samej tożsamości (np. numer PESEL) zawsze daje ten sam zaszyfrowany ciąg. Pozwala to analitykom na zliczanie unikalnych osób (analytics) bez poznania ich prawdziwych danych.
+B. Cloud KMS: Proces szyfrowania w DLP wymaga klucza nadrzędnego (wrapped key) do ochrony klucza sesyjnego. KMS jest niezbędnym komponentem do zarządzania tym kluczem i umożliwienia procesu 're-identification' (odwrócenia szyfrowania).
+
+Dlaczego inne są błędne:
+C. Cryptographic hashing: Jest nieodwracalne. Nie spełnia wymogu 're-identify'.
+D. Automatic redaction: Usuwa dane całkowicie (zastępuje je tekstem [PII]). Dane znikają, nie można ich odzyskać ani precyzyjnie łączyć w analityce.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla BE. To jedyna metoda spełniająca wymóg odwracalności transformacji.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: BE</b></p>
-<p>Deterministyczne szyfrowanie pozwala analitykom na złączanie danych (np. po zakodowanym ID użytkownika) bez poznania jego tożsamości.</p>
+<p><b>Głęboka analiza:</b> Deterministyczne szyfrowanie to złoty środek w Big Data. Analityk widzi, że 'Użytkownik X' kupił 5 produktów, ale nie wie, że X to Jan Kowalski. HR/Legal może to sprawdzić używając klucza z KMS.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/pseudonymization" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization</a></li>

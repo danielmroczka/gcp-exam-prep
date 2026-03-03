@@ -78,14 +78,22 @@ ensure Google does not use your sensitive data for tuning public models. Vertex 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Zgodnie z warunkami świadczenia usług Google Cloud, dane klientów używane w Vertex AI NIE są wykorzystywane do trenowania ogólnodostępnych modeli bazowych Google.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Default Data Governance: Google Cloud w swoich warunkach prawnych (GCP Data Processing Addendum) gwarantuje, że dane klientów przetwarzane w Vertex AI są ich własnością i NIE są wykorzystywane do trenowania modeli bazowych (foundation models), z których korzystają inni klienci. Twoje dane są odizolowane.
+
+Dlaczego inne są błędne:
+A. Do not use: Niepotrzebne, platforma jest bezpieczna.
+B. CMEK: Chroni przed odczytem danych, ale nie wpływa na to, czy Google (jako system) używa ich do uczenia (choć warunki prawne C to wykluczają).
+D. Support opt-out: Nie jest wymagany, bo 'opt-out' jest stanem domyślnym i niezmiennym dla usług Vertex AI Enterprise.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To kluczowa informacja dla firm obawiających się wycieku własności intelektualnej do publicznych modeli AI.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>Twoje dane są izolowane wewnątrz Twojego projektu i perymetru bezpieczeństwa.</p>
+<p><b>Głęboka analiza:</b> Google oferuje tzw. 'Customer Managed Tuning', gdzie model jest dotrenowywany Twoimi danymi, ale ta 'wersja' modelu istnieje tylko w Twoim projekcie i nikt inny nie ma do niej dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vertex-ai/docs/generative-ai/data-governance" target="_blank">https://cloud.google.com/vertex-ai/docs/generative-ai/data-governance</a></li>

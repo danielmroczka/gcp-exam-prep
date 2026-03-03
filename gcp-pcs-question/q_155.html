@@ -78,14 +78,22 @@ Ensure Cloud Storage buckets cannot have data publicly available across the orga
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Uniform bucket-level access (UBLA) wymusza użycie IAM, a polityka 'Domain Restricted Sharing' uniemożliwia nadawanie uprawnień użytkownikom spoza Twojej domeny (np. allUsers).</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. UBLA + Domain Restricted Sharing: Uniform Bucket-Level Access (UBLA) wyłącza system ACL, przenosząc całą kontrolę do IAM (łatwiejszy audyt). Polityka organizacji `iam.allowedPolicyMemberDomains` (Domain Restricted Sharing) uniemożliwia nadawanie ról IAM komukolwiek spoza Twojej organizacji (np. `allUsers` lub `allAuthenticatedUsers`). To połączenie proaktywnie blokuje próby upublicznienia danych.
+
+Dlaczego inne są błędne:
+A. DLP: Wykrywa dane wrażliwe, ale nie zapobiega technicznie upublicznieniu całego bucketu.
+B. Remove Owner: Ownerzy są problemem, ale usunięcie roli nie zablokuje uprawnień `storage.buckets.setIamPolicy`, które mogą posiadać inne role.
+D. setIamPolicy: Odebranie tego uprawnienia deweloperom uniemożliwi im pracę, a polityka 'Domain Restricted Sharing' i tak musi być włączona, aby zadziałać prewencyjnie dla wszystkich.
+
+Konsensus społeczności ExamTopics: 100% na C. To najsilniejsza kombinacja dla ochrony danych w GCS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>To połączenie jest najsilniejszą bronią przeciwko przypadkowemu upublicznieniu danych w bucketach.</p>
+<p><b>Głęboka analiza:</b> Pamiętaj, że polityka organizations jest silniejsza niż uprawnienia administratora projektu. Nawet Owner projektu nie będzie mógł udostępnić bucketu światu, jeśli polityka domeny mu na to zabrania.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/org-policy-constraints#domain-restricted-sharing" target="_blank">https://cloud.google.com/storage/docs/org-policy-constraints#domain-restricted-sharing</a></li>

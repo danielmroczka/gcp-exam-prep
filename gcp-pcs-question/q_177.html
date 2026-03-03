@@ -78,14 +78,21 @@ Identify network anomalies and capture payloads within VPCs. Which method?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Tylko Packet Mirroring pozwala na przechwytywanie 'payloads' (zawartości pakietów) dla celów inspekcji.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Packet Mirroring: Tylko ta metoda pozwala na przechwycenie rzeczywistej zawartości komunikacji (payloads). Możesz wysłać te dane do systemu IDS, który przeanalizuje je pod kątem anomalii i zagrożeń.
+
+Dlaczego inne są błędne:
+C. VPC Flow Logs: Widzą tylko statystyki połączeń (headers). Nie widzą tego, co użytkownik wpisał w formularzu lub jakie dane przesłał plikiem (payload).
+A, D: Nie monitorują ruchu sieciowego w warstwie pakietów.
+
+Konsensus społeczności ExamTopics: 100% na B. Payload = Packet Mirroring.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>VPC Flow Logs (C) zawierają tylko metadane o połączeniach (kto, gdzie, kiedy, ile danych).</p>
+<p><b>Głęboka analiza:</b> Packet Mirroring w GCP jest skalowalne i pozwala na monitorowanie ruchu nawet między instancjami w tej samej podsieci, który nie przechodzi przez żaden zewnętrzny router.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/vpc/docs/packet-mirroring" target="_blank">https://cloud.google.com/vpc/docs/packet-mirroring</a></li>

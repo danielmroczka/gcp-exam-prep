@@ -79,14 +79,22 @@ GDPR: data residency and operational sovereignty in EU. Which two?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AC.
 
-Wyjaśnienie: Resource locations (A) zapewnia rezydencję danych (gdzie leżą). Key Access Justifications (C) daje kontrolę nad tym, kto i dlaczego może użyć klucza szyfrującego, co wspiera suwerenność operacyjną.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Resource locations: Gwarantuje, że dane fizycznie spoczywają w Europie (Residency).
+C. Key Access Justifications (KAJ): Daje kontrolę nad użyciem kluczy szyfrujących. Pozwala automatycznie odrzucać prośby o odszyfrowanie danych, jeśli uzasadnienie (np. wsparcie techniczne spoza EU) nie jest zgodne z Twoją polityką suwerenności (Operational Sovereignty).
+
+Dlaczego inne są błędne:
+B, E: To narzędzia monitoringu technicznego, nie wspierają bezpośrednio wymogów prawnych dot. lokalizacji danych i suwerenności kluczy.
+D. Identity federation: Dotyczy tożsamości, a nie miejsca składowania danych czy kontroli nad kluczami.
+
+Konsensus społeczności ExamTopics: 100% na AC. KAJ to przełomowa usługa dla suwerenności danych w EU.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AC</b></p>
-<p>KAJ pozwala na automatyczne blokowanie dostępu do danych, jeśli uzasadnienie dostępu nie spełnia wymogów (np. dostęp spoza UE).</p>
+<p><b>Głęboka analiza:</b> KAJ działa tylko z EKM (External Key Manager). Dzięki temu Google nie może odczytać Twoich danych bez Twojej zgody i podania poprawnego powodu dostępu.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/key-access-justifications/docs/overview" target="_blank">https://cloud.google.com/key-access-justifications/docs/overview</a></li>

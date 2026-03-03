@@ -78,14 +78,22 @@ Phishing attacks. 2SV option using cryptographic signature and login URL verific
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Klucze fizyczne (U2F/FIDO2) jak Titan Security Keys są jedyną metodą całkowicie odporną na phishing, ponieważ weryfikują autentyczność strony logowania.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. Titan Security Keys: Wykorzystują protokół FIDO2/WebAuthn. Klucz fizyczny komunikuje się z przeglądarką i sprawdza, czy URL strony logowania pasuje do zarejestrowanego serwisu. Jeśli strona jest fałszywa (phishing), klucz odmówi złożenia podpisu kryptograficznego. To jedyna metoda w 100% odporna na phishing.
+
+Dlaczego inne są błędne:
+B. Google prompt: Bardzo wygodny, ale użytkownik może omyłkowo kliknąć 'Tak' na telefonie, będąc na fałszywej stronie.
+C. Google Authenticator (TOTP): Kody można przepisać na fałszywą stronę, która w tym samym momencie przekaże je do prawdziwego Google (Proxy Phishing).
+D. Cloud HSM keys: Służą do szyfrowania danych w chmurze, a nie do logowania się użytkowników do konsoli Google.
+
+Konsensus społeczności ExamTopics: 100% na A. Fizyczne klucze to najwyższy poziom ochrony tożsamości.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Inne metody (prompt, kody) mogą zostać przejęte przez fałszywe strony (man-in-the-middle).</p>
+<p><b>Głęboka analiza:</b> Google wdrożyło klucze Titan u wszystkich swoich pracowników i od tego czasu odnotowało ZEROWY wskaźnik udanych ataków phishingowych na swoje konta wewnętrzne.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/titan-security-key" target="_blank">https://cloud.google.com/titan-security-key</a></li>

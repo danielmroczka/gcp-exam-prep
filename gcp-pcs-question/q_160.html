@@ -79,14 +79,23 @@ Client concerned about control of keys. Does not want to store keys at rest in t
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: AD.
 
-Wyjaśnienie: CSEK (A) - klucz dostarczany przez klienta 'w locie'. Cloud EKM (D) - klucz przechowywany u zewnętrznego dostawcy HSM.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. CSEK (Customer-Supplied): Klucz dostarczasz Ty przy każdej operacji. Materiał klucza NIGDY nie jest zapisywany na dyskach Google (at rest) - rezyduje tylko w Twoim on-premises.
+D. Cloud EKM (External): Klucz fizycznie spoczywa u zewnętrznego partnera HSM. Google odwołuje się do niego przez sieć, ale nie przechowuje materiału klucza 'at rest' w swojej infrastrukturze KMS.
+
+Dlaczego inne są błędne:
+B. Google default: Klucze Google leżą w Google.
+C. Secret Manager: To usługa Google, klucze (hasła) leżą na dyskach Google.
+E. CMEK: Zarządzasz kluczem (rotacja itp.), ale materiał klucza fizycznie rezyduje w systemie Cloud KMS Google.
+
+Konsensus społeczności ExamTopics: 100% na AD. To dwie jedyne metody separacji fizycznej klucza od chmury dostawcy danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: AD</b></p>
-<p>W obu przypadkach fizyczny klucz 'at rest' nie znajduje się na dyskach Google zarządzanych przez ich systemy KMS.</p>
+<p><b>Głęboka analiza:</b> EKM jest wygodniejszy dla dużych baz (np. BigQuery), a CSEK jest zazwyczaj używany przy przesyłaniu pojedynczych plików do Cloud Storage (gsutil).
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kms/docs/ekm" target="_blank">https://cloud.google.com/kms/docs/ekm</a></li>

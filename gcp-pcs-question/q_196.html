@@ -78,14 +78,21 @@ Updated policy: require CMEK instead of GMEK for existing Cloud Storage files. R
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Operacja 'rewrite' w GCS pozwala na zmianę parametrów obiektu (np. klucza szyfrującego) bez przesyłania danych poza chmurę.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Rewrite objects: Sama zmiana domyślnego klucza na buckecie (Change type) wpływa tylko na NOWE pliki. Aby 'przeszyfrować' istniejące dane bez ich pobierania na dysk, należy użyć operacji 'rewrite' (np. `gsutil rewrite -k ...`). Google przepisuje wtedy dane wewnątrz swojej infrastruktury, nakładając nowy klucz CMEK.
+
+Dlaczego inne są błędne:
+A, B: Przesyłanie terabajtów danych przez łącze internetowe w celu ich prze-szyfrowania jest skrajnie nieefektywne i kosztowne.
+C. Copy to new bucket: Zadziała, ale 'rewrite' w miejscu jest zazwyczaj szybszy i nie wymaga tworzenia nowej infrastruktury oraz zmiany URL-i do plików.
+
+Konsensus społeczności ExamTopics: 100% na D. 'gsutil rewrite' to standardowa komenda do zmiany kluczy w GCS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Można to zrobić za pomocą polecenia 'gsutil rewrite' lub przez konsolę po zmianie domyślnego klucza bucketu.</p>
+<p><b>Głęboka analiza:</b> Operacja rewrite jest atomowa dla pojedynczego obiektu i gwarantuje, że nowa wersja pliku jest poprawnie zabezpieczona nowym kluczem przed usunięciem starej wersji.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#rewrite" target="_blank">https://cloud.google.com/storage/docs/using-customer-managed-encryption-keys#rewrite</a></li>

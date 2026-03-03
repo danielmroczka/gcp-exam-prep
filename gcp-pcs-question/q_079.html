@@ -78,14 +78,22 @@ When using App Engine, which area in the technology stack should the organizatio
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: W modelu PaaS (App Engine) Google zarządza infrastrukturą i OS, ale za bezpieczeństwo kodu aplikacji odpowiada klient.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Application-level attacks: App Engine to usługa PaaS. Google zarządza serwerami, systemem operacyjnym i środowiskiem uruchomieniowym. Odpowiedzialność klienta skupia się na KODZIE aplikacji. Ochrona przed błędami logicznymi, takimi jak XSS czy SQL Injection, leży w 100% po stronie programistów klienta.
+
+Dlaczego inne są błędne:
+A. VPC Flow Logs: W App Engine Standard nie masz nawet dostępu do tradycyjnej sieci VPC w taki sposób, aby zarządzać Flow Logami (to rola Google).
+C. Guest OS patches: To całkowita odpowiedzialność Google w modelu PaaS.
+D. Encrypting data: Google szyfruje dane domyślnie 'at rest'. Choć możesz dodać własne klucze, 'obrona przed atakami' w kodzie jest bardziej unikalną i krytyczną odpowiedzialnością klienta w tym modelu.
+
+Konsensus społeczności ExamTopics: 100% na B. Klasyka modelu PaaS.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Ochrona przed lukami w kodzie (np. OWASP Top 10) to obowiązek dewelopera/klienta.</p>
+<p><b>Głęboka analiza:</b> Wiele osób myśli, że chmura załatwia wszystko. Jednak luka w kodzie (np. brak sanitizacji inputu) pozwoli hakerowi wykraść dane niezależnie od tego, jak bezpieczna jest infrastruktura Google.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/security/shared-responsibility-model" target="_blank">https://cloud.google.com/security/shared-responsibility-model</a></li>

@@ -78,14 +78,22 @@ Grant GKE applications access to GCP services according to security best practic
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: B.
 
-Wyjaśnienie: Workload Identity jest zalecaną metodą nadawania tożsamości aplikacjom w GKE, ponieważ mapuje konta K8s na IAM w sposób bezpieczny i bezkluczowy.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+B. Workload Identity: Jest to jedyny zalecany (best practice) sposób nadawania uprawnień aplikacjom w GKE. Pozwala on na przypisanie tożsamości GCP bezpośrednio do konta serwisowego Kubernetes (KSA). Dzięki temu każdy pod ma własny, minimalny zestaw uprawnień, bez używania statycznych kluczy i bez dziedziczenia uprawnień od węzła.
+
+Dlaczego inne są błędne:
+A. Default SA: Posiada zbyt szerokie uprawnienia (rola Editor) - skrajne naruszenie zasad security.
+C. Custom SA on nodes: Wszystkie pody na tym samym węźle miałyby te same uprawnienia (brak izolacji między aplikacjami).
+D. SA key as secret: Nadal używa statycznych kluczy JSON, które mogą wycieknąć i wymagają rotacji.
+
+Konsensus społeczności ExamTopics: 100% na B. Workload Identity to 'złoty standard' dla GKE.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: B</b></p>
-<p>Eliminuje ryzyko związane z używaniem statycznych kluczy (D) lub zbyt szerokich uprawnień węzła (A, C).</p>
+<p><b>Głęboka analiza:</b> Workload Identity sprawia, że biblioteki Google (Cloud SDK) wewnątrz kontenera automatycznie 'widzą' tożsamość i pobierają tokeny bez żadnej konfiguracji ze strony programisty.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity" target="_blank">https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity</a></li>

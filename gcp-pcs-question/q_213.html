@@ -78,14 +78,21 @@ GitHub Actions CI/CD access to GCP resources most secure way. What to do?
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Workload Identity Federation pozwala GitHubowi na pobranie tymczasowych tokenów GCP na podstawie własnego tokena OIDC, bez potrzeby używania statycznych kluczy JSON.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Workload Identity Federation (WIF): Pozwala GitHubowi na wymianę swojego tokena OIDC na krótkotrwały token dostępu GCP. Eliminuje to potrzebę posiadania statycznych, długowiecznych kluczy JSON (A, B) w systemie zewnętrznym, co jest ogromną zaletą bezpieczeństwa.
+
+Dlaczego inne są błędne:
+A, B: Statyczne klucze JSON to ryzyko. Jeśli GitHub zostanie zhakowany lub ktoś podejrzy konfigurację, haker ma wieczny dostęp do Twojej chmury.
+C. GKE Workload Identity: Służy do komunikacji WEWNĄTRZ GKE (pod -> GCP), nie pomaga zewnętrznemu GitHubowi w dostaniu się do chmury.
+
+Konsensus społeczności ExamTopics: 100% na D. WIF to obecnie jedyna zalecana metoda dla zewnętrznych potoków CI/CD.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>Jest to obecnie złoty standard bezpieczeństwa dla zewnętrznych systemów CI/CD.</p>
+<p><b>Głęboka analiza:</b> WIF pozwala na mapowanie atrybutów GitHub (np. 'repo: firma/projekt') na konkretne role w GCP, co zapewnia, że tylko określone repozytorium może wykonać wdrożenie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/workload-identity-federation" target="_blank">https://cloud.google.com/iam/docs/workload-identity-federation</a></li>

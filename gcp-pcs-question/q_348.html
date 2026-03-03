@@ -78,14 +78,22 @@ regulated business unit needs temporary exception to external IPs policy. comply
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: C.
 
-Wyjaśnienie: Najbezpieczniejszą metodą zarządzania wyjątkami w politykach organizacji jest izolacja tych wyjątków do osobnego folderu (C) i nadpisanie polityki tylko tam.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+C. Folder-level Override: Najlepszym sposobem na zarządzanie wyjątkami w GCP jest hierarchia. Utrzymujesz silną polityka na poziomie Organizacji, a dla 'wyjątkowego' działu tworzysz osobny folder, w którym nadpisujesz tę jedną politykę (Override). To zapewnia izolację wyjątku i łatwy audyt (drift jest ograniczony do jednego folderu).
+
+Dlaczego inne są błędne:
+A. Move others: Niepotrzebne skomplikowanie struktury dla większości, która nie potrzebuje zmian.
+B. Custom role bypass: Nie istnieje rola IAM pozwalająca na 'zignorowanie' polityki organizacji (Org Policy działa na poziomie API, niezależnie od IAM).
+D. Allow for all: Katastrofa bezpieczeństwa.
+
+Konsensus społeczności ExamTopics: 100% poparcia dla C. To złoty standard zarządzania wyjątkami compliance.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: C</b></p>
-<p>To zapobiega przypadkowemu wyłączeniu restrykcji w innych projektach.</p>
+<p><b>Głęboka analiza:</b> Po zakończeniu projektu regulowanego, wystarczy skasować politykę na folderze, a projekty automatycznie odziedziczą bezpieczne ustawienia z góry (Organizacji).</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy" target="_blank">https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy</a></li>

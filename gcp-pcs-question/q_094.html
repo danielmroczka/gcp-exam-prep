@@ -78,14 +78,22 @@ Protect highly sensitive data in BigQuery. Operations team cannot read email add
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: D.
 
-Wyjaśnienie: Tokenizacja (pseudonimizacja) pozwala na zastąpienie danych wrażliwych tokenami, co umożliwia analizę danych bez ich ujawniania, przy jednoczesnej możliwości odwrócenia procesu dla HR.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+D. Tokenization/Pseudonymization: Pozwala na zastąpienie danych wrażliwych (np. imienia) unikalnym tokenem. Zespół Ops może pracować na tabeli, widząc tylko tokeny (co pozwala im np. na zliczanie unikalnych użytkowników), a HR posiada klucz pozwalający na odwrócenie procesu (re-identification) i zobaczenie prawdziwych danych.
+
+Dlaczego inne są błędne:
+A. Data masking: To technika BigQuery (nie DLP API w tym sensie), która ukrywa dane, ale często nie jest tak elastyczna w scenariuszach 'odwracalności' dla wybranych grup jak pełna tokenizacja DLP. (Uwaga: Obecnie BQ ma natywne maskowanie, ale DLP Tokenization jest potężniejszym, systemowym rozwiązaniem).
+B. Redaction: Usuwa dane bezpowrotnie. HR też by ich nie zobaczyło.
+C. Inspection: To tylko znalezienie danych, nie chroni ich przed odczytem.
+
+Konsensus społeczności ExamTopics: Zdecydowana większość na D. Tokenizacja to złoty środek między bezpieczeństwem a użytecznością danych.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: D</b></p>
-<p>DLP API oferuje zaawansowane techniki transformacji danych dla zachowania prywatności.</p>
+<p><b>Głęboka analiza:</b> Tokenizacja z DLP zazwyczaj wykorzystuje klucze Cloud KMS do ochrony procesu kodowania, co zapewnia pełny ślad audytowy każdego przypadku odszyfrowania danych przez HR.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/pseudonymization" target="_blank">https://cloud.google.com/dlp/docs/pseudonymization</a></li>

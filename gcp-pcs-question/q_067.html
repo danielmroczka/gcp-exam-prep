@@ -78,14 +78,22 @@ A company is backing up logs to Cloud Storage. Analysts should only access logs 
 <h2>Wyjaśnienie</h2>
 <pre>Odpowiedź: A.
 
-Wyjaśnienie: Automatyzacja za pomocą Cloud Functions i DLP API to standardowy sposób na klasyfikację i przemieszczanie danych wrażliwych.</pre>
+Wyjaśnienie (Dlaczego poprawna):
+A. DLP + Cloud Functions: Cloud Storage nie posiada wbudowanego skanera PII. Należy zautomatyzować proces: zdarzenie 'upload' do bucketu wyzwala Cloud Function, która przesyła dane do DLP API. Jeśli DLP znajdzie PII, funkcja przenosi plik do bucketu administratora.
+
+Dlaczego inne są błędne:
+B. Upload to both: Ryzykowne i nieefektywne. Dane wrażliwe i tak trafiają do 'shared' bucketu przed ich usunięciem.
+C. Lifecycle Management: Działa na podstawie wieku lub wersji obiektu, nie potrafi analizować treści plików i wykrywać PII.
+D. Trigger for PII: Nie istnieje taki natywny wyzwalacz w GCS. Trigerem jest 'zapis pliku', a logika wykrywania PII musi być w kodzie funkcji.
+
+Konsensus społeczności ExamTopics: 100% na A. To klasyczny wzorzec architektury 'Event-driven security' w GCP.</pre>
 </div>
 <div class="ai-analysis-container" style="display:none;">
 <h2>Analiza i Podsumowanie Dyskusji (AI)</h2>
 <div class="analysis-section">
 <h3>Analiza i Wyjaśnienie</h3>
 <p><b>Sugerowana odpowiedź: A</b></p>
-<p>Cloud Storage nie posiada natywnej funkcji wykrywania PII, dlatego wymagany jest skan DLP wyzwalany zdarzeniem uploadu.</p>
+<p><b>Głęboka analiza:</b> Ten proces zapewnia, że analitycy nigdy nie zobaczą nieprzeprocesowanych logów. Jest to jedyna metoda gwarantująca zachowanie poufności danych wrażliwych przy automatycznym backupie.</p>
 <h3>Dodatkowe Zasoby (Linki)</h3>
 <ul>
 <li><a href="https://cloud.google.com/dlp/docs/tutorials/gcs-notifications" target="_blank">https://cloud.google.com/dlp/docs/tutorials/gcs-notifications</a></li>
